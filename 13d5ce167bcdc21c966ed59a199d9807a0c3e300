@@ -135,6 +135,30 @@
       },
       "revId": "13d5ce167bcdc21c966ed59a199d9807a0c3e300",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6e1964b_a49c6371",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-03-11T20:38:06Z",
+      "side": 1,
+      "message": "Below is a short summary \n\n1. Design issue in the current implementation\nRDMA is not an NFS protocol. It is a transport for RPC (RPC-over-RDMA), while the actual NFS protocols remain NFSv3 or NFSv4.x.\nHowever, RDMA is currently enabled through the NFS_Protocols configuration parameter using nfsrdma or rpcrdma. The NFS_Protocols parameter is meant to control NFS protocol versions, not transport mechanisms.\nBecause of this, the current design mixes transport configuration with protocol configuration, which is conceptually incorrect.\nIn addition, this approach effectively makes the existing configuration parameter NFS_RDMA_Protocol_Versions unusable.\n\n2. Other issues in the current implementation\nThere are also a few issues with the current method:\nRDMA configuration through these tokens is not documented\nnfsrdma and rpcrdma provide identical functionality\nThe global rdma variable is only used to control RDMA listener creation, so it is not really useful as a global variable\n\n3. Why the new approach is better\nThe new configuration clearly separates transport configuration from protocol configuration:\n\nEnable_RDMA controls whether RDMA transport is enabled\nNFS_RDMA_Protocol_Versions (existing configuration parameter) controls which NFS versions are allowed over RDMA\nThis makes the configuration clearer, easier to understand, and fully configuration-driven.",
+      "parentUuid": "1d95544f_6b24905b",
+      "range": {
+        "startLine": 554,
+        "startChar": 17,
+        "endLine": 554,
+        "endChar": 18
+      },
+      "revId": "13d5ce167bcdc21c966ed59a199d9807a0c3e300",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
