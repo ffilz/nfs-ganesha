@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c99d9e5e_8fcfbba6",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-03-11T19:05:47Z",
+      "side": 1,
+      "message": "Small suggestion (not a functional issue):\n\nIf the first if returns rc \u003c 0, we still evaluate the next four if conditions unnecessarily. It might be cleaner to exit early using a single error path, for example:\n\nrc \u003d display_cat(dspbuf, \"NLM-\");\nif (rc \u003c\u003d 0)\ngoto error;\n\nerror:\nLogCrit(COMPONENT_NLM, \"Failed to encode NLM client entry\");\nreturn rc;",
+      "revId": "921fd0bf41df48c7c5901603f63e2294435d7d57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c690edb5_c76ca3d0",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-03-11T19:05:47Z",
+      "side": 1,
+      "message": "It should be \"return NULL\"",
+      "revId": "921fd0bf41df48c7c5901603f63e2294435d7d57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
