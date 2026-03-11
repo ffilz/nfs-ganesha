@@ -159,6 +159,30 @@
       },
       "revId": "13d5ce167bcdc21c966ed59a199d9807a0c3e300",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "460ad41c_91bc4a30",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-11T23:28:10Z",
+      "side": 1,
+      "message": "Hmm, the nfsrdma/rpcrdma option was added way back in V2.6-dev.3\n\nI\u0027m really inclined not to change something that has been part of config for so long unless it\u0027s part of a larger revisit of all our config.\n\nNote that right next to it is config for vsock, which is also a transport not a protocol.",
+      "parentUuid": "e6e1964b_a49c6371",
+      "range": {
+        "startLine": 554,
+        "startChar": 17,
+        "endLine": 554,
+        "endChar": 18
+      },
+      "revId": "13d5ce167bcdc21c966ed59a199d9807a0c3e300",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
