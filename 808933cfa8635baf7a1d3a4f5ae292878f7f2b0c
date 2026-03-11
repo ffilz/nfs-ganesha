@@ -34,6 +34,24 @@
       "parentUuid": "aedbdaa2_9505efdf",
       "revId": "808933cfa8635baf7a1d3a4f5ae292878f7f2b0c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b1c5e5f_5f0c2c81",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-11T16:11:36Z",
+      "side": 1,
+      "message": "Righ, SIGHUP. Also could be invoked from DBUS. It might be worth investigating if we can make it smaller, but 20ms is probably OK.",
+      "parentUuid": "bef62e7c_f8b04270",
+      "revId": "808933cfa8635baf7a1d3a4f5ae292878f7f2b0c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
