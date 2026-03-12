@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70f2ebe0_26eff636",
+        "filename": "src/support/nfs_creds.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2026-03-12T20:01:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cddb79e6_8b477dda",
+      "revId": "b29abf1ff34d6e59ae704973fea250507282998d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9437985b_90fc80ec",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-12T19:12:17Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tprincipal);\n→ to be replaced with:\n    + \t\t principal);",
+      "revId": "b29abf1ff34d6e59ae704973fea250507282998d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eeee28ca_9b39e86e",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2026-03-12T20:01:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9437985b_90fc80ec",
       "revId": "b29abf1ff34d6e59ae704973fea250507282998d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
