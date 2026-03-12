@@ -365,6 +365,9 @@ bool reread_config(void)
 {
 	int status = 0;
 	config_file_t config_struct;
+	const time_t unset_time_validity = -1;
+	directory_services_param_t *ds_param =
+		&nfs_param.directory_services_param;
 #ifdef _HAVE_GSSAPI
 	nfs_krb5_parameter_t new_krb5_param;
 #endif
@@ -427,6 +430,26 @@ bool reread_config(void)
 	/* We currently only support reloading the UTF8 validation field. */
 	nfs_param.nfsv4_param.enforce_utf8_vld =
 		nfs_version4_param.enforce_utf8_vld;
+
+	/* For backward compatibility, use `manage_gids_expiration` from
+	 * `nfs_core_param` config section, if `idmapped_user_time_validity` or
+	 * `idmapped_group_time_validity` is not set under `directory_services`
+	 * section. Otherwise, ignore the `manage_gids_expiration` value.
+	 */
+	if (ds_param->idmapped_user_time_validity == unset_time_validity) {
+		LogDebug(COMPONENT_CONFIG,
+			 "idmapped_user_time_validity not set,"
+			 " using manage_gids_expiration");
+		ds_param->idmapped_user_time_validity =
+			nfs_param.core_param.manage_gids_expiration;
+	}
+	if (ds_param->idmapped_group_time_validity == unset_time_validity) {
+		LogDebug(COMPONENT_CONFIG,
+			 "idmapped_group_time_validity not set,"
+			 " using manage_gids_expiration");
+		ds_param->idmapped_group_time_validity =
+			nfs_param.core_param.manage_gids_expiration;
+	}
 
 	/* Set idmapping status based on directory_services configuration */
 	status = set_idmapping_status(
