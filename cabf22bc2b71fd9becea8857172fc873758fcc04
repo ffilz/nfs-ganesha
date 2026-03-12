@@ -57,6 +57,30 @@
       },
       "revId": "cabf22bc2b71fd9becea8857172fc873758fcc04",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fcd5466_6f75226e",
+        "filename": "src/doc/man/ganesha-tls-config.rst",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-03-12T06:49:46Z",
+      "side": 1,
+      "message": "default export block and export block has this entry of SecType, from which user can control i.e enable disable krb5p/krb5pi.\n\nAnd the info is noted, I will create another PR to handle this specific.\n@xh140312@outlook.com Thankyou for the inputs and catching this.",
+      "parentUuid": "b81d8535_6576aa37",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 37
+      },
+      "revId": "cabf22bc2b71fd9becea8857172fc873758fcc04",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
