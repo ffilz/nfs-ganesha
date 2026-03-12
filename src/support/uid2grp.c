@@ -462,8 +462,8 @@ static struct group_data *uid2grp_allocate_by_principal(char *principal,
 
 #ifdef _MSPAC_SUPPORT
 	/* TODO */
-	LogWarn(COMPONENT_IDMAPPER, "Unsupported code path for principal %s",
-		principal);
+	LogDebug(COMPONENT_IDMAPPER, "Unsupported code path for principal %s",
+		 principal);
 	return NULL;
 #endif
 
