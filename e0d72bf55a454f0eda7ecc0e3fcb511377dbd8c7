@@ -123,6 +123,24 @@
       "parentUuid": "3445763b_ee559435",
       "revId": "e0d72bf55a454f0eda7ecc0e3fcb511377dbd8c7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0259e103_262822c6",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2193,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-03-12T05:19:33Z",
+      "side": 1,
+      "message": "Got clarification regarding this.\nIn no situation, we can have NULL fsal_fd, as gets checked earlier in the code flow. Hence no need to worry about it.",
+      "parentUuid": "6639655e_28481eec",
+      "revId": "e0d72bf55a454f0eda7ecc0e3fcb511377dbd8c7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
