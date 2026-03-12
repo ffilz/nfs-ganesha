@@ -349,7 +349,7 @@ static void rpcsec_gss_fetch_managed_groups(char *principal)
 			IDMAPPING_PRINCIPAL_TO_GROUPLIST, IDMAPPING_NFSIDMAP,
 			IDMAPPING_STATUS_SUCCESS);
 #else
-		LogWarn(COMPONENT_DISPATCH,
+		LogDebug(COMPONENT_DISPATCH,
 			"Unsupported code path for principal %s", principal);
 		op_ctx->creds.caller_glen = 0;
 #endif
