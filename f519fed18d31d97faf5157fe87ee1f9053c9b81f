@@ -1,0 +1,2367 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c2395da_e3e0abda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "More comments coming...",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c97c3da3_c01ab337",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Export component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9c8d9ff_3cb9f4bd",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Export component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "474048b9_dbf96b0a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This isn\u0027t the actual memory I/O buffer, it feels like it should be a different component.",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57da9367_d881f031",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This isn\u0027t the actual memory I/O buffer, it feels like it should be a different component.",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e2fca9f_0add97fa",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This isn\u0027t the actual memory I/O buffer, it feels like it should be a different component.",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbd9aa84_cd8851df",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1522,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Wonder if we should separate handle cache and directory cache?",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cf902d2_ff3fde86",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2637,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "I think this should be cache (or directory cache if we separate)",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df11621a_41937e3f",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3081,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "I think this should be cache (or directory cache if we separate)",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35b30e2b_6c3fbaf5",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3503,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Cache",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "937d3624_ac73d619",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1690,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Just MEM_COMP_CACHE",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8aa911d_942a0de3",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1953,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Just MEM_COMP_CACHE",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbdefa6e_24dde347",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2114,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Cache (or directory cache)",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58d3f22e_9cd008ad",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2211,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Cache (or directory cache)",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61b3e270_b65be114",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Export not cache",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c82aab9a_500fc33a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Export not cache or misc",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8e9cb41_02eff467",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Export not cache or misc",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee404040_596a24cb",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Just MEM_COMP_CACHE",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8211981_87e18116",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Get rid of pools... they have no value with new scheme",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf65309_adf5af69",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_up.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Cache",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "246bb03c_469bc24e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Export",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1744a283_6684f98f",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Export",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c650a27_abed8207",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Export",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81f2200e_760a13b3",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This isn\u0027t the actual memory I/O buffer, it feels like it should be a different component.",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b280ff6_5eb28609",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This isn\u0027t the actual memory I/O buffer, it feels like it should be a different component.",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8507349_44b8e135",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_NULL/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This isn\u0027t the actual memory I/O buffer, it feels like it should be a different component.",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02c08755_09adb518",
+        "filename": "src/Protocols/9P/9p_symlink.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6086fe81_5ebf4a5b",
+        "filename": "src/Protocols/9P/9p_symlink.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd73432f_6da5d2e5",
+        "filename": "src/Protocols/NFS/mnt_Export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a9361e5_b44b6cf3",
+        "filename": "src/Protocols/NFS/mnt_Export.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3cd5626_1d02af77",
+        "filename": "src/Protocols/NFS/nfs3_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89022ce9_1f276cca",
+        "filename": "src/Protocols/NFS/nfs3_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f504c5da_00fe5731",
+        "filename": "src/Protocols/NFS/nfs3_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cb9330c_13ce00d7",
+        "filename": "src/Protocols/NFS/nfs3_readdir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "READDIR is not read/write I/O, I think this should just be MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a45f44d_e563f227",
+        "filename": "src/Protocols/NFS/nfs3_readdir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "READDIR is not read/write I/O, I think this should just be MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b279b50c_9ea538e6",
+        "filename": "src/Protocols/NFS/nfs3_readdirplus.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "READDIR is not read/write I/O, I think this should just be MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90111aab_a6391e21",
+        "filename": "src/Protocols/NFS/nfs3_readdirplus.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "READDIR is not read/write I/O, I think this should just be MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "851423c2_74b584de",
+        "filename": "src/Protocols/NFS/nfs3_write.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b75a3083_959b9040",
+        "filename": "src/Protocols/NFS/nfs3_write.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d70da0ff_3e6b5c18",
+        "filename": "src/Protocols/NFS/nfs3_write.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51417db2_6818ec0d",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef7443f7_11fb20bb",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70fa144c_0598ed9c",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1541,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42ca11e4_b890f9cf",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1765,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "I think we need a QoS component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edcc4b2c_5ea81c58",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_SESSION",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85ccbe47_7a88c588",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_SESSION",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "381eb47a_126b4ac3",
+        "filename": "src/Protocols/NFS/nfs4_op_layoutget.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_FILE_AND_STATE_LOCK",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4526b5e2_460cfb89",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "QoS component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a08ffa7_4f3ed675",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Not sure if you\u0027re rebased on latest, this allocation has changed...",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cebfbbaa_b027fc05",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "238c4704_d825eb76",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d0e2f1f_62985109",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae8cb03f_5d829001",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f90b471d_1a2a6661",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8315a0fe_406e552e",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cc2b03f_44f8ebc6",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58e3bf32_6635e8d6",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02160da6_be510a91",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0503e5a_7f12d8db",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "READDIR is not read/write I/O, I think this should just be MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2537f3e_ce0dfc00",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "READDIR is not read/write I/O, I think this should just be MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1c99d4a_0b8c556c",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "READDIR is not read/write I/O, I think this should just be MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06a29671_4d395a57",
+        "filename": "src/Protocols/NFS/nfs4_op_readlink.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01f74663_3b352b11",
+        "filename": "src/Protocols/NFS/nfs4_op_readlink.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78c68189_64345258",
+        "filename": "src/Protocols/NFS/nfs4_op_setclientid.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_SESSION",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3b0a283_641b7259",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1dd35b0_77118294",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7410ed3c_6940154c",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f661560_f5a0a7cf",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5df9e7ff_7a3ea703",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30d39387_3ddf188a",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This is not the actual I/O buffer so I feel like it should be a different component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf0dddd0_34b721c5",
+        "filename": "src/Protocols/NFS/nfs4_op_write.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "QoS component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08034b2d_9625a3f4",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65746f13_4b2cc463",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0037cc2a_cab7d009",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0a884c4_b69e7e59",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e84275b_d4cd94fb",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55bcd26b_5a2b5afb",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bca0b0e_5b5fd4a7",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43a7edbd_ec0f94d2",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Hmm, maybe this needs a FSAL free helper... this is tricky, but correct",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c16a2641_ff8e5f34",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dfab9cb_2f05c64b",
+        "filename": "src/Protocols/NFS/nfs4_op_xattr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Hmm, maybe this needs a FSAL free helper... this is tricky, but correct",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e42ae864_c9d76b4e",
+        "filename": "src/Protocols/NFS/nfs4_pseudo.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_EXPORT",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4223223_93cbf38a",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1262,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1449216c_964de47b",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1292,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c944011f_ca9fcc76",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1319,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c8c487_3d7b26eb",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5227,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_PROTOCOL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e846b271_b70c8d29",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "In general, I would like to use a MEM_COMP_CONFIG for all these, it SHOULD go to zero after config processing (start up or update) is complete.",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0508f452_58adec98",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Why change this to a free? Where was it allocated?",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96f4e0c1_7c0d664a",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Where was this allocated?",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3426d20c_d38a7bdc",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Where was this allocated?",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fec7ad7a_6d7e6614",
+        "filename": "src/config_parsing/conf_lex.l",
+        "patchSetId": 4
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "In general, I\u0027d like all these to be a new component MEM_COMP_CONFIG. It should go to zero after config processing is complete (startup or update).",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16520580_69bff588",
+        "filename": "src/config_parsing/conf_lex.l",
+        "patchSetId": 4
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Again, where are these allocated?",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6c702e7_41f56a1a",
+        "filename": "src/config_parsing/conf_lex.l",
+        "patchSetId": 4
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Again, where is this allocated?",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8be8e590_e6a49803",
+        "filename": "src/config_parsing/conf_lex.l",
+        "patchSetId": 4
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Again, where is this allocated? Why just free?",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9db14736_c163c601",
+        "filename": "src/config_parsing/conf_url.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "These are all config related, let\u0027s use new component MEM_COMP_CONFIG, it should go to zero after config processing is complete.",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7366a933_e52d5b37",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "More config... MEM_COMP_CONFIG",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32aace1f_ceba6fba",
+        "filename": "src/config_parsing/conf_yacc.y",
+        "patchSetId": 4
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "More config... MEM_COMP_CONFIG",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab1fb5e6_830194da",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "where is this allocated? Why just free?",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbec5179_1c7df4eb",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "More config... MEM_COMP_CONFIG",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "235baa08_7cf2c612",
+        "filename": "src/dbus/dbus_server.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Hmm, let\u0027s have a new component MEM_COMP_DBUS for all DBUS allocations",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f833e85_d9e9a9f9",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "It might make sense to have a MEM_COMP_CONFIG that is expected to go to zero once config processing (or config update processing) is complete.",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e59a6d0a_08ff3c60",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "NFSv4.1 sessions and clientid should be in same bucket",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e138218_ad342f7b",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Externs should be in a header file",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d044939a_5503b940",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Make this part of config component",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1bfd6f4_8539e9ce",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Convert this to use a local variable char array, 32 bytes should be more than enough.",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "888ed542_5a89744f",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1259,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Config memory",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64dd558a_47256cea",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1846,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Config memory",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b02a4529_05c4ab19",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1853,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Another place to convert to a local variable char array",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b5daf82_8b8daa1d",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1911,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "More config",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43b0e47e_827f8875",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3076,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "This really feels like it belongs in a different source file...",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd90e492_27e13408",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Part of the export, not client",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acde558f_b67186c0",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Part of export, not client",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ca751a8_caa3bb71",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "All path strings should be accounted for with export",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62823118_8bc2173d",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2211,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Part of export not client",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c17a723_fe3645eb",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3060,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "More path stuff, part of export",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd0aeab3_955bd991",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "All three functions in this file should take a memory component argument so the memory can be properly accounted for",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b79e3e63_882d84c8",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Let\u0027s use MEM_COMP_ACE_POOL\n\nDo we want to combine MEM_COMP_ACL_POOL and MEM_COMP_ACE_POOL?",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b87a2e84_95aa1e84",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "replace fsal_acl_pool-\u003eobject_size with sizeof(fsal_acl_t)",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0786c9cb_1a20f5be",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Let\u0027s use MEM_COMP_ACL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7608f097_2aa53a0e",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Let\u0027s use MEM_COMP_ACL",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebd712bb_e78c5c5d",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Remove the pool definition",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e693e95_b78ff289",
+        "filename": "src/support/refstr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Add a mem component parameter to these functions",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99e2132c_7501fed3",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Let\u0027s add a memory component field to the gsh_stats structure so we can specify whether this is a client, export, or other allocation",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eb31c88_d77249f0",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_CLIENT",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e36a762_5317c708",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Let\u0027s add a memory component field to the gsh_stats structure so we can specify whether this is a client, export, or other allocation",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "031d8238_780c04d9",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Let\u0027s add a memory component field to the gsh_stats structure so we can specify whether this is a client, export, or other allocation",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c272bcbb_48bb8591",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_CLIENT",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c387016_360485d2",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Let\u0027s add a memory component field to the gsh_stats structure so we can specify whether this is a client, export, or other allocation",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1b465c_472fc4ad",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Let\u0027s add a memory component field to the gsh_stats structure so we can specify whether this is a client, export, or other allocation",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6672a0d6_55036a6f",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Let\u0027s add a memory component field to the gsh_stats structure so we can specify whether this is a client, export, or other allocation",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcbbca5c_64f702bb",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Let\u0027s add a memory component field to the gsh_stats structure so we can specify whether this is a client, export, or other allocation",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c15e6058_ae01e231",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Let\u0027s add a memory component field to the gsh_stats structure so we can specify whether this is a client, export, or other allocation",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d8b9eb2_bcb21585",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_CLIENT",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "795c5d2b_cb25e50a",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_EXPORT",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31bee01b_217b7886",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1586,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Let\u0027s add a memory component field to the gsh_stats structure so we can specify whether this is a client, export, or other allocation",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d7dbf63_acbd36d5",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2537,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_EXPORT",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e06b56c1_79022ea3",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2556,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_EXPORT",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1faf8c39_20339486",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3025,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "Let\u0027s add a memory component field to the gsh_stats structure so we can specify whether this is a client, export, or other allocation",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8193bd7_4bb1a738",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3086,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-16T23:31:12Z",
+      "side": 1,
+      "message": "MEM_COMP_CLIENT",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
