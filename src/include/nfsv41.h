@@ -8168,9 +8168,7 @@ static inline bool xdr_nfs_opnum4(XDR *xdrs, nfs_opnum4 *objp)
 
 static inline bool xdr_nfs_argop4(XDR *xdrs, nfs_argop4 *objp)
 {
-	struct nfs_request_lookahead slhd = { .flags = 0,
-					      .read = 0,
-					      .write = 0 };
+	struct nfs_request_lookahead slhd = { 0, 0, 0 };
 	struct nfs_request_lookahead *lkhd =
 		xdrs->x_public ? (struct nfs_request_lookahead *)xdrs->x_public
 			       : &slhd;
@@ -9786,6 +9784,6 @@ static inline void copy_into_utf8string(utf8string *dest, const char *src,
 
 #ifdef __cplusplus
 }
-#endif
+#endif /* extern "C" */
 
 #endif /* !_NFSV41_H_RPCGEN */
