@@ -1612,7 +1612,7 @@ static int getxattr_cb(rgw_xattrlist *attrs, void *arg, uint32_t flags)
 
 	cb_arg->utf8string_val = gsh_strldup(attrs->xattrs->val.val,
 					     attrs->xattrs->val.len,
-					     &cb_arg->utf8string_len);
+					     (size_t *)&cb_arg->utf8string_len);
 	cb_arg->utf8string_len = attrs->xattrs->val.len;
 	return 0;
 }
@@ -1791,9 +1791,9 @@ static int lsxattr_cb(rgw_xattrlist *attrs, void *arg, uint32_t flag)
 			    XATTR_USER_PREFIX_LEN))
 			return 0;
 
-		entry->utf8string_val = gsh_strldup(xattr->key.val,
-						    xattr->key.len,
-						    &entry->utf8string_len);
+		entry->utf8string_val =
+			gsh_strldup(xattr->key.val, xattr->key.len,
+				    (size_t *)&entry->utf8string_len);
 		cb_arg->names->xl4_count++;
 
 		if (cb_arg->names->xl4_count == cb_arg->max) {
