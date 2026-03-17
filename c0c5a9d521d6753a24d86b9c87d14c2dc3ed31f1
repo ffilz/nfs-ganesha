@@ -16,6 +16,24 @@
       "message": "clang-format expects formatting for these lines:\n    - \t\t      INT64_MAX, UNSET_TIME_VALIDITY,\n    - \t\t      directory_services_param, idmapped_user_time_validity),\n    - \t\t      INT64_MAX, UNSET_TIME_VALIDITY,\n    - \t\t      directory_services_param, idmapped_group_time_validity),\n→ to be replaced with:\n    + \t\t      INT64_MAX, UNSET_TIME_VALIDITY, directory_services_param,\n    + \t\t      idmapped_user_time_validity),\n    + \t\t      INT64_MAX, UNSET_TIME_VALIDITY, directory_services_param,\n    + \t\t      idmapped_group_time_validity),",
       "revId": "c0c5a9d521d6753a24d86b9c87d14c2dc3ed31f1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99c06f86_9d4252db",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1036722
+      },
+      "writtenOn": "2026-03-17T05:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "901b3636_e14dcbb2",
+      "revId": "c0c5a9d521d6753a24d86b9c87d14c2dc3ed31f1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
