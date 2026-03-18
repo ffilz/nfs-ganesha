@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48923870_fe010309",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T19:04:47Z",
+      "side": 1,
+      "message": "Looks good. I\u0027m just concerned with that one block where the formatting keeps flipping. I\u0027ve seen it flipped in other patches too. Maybe a separate patch to get that properly formatted, and then build on it to add the new component with this patch?",
+      "revId": "3d39bebc49136aacb43ae1cfde16ea0117ca7d34",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "579242de_23973359",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1953,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T19:04:47Z",
+      "side": 1,
+      "message": "Is this format change going to satisfy current clang-format? I keep seeing this particular block flip flop, We need to settle on one format and stick with it...",
+      "revId": "3d39bebc49136aacb43ae1cfde16ea0117ca7d34",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
