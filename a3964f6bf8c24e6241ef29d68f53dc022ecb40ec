@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "979146ae_d7c2a96c",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T20:20:58Z",
+      "side": 1,
+      "message": "But if unconfigured, it\u0027s using bind_addr which might also not be configured.",
+      "parentUuid": "3b57f8ab_94dc6a31",
+      "revId": "a3964f6bf8c24e6241ef29d68f53dc022ecb40ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "894997e2_b7d90f0a",
         "filename": "src/include/GrpcServerInit.h",
         "patchSetId": 3
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "if_ip_addr_any() is used by monitoring code.  Do we need another method that does the same thing?",
       "parentUuid": "894997e2_b7d90f0a",
+      "revId": "a3964f6bf8c24e6241ef29d68f53dc022ecb40ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4655a9f_16b0faa0",
+        "filename": "src/include/GrpcServerInit.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T20:20:58Z",
+      "side": 1,
+      "message": "My patch: https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1230481\n\nIs adding two functions in ip_utils.c with similar structure to is_loopback()\n\nThis function is added in a GRPC specific header file. Better to have in a common place and similar structure to an existing function.",
+      "parentUuid": "c1f33a13_ff1f1b16",
       "revId": "a3964f6bf8c24e6241ef29d68f53dc022ecb40ec",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
