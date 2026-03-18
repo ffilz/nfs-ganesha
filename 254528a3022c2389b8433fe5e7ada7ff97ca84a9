@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54cc1e92_f74db1da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T18:54:53Z",
+      "side": 1,
+      "message": "Let\u0027s remove this bit from the commit message, we removed unnecessary includes",
+      "parentUuid": "d1d756b5_afceb01d",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ddd1ea7_99325380",
         "filename": "src/FSAL/FSAL_CEPH/ds.c",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-02-16T22:50:50Z",
       "side": 1,
       "message": "Let\u0027s not add this header file to source files that don\u0027t use it",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d03f14b_f7055ccc",
+        "filename": "src/FSAL/FSAL_CEPH/ds.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T18:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ddd1ea7_99325380",
       "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d997a48_60d7ee88",
+        "filename": "src/FSAL/FSAL_CEPH/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T18:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86963b78_543967f4",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33e73232_a8b8699c",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-11-07T00:14:22Z",
       "side": 1,
       "message": "Please don\u0027t use // comments in .c files",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1c1ef09_ab489fd9",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T18:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33e73232_a8b8699c",
       "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -105,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03c7b068_b5da41a6",
+        "filename": "src/FSAL/FSAL_CEPH/internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T18:54:53Z",
+      "side": 1,
+      "message": "Oh, and let\u0027s put \"TODO\" in the comment - it makes it easy to grep the code for things that should be re-examined.",
+      "parentUuid": "6553187e_8ced2884",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "99db83dc_faf91305",
         "filename": "src/FSAL/FSAL_CEPH/internal.h",
         "patchSetId": 2
@@ -116,6 +206,24 @@
       "writtenOn": "2026-02-16T22:50:50Z",
       "side": 1,
       "message": "Let\u0027s not add this here, just use it in the C files that use the header.",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4492cb9a_d78450f0",
+        "filename": "src/FSAL/FSAL_CEPH/internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T18:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99db83dc_faf91305",
       "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -155,6 +263,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae39eee4_91130e8a",
+        "filename": "src/FSAL/FSAL_CEPH/internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T18:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "705fbd9a_a3833086",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c26fb1a_f4f6dad3",
@@ -172,6 +298,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "660045ad_2f803d4b",
+        "filename": "src/FSAL/FSAL_CEPH/mds.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T18:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c26fb1a_f4f6dad3",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43b6a1fa_448edc5c",
@@ -185,6 +329,24 @@
       "writtenOn": "2026-02-16T22:50:50Z",
       "side": 1,
       "message": "Let\u0027s not add this header file to source files that don\u0027t use it",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9632bbaf_72e27cc2",
+        "filename": "src/FSAL/FSAL_CEPH/statx_compat.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T18:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43b6a1fa_448edc5c",
       "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -236,6 +398,24 @@
       "writtenOn": "2026-02-16T22:50:50Z",
       "side": 1,
       "message": "Let\u0027s not add this header file to source files that don\u0027t use it",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f33099a_ecbfda50",
+        "filename": "src/tools/multilock/ml_cephfs_client.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T18:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfe3c53d_023c616d",
       "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
