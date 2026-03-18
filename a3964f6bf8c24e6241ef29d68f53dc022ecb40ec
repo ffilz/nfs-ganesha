@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90381176_ac354e22",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T18:37:49Z",
+      "side": 1,
+      "message": "Hmm, really still not sure about the binding here.",
+      "revId": "a3964f6bf8c24e6241ef29d68f53dc022ecb40ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "894997e2_b7d90f0a",
+        "filename": "src/include/GrpcServerInit.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-18T18:37:49Z",
+      "side": 1,
+      "message": "I have a patch adding is_inaddrany to ip_utils.c, let\u0027s try to use that function. I will try and get that merged sooner than later so you can rebase and use it.",
+      "revId": "a3964f6bf8c24e6241ef29d68f53dc022ecb40ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
