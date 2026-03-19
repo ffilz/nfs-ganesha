@@ -87,6 +87,24 @@
       "parentUuid": "f7661d29_0fb101b1",
       "revId": "3d39bebc49136aacb43ae1cfde16ea0117ca7d34",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b062487c_b23e493a",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1953,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-19T20:36:09Z",
+      "side": 1,
+      "message": "OK, it looks like clang-format would prefer the 2 column format, but for this, I really do prefer the single column format.\n\nPlease revert to the single column, and put\n\n/* clang-format off */ before and\n/* clang-format on */ after",
+      "parentUuid": "81a1d8b1_436c48cb",
+      "revId": "3d39bebc49136aacb43ae1cfde16ea0117ca7d34",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
