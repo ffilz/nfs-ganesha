@@ -283,6 +283,10 @@ time_format(enum,default ganesha)
 
 **CLIENT_REQ_XID(bool, default false)**
 
+**LOG_INDEX(bool, default false)**
+
+**LOG_INDEX_WRAP_AROUND(uint32_t, default 100000)**
+
 See also
 ==============================
 :doc:`ganesha-config <ganesha-config>`\(8)
