@@ -174,6 +174,7 @@ struct logfields {
 	bool disp_level;
 	bool disp_op_id;
 	bool disp_client_req_xid;
+	bool disp_log_index;
 	enum timedate_formats_t datefmt;
 	enum timedate_formats_t timefmt;
 	char *user_date_fmt;
@@ -196,6 +197,7 @@ static struct logfields default_logfields = { .disp_epoch = true,
 					      .disp_funct = true,
 					      .disp_comp = true,
 					      .disp_level = true,
+					      .disp_log_index = false,
 					      .datefmt = TD_GANESHA,
 					      .timefmt = TD_GANESHA };
 
@@ -1494,6 +1496,13 @@ static int display_log_component(struct display_buffer *dsp_log,
 				op_ctx->nfs_reqdata->svc.rq_msg.rm_xid);
 	}
 
+	if (b_left > 0 && logfields->disp_log_index) {
+		static int64_t log_index;
+		const int64_t current_index =
+			atomic_relaxed_inc_int64_t(&log_index) % 100000;
+		b_left = display_printf(dsp_log, " #%05u :", current_index);
+	}
+
 	/* If we overflowed the buffer with the header, just skip it. */
 	if (b_left == 0) {
 		display_reset_buffer(dsp_log);
@@ -2076,6 +2085,7 @@ static struct config_item format_options[] = {
 	CONF_ITEM_BOOL("LEVEL", true, logfields, disp_level),
 	CONF_ITEM_BOOL("OP_ID", false, logfields, disp_op_id),
 	CONF_ITEM_BOOL("CLIENT_REQ_XID", false, logfields, disp_client_req_xid),
+	CONF_ITEM_BOOL("LOG_INDEX", false, logfields, disp_log_index),
 	CONFIG_EOL
 };
 

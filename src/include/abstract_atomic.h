@@ -50,6 +50,8 @@
  *
  * int64_t atomic_add_int64_t(int64_t *augend, int64_t addend)
  * int64_t atomic_inc_int64_t(int64_t *var)
+ * int64_t atomic_relaxed_add_int64_t(int64_t *augend, int64_t addend)
+ * int64_t atomic_relaxed_inc_int64_t(int64_t *var)
  * int64_t atomic_sub_int64_t(int64_t *minuend, int64_t subtrahend)
  * int64_t atomic_dec_int64_t(int64_t *var)
  * int64_t atomic_postadd_int64_t(int64_t *augend, int64_t addend)
@@ -119,6 +121,37 @@ static inline int64_t atomic_add_int64_t(int64_t *augend, int64_t addend)
 static inline int64_t atomic_inc_int64_t(int64_t *var)
 {
 	return atomic_add_int64_t(var, 1);
+}
+
+/**
+ * @brief Atomically add to an int64_t with relaxed ordering.
+ *
+ * This function atomically adds to the supplied value with relaxed ordering.
+ *
+ * @param[in,out] augend Number to be added to
+ * @param[in]     addend Number to add
+ *
+ * @return The value after addition.
+ *
+ */
+static inline int64_t atomic_relaxed_add_int64_t(int64_t *augend,
+						 int64_t addend)
+{
+	return __atomic_add_fetch(augend, addend, __ATOMIC_RELAXED);
+}
+
+/**
+ * @brief Atomically increment an int64_t with relaxed ordering.
+ *
+ * This function atomically adds 1 to the supplied value with relaxed ordering.
+ *
+ * @param[in,out] var Pointer to the variable to modify
+ *
+ * @return The value after increment.
+ */
+static inline int64_t atomic_relaxed_inc_int64_t(int64_t *var)
+{
+	return atomic_relaxed_add_int64_t(var, 1);
 }
 
 /**
