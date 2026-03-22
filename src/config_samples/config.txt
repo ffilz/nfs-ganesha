@@ -931,6 +931,10 @@ LOG { FORMAT {} }
 
 	CLIENT_REQ_XID(bool, default false)
 
+	LOG_INDEX(bool, default false)
+
+	LOG_INDEX_WRAP_AROUND(uint32_t, default 100000)
+
 LOG { CONDITIONAL {} }
 ---------------------
 
