@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef867a9f_90490b70",
+        "filename": "src/FSAL/default_methods.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1079,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-03-24T11:00:19Z",
+      "side": 1,
+      "message": "Comment needs to be corrected \nCurrent function is file_control, but mentioned as file_close",
+      "revId": "cb8a799e91d66d9cd7086c467c08e9cc9488de40",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30822365_f79efebf",
         "filename": "src/include/fsal_api.h",
         "patchSetId": 3
