@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cfbae51_33300ff9",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-03-26T16:52:22Z",
+      "side": 1,
+      "message": "WARNING: line length of 86 exceeds 80 columns\n+\t\t\t\t    \"retry lock: first\u003d%p, second\u003d%p\", first, second);",
+      "revId": "432efc3202d762f955993a639ed75fc72c378ef5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "237fda39_8e7161dd",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-03-26T16:52:22Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t    \"retry lock: first\u003d%p, second\u003d%p\", first, second);\n    - \t\t\tusleep(10000);  /* 10 milliseconds */\n→ to be replaced with:\n    + \t\t\t\t    \"retry lock: first\u003d%p, second\u003d%p\", first,\n    + \t\t\t\t    second);\n    + \t\t\tusleep(10000); /* 10 milliseconds */",
+      "revId": "432efc3202d762f955993a639ed75fc72c378ef5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
