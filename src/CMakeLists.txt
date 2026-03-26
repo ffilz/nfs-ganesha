@@ -513,19 +513,33 @@ IF(MOOSHIKA_PREFIX)
   set(ENV{PKG_CONFIG_PATH} "${PKG_CONFIG_PATH}:${MOOSHIKA_PREFIX}/lib/pkgconfig")
 ENDIF()
 
-if(USE_NFS_RDMA OR USE_9P_RDMA)
-  check_library_exists(rdmacm rdma_create_qp "" RDMACM_FOUND)
-  check_library_exists(ibverbs ibv_alloc_pd "" IBVERBS_FOUND)
-  if(RDMACM_FOUND AND IBVERBS_FOUND)
-    find_package(RDMA REQUIRED)
-    include_directories(${RDMA_INCLUDE_DIR})
-    set(SYSTEM_LIBRARIES ${SYSTEM_LIBRARIES} ${RDMA_LIBRARY})
-  else(RDMACM_FOUND AND IBVERBS_FOUND)
-    set(USE_NFS_RDMA OFF)
-    set(USE_9P_RDMA OFF)
-    message(WARNING "Could not find RDMA dependencies(RDMACM=${RDMACM_FOUND} IBVERBS=${IBVERBS_FOUND}), disabling RDMA Support")
-  endif(RDMACM_FOUND AND IBVERBS_FOUND)
-endif(USE_NFS_RDMA OR USE_9P_RDMA)
+if(USE_NFS_RDMA OR USE_9P_RDMA OR USE_RPC_RDMA)
+  find_package(PkgConfig REQUIRED)
+
+  pkg_check_modules(RDMACM librdmacm)
+  pkg_check_modules(IBVERBS libibverbs)
+
+  if(NOT RDMACM_FOUND OR NOT IBVERBS_FOUND)
+    message(FATAL_ERROR
+      "RDMA support requested but required packages not found.\n"
+      "Detected:\n"
+      "  librdmacm: ${RDMACM_FOUND}\n"
+      "  libibverbs: ${IBVERBS_FOUND}\n"
+      "Install RDMA development packages:\n"
+      "  Ubuntu/Debian: libibverbs-dev librdmacm-dev (rdma-core recommended)\n"
+      "  RHEL/CentOS: rdma-core-devel")
+  endif()
+
+  include_directories(${RDMACM_INCLUDE_DIRS} ${IBVERBS_INCLUDE_DIRS})
+
+  set(SYSTEM_LIBRARIES ${SYSTEM_LIBRARIES}
+      ${RDMACM_LIBRARIES} ${IBVERBS_LIBRARIES})
+
+  find_package(RDMA REQUIRED)
+  include_directories(${RDMA_INCLUDE_DIR})
+
+  set(SYSTEM_LIBRARIES ${SYSTEM_LIBRARIES} ${RDMA_LIBRARY})
+endif()
 
 if(USE_9P_RDMA AND NOT USE_9P)
   message(WARNING "The support of 9P/RDMA needs 9P protocol support. Enabling 9P")
