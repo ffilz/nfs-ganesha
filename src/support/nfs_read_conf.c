@@ -196,9 +196,38 @@ static int haproxy_host_adder(const char *token, enum term_type type_hint,
 	return rc;
 }
 
+static int cluster_members_adder(const char *token, enum term_type type_hint,
+				 struct config_item *item, void *param_addr,
+				 void *cnode,
+				 struct config_error_type *err_type)
+{
+	struct base_client_entry *host;
+	int rc;
+
+	if (type_hint != TERM_V4ADDR && type_hint != TERM_V6ADDR) {
+		/* Currently only allow individual addresses */
+		config_proc_error(cnode, err_type,
+				  "Expected a IPv4 or IPv6 address, got (%s)",
+				  token);
+		err_type->invalid = true;
+		return 1;
+	}
+
+	host = container_of(param_addr, struct base_client_entry, cle_list);
+
+	LogMidDebug(COMPONENT_CONFIG, "Adding host %s", token);
+
+	rc = add_client(COMPONENT_CONFIG, &host->cle_list, token, type_hint,
+			cnode, err_type, NULL, NULL, NULL);
+	return rc;
+}
+
 static struct config_item core_params[] = {
 	CONF_ITEM_PROC_MULT("HAProxy_Hosts", noop_conf_init, haproxy_host_adder,
 			    nfs_core_param, haproxy_hosts),
+	CONF_ITEM_PROC_MULT("Cluster_Members", noop_conf_init,
+			    cluster_members_adder, nfs_core_param,
+			    cluster_members),
 	CONF_ITEM_UI16("NFS_Port", 0, UINT16_MAX, NFS_PORT, nfs_core_param,
 		       port[P_NFS]),
 #ifdef _USE_NFS3
