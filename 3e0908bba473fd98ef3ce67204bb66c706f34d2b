@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff2c69b7_451930e6",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-27T17:43:55Z",
+      "side": 1,
+      "message": "Hmm, while we\u0027re at it, let\u0027s replace goto with a do ... while:\n\ndo {\n....rc \u003d pthread_rwlock_trywrlock(\u0026second-\u003econtent_lock);\n....if (rc !\u003d 0) {\n........Log...\n........usleep...\n....}\n} while (rc !\u003d 0)",
+      "revId": "3e0908bba473fd98ef3ce67204bb66c706f34d2b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
