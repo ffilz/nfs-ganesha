@@ -16,6 +16,23 @@
       "message": "Recheck gatecheck",
       "revId": "dfebdef00a89e6b3d34102d6922eccfcd5e5f7f2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc9569e7_218b082f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-03-31T14:58:52Z",
+      "side": 1,
+      "message": "Looks good, but are there corresponding traces for refcount increase? And does this cover all the refcount decreases?",
+      "revId": "dfebdef00a89e6b3d34102d6922eccfcd5e5f7f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
