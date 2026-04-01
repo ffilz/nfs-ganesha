@@ -33,6 +33,24 @@
       "message": "@ffilzlnx@mindspring.com,\n\nwhile rebasing with https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1226855,\n\nAfter fixing all conflicts and when pushing the changes, I am seeing these errors.\n\nroot@rhs-srv-09-CentOS9-sreedhar-vm1:/mnt/TASKS/c_cpp/new_pr/rebasing/rb2/nfs-ganesha# git push gerrit HEAD:refs/for/next\nEnumerating objects: 764, done.\nCounting objects: 100% (764/764), done.\nDelta compression using up to 8 threads\nCompressing objects: 100% (497/497), done.\nWriting objects: 100% (601/601), 129.53 KiB | 5.63 MiB/s, done.\nTotal 601 (delta 518), reused 105 (delta 103), pack-reused 0 (from 0)\nremote: Resolving deltas: 100% (518/518)\nremote: Processing changes: refs: 1, done    \nremote: commit a9a848f: warning: subject \u003e50 characters; use shorter first paragraph\nremote: commit a9a848f: warning: too many message lines longer than 72 characters; manually wrap lines\nremote: commit 6b3f080: warning: subject \u003e50 characters; use shorter first paragraph\nremote: commit 81407a4: warning: subject \u003e50 characters; use shorter first paragraph\nTo ssh://review.gerrithub.io:29418/ffilz/nfs-ganesha\n ! [remote rejected]     HEAD -\u003e refs/for/next (change https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1226026 closed)\nerror: failed to push some refs to \u0027ssh://review.gerrithub.io:29418/ffilz/nfs-ganesha\u0027\n\nI adjusted the PR summary and description, still facing same error, what this \n\n ! [remote rejected]     HEAD -\u003e refs/for/next (change https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1226026 closed)   mean ?\n\n\nAny input to resolve this error is helpful. Thanks in advance.",
       "revId": "d343fa113ec83f8ce5ab14717acf6545ed143b05",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf47218_c032f561",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-04-01T18:07:13Z",
+      "side": 1,
+      "message": "Rebasing is done.",
+      "parentUuid": "1ebbeda1_dc9880c7",
+      "revId": "d343fa113ec83f8ce5ab14717acf6545ed143b05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
