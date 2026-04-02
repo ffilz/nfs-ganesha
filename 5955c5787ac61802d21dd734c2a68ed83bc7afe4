@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0c692ee_bfd3b06d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-02T17:33:03Z",
+      "side": 1,
+      "message": "This iteration is going to depend on a client doing an FSINFO call to update the metrics. Really we need to have the metrics fetched from the filesystem when Prometheus does a scrape.",
+      "revId": "5955c5787ac61802d21dd734c2a68ed83bc7afe4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
