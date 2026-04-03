@@ -154,7 +154,7 @@ char *rados_kv_create_val(nfs_client_id_t *clientid, size_t *size)
 		 * 4 characters plus NUL are necessary, so we won't
 		 * overrun, nor can we get a -1 with EOVERFLOW or EINVAL
 		 */
-		LogFatal(COMPONENT_CLIENTID, "snprintf returned unexpected %d",
+		LogFatal(COMPONENT_RECOVERY, "snprintf returned unexpected %d",
 			 cidstr_lenx_len);
 	}
 
@@ -174,7 +174,8 @@ char *rados_kv_create_val(nfs_client_id_t *clientid, size_t *size)
 	total_len += cidstr_len;
 	memcpy(val + total_len, ")", 2);
 
-	LogDebug(COMPONENT_CLIENTID, "Created client name [%s]", val);
+	LogDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+		    "Created client name [%s]", val);
 
 	if (size)
 		*size = lsize;
@@ -200,9 +201,9 @@ int rados_kv_put(char *key, char *val, char *object)
 	ret = rados_write_op_operate(write_op, rados_recov_io_ctx, object, NULL,
 				     0);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID,
-			 "Failed to put kv ret=%d, key=%s, val=%s", ret, key,
-			 val);
+		LogEventAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+			    "Failed to put kv ret=%d, key=%s, val=%s", ret, key,
+			    val);
 	}
 	rados_release_write_op(write_op);
 
@@ -226,21 +227,22 @@ int rados_kv_get(char *key, char *val, char *object)
 					    1, &iter_vals, NULL);
 	ret = rados_read_op_operate(read_op, rados_recov_io_ctx, object, 0);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to get kv ret=%d, key=%s",
-			 ret, key);
+		LogEventAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+			    "Failed to get kv ret=%d, key=%s", ret, key);
 		goto out;
 	}
 
 	ret = rados_omap_get_next(iter_vals, &key_out, &val_out, &val_len_out);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to get kv ret=%d, key=%s",
-			 ret, key);
+		LogEventAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+			    "Failed to get kv ret=%d, key=%s", ret, key);
 		goto out;
 	}
 
 	/* All internal so buffer length is known to be ok */
 	memcpy(val, val_out, val_len_out + 1);
-	LogDebug(COMPONENT_CLIENTID, "%s: key=%s val=%s", __func__, key, val);
+	LogDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY, "%s: key=%s val=%s",
+		    __func__, key, val);
 	rados_omap_get_end(iter_vals);
 out:
 	rados_release_read_op(read_op);
@@ -260,8 +262,8 @@ static int rados_kv_del(char *key, char *object)
 	ret = rados_write_op_operate(write_op, rados_recov_io_ctx, object, NULL,
 				     0);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to del kv ret=%d, key=%s",
-			 ret, key);
+		LogEventAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+			    "Failed to del kv ret=%d, key=%s", ret, key);
 	}
 	rados_release_write_op(write_op);
 
@@ -286,7 +288,8 @@ again:
 				     (unsigned char *)&pmore, NULL);
 	ret = rados_read_op_operate(read_op, rados_recov_io_ctx, object, 0);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to lst kv ret=%d", ret);
+		LogEventAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+			    "Failed to lst kv ret=%d", ret);
 		goto out;
 	}
 
@@ -333,7 +336,7 @@ int rados_load_config_from_parse(config_file_t parse_tree,
 	(void)load_config_from_parse(parse_tree, &rados_kv_param_blk, NULL,
 				     true, err_type);
 	if (!config_error_is_harmless(err_type)) {
-		LogCrit(COMPONENT_INIT,
+		LogCrit(COMPONENT_RECOVERY,
 			"Error while parsing RadosKV specific configuration");
 		return -1;
 	}
@@ -348,34 +351,34 @@ int rados_kv_connect(rados_ioctx_t *io_ctx, const char *userid,
 
 	ret = rados_create(&clnt, userid);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to create: %d", ret);
+		LogEvent(COMPONENT_RECOVERY, "Failed to create: %d", ret);
 		return ret;
 	}
 
 	ret = rados_conf_read_file(clnt, conf);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to read conf: %d", ret);
+		LogEvent(COMPONENT_RECOVERY, "Failed to read conf: %d", ret);
 		rados_shutdown(clnt);
 		return ret;
 	}
 
 	ret = rados_connect(clnt);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to connect: %d", ret);
+		LogEvent(COMPONENT_RECOVERY, "Failed to connect: %d", ret);
 		rados_shutdown(clnt);
 		return ret;
 	}
 
 	ret = rados_pool_create(clnt, pool);
 	if (ret < 0 && ret != -EEXIST) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to create pool: %d", ret);
+		LogEvent(COMPONENT_RECOVERY, "Failed to create pool: %d", ret);
 		rados_shutdown(clnt);
 		return ret;
 	}
 
 	ret = rados_ioctx_create(clnt, pool, io_ctx);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to create ioctx");
+		LogEvent(COMPONENT_RECOVERY, "Failed to create ioctx");
 		rados_shutdown(clnt);
 	}
 
@@ -414,7 +417,7 @@ int set_nodeid(void)
 	bool prepend = false;
 	long maxlen = sysconf(_SC_HOST_NAME_MAX);
 	if (maxlen < 0) {
-		LogWarn(COMPONENT_CLIENTID,
+		LogWarn(COMPONENT_RECOVERY,
 			"sysconf(_SC_HOST_NAME_MAX) failed, falling back to MAXNAMLEN");
 		maxlen = MAXNAMLEN;
 	}
@@ -425,12 +428,12 @@ int set_nodeid(void)
 	if (g_nodeid >= 0) {
 		node_id = g_nodeid;
 		prepend = true;
-		LogDebug(COMPONENT_CLIENTID,
+		LogDebug(COMPONENT_RECOVERY,
 			 "Global nodeid, \"node\" will be prepended");
 	} else if (!rados_kv_param.nodeid) {
 		/* Need to use hostname */
 		use_host_name = true;
-		LogDebug(COMPONENT_CLIENTID,
+		LogDebug(COMPONENT_RECOVERY,
 			 "No nodeid, hostname will be used");
 	} else {
 		/* Process the provided nodeid */
@@ -439,20 +442,20 @@ int set_nodeid(void)
 		errno = 0;
 		node_id = strtol(rados_kv_param.nodeid, &endptr, 10);
 		if (errno) {
-			LogDebug(COMPONENT_CLIENTID,
+			LogDebug(COMPONENT_RECOVERY,
 				 "conversion failed, %d, using nodeid as is",
 				 errno);
 		} else {
 			if (*endptr != '\0') {
 				node_id = -1;
 				LogDebug(
-					COMPONENT_CLIENTID,
+					COMPONENT_RECOVERY,
 					"Not a numeric string, using nodeid as is");
 			}
 			if (node_id >= 0) {
 				prepend = true;
 				LogDebug(
-					COMPONENT_CLIENTID,
+					COMPONENT_RECOVERY,
 					"Numeric nodeid, \"node\" will be prepended");
 			}
 		}
@@ -461,11 +464,11 @@ int set_nodeid(void)
 		/* numeric nodeid, prepend "node" */
 		ret = snprintf(nodeid, maxlen, "node%d", node_id);
 		if (unlikely(ret > maxlen)) {
-			LogCrit(COMPONENT_CLIENTID, "node%d too long", node_id);
+			LogCrit(COMPONENT_RECOVERY, "node%d too long", node_id);
 			return -ENAMETOOLONG;
 		} else if (unlikely(ret < 0)) {
 			ret = errno;
-			LogCrit(COMPONENT_CLIENTID,
+			LogCrit(COMPONENT_RECOVERY,
 				"Unexpected return from snprintf %d error %s",
 				ret, strerror(ret));
 			return -ret;
@@ -475,7 +478,7 @@ int set_nodeid(void)
 		ret = gethostname(nodeid, maxlen);
 		if (ret) {
 			ret = errno;
-			LogCrit(COMPONENT_CLIENTID,
+			LogCrit(COMPONENT_RECOVERY,
 				"Failed to gethostname: %s (%d)", strerror(ret),
 				ret);
 			return -ret;
@@ -484,18 +487,18 @@ int set_nodeid(void)
 		/* non-numeric nodeid set in ganesha.conf, use it as is */
 		ret = snprintf(nodeid, maxlen, "%s", rados_kv_param.nodeid);
 		if (unlikely(ret > maxlen)) {
-			LogCrit(COMPONENT_CLIENTID, "%s too long",
+			LogCrit(COMPONENT_RECOVERY, "%s too long",
 				rados_kv_param.nodeid);
 			return -ENAMETOOLONG;
 		} else if (unlikely(ret < 0)) {
 			ret = errno;
-			LogCrit(COMPONENT_CLIENTID,
+			LogCrit(COMPONENT_RECOVERY,
 				"Unexpected return from snprintf %d error %s",
 				ret, strerror(ret));
 			return -ret;
 		}
 	}
-	LogEvent(COMPONENT_CLIENTID, "Nodeid : %s ", nodeid);
+	LogEvent(COMPONENT_RECOVERY, "Nodeid : %s ", nodeid);
 	return 0;
 }
 
@@ -527,7 +530,7 @@ int rados_kv_init(void)
 			       rados_kv_param.ceph_conf, rados_kv_param.pool,
 			       rados_kv_param.namespace);
 	if (ret < 0) {
-		LogCrit(COMPONENT_CLIENTID,
+		LogCrit(COMPONENT_RECOVERY,
 			"Failed to connect to rados kv store: %d", ret);
 		goto out;
 	}
@@ -538,7 +541,7 @@ int rados_kv_init(void)
 	ret = rados_write_op_operate(op, rados_recov_io_ctx, old_oid->gr_val,
 				     NULL, 0);
 	if (ret < 0 && ret != -EEXIST) {
-		LogCrit(COMPONENT_CLIENTID,
+		LogCrit(COMPONENT_RECOVERY,
 			"Failed to create recovery (rados) object");
 		rados_release_write_op(op);
 		rados_kv_shutdown();
@@ -551,7 +554,7 @@ int rados_kv_init(void)
 	ret = rados_write_op_operate(op, rados_recov_io_ctx, recov_oid->gr_val,
 				     NULL, 0);
 	if (ret < 0 && ret != -EEXIST) {
-		LogCrit(COMPONENT_CLIENTID,
+		LogCrit(COMPONENT_RECOVERY,
 			"Failed to create recovery (rados) object");
 		rados_release_write_op(op);
 		rados_kv_shutdown();
@@ -559,7 +562,7 @@ int rados_kv_init(void)
 	}
 	rados_release_write_op(op);
 
-	LogEvent(COMPONENT_CLIENTID,
+	LogEvent(COMPONENT_RECOVERY,
 		 "rados-kv recovery backend initialization complete");
 	ret = 0;
 out:
@@ -574,13 +577,13 @@ void rados_kv_add_clid_impl(nfs_client_id_t *clientid, char *recov_obj)
 	char *cval;
 	int ret;
 
-	LogDebug(COMPONENT_CLIENTID, "Recovery object in use : %s", recov_obj);
+	LogDebug(COMPONENT_RECOVERY, "Recovery object in use : %s", recov_obj);
 	rados_kv_create_key(clientid, ckey, sizeof(ckey));
 	cval = rados_kv_create_val(clientid, NULL);
 	ret = rados_kv_put(ckey, cval, recov_obj);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to add clid %lu",
-			 clientid->cid_clientid);
+		LogEventAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+			    "Failed to add clid %lu", clientid->cid_clientid);
 		gsh_free(cval);
 	} else {
 		clientid->cid_recov_tag = cval;
@@ -603,12 +606,13 @@ void rados_kv_rm_clid_impl(nfs_client_id_t *clientid, char *recov_obj)
 	char ckey[RADOS_KEY_MAX_LEN];
 	int ret;
 
-	LogDebug(COMPONENT_CLIENTID, "Recovery object in use : %s", recov_obj);
+	LogDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+		    "Recovery object in use : %s", recov_obj);
 	rados_kv_create_key(clientid, ckey, sizeof(ckey));
 	ret = rados_kv_del(ckey, recov_obj);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to del clid %lu",
-			 clientid->cid_clientid);
+		LogEventAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+			    "Failed to del clid %lu", clientid->cid_clientid);
 		return;
 	}
 	free(clientid->cid_recov_tag);
@@ -662,7 +666,8 @@ static void rados_kv_pop_clid_entry(char *key, char *val, size_t val_len,
 	if (!old) {
 		ret = rados_kv_put(key, dupval, old_oid->gr_val);
 		if (ret < 0) {
-			LogEvent(COMPONENT_CLIENTID, "Failed to move %s", key);
+			LogEventAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+				    "Failed to move %s", key);
 		}
 	}
 	gsh_free(dupval);
@@ -681,7 +686,8 @@ static void rados_kv_pop_clid_entry(char *key, char *val, size_t val_len,
 			gsh_refstr_put(recov_oid);
 		}
 		if (ret < 0) {
-			LogEvent(COMPONENT_CLIENTID, "Failed to del %s", key);
+			LogEventAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+				    "Failed to del %s", key);
 		}
 	}
 	gsh_refstr_put(old_oid);
@@ -706,7 +712,7 @@ static void rados_kv_read_recov_clids_recover(
 				old_oid->gr_val);
 	gsh_refstr_put(old_oid);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID,
+		LogEvent(COMPONENT_RECOVERY,
 			 "Failed to recover, processing old entries");
 		return;
 	}
@@ -719,7 +725,7 @@ static void rados_kv_read_recov_clids_recover(
 				recov_oid->gr_val);
 	gsh_refstr_put(recov_oid);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID,
+		LogEvent(COMPONENT_RECOVERY,
 			 "Failed to recover, processing recov entries");
 	}
 }
@@ -747,10 +753,10 @@ void rados_kv_read_recov_clids_takeover(nfs_grace_start_t *gsp,
 		       gsp->ipaddr);
 
 	if (unlikely(ret >= sizeof(object_takeover))) {
-		LogCrit(COMPONENT_CLIENTID, "object_takeover too long %s_recov",
+		LogCrit(COMPONENT_RECOVERY, "object_takeover too long %s_recov",
 			gsp->ipaddr);
 	} else if (unlikely(ret < 0)) {
-		LogCrit(COMPONENT_CLIENTID,
+		LogCrit(COMPONENT_RECOVERY,
 			"Unexpected return from snprintf %d error %s (%d)", ret,
 			strerror(errno), errno);
 	}
@@ -758,7 +764,7 @@ void rados_kv_read_recov_clids_takeover(nfs_grace_start_t *gsp,
 	ret = rados_kv_traverse(rados_kv_pop_clid_entry, &args,
 				object_takeover);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to takeover");
+		LogEvent(COMPONENT_RECOVERY, "Failed to takeover");
 	}
 }
 
@@ -776,7 +782,7 @@ void rados_kv_cleanup_old(void)
 	ret = rados_write_op_operate(write_op, rados_recov_io_ctx,
 				     old_oid->gr_val, NULL, 0);
 	if (ret < 0)
-		LogEvent(COMPONENT_CLIENTID, "Failed to cleanup old");
+		LogEvent(COMPONENT_RECOVERY, "Failed to cleanup old");
 	rados_release_write_op(write_op);
 	gsh_refstr_put(old_oid);
 }
@@ -796,18 +802,21 @@ void rados_kv_add_revoke_fh(nfs_client_id_t *delr_clid, nfs_fh4 *delr_handle)
 	rcu_read_unlock();
 	ret = rados_kv_get(ckey, cval, recov_oid->gr_val);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to get %s", ckey);
+		LogEventAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+			    "Failed to get %s", ckey);
 		goto out;
 	}
 
-	LogDebug(COMPONENT_CLIENTID, "%s: key=%s val=%s", __func__, ckey, cval);
+	LogDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY, "%s: key=%s val=%s",
+		    __func__, ckey, cval);
 	rados_kv_append_val_rdfh(cval, delr_handle->nfs_fh4_val,
 				 delr_handle->nfs_fh4_len);
 
 	ret = rados_kv_put(ckey, cval, recov_oid->gr_val);
 	if (ret < 0) {
-		LogEvent(COMPONENT_CLIENTID, "Failed to add rdfh for clid %lu",
-			 delr_clid->cid_clientid);
+		LogEventAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+			    "Failed to add rdfh for clid %lu",
+			    delr_clid->cid_clientid);
 	}
 out:
 	gsh_refstr_put(recov_oid);
