@@ -16,6 +16,24 @@
       "message": "This iteration is going to depend on a client doing an FSINFO call to update the metrics. Really we need to have the metrics fetched from the filesystem when Prometheus does a scrape.",
       "revId": "5955c5787ac61802d21dd734c2a68ed83bc7afe4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98548910_ca3a710a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-04-03T18:41:39Z",
+      "side": 1,
+      "message": "@sragraha@redhat.com, I agree with Frank that metrics currently depend on whether the client triggers an FSINFO call. If the client doesn’t make the call, Prometheus may end up scraping outdated data. Instead, Prometheus should initiate scrapes at regular intervals, with the filesystem directly providing fresh metrics during each scrape. This ensures Prometheus always receives the latest data, independent of client activity.",
+      "parentUuid": "b0c692ee_bfd3b06d",
+      "revId": "5955c5787ac61802d21dd734c2a68ed83bc7afe4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
