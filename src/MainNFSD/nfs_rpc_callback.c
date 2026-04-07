@@ -766,6 +766,8 @@ int nfs_rpc_create_chan_v41(SVCXPRT *xprt, nfs41_session_t *session,
 	char *err;
 	int i;
 	int code = 0;
+	xprt_type_t xprt_type = svc_get_xprt_type(xprt);
+
 	bool authed = false;
 
 	PTHREAD_MUTEX_lock(&chan->chan_mtx);
@@ -796,9 +798,10 @@ int nfs_rpc_create_chan_v41(SVCXPRT *xprt, nfs41_session_t *session,
 
 	assert(xprt);
 
-	if (svc_get_xprt_type(xprt) == XPRT_RDMA) {
-		LogWarn(COMPONENT_NFS_CB,
-			"refusing to create back channel over RDMA for now");
+	if (xprt_type == XPRT_RDMA) {
+		LogDebug(
+			COMPONENT_NFS_CB,
+			"Backchannel over RDMA is currently unsupported; rejecting request");
 		code = EINVAL;
 		goto out;
 	}
@@ -869,8 +872,11 @@ int nfs_rpc_create_chan_v41(SVCXPRT *xprt, nfs41_session_t *session,
 
 out:
 	if (code != 0) {
-		LogWarn(COMPONENT_NFS_CB,
-			"can not create back channel, code %d", code);
+		if (xprt_type != XPRT_RDMA) {
+			LogWarn(COMPONENT_NFS_CB,
+				"Backchannel creation failed (transport=%s, error=%d)",
+				xprt_type_to_str(xprt_type), code);
+		}
 		if (chan->clnt)
 			nfs_rpc_destroy_chan_no_lock(chan);
 	}
