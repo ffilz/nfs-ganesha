@@ -118,18 +118,14 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 
 	/* We call getgrouplist() with ngroups set to 1000 first. This should
 	 * reduce the number of getgrouplist() calls made to 1, for most cases.
-	 * However, getgrouplist() return -1 if the actual number of groups the
-	 * user is in, is more than 1000 (very rare) and ngroups will be set to
-	 * the actual number of groups the user is in. We can then make a second
-	 * query to fetch all the groups when ngroups is greater than 1000.
 	 *
-	 * The manpage doesn't say anything about errno value, it was usually
-	 * zero but was set to 34 (ERANGE) under some environments. ngroups was
-	 * set correctly no matter what the errno value is!
-	 * We assume that ngroups is correctly set, no matter what the
-	 * errno value is. The man page says, "The ngroups argument
-	 * is a value-result argument: on  return  it always contains
-	 * the  number  of  groups found for user."
+	 * pwnam_wrappers__getgrouplist() return values:
+	 *   - Returns -1 if buffer is too small (retry needed)
+	 *   - Returns 0 on success
+	 *   - Returns positive errno on error (ENOENT, ETIMEDOUT, etc.)
+	 *
+	 * ngroups is always set to the actual number of groups on success or
+	 * when buffer is too small.
 	 */
 	groups = gsh_malloc(ngroups * sizeof(gid_t));
 
@@ -143,12 +139,15 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 			    "getgrouplist returned {}, ngroups={} ", ret,
 			    ngroups);
 
-	if (ret != 0) {
+	if (ret == -1) {
+		/* Buffer too small - retry with correct size */
 		LogEvent(COMPONENT_IDMAPPER,
-			 "getgrouplist for user: %s failed, errno: %d, retrying", user, ret);
-		GSH_AUTO_TRACEPOINT(uid2grp, getgrouplist_failed, TRACE_INFO,
-				    "getgrouplist for user: {} failed, errno: {}, retrying",
-				    TP_STR(user), ret);
+			 "getgrouplist for user: %s needs retry, ngroups: %d",
+			 user, ngroups);
+		GSH_AUTO_TRACEPOINT(
+			uid2grp, getgrouplist_retry, TRACE_INFO,
+			"getgrouplist for user: {} needs retry, ngroups: {}",
+			TP_STR(user), ngroups);
 
 		gsh_free(groups);
 
@@ -169,13 +168,13 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 
 		if (ret != 0) {
 			LogWarn(COMPONENT_IDMAPPER,
-				"getgrouplist for user:%s failed, ngroups: %d, errno: %d",
-				user, ngroups, ret);
+				"getgrouplist retry for user:%s failed, ret: %d, ngroups: %d",
+				user, ret, ngroups);
 			GSH_AUTO_TRACEPOINT(
 				uid2grp, getgrouplist_retry_failed,
 				TRACE_WARNING,
-				"getgrouplist for user:{} failed, ngroups: {}, errno: {}",
-				TP_STR(user), ngroups, ret);
+				"getgrouplist retry for user:{} failed, ret: {}, ngroups: {}",
+				TP_STR(user), ret, ngroups);
 			gsh_free(groups);
 			return false;
 		}
@@ -184,6 +183,17 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 			gc_stats_update(&s_time, &e_time);
 			stats = false;
 		}
+	} else if (ret > 0) {
+		/* Error from SSSD (ENOENT, ETIMEDOUT, etc.) */
+		LogWarn(COMPONENT_IDMAPPER,
+			"getgrouplist for user: %s failed with error: %d", user,
+			ret);
+		GSH_AUTO_TRACEPOINT(
+			uid2grp, getgrouplist_failed, TRACE_WARNING,
+			"getgrouplist for user: {} failed with error: {}",
+			TP_STR(user), ret);
+		gsh_free(groups);
+		return false;
 	}
 
 	idmapper_monitoring__user_groups(ngroups);
