@@ -33,6 +33,42 @@
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t    \"retry lock: first\u003d%p, second\u003d%p\", first, second);\n    - \t\t\tusleep(10000);  /* 10 milliseconds */\n→ to be replaced with:\n    + \t\t\t\t    \"retry lock: first\u003d%p, second\u003d%p\", first,\n    + \t\t\t\t    second);\n    + \t\t\tusleep(10000); /* 10 milliseconds */",
       "revId": "432efc3202d762f955993a639ed75fc72c378ef5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f37dcf1_effe5ee4",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-07T19:04:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "237fda39_8e7161dd",
+      "revId": "432efc3202d762f955993a639ed75fc72c378ef5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0493619d_50e8f5ae",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-07T19:04:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3cfbae51_33300ff9",
+      "revId": "432efc3202d762f955993a639ed75fc72c378ef5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
