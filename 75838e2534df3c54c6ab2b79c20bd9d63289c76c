@@ -16,6 +16,40 @@
       "message": "Done",
       "revId": "75838e2534df3c54c6ab2b79c20bd9d63289c76c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b9f685_bad30456",
+        "filename": "src/idmapper/pwnam_wrappers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-08T23:04:52Z",
+      "side": 1,
+      "message": "Wondering if we should normalize to:\n-1 with errno set for error (ERANGE for buffer too small)\n0 for success (or even \u003e\u003d 0 for success with non-zero is count of groups).\n\nJust if we are mangling return values to put them in a more standard format.",
+      "revId": "75838e2534df3c54c6ab2b79c20bd9d63289c76c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41240eb8_69c1bb00",
+        "filename": "src/idmapper/pwnam_wrappers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-08T23:04:52Z",
+      "side": 1,
+      "message": "Wondering if this should be a switch statement like above.",
+      "revId": "75838e2534df3c54c6ab2b79c20bd9d63289c76c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
