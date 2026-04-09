@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e342c39_b1c5f75d",
+        "filename": "src/Protocols/NFS/nfs4_op_getattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T13:04:24Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                        (op_ctx !\u003d NULL) ? op_ctx-\u003eclientid : NULL;$",
+      "revId": "28c37708174bbaf0759b4624e4201d1056331073",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d3e8390_409c8652",
+        "filename": "src/Protocols/NFS/nfs4_op_getattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T13:04:24Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    -                         (op_ctx !\u003d NULL) ? op_ctx-\u003eclientid : NULL;\n    -                 if (is_write_delegated(obj, \u0026deleg_client) \u0026\u0026 deleg_client \u0026\u0026\n    -                     (req_clientid \u003d\u003d NULL ||\n    -                      deleg_client-\u003ecid_clientid !\u003d *req_clientid)) {\n→ to be replaced with:\n    + \t\t\t(op_ctx !\u003d NULL) ? op_ctx-\u003eclientid : NULL;\n    + \t\tif (is_write_delegated(obj, \u0026deleg_client) \u0026\u0026 deleg_client \u0026\u0026\n    + \t\t    (req_clientid \u003d\u003d NULL ||\n    + \t\t     deleg_client-\u003ecid_clientid !\u003d *req_clientid)) {",
+      "revId": "28c37708174bbaf0759b4624e4201d1056331073",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd6ed96c_190a418e",
+        "filename": "src/Protocols/NFS/nfs4_op_getattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T13:04:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                        (op_ctx !\u003d NULL) ? op_ctx-\u003eclientid : NULL;$",
+      "revId": "28c37708174bbaf0759b4624e4201d1056331073",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7620ec3_60907515",
+        "filename": "src/Protocols/NFS/nfs4_op_getattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T13:04:24Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                if (is_write_delegated(obj, \u0026deleg_client) \u0026\u0026 deleg_client \u0026\u0026$",
+      "revId": "28c37708174bbaf0759b4624e4201d1056331073",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aae785fa_2826046d",
+        "filename": "src/Protocols/NFS/nfs4_op_getattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T13:04:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                if (is_write_delegated(obj, \u0026deleg_client) \u0026\u0026 deleg_client \u0026\u0026$",
+      "revId": "28c37708174bbaf0759b4624e4201d1056331073",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dba2a54_32b36e47",
+        "filename": "src/Protocols/NFS/nfs4_op_getattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T13:04:24Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                    (req_clientid \u003d\u003d NULL ||$",
+      "revId": "28c37708174bbaf0759b4624e4201d1056331073",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b57c5a3_6f35b98a",
+        "filename": "src/Protocols/NFS/nfs4_op_getattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T13:04:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                    (req_clientid \u003d\u003d NULL ||$",
+      "revId": "28c37708174bbaf0759b4624e4201d1056331073",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e17989e_920575b6",
+        "filename": "src/Protocols/NFS/nfs4_op_getattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T13:04:24Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                     deleg_client-\u003ecid_clientid !\u003d *req_clientid)) {$",
+      "revId": "28c37708174bbaf0759b4624e4201d1056331073",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed6e6f8d_395f9dba",
+        "filename": "src/Protocols/NFS/nfs4_op_getattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T13:04:24Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                     deleg_client-\u003ecid_clientid !\u003d *req_clientid)) {$",
+      "revId": "28c37708174bbaf0759b4624e4201d1056331073",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
