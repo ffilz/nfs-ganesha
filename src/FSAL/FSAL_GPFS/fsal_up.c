@@ -204,6 +204,14 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 		LogDebug(COMPONENT_FSAL_UP, "Received event to process for %d",
 			 gpfs_fs->root_fd);
 
+		/* We wanted to terminate this thread in case of THREAD_STOP */
+		if (reason == THREAD_STOP) {
+			LogDebug(COMPONENT_FSAL_UP,
+				 "Terminating the GPFS up call thread for %d",
+				 gpfs_fs->root_fd);
+			goto out;
+		}
+
 		/* Get a ref to the first export from the fsal_fs and
 		 * initialize op_context for the thread.
 		 */
@@ -411,13 +419,6 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 				}
 			}
 		} break;
-
-		case THREAD_STOP: /* We wanted to terminate this thread */
-			LogDebug(COMPONENT_FSAL_UP,
-				 "Terminating the GPFS up call thread for %d",
-				 gpfs_fs->root_fd);
-			release_op_context();
-			goto out;
 
 		case INODE_INVALIDATE:
 			LogMidDebug(
