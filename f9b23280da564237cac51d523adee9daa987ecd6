@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf2781ac_26d69f85",
+        "filename": "src/config_parsing/conf_url.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T03:45:55Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - int config_url_fetch(const char *url, FILE **f, void (**rel)(FILE *, void *), void **fbuf)\n→ to be replaced with:\n    + int config_url_fetch(const char *url, FILE **f, void (**rel)(FILE *, void *),\n    + \t\t     void **fbuf)",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32bb1889_7cc9db6e",
+        "filename": "src/config_parsing/conf_url.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T03:45:55Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+int config_url_fetch(const char *url, FILE **f, void (**rel)(FILE *, void *), void **fbuf)",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87b0fb13_c33102ee",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T03:45:55Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct cu_rados_save *save \u003d (struct cu_rados_save *)b;\n+\tif (f)",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a33a979e_45427b60",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T03:45:55Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - static int cu_rados_url_fetch(const char *url, FILE **f, void (**rel)(FILE *, void *), void **fbuf)\n→ to be replaced with:\n    + static int cu_rados_url_fetch(const char *url, FILE **f,\n    + \t\t\t      void (**rel)(FILE *, void *), void **fbuf)",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "008e5e2b_c80281a5",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T03:45:55Z",
+      "side": 1,
+      "message": "WARNING: line length of 99 exceeds 80 columns\n+static int cu_rados_url_fetch(const char *url, FILE **f, void (**rel)(FILE *, void *), void **fbuf)",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eade7d3_246589e6",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T03:45:55Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\tstream \u003d open_memstream(\u0026save-\u003estreambuf, \u0026save-\u003estreamsz);",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b73a6a_b34f0948",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T03:45:55Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\tstream \u003d open_memstream(\u0026save-\u003estreambuf, \u0026save-\u003estreamsz);\n→ to be replaced with:\n    + \t\t\tstream \u003d open_memstream(\u0026save-\u003estreambuf,\n    + \t\t\t\t\t\t\u0026save-\u003estreamsz);",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67e68d43_3b454f5c",
+        "filename": "src/include/conf_url.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T03:45:55Z",
+      "side": 1,
+      "message": "WARNING: line length of 92 exceeds 80 columns\n+\tint (*url_fetch)(const char *url, FILE **f, void (**)(FILE *, void *), void **fbuf);",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcfeb971_6f47c305",
+        "filename": "src/include/conf_url.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T03:45:55Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tint (*url_fetch)(const char *url, FILE **f, void (**)(FILE *, void *), void **fbuf);\n→ to be replaced with:\n    + \tint (*url_fetch)(const char *url, FILE **f, void (**)(FILE *, void *),\n    + \t\t\t void **fbuf);",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e4eab5f_10c1e3ca",
+        "filename": "src/include/conf_url.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T03:45:55Z",
+      "side": 1,
+      "message": "WARNING: line length of 91 exceeds 80 columns\n+int config_url_fetch(const char *url, FILE **f, void (**rel)(FILE *, void *), void **fbuf);",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3b6727e_583eeda9",
+        "filename": "src/include/conf_url.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-09T03:45:55Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - int config_url_fetch(const char *url, FILE **f, void (**rel)(FILE *, void *), void **fbuf);\n→ to be replaced with:\n    + int config_url_fetch(const char *url, FILE **f, void (**rel)(FILE *, void *),\n    + \t\t     void **fbuf);",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
