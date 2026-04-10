@@ -33,6 +33,24 @@
       "message": "Rather than displaying \"failed\", it would be clearer to show a message like \"Cannot create RDMA back‑channel\", so that users do not confuse \"unsupported\" with \"failure\". Also, let it be \"code\" as a string instead of \"error\".",
       "revId": "920d10b36b5de0284d59d0a6825aa435817db2cf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3708295b_c70c4208",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1010265
+      },
+      "writtenOn": "2026-04-10T07:46:38Z",
+      "side": 1,
+      "message": "if its unsupported, I would prefer \"unsupported\" is spelled out.. - is it worth a warning even ? non xprt_rdma does not produce a log message should code be !\u003d0?",
+      "parentUuid": "d30df67e_636b6ae2",
+      "revId": "920d10b36b5de0284d59d0a6825aa435817db2cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
