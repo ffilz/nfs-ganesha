@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20f40aaf_c5ef6557",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-10T21:37:46Z",
+      "side": 1,
+      "message": "Please address all the formatting issued raised by checkpatch and clang-format",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c49f188_ccd3bf01",
+        "filename": "src/config_parsing/conf_url.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-10T21:37:46Z",
+      "side": 1,
+      "message": "Formatting definitely has to be fixed here.",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf2781ac_26d69f85",
         "filename": "src/config_parsing/conf_url.c",
         "patchSetId": 2
@@ -48,6 +82,41 @@
       "writtenOn": "2026-04-09T03:45:55Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tstruct cu_rados_save *save \u003d (struct cu_rados_save *)b;\n+\tif (f)",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c50bd4fd_5e3da985",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-10T21:37:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "87b0fb13_c33102ee",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09fc1e3f_1f603031",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-10T21:37:46Z",
+      "side": 1,
+      "message": "Please fix formatting - long line",
       "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
