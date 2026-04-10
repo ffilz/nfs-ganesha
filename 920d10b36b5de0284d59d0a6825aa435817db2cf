@@ -16,6 +16,23 @@
       "message": "Waiting for review from @raprasad@redhat.com",
       "revId": "920d10b36b5de0284d59d0a6825aa435817db2cf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d30df67e_636b6ae2",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-04-10T06:48:16Z",
+      "side": 1,
+      "message": "Rather than displaying \"failed\", it would be clearer to show a message like \"Cannot create RDMA back‑channel\", so that users do not confuse \"unsupported\" with \"failure\". Also, let it be \"code\" as a string instead of \"error\".",
+      "revId": "920d10b36b5de0284d59d0a6825aa435817db2cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
