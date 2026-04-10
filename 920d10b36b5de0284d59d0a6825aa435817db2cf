@@ -69,6 +69,24 @@
       "parentUuid": "d30df67e_636b6ae2",
       "revId": "920d10b36b5de0284d59d0a6825aa435817db2cf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c9473ec_b4b9f646",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-04-10T08:08:14Z",
+      "side": 1,
+      "message": "The RDMA unsupported case is handled separately and logged at debug level.\nThis block applies only to non-RDMA transports where backchannel creation actually fails, so using “failed” is appropriate here.\nI’ve updated the error reporting to use strerror(code) for better readability.",
+      "parentUuid": "d30df67e_636b6ae2",
+      "revId": "920d10b36b5de0284d59d0a6825aa435817db2cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
