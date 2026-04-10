@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "241640c2_05a8418d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-10T18:10:34Z",
+      "side": 1,
+      "message": "Obviously this resolves the crash, but I\u0027m not sure what the implications of an NFSv4.0 GETATTR are since a client holding a delegation could trigger a CB_GETATTR to itself... Though I guess that shouldn\u0027t happen, the client holding a delegation (read or write) is sufficient to assure it doesn\u0027t need to get attributes from the server.",
+      "revId": "229c68d1c25067f7546158f570325b002fcdb9d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
