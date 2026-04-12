@@ -287,6 +287,15 @@ time_format(enum,default ganesha)
 
 **LOG_INDEX_WRAP_AROUND(uint32_t, default 100000)**
 
+LOG { ROTATE {} }
+--------------------------------------------------------------------------------
+**size_kb(uint32_t, default 0)**
+    Rotate the log file when the size in KB exceeds this value, if zero,
+    do not rotate based on size.
+**time_sec(uint32_t, default 0)**
+    Rotate the log file when the time in seconds exceeds this value, if zero,
+    do not rotate based on time.
+
 See also
 ==============================
 :doc:`ganesha-config <ganesha-config>`\(8)
