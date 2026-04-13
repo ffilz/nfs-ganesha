@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05f8d137_09d5c675",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1264,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-13T20:19:44Z",
+      "side": 1,
+      "message": "Is that expensive to do an fstat for every log message?\n\nCould we track the size ourselves?",
+      "revId": "a25f83804cea92d0895f53965307a4bc82ceb15b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce8dc786_c0a8983b",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1289,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-13T20:19:44Z",
+      "side": 1,
+      "message": "Please use /* */ style comments in C files",
+      "revId": "a25f83804cea92d0895f53965307a4bc82ceb15b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
