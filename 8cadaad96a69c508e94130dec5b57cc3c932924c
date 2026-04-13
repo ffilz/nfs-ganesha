@@ -16,6 +16,24 @@
       "message": "Should this really only be a LogDebug?",
       "revId": "8cadaad96a69c508e94130dec5b57cc3c932924c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b24b6d6_fbe25066",
+        "filename": "src/MainNFSD/nfs_rpc_callback.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1010265
+      },
+      "writtenOn": "2026-04-13T07:54:44Z",
+      "side": 1,
+      "message": "Yes - \nmy understanding is that backchannel for RDMA is not yet implemented and is not strictly required - and we know that it is missing. Who should feel addressed by a EVENT or WARN ? What should the user do with it ?",
+      "parentUuid": "1326deb9_d9072437",
+      "revId": "8cadaad96a69c508e94130dec5b57cc3c932924c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
