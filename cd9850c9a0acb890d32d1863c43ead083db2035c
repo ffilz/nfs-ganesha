@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02751690_22e9fb24",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1077,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-13T19:13:15Z",
+      "side": 1,
+      "message": "Please move declarations to top of function, also use /* */ style comment",
+      "revId": "cd9850c9a0acb890d32d1863c43ead083db2035c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f2de1f0_00c7c3b6",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-13T19:13:15Z",
+      "side": 1,
+      "message": "You\u0027re just examining the partition table right. Use rdlock not wrlock.",
+      "revId": "cd9850c9a0acb890d32d1863c43ead083db2035c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1227cb54_41b516db",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-13T19:13:15Z",
+      "side": 1,
+      "message": "You\u0027re just examining the partition table right. Use rdlock not wrlock.",
+      "revId": "cd9850c9a0acb890d32d1863c43ead083db2035c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e82e354c_ae54589b",
+        "filename": "src/include/nfs_init.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-13T19:13:15Z",
+      "side": 1,
+      "message": "Please declare this in include/nfs_core.h\n\nPlease actually grab the other two bool defined in the same block even though you won\u0027t use them.\n\n\nPut the declaration after the struct netconfig variables. Then you are adding it in the same place my rpcbind patch is adding it.",
+      "revId": "cd9850c9a0acb890d32d1863c43ead083db2035c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e95e657_a69c9a58",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-13T19:13:15Z",
+      "side": 1,
+      "message": "Please rebase on latest next, that will resolve the clang-format situation for this code block.",
+      "revId": "cd9850c9a0acb890d32d1863c43ead083db2035c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

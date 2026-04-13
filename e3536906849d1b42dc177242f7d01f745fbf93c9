@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "221dcc08_a7faf3c1",
+        "filename": "src/MainNFSD/nfs_main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-13T19:13:15Z",
+      "side": 0,
+      "message": "Didn\u0027t realize this was here...\n\nI am fixing up my patch that introduces is_inaddrany to also remove this use.\n\nIt actually uses a different method that also detects IPv4 INADDRANY embedded in IPv6 address. And uses memcmp to in6addr_any constant.\n\nMy plan is to merge my patch before we merge yours, so you will rebase once mine is merged and it should be a clean merge with a trivial manual merge if any.",
+      "revId": "e3536906849d1b42dc177242f7d01f745fbf93c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
