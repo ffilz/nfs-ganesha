@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a69c3ab_4f77f502",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-15T18:41:35Z",
+      "side": 1,
+      "message": "OK, just fix up those // comments to /* */ comments",
+      "revId": "a25f83804cea92d0895f53965307a4bc82ceb15b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05f8d137_09d5c675",
@@ -32,6 +49,24 @@
       "side": 1,
       "message": "its not expensive because we did open which caches this information.\nwe can probably add a map between fd and projected size. but it will be easier to break. WDYT?",
       "parentUuid": "05f8d137_09d5c675",
+      "revId": "a25f83804cea92d0895f53965307a4bc82ceb15b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44a412de_8c659f1e",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1264,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-15T18:41:35Z",
+      "side": 1,
+      "message": "True, fstat shouldn\u0027t have to go to disk. OK, let\u0027s call it good.",
+      "parentUuid": "2f0b5f69_9b548edb",
       "revId": "a25f83804cea92d0895f53965307a4bc82ceb15b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
