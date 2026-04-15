@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f0b5f69_9b548edb",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1264,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2026-04-15T08:56:16Z",
+      "side": 1,
+      "message": "its not expensive because we did open which caches this information.\nwe can probably add a map between fd and projected size. but it will be easier to break. WDYT?",
+      "parentUuid": "05f8d137_09d5c675",
+      "revId": "a25f83804cea92d0895f53965307a4bc82ceb15b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce8dc786_c0a8983b",
         "filename": "src/log/log_functions.c",
         "patchSetId": 3
