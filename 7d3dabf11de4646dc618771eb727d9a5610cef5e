@@ -16,6 +16,24 @@
       "message": "Can we please hold this for a while?  We have been testing this while running an add/delete loop.  We see the debug message logged and the associated `readdir` succeeds.  However, we then see a stale filehandle in a subsequent `readdir` that causes a failure.  We\u0027re still trying to make sense of it.  The change is obviously correct but there is something else that needs to be fixed.",
       "revId": "7d3dabf11de4646dc618771eb727d9a5610cef5e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8185694e_3ec19567",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-16T20:06:42Z",
+      "side": 1,
+      "message": "Sure - will remove +2 until you are ready",
+      "parentUuid": "6f74d0e1_08609b9f",
+      "revId": "7d3dabf11de4646dc618771eb727d9a5610cef5e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
