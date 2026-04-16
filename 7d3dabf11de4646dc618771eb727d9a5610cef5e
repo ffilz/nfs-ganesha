@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f74d0e1_08609b9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2026-04-16T10:08:42Z",
+      "side": 1,
+      "message": "Can we please hold this for a while?  We have been testing this while running an add/delete loop.  We see the debug message logged and the associated `readdir` succeeds.  However, we then see a stale filehandle in a subsequent `readdir` that causes a failure.  We\u0027re still trying to make sense of it.  The change is obviously correct but there is something else that needs to be fixed.",
+      "revId": "7d3dabf11de4646dc618771eb727d9a5610cef5e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
