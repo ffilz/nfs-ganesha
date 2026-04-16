@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "512927f0_6ce2f2ad",
+        "filename": "src/include/abstract_atomic.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2026-04-16T08:19:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b47e84f3_fd81c153",
+      "revId": "7e2506d98b8f35d6a483cb500753fa3159769a69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fea131d7_3a9dd390",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-13T20:22:20Z",
       "side": 1,
       "message": "The config is a 32 bit but the real counter is 64 bit? I think we only need 32 bit across the board for this.",
+      "revId": "7e2506d98b8f35d6a483cb500753fa3159769a69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7670ff1_e7c3f119",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2110,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2026-04-16T08:19:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fea131d7_3a9dd390",
       "revId": "7e2506d98b8f35d6a483cb500753fa3159769a69",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
