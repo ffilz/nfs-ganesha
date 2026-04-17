@@ -61,7 +61,7 @@ To enable/disable stat counters use:
                                  v4_full | auth | client_all_ops]
 
 To show/reset/enable/disable memory stat counters use:
-  {progname} [mem_stats] [show | reset | enable | disable]
+  {progname} [mem_stats] [show | reset | enable | disable | status]
 
 """
     )
@@ -141,11 +141,11 @@ elif command in ('enable', 'disable'):
         print_usage_exit(1)
 elif command in ('mem_stats'):
     if not len(opts) == 1:
-        print("\nError: Option '%s' must be followed by show/reset." % command)
+        print("\nError: Option '%s' must be followed by show/reset/enable/disable/status." % command)
         print_usage_exit(1)
     command_arg = opts[0]
-    if command_arg not in ('show', 'reset', 'enable', 'disable'):
-        print("\nError: Option '%s' must be followed by show/reset/enable/disable" % command)
+    if command_arg not in ('show', 'reset', 'enable', 'disable', 'status'):
+        print("\nError: Option '%s' must be followed by show/reset/enable/disable/status" % command)
         print_usage_exit(1)
 elif command == "help":
     print_usage_exit(0)
@@ -214,6 +214,8 @@ try:
             result = mem_interface.enable_mem_stats()
         elif command_arg == "disable":
             result = mem_interface.disable_mem_stats()
+        elif command_arg == "status":
+            result = mem_interface.status_mem_stats()
     print(result.json()) if output_json else print(result)
 except dbus.exceptions.DBusException:
     sys.exit("Error: Can't talk to ganesha service on d-bus. Looks like Ganesha is down")

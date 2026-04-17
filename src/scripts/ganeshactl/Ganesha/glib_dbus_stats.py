@@ -1559,12 +1559,18 @@ class RetrieveMemoryStats():
                                                      self.dbus_memstats_name)
         return MemStatsStatus(stats_state())
 
+    # get memory stats status
+    def status_mem_stats(self):
+        stats_state = self.memmgrobj.get_dbus_method("StatusMemoryStats",
+                                                     self.dbus_memstats_name)
+        return MemStatsStatus(stats_state())
+
 class MemStatsStatus():
     def __init__(self, status):
         self.status = status
 
     def __str__(self):
-            return "GANESHA RESPONSE STATUS: " + self.status[1]
+            return self.status[1]
 
 class DumpMemStats(Report):
     def __init__(self, stats):
