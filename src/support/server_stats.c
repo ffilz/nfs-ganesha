@@ -3675,6 +3675,26 @@ static bool disable_memory_statistics(DBusMessageIter *args, DBusMessage *reply,
 	return success;
 }
 
+static bool status_memory_statistics(DBusMessageIter *args, DBusMessage *reply,
+				     DBusError *error)
+{
+	bool success = true;
+	char *msg;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	/* Check the global enable memory stats capturing flag */
+	if (gsh_mem_stats_enabled)
+		msg = "Stats counting of mem_stats is currently enabled";
+	else
+		msg = "Stats counting of mem_stats is currently disabled";
+
+	gsh_dbus_status_reply(&iter, success, msg);
+
+	return success;
+}
+
 #define TOTAL_MEM_STATS_REPLY \
 	{ .name = "mem_stats", .type = "(a(sa(st)))", .direction = "out" }
 #define MEM_STATS_ENABLED_REPLY \
@@ -3705,9 +3725,15 @@ static struct gsh_dbus_method disable_mem_statistics = {
 	.args = { STATUS_REPLY, END_ARG_LIST }
 };
 
+static struct gsh_dbus_method status_mem_statistics = {
+	.name = "StatusMemoryStats",
+	.method = status_memory_statistics,
+	.args = { STATUS_REPLY, END_ARG_LIST }
+};
+
 static struct gsh_dbus_method *mem_stats_methods[] = {
 	&get_mem_statistics, &reset_mem_statistics, &enable_mem_statistics,
-	&disable_mem_statistics, NULL
+	&disable_mem_statistics, &status_mem_statistics, NULL
 };
 
 static struct gsh_dbus_interface mem_stats_table = {
