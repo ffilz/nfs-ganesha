@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f09c7f9_d749dd6d",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T14:41:53Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+ * @param[in]  s       ^I^I^IThe string to convert.$",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55924f7d_a4aac3ae",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T14:41:53Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+ * @param[out] out_number  ^IThe resulting 32-bit number.$",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a19eae90_e3852a46",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T14:41:53Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - static bool string_to_numeric_uid_gid(const char* s, uint32_t* out_number) {\n    - \tchar* endptr \u003d NULL;\n    - \tif (s \u003d\u003d NULL || *s \u003d\u003d \u0027\\0\u0027) return false;\n    - \tif (s[0] \u003d\u003d \u00270\u0027 \u0026\u0026 s[1] !\u003d \u0027\\0\u0027) return false;\n    - \tif (!isdigit((unsigned char)s[0])) return false;\n→ to be replaced with:\n    + static bool string_to_numeric_uid_gid(const char *s, uint32_t *out_number)\n    + {\n    + \tchar *endptr \u003d NULL;\n    + \tif (s \u003d\u003d NULL || *s \u003d\u003d \u0027\\0\u0027)\n    + \t\treturn false;\n    + \tif (s[0] \u003d\u003d \u00270\u0027 \u0026\u0026 s[1] !\u003d \u0027\\0\u0027)\n    + \t\treturn false;\n    + \tif (!isdigit((unsigned char)s[0]))\n    + \t\treturn false;",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd4f81bc_01c6be59",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T14:41:53Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+static bool string_to_numeric_uid_gid(const char* s, uint32_t* out_number) {",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94f39da6_438d5459",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T14:41:53Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\tif (s \u003d\u003d NULL || *s \u003d\u003d \u0027\\0\u0027) return false;",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a36f5685_2f915662",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T14:41:53Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\tif (s[0] \u003d\u003d \u00270\u0027 \u0026\u0026 s[1] !\u003d \u0027\\0\u0027) return false;",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2e78a1d_775117e2",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T14:41:53Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\tif (!isdigit((unsigned char)s[0])) return false;",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dd3c2d7_ef193e2f",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T14:41:53Z",
+      "side": 1,
+      "message": "WARNING: line length of 91 exceeds 80 columns\n+\t\t\t\"ID {} exceeds 32-bit range\", TP_BYTE_ARR_TRUNCATED(s, strlen(s)));",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6556738d_ea3c647e",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T14:41:53Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\"ID {} exceeds 32-bit range\", TP_BYTE_ARR_TRUNCATED(s, strlen(s)));\n    - \tif (endptr \u003d\u003d s || *endptr !\u003d \u0027\\0\u0027) return false;\n→ to be replaced with:\n    + \t\t\t\t    \"ID {} exceeds 32-bit range\",\n    + \t\t\t\t    TP_BYTE_ARR_TRUNCATED(s, strlen(s)));\n    + \tif (endptr \u003d\u003d s || *endptr !\u003d \u0027\\0\u0027)\n    + \t\treturn false;",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "746b6f12_c657b408",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T14:41:53Z",
+      "side": 1,
+      "message": "ERROR: trailing statements should be on next line\n+\tif (endptr \u003d\u003d s || *endptr !\u003d \u0027\\0\u0027) return false;",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb53ff4_3a1126ff",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T14:41:53Z",
+      "side": 1,
+      "message": "clang-format expects to remove the following lines:\n    - Extra blank line to be removed",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
