@@ -50,6 +50,7 @@
 #include <errno.h>
 #include <sys/un.h>
 
+#include "log_common.h"
 #include "ip_utils.h"
 
 #ifdef RPC_VSOCK
@@ -82,14 +83,14 @@ uint64_t hash_sockaddr(sockaddr_t *addr, bool ignore_port)
 
 	switch (addr->ss_family) {
 	case AF_INET: {
-		struct sockaddr_in *paddr = (struct sockaddr_in *)addr;
-
-		addr_hash = paddr->sin_addr.s_addr;
-		if (!ignore_port) {
-			port = paddr->sin_port;
-			addr_hash ^= (port << 16);
-		}
-		break;
+		/* IPv6 spec allows IPv4 addresses to be mapped as IPv6 addresses.
+		 * This allows us to ensure that an IPv4 address has the same hash
+		 * whether mapped as IPv6 or not.
+		 */
+		sockaddr_t addr_ipv6;
+		addr = ipv4_to_ipv4_mapped_ipv6(addr, &addr_ipv6);
+		assert(addr_ipv6.ss_family == AF_INET6);
+		/* fall through */
 	}
 	case AF_INET6: {
 		struct sockaddr_in6 *paddr = (struct sockaddr_in6 *)addr;
@@ -214,39 +215,28 @@ int ip_str_to_sockaddr(char *ip_str, sockaddr_t *sp)
  */
 int sockaddr_cmp(sockaddr_t *addr1, sockaddr_t *addr2, bool ignore_port)
 {
-	sockaddr_t addr_ipv4_1 = {};
-	sockaddr_t addr_ipv4_2 = {};
+	sockaddr_t addr_ipv6_1 = {};
+	sockaddr_t addr_ipv6_2 = {};
 
-	if (addr1->ss_family != addr2->ss_family) {
-		addr1 = convert_ipv6_to_ipv4(addr1, &addr_ipv4_1);
-		addr2 = convert_ipv6_to_ipv4(addr2, &addr_ipv4_2);
+	if (addr1->ss_family == AF_INET) {
+		addr1 = ipv4_to_ipv4_mapped_ipv6(addr1, &addr_ipv6_1);
 	}
+	if (addr2->ss_family == AF_INET) {
+		addr2 = ipv4_to_ipv4_mapped_ipv6(addr2, &addr_ipv6_2);
+	}
+
 	switch (addr1->ss_family) {
-	case AF_INET: {
-		struct sockaddr_in *in1 = (struct sockaddr_in *)addr1;
-		struct sockaddr_in *in2 = (struct sockaddr_in *)addr2;
-
-		if (in1->sin_addr.s_addr < in2->sin_addr.s_addr)
-			return -1;
-
-		if (in1->sin_addr.s_addr == in2->sin_addr.s_addr) {
-			if (ignore_port)
-				return 0;
-			/* else */
-			if (in1->sin_port < in2->sin_port)
-				return -1;
-			if (in1->sin_port == in2->sin_port)
-				return 0;
-			return 1;
-		}
-		return 1;
-	}
+	case AF_INET:
+		LogFatal(COMPONENT_EXPORT, "AF_INET should have been converted already.");
 	case AF_INET6: {
 		struct sockaddr_in6 *in1 = (struct sockaddr_in6 *)addr1;
 		struct sockaddr_in6 *in2 = (struct sockaddr_in6 *)addr2;
+		assert(in1->sin6_family == AF_INET6);
+		assert(in2->sin6_family == AF_INET6);
+
 		int acmp = memcmp(in1->sin6_addr.s6_addr,
-				  in2->sin6_addr.s6_addr,
-				  sizeof(struct in6_addr));
+					in2->sin6_addr.s6_addr,
+					sizeof(struct in6_addr));
 		if (acmp == 0) {
 			if (ignore_port)
 				return 0;
@@ -363,6 +353,55 @@ sockaddr_t *convert_ipv6_to_ipv4(sockaddr_t *ipv6, sockaddr_t *ipv4)
 	} else {
 		return ipv6;
 	}
+}
+
+/**
+ * @brief Convert an IPv4 address to an IPv4-mapped IPv6 address and return it.
+ *        If the input address is not IPv4, return the input address.
+ *
+ * @param[in] ipv4  The input address which may be IPv4 or IPV6
+ * @param[in] ipv6  sockattr_t buffer to create a new IPv6 address
+ *
+ * @returns If the input address is IPv4, the input address mapped to IPv6.
+ *          Otherwise the input address.
+ */
+sockaddr_t *ipv4_to_ipv4_mapped_ipv6(sockaddr_t* ipv4, sockaddr_t* ipv6) {
+	struct sockaddr_in* paddr = (struct sockaddr_in*)ipv4;
+	struct sockaddr_in6* psockaddr_in6 = (struct sockaddr_in6*)ipv6;
+
+	/* An IPv4 address when encapsulated as an IPv6 address looks like:
+	 * |---------------------------------------------------------------|
+	 * |   80 bits = 10 bytes  | 16 bits = 2 bytes | 32 bits = 4 bytes |
+	 * |---------------------------------------------------------------|
+	 * |            0          |        FFFF       |    IPv4 address   |
+	 * |---------------------------------------------------------------|
+	 */
+	if (ipv4->ss_family != AF_INET) {
+		return ipv4;
+	}
+	memset(psockaddr_in6, 0, sizeof(*psockaddr_in6));
+	psockaddr_in6->sin6_family = AF_INET6;
+	psockaddr_in6->sin6_port = paddr->sin_port;
+	memcpy(psockaddr_in6->sin6_addr.s6_addr, ten_bytes_all_0, 10);
+	psockaddr_in6->sin6_addr.s6_addr[10] = 0xFF;
+	psockaddr_in6->sin6_addr.s6_addr[11] = 0xFF;
+	memcpy(&psockaddr_in6->sin6_addr.s6_addr[12], &paddr->sin_addr.s_addr,
+				 sizeof(struct in_addr));
+
+	if (isMidDebug(COMPONENT_EXPORT)) {
+		char ipstring4[SOCK_NAME_MAX];
+		char ipstring6[SOCK_NAME_MAX];
+		struct display_buffer dspbuf4 = {sizeof(ipstring4), ipstring4, ipstring4};
+		struct display_buffer dspbuf6 = {sizeof(ipstring6), ipstring6, ipstring6};
+
+		display_sockip(&dspbuf4, ipv4);
+		display_sockip(&dspbuf6, ipv6);
+		LogMidDebug(
+				COMPONENT_EXPORT,
+				"Converting IPv4 address %s to an IPv6 encapsulated IPv4 address %s ",
+				ipstring4, ipstring6);
+	}
+	return ipv6;
 }
 
 /**
