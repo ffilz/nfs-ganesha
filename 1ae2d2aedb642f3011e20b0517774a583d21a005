@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d01c3970_1f9d7c21",
+        "filename": "src/include/ip_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T13:33:54Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - sockaddr_t *ipv4_to_ipv4_mapped_ipv6(sockaddr_t* ipv4, sockaddr_t* ipv6);\n→ to be replaced with:\n    + sockaddr_t *ipv4_to_ipv4_mapped_ipv6(sockaddr_t *ipv4, sockaddr_t *ipv6);",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0127ad1b_9639e101",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T13:33:54Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t/* IPv6 spec allows IPv4 addresses to be mapped as IPv6 addresses.",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ada5bed6_0646d79e",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T13:33:54Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t * This allows us to ensure that an IPv4 address has the same hash",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a73b6a_92296081",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T13:33:54Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tsockaddr_t addr_ipv6;\n+\t\taddr \u003d ipv4_to_ipv4_mapped_ipv6(addr, \u0026addr_ipv6);",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af18f773_c62307a4",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T13:33:54Z",
+      "side": 1,
+      "message": "WARNING: Prefer \u0027fallthrough;\u0027 over fallthrough comment\n+\t\t/* fall through */",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c610c27_a562bb34",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T13:33:54Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\tLogFatal(COMPONENT_EXPORT, \"AF_INET should have been converted already.\");",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f0fd1d8_e2b54fab",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T13:33:54Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tLogFatal(COMPONENT_EXPORT, \"AF_INET should have been converted already.\");\n→ to be replaced with:\n    + \t\tLogFatal(COMPONENT_EXPORT,\n    + \t\t\t \"AF_INET should have been converted already.\");",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "714b26b2_09b92136",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T13:33:54Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tin2-\u003esin6_addr.s6_addr,\n    - \t\t\t\t\tsizeof(struct in6_addr));\n→ to be replaced with:\n    + \t\t\t\t  in2-\u003esin6_addr.s6_addr,\n    + \t\t\t\t  sizeof(struct in6_addr));",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d490911b_ff3de360",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T13:33:54Z",
+      "side": 1,
+      "message": "ERROR: open brace \u0027{\u0027 following function definitions go on the next line\n+sockaddr_t *ipv4_to_ipv4_mapped_ipv6(sockaddr_t* ipv4, sockaddr_t* ipv6) {",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c59e9c20_a6810333",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T13:33:54Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - sockaddr_t *ipv4_to_ipv4_mapped_ipv6(sockaddr_t* ipv4, sockaddr_t* ipv6) {\n    - \tstruct sockaddr_in* paddr \u003d (struct sockaddr_in*)ipv4;\n    - \tstruct sockaddr_in6* psockaddr_in6 \u003d (struct sockaddr_in6*)ipv6;\n→ to be replaced with:\n    + sockaddr_t *ipv4_to_ipv4_mapped_ipv6(sockaddr_t *ipv4, sockaddr_t *ipv6)\n    + {\n    + \tstruct sockaddr_in *paddr \u003d (struct sockaddr_in *)ipv4;\n    + \tstruct sockaddr_in6 *psockaddr_in6 \u003d (struct sockaddr_in6 *)ipv6;",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1419a539_9a8302f7",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T13:33:54Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t sizeof(struct in_addr));\n    - \t\tstruct display_buffer dspbuf4 \u003d {sizeof(ipstring4), ipstring4, ipstring4};\n    - \t\tstruct display_buffer dspbuf6 \u003d {sizeof(ipstring6), ipstring6, ipstring6};\n    - \t\t\t\tCOMPONENT_EXPORT,\n    - \t\t\t\t\"Converting IPv4 address %s to an IPv6 encapsulated IPv4 address %s \",\n    - \t\t\t\tipstring4, ipstring6);\n→ to be replaced with:\n    + \t       sizeof(struct in_addr));\n    + \t\tstruct display_buffer dspbuf4 \u003d { sizeof(ipstring4), ipstring4,\n    + \t\t\t\t\t\t  ipstring4 };\n    + \t\tstruct display_buffer dspbuf6 \u003d { sizeof(ipstring6), ipstring6,\n    + \t\t\t\t\t\t  ipstring6 };\n    + \t\t\tCOMPONENT_EXPORT,\n    + \t\t\t\"Converting IPv4 address %s to an IPv6 encapsulated IPv4 address %s \",\n    + \t\t\tipstring4, ipstring6);",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c721f120_73cbe081",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T13:33:54Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\tstruct display_buffer dspbuf4 \u003d {sizeof(ipstring4), ipstring4, ipstring4};",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83c789d8_add6e2f9",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-19T13:33:54Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\tstruct display_buffer dspbuf6 \u003d {sizeof(ipstring6), ipstring6, ipstring6};",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
