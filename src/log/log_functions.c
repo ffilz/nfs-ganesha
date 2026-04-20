@@ -54,7 +54,6 @@
 
 #include "log.h"
 #include "gsh_list.h"
-#include "gsh_rpc.h"
 #include "common_utils.h"
 #include "abstract_mem.h"
 
