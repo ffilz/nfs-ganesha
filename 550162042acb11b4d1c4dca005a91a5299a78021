@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d94dd2c_a67b0a28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-20T18:52:39Z",
+      "side": 1,
+      "message": "Please address all the clang-format and checkpatch issues.",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f09c7f9_d749dd6d",
         "filename": "src/idmapper/idmapper.c",
         "patchSetId": 1
@@ -184,6 +201,23 @@
       "writtenOn": "2026-04-19T14:41:53Z",
       "side": 1,
       "message": "clang-format expects to remove the following lines:\n    - Extra blank line to be removed",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4433f3f8_ed0da9a6",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-20T18:52:39Z",
+      "side": 1,
+      "message": "I made an effort to have gsh_buffdesc strings NUL terminated to avoid having to do swizzling like this. Is there someplace this was missed, if so let\u0027s fix it rather than adding this swizzling.",
       "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
