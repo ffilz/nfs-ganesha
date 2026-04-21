@@ -104,6 +104,29 @@
       "message": "Wondering if this should be a switch statement like above.",
       "revId": "75838e2534df3c54c6ab2b79c20bd9d63289c76c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2293ce79_8ae48dc0",
+        "filename": "src/idmapper/pwnam_wrappers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T12:06:55Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s the right approach\n\nI\u0027d just create a wrapper function for `getgrouplist` and for `sss_nss_idmap__getgrouplist` and and assign each of them correspondingly in the `pwnam_wrappers__set_implementation`.\n\nWhy have both logics and a switch for each call instead of just calling the right function that does the logic that\u0027s required from it.\n\n---\n\nAs for the implementation, just document the requirements and API that we decided above the declaration of the global `getgrouplist_func`.\n\nAdd two static functions `getgrouplist_nsswitch_wrapper` and `getgrouplist_sss_nss_idmap_wrapper` and each should call the corresponding getgrouplist function and normalize the return code.\n\nIn `pwnam_wrappers__set_implementation` assign the local static wrapper.",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 1
+      },
+      "revId": "75838e2534df3c54c6ab2b79c20bd9d63289c76c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
