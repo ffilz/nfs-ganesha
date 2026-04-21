@@ -33,6 +33,24 @@
       "message": "There\u0027s a reason why we have static metrics and not only dynamic ones.\n\nThe reason is that dynamic metrics causes a performance degradation when they\u0027re attempted to be touched in IO rate.\n\nEach usage of the dynamic metrics triggers lookups in dictionaries which requires locks and when its done from many threads it will degrade the performance.\n\nSo as much as the \"old\" metrics systems seems to be archaic, there\u0027s a reason behind it.\n\nWe for example, disable the \"dynamic_metrics\" fully as it degrades the performance majorly.\n\nI\u0027d suggest to migrate all of the dynamic metrics to be static referenced based metrics instead.",
       "revId": "f555be5f7f093ea98dc61720a28e6563ec2a3d05",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8ad3b85_6673609b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T12:14:43Z",
+      "side": 1,
+      "message": "I added a comment explaining the rational behind the static metrics- https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1227696/comments/26868342_54b650b3\n\nTLDR; dynamic metrics causes performance degradation and should be considered to be replaced by static metrics.",
+      "parentUuid": "fd878679_c0d89aae",
+      "revId": "f555be5f7f093ea98dc61720a28e6563ec2a3d05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
