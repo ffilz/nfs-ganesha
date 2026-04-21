@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e630c1a_6c322594",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-21T17:44:13Z",
+      "side": 1,
+      "message": "Agreed. Did clang-format or something get to this file?",
+      "parentUuid": "7f79cdea_fcc2b3f5",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 36,
+        "endChar": 0
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "758f5dd1_21273b70",
         "filename": "src/config_samples/config.txt",
         "patchSetId": 7
@@ -54,6 +78,30 @@
       "writtenOn": "2026-04-21T13:05:16Z",
       "side": 1,
       "message": "Consider changing to ::",
+      "range": {
+        "startLine": 1257,
+        "startChar": 41,
+        "endLine": 1257,
+        "endChar": 48
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb7d7d13_82822dd5",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-21T17:44:13Z",
+      "side": 1,
+      "message": "We currently have IPv4 addresses as default. I don\u0027t know that anyone still uses IPv4 only systems, but that is a consideration. There might be good reason to actually configure a specific address anyway.",
+      "parentUuid": "758f5dd1_21273b70",
       "range": {
         "startLine": 1257,
         "startChar": 41,
@@ -457,6 +505,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48e7bc89_b738b0d4",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-21T17:44:13Z",
+      "side": 1,
+      "message": "Yea, it should be an extern.",
+      "parentUuid": "271c5307_4fa1fd22",
+      "range": {
+        "startLine": 57,
+        "startChar": 2,
+        "endLine": 57,
+        "endChar": 21
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "499ae6b5_fb7e3574",
         "filename": "src/grpc_server/GrpcServer.h",
         "patchSetId": 7
@@ -468,6 +540,30 @@
       "writtenOn": "2026-04-21T13:05:16Z",
       "side": 1,
       "message": "Move the function definitions (GrpcServer::GrpcServer(), etc.) to a .cpp file. Defining them in a header will cause \"multiple definition\" errors if this header is included in more than one place.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 0
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d892f53d_437d51e5",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-21T17:44:13Z",
+      "side": 1,
+      "message": "They could also be defined in the class so they are \"inline\"",
+      "parentUuid": "499ae6b5_fb7e3574",
       "range": {
         "startLine": 59,
         "startChar": 0,
@@ -526,6 +622,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a3810924_5b6d0c09",
+        "filename": "src/include/ip_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-21T17:44:13Z",
+      "side": 1,
+      "message": "This function is going to be replaced by one of my patches. I will change to that macro though. I had coded a memcmp to in6addr_any (also defined in netinet/in.h).\nMy patch also checks for IPv4 0.0.0.0 embedded in IPv6 for good measure.",
+      "parentUuid": "a414f117_77638725",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 1
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b708910_85c491ef",
         "filename": "src/support/nfs_read_conf.c",
         "patchSetId": 7
@@ -537,6 +657,30 @@
       "writtenOn": "2026-04-21T13:05:16Z",
       "side": 1,
       "message": "Should there be a bool that determines if grpc is enabled or not?\n\nNot everyone would need the grpc",
+      "range": {
+        "startLine": 704,
+        "startChar": 0,
+        "endLine": 704,
+        "endChar": 43
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6641f888_9d5a50cd",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-21T17:44:13Z",
+      "side": 1,
+      "message": "Yes, definitely. We don\u0027t want to open a port if we aren\u0027t using it.",
+      "parentUuid": "5b708910_85c491ef",
       "range": {
         "startLine": 704,
         "startChar": 0,
