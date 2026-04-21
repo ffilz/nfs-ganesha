@@ -34,6 +34,24 @@
       "parentUuid": "6f74d0e1_08609b9f",
       "revId": "7d3dabf11de4646dc618771eb727d9a5610cef5e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9055f240_3452ed4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2026-04-21T05:41:42Z",
+      "side": 1,
+      "message": "@ffilzlnx@mindspring.com OK, I think we\u0027ve now covered my concerns... 😀\n\nThere was a minor bug in the previous version where, when we skip the final directory entry, `ERR_FSAL_NOENT` could escape out of the loop and be returned.  That is solved by resetting `status`.\n\nMy main concern was that when I tortured this with a tight add/delete file loop in a directory on the underlying filesystem (that also contained additional files, so should never be empty), while reading the directory in a tight loop from an NFS client, I would see empty listings after an `ESTALE` error for the *directory* (not for the file being added/deleted).  This is with `Attr_Expiration_time \u003d 0` but `Dir_Chunk \u003d 128` (which might be an unusual combination).  With this configuration, we essentially get the same issue in MDCache: the directory is read but then, when we try to fetch the attributes, the file can be gone (again), so any reference to it is stale... and `readdir` returns `ESTALE` (or similar).  So, this is a separate issue in MDCache, which @pschwenke@ddn.com is solving with a skip there.\n\nI tried solving this by returning `ERR_FSAL_DELAY` instead of skipping in VFS `read_dirents()`.  However, this is pointless because it only catches the cases where the race is lost between `getdents64()` and `fstatat()`.  If the file is removed after `read_dirents()` returns then it returns to just being an MDCache issue.\n\nMy best guess about why `FSAL_GPFS` isn\u0027t affected is that there generally isn\u0027t a reason to set `Attr_Expiration_time \u003d 0` because it does MDCache invalidation via an upcall.  So, the attributes would normally come from the cache.  I guess there are small windows where the file is deleted just as the attribute cache entry expires...  or the upcall expires the entry for a deleted file.\n\nAnyway, I think this fix stands alone... and a separate one is needed for MDCache.",
+      "parentUuid": "8185694e_3ec19567",
+      "revId": "7d3dabf11de4646dc618771eb727d9a5610cef5e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
