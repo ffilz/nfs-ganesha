@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17dc21fa_475003b2",
+        "filename": "coverity/ganesha_model.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-21T14:53:46Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - int dlclose(void* handle) { __coverity_free__(handle); }\n→ to be replaced with:\n    + int dlclose(void *handle)\n    + {\n    + \t__coverity_free__(handle);\n    + }",
+      "revId": "cc1a21570015a47b2293c9db06d9a7df681ab5b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
