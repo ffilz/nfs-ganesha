@@ -51,6 +51,24 @@
       "parentUuid": "fd878679_c0d89aae",
       "revId": "f555be5f7f093ea98dc61720a28e6563ec2a3d05",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "583301bf_1c19f8ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-21T17:54:19Z",
+      "side": 1,
+      "message": "Lior - are you suggesting static metrics that access the stats arrays collected by for the DBUS metrics? If so, I have been pushing for Prometheus scrape gathering those stats rather than actively pushing stats into Prometheus metrics.",
+      "parentUuid": "26868342_54b650b3",
+      "revId": "f555be5f7f093ea98dc61720a28e6563ec2a3d05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
