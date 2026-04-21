@@ -67,6 +67,29 @@
       "message": "Above were some of the yesterday\u0027s discussion points with Frank. Would require further help and inputs, including Daniel for his review and inputs as well.",
       "revId": "9b5032220e0b79f07e2592d1bc53b2bf419b7caa",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "247ff73a_066450bc",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T10:01:57Z",
+      "side": 1,
+      "message": "This is a very large PR, which makes it difficult to provide the thorough review this logic deserves. To improve readability and maintainability, I suggest breaking this down. Specifically, the functions are quite long with deep nesting; extracting these into smaller, well-named helper functions would document the behavior more clearly and reduce the indentation levels.",
+      "range": {
+        "startLine": 1357,
+        "startChar": 0,
+        "endLine": 1384,
+        "endChar": 45
+      },
+      "revId": "9b5032220e0b79f07e2592d1bc53b2bf419b7caa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
