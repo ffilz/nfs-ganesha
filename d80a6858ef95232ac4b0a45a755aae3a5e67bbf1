@@ -16,6 +16,552 @@
       "message": "OK, we\u0027ll respin this once my patches are merged.",
       "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f79cdea_fcc2b3f5",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "I don\u0027t think you should reformat that file while trying to make a specific change\n\nIf you\u0027d want to reformat the cmake, do a separate commit that reformat it\n\nIt makes it harder to see what changes you made here for grpc and review them",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 36,
+        "endChar": 0
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "758f5dd1_21273b70",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "Consider changing to ::",
+      "range": {
+        "startLine": 1257,
+        "startChar": 41,
+        "endLine": 1257,
+        "endChar": 48
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d732f1da_f108069e",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 7
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "You skip the Grpc_Addr here",
+      "range": {
+        "startLine": 670,
+        "startChar": 41,
+        "endLine": 670,
+        "endChar": 42
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "434ee1d8_3e6a248d",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "You are capturing server_crt, server_key, and ca_crt by value in the thread lambda. Since these are std::string_view, you are capturing the pointer and length. If the original strings passed to start() are destroyed before the thread reads them, you\u0027ll have a use-after-free. Recommendation: Capture them as std::string to ensure the thread owns the data.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 5
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8040a68_ff6f3b74",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "start can be called even if the server was already started, and it will spawn a new thread and re-assign a value to the `server_thread_` variable",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 5
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0281ebc_0756306f",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "service objects (e.g., showClientService) are allocated on the stack. Since server_-\u003eWait() blocks, this is technically safe for now, but if the server were to shut down and return, those objects are destroyed before server_ is necessarily cleared. Move these to be class members or std::shared_ptr",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 36
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c6be8f3_c5f31aff",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "Dead Code: std::string key \u003d \"\"; followed by key \u003d read_cert_file(...) is redundant. Initialize directly: std::string key \u003d read_cert_file(...).",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 21
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2cb871b_59c30b98",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "Logging Consistency: Use server_address.c_str() consistently. You used .data() in one log and .c_str() in another; .c_str() is safer for null-terminated C logging.",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 0
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c59f210_5215fe6e",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "Use string_view",
+      "range": {
+        "startLine": 88,
+        "startChar": 27,
+        "endLine": 88,
+        "endChar": 47
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "880954bf_f62fc037",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "Error Handling: If read_cert_file fails for the server key/cert, you log a warning and return. However, the thread stays alive until the function ends. Since the server didn\u0027t start, ensure stop() or the destructor knows how to clean up a \"zombie\" thread state.",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 3
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e074cc97_e33741b0",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "Race Condition on server_: You check if (server_) inside the lock, but you assign server_ \u003d builder.BuildAndStart(); outside the lock. Another call to start() could happen in that gap, leading to multiple servers starting. Move the assignment inside the locked block.",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 35
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09443b6a_1edec8b9",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "n stop(), you hold the mutex_ while calling server_thread_.join(). However, the server_thread_ (running gRPCServerStart) might be trying to acquire that same mutex_ during its initialization or if it fails and returns.",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 2
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e979acee_c778ab34",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "You don\u0027t include relevant headers-\n\n\u003cmutex\u003e, \u003cthread\u003e, \u003cmemory\u003e, \u003cstring\u003e, and \u003cstring_view\u003e.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 39
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "394824b5_b39b5f80",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "The parameters naming convention here isn\u0027t the same as in the following functions\n\nPlease be consistent",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 33,
+        "endChar": 59
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be311f74_8300e2f8",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "ip addr should be a string_view",
+      "range": {
+        "startLine": 36,
+        "startChar": 19,
+        "endLine": 36,
+        "endChar": 31
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5c5740c_18f394e9",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "inconsistent convention",
+      "range": {
+        "startLine": 37,
+        "startChar": 22,
+        "endLine": 37,
+        "endChar": 30
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6e5f3dd_2b9482f7",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "Why not pass those as part of the start function as well?\nIt means nothing if it was set after the server was started",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 32
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22585be4_2207e787",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "same here regarding name convention",
+      "range": {
+        "startLine": 50,
+        "startChar": 13,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "271c5307_4fa1fd22",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "Declaring } ganesha_grpc_server; in a header creates a global instance in every file that includes it.\n\nThat\u0027s not a good practice",
+      "range": {
+        "startLine": 57,
+        "startChar": 2,
+        "endLine": 57,
+        "endChar": 21
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "499ae6b5_fb7e3574",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "Move the function definitions (GrpcServer::GrpcServer(), etc.) to a .cpp file. Defining them in a header will cause \"multiple definition\" errors if this header is included in more than one place.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 0
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11a97034_32638d45",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "The closing guard #endif /* GANESHA_GRPC_H */ doesn\u0027t match the opening #ifndef GRPC_SERVER_H. Update them to match.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 27
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a414f117_77638725",
+        "filename": "src/include/ip_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "This can be simplified to-\n```\nstatic inline bool is_inaddrany(const sockaddr_t *addr)\n{\n    if (addr-\u003ess_family \u003d\u003d AF_INET6) {\n        const struct sockaddr_in6 *sin6 \u003d (const struct sockaddr_in6 *)addr;\n        return IN6_IS_ADDR_UNSPECIFIED(\u0026sin6-\u003esin6_addr);\n    }\n    \n    /* IPv4 */\n    const struct sockaddr_in *sin \u003d (const struct sockaddr_in *)addr;\n    return sin-\u003esin_addr.s_addr \u003d\u003d INADDR_ANY;\n}\n```",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 1
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b708910_85c491ef",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "Should there be a bool that determines if grpc is enabled or not?\n\nNot everyone would need the grpc",
+      "range": {
+        "startLine": 704,
+        "startChar": 0,
+        "endLine": 704,
+        "endChar": 43
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87d60516_82a7cbe5",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-21T13:05:16Z",
+      "side": 1,
+      "message": "nit: redundant newlines",
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
