@@ -189,7 +189,7 @@ fsid_device(bool, default false)
 fsid_override(bool, default false)
     Whether to use the Filesytem_id specified in an export definition
     to override the filesystem ID provided by the underlying
-    filesystem.  This enables the ability to export multiple directories from 
+    filesystem.  This enables the ability to export multiple directories from
     the same underlying filesystem.
 
 resolve_fs_retries(uint32_t, range 1 to 1000, default 10)
