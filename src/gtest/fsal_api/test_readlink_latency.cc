@@ -171,8 +171,9 @@ TEST_F(ReadlinkEmptyLatencyTest, LOOP)
 	now(&s_time);
 
 	for (int i = 0; i < LOOP_COUNT; ++i) {
-		status = symlink_test_root->obj_ops->readlink(
-			symlink_test_root, &link_content, false);
+		status = symlink_test_root->obj_ops->readlink(symlink_test_root,
+							      &link_content,
+							      false);
 		EXPECT_EQ(status.major, 0);
 		gsh_free(link_content.addr);
 	}
@@ -212,8 +213,9 @@ TEST_F(ReadlinkFullLatencyTest, BIG)
 	now(&s_time);
 
 	for (int i = 0; i < LOOP_COUNT; ++i) {
-		status = symlink_test_root->obj_ops->readlink(
-			symlink_test_root, &link_content, false);
+		status = symlink_test_root->obj_ops->readlink(symlink_test_root,
+							      &link_content,
+							      false);
 		ASSERT_EQ(status.major, 0)
 			<< " failed to readlink " << TEST_ROOT_LINK;
 		gsh_free(link_content.addr);
