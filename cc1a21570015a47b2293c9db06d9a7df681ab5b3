@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09d3660a_da345b78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-21T17:28:00Z",
+      "side": 1,
+      "message": "Looks good except for that one change of void *x to void* x which is odd.",
+      "revId": "cc1a21570015a47b2293c9db06d9a7df681ab5b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "17dc21fa_475003b2",
         "filename": "coverity/ganesha_model.c",
         "patchSetId": 2
@@ -14,6 +31,24 @@
       "writtenOn": "2026-04-21T14:53:46Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - int dlclose(void* handle) { __coverity_free__(handle); }\n→ to be replaced with:\n    + int dlclose(void *handle)\n    + {\n    + \t__coverity_free__(handle);\n    + }",
+      "revId": "cc1a21570015a47b2293c9db06d9a7df681ab5b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32569fe7_03912ccd",
+        "filename": "coverity/ganesha_model.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-21T17:28:00Z",
+      "side": 1,
+      "message": "What\u0027s up with this change? I expect the previous format.\n\nHave you changed your clang-format config?",
+      "parentUuid": "17dc21fa_475003b2",
       "revId": "cc1a21570015a47b2293c9db06d9a7df681ab5b3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
