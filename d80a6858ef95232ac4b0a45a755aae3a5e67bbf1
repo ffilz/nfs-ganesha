@@ -67,6 +67,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "475c9ba4_c4898cda",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1065,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T18:01:06Z",
+      "side": 1,
+      "message": "You don\u0027t need this address conversion. The config code will have already taken care of this.\n\nAlso, this is invoked long before v6disabled might even be set (it isn\u0027t set until nfs_Init_svc() is called near the end of nfs_init().",
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "758f5dd1_21273b70",
         "filename": "src/config_samples/config.txt",
         "patchSetId": 7
@@ -102,6 +119,30 @@
       "side": 1,
       "message": "We currently have IPv4 addresses as default. I don\u0027t know that anyone still uses IPv4 only systems, but that is a consideration. There might be good reason to actually configure a specific address anyway.",
       "parentUuid": "758f5dd1_21273b70",
+      "range": {
+        "startLine": 1257,
+        "startChar": 41,
+        "endLine": 1257,
+        "endChar": 48
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "532929db_bb590cdb",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T18:01:06Z",
+      "side": 1,
+      "message": "FYI: the string \"0.0,0.0\" is actually ignored... CONF_ITEM_IP_ADDR initializes the parameter to the appropriate inaddrany or in6addrany depending on how the system is set up and it\u0027s IP stack.\n\nSo let\u0027s leave it the same as the Bind_Addr param for now.\n\nAt some later time we might clean this up a bit and make the config more clear.",
+      "parentUuid": "bb7d7d13_82822dd5",
       "range": {
         "startLine": 1257,
         "startChar": 41,
@@ -687,6 +728,23 @@
         "endLine": 704,
         "endChar": 43
       },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1eaaa4d_703ae2d7",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T18:01:06Z",
+      "side": 1,
+      "message": "FYI: the string \"0.0,0.0\" is actually ignored... CONF_ITEM_IP_ADDR initializes the parameter to the appropriate inaddrany or in6addrany depending on how the system is set up and it\u0027s IP stack.",
       "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
