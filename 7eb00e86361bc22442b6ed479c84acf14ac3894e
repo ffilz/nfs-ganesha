@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b4c75c8_81c5f7c7",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "So a real question here - is there really any value to hashing the full IPv6 address? If we just hashed the last 4 bytes, the hash of an IPv4 address and it\u0027s IPv6 encapsulated form would be the same. For other IPv6 addresses, last 4 bytes should be plenty unique for hashing.",
+      "revId": "7eb00e86361bc22442b6ed479c84acf14ac3894e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bc6e655_6ac9e3fe",
         "filename": "src/support/ip_utils.c",
         "patchSetId": 2
@@ -65,6 +82,24 @@
       "writtenOn": "2026-04-21T12:11:34Z",
       "side": 1,
       "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t/* IPv6 spec allows IPv4 addresses to be mapped as IPv6 addresses.",
+      "revId": "7eb00e86361bc22442b6ed479c84acf14ac3894e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b069b9f1_0c16f471",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9bc6e655_6ac9e3fe",
       "revId": "7eb00e86361bc22442b6ed479c84acf14ac3894e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +121,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b615ebed_6521a82c",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "eba6b758_c7e01860",
+      "revId": "7eb00e86361bc22442b6ed479c84acf14ac3894e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "124be1a8_1bb5e1b2",
@@ -103,6 +156,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb75120c_27d8af0b",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "124be1a8_1bb5e1b2",
+      "revId": "7eb00e86361bc22442b6ed479c84acf14ac3894e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9297cfde_58406920",
@@ -116,6 +187,24 @@
       "writtenOn": "2026-04-21T12:11:34Z",
       "side": 1,
       "message": "WARNING: Prefer \u0027fallthrough;\u0027 over fallthrough comment\n+\t\t/* fall through */",
+      "revId": "7eb00e86361bc22442b6ed479c84acf14ac3894e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "118a6153_a5073f10",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9297cfde_58406920",
       "revId": "7eb00e86361bc22442b6ed479c84acf14ac3894e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

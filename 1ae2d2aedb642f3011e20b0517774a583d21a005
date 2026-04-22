@@ -53,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27914c57_7c78ce0a",
+        "filename": "src/include/ip_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d01c3970_1f9d7c21",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0127ad1b_9639e101",
@@ -89,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ec881fb_b79caf16",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Please re-wrap comment to fix these.",
+      "parentUuid": "ada5bed6_0646d79e",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79a73b6a_92296081",
         "filename": "src/support/ip_utils.c",
         "patchSetId": 1
@@ -106,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13aabb1a_79bc5b6f",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Please add the blank line",
+      "parentUuid": "79a73b6a_92296081",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af18f773_c62307a4",
         "filename": "src/support/ip_utils.c",
         "patchSetId": 1
@@ -117,6 +171,24 @@
       "writtenOn": "2026-04-19T13:33:54Z",
       "side": 1,
       "message": "WARNING: Prefer \u0027fallthrough;\u0027 over fallthrough comment\n+\t\t/* fall through */",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65e022d8_6e6db2bf",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Please fix",
+      "parentUuid": "af18f773_c62307a4",
       "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -155,6 +227,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d35df645_9b0f586b",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f0fd1d8_e2b54fab",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be9d30b6_838e8fe3",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c610c27_a562bb34",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "714b26b2_09b92136",
@@ -168,6 +276,24 @@
       "writtenOn": "2026-04-19T13:33:54Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tin2-\u003esin6_addr.s6_addr,\n    - \t\t\t\t\tsizeof(struct in6_addr));\n→ to be replaced with:\n    + \t\t\t\t  in2-\u003esin6_addr.s6_addr,\n    + \t\t\t\t  sizeof(struct in6_addr));",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99a20935_054634d4",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "714b26b2_09b92136",
       "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -189,6 +315,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0461615f_840a3f8d",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d490911b_ff3de360",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c59e9c20_a6810333",
@@ -202,6 +346,24 @@
       "writtenOn": "2026-04-19T13:33:54Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - sockaddr_t *ipv4_to_ipv4_mapped_ipv6(sockaddr_t* ipv4, sockaddr_t* ipv6) {\n    - \tstruct sockaddr_in* paddr \u003d (struct sockaddr_in*)ipv4;\n    - \tstruct sockaddr_in6* psockaddr_in6 \u003d (struct sockaddr_in6*)ipv6;\n→ to be replaced with:\n    + sockaddr_t *ipv4_to_ipv4_mapped_ipv6(sockaddr_t *ipv4, sockaddr_t *ipv6)\n    + {\n    + \tstruct sockaddr_in *paddr \u003d (struct sockaddr_in *)ipv4;\n    + \tstruct sockaddr_in6 *psockaddr_in6 \u003d (struct sockaddr_in6 *)ipv6;",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf97214_362f9e94",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c59e9c20_a6810333",
       "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -248,6 +410,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcf98aa9_47919718",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "What\u0027s up with clang-format complaints here?",
+      "parentUuid": "1419a539_9a8302f7",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c721f120_73cbe081",
         "filename": "src/support/ip_utils.c",
         "patchSetId": 1
@@ -259,6 +439,24 @@
       "writtenOn": "2026-04-19T13:33:54Z",
       "side": 1,
       "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\tstruct display_buffer dspbuf4 \u003d {sizeof(ipstring4), ipstring4, ipstring4};",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dca69f3_030a7a56",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c721f120_73cbe081",
       "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -276,6 +474,24 @@
       "writtenOn": "2026-04-19T13:33:54Z",
       "side": 1,
       "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\tstruct display_buffer dspbuf6 \u003d {sizeof(ipstring6), ipstring6, ipstring6};",
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a65e9912_76bfc6e9",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:31:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83c789d8_add6e2f9",
       "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
