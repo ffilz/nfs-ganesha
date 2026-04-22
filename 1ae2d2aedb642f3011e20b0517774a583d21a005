@@ -190,6 +190,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09adc130_2e1a175d",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2026-04-22T01:45:32Z",
+      "side": 1,
+      "message": "Is this needed after the above `memset()`?",
+      "range": {
+        "startLine": 385,
+        "startChar": 1,
+        "endLine": 385,
+        "endChar": 63
+      },
+      "revId": "1ae2d2aedb642f3011e20b0517774a583d21a005",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1419a539_9a8302f7",
         "filename": "src/support/ip_utils.c",
         "patchSetId": 1

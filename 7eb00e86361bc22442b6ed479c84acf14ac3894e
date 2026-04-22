@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd5d14c3_7e052932",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2026-04-22T01:45:32Z",
+      "side": 1,
+      "message": "This is definitely needed because the existing code has inherited unsafe behaviour from the old `sockaddr_cmpf()`.  It happily compares after the end of an IPv4 address (with possibly uninitialised data), when `addr1` is IPv6 and `addr2` is IPv4.\n\nSo, converting to IPv6 before comparison is the right thing to do.\n\n@ffilzlnx@mindspring.com, @pschwenke@ddn.com and I discussed this morning about whether the hashing really needs to convert to IPv6, since the hash value is only usefully 32-bits.  It might be better to leave IPv4 as it is but just use the last 4 octets of an IPv6 address, which means it will \"hash\" identically for an IPv4 address and the equivalent IPv4-mapped-IPv6 address.  I guess that would be a separate commit...\n\nJust a few unresolved comments before I give +1.  🙂",
+      "revId": "7eb00e86361bc22442b6ed479c84acf14ac3894e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bc6e655_6ac9e3fe",
         "filename": "src/support/ip_utils.c",
         "patchSetId": 2
