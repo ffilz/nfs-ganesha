@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eeed67c_bb05f4f7",
+        "filename": "src/support/rados_grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-22T20:24:25Z",
+      "side": 1,
+      "message": "You never reset failed_to_write, so how does loop terminate once it happens?",
+      "revId": "83fa050c2748942f2e226c76420ef25a0cafea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
