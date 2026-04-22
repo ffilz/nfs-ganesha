@@ -574,15 +574,26 @@ static void rados_cluster_shutdown(void)
 	/*
 	 * Request grace on clean shutdown to minimize the chance that we'll
 	 * miss the window and the MDS kills off the old session.
-	 *
-	 * FIXME: only do this if our key is in the omap, and we have a
-	 *        non-empty recovery db.
 	 */
+
+	/* TODO - Revisit below commented code, when the deployment of ceph
+	 *        cluster changes. Currently it is assumed that total number
+	 *        of Ganesha(s) running in given NFS cluster remain same.
+	 */
+
+	/* Do not call rados_grace_join, which leads to increasing current
+	 * epoch. And when Ganesha with same nodeid started again, then at
+	 * start Ganesha joins the grace, which increases current epoch.
+	 * Thus current epoch jumps by 2 in case of graceful shutdown and
+	 * start of Ganesha. This leads to not finding recovery object
+	 */
+#if 0
 	ret = rados_grace_join(rados_recov_io_ctx, rados_kv_param.grace_oid,
 			       nodeid, &cur, &rec, true);
 	if (ret)
 		LogEvent(COMPONENT_RECOVERY,
 			 "Failed to start grace period on shutdown: %d", ret);
+#endif
 
 	ret = rados_unwatch2(rados_recov_io_ctx, rados_watch_cookie);
 	if (ret)
