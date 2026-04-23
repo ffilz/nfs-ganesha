@@ -53,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d3da640_46d05c81",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-23T16:10:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a5507b4_17ac01b1",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c48a574_eb7be8fc",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Moved to LogDebug and component as DISPATCH",
       "parentUuid": "3c48a574_eb7be8fc",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "369522d1_13c5b67f",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-23T16:10:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f78e1cf8_0e4f14ce",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -426,6 +462,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82a93b25_b6918b90",
+        "filename": "src/include/nfs_exports.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-23T16:10:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39e56372_b1701866",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d232edd4_897bd55e",
@@ -463,6 +517,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4bb6130d_ee8c8ecc",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2108,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-23T16:10:41Z",
+      "side": 1,
+      "message": "OK, so these are ONLY used in cr_extra_flags?\n\nPlease define in sal_data.h, they are not part of the NFSv4.x protocol and will cause confusion in this file.",
+      "parentUuid": "c3f6453e_9ab3b287",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b95d7aad_ba1c656c",
         "filename": "src/include/sal_data.h",
         "patchSetId": 13
@@ -492,6 +564,24 @@
       "side": 1,
       "message": "As per the last discussion with the team, it was decided to not use the exiting flag bits and create new one",
       "parentUuid": "b95d7aad_ba1c656c",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5f81bbe_08b10e06",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-23T16:10:41Z",
+      "side": 1,
+      "message": "What was the reasoning?",
+      "parentUuid": "410650ec_8da990bf",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -566,6 +656,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfb28cde_b0eddb2b",
+        "filename": "src/support/exports.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2116,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-23T16:10:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6941d8c6_61999394",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c523b56_c0922c1e",
@@ -601,6 +709,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "309673c6_b2d7765f",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-23T16:10:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49803259_4b81c26e",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e211110c_3c3d64e8",
@@ -632,6 +758,24 @@
       "side": 1,
       "message": "This is a 1 time print, atleast user should know code has been compiled with USE_TLS and is disabled by the config.\n\notherwise there is no way to get the details.",
       "parentUuid": "e211110c_3c3d64e8",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bfa42ec_afac1538",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-23T16:10:41Z",
+      "side": 1,
+      "message": "OK, fair enough.",
+      "parentUuid": "a26aeff7_0eb2b7e6",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

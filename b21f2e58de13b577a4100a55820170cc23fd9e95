@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13b2dd0c_e24c0a83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-23T16:10:41Z",
+      "side": 1,
+      "message": "This is getting really close, a couple little nits, and would like more understanding of why we need two separate flag fields in the client_record for hashing/matching.",
+      "revId": "b21f2e58de13b577a4100a55820170cc23fd9e95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d17cdee_70bb80fa",
         "filename": "src/doc/man/ganesha-tls-config.rst",
         "patchSetId": 19
@@ -32,6 +49,57 @@
       "side": 1,
       "message": "Done, false positive",
       "parentUuid": "8d17cdee_70bb80fa",
+      "revId": "b21f2e58de13b577a4100a55820170cc23fd9e95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe6f9c9b_23e7858c",
+        "filename": "src/doc/man/ganesha-tls-config.rst",
+        "patchSetId": 19
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-23T16:10:41Z",
+      "side": 1,
+      "message": "Does this table format OK on man page?\n\nYou could narrow down the first two columns by making the header 2 lines, that might help with readability in a narrower window.",
+      "revId": "b21f2e58de13b577a4100a55820170cc23fd9e95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eab47ab_d6549a88",
+        "filename": "src/support/exports.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 2243,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-23T16:10:41Z",
+      "side": 1,
+      "message": "Please put a comma after this item",
+      "revId": "b21f2e58de13b577a4100a55820170cc23fd9e95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f069e606_77d915ca",
+        "filename": "src/support/exports.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 2262,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-23T16:10:41Z",
+      "side": 1,
+      "message": "Please put a comma after this item",
       "revId": "b21f2e58de13b577a4100a55820170cc23fd9e95",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
