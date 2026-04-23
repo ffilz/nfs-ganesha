@@ -535,6 +535,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66292f3c_bf899f0e",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 2108,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-04-23T18:45:31Z",
+      "side": 1,
+      "message": "Moved to sal_data.h",
+      "parentUuid": "4bb6130d_ee8c8ecc",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b95d7aad_ba1c656c",
         "filename": "src/include/sal_data.h",
         "patchSetId": 13
@@ -588,6 +606,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4637a32_4c809fc7",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-04-23T18:45:31Z",
+      "side": 1,
+      "message": "We should be keeping the pnfs flags different from other use cases.\nIn future we will be using cr_extra_flag flag field to accommodate/biffurcate RDMA connections from TCP",
+      "parentUuid": "e5f81bbe_08b10e06",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a740202d_ef76c855",
         "filename": "src/include/sal_functions.h",
         "patchSetId": 13
@@ -617,6 +653,24 @@
       "side": 1,
       "message": "As per the last discussion with team, it was decided to create a new flag and to not use the exiting bits.",
       "parentUuid": "a740202d_ef76c855",
+      "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae71bcef_b9376365",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-04-23T18:45:31Z",
+      "side": 1,
+      "message": "We should be keeping the pnfs flags different from other use cases.\nIn future we will be using cr_extra_flag flag field to accommodate/biffurcate RDMA connections from TCP",
+      "parentUuid": "efb29bd4_960094dc",
       "revId": "20349d78d3990674e9f45aa6dd8e54317d7986bd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

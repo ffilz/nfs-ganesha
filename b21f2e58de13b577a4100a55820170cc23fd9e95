@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bac6e89e_b80547c1",
+        "filename": "src/doc/man/ganesha-tls-config.rst",
+        "patchSetId": 19
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-04-23T18:45:31Z",
+      "side": 1,
+      "message": "rechecked, seems to be correctly showing in Man page",
+      "parentUuid": "fe6f9c9b_23e7858c",
+      "revId": "b21f2e58de13b577a4100a55820170cc23fd9e95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6eab47ab_d6549a88",
         "filename": "src/support/exports.c",
         "patchSetId": 19
@@ -89,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b680f77a_731cb432",
+        "filename": "src/support/exports.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 2243,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-04-23T18:45:31Z",
+      "side": 1,
+      "message": "last element in the macro should not end with a comma, compilation will break.",
+      "parentUuid": "6eab47ab_d6549a88",
+      "revId": "b21f2e58de13b577a4100a55820170cc23fd9e95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f069e606_77d915ca",
         "filename": "src/support/exports.c",
         "patchSetId": 19
@@ -100,6 +136,24 @@
       "writtenOn": "2026-04-23T16:10:41Z",
       "side": 1,
       "message": "Please put a comma after this item",
+      "revId": "b21f2e58de13b577a4100a55820170cc23fd9e95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53445154_7c581fca",
+        "filename": "src/support/exports.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 2262,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-04-23T18:45:31Z",
+      "side": 1,
+      "message": "last element in the macro should not end with a comma, compilation will break.",
+      "parentUuid": "f069e606_77d915ca",
       "revId": "b21f2e58de13b577a4100a55820170cc23fd9e95",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
