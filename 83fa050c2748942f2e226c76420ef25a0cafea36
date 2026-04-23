@@ -16,6 +16,24 @@
       "message": "You never reset failed_to_write, so how does loop terminate once it happens?",
       "revId": "83fa050c2748942f2e226c76420ef25a0cafea36",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b8ee906_10fafeea",
+        "filename": "src/support/rados_grace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-04-23T05:41:14Z",
+      "side": 1,
+      "message": "Good catch.\nCorrecting the code",
+      "parentUuid": "0eeed67c_bb05f4f7",
+      "revId": "83fa050c2748942f2e226c76420ef25a0cafea36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
