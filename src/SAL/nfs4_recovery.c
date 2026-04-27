@@ -67,6 +67,9 @@ static struct glist_head clid_list = GLIST_HEAD_INIT(clid_list); /* clients */
 
 static uint32_t grace_status;
 
+/* Flag indicating that Ganesha need to handle 0 clients during grace */
+static bool handling_zero_clients = true;
+
 static int default_recovery_init(void)
 {
 	return 0;
@@ -579,6 +582,16 @@ void nfs_try_lift_grace(void)
 #endif
 		in_grace = (rc_count != clid_count);
 
+	if (clid_count == 0) {
+		if (handling_zero_clients) {
+			/* Handle special condition of no clients connected to
+			 * this Ganesha. Otherwise it will end the grace period
+			 * immediately
+			 */
+			in_grace = true;
+			handling_zero_clients = false;
+		}
+	}
 	/* Otherwise, wait for the timeout */
 	if (in_grace) {
 		struct timespec timeout, now;
@@ -641,8 +654,10 @@ void nfs_try_lift_grace(void)
 			     recovery_backend->try_lift_grace()))
 				nfs_lift_grace_locked();
 		} else if (!recovery_backend->try_lift_grace ||
-			   recovery_backend->try_lift_grace())
+			   recovery_backend->try_lift_grace()) {
 			nfs_lift_grace_locked();
+			handling_zero_clients = true;
+		}
 	}
 	PTHREAD_MUTEX_unlock(&grace_mutex);
 }
