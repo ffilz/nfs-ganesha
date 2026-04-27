@@ -488,7 +488,9 @@ static struct group_data *uid2grp_allocate_by_principal(char *principal,
 
 #ifdef _MSPAC_SUPPORT
 	/* TODO */
-	LogWarn(COMPONENT_IDMAPPER, "Unsupported code path for principal %s",
+	LogDebug(
+		COMPONENT_IDMAPPER,
+		"MSPAC: uid2grp not supported for principal '%s'; returning NULL to allow fallback to set_extended_groups()",
 		principal);
 	return NULL;
 #endif
