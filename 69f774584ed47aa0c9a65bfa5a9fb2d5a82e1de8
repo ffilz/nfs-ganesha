@@ -34,6 +34,24 @@
       "parentUuid": "83a6ba13_538ded72",
       "revId": "69f774584ed47aa0c9a65bfa5a9fb2d5a82e1de8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5126053_189cc36d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-27T23:16:04Z",
+      "side": 1,
+      "message": "So based on Jeff\u0027s response:\n\n\"t\u0027s been a long time since I looked at that code so I probably can\u0027t\ngive it a meaningful review. IIRC, the reason for initiating a grace\nperiod on shutdown is that when one of the servers goes down, the ceph\nmds will kill its client session. Once that happens, another server in\nthe cluster could acquire state that the now-down server held before\nshutdown. If the server comes back and the clients try to reclaim that\nstate, then you have a conflict.\n\nSo, I think you do still need to impose a grace period on shutdown, but\nif it\u0027s causing the epoch to be incremented twice then that\u0027s likely a\nbug.\"\n\nIt seems like we need to refine this?",
+      "parentUuid": "ef487f66_a423cf51",
+      "revId": "69f774584ed47aa0c9a65bfa5a9fb2d5a82e1de8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
