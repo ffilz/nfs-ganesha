@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc8e6ba9_f96a434c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-27T23:13:07Z",
+      "side": 1,
+      "message": "Looks good, a few nits.",
+      "revId": "7e2ca4dc9ae6d1c362359d1d6ba10a89bc581b80",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d776ab4c_b64d574d",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-27T23:13:07Z",
+      "side": 1,
+      "message": "Maybe a note that this flag is protected by grace_mutex",
+      "revId": "7e2ca4dc9ae6d1c362359d1d6ba10a89bc581b80",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93433299_8533f22d",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-27T23:13:07Z",
+      "side": 1,
+      "message": "Maybe a bit more to this comment to make it clear this will cause Ganesha to enter grace for at least X amount of time?",
+      "revId": "7e2ca4dc9ae6d1c362359d1d6ba10a89bc581b80",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5f2c143_bc1fb74a",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-27T23:13:07Z",
+      "side": 1,
+      "message": "Blank line please",
+      "revId": "7e2ca4dc9ae6d1c362359d1d6ba10a89bc581b80",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
