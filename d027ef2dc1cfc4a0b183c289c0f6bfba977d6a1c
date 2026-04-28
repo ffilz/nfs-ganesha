@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed216671_457aa75d",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-28T22:38:47Z",
+      "side": 1,
+      "message": "This should use %\"PRIu32 \" instead of %u for portability",
+      "revId": "d027ef2dc1cfc4a0b183c289c0f6bfba977d6a1c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07b29f35_069ab166",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-28T22:38:47Z",
+      "side": 1,
+      "message": "share_access should use %\"PRIx32 \" for compatibility\nsame with fds_num_write_opens",
+      "revId": "d027ef2dc1cfc4a0b183c289c0f6bfba977d6a1c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dddd8ef7_116beb22",
+        "filename": "src/SAL/state_deleg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-28T22:38:47Z",
+      "side": 1,
+      "message": "use %s and object_file_type_to_str for type safety and more readable log",
+      "revId": "d027ef2dc1cfc4a0b183c289c0f6bfba977d6a1c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
