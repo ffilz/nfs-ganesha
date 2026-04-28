@@ -191,6 +191,18 @@ fsal_status_t update_export(struct fsal_module *fsal_hdl, void *parse_node,
 }
 
 /**
+ * @brief Default deleg transition handler method
+ *
+ * Do nothing.
+ */
+
+static void handle_deleg_transition(struct fsal_export *orig,
+				    struct gsh_export *exp)
+{
+	/* return */
+}
+
+/**
  * @brief Default emergency cleanup method
  *
  * Do nothing.
@@ -289,6 +301,23 @@ static fsal_status_t fsal_reclaim_client(struct fsal_module *const fsal_hdl,
 	return fsalstat(ERR_FSAL_NOTSUPP, ENOTSUP);
 }
 
+/**
+ * @brief FSAL function to register nfs service to its
+ * respective FSAL backend monitoring services
+ */
+static void fsal_register_nfs_service(void)
+{
+	/* return */
+}
+
+/**
+ * @brief FSAL function to unregister nfs service to its
+ * respective FSAL backend monitoring services
+ */
+static void fsal_unregister_nfs_service(void)
+{
+	/* return */
+}
 /* Default fsal module method vector.
  * copied to allocated vector at register time
  */
@@ -300,6 +329,7 @@ struct fsal_ops def_fsal_ops = {
 	.dump_config = dump_config,
 	.create_export = create_export,
 	.update_export = update_export,
+	.handle_deleg_transition = handle_deleg_transition,
 	.emergency_cleanup = emergency_cleanup,
 	.getdeviceinfo = getdeviceinfo,
 	.fs_da_addr_size = fs_da_addr_size,
@@ -308,6 +338,8 @@ struct fsal_ops def_fsal_ops = {
 	.fsal_extract_stats = fsal_extract_stats,
 	.fsal_reset_stats = fsal_reset_stats,
 	.fsal_reclaim_client = fsal_reclaim_client,
+	.fsal_register_nfs_service = fsal_register_nfs_service,
+	.fsal_unregister_nfs_service = fsal_unregister_nfs_service,
 };
 
 /* get_name

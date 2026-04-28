@@ -1793,6 +1793,7 @@ void state_complete_grant(state_cookie_entry_t *cookie_entry)
 /**
  * @brief Attempt to grant a blocked lock
  *
+ * @note The st_lock MUST be held
  * @param[in] lock_entry Lock entry to grant
  */
 
@@ -1883,26 +1884,21 @@ void try_to_grant_lock(state_lock_entry_t *lock_entry)
 /**
  * @brief Routine to be called from the FSAL upcall handler
  *
+ * @note The st_lock MUST be held
  * @param[in] block_data Data describing blocked lock
  */
 
 void process_blocked_lock_upcall(state_lock_entry_t *lock_entry)
 {
 	/* A lock entry reference was taken when this work was scheduled. */
-
-	STATELOCK_lock(lock_entry->sle_obj);
-
 	if (glist_null(&lock_entry->sle_list)) {
 		LogEntry(
 			"Received up-call for lock entry that was already removed from the lock list. Ignoring",
 			lock_entry);
-		goto out_upcall;
+		return;
 	}
 
 	try_to_grant_lock(lock_entry);
-
-out_upcall:
-	STATELOCK_unlock(lock_entry->sle_obj);
 }
 
 /**
@@ -2350,13 +2346,13 @@ state_status_t do_lock_op(struct fsal_obj_handle *obj, state_t *state,
 	 * then save the op_ctx->client and switch to owner_client.
 	 */
 	if (owner_client != op_ctx->client && owner_client != NULL)
-		op_ctx->client = owner_client;
+		set_op_context_client(owner_client);
 
 	/* Perform this lock operation using the support_ex lock op. */
 	fsal_status = obj->obj_ops->lock_op2(obj, state, owner, fsal_lock_op,
 					     lock, &conflicting_lock);
 
-	op_ctx->client = saved_client;
+	set_op_context_client(saved_client);
 
 	status = state_error_convert(fsal_status);
 
@@ -2434,6 +2430,7 @@ void copy_conflict(state_lock_entry_t *found_entry, state_owner_t **holder,
  * @param[out] holder   Owner that holds conflicting lock
  * @param[out] conflict Description of conflicting lock
  *
+ * @note The st_lock MUST be held
  * @return State status.
  */
 state_status_t state_test(struct fsal_obj_handle *obj, state_t *state,
@@ -2447,7 +2444,6 @@ state_status_t state_test(struct fsal_obj_handle *obj, state_t *state,
 	LOCK__REQUEST_AUTO_TRACEPOINT(lock, obj, test_request_start, TRACE_INFO,
 				      "test request started");
 
-	STATELOCK_lock(obj);
 	if (state && !state->state_owner) {
 		/* This is a stale state, don't pass it to FSAL. */
 		LogLock(COMPONENT_STATE, NIV_WARN, "Owner released", obj, owner,
@@ -2494,8 +2490,6 @@ state_status_t state_test(struct fsal_obj_handle *obj, state_t *state,
 
 	if (isFullDebug(COMPONENT_STATE) && isFullDebug(COMPONENT_MEMLEAKS))
 		LogList("Lock List", obj, &obj->state_hdl->file.lock_list);
-
-	STATELOCK_unlock(obj);
 
 	return status;
 }
@@ -3649,7 +3643,10 @@ void state_nfs4_owner_unlock_all(state_owner_t *owner)
 		/* Remove all locks held by this owner on the file */
 		status = state_unlock(obj, state, owner, false, 0, &lock);
 
-		if (!state_unlock_err_ok(status)) {
+		if (state_unlock_err_ok(status)) {
+			/* Delete the state_t */
+			state_del(state);
+		} else {
 			/* Increment the error count and try the next lock,
 			 * with any luck the memory pressure which is causing
 			 * the problem will resolve itself.
@@ -3657,9 +3654,6 @@ void state_nfs4_owner_unlock_all(state_owner_t *owner)
 			LogCrit(COMPONENT_STATE, "state_unlock failed %s",
 				state_err_str(status));
 			errcnt++;
-		} else if (status == STATE_SUCCESS) {
-			/* Delete the state_t */
-			state_del(state);
 		}
 
 		dec_state_t_ref(state);

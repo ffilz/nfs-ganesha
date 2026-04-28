@@ -65,6 +65,10 @@ extern __thread struct req_op_context *op_ctx;
 #include "nfs4_acls.h"
 #include "nfs4_fs_locations.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief If we don't know how big a buffer we want for a link, use
  * this value.
@@ -114,6 +118,7 @@ void release_op_context(void);
 void suspend_op_context(void);
 void resume_op_context(struct req_op_context *ctx);
 void set_op_context_export(struct gsh_export *exp);
+void set_op_context_client(struct gsh_client *client);
 void clear_op_context_export(void);
 void save_op_context_export_and_clear(struct saved_export_context *saved);
 void save_op_context_export_and_set_export(struct saved_export_context *saved,
@@ -230,7 +235,7 @@ void log_attrlist(log_components_t component, log_levels_t level,
 
 #define LogAttrlist(component, level, reason, attr, is_obj)                  \
 	do {                                                                 \
-		if (unlikely(isLevel(component, level)))                     \
+		if (isLevel(component, level))                               \
 			log_attrlist(component, level, reason, attr, is_obj, \
 				     (char *)__FILE__, __LINE__,             \
 				     (char *)__func__);                      \
@@ -471,7 +476,7 @@ static inline void fsal_copy_attrs(struct fsal_attrlist *dest,
 		LogCrit(COMPONENT_FSAL,
 			"Invalid dest pointer, dest: %p, "
 			"src: %p, ac: %p",
-			dest, src, dest->acl);
+			(void *)dest, (void *)src, (void *)dest->acl);
 	}
 
 	/* Copy source to dest, but retain dest->request_mask */
@@ -651,6 +656,12 @@ struct async_process_data {
 	pthread_cond_t *fsa_cond;
 };
 
+/**
+ * API to get the buffer to fill the IO Payloads
+ */
+void *get_buffer_for_io_response(uint64_t size, size_t *buffer_size,
+				 bool prefer_no_allocate);
+
 extern void fsal_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 		       fsal_async_cb done_cb, struct fsal_io_arg *read_arg,
 		       void *caller_arg);
@@ -731,6 +742,10 @@ extern bool close_fast;
 void fsal_init_fds_limit(struct fd_lru_parameter *params);
 fsal_status_t fd_lru_pkginit(struct fd_lru_parameter *params);
 fsal_status_t fd_lru_pkgshutdown(void);
+
+#ifdef __cplusplus
+}
+#endif /* extern "C" */
 
 #endif /* !FSAL_H */
 /** @} */

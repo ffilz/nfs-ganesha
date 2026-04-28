@@ -75,6 +75,19 @@
 #include "gsh_dbus.h"
 #endif
 
+/* RW lock for fsal_registration_list and 'registered' state */
+static pthread_rwlock_t fsal_registration_lock = PTHREAD_RWLOCK_INITIALIZER;
+
+/* List head tracking FSAL modules for NFS registration */
+static struct glist_head fsal_registration_list =
+	GLIST_HEAD_INIT(fsal_registration_list);
+
+/*
+ * Set to true once the NFS server is fully initialized.
+ * Remains true across export reloads (SIGHUP).
+ */
+static bool nfs_service_ready;
+
 /* fsal_attach_export
  * called from the FSAL's create_export method with a reference on the fsal.
  */
@@ -2042,7 +2055,7 @@ fsal_status_t fd_lru_pkgshutdown(void)
 fsal_status_t close_fsal_fd(struct fsal_obj_handle *obj_hdl,
 			    struct fsal_fd *fsal_fd, bool is_reclaiming)
 {
-	fsal_status_t status;
+	fsal_status_t status = { 0 };
 	bool is_globalfd = fsal_fd->fd_type == FSAL_FD_GLOBAL;
 
 	/* Assure that is_reclaiming is only set when it's a global fd */
@@ -2062,16 +2075,24 @@ fsal_status_t close_fsal_fd(struct fsal_obj_handle *obj_hdl,
 	 */
 	status = obj_hdl->obj_ops->close_func(obj_hdl, fsal_fd);
 
-	if (status.major != ERR_FSAL_NOT_OPENED) {
-		if (is_globalfd) {
-			/* Need to decrement the appropriate counter and remove
-			 * from LRU for globalfd.
-			 */
-			remove_fd_lru(fsal_fd);
-		}
-	} else {
-		/* Wasn't open.  Not an error, but shouldn't remove from LRU. */
+	/* Normalize: not-opened is not an error. */
+	if (status.major == ERR_FSAL_NOT_OPENED)
 		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+
+	/* For global FDs, always remove from the LRU list if still present.
+	 * The reaper and the release path can both call close_fsal_fd; the
+	 * first caller removes the entry, the second finds it already gone.
+	 * in Case of fd already in closed state, Skipping removal leaves a
+	 * dangling fd_lru pointer causing release() freeing this entry.
+	 */
+	if (is_globalfd) {
+		/* Check makes sure that alreday removed entry
+		 * is not getting removed causing ref count issue */
+		if (!glist_null(&fsal_fd->fd_lru))
+			remove_fd_lru(fsal_fd);
+		else
+			LogFullDebug(COMPONENT_FSAL,
+				     "fsal_fd %p (release path race)", fsal_fd);
 	}
 
 	fsal_complete_fd_work(fsal_fd);
@@ -2137,6 +2158,49 @@ fsal_status_t reopen_fsal_fd(struct fsal_obj_handle *obj_hdl,
 	}
 
 	fsal_openflags_t old_openflags = fsal_fd->openflags;
+
+	/* Revalidate fsal_fd->fsal_export before reopening.
+	 *
+	 * fsal_fd->fsal_export is set when the FD is first opened and is not
+	 * updated when exports change. It can become stale in two ways:
+	 *
+	 *   1. Freed memory: the export was removed and its memory freed.
+	 *      Dereferencing fsal_fd->fsal_export in insert_fd_lru or the LRU
+	 *      reaper causes a crash.
+	 *
+	 *   2. Reused memory: the old export's memory was reused for a new
+	 *      export (e.g. export_id=1 unexported then re-exported with the
+	 *	same id).  fsal_fd->fsal_export is a valid pointer but to the i
+	 *      WRONG export. FD is accounted under wrong export, silent data
+	 *      corruption and access-control violation.
+	 *
+	 * This is validated and in test able to hit the "2. Reused Memory",
+	 * causing lru_try_one() to crash with invalid fsal_export ptr access.
+	 * which was previously unexported and reexported again.
+	 *
+	 * op_ctx->fsal_export is set by the NFS dispatch layer for each request
+	 * and always points to the live export the client's FH belongs to.
+	 * Update fsal_fd->fsal_export to match before insert_fd_lru is called.
+	 */
+	if (fsal_fd->fsal_export != op_ctx->fsal_export) {
+		LogFullDebug(COMPONENT_FSAL, "stale fsal_export on fsal_fd %p",
+			     fsal_fd);
+		if (fsal_fd->fsal_export)
+			LogFullDebug(COMPONENT_FSAL,
+				     "old exp=%p, id=%d != new exp=%p id=%d",
+				     fsal_fd->fsal_export,
+				     fsal_fd->fsal_export->export_id,
+				     op_ctx->fsal_export,
+				     op_ctx->fsal_export->export_id);
+		else
+			LogFullDebug(COMPONENT_FSAL,
+				     "old exp=NULL, id=-1 != new exp=%p id=%d",
+				     op_ctx->fsal_export,
+				     op_ctx->fsal_export->export_id);
+
+		fsal_fd->fsal_export = op_ctx->fsal_export;
+	}
+
 	/* Now that we are actually about to open or re-open, let's
 	 * make sure we get the file opened however desired.
 	 *
@@ -2772,10 +2836,11 @@ fsal_status_t fsal_start_io(struct fsal_fd **out_fd,
 		status = wait_to_start_io(obj_hdl, state_fd, FSAL_O_RDWR, true,
 					  false);
 
-		if (status.major == ERR_FSAL_ACCESS &&
+		if ((status.major == ERR_FSAL_ACCESS ||
+		     status.major == ERR_FSAL_ROFS) &&
 		    state->state_type == STATE_TYPE_LOCK) {
-			/* Got an EACCESS and openstate may be available, try
-			 * again with it's openflags. Otherwise leave the
+			/* Got an EACCESS/EROFS and openstate may be available,
+			 * try again with it's openflags. Otherwise leave the
 			 * access error as is.
 			 */
 			struct state_t *openstate;
@@ -3208,6 +3273,112 @@ void destroy_ctx_refstr(void)
 	gsh_refstr_put(no_export);
 }
 
+/* find entry by fsal pointer (read-locked by caller) */
+static fsal_registration_entry_t *find_fsal_entry(struct fsal_module *fsal_mod)
+{
+	struct glist_head *glist;
+
+	glist_for_each(glist, &fsal_registration_list) {
+		fsal_registration_entry_t *entry =
+			glist_entry(glist, fsal_registration_entry_t, list);
+
+		if (entry->fsal_mod == fsal_mod)
+			return entry;
+	}
+	return NULL;
+}
+
+/* @brief
+ * Unlink and free the registration entry for fsal_mod.
+ * Called during FSAL unregister; grabs write lock.
+ * No-op if NULL or not found.
+ */
+void unregister_nfs_service_with_fsal_backend(struct fsal_module *fsal_mod)
+{
+	fsal_registration_entry_t *entry;
+
+	if (!fsal_mod)
+		return;
+
+	PTHREAD_RWLOCK_wrlock(&fsal_registration_lock);
+	entry = find_fsal_entry(fsal_mod);
+
+	if (entry) {
+		fsal_mod->m_ops.fsal_unregister_nfs_service();
+		glist_del(&entry->list);
+		gsh_free(entry);
+	}
+	PTHREAD_RWLOCK_unlock(&fsal_registration_lock);
+}
+
+/* @brief
+ * Track fsal_mod; if the NFS service is ready and not yet registered with this
+ * FSAL, register the NFS service with the FSAL backend (idempotent).
+ */
+void fsal_registration_try_register(struct fsal_module *fsal_mod)
+{
+	fsal_registration_entry_t *entry;
+
+	if (!fsal_mod)
+		return;
+
+	PTHREAD_RWLOCK_wrlock(&fsal_registration_lock);
+
+	entry = find_fsal_entry(fsal_mod);
+
+	if (!entry) {
+		entry = gsh_malloc(sizeof(*entry));
+		entry->fsal_mod = fsal_mod;
+		entry->registered = false;
+		glist_add_tail(&fsal_registration_list, &entry->list);
+	}
+
+	/* If server is ready and this FSAL isn't registered yet, do it now. */
+	if (nfs_service_ready && !entry->registered) {
+		entry->fsal_mod->m_ops.fsal_register_nfs_service();
+		entry->registered = true;
+	}
+
+	PTHREAD_RWLOCK_unlock(&fsal_registration_lock);
+}
+
+/**
+ * @brief
+ * Mark the NFS service as ready and register the NFS service with all tracked
+ * FSAL backends that aren’t registered yet (idempotent).
+ */
+void register_nfs_service_with_fsal_backend(void)
+{
+	struct glist_head *glist;
+
+	PTHREAD_RWLOCK_wrlock(&fsal_registration_lock);
+	nfs_service_ready = true; /* mark readiness first */
+
+	glist_for_each(glist, &fsal_registration_list) {
+		fsal_registration_entry_t *entry =
+			glist_entry(glist, fsal_registration_entry_t, list);
+
+		if (!entry->registered) {
+			entry->fsal_mod->m_ops.fsal_register_nfs_service();
+			entry->registered = true;
+		}
+	}
+	PTHREAD_RWLOCK_unlock(&fsal_registration_lock);
+}
+
+/**
+ * @brief Check if Export or Client conditional flag set into the op_context.
+ */
+bool is_op_context_conditional_flag_set(void)
+{
+	if (cond_log_match_policy == COND_LOG_MATCH_ALL)
+		return (op_ctx && (op_ctx->client_conditional_log &&
+				   op_ctx->export_conditional_log));
+
+	return (op_ctx && (op_ctx->client_conditional_log ||
+			   op_ctx->export_conditional_log));
+}
+
 /**
  * @brief Set an export into an op_context (could be NULL).
  *
@@ -3264,6 +3435,10 @@ static void set_op_context_export_fsal_no_release(struct gsh_export *exp,
 		op_ctx->fsal_module = fsal_exp->fsal;
 	else if (!op_ctx->fsal_module && op_ctx->saved_op_ctx)
 		op_ctx->fsal_module = op_ctx->saved_op_ctx->fsal_module;
+
+	if (op_ctx->ctx_export &&
+	    conditional_logging_export_match(op_ctx->ctx_export->export_id))
+		op_ctx->export_conditional_log = true;
 }
 
 /** @brief Remove the current export from the op_context so the op_context has
@@ -3314,6 +3489,9 @@ static inline void clear_op_context_export_impl(void)
 	 */
 	gsh_refstr_put(op_ctx->ctx_fullpath);
 	gsh_refstr_put(op_ctx->ctx_pseudopath);
+
+	/* Clear the context export conditional flag */
+	op_ctx->export_conditional_log = false;
 }
 
 /**
@@ -3357,6 +3535,25 @@ void set_op_context_export(struct gsh_export *exp)
 	clear_op_context_export_impl();
 
 	set_op_context_export_fsal_no_release(exp, fsal_exp, NULL);
+}
+
+/**
+ * @brief Set a client into the op_context.
+ *
+ * @param[in] client   The gsh_client to set, can be NULL.
+ *
+ */
+void set_op_context_client(struct gsh_client *client)
+{
+	op_ctx->client = client;
+
+	if (!op_ctx->client)
+		return;
+
+	op_ctx->client_conditional_log = false;
+
+	if (conditional_logging_client_match(&op_ctx->client->cl_addrbuf))
+		op_ctx->client_conditional_log = true;
 }
 
 /**
@@ -3553,6 +3750,8 @@ void release_op_context(void)
 	struct req_op_context *cur_ctx = op_ctx;
 
 	clear_op_context_export_impl();
+
+	op_ctx->client_conditional_log = false;
 
 	/* Clear the ctx_export and fsal_export */
 	op_ctx->ctx_export = NULL;

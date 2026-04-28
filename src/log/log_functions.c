@@ -29,6 +29,7 @@
 #include "config.h"
 
 #include <pthread.h>
+#include <stdatomic.h>
 #include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
@@ -57,6 +58,7 @@
 #include "gsh_rpc.h"
 #include "common_utils.h"
 #include "abstract_mem.h"
+#include "log_common.h"
 
 #ifdef USE_DBUS
 #include "gsh_dbus.h"
@@ -65,6 +67,22 @@
 #include "nfs_core.h"
 #include "config_parsing.h"
 #include "sal_functions.h"
+
+/* clang-format off */
+
+#define COMPONENT_ARG \
+	{ .name = "component_name", .type = "s", .direction = "in" }
+#define LOG_LEVEL_ARG { .name = "log_level", .type = "s", .direction = "in" }
+#define MATCH_POLICY_ARG \
+	{ .name = "match_policy", .type = "s", .direction = "in" }
+
+#define CT_ASSERT_CONCAT(a, b) a##b
+#define CT_ASSERT_CONCAT2(a, b) CT_ASSERT_CONCAT(a, b)
+#define CT_ASSERT(cond, msg) \
+	typedef char CT_ASSERT_CONCAT2(static_assert_failed_, __LINE__) \
+		[(cond) ? 1 : -1] __attribute__((unused))
+
+/* clang-format on */
 
 /*
  * The usual PTHREAD_RWLOCK_xxx macros log messages for tracing if FULL
@@ -101,6 +119,22 @@
 	} while (0)
 
 pthread_rwlock_t log_rwlock;
+pthread_rwlock_t cond_log_rwlock;
+pthread_rwlock_t log_rotate_rwlock;
+struct timespec last_rotation_time;
+
+/* For log rotation */
+struct log_rotate_limits {
+	uint32_t size_kb; /* Size in KB to rotate the log file. */
+	uint32_t time_sec; /* Time in seconds to rotate the log file. */
+};
+
+static struct log_rotate_limits log_rotate_limits_default = {
+	.size_kb = 0, /* Do not rotate based on size. */
+	.time_sec = 0, /* Do not rotate based on time. */
+};
+
+static struct log_rotate_limits *log_rotate_limits = &log_rotate_limits_default;
 
 /* Variables to control log fields */
 
@@ -167,6 +201,8 @@ struct logfields {
 	bool disp_level;
 	bool disp_op_id;
 	bool disp_client_req_xid;
+	bool disp_log_index;
+	uint32_t log_index_wrap_around;
 	enum timedate_formats_t datefmt;
 	enum timedate_formats_t timefmt;
 	char *user_date_fmt;
@@ -189,6 +225,8 @@ static struct logfields default_logfields = { .disp_epoch = true,
 					      .disp_funct = true,
 					      .disp_comp = true,
 					      .disp_level = true,
+					      .disp_log_index = false,
+					      .log_index_wrap_around = 100000,
 					      .datefmt = TD_GANESHA,
 					      .timefmt = TD_GANESHA };
 
@@ -239,6 +277,14 @@ char const_log_str[LOG_BUFF_LEN] = "\0";
 char date_time_fmt[MAX_TD_FMT_LEN] = "\0";
 static bool disp_utc_timestamp;
 
+/*
+ * Below export and client list are protected by cond_log_rwlock
+ */
+struct glist_head global_export_id_list =
+	GLIST_HEAD_INIT(global_export_id_list);
+struct glist_head global_client_ip_list =
+	GLIST_HEAD_INIT(global_client_ip_list);
+
 typedef struct loglev {
 	char *str;
 	char *short_str;
@@ -256,6 +302,28 @@ static log_level_t tabLogLevel[] = {
 	[NIV_DEBUG] = { "NIV_DEBUG", "DEBUG", LOG_DEBUG },
 	[NIV_MID_DEBUG] = { "NIV_MID_DEBUG", "M_DBG", LOG_DEBUG },
 	[NIV_FULL_DEBUG] = { "NIV_FULL_DEBUG", "F_DBG", LOG_DEBUG }
+};
+
+struct cond_log_match_policies_info {
+	const char *policy_name; /* policy name */
+	const char *policy_str; /* shorter, more useful name */
+};
+
+struct cond_log_match_policies_info ConditionalLogPolicy[COND_LOG_MATCH_MAX] = {
+	[COND_LOG_MATCH_ANY] = {
+		.policy_name = "MATCH_ANY",
+		.policy_str = "ANY",},
+	[COND_LOG_MATCH_ALL] = {
+		.policy_name = "MATCH_ALL",
+		.policy_str = "ALL",},
+};
+
+/**
+ * @brief Conditional Log Match Policy
+ */
+static struct config_item_list cond_log_match_policies[] = {
+	CONFIG_LIST_TOK("ANY", COND_LOG_MATCH_ANY),
+	CONFIG_LIST_TOK("ALL", COND_LOG_MATCH_ALL), CONFIG_LIST_EOL
 };
 
 #ifndef ARRAY_SIZE
@@ -348,6 +416,7 @@ void Cleanup(void)
 	}
 
 	PTHREAD_RWLOCK_destroy(&log_rwlock);
+	PTHREAD_RWLOCK_destroy(&cond_log_rwlock);
 #ifdef _DONT_HAVE_LOCALTIME_R
 	PTHREAD_MUTEX_destroy(&mutex_localtime);
 #endif
@@ -386,6 +455,26 @@ char *ReturnLevelInt(int level)
 	/* If nothing is found, return NULL. */
 	return NULL;
 } /* ReturnLevelInt */
+
+/*
+ * Convert a numeral match policy in ascii to
+ * the numeral value.
+ */
+int ReturnMatchPolicyAscii(const char *str)
+{
+	int i = 0;
+
+	for (i = 0; i < COND_LOG_MATCH_MAX; i++)
+		if (ConditionalLogPolicy[i].policy_name &&
+		    ConditionalLogPolicy[i].policy_str &&
+		    (strcasecmp(str, ConditionalLogPolicy[i].policy_name) ==
+			     0 ||
+		     strcasecmp(str, ConditionalLogPolicy[i].policy_str) == 0))
+			return i;
+
+	/* If nothing found, return -1 */
+	return -1;
+}
 
 /*
  * Set the name of this program.
@@ -1069,6 +1158,9 @@ void init_logging(const char *log_path, const int debug_level)
 
 	/* Finish initialization of and register log facilities. */
 	PTHREAD_RWLOCK_init(&log_rwlock, NULL);
+	PTHREAD_RWLOCK_init(&cond_log_rwlock, NULL);
+	PTHREAD_RWLOCK_init(&log_rotate_rwlock, NULL);
+	now_mono(&last_rotation_time);
 #ifdef _DONT_HAVE_LOCALTIME_R
 	PTHREAD_MUTEX_init(&mutex_localtime, NULL);
 #endif
@@ -1171,6 +1263,61 @@ static int log_to_syslog(log_header_t headers, void *private,
 	return 0;
 }
 
+static bool should_rotate(int fd)
+{
+	struct stat st;
+	struct timespec ts;
+
+	if (log_rotate_limits->size_kb != 0) {
+		if (fstat(fd, &st) != 0) {
+			fprintf(stderr, "Error: couldn't fstat log file %s\n",
+				strerror(errno));
+			return false; /* fstat failed */
+		}
+		if (st.st_size > (uint64_t)log_rotate_limits->size_kb * 1024)
+			return true;
+	}
+	if (log_rotate_limits->time_sec != 0) {
+		now_mono(&ts);
+		if (ts.tv_sec - last_rotation_time.tv_sec >=
+		    log_rotate_limits->time_sec)
+			return true;
+	}
+	return false;
+}
+
+static void rotate_if_should(int fd, char *path)
+{
+	char old_path[MAXPATHLEN];
+
+	if (!should_rotate(fd))
+		return;
+
+	PTHREAD_RWLOCK_wrlock(&log_rotate_rwlock);
+	/* We need to open file under lock to avoid race where other thread
+	 already rotated it. */
+	const int current_fd = open(path, O_RDONLY, log_mask);
+
+	if (current_fd == -1)
+		goto out;
+	if (!should_rotate(current_fd)) {
+		close(current_fd);
+		goto out;
+	}
+	close(current_fd);
+	snprintf(old_path, sizeof(old_path), "%s.old", path);
+	if (rename(path, old_path) != 0) {
+		fprintf(stderr,
+			"Error: couldn't rename log file %s to %s: %s\n", path,
+			old_path, strerror(errno));
+		/* Continue logging to the current file */
+	} else {
+		now_mono(&last_rotation_time);
+	}
+out:
+	PTHREAD_RWLOCK_unlock(&log_rotate_rwlock);
+}
+
 static int log_to_file(log_header_t headers, void *private, log_levels_t level,
 		       struct display_buffer *buffer, char *compstr,
 		       char *message)
@@ -1199,7 +1346,7 @@ static int log_to_file(log_header_t headers, void *private, log_levels_t level,
 
 			goto error;
 		}
-
+		rotate_if_should(fd, path);
 		rc = close(fd);
 
 		if (rc == 0)
@@ -1435,6 +1582,14 @@ static int display_log_component(struct display_buffer *dsp_log,
 				op_ctx->nfs_reqdata->svc.rq_msg.rm_xid);
 	}
 
+	if (b_left > 0 && logfields->disp_log_index) {
+		static int32_t log_index;
+		const int32_t current_index =
+			atomic_relaxed_inc_int32_t(&log_index) %
+			logfields->log_index_wrap_around;
+		b_left = display_printf(dsp_log, " #%05u :", current_index);
+	}
+
 	/* If we overflowed the buffer with the header, just skip it. */
 	if (b_left == 0) {
 		display_reset_buffer(dsp_log);
@@ -1540,6 +1695,8 @@ static log_levels_t default_log_levels[] = {
 	[COMPONENT_NFS_MSK] = NIV_EVENT,
 	[COMPONENT_XPRT] = NIV_EVENT,
 	[COMPONENT_QOS] = NIV_EVENT,
+	[COMPONENT_RECOVERY] = NIV_EVENT,
+	[COMPONENT_RDMA] = NIV_EVENT,
 };
 
 /* Active set of log levels */
@@ -1548,13 +1705,74 @@ log_levels_t *component_log_level = default_log_levels;
 /* Original log level set by -N or otherwise code default */
 log_levels_t original_log_level = NIV_EVENT;
 
+/**
+ * @brief Default Conditional logging levels
+ *
+ * These are for early initialization and whenever we
+ * have to fall back to something that will at least work...
+ */
+
+static log_levels_t default_conditional_log_levels[] = {
+	[COMPONENT_ALL] = NIV_FULL_DEBUG,
+	[COMPONENT_LOG] = NIV_FULL_DEBUG,
+	[COMPONENT_MEM_ALLOC] = NIV_FULL_DEBUG,
+	[COMPONENT_MEMLEAKS] = NIV_FULL_DEBUG,
+	[COMPONENT_FSAL] = NIV_FULL_DEBUG,
+	[COMPONENT_NFSPROTO] = NIV_FULL_DEBUG,
+	[COMPONENT_NFS_V4] = NIV_FULL_DEBUG,
+	[COMPONENT_EXPORT] = NIV_FULL_DEBUG,
+	[COMPONENT_FILEHANDLE] = NIV_FULL_DEBUG,
+	[COMPONENT_DISPATCH] = NIV_FULL_DEBUG,
+	[COMPONENT_MDCACHE] = NIV_FULL_DEBUG,
+	[COMPONENT_MDCACHE_LRU] = NIV_FULL_DEBUG,
+	[COMPONENT_HASHTABLE] = NIV_FULL_DEBUG,
+	[COMPONENT_HASHTABLE_CACHE] = NIV_FULL_DEBUG,
+	[COMPONENT_DUPREQ] = NIV_FULL_DEBUG,
+	[COMPONENT_INIT] = NIV_FULL_DEBUG,
+	[COMPONENT_MAIN] = NIV_FULL_DEBUG,
+	[COMPONENT_IDMAPPER] = NIV_FULL_DEBUG,
+	[COMPONENT_NFS_READDIR] = NIV_FULL_DEBUG,
+	[COMPONENT_NFS_V4_LOCK] = NIV_FULL_DEBUG,
+	[COMPONENT_CONFIG] = NIV_FULL_DEBUG,
+	[COMPONENT_CLIENTID] = NIV_FULL_DEBUG,
+	[COMPONENT_SESSIONS] = NIV_FULL_DEBUG,
+	[COMPONENT_PNFS] = NIV_FULL_DEBUG,
+	[COMPONENT_RW_LOCK] = NIV_FULL_DEBUG,
+	[COMPONENT_NLM] = NIV_FULL_DEBUG,
+	[COMPONENT_TIRPC] = NIV_FULL_DEBUG,
+	[COMPONENT_NFS_CB] = NIV_FULL_DEBUG,
+	[COMPONENT_THREAD] = NIV_FULL_DEBUG,
+	[COMPONENT_NFS_V4_ACL] = NIV_FULL_DEBUG,
+	[COMPONENT_STATE] = NIV_FULL_DEBUG,
+	[COMPONENT_9P] = NIV_FULL_DEBUG,
+	[COMPONENT_9P_DISPATCH] = NIV_FULL_DEBUG,
+	[COMPONENT_FSAL_UP] = NIV_FULL_DEBUG,
+	[COMPONENT_DBUS] = NIV_FULL_DEBUG,
+	[COMPONENT_NFS_MSK] = NIV_FULL_DEBUG,
+	[COMPONENT_XPRT] = NIV_FULL_DEBUG,
+	[COMPONENT_QOS] = NIV_FULL_DEBUG,
+	[COMPONENT_RECOVERY] = NIV_FULL_DEBUG,
+	[COMPONENT_RDMA] = NIV_FULL_DEBUG
+};
+
+CT_ASSERT(sizeof(default_conditional_log_levels) /
+			  sizeof(default_conditional_log_levels[0]) ==
+		  COMPONENT_COUNT,
+	  "default_conditional_log_levels must contain all log components");
+
+/* Active set of conditional log levels */
+log_levels_t *conditional_component_log_level = default_conditional_log_levels;
+
+/* default conditional logging match policy (COND_LOG_MATCH_ANY)*/
+cond_log_match_policies_t cond_log_match_policy;
+
 /* Default log level setby LOG { default_log_level }, setting to NB_LOG_LEVEL
  * indicates it has not been specified in the config (in which case we fall
  * back to original_log_level.
  */
 log_levels_t default_log_level = NB_LOG_LEVEL;
 
-struct log_component_info LogComponents[COMPONENT_COUNT] = {
+struct log_component_info LogComponents[] = {
 	[COMPONENT_ALL] = {
 		.comp_name = "COMPONENT_ALL",
 		.comp_str = "",},
@@ -1669,7 +1887,16 @@ struct log_component_info LogComponents[COMPONENT_COUNT] = {
 	[COMPONENT_QOS] = {
 		.comp_name = "COMPONENT_QOS",
 		.comp_str = "QOS",},
+	[COMPONENT_RECOVERY] = {
+		.comp_name = "COMPONENT_RECOVERY",
+		.comp_str = "RECOVERY",},
+	[COMPONENT_RDMA] = {
+		.comp_name = "COMPONENT_RDMA",
+		.comp_str = "RDMA",},
 };
+
+CT_ASSERT(sizeof(LogComponents) / sizeof(LogComponents[0]) == COMPONENT_COUNT,
+	  "LogComponents must contain all log components");
 
 void DisplayLogComponentLevel(log_components_t component, const char *file,
 			      int line, const char *function,
@@ -1834,29 +2061,52 @@ HANDLE_PROP(DBUS);
 HANDLE_PROP(NFS_MSK);
 HANDLE_PROP(XPRT);
 HANDLE_PROP(QOS);
+HANDLE_PROP(RECOVERY);
+HANDLE_PROP(RDMA);
 
-static struct gsh_dbus_prop *log_props[] = {
-	LOG_PROPERTY_ITEM(ALL),		LOG_PROPERTY_ITEM(LOG),
-	LOG_PROPERTY_ITEM(MEM_ALLOC),	LOG_PROPERTY_ITEM(MEMLEAKS),
-	LOG_PROPERTY_ITEM(FSAL),	LOG_PROPERTY_ITEM(NFSPROTO),
-	LOG_PROPERTY_ITEM(NFS_V4),	LOG_PROPERTY_ITEM(EXPORT),
-	LOG_PROPERTY_ITEM(FILEHANDLE),	LOG_PROPERTY_ITEM(DISPATCH),
-	LOG_PROPERTY_ITEM(MDCACHE),	LOG_PROPERTY_ITEM(MDCACHE_LRU),
-	LOG_PROPERTY_ITEM(HASHTABLE),	LOG_PROPERTY_ITEM(HASHTABLE_CACHE),
-	LOG_PROPERTY_ITEM(DUPREQ),	LOG_PROPERTY_ITEM(INIT),
-	LOG_PROPERTY_ITEM(MAIN),	LOG_PROPERTY_ITEM(IDMAPPER),
-	LOG_PROPERTY_ITEM(NFS_READDIR), LOG_PROPERTY_ITEM(NFS_V4_LOCK),
-	LOG_PROPERTY_ITEM(CONFIG),	LOG_PROPERTY_ITEM(CLIENTID),
-	LOG_PROPERTY_ITEM(SESSIONS),	LOG_PROPERTY_ITEM(PNFS),
-	LOG_PROPERTY_ITEM(RW_LOCK),	LOG_PROPERTY_ITEM(NLM),
-	LOG_PROPERTY_ITEM(TIRPC),	LOG_PROPERTY_ITEM(NFS_CB),
-	LOG_PROPERTY_ITEM(THREAD),	LOG_PROPERTY_ITEM(NFS_V4_ACL),
-	LOG_PROPERTY_ITEM(STATE),	LOG_PROPERTY_ITEM(9P),
-	LOG_PROPERTY_ITEM(9P_DISPATCH), LOG_PROPERTY_ITEM(FSAL_UP),
-	LOG_PROPERTY_ITEM(DBUS),	LOG_PROPERTY_ITEM(NFS_MSK),
-	LOG_PROPERTY_ITEM(XPRT),	LOG_PROPERTY_ITEM(QOS),
-	NULL
-};
+/* clang-format off */
+static struct gsh_dbus_prop *log_props[] = { LOG_PROPERTY_ITEM(ALL),
+					     LOG_PROPERTY_ITEM(LOG),
+					     LOG_PROPERTY_ITEM(MEM_ALLOC),
+					     LOG_PROPERTY_ITEM(MEMLEAKS),
+					     LOG_PROPERTY_ITEM(FSAL),
+					     LOG_PROPERTY_ITEM(NFSPROTO),
+					     LOG_PROPERTY_ITEM(NFS_V4),
+					     LOG_PROPERTY_ITEM(EXPORT),
+					     LOG_PROPERTY_ITEM(FILEHANDLE),
+					     LOG_PROPERTY_ITEM(DISPATCH),
+					     LOG_PROPERTY_ITEM(MDCACHE),
+					     LOG_PROPERTY_ITEM(MDCACHE_LRU),
+					     LOG_PROPERTY_ITEM(HASHTABLE),
+					     LOG_PROPERTY_ITEM(HASHTABLE_CACHE),
+					     LOG_PROPERTY_ITEM(DUPREQ),
+					     LOG_PROPERTY_ITEM(INIT),
+					     LOG_PROPERTY_ITEM(MAIN),
+					     LOG_PROPERTY_ITEM(IDMAPPER),
+					     LOG_PROPERTY_ITEM(NFS_READDIR),
+					     LOG_PROPERTY_ITEM(NFS_V4_LOCK),
+					     LOG_PROPERTY_ITEM(CONFIG),
+					     LOG_PROPERTY_ITEM(CLIENTID),
+					     LOG_PROPERTY_ITEM(SESSIONS),
+					     LOG_PROPERTY_ITEM(PNFS),
+					     LOG_PROPERTY_ITEM(RW_LOCK),
+					     LOG_PROPERTY_ITEM(NLM),
+					     LOG_PROPERTY_ITEM(TIRPC),
+					     LOG_PROPERTY_ITEM(NFS_CB),
+					     LOG_PROPERTY_ITEM(THREAD),
+					     LOG_PROPERTY_ITEM(NFS_V4_ACL),
+					     LOG_PROPERTY_ITEM(STATE),
+					     LOG_PROPERTY_ITEM(9P),
+					     LOG_PROPERTY_ITEM(9P_DISPATCH),
+					     LOG_PROPERTY_ITEM(FSAL_UP),
+					     LOG_PROPERTY_ITEM(DBUS),
+					     LOG_PROPERTY_ITEM(NFS_MSK),
+					     LOG_PROPERTY_ITEM(XPRT),
+					     LOG_PROPERTY_ITEM(QOS),
+					     LOG_PROPERTY_ITEM(RECOVERY),
+					     LOG_PROPERTY_ITEM(RDMA),
+					     NULL };
+/* clang-format on */
 
 struct gsh_dbus_interface log_interface = {
 	.name = "org.ganesha.nfsd.log.component",
@@ -1881,6 +2131,10 @@ struct facility_config {
 	void *lf_private;
 };
 
+struct conditional_config {
+	log_levels_t *cond_comp_log_level;
+};
+
 /**
  * @brief Logger config block parameters
  */
@@ -1888,10 +2142,13 @@ struct facility_config {
 struct logger_config {
 	struct glist_head facility_list;
 	struct logfields *logfields;
+	struct log_rotate_limits *log_rotate_limits;
 	log_levels_t *comp_log_level;
 	log_levels_t default_log_level;
 	uint32_t rpc_debug_flags;
 	bool disp_utc_timestamp;
+	cond_log_match_policies_t match_policy;
+	struct conditional_config conditional;
 };
 
 /**
@@ -1940,6 +2197,9 @@ static struct config_item format_options[] = {
 	CONF_ITEM_BOOL("LEVEL", true, logfields, disp_level),
 	CONF_ITEM_BOOL("OP_ID", false, logfields, disp_op_id),
 	CONF_ITEM_BOOL("CLIENT_REQ_XID", false, logfields, disp_client_req_xid),
+	CONF_ITEM_BOOL("LOG_INDEX", false, logfields, disp_log_index),
+	CONF_ITEM_UI32("LOG_INDEX_WRAP_AROUND", 1000, UINT32_MAX, 100000,
+		       logfields, log_index_wrap_around),
 	CONFIG_EOL
 };
 
@@ -2135,6 +2395,9 @@ static struct config_item component_levels[] = {
 			 int),
 	CONF_INDEX_TOKEN("XPRT", NB_LOG_LEVEL, log_levels, COMPONENT_XPRT, int),
 	CONF_INDEX_TOKEN("QOS", NB_LOG_LEVEL, log_levels, COMPONENT_QOS, int),
+	CONF_INDEX_TOKEN("RECOVERY", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_RECOVERY, int),
+	CONF_INDEX_TOKEN("RDMA", NB_LOG_LEVEL, log_levels, COMPONENT_RDMA, int),
 	CONFIG_EOL
 };
 
@@ -2316,6 +2579,232 @@ static int facility_commit(void *node, void *link_mem, void *self_struct,
 	return 0;
 }
 
+static int export_id_list_adder(const char *token, enum term_type type_hint,
+				struct config_item *item, void *param_addr,
+				void *cnode, struct config_error_type *err_type)
+{
+	int rc = 0;
+	uint16_t export_id = 0;
+
+	LogDebug(COMPONENT_CONFIG, "Adding Export Id: %s", token);
+
+	if (!parse_uint16_from_str(token, &export_id)) {
+		config_proc_error(cnode, err_type, "Invalid export id: %s",
+				  token);
+		err_type->invalid = true;
+		rc++;
+		goto out;
+	}
+
+	rc = add_export_id(COMPONENT_CONFIG, &global_export_id_list, export_id,
+			   cnode, err_type);
+
+out:
+	return rc;
+}
+
+/**
+ * @brief Initialize a Conditional CLIENTS block.
+ *
+ * This block is allocated just to capture the fields.  It's members
+ * are used to create/modify a facility at which point it gets freed.
+ */
+static int client_ip_list_adder(const char *token, enum term_type type_hint,
+				struct config_item *item, void *param_addr,
+				void *cnode, struct config_error_type *err_type)
+{
+	int rc = 0;
+
+	LogDebug(COMPONENT_CONFIG, "Adding client %s", token);
+
+	rc = add_client(COMPONENT_CONFIG, &global_client_ip_list, token,
+			type_hint, cnode, err_type, NULL, NULL, NULL);
+
+	return rc;
+}
+
+/**
+ * @brief Conditional Logging params
+ */
+static struct config_item conditional_params[] = {
+	CONF_INDEX_TOKEN("ALL", NB_LOG_LEVEL, log_levels, COMPONENT_ALL, int),
+	CONF_INDEX_TOKEN("LOG", NB_LOG_LEVEL, log_levels, COMPONENT_LOG, int),
+	CONF_INDEX_TOKEN("MEM_ALLOC", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MEM_ALLOC, int),
+	CONF_INDEX_TOKEN("MEMLEAKS", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MEMLEAKS, int),
+	CONF_INDEX_TOKEN("LEAKS", NB_LOG_LEVEL, log_levels, COMPONENT_MEMLEAKS,
+			 int),
+	CONF_INDEX_TOKEN("FSAL", NB_LOG_LEVEL, log_levels, COMPONENT_FSAL, int),
+	CONF_INDEX_TOKEN("NFSPROTO", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_NFSPROTO, int),
+	CONF_INDEX_TOKEN("NFS3", NB_LOG_LEVEL, log_levels, COMPONENT_NFSPROTO,
+			 int),
+	CONF_INDEX_TOKEN("NFS_V4", NB_LOG_LEVEL, log_levels, COMPONENT_NFS_V4,
+			 int),
+	CONF_INDEX_TOKEN("NFS4", NB_LOG_LEVEL, log_levels, COMPONENT_NFS_V4,
+			 int),
+	CONF_INDEX_TOKEN("EXPORT", NB_LOG_LEVEL, log_levels, COMPONENT_EXPORT,
+			 int),
+	CONF_INDEX_TOKEN("FILEHANDLE", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_FILEHANDLE, int),
+	CONF_INDEX_TOKEN("FH", NB_LOG_LEVEL, log_levels, COMPONENT_FILEHANDLE,
+			 int),
+	CONF_INDEX_TOKEN("DISPATCH", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_DISPATCH, int),
+	CONF_INDEX_TOKEN("DISP", NB_LOG_LEVEL, log_levels, COMPONENT_DISPATCH,
+			 int),
+	CONF_INDEX_TOKEN("CACHE_INODE", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MDCACHE, int),
+	CONF_INDEX_TOKEN("INODE", NB_LOG_LEVEL, log_levels, COMPONENT_MDCACHE,
+			 int),
+	CONF_INDEX_TOKEN("MDCACHE", NB_LOG_LEVEL, log_levels, COMPONENT_MDCACHE,
+			 int),
+	CONF_INDEX_TOKEN("CACHE_INODE_LRU", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MDCACHE_LRU, int),
+	CONF_INDEX_TOKEN("INODE_LRU", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MDCACHE_LRU, int),
+	CONF_INDEX_TOKEN("MDCACHE_LRU", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_MDCACHE_LRU, int),
+	CONF_INDEX_TOKEN("HASHTABLE", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_HASHTABLE, int),
+	CONF_INDEX_TOKEN("HT", NB_LOG_LEVEL, log_levels, COMPONENT_HASHTABLE,
+			 int),
+	CONF_INDEX_TOKEN("HASHTABLE_CACHE", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_HASHTABLE_CACHE, int),
+	CONF_INDEX_TOKEN("HT_CACHE", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_HASHTABLE_CACHE, int),
+	CONF_INDEX_TOKEN("DUPREQ", NB_LOG_LEVEL, log_levels, COMPONENT_DUPREQ,
+			 int),
+	CONF_INDEX_TOKEN("INIT", NB_LOG_LEVEL, log_levels, COMPONENT_INIT, int),
+	CONF_INDEX_TOKEN("NFS_STARTUP", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_INIT, int),
+	CONF_INDEX_TOKEN("MAIN", NB_LOG_LEVEL, log_levels, COMPONENT_MAIN, int),
+	CONF_INDEX_TOKEN("IDMAPPER", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_IDMAPPER, int),
+	CONF_INDEX_TOKEN("NFS_READDIR", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_NFS_READDIR, int),
+	CONF_INDEX_TOKEN("NFS_V4_LOCK", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_NFS_V4_LOCK, int),
+	CONF_INDEX_TOKEN("NFS4_LOCK", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_NFS_V4_LOCK, int),
+	CONF_INDEX_TOKEN("CONFIG", NB_LOG_LEVEL, log_levels, COMPONENT_CONFIG,
+			 int),
+	CONF_INDEX_TOKEN("CLIENTID", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_CLIENTID, int),
+	CONF_INDEX_TOKEN("SESSIONS", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_SESSIONS, int),
+	CONF_INDEX_TOKEN("PNFS", NB_LOG_LEVEL, log_levels, COMPONENT_PNFS, int),
+	CONF_INDEX_TOKEN("RW_LOCK", NB_LOG_LEVEL, log_levels, COMPONENT_RW_LOCK,
+			 int),
+	CONF_INDEX_TOKEN("NLM", NB_LOG_LEVEL, log_levels, COMPONENT_NLM, int),
+	CONF_INDEX_TOKEN("TIRPC", NB_LOG_LEVEL, log_levels, COMPONENT_TIRPC,
+			 int),
+	CONF_INDEX_TOKEN("NFS_CB", NB_LOG_LEVEL, log_levels, COMPONENT_NFS_CB,
+			 int),
+	CONF_INDEX_TOKEN("THREAD", NB_LOG_LEVEL, log_levels, COMPONENT_THREAD,
+			 int),
+	CONF_INDEX_TOKEN("NFS_V4_ACL", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_NFS_V4_ACL, int),
+	CONF_INDEX_TOKEN("NFS4_ACL", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_NFS_V4_ACL, int),
+	CONF_INDEX_TOKEN("STATE", NB_LOG_LEVEL, log_levels, COMPONENT_STATE,
+			 int),
+	CONF_INDEX_TOKEN("_9P", NB_LOG_LEVEL, log_levels, COMPONENT_9P, int),
+	CONF_INDEX_TOKEN("_9P_DISPATCH", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_9P_DISPATCH, int),
+	CONF_INDEX_TOKEN("_9P_DISP", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_9P_DISPATCH, int),
+	CONF_INDEX_TOKEN("FSAL_UP", NB_LOG_LEVEL, log_levels, COMPONENT_FSAL_UP,
+			 int),
+	CONF_INDEX_TOKEN("DBUS", NB_LOG_LEVEL, log_levels, COMPONENT_DBUS, int),
+	CONF_INDEX_TOKEN("NFS_MSK", NB_LOG_LEVEL, log_levels, COMPONENT_NFS_MSK,
+			 int),
+	CONF_INDEX_TOKEN("XPRT", NB_LOG_LEVEL, log_levels, COMPONENT_XPRT, int),
+	CONF_INDEX_TOKEN("QOS", NB_LOG_LEVEL, log_levels, COMPONENT_QOS, int),
+	CONF_INDEX_TOKEN("RECOVERY", NB_LOG_LEVEL, log_levels,
+			 COMPONENT_RECOVERY, int),
+	CONF_ITEM_PROC_MULT("Exports", noop_conf_init, export_id_list_adder,
+			    export_id_list, export_id_glist),
+	CONF_ITEM_PROC_MULT("Clients", noop_conf_init, client_ip_list_adder,
+			    base_client_entry, cle_list),
+	CONFIG_EOL
+};
+
+/**
+ * @brief Initialize a Conditional block.
+ *
+ * This block is allocated just to capture the fields.  It's members
+ * are used to create/modify a facility at which point it gets freed.
+ */
+static void *conditional_init(void *link_mem, void *self_struct)
+{
+	assert(link_mem != NULL || self_struct != NULL);
+
+	if (link_mem == NULL)
+		return self_struct;
+	else if (self_struct == NULL)
+		return gsh_calloc(COMPONENT_COUNT, sizeof(log_levels_t));
+	else {
+		gsh_free(self_struct);
+		return NULL;
+	}
+}
+
+/**
+ * @brief Commit a conditional block
+ *
+ * It can create a stream, syslog, or file facility and modify any
+ * existing one.  Special loggers must be created elsewhere.
+ * Note that you cannot use a log { facility {... }} to modify one
+ * of these special loggers because log block parsing is done first
+ * at server initialization.
+ */
+static int conditional_commit(void *node, void *link_mem, void *self_struct,
+			      struct config_error_type *err_type)
+{
+	struct conditional_config *conditional = link_mem;
+
+	assert(link_mem != NULL || self_struct != NULL);
+
+	conditional->cond_comp_log_level = (log_levels_t *)self_struct;
+
+	return 0;
+}
+
+static struct config_item rotate_options[] = {
+	CONF_ITEM_UI32("Size_KB", 0, UINT32_MAX, 0, log_rotate_limits, size_kb),
+	CONF_ITEM_UI32("Time_Sec", 0, UINT32_MAX, 0, log_rotate_limits,
+		       time_sec),
+	CONFIG_EOL
+};
+
+static void *rotate_init(void *link_mem, void *self_struct)
+{
+	assert(link_mem != NULL || self_struct != NULL);
+
+	if (link_mem == NULL)
+		return NULL;
+	if (self_struct == NULL)
+		return gsh_calloc(1, sizeof(struct log_rotate_limits));
+	else {
+		gsh_free(self_struct);
+		return NULL;
+	}
+}
+
+static int rotate_commit(void *node, void *link_mem, void *self_struct,
+			 struct config_error_type *err_type)
+{
+	struct log_rotate_limits *cfg = self_struct;
+	struct log_rotate_limits **cfg_ptr = link_mem;
+	struct logger_config *logger;
+
+	logger = container_of(cfg_ptr, struct logger_config, log_rotate_limits);
+	logger->log_rotate_limits = cfg;
+	return 0;
+}
+
 static void *log_conf_init(void *link_mem, void *self_struct)
 {
 	struct logger_config *logger = self_struct;
@@ -2352,17 +2841,47 @@ static void *log_conf_init(void *link_mem, void *self_struct)
 					  logger->logfields);
 			logger->logfields = NULL;
 		}
+		if (logger->log_rotate_limits != NULL) {
+			(void)rotate_init(&logger->log_rotate_limits,
+					  logger->log_rotate_limits);
+			logger->log_rotate_limits = NULL;
+		}
 	}
 	return NULL;
+}
+
+void SetConditionalComponentLogLevel(log_components_t component,
+				     int level_to_set)
+{
+	assert(level_to_set >= NIV_NULL);
+	assert(level_to_set < NB_LOG_LEVEL);
+	assert(component != COMPONENT_ALL);
+
+	if (level_to_set == conditional_component_log_level[component])
+		return;
+
+	LogChanges("Changing Conditional log level of %s from %s to %s",
+		   LogComponents[component].comp_name,
+		   ReturnLevelInt(conditional_component_log_level[component]),
+		   ReturnLevelInt(level_to_set));
+
+	conditional_component_log_level[component] = level_to_set;
 }
 
 static void apply_logger_config_levels(struct logger_config *logger)
 {
 	enum log_components comp;
 	bool has_levels = logger->comp_log_level != NULL;
+	bool has_conditional_levels = logger->conditional.cond_comp_log_level !=
+				      NULL;
+
 	log_levels_t log_level_all =
 		has_levels ? logger->comp_log_level[COMPONENT_ALL]
 			   : NB_LOG_LEVEL;
+	log_levels_t conditional_log_level_all =
+		has_conditional_levels
+			? logger->conditional.cond_comp_log_level[COMPONENT_ALL]
+			: NB_LOG_LEVEL;
 
 	/* Handle Default_Log_Level */
 	if (logger->default_log_level != default_log_level) {
@@ -2373,6 +2892,21 @@ static void apply_logger_config_levels(struct logger_config *logger)
 			   ReturnLevelInt(logger->default_log_level));
 
 		default_log_level = logger->default_log_level;
+	}
+
+	/* Handle Default Conditional Log Level */
+	if (has_conditional_levels &&
+	    (conditional_log_level_all != NB_LOG_LEVEL) &&
+	    (conditional_log_level_all <
+	     conditional_component_log_level[COMPONENT_ALL])) {
+		LogChanges(
+			"Changing Default Conditional Log Level from %s to %s",
+			ReturnLevelInt(
+				conditional_component_log_level[COMPONENT_ALL]),
+			ReturnLevelInt(conditional_log_level_all));
+
+		conditional_component_log_level[COMPONENT_ALL] =
+			conditional_log_level_all;
 	}
 
 	for (comp = COMPONENT_LOG; comp < COMPONENT_COUNT; comp++) {
@@ -2400,6 +2934,21 @@ static void apply_logger_config_levels(struct logger_config *logger)
 		}
 
 		SetComponentLogLevel(comp, level);
+
+		/* Handle conditional component log level */
+		log_levels_t cond_level;
+
+		if (has_conditional_levels &&
+		    logger->conditional.cond_comp_log_level[comp] !=
+			    NB_LOG_LEVEL) {
+			cond_level =
+				logger->conditional.cond_comp_log_level[comp];
+		} else {
+			cond_level =
+				conditional_component_log_level[COMPONENT_ALL];
+		}
+
+		SetConditionalComponentLogLevel(comp, cond_level);
 	}
 }
 
@@ -2495,6 +3044,13 @@ done:
 	}
 
 	if (errcnt == 0) {
+		if (logger->log_rotate_limits) {
+			if (log_rotate_limits != &log_rotate_limits_default) {
+				gsh_free(log_rotate_limits);
+			}
+			log_rotate_limits = logger->log_rotate_limits;
+		}
+
 		if (logger->logfields != NULL) {
 			LogEvent(COMPONENT_CONFIG,
 				 "Changing definition of log fields");
@@ -2513,6 +3069,17 @@ done:
 
 		/* Apply any changes to Default_Log_Level or COMPONENTS */
 		apply_logger_config_levels(logger);
+
+		/* Apply Match Policy if conditional logging enabled */
+		if (logger->match_policy > COND_LOG_MATCH_ANY &&
+		    logger->match_policy < COND_LOG_MATCH_MAX) {
+			/* Change the default condtional logging match policy */
+			cond_log_match_policy = logger->match_policy;
+			LogChanges(
+				"Conditional logging match policy changed to (%s)",
+				ConditionalLogPolicy[cond_log_match_policy]
+					.policy_name);
+		}
 
 		if (ntirpc_pp.debug_flags != logger->rpc_debug_flags)
 			LogChanges(
@@ -2533,6 +3100,8 @@ done:
 				gsh_free(lf->user_time_fmt);
 			gsh_free(lf);
 		}
+		if (logger->log_rotate_limits != NULL)
+			gsh_free(logger->log_rotate_limits);
 	}
 
 	if (logger->comp_log_level != NULL)
@@ -2540,6 +3109,7 @@ done:
 
 	logger->logfields = NULL;
 	logger->comp_log_level = NULL;
+	logger->log_rotate_limits = NULL;
 
 	return errcnt;
 }
@@ -2556,8 +3126,14 @@ static struct config_item logging_params[] = {
 			logger_config, logfields),
 	CONF_ITEM_BLOCK("Components", component_levels, component_init,
 			component_commit, logger_config, comp_log_level),
+	CONF_ITEM_BLOCK("Rotate", rotate_options, rotate_init, rotate_commit,
+			logger_config, log_rotate_limits),
 	CONF_ITEM_BOOL("Display_UTC_Timestamp", false, logger_config,
 		       disp_utc_timestamp),
+	CONF_ITEM_TOKEN("Match_Policy", COND_LOG_MATCH_ANY,
+			cond_log_match_policies, logger_config, match_policy),
+	CONF_ITEM_BLOCK("Conditional", conditional_params, conditional_init,
+			conditional_commit, logger_config, conditional),
 	CONFIG_EOL
 };
 
@@ -2949,3 +3525,660 @@ bool _ratelimit(struct ratelimit_state *rs, int *missed)
 
 	return ret;
 }
+
+/**
+ * @brief Match a specific export id in a export id list
+ *
+ * @param[in]  Export          Export Id to search for
+ *
+ * @return the export id entry or NULL if failure.
+ */
+struct export_id_list *conditional_logging_export_match(uint16_t export_id)
+{
+	return is_export_id_match(COMPONENT_LOG, &global_export_id_list,
+				  export_id);
+}
+
+/**
+ * @brief Match a specific client in a client list
+ *
+ * @param[in]  client          Client to search for
+ *
+ * @return the client entry or NULL if failure.
+ */
+struct base_client_entry *conditional_logging_client_match(sockaddr_t *sockaddr)
+{
+	/* Check if the client sockaddr already exist */
+	return client_match(COMPONENT_LOG, " for ConditionalLogging", sockaddr,
+			    &global_client_ip_list, NULL);
+}
+
+#ifdef USE_DBUS
+static bool dbus_cond_log_prop_get(log_components_t component,
+				   DBusMessageIter *reply)
+{
+	char *level_code;
+
+	level_code = ReturnLevelInt(conditional_component_log_level[component]);
+	if (level_code == NULL)
+		return false;
+	if (!dbus_message_iter_append_basic(reply, DBUS_TYPE_STRING,
+					    &level_code))
+		return false;
+	return true;
+}
+
+static bool dbus_cond_log_prop_set(log_components_t component,
+				   DBusMessageIter *arg)
+{
+	char *level_code;
+	int log_level;
+	int i;
+
+	if (dbus_message_iter_get_arg_type(arg) != DBUS_TYPE_STRING)
+		return false;
+	dbus_message_iter_get_basic(arg, &level_code);
+
+	log_level = ReturnLevelAscii(level_code);
+	if (log_level == -1) {
+		LogDebug(COMPONENT_DBUS,
+			 "Invalid log level: '%s' given for component %s",
+			 level_code, LogComponents[component].comp_name);
+		return false;
+	}
+
+	if (component == COMPONENT_ALL) {
+		LogChanges(
+			"Dbus setting conditional log level for all components to %s",
+			level_code);
+
+		conditional_component_log_level[component] = log_level;
+
+		for (i = COMPONENT_ALL + 1; i < COMPONENT_COUNT; i++)
+			SetConditionalComponentLogLevel(i, log_level);
+	} else {
+		LogChanges(
+			"Dbus set conditional log level for %s from %s to %s.",
+			LogComponents[component].comp_name,
+			ReturnLevelInt(
+				conditional_component_log_level[component]),
+			ReturnLevelInt(log_level));
+		SetConditionalComponentLogLevel(component, log_level);
+	}
+	return true;
+}
+
+/* Macros to make mapping properties table to components enum etc. easier
+ * expands to table entries and shim functions.
+ */
+
+/* clang-format off */
+#define HANDLE_COND_LOG_PROP(component)                                      \
+	static bool dbus_prop_get_COND_COMPONENT_##component(                \
+		DBusMessageIter *reply)                                      \
+	{                                                                    \
+		return dbus_cond_log_prop_get(COMPONENT_##component, reply); \
+	}                                                                    \
+\
+	static bool dbus_prop_set_COND_COMPONENT_##component(                \
+		DBusMessageIter *args)                                       \
+	{                                                                    \
+		return dbus_cond_log_prop_set(COMPONENT_##component, args);  \
+	}                                                                    \
+\
+	static struct gsh_dbus_prop COND_COMPONENT_##component##_prop = {    \
+		.name = "COMPONENT_" #component,                             \
+		.access = DBUS_PROP_READWRITE,                               \
+		.type = "s",                                                 \
+		.get = dbus_prop_get_COND_COMPONENT_##component,             \
+		.set = dbus_prop_set_COND_COMPONENT_##component              \
+	}
+
+/* clang-format on */
+
+#define COND_LOG_PROPERTY_ITEM(component) (&COND_COMPONENT_##component##_prop)
+
+/**
+ * @brief Conditional Log property handlers.
+ *
+ * Expands to get/set functions that match dbus_prop_get/set protos
+ * and call common handler with component enum as arg.
+ * There is one line per log_components_t enum.
+ * These must also match COND_LOG_PROPERTY_ITEM
+ */
+
+HANDLE_COND_LOG_PROP(ALL);
+HANDLE_COND_LOG_PROP(LOG);
+HANDLE_COND_LOG_PROP(MEM_ALLOC);
+HANDLE_COND_LOG_PROP(MEMLEAKS);
+HANDLE_COND_LOG_PROP(FSAL);
+HANDLE_COND_LOG_PROP(NFSPROTO);
+HANDLE_COND_LOG_PROP(NFS_V4);
+HANDLE_COND_LOG_PROP(EXPORT);
+HANDLE_COND_LOG_PROP(FILEHANDLE);
+HANDLE_COND_LOG_PROP(DISPATCH);
+HANDLE_COND_LOG_PROP(MDCACHE);
+HANDLE_COND_LOG_PROP(MDCACHE_LRU);
+HANDLE_COND_LOG_PROP(HASHTABLE);
+HANDLE_COND_LOG_PROP(HASHTABLE_CACHE);
+HANDLE_COND_LOG_PROP(DUPREQ);
+HANDLE_COND_LOG_PROP(INIT);
+HANDLE_COND_LOG_PROP(MAIN);
+HANDLE_COND_LOG_PROP(IDMAPPER);
+HANDLE_COND_LOG_PROP(NFS_READDIR);
+HANDLE_COND_LOG_PROP(NFS_V4_LOCK);
+HANDLE_COND_LOG_PROP(CONFIG);
+HANDLE_COND_LOG_PROP(CLIENTID);
+HANDLE_COND_LOG_PROP(SESSIONS);
+HANDLE_COND_LOG_PROP(PNFS);
+HANDLE_COND_LOG_PROP(RW_LOCK);
+HANDLE_COND_LOG_PROP(NLM);
+HANDLE_COND_LOG_PROP(TIRPC);
+HANDLE_COND_LOG_PROP(NFS_CB);
+HANDLE_COND_LOG_PROP(THREAD);
+HANDLE_COND_LOG_PROP(NFS_V4_ACL);
+HANDLE_COND_LOG_PROP(STATE);
+HANDLE_COND_LOG_PROP(9P);
+HANDLE_COND_LOG_PROP(9P_DISPATCH);
+HANDLE_COND_LOG_PROP(FSAL_UP);
+HANDLE_COND_LOG_PROP(DBUS);
+HANDLE_COND_LOG_PROP(NFS_MSK);
+HANDLE_COND_LOG_PROP(XPRT);
+
+static struct gsh_dbus_prop *cond_log_props[] = {
+	COND_LOG_PROPERTY_ITEM(ALL),
+	COND_LOG_PROPERTY_ITEM(LOG),
+	COND_LOG_PROPERTY_ITEM(MEM_ALLOC),
+	COND_LOG_PROPERTY_ITEM(MEMLEAKS),
+	COND_LOG_PROPERTY_ITEM(FSAL),
+	COND_LOG_PROPERTY_ITEM(NFSPROTO),
+	COND_LOG_PROPERTY_ITEM(NFS_V4),
+	COND_LOG_PROPERTY_ITEM(EXPORT),
+	COND_LOG_PROPERTY_ITEM(FILEHANDLE),
+	COND_LOG_PROPERTY_ITEM(DISPATCH),
+	COND_LOG_PROPERTY_ITEM(MDCACHE),
+	COND_LOG_PROPERTY_ITEM(MDCACHE_LRU),
+	COND_LOG_PROPERTY_ITEM(HASHTABLE),
+	COND_LOG_PROPERTY_ITEM(HASHTABLE_CACHE),
+	COND_LOG_PROPERTY_ITEM(DUPREQ),
+	COND_LOG_PROPERTY_ITEM(INIT),
+	COND_LOG_PROPERTY_ITEM(MAIN),
+	COND_LOG_PROPERTY_ITEM(IDMAPPER),
+	COND_LOG_PROPERTY_ITEM(NFS_READDIR),
+	COND_LOG_PROPERTY_ITEM(NFS_V4_LOCK),
+	COND_LOG_PROPERTY_ITEM(CONFIG),
+	COND_LOG_PROPERTY_ITEM(CLIENTID),
+	COND_LOG_PROPERTY_ITEM(SESSIONS),
+	COND_LOG_PROPERTY_ITEM(PNFS),
+	COND_LOG_PROPERTY_ITEM(RW_LOCK),
+	COND_LOG_PROPERTY_ITEM(NLM),
+	COND_LOG_PROPERTY_ITEM(TIRPC),
+	COND_LOG_PROPERTY_ITEM(NFS_CB),
+	COND_LOG_PROPERTY_ITEM(THREAD),
+	COND_LOG_PROPERTY_ITEM(NFS_V4_ACL),
+	COND_LOG_PROPERTY_ITEM(STATE),
+	COND_LOG_PROPERTY_ITEM(9P),
+	COND_LOG_PROPERTY_ITEM(9P_DISPATCH),
+	COND_LOG_PROPERTY_ITEM(FSAL_UP),
+	COND_LOG_PROPERTY_ITEM(DBUS),
+	COND_LOG_PROPERTY_ITEM(NFS_MSK),
+	COND_LOG_PROPERTY_ITEM(XPRT),
+	NULL
+};
+
+static bool dbus_conditional_log_export_enable(DBusMessageIter *args,
+					       DBusMessage *reply,
+					       DBusError *error)
+{
+	int rc = 0;
+	char errbuf[LOG_BUFF_LEN];
+	struct config_error_type err_type;
+	char *errormsg = "Conditional Logging Export Enable: Ok";
+	bool success = true;
+	uint16_t export_id;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (!args) {
+		errormsg = "Message has no arguments! Export id expected";
+		goto arg_error;
+	}
+
+	if (dbus_message_iter_get_arg_type(args) != DBUS_TYPE_UINT16) {
+		errormsg = "Invalid argument type";
+		goto arg_error;
+	}
+
+	dbus_message_iter_get_basic(args, &export_id);
+
+	init_error_type_static(&err_type, errbuf, sizeof(errbuf));
+
+	PTHREAD_RWLOCK_wrlock(&cond_log_rwlock);
+
+	rc = add_export_id(COMPONENT_CONFIG, &global_export_id_list, export_id,
+			   NULL, &err_type);
+
+	if (rc > 0) {
+		errormsg = errbuf;
+		goto out;
+	}
+
+	LogEvent(COMPONENT_LOG, "Conditional Logging Enabled for Export_Id: %d",
+		 export_id);
+	errormsg = "Conditional logging enable: Success";
+
+out:
+	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool dbus_conditional_log_export_disable(DBusMessageIter *args,
+						DBusMessage *reply,
+						DBusError *error)
+{
+	char errormsg[LOG_BUFF_LEN];
+	bool success = true;
+	uint16_t export_id;
+	struct export_id_list *export_entry = NULL;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (!args) {
+		snprintf(errormsg, sizeof(errormsg),
+			 "Message has no arguments! Export Id expected");
+		goto arg_error;
+	}
+
+	if (dbus_message_iter_get_arg_type(args) != DBUS_TYPE_UINT16) {
+		snprintf(errormsg, sizeof(errormsg), "Invalid argument type");
+		goto arg_error;
+	}
+
+	dbus_message_iter_get_basic(args, &export_id);
+
+	PTHREAD_RWLOCK_wrlock(&cond_log_rwlock);
+
+	export_entry = conditional_logging_export_match(export_id);
+	if (!export_entry) {
+		snprintf(errormsg, sizeof(errormsg),
+			 "Conditional Logging not enabled for Export Id: %d",
+			 export_id);
+		goto out;
+	}
+
+	glist_del(&export_entry->export_id_glist);
+	gsh_free(&export_entry->export_id_glist);
+
+	LogEvent(COMPONENT_LOG,
+		 "Conditional Logging disabled for Export_Id: %d", export_id);
+	snprintf(errormsg, sizeof(errormsg),
+		 "Conditional logging disable: Success");
+
+out:
+	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+/**
+ * @brief Enable conditional logging for network-type clients via DBus
+ *
+ * This DBus handler enables conditional logging for a specific network
+ * client type based on the arguments received in the DBus message.
+ * It parses the input parameters from @p args, applies the logging
+ * configuration, and populates the DBus @p reply on success or
+ * sets @p error on failure.
+ *
+ * @param[in]  args    DBus message iterator containing input arguments
+ * @param[out] reply   DBus reply message to be sent back to the caller
+ * @param[out] error   DBus error object set on failure
+ *
+ * @return true if conditional logging was successfully enabled,
+ *         false otherwise.
+ */
+static bool dbus_conditional_log_client_enable(DBusMessageIter *args,
+					       DBusMessage *reply,
+					       DBusError *error)
+{
+	int rc = 0;
+	char *arg_str;
+	char *errormsg = "Conditional logging enable: Ok";
+	char errbuf[LOG_BUFF_LEN];
+	bool success = true;
+	DBusMessageIter iter;
+	struct config_error_type err_type;
+	CIDR *cidr;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (!args) {
+		errormsg = "Message has no arguments! Client IP expected";
+		goto arg_error;
+	}
+
+	dbus_message_iter_get_basic(args, &arg_str);
+
+	cidr = cidr_from_str(arg_str);
+	if (!cidr) {
+		errormsg = "Only IP/CIDR clients are allowed via DBUS";
+		goto arg_error;
+	}
+	cidr_free(cidr);
+
+	init_error_type_static(&err_type, errbuf, sizeof(errbuf));
+
+	PTHREAD_RWLOCK_wrlock(&cond_log_rwlock);
+
+	rc = add_client(COMPONENT_LOG, &global_client_ip_list, arg_str,
+			TERM_V4CIDR, NULL, &err_type, NULL, NULL, NULL);
+
+	if (rc > 0) {
+		errormsg = errbuf;
+		goto out;
+	}
+
+	LogEvent(COMPONENT_LOG, "Conditional logging enable: Success(%s)",
+		 arg_str);
+	errormsg = "Conditional logging enable: Success";
+
+out:
+	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool dbus_conditional_log_client_disable(DBusMessageIter *args,
+						DBusMessage *reply,
+						DBusError *error)
+{
+	char *arg_str;
+	char *errormsg = "Conditional logging disable: Ok";
+	bool success = true;
+	bool deleted = false;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (args == NULL) {
+		errormsg = "Message has no arguments! Client IP expected";
+		goto arg_error;
+	}
+
+	dbus_message_iter_get_basic(args, &arg_str);
+
+	PTHREAD_RWLOCK_wrlock(&cond_log_rwlock);
+
+	deleted = delete_base_client(COMPONENT_LOG, &global_client_ip_list,
+				     arg_str);
+	if (!deleted) {
+		errormsg =
+			"Conditional logging disable: Exact client not found";
+		goto out;
+	}
+
+	errormsg = "Conditional logging disable: Base client deleted";
+	LogEvent(COMPONENT_LOG,
+		 "Conditional logging disable: Base client deleted(%s)",
+		 arg_str);
+
+out:
+	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool dbus_conditional_log_export_list_show(DBusMessageIter *args,
+						  DBusMessage *reply,
+						  DBusError *error)
+{
+	char *errormsg = "Conditional Log";
+	bool success = true;
+	DBusMessageIter iter;
+	struct glist_head *export_glist;
+	struct export_id_list *export_id_list = NULL;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (args != NULL) {
+		errormsg = "Show Export list takes no arguments.";
+		goto arg_error;
+	}
+
+	PTHREAD_RWLOCK_rdlock(&cond_log_rwlock);
+
+	if (glist_empty(&global_export_id_list) == true) {
+		errormsg = "Conditional Logging Export: List Empty";
+	} else {
+		errormsg = "Conditional Logging Export: List Ok";
+		/* Print the export list */
+		glist_for_each(export_glist, &global_export_id_list) {
+			export_id_list = glist_entry(export_glist,
+						     struct export_id_list,
+						     export_id_glist);
+
+			dbus_message_iter_append_basic(
+				&iter, DBUS_TYPE_UINT16,
+				&export_id_list->export_id);
+		}
+	}
+
+	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool dbus_conditional_log_client_list_show(DBusMessageIter *args,
+						  DBusMessage *reply,
+						  DBusError *error)
+{
+	char *errormsg = "Conditional Logging Client:";
+	bool success = true;
+	DBusMessageIter iter;
+	char *cli_str = NULL;
+	struct glist_head *client_glist;
+	struct base_client_entry *cli;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (args != NULL) {
+		errormsg = "Show Client list takes no arguments.";
+		goto arg_error;
+	}
+
+	PTHREAD_RWLOCK_rdlock(&cond_log_rwlock);
+
+	if (glist_empty(&global_client_ip_list) == true) {
+		errormsg = "Conditional Logging Client: List Empty";
+	} else {
+		errormsg = "Conditional Logging Client: List Ok";
+		/* Print the client list */
+		glist_for_each(client_glist, &global_client_ip_list) {
+			cli = glist_entry(client_glist,
+					  struct base_client_entry, cle_list);
+
+			switch (cli->type) {
+			case NETWORK_CLIENT:
+				cli_str = cidr_to_str(cli->client.network.cidr);
+				break;
+			case NETGROUP_CLIENT:
+				cli_str = cli->client.netgroup.netgroupname;
+				break;
+			case WILDCARDHOST_CLIENT:
+				cli_str = cli->client.wildcard.wildcard;
+				break;
+			case MATCH_ANY_CLIENT:
+				cli_str = "*";
+				break;
+			default:
+				cli_str = "<unknown>";
+				break;
+			}
+
+			dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING,
+						       &cli_str);
+		}
+	}
+
+	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool dbus_conditional_log_match_policy_change(DBusMessageIter *args,
+						     DBusMessage *reply,
+						     DBusError *error)
+{
+	char *errormsg = "Conditional Logging";
+	char *match_policy_str;
+	bool success = true;
+	int match_policy;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	if (!args) {
+		errormsg = "Message has no arguments! Match Policy expected";
+		goto arg_error;
+	}
+
+	if (dbus_message_iter_get_arg_type(args) != DBUS_TYPE_STRING) {
+		errormsg = "Invalid argument type";
+		goto arg_error;
+	}
+
+	dbus_message_iter_get_basic(args, &match_policy_str);
+
+	match_policy = ReturnMatchPolicyAscii(match_policy_str);
+
+	if (match_policy >= COND_LOG_MATCH_ANY &&
+	    match_policy < COND_LOG_MATCH_MAX) {
+		cond_log_match_policy = match_policy;
+		LogEvent(COMPONENT_LOG,
+			 "Conditional logging Match Policy changed to (%s)",
+			 ConditionalLogPolicy[match_policy].policy_name);
+		errormsg = "Conditional logging Match Policy changed: success";
+	} else {
+		errormsg = "Conditional logging Match Policy Invalid";
+	}
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static bool dbus_conditional_log_match_policy_show(DBusMessageIter *args,
+						   DBusMessage *reply,
+						   DBusError *error)
+{
+	char errormsg[LOG_BUFF_LEN];
+	bool success = true;
+	DBusMessageIter iter;
+
+	dbus_message_iter_init_append(reply, &iter);
+
+	/* No argument expected here */
+	if (args) {
+		snprintf(errormsg, sizeof(errormsg),
+			 "Message has arguments. No argument expected");
+		goto arg_error;
+	}
+
+	snprintf(errormsg, sizeof(errormsg),
+		 "Conditional logging current Match Policy: %s",
+		 ConditionalLogPolicy[cond_log_match_policy].policy_name);
+
+arg_error:
+	gsh_dbus_status_reply(&iter, success, errormsg);
+
+	return success;
+}
+
+static struct gsh_dbus_method conditional_log_export_enable = {
+	.name = "ExportEnable",
+	.method = dbus_conditional_log_export_enable,
+	.args = { ID_ARG, STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_export_disable = {
+	.name = "ExportDisable",
+	.method = dbus_conditional_log_export_disable,
+	.args = { ID_ARG, STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_client_enable = {
+	.name = "ClientEnable",
+	.method = dbus_conditional_log_client_enable,
+	.args = { IPADDR_ARG, STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_client_disable = {
+	.name = "ClientDisable",
+	.method = dbus_conditional_log_client_disable,
+	.args = { IPADDR_ARG, STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_export_list_show = {
+	.name = "ShowConditionalLogExportList",
+	.method = dbus_conditional_log_export_list_show,
+	.args = { STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_client_list_show = {
+	.name = "ShowConditionalLogClientList",
+	.method = dbus_conditional_log_client_list_show,
+	.args = { STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_match_policy_change = {
+	.name = "ChangeMatchPolicy",
+	.method = dbus_conditional_log_match_policy_change,
+	.args = { MATCH_POLICY_ARG, STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method conditional_log_match_policy_show = {
+	.name = "ShowMatchPolicy",
+	.method = dbus_conditional_log_match_policy_show,
+	.args = { STATUS_REPLY, END_ARG_LIST }
+};
+
+static struct gsh_dbus_method *log_conditional_methods[] = {
+	&conditional_log_export_enable,
+	&conditional_log_export_disable,
+	&conditional_log_client_enable,
+	&conditional_log_client_disable,
+	&conditional_log_export_list_show,
+	&conditional_log_client_list_show,
+	&conditional_log_match_policy_change,
+	&conditional_log_match_policy_show,
+	NULL
+};
+
+struct gsh_dbus_interface log_conditional_interface = {
+	.name = "org.ganesha.nfsd.log.conditional",
+	.props = cond_log_props,
+	.methods = log_conditional_methods,
+	.signals = NULL
+};
+#endif /* USE_DBUS */

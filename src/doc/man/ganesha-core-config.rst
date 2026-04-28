@@ -62,8 +62,8 @@ NFS_RDMA_Protocol_Versions(enum list, default [4.0])
     Possible values:
         (NONE, 3, v3, NFS3, NFSv3, 4.0, v4.0, NFS4.0, NFSv4.0, 4.1,
         v4.1, NFS4.1, NFSv4.1, 4.2, v4.2, NFS4.2, NFSv4.2, ALL)
-    Supported NFS Version for NFS Over RDMA. By default, NFSv4.0,
-    NFSv4.1 & NFSv4.2 are enabled.
+    Supported NFS Version for NFS Over RDMA. By default, NFSv3,
+    NFSv4.0, NFSv4.1 & NFSv4.2 are enabled.
 
 Monitoring_Addr(IPv4 or IPv6 addr, default 0.0.0.0)
     The address to which to bind for listening the monitoring port. If not
@@ -85,6 +85,11 @@ Enable_Metrics (bool, default false)
 
 Bind_addr(IPv4 or IPv6 addr, default 0.0.0.0)
     The address to which to bind for our listening port.
+
+Interface_Name(string, default NULL)
+    If present, binds all TCP sockets to the specified interface. If not
+    present, has no effect. On systems with mutliple NICs, this option
+    will ensure all TCP traffic goes through a specified interface.
 
 NFS_Program(uint32, range 1 to INT32_MAX, default 100003)
     RPC program number for NFS.
@@ -164,6 +169,7 @@ Blocked_Lock_Poller_Interval(int64, range 0 to 180, default 10)
 Protocols(enum list, default [3,4,9P])
     Possible values:
         3, 4, NFS3, NFS4, V3, V4, NFSv3, NFSv4, 9P
+    Support for NFS Over RDMA: [3 or 4 or 3,4], nfsrdma, rpcrdma
 
     The protocols that Ganesha will listen for.  This is a hard limit, as this
     list determines which sockets are opened.  This list can be restricted per
@@ -179,6 +185,12 @@ Clustered(bool, default true)
 
 fsid_device(bool, default false)
     Whether to use device major/minor for fsid.
+
+fsid_override(bool, default false)
+    Whether to use the Filesytem_id specified in an export definition
+    to override the filesystem ID provided by the underlying
+    filesystem.  This enables the ability to export multiple directories from
+    the same underlying filesystem.
 
 resolve_fs_retries(uint32_t, range 1 to 1000, default 10)
     How many times to attempt stat while resolving POSIX filesystems for
@@ -204,11 +216,12 @@ Dbus_Name_Prefix
     single host. The prefix should be different for every ganesha instance. If
     this is set, the dbus name will be <prefix>.org.ganesha.nfsd
 
-Enable_UDP(list, valid values [False, True, Mount, NLM], default True)
+Enable_UDP(list, valid values [False, True, Mount, NLM, RQuota], default True)
     Whether to create UDP listeners for Mount, NFS, NLM, RQUOTA, and register
     them with portmapper. Set to false, e.g., to run as non-root. Set to Mount
-    to enable only Mount UDP listener. Set to Mount, NLM to enable
-    only Mount and NLM UDP listeners.
+    to enable only Mount UDP listener. Set to RQuota to enable only
+    RQUOTA UDP listener. Multiple values can be combined, e.g., Mount, RQuota
+    to enable only Mount and RQUOTA UDP listeners.
 
 Max_Uid_To_Group_Reqs(uint32, range 0 to INT32_MAX, default 0)
     Maximum number of concurrent uid2grp requests that can be made by ganesha.
@@ -541,6 +554,7 @@ RecoveryBackend(enum, default "fs")
     - rados_kv : rados key-value
     - rados_ng : rados key-value (better resiliency)
     - rados_cluster: clustered rados backend (active/active)
+    - none: Don't use any recovery backend
 
 RecoveryBackendIPBased(bool, default false)
     Whether recovery backend to be used is based on the IP hosted by that
@@ -588,6 +602,10 @@ Server_Owner(string, default "")
 Virtual_Server(bool, default false)
     When set true, Ganesha will make each IP address appear to NFSv4 clients
     as a separate server (trunking will not be allowed).
+
+Ip_Based_Client_Owner_Separation(bool, default false)
+    Whether to distinguish between clients based on their IP address in addition
+    to the client owner identifier provided by them for NFS4.1 and above.
 
 Max_Open_States_Per_Client(uint32, range 0 to UINT32_MAX, default 0)
     Specify the maximum number of files that could be opened by a client. One

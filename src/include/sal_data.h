@@ -843,6 +843,10 @@ struct nfs_client_id_t {
  * cid_mutex.
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct nfs_client_record_t {
 	int32_t cr_refcount; /*< Reference count for lifecycle */
 	pthread_mutex_t cr_mutex; /*< Mutex protecting this structure */
@@ -855,14 +859,23 @@ struct nfs_client_record_t {
 						   one. */
 	sockaddr_t cr_server_addr; /*< Server IP address the client connected to
 				    */
+	sockaddr_t cr_client_addr; /*< The client address */
 	uint32_t cr_pnfs_flags; /*< pNFS flags.  RFC 5661 allows us
 				     to treat identical co_owners with
 				     different pNFS flags as
 				     disjoint. Linux client stupidity
 				     forces us to do so. */
 	int cr_client_val_len; /*< Length of owner */
+#ifdef __cplusplus
+	char cr_client_val[1];
+#else
 	char cr_client_val[]; /*< Supplied co_owner */
+#endif
 };
+
+#ifdef __cplusplus
+}
+#endif /* extern "C" */
 
 extern pool_t *client_id_pool;
 

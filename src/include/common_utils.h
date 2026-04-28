@@ -42,8 +42,24 @@
 #include "gsh_types.h"
 #include "log.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifndef UNUSED
+#define UNUSED_ATTR __attribute__((unused))
+#define UNUSED(...) UNUSED_(__VA_ARGS__)
+#define UNUSED_(arg) NOT_USED_##arg UNUSED_ATTR
+#endif
+
 extern pthread_mutexattr_t default_mutex_attr;
 extern pthread_rwlockattr_t default_rwlock_attr;
+
+extern struct base_client_entry *
+conditional_logging_client_match(sockaddr_t *sockaddr);
+struct gsh_export;
+extern struct export_id_list *
+conditional_logging_export_match(uint16_t export_id);
 
 /**
  * BUILD_BUG_ON - break compile if a condition is true.
@@ -538,13 +554,14 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		rc = pthread_mutex_lock(_mtx);                                \
 		if (rc == 0) {                                                \
 			LogFullDebug(COMPONENT_RW_LOCK,                       \
-				     "Acquired mutex %p (%s) at %s:%d", _mtx, \
+				     "Acquired mutex %p (%s) at %s:%d",       \
+				      (void *)_mtx,                           \
 				     #_mtx, __FILE__, __LINE__);              \
 		} else {                                                      \
 			LogCrit(COMPONENT_RW_LOCK,                            \
 				"Error %d, acquiring mutex %p (%s) "          \
 				"at %s:%d",                                   \
-				rc, _mtx, #_mtx, __FILE__, __LINE__);         \
+				rc, (void *)_mtx, #_mtx, __FILE__, __LINE__); \
 			abort();                                              \
 		}                                                             \
 	} while (0)
@@ -564,21 +581,21 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 			     NIV_FULL_DEBUG))
 			DisplayLogComponentLevel(COMPONENT_RW_LOCK, filename,
 						 line, fun_name, NIV_FULL_DEBUG,
-						 "Acquired mutex %p (%s)", mtx,
-						 mtx_name);
+						 "Acquired mutex %p (%s)",
+						 (void *)mtx, mtx_name);
 	} else if (rc == EBUSY) {
 		if (unlikely(component_log_level[COMPONENT_RW_LOCK] >=
 			     NIV_FULL_DEBUG))
 			DisplayLogComponentLevel(COMPONENT_RW_LOCK, filename,
 						 line, fun_name, NIV_FULL_DEBUG,
-						 "Busy mutex %p (%s)", mtx,
-						 mtx_name);
+						 "Busy mutex %p (%s)",
+						 (void *)mtx, mtx_name);
 	} else {
 		if (likely(component_log_level[COMPONENT_RW_LOCK] >= NIV_CRIT))
 			DisplayLogComponentLevel(
 				COMPONENT_RW_LOCK, filename, line, fun_name,
 				NIV_CRIT, "Error %d, acquiring mutex %p (%s)",
-				rc, mtx, mtx_name);
+				rc, (void *)mtx, mtx_name);
 		abort();
 	}
 
@@ -603,13 +620,14 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 		rc = pthread_mutex_unlock(_mtx);                              \
 		if (rc == 0) {                                                \
 			LogFullDebug(COMPONENT_RW_LOCK,                       \
-				     "Released mutex %p (%s) at %s:%d", _mtx, \
+				     "Released mutex %p (%s) at %s:%d",       \
+				     (void *)_mtx,                            \
 				     #_mtx, __FILE__, __LINE__);              \
 		} else {                                                      \
 			LogCrit(COMPONENT_RW_LOCK,                            \
 				"Error %d, releasing mutex %p (%s) "          \
 				"at %s:%d",                                   \
-				rc, _mtx, #_mtx, __FILE__, __LINE__);         \
+				rc, (void *)_mtx, #_mtx, __FILE__, __LINE__); \
 			abort();                                              \
 		}                                                             \
 	} while (0)
@@ -632,13 +650,15 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 									  \
 		if (rc == 0) {                                            \
 			LogFullDebug(COMPONENT_RW_LOCK,                   \
-				     "Init mutex %p (%s) at %s:%d", _mtx, \
+				     "Init mutex %p (%s) at %s:%d",       \
+				     (void *)_mtx,                        \
 				     #_mtx, __FILE__, __LINE__);          \
 		} else {                                                  \
 			LogCrit(COMPONENT_RW_LOCK,                        \
 				"Error %d, Init mutex %p (%s) "           \
 				"at %s:%d",                               \
-				rc, _mtx, #_mtx, __FILE__, __LINE__);     \
+				rc, (void *)_mtx, #_mtx,                  \
+				__FILE__, __LINE__);                      \
 			abort();                                          \
 		}                                                         \
 	} while (0)
@@ -656,13 +676,14 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 		rc = pthread_mutex_destroy(_mtx);                            \
 		if (rc == 0) {                                               \
 			LogFullDebug(COMPONENT_RW_LOCK,                      \
-				     "Destroy mutex %p (%s) at %s:%d", _mtx, \
+				     "Destroy mutex %p (%s) at %s:%d",       \
+				     (void *) _mtx,                          \
 				     #_mtx, __FILE__, __LINE__);             \
 		} else {                                                     \
 			LogCrit(COMPONENT_RW_LOCK,                           \
 				"Error %d, Destroy mutex %p (%s) "           \
 				"at %s:%d",                                  \
-				rc, _mtx, #_mtx, __FILE__, __LINE__);        \
+				rc, (void *)_mtx, #_mtx, __FILE__, __LINE__);\
 			abort();                                             \
 		}                                                            \
 	} while (0)
@@ -771,13 +792,15 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 		rc = pthread_cond_init(_cond, _attr);                     \
 		if (rc == 0) {                                            \
 			LogFullDebug(COMPONENT_RW_LOCK,                   \
-				     "Init cond %p (%s) at %s:%d", _cond, \
+				     "Init cond %p (%s) at %s:%d",        \
+				     (void *)_cond,                       \
 				     #_cond, __FILE__, __LINE__);         \
 		} else {                                                  \
 			LogCrit(COMPONENT_RW_LOCK,                        \
 				"Error %d, Init cond %p (%s) "            \
 				"at %s:%d",                               \
-				rc, _cond, #_cond, __FILE__, __LINE__);   \
+				rc, (void *)_cond, #_cond, __FILE__,      \
+				__LINE__);                                \
 			abort();                                          \
 		}                                                         \
 	} while (0)
@@ -795,13 +818,15 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 		rc = pthread_cond_destroy(_cond);                            \
 		if (rc == 0) {                                               \
 			LogFullDebug(COMPONENT_RW_LOCK,                      \
-				     "Destroy cond %p (%s) at %s:%d", _cond, \
+				     "Destroy cond %p (%s) at %s:%d",        \
+				      (void *)_cond,                         \
 				     #_cond, __FILE__, __LINE__);            \
 		} else {                                                     \
 			LogCrit(COMPONENT_RW_LOCK,                           \
 				"Error %d, Destroy cond %p (%s) "            \
 				"at %s:%d",                                  \
-				rc, _cond, #_cond, __FILE__, __LINE__);      \
+				rc, (void *)_cond, #_cond, __FILE__,         \
+				__LINE__);                                   \
 			abort();                                             \
 		}                                                            \
 	} while (0)
@@ -836,7 +861,7 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 static inline int PTHREAD_cond_timedwait(pthread_cond_t *cond,
 					 pthread_mutex_t *mtx,
 					 const struct timespec *abstime,
-					 const char *cond_name,
+					 const char *UNUSED(cond_name),
 					 const char *filename,
 					 const char *fun_name, const int line)
 {
@@ -849,8 +874,9 @@ static inline int PTHREAD_cond_timedwait(pthread_cond_t *cond,
 			DisplayLogComponentLevel(
 				COMPONENT_RW_LOCK, filename, line, fun_name,
 				NIV_FULL_DEBUG,
-				"Wait cond %p, abstime: %ld.%09ld", cond,
-				abstime->tv_sec, abstime->tv_nsec);
+				"Wait cond %p, abstime: %ld.%09ld",
+				(void *)cond, abstime->tv_sec,
+				abstime->tv_nsec);
 	} else if (rc == ETIMEDOUT) {
 		if (unlikely(component_log_level[COMPONENT_RW_LOCK] >=
 			     NIV_FULL_DEBUG))
@@ -858,14 +884,16 @@ static inline int PTHREAD_cond_timedwait(pthread_cond_t *cond,
 				COMPONENT_RW_LOCK, filename, line, fun_name,
 				NIV_FULL_DEBUG,
 				"Error %d, Wait cond %p, abstime: %ld.%09ld",
-				rc, cond, abstime->tv_sec, abstime->tv_nsec);
+				rc, (void *)cond, abstime->tv_sec,
+				abstime->tv_nsec);
 	} else {
 		if (likely(component_log_level[COMPONENT_RW_LOCK] >= NIV_CRIT))
 			DisplayLogComponentLevel(
 				COMPONENT_RW_LOCK, filename, line, fun_name,
 				NIV_CRIT,
 				"Error %d, Wait cond %p, abstime: %ld.%09ld",
-				rc, cond, abstime->tv_sec, abstime->tv_nsec);
+				rc, (void *)cond, abstime->tv_sec,
+				abstime->tv_nsec);
 		abort();
 	}
 	return rc;
@@ -1205,5 +1233,62 @@ static inline int gsh_getnameinfo(const struct sockaddr *addr,
 	}
 	return ret;
 }
+
+/**
+ * @brief Strictly parse a string into a uint16_t value.
+ *
+ * This helper converts the input string @p token into a 16-bit unsigned
+ * integer using base-10 interpretation. The conversion is considered
+ * successful only if:
+ *
+ *  - The input string is non-NULL and non-empty.
+ *  - At least one digit is parsed.
+ *  - The entire string is consumed (no trailing characters).
+ *  - No overflow occurs.
+ *  - The parsed value fits within the range of uint16_t.
+ *
+ * Unlike strtoull(), this function rejects partial conversions such as
+ * "123abc" and will fail if any non-numeric characters are present.
+ *
+ * @param[in]  token  Null-terminated string containing the numeric value.
+ * @param[out] out    Pointer to store the parsed uint16_t value on success.
+ *
+ * @return true  If the string is a valid base-10 representation of a
+ *               uint16_t value.
+ * @return false If the input is invalid, contains trailing characters,
+ *               or exceeds the uint16_t range.
+ *
+ * @note errno is used internally to detect overflow conditions.
+ */
+static inline bool parse_uint16_from_str(const char *token, uint16_t *out)
+{
+	char *endptr;
+	unsigned long long val;
+
+	if (token == NULL || *token == '\0')
+		return false;
+
+	errno = 0;
+	val = strtoull(token, &endptr, 10);
+
+	/* No digits parsed */
+	if (endptr == token)
+		return false;
+
+	/* Trailing characters present */
+	if (*endptr != '\0')
+		return false;
+
+	/* Overflow or out-of-range */
+	if (errno == ERANGE || val > UINT16_MAX)
+		return false;
+
+	*out = (uint16_t)val;
+	return true;
+}
+
+#ifdef __cplusplus
+}
+#endif /* extern "C" */
 
 #endif /* !COMMON_UTILS_H */

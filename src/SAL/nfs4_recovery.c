@@ -108,6 +108,11 @@ static struct nfs4_recovery_backend *recovery_backend =
 	&default_recovery_backend;
 int32_t reclaim_completes; /* atomic */
 
+static void fs_no_recovery_backend_init(struct nfs4_recovery_backend **backend)
+{
+	*backend = &default_recovery_backend;
+}
+
 static void nfs4_recovery_load_clids(nfs_grace_start_t *gsp);
 static void nfs_release_nlm_state(char *release_ip, sockaddr_t *release_addr);
 static void nfs_release_v4_clients(char *ip, sockaddr_t *ip_saddr);
@@ -118,7 +123,8 @@ clid_entry_t *nfs4_add_clid_entry(char *cl_name, bool reclaim_complete)
 
 	glist_init(&new_ent->cl_rfh_list);
 	(void)strlcpy(new_ent->cl_name, cl_name, sizeof(new_ent->cl_name));
-	LogDebug(COMPONENT_CLIENTID, "%s %d", cl_name, reclaim_complete);
+	LogDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY, "%s %d", cl_name,
+		    reclaim_complete);
 	new_ent->cl_reclaim_complete = reclaim_complete;
 	glist_add(&clid_list, &new_ent->cl_list);
 	++clid_count;
@@ -227,7 +233,7 @@ static void nfs_lift_grace_locked(void)
 					     GRACE_STATUS_CHANGE_REQ));
 		assert(!nfs_param.nfsv4_param.sticky_grace ||
 		       !(cur & GRACE_STATUS_COUNT_MASK));
-		LogEvent(COMPONENT_STATE, "NFS Server Now NOT IN GRACE");
+		LogEvent(COMPONENT_RECOVERY, "NFS Server Now NOT IN GRACE");
 	}
 }
 
@@ -260,7 +266,7 @@ int nfs_start_grace(nfs_grace_start_t *gsp)
 
 	if (nfs_param.nfsv4_param.graceless) {
 		nfs_lift_grace_locked();
-		LogEvent(COMPONENT_STATE,
+		LogEvent(COMPONENT_RECOVERY,
 			 "NFS Server skipping GRACE (Graceless is true)");
 		goto out;
 	}
@@ -283,7 +289,7 @@ int nfs_start_grace(nfs_grace_start_t *gsp)
 	 */
 	ret = clock_gettime(CLOCK_MONOTONIC, &current_grace);
 	if (ret != 0) {
-		LogCrit(COMPONENT_MAIN, "Failed to get timestamp");
+		LogCrit(COMPONENT_RECOVERY, "Failed to get timestamp");
 		assert(0); /* if this is broken, we are toast so die */
 	}
 
@@ -293,8 +299,10 @@ int nfs_start_grace(nfs_grace_start_t *gsp)
 		was_grace = cur & GRACE_STATUS_ACTIVE;
 
 		/* If we're already in a grace period then we're done */
-		if (was_grace)
+		if (was_grace) {
+			LogDebug(COMPONENT_RECOVERY, "Already in grace");
 			break;
+		}
 
 		/*
 		 * Are there outstanding
@@ -325,7 +333,7 @@ int nfs_start_grace(nfs_grace_start_t *gsp)
 	 */
 	if (!was_grace && (old & GRACE_STATUS_COUNT_MASK) &&
 	    nfs_param.nfsv4_param.sticky_grace) {
-		LogEvent(COMPONENT_STATE,
+		LogEvent(COMPONENT_RECOVERY,
 			 "Unable to start grace, grace status 0x%x",
 			 grace_status);
 		ret = -EAGAIN;
@@ -336,18 +344,19 @@ int nfs_start_grace(nfs_grace_start_t *gsp)
 
 	if ((int)nfs_param.nfsv4_param.grace_period <
 	    (int)nfs_param.nfsv4_param.lease_lifetime) {
-		LogWarn(COMPONENT_STATE,
+		LogWarn(COMPONENT_RECOVERY,
 			"NFS Server GRACE duration should at least match LEASE period. Current configured values are GRACE(%d), LEASE(%d)",
 			(int)nfs_param.nfsv4_param.grace_period,
 			(int)nfs_param.nfsv4_param.lease_lifetime);
 	}
 
-	LogEvent(COMPONENT_STATE, "NFS Server Now IN GRACE, duration %d",
-		 (int)nfs_param.nfsv4_param.grace_period);
-
-	/* Set enforcing flag here */
-	if (!was_grace)
+	if (!was_grace) {
+		LogEvent(COMPONENT_RECOVERY,
+			 "NFS Server Now IN GRACE, duration %d",
+			 (int)nfs_param.nfsv4_param.grace_period);
+		/* Set enforcing flag here */
 		nfs4_set_enforcing();
+	}
 
 	/*
 	 * If we're just starting the grace period, then load the
@@ -366,17 +375,17 @@ int nfs_start_grace(nfs_grace_start_t *gsp)
 		switch (gsp->event) {
 		case EVENT_RELEASE_IP:
 		case EVENT_TAKE_IP:
-			LogEvent(COMPONENT_STATE,
+			LogEvent(COMPONENT_RECOVERY,
 				 "NFS Server recovery event %d ip %s",
 				 gsp->event, gsp->ipaddr);
 			break;
 		case EVENT_TAKE_NODEID:
-			LogEvent(COMPONENT_STATE,
+			LogEvent(COMPONENT_RECOVERY,
 				 "NFS Server recovery event %d nodeid %d",
 				 gsp->event, gsp->nodeid);
 			break;
 		default:
-			LogEvent(COMPONENT_STATE,
+			LogEvent(COMPONENT_RECOVERY,
 				 "NFS Server recovery event %d", gsp->event);
 		}
 
@@ -401,8 +410,6 @@ int nfs_start_grace(nfs_grace_start_t *gsp)
 			}
 		}
 	}
-	LogEvent(COMPONENT_STATE,
-		 "grace reload client info completed from backend");
 out:
 	PTHREAD_MUTEX_unlock(&grace_mutex);
 	return ret;
@@ -499,7 +506,7 @@ int nfs_recovery_get_nodeid(char **pnodeid)
 	rc = gsh_gethostname(hostname, MAXNAMLEN + 1,
 			     nfs_param.core_param.enable_AUTHSTATS);
 	if (rc != 0) {
-		LogEvent(COMPONENT_CLIENTID, "gethostname failed: %d", errno);
+		LogEvent(COMPONENT_RECOVERY, "gethostname failed: %d", errno);
 		rc = -errno;
 		gsh_free(hostname);
 		return rc;
@@ -540,8 +547,8 @@ int nfs_recovery_fsal_reclaim_client(char *nodeid)
 		if ((strcmp("MDCACHE", m->name) == 0) ||
 		    (strcmp("PSEUDO", m->name) == 0))
 			continue;
-		LogEvent(COMPONENT_STATE, "Calling client reclaim for FSAL %s",
-			 m->name);
+		LogEvent(COMPONENT_RECOVERY,
+			 "Calling client reclaim for FSAL %s", m->name);
 		m->m_ops.fsal_reclaim_client(m, nodeid);
 	}
 	return 0;
@@ -564,7 +571,7 @@ void nfs_try_lift_grace(void)
 	PTHREAD_MUTEX_lock(&grace_mutex);
 	rc_count = atomic_fetch_int32_t(&reclaim_completes);
 	if (clid_count > 0)
-		LogEvent(COMPONENT_STATE,
+		LogEvent(COMPONENT_RECOVERY,
 			 "check grace:reclaim complete(%d) clid count(%d)",
 			 rc_count, clid_count);
 #ifdef _USE_NLM
@@ -578,7 +585,7 @@ void nfs_try_lift_grace(void)
 		int ret = clock_gettime(CLOCK_MONOTONIC, &now);
 
 		if (ret != 0) {
-			LogCrit(COMPONENT_MAIN, "Failed to get timestamp");
+			LogCrit(COMPONENT_RECOVERY, "Failed to get timestamp");
 			assert(0);
 		}
 
@@ -723,9 +730,10 @@ static bool check_clid(nfs_client_id_t *clientid, clid_entry_t *clid_ent)
 {
 	bool ret = false;
 
-	LogDebug(COMPONENT_CLIENTID, "compare %s to: %s reclaim complete %d",
-		 clientid->cid_recov_tag, clid_ent->cl_name,
-		 clid_ent->cl_reclaim_complete);
+	LogDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+		    "compare %s to: %s reclaim complete %d",
+		    clientid->cid_recov_tag, clid_ent->cl_name,
+		    clid_ent->cl_reclaim_complete);
 
 	/**
 	 * If the clid_ent didn't reclaim completely before this grace period,
@@ -758,8 +766,8 @@ void nfs4_chk_clid_impl(nfs_client_id_t *clientid, clid_entry_t **clid_ent_arg)
 	clid_entry_t *clid_ent;
 	*clid_ent_arg = NULL;
 
-	LogDebug(COMPONENT_CLIENTID, "chk for %" PRIu64,
-		 clientid->cid_clientid);
+	LogDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY, "chk for %" PRIu64,
+		    clientid->cid_clientid);
 
 	/* If there were no clients at time of restart, we're done */
 	if (clid_count == 0)
@@ -780,9 +788,9 @@ void nfs4_chk_clid_impl(nfs_client_id_t *clientid, clid_entry_t **clid_ent_arg)
 
 				display_client_id_rec(&dspbuf, clientid);
 
-				LogFullDebug(COMPONENT_CLIENTID,
-					     "Allowed to reclaim ClientId %s",
-					     str);
+				LogFullDebugAlt(
+					COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+					"Allowed to reclaim ClientId %s", str);
 			}
 			clientid->cid_allow_reclaim = true;
 			*clid_ent_arg = clid_ent;
@@ -819,10 +827,12 @@ void nfs41_reclaim_complete_clid(nfs_client_id_t *clientid)
  */
 static void nfs4_recovery_load_clids(nfs_grace_start_t *gsp)
 {
-	LogDebug(COMPONENT_STATE, "Load recovery cli %p", gsp);
+	LogDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
+		    "Load recovery cli %p", gsp);
 
 	recovery_backend->recovery_read_clids(gsp, nfs4_add_clid_entry,
 					      nfs4_add_rfh_entry);
+	LogEvent(COMPONENT_RECOVERY, "Load client info completed from backend");
 }
 
 #ifdef USE_RADOS_RECOV
@@ -880,6 +890,8 @@ const char *recovery_backend_str(enum recovery_backend recovery_backend)
 		return "rados_ng";
 	case RECOVERY_BACKEND_RADOS_CLUSTER:
 		return "rados_cluster";
+	case RECOVERY_BACKEND_NONE:
+		return "none";
 	}
 
 	return "Unknown recovery backend";
@@ -894,7 +906,7 @@ const char *recovery_backend_str(enum recovery_backend recovery_backend)
  */
 int nfs4_recovery_init(void)
 {
-	LogEvent(COMPONENT_CLIENTID, "Recovery Backend Init for %s",
+	LogEvent(COMPONENT_RECOVERY, "Recovery Backend Init for %s",
 		 recovery_backend_str(nfs_param.nfsv4_param.recovery_backend));
 
 	switch (nfs_param.nfsv4_param.recovery_backend) {
@@ -903,6 +915,9 @@ int nfs4_recovery_init(void)
 		break;
 	case RECOVERY_BACKEND_FS_NG:
 		fs_ng_backend_init(&recovery_backend);
+		break;
+	case RECOVERY_BACKEND_NONE:
+		fs_no_recovery_backend_init(&recovery_backend);
 		break;
 #ifdef USE_RADOS_RECOV
 	case RECOVERY_BACKEND_RADOS_KV:
@@ -920,7 +935,7 @@ int nfs4_recovery_init(void)
 	case RECOVERY_BACKEND_RADOS_CLUSTER:
 #endif
 	default:
-		LogCrit(COMPONENT_CLIENTID, "Unsupported Backend %s",
+		LogCrit(COMPONENT_RECOVERY, "Unsupported Backend %s",
 			recovery_backend_str(
 				nfs_param.nfsv4_param.recovery_backend));
 		return -ENOENT;
@@ -1010,17 +1025,18 @@ bool nfs4_check_deleg_reclaim(nfs_client_id_t *clid, nfs_fh4 *fhandle)
 			rfh_entry = glist_entry(node, rdel_fh_t, rdfh_list);
 			assert(rfh_entry != NULL);
 			if (!strcmp(rhdlstr, rfh_entry->rdfh_handle_str)) {
-				LogFullDebug(COMPONENT_CLIENTID,
-					     "Can't reclaim revoked fh:%s",
-					     rfh_entry->rdfh_handle_str);
+				LogFullDebugAlt(COMPONENT_CLIENTID,
+						COMPONENT_RECOVERY,
+						"Can't reclaim revoked fh:%s",
+						rfh_entry->rdfh_handle_str);
 				retval = false;
 				break;
 			}
 		}
 	}
 	PTHREAD_MUTEX_unlock(&grace_mutex);
-	LogFullDebug(COMPONENT_CLIENTID, "Returning %s",
-		     retval ? "TRUE" : "FALSE");
+	LogFullDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY, "Returning %s",
+			retval ? "TRUE" : "FALSE");
 	return retval;
 }
 
@@ -1102,10 +1118,11 @@ static bool ip_match(sockaddr_t *ip, nfs_client_id_t *cid)
 		struct display_buffer db2 = { sizeof(addr2), addr2, addr2 };
 		display_sockaddr_port(&db1, ip, true);
 		display_sockaddr_port(&db2, saddr, true);
-		LogDebug(COMPONENT_STATE, "Match %s with %s", addr1, addr2);
+		LogDebugAlt(COMPONENT_STATE, COMPONENT_RECOVERY,
+			    "Match %s with %s", addr1, addr2);
 	}
 	rc = sockaddr_cmp(ip, saddr, true) == 0;
-	LogDebug(COMPONENT_STATE, "Match ret=%d", rc);
+	LogDebugAlt(COMPONENT_STATE, COMPONENT_RECOVERY, "Match ret=%d", rc);
 	return rc;
 }
 
@@ -1124,7 +1141,8 @@ static void nfs_release_v4_clients(char *ip, sockaddr_t *ip_saddr)
 	nfs_client_record_t *recp;
 	int i;
 
-	LogEvent(COMPONENT_STATE, "NFS Server V4 recovery release ip %s", ip);
+	LogEvent(COMPONENT_RECOVERY, "NFS Server V4 recovery release ip %s",
+		 ip);
 
 	/* go through the confirmed clients looking for a match */
 	for (i = 0; i < ht->parameter.index_size; i++) {
@@ -1199,6 +1217,7 @@ int load_recovery_param_from_conf(config_file_t parse_tree,
 	switch (nfs_param.nfsv4_param.recovery_backend) {
 	case RECOVERY_BACKEND_FS:
 	case RECOVERY_BACKEND_FS_NG:
+	case RECOVERY_BACKEND_NONE:
 		return 0;
 
 	case RECOVERY_BACKEND_RADOS_KV:
@@ -1215,7 +1234,7 @@ int load_recovery_param_from_conf(config_file_t parse_tree,
 		 * an error and eventually die.
 		 */
 		if (!rados.dl && load_rados_recov() < 0) {
-			LogCrit(COMPONENT_CLIENTID,
+			LogCrit(COMPONENT_RECOVERY,
 				"Failed to load Backend %s. Please install the appropriate package",
 				recovery_backend_str(
 					nfs_param.nfsv4_param.recovery_backend));
@@ -1225,7 +1244,7 @@ int load_recovery_param_from_conf(config_file_t parse_tree,
 		return rados.load_config_from_parse(parse_tree, err_type);
 #endif
 	default:
-		LogCrit(COMPONENT_CLIENTID, "Unsupported Backend %s",
+		LogCrit(COMPONENT_RECOVERY, "Unsupported Backend %s",
 			recovery_backend_str(
 				nfs_param.nfsv4_param.recovery_backend));
 	}

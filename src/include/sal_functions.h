@@ -44,6 +44,11 @@
 #include "fsal.h"
 #include "gsh_recovery.h"
 
+#include "gsh_lttng/gsh_lttng.h"
+#if defined(USE_LTTNG) && !defined(LTTNG_PARSING)
+#include "gsh_lttng/generated_traces/state.h"
+#endif
+
 extern struct glist_head fsal_list;
 
 /**
@@ -345,7 +350,8 @@ int32_t dec_client_record_ref(nfs_client_record_t *record);
 nfs_client_record_t *get_client_record(const char *const value,
 				       const size_t len,
 				       const uint32_t pnfs_flags,
-				       const sockaddr_t *server_addr);
+				       const sockaddr_t *server_addr,
+				       const sockaddr_t *client_addr);
 
 /******************************************************************************
  *
@@ -439,6 +445,8 @@ static inline void inc_state_t_ref(struct state_t *state)
 
 	LogFullDebug(COMPONENT_STATE, "State %p state_refcount now %" PRIi32,
 		     state, refcount);
+	GSH_AUTO_TRACEPOINT(state, inc_state_t_ref, TRACE_INFO,
+			    "State ({}) incref. Refcount={}", state, refcount);
 }
 
 void dec_nfs4_state_ref(struct state_t *state);

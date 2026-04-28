@@ -508,6 +508,8 @@ struct req_op_context {
 	struct {
 		bool pseudo_fsal_internal_lookup;
 	} flags;
+	bool export_conditional_log; /* conditional log enable for export */
+	bool client_conditional_log; /* conditional log enable for client */
 };
 
 /**
@@ -651,16 +653,21 @@ struct fsal_ops {
 				       const struct fsal_up_vector *up_ops);
 
 	/**
- * @brief Enable delegations by setting the deleg timeout
+ * @brief Handle runtime delegation option transitions.
  *
- * This function is a wrapper around enable_delegations() function
- * which will allow the deleg timeout to be set in the
- * underlying FSAL.
+ * This function handles delegation option transitions that occur at runtime
+ * via EXPORT_DEFAULTS, EXPORT and CLIENT blocks.
+ *
+ * 1) If delegation is disabled at runtime, any outstanding
+ *    delegations are recalled.
+ *
+ * 2) If delegation is enabled at runtime, the delegation timeout
+ *    is configured on the corresponding Ceph mount (cmount).
  *
  * @param[in]     orig      FSAL export
  * @param[in]     exp       GSH export
  */
-	void (*fsal_enable_delegations)(struct fsal_export *orig,
+	void (*handle_deleg_transition)(struct fsal_export *orig,
 					struct gsh_export *exp);
 
 	/**
@@ -819,6 +826,18 @@ struct fsal_ops {
  */
 	fsal_status_t (*fsal_reclaim_client)(struct fsal_module *const fsal_hdl,
 					     char *nodeid);
+
+	/**
+ * This function is used to register nfs service to its respective backend
+ * monitoring services.
+ */
+	void (*fsal_register_nfs_service)(void);
+
+	/**
+ * This function is used to unregister nfs service to its respective backend
+ * monitoring services.
+ */
+	void (*fsal_unregister_nfs_service)(void);
 
 	/**@}*/
 };

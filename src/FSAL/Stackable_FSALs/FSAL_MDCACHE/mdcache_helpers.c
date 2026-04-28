@@ -442,7 +442,8 @@ fsal_status_t mdc_get_parent_handle(struct mdcache_fsal_export *export,
 }
 
 /* entry's content_lock must not be held, this function will
-get the content_lock in exclusive mode */
+ * get the content_lock (in read or exclusive mode as needed)
+ */
 fsal_status_t mdc_get_parent(struct mdcache_fsal_export *export,
 			     mdcache_entry_t *entry,
 			     struct gsh_buffdesc *parent_out)
@@ -451,13 +452,15 @@ fsal_status_t mdc_get_parent(struct mdcache_fsal_export *export,
 	struct fsal_obj_handle *root_obj = NULL;
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 
-	PTHREAD_RWLOCK_wrlock(&entry->content_lock);
-
 	if (entry->obj_handle.type != DIRECTORY) {
 		/* Parent pointer only for directories */
-		status.major = ERR_FSAL_INVAL;
-		goto out;
+		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
+
+	/* Try with a read lock first to avoid write contention when
+	 * the parent pointer is already cached and valid.
+	 */
+	PTHREAD_RWLOCK_rdlock(&entry->content_lock);
 
 	/* First check if the entry->obj_handle points to a root object.
 	 * Never lookup for parent of a root object.
@@ -478,6 +481,20 @@ fsal_status_t mdc_get_parent(struct mdcache_fsal_export *export,
 
 	if (entry->fsobj.fsdir.parent.len != 0) {
 		/* Already has a parent pointer */
+		if (entry->fsobj.fsdir.parent_time == 0 ||
+		    mdcache_is_parent_valid(entry)) {
+			goto copy_parent_out;
+		}
+	}
+
+	/* Need to refresh the parent pointer — upgrade to write lock */
+	PTHREAD_RWLOCK_unlock(&entry->content_lock);
+	PTHREAD_RWLOCK_wrlock(&entry->content_lock);
+
+	/* Re-check after acquiring write lock (another thread may have
+	 * refreshed it while we were waiting for the write lock).
+	 */
+	if (entry->fsobj.fsdir.parent.len != 0) {
 		if (entry->fsobj.fsdir.parent_time == 0 ||
 		    mdcache_is_parent_valid(entry)) {
 			goto copy_parent_out;
@@ -1066,6 +1083,29 @@ fsal_status_t mdcache_locate_host(struct gsh_buffdesc *fh_desc,
 					   LRU_ACTIVE_REF | LRU_PROMOTE);
 
 	if (!FSAL_IS_ERROR(status)) {
+		/* Entry found in cache.  Verify the entry is still mapped to
+		 * the current export and that MDC_UNEXPORT is not set.
+		 * Without this check, NFSv3 operations can proceed while the
+		 * export is being unexported, leading to:
+		 *  - Use of entries whose fsal_export is being freed
+		 *  - Crashes in reopen_fsal_fd via stale export pointers
+		 *  - Security violations from wrong-export context
+		 */
+		status = mdc_check_mapping(*entry);
+		if (FSAL_IS_ERROR(status)) {
+			/* Export is being unexported or entry is no longer
+			 * mapped to the current export.  Release the ref we
+			 * took at lookup and return STALE to the caller.
+			 */
+			LogDebug(COMPONENT_MDCACHE,
+				 "entry %p rejected for export_id %d check:%s",
+				 *entry, sub_export->export_id,
+				 fsal_err_txt(status));
+			mdcache_lru_unref(*entry, LRU_ACTIVE_REF);
+			*entry = NULL;
+			return status;
+		}
+
 		status = get_optional_attrs(&(*entry)->obj_handle, attrs_out);
 		return status;
 	} else if (status.major != ERR_FSAL_NOENT) {
@@ -1425,31 +1465,29 @@ void mdcache_src_dest_lock(mdcache_entry_t *src, mdcache_entry_t *dest)
 	 * A's content_lock (which is held by thread 1).
 	 * This change is to avoid this deadlock.
 	 */
+	/* Order by address to ensure consistent lock ordering */
+	mdcache_entry_t *first = (src < dest) ? src : dest;
+	mdcache_entry_t *second = (src < dest) ? dest : src;
 
-retry_lock:
-	if (src == dest)
+	if (src == dest) {
 		PTHREAD_RWLOCK_wrlock(&src->content_lock);
-	else if (src < dest) {
-		PTHREAD_RWLOCK_wrlock(&src->content_lock);
-		rc = pthread_rwlock_trywrlock(&dest->content_lock);
-		if (rc) {
-			LogDebugAlt(COMPONENT_NFS_READDIR, COMPONENT_MDCACHE,
-				    "retry dest %p lock, src %p", dest, src);
-			PTHREAD_RWLOCK_unlock(&src->content_lock);
-			sleep(1);
-			goto retry_lock;
-		}
-	} else {
-		PTHREAD_RWLOCK_wrlock(&dest->content_lock);
-		rc = pthread_rwlock_trywrlock(&src->content_lock);
-		if (rc) {
-			LogDebugAlt(COMPONENT_NFS_READDIR, COMPONENT_MDCACHE,
-				    "retry src %p lock, dest %p", src, dest);
-			PTHREAD_RWLOCK_unlock(&dest->content_lock);
-			sleep(1);
-			goto retry_lock;
-		}
+		return;
 	}
+
+	do {
+		PTHREAD_RWLOCK_wrlock(&first->content_lock);
+
+		rc = pthread_rwlock_trywrlock(&second->content_lock);
+		if (rc) {
+			LogDebugAlt(COMPONENT_NFS_READDIR, COMPONENT_MDCACHE,
+				    "retry lock: first=%p, second=%p", first,
+				    second);
+
+			PTHREAD_RWLOCK_unlock(&first->content_lock);
+			usleep(10000); /* 10 milliseconds */
+		}
+
+	} while (rc);
 }
 
 /**
@@ -3098,7 +3136,7 @@ again:
 	     dirent = glist_next_entry(&chunk->dirents, mdcache_dir_entry_t,
 				       chunk_list, &dirent->chunk_list)) {
 		fsal_status_t status;
-		enum fsal_dir_result cb_result;
+		enum fsal_dir_result cb_result = DIR_CONTINUE;
 		mdcache_entry_t *entry = NULL;
 		struct fsal_attrlist attrs;
 
@@ -3266,7 +3304,6 @@ again:
 							     &attrs);
 		if (FSAL_IS_ERROR(status)) {
 			mdcache_lru_unref_chunk(chunk);
-			PTHREAD_RWLOCK_unlock(&directory->content_lock);
 
 			LogFullDebugAlt(COMPONENT_NFS_READDIR,
 					COMPONENT_MDCACHE,
@@ -3274,6 +3311,19 @@ again:
 					fsal_err_txt(status));
 
 			mdcache_lru_unref(entry, LRU_ACTIVE_REF);
+			/*
+			 * If the entry is still hanging around but the file
+			 * has been deleted, we don't want to abort going
+			 * through the directory entries.  Just skip the
+			 * dodgy entry.
+			 */
+			if (status.major == ERR_FSAL_STALE) {
+				status = fsalstat(ERR_FSAL_NO_ERROR, 0);
+				LogFullDebug(COMPONENT_MDCACHE,
+					     "Skip stale entry & status reset");
+				goto skip;
+			}
+			PTHREAD_RWLOCK_unlock(&directory->content_lock);
 			return status;
 		}
 
@@ -3286,6 +3336,7 @@ again:
 		cb_result = cb(dirent->name, &entry->obj_handle, &attrs,
 			       dir_state, dirent->ck);
 
+skip:
 		fsal_release_attrs(&attrs);
 
 		if (whence_is_name) {

@@ -1623,123 +1623,6 @@ void reset_export_stats(void)
 }
 
 /**
- * @brief Handle the delegation option transition
- */
-static void queue_deleg_transition_handler(struct fridgethr_context *ctx)
-{
-	/* Take the lock here to prevent a race condition between the
-	 * delegation transition handler and config updates.
-	 */
-	EXPORT_ADMIN_LOCK();
-	EXPORT_ADMIN_UNLOCK();
-
-	struct gsh_export *export = ctx->arg;
-	state_t *state;
-	struct glist_head *glist, *glistn;
-	sockaddr_t ip_address;
-	struct req_op_context op_context;
-	char *src = NULL;
-	nfs_client_id_t *clientid = NULL;
-	struct state_deleg *deleg = NULL;
-
-	/* Initializing the op_context with export and fsal_export */
-	init_op_context_simple(&op_context, export, export->fsal_export);
-
-	struct req_op_context *op_ctx = &op_context;
-
-	/* Loop through the export state list and check if any outstanding
-	 * delegations need to be recalled. Recall a delegation if the
-	 * delegation option was disabled in the config
-	 */
-	glist_for_each_safe(glist, glistn, &export->exp_state_list) {
-		struct fsal_obj_handle *obj = NULL;
-		state_owner_t *owner = NULL;
-
-		state = glist_entry(glist, state_t, state_export_list);
-
-		if (!get_state_obj_export_owner_refs(state, &obj, NULL,
-						     &owner)) {
-			/* This state_t is in the process of being destroyed,
-			 * skip it.
-			 */
-			continue;
-		}
-
-		PTHREAD_MUTEX_lock(&state->state_mutex);
-
-		/* Check only the delegation states */
-		if (state->state_type == STATE_TYPE_DELEG) {
-			clientid = owner->so_owner.so_nfs4_owner.so_clientrec;
-			src = clientid->gsh_client->hostaddr_str;
-
-			ip_str_to_sockaddr(src, &ip_address);
-
-			if (isMidDebug(COMPONENT_FSAL)) {
-				char scratch[SOCK_NAME_MAX];
-				struct display_buffer dspbuf = {
-					sizeof(scratch), scratch, scratch
-				};
-				display_sockip(&dspbuf, &ip_address);
-			}
-
-			/* Set the export and client IP address for the state
-			 * so that export_check_access() can evaluate the
-			 * effective options.
-			 */
-
-			op_ctx->ctx_export = export;
-			op_ctx->caller_addr = &ip_address;
-
-			/* Check the effective option derived from
-			 * EXPORT_DEFAULT, EXPORT, CLIENT block
-			 */
-			export_check_access();
-
-			deleg = &state->state_data.deleg;
-
-			/* Recall if there is an outstanding write or a read
-			 * delegation and the corresponding write or read
-			 * delegation was disabled in the config.
-			 */
-			if ((deleg->sd_type == OPEN_DELEGATE_WRITE &&
-			     !(op_ctx->export_perms.options &
-			       EXPORT_OPTION_WRITE_DELEG)) ||
-			    (deleg->sd_type == OPEN_DELEGATE_READ &&
-			     !(op_ctx->export_perms.options &
-			       EXPORT_OPTION_READ_DELEG))) {
-				LogFullDebug(
-					COMPONENT_FSAL,
-					"Deleg has been disabled. Recalling");
-
-				/* Asynchronous delegrecall per state
-				 * implementation.
-				 */
-				if (async_delegrecall_per_state(
-					    general_fridge, obj, state) != 0)
-					LogFullDebug(COMPONENT_FSAL,
-						     "Unable to recall");
-			}
-		}
-
-		PTHREAD_MUTEX_unlock(&state->state_mutex);
-	}
-}
-
-int async_deleg_transition_handler(struct fridgethr *fr,
-				   struct gsh_export *probe_exp)
-{
-	int rc = 0;
-
-	rc = fridgethr_submit(fr, queue_deleg_transition_handler, probe_exp);
-
-	if (rc != 0)
-		LogFullDebug(COMPONENT_FSAL, "fridgethr submit returned rc %d",
-			     rc);
-
-	return rc;
-}
-
-/**
  * @brief Update an export
  *
  * This method passes a pathname in the server's local filesystem
@@ -3091,6 +2974,202 @@ void export_pkginit(void)
 	memset(&export_by_id.cache, 0, sizeof(export_by_id.cache));
 
 	RegisterCleanup(&export_mgr_cleanup_element);
+}
+
+struct export_id_list *is_export_id_match(enum log_components component,
+					  struct glist_head *export_list,
+					  uint16_t export_id)
+{
+	struct export_id_list *expidli = NULL;
+	struct glist_head *g;
+
+	glist_for_each(g, export_list) {
+		expidli =
+			glist_entry(g, struct export_id_list, export_id_glist);
+
+		/* Check if Export ID already exist or not */
+		if (expidli->export_id == export_id)
+			goto out;
+	}
+
+	expidli = NULL;
+
+out:
+	return expidli;
+}
+
+/**
+ * @brief Add the export_id in the list if does not exists
+ *
+ * @param component     [IN]  component for logging
+ * @param export_list   [IN]  the export list this gets linked to in tail order
+ * @param export_id     [IN]  the export_id
+ * @param cnode         [IN]  opaque pointer needed for config_proc_error()
+ * @param err_type      [OUT] error handling ref
+ *
+ * @returns 0 on success, error count on failure
+ */
+
+int add_export_id(enum log_components component, struct glist_head *export_list,
+		  uint16_t export_id, void *cnode,
+		  struct config_error_type *err_type)
+{
+	struct export_id_list *expidli;
+	int errcnt = 0;
+
+	/*
+	 * Locking requirements:
+	 * Caller must hold rwlock (read/write lock) before calling.
+	 * No locking is performed internally.
+	 */
+	/* Check if the same export id already exist */
+	if (is_export_id_match(component, export_list, export_id)) {
+		config_proc_error(cnode, err_type,
+				  "Duplicate export entry found: %d",
+				  export_id);
+		err_type->exists = true;
+		errcnt++;
+		goto exit;
+	}
+
+	expidli = gsh_calloc(1, sizeof(struct export_id_list));
+	expidli->export_id = export_id;
+
+	glist_add_tail(export_list, &expidli->export_id_glist);
+
+exit:
+	return errcnt;
+}
+
+/**
+ * @brief Handle the delegation option transition
+ */
+static void queue_deleg_transition_handler(struct fridgethr_context *ctx)
+{
+	/* Take the lock here to prevent a race condition between the
+	 * delegation transition handler and config updates.
+	 */
+	EXPORT_ADMIN_LOCK();
+	EXPORT_ADMIN_UNLOCK();
+
+	struct gsh_export *export = ctx->arg;
+	state_t *state;
+	struct glist_head *glist, *glistn;
+	sockaddr_t ip_address;
+	struct req_op_context op_context;
+	char *src = NULL;
+	nfs_client_id_t *clientid = NULL;
+	struct state_deleg *deleg = NULL;
+	bool write_delegated = false;
+	bool read_delegated = false;
+
+	/* Initializing the op_context with export and fsal_export */
+	init_op_context_simple(&op_context, export, export->fsal_export);
+
+	struct req_op_context *op_ctx = &op_context;
+
+	/* Loop through the export state list and check if any outstanding
+	 * delegations need to be recalled. Recall a delegation if the
+	 * delegation option was disabled in the config
+	 */
+	glist_for_each_safe(glist, glistn, &export->exp_state_list) {
+		struct fsal_obj_handle *obj = NULL;
+		state_owner_t *owner = NULL;
+
+		state = glist_entry(glist, state_t, state_export_list);
+
+		if (!get_state_obj_export_owner_refs(state, &obj, NULL,
+						     &owner)) {
+			/* This state_t is in the process of being destroyed,
+			 * skip it.
+			 */
+			continue;
+		}
+
+		PTHREAD_MUTEX_lock(&state->state_mutex);
+
+		/* Check only the delegation states */
+		if (state->state_type == STATE_TYPE_DELEG) {
+			clientid = owner->so_owner.so_nfs4_owner.so_clientrec;
+			src = clientid->gsh_client->hostaddr_str;
+
+			ip_str_to_sockaddr(src, &ip_address);
+
+			if (isMidDebug(COMPONENT_FSAL)) {
+				char scratch[SOCK_NAME_MAX];
+				struct display_buffer dspbuf = {
+					sizeof(scratch), scratch, scratch
+				};
+				display_sockip(&dspbuf, &ip_address);
+			}
+
+			/* Set the export and client IP address for the state
+			 * so that export_check_access() can evaluate the
+			 * effective options.
+			 */
+
+			op_ctx->ctx_export = export;
+			op_ctx->caller_addr = &ip_address;
+
+			/* Check the effective option derived from
+			 * EXPORT_DEFAULT, EXPORT, CLIENT block
+			 */
+			export_check_access();
+
+			deleg = &state->state_data.deleg;
+
+			/* Recall if there is an outstanding write or a read
+			 * delegation and the corresponding write or read
+			 * delegation was disabled in the config.
+			 */
+			write_delegated =
+				(deleg->sd_type == OPEN_DELEGATE_WRITE ||
+				 deleg->sd_type ==
+					 OPEN_DELEGATE_WRITE_ATTRS_DELEG);
+
+			read_delegated =
+				(deleg->sd_type == OPEN_DELEGATE_READ ||
+				 deleg->sd_type ==
+					 OPEN_DELEGATE_READ_ATTRS_DELEG);
+
+			if ((write_delegated && !(op_ctx->export_perms.options &
+						  EXPORT_OPTION_WRITE_DELEG)) ||
+			    (read_delegated && !(op_ctx->export_perms.options &
+						 EXPORT_OPTION_READ_DELEG))) {
+				LogFullDebug(
+					COMPONENT_FSAL,
+					"Deleg has been disabled. Recalling");
+
+				/* Asynchronous delegrecall per state
+				 * implementation.
+				 */
+				if (async_delegrecall_per_state(
+					    general_fridge, obj, state) != 0)
+					LogFullDebug(COMPONENT_FSAL,
+						     "Unable to recall");
+			}
+		}
+
+		PTHREAD_MUTEX_unlock(&state->state_mutex);
+		/* Release object ref */
+		obj->obj_ops->put_ref(obj);
+		/* Release the owner */
+		dec_state_owner_ref(owner);
+	}
+}
+
+int async_deleg_transition_handler(struct fridgethr *fr,
+				   struct gsh_export *probe_exp)
+{
+	int rc = 0;
+
+	rc = fridgethr_submit(fr, queue_deleg_transition_handler, probe_exp);
+
+	if (rc != 0)
+		LogFullDebug(COMPONENT_FSAL, "fridgethr submit returned rc %d",
+			     rc);
+
+	return rc;
 }
 
 /** @} */

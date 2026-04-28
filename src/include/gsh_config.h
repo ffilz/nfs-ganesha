@@ -230,8 +230,10 @@ typedef enum protos {
 #define UDP_LISTENER_ALL 0x00000001
 #define UDP_LISTENER_MOUNT 0x00000002
 #define UDP_LISTENER_NLM 0x00000004
-#define UDP_LISTENER_MASK \
-	(UDP_LISTENER_ALL | UDP_LISTENER_MOUNT | UDP_LISTENER_NLM)
+#define UDP_LISTENER_RQUOTA 0x00000008
+#define UDP_LISTENER_MASK                                           \
+	(UDP_LISTENER_ALL | UDP_LISTENER_MOUNT | UDP_LISTENER_NLM | \
+	 UDP_LISTENER_RQUOTA)
 
 #define ROOT_KERBEROS_PRINCIPAL_NONE (1 << 0)
 #define ROOT_KERBEROS_PRINCIPAL_NFS (1 << 1)
@@ -253,9 +255,7 @@ typedef enum protos {
 #define NFS_RDMA_ENABLE_FOR_ALL                                   \
 	(NFS_RDMA_ENABLE_FOR_NFSV3 | NFS_RDMA_ENABLE_FOR_NFSV40 | \
 	 NFS_RDMA_ENABLE_FOR_NFSV41 | NFS_RDMA_ENABLE_FOR_NFSV42)
-#define NFS_RDMA_ENABLE_BY_DEFAULT                                 \
-	(NFS_RDMA_ENABLE_FOR_NFSV40 | NFS_RDMA_ENABLE_FOR_NFSV41 | \
-	 NFS_RDMA_ENABLE_FOR_NFSV42)
+#define NFS_RDMA_ENABLE_BY_DEFAULT NFS_RDMA_ENABLE_FOR_ALL
 #endif
 
 typedef struct nfs_core_param {
@@ -268,6 +268,8 @@ typedef struct nfs_core_param {
 	    listening port.  Set by the Bind_Addr option.
 	    Must be 8-byte aligned (see sockaddr_t). */
 	sockaddr_t bind_addr;
+	/** The interface to bind to. Set by the Interface_Name option. */
+	char *interface_name;
 	/** An array of port numbers, one for each protocol.  Set by
 	    the NFS_Port, MNT_Port, NLM_Port, and Rquota_Port options. */
 	uint16_t port[P_COUNT];
@@ -479,6 +481,8 @@ typedef struct nfs_core_param {
 	uint32_t heartbeat_freq;
 	/** Whether to use device major/minor for fsid. Defaults to false. */
 	bool fsid_device;
+	/** Whether to use export Filesystem_id for fsid. Defaults to false. */
+	bool fsid_override;
 	/** How many times to attempt retry of stat while resolving POSIX
 	 *  filesystems */
 	uint32_t resolve_fs_retries;
@@ -641,6 +645,10 @@ typedef struct nfs_version4_parameter {
 	 *  server.
 	 */
 	bool virtual_server;
+	/** Distinguish between clients based on their source IP address
+	 * in addition to their client owner.
+	 */
+	bool ip_based_client_owner_separation;
 	/** This config param is deprecated. Use `domainname` defined
 	    in `directory_services_param` struct. */
 	char *domainname;
@@ -712,6 +720,8 @@ typedef struct nfs_version4_parameter {
 	bool allow_blocking_locks;
 
 } nfs_version4_parameter_t;
+
+#define UNSET_TIME_VALIDITY (-1)
 
 typedef struct directory_services_param {
 	/** Domain to use if we aren't using the nfsidmap. Defaults

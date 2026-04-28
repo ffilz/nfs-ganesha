@@ -37,6 +37,7 @@
 #include <fcntl.h>
 #include <sys/file.h> /* for having FNDELAY */
 #include <sys/socket.h>
+#include <net/if.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
@@ -69,6 +70,7 @@ static struct config_item_list udp_listener_type[] = {
 	CONFIG_LIST_TOK("on", UDP_LISTENER_ALL),
 	CONFIG_LIST_TOK("mount", UDP_LISTENER_MOUNT),
 	CONFIG_LIST_TOK("nlm", UDP_LISTENER_NLM),
+	CONFIG_LIST_TOK("rquota", UDP_LISTENER_RQUOTA),
 	CONFIG_LIST_EOL
 };
 
@@ -220,6 +222,8 @@ static struct config_item core_params[] = {
 #endif
 
 	CONF_ITEM_IP_ADDR("Bind_Addr", "0.0.0.0", nfs_core_param, bind_addr),
+	CONF_ITEM_STR("Interface_Name", 1, IF_NAMESIZE, NULL, nfs_core_param,
+		      interface_name),
 	CONF_ITEM_UI32("NFS_Program", 1, INT32_MAX, NFS_PROGRAM, nfs_core_param,
 		       program[P_NFS]),
 #ifdef _USE_NFS3
@@ -351,6 +355,7 @@ static struct config_item core_params[] = {
 	CONF_ITEM_UI32("heartbeat_freq", 0, 5000, 1000, nfs_core_param,
 		       heartbeat_freq),
 	CONF_ITEM_BOOL("fsid_device", false, nfs_core_param, fsid_device),
+	CONF_ITEM_BOOL("fsid_override", false, nfs_core_param, fsid_override),
 	CONF_ITEM_UI32("resolve_fs_retries", 1, 1000, 10, nfs_core_param,
 		       resolve_fs_retries),
 	CONF_ITEM_UI32("resolve_fs_delay", 1, 1000, 100, nfs_core_param,
@@ -548,10 +553,12 @@ static struct config_item directory_services_params[] = {
 		      directory_services_param, domainname),
 	CONF_ITEM_BOOL("Idmapping_Active", true, directory_services_param,
 		       idmapping_active),
-	CONF_ITEM_I64("Idmapped_User_Time_Validity", -1, INT64_MAX, -1,
-		      directory_services_param, idmapped_user_time_validity),
-	CONF_ITEM_I64("Idmapped_Group_Time_Validity", -1, INT64_MAX, -1,
-		      directory_services_param, idmapped_group_time_validity),
+	CONF_ITEM_I64("Idmapped_User_Time_Validity", UNSET_TIME_VALIDITY,
+		      INT64_MAX, UNSET_TIME_VALIDITY, directory_services_param,
+		      idmapped_user_time_validity),
+	CONF_ITEM_I64("Idmapped_Group_Time_Validity", UNSET_TIME_VALIDITY,
+		      INT64_MAX, UNSET_TIME_VALIDITY, directory_services_param,
+		      idmapped_group_time_validity),
 	CONF_ITEM_LIST("Root_Kerberos_Principal",
 		       ROOT_KERBEROS_PRINCIPAL_DEFAULT,
 		       root_kerberos_principal_options,
@@ -620,6 +627,7 @@ static struct config_item_list recovery_backend_types[] = {
 	CONFIG_LIST_TOK("rados_kv", RECOVERY_BACKEND_RADOS_KV),
 	CONFIG_LIST_TOK("rados_ng", RECOVERY_BACKEND_RADOS_NG),
 	CONFIG_LIST_TOK("rados_cluster", RECOVERY_BACKEND_RADOS_CLUSTER),
+	CONFIG_LIST_TOK("none", RECOVERY_BACKEND_NONE),
 	CONFIG_LIST_EOL
 };
 
@@ -637,6 +645,9 @@ static struct config_item version4_params[] = {
 		      nfs_version4_parameter, server_owner),
 	CONF_ITEM_BOOL("Virtual_Server", false, nfs_version4_parameter,
 		       virtual_server),
+	CONF_ITEM_BOOL("Ip_Based_Client_Owner_Separation", false,
+		       nfs_version4_parameter,
+		       ip_based_client_owner_separation),
 	CONF_ITEM_STR("DomainName", 1, MAXPATHLEN, DOMAINNAME_DEFAULT,
 		      nfs_version4_parameter, domainname),
 	CONF_ITEM_PATH("IdmapConf", 1, MAXPATHLEN, IDMAPCONF_DEFAULT,

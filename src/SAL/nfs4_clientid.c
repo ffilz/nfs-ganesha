@@ -1261,7 +1261,8 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 			display_owner(&dspbuf, owner);
 
 			if (refcount > 1)
-				LogWarn(COMPONENT_CLIENTID,
+				LogWarnLimited(
+					COMPONENT_CLIENTID,
 					"Expired State - Lock Owners, Possibly extra references to {%s}",
 					str);
 			else
@@ -1272,6 +1273,11 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 		}
 
 		dec_state_owner_ref(owner);
+		if (refcount > 1) {
+			/* Allow other threads to proceed and release
+			 * references. */
+			sched_yield();
+		}
 	}
 
 	/* revoke layouts for this client*/
@@ -1330,7 +1336,8 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 			display_owner(&dspbuf, owner);
 
 			if (refcount > 1)
-				LogWarn(COMPONENT_CLIENTID,
+				LogWarnLimited(
+					COMPONENT_CLIENTID,
 					"Expired State - Open Owners, Possibly extra references to {%s}",
 					str);
 			else
@@ -1341,6 +1348,11 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 		}
 
 		dec_state_owner_ref(owner);
+		if (refcount > 1) {
+			/* Allow other threads to proceed and release
+			 * references.*/
+			sched_yield();
+		}
 	}
 
 	/* revoke delegations for this client*/
@@ -1938,6 +1950,8 @@ uint64_t client_record_value_hash(nfs_client_record_t *key)
 	uint64_t other;
 
 	other = key->cr_pnfs_flags;
+	if (nfs_param.nfsv4_param.ip_based_client_owner_separation)
+		other = other ^ hash_sockaddr(&key->cr_client_addr, true);
 	other = (other << 32) | hash_sockaddr(&key->cr_server_addr, true);
 	return CityHash64WithSeed(key->cr_client_val, key->cr_client_val_len,
 				  other);
@@ -2029,6 +2043,18 @@ int compare_client_record(struct gsh_buffdesc *buff1,
 		return 1;
 	}
 
+	if (nfs_param.nfsv4_param.ip_based_client_owner_separation) {
+		rc = sockaddr_cmp(&pkey1->cr_client_addr,
+				  &pkey2->cr_client_addr, true);
+
+		if (rc == 0) {
+			if (isDebug(COMPONENT_HASHTABLE))
+				LogFullDebug(COMPONENT_CLIENTID,
+					     "client sockaddr mismatch");
+			return rc;
+		}
+	}
+
 	rc = memcmp(pkey1->cr_client_val, pkey2->cr_client_val,
 		    pkey1->cr_client_val_len);
 
@@ -2077,7 +2103,8 @@ int display_client_record_val(struct display_buffer *dspbuf,
 nfs_client_record_t *get_client_record(const char *const value,
 				       const size_t len,
 				       const uint32_t pnfs_flags,
-				       const sockaddr_t *server_addr)
+				       const sockaddr_t *server_addr,
+				       const sockaddr_t *client_addr)
 {
 	nfs_client_record_t *record;
 	nfs_client_record_t *old;
@@ -2087,7 +2114,9 @@ nfs_client_record_t *get_client_record(const char *const value,
 	hash_error_t rc;
 	int32_t refcount;
 	sockaddr_t server_addr_ipv4;
+	sockaddr_t client_addr_ipv4;
 	sockaddr_t *server_addr_conv;
+	sockaddr_t *client_addr_conv;
 
 	assert(len);
 
@@ -2102,6 +2131,9 @@ nfs_client_record_t *get_client_record(const char *const value,
 	/* Canonicalise, does the right thing with IPv4 input */
 	server_addr_conv = convert_ipv6_to_ipv4((sockaddr_t *)server_addr,
 						&server_addr_ipv4);
+	client_addr_conv = convert_ipv6_to_ipv4((sockaddr_t *)client_addr,
+						&client_addr_ipv4);
+	record->cr_client_addr = *client_addr_conv;
 	record->cr_server_addr = *server_addr_conv;
 	buffkey.addr = record;
 	buffkey.len = sizeof(*record);

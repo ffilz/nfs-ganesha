@@ -50,7 +50,7 @@ set(GANESHA_MAJOR_VERSION 9)
 # Minor version is blank for development.  On release, it becomes ".0".  On a
 # stable maintenance branch, this becomes ".N" where N is monotonically
 # increasing starting at 1.3 Remember to include the "." !!
-set(GANESHA_MINOR_VERSION .4)
+set(GANESHA_MINOR_VERSION .13)
 
 IF(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
 set(GANESHA_BUILD_RELEASE 1)
@@ -219,7 +219,7 @@ ELSE( EXISTS ${GANESHA_TOP_CMAKE_DIR}/../.git/HEAD  )
 		   ERROR_QUIET
                    OUTPUT_VARIABLE _GIT_HEAD_COMMIT)
 
-  EXECUTE_PROCESS( COMMAND ${GANESHA_TOP_CMAKE_DIR}/cmake/gitdesc_from_path.sh ARGS ${GANESHA_TOP_CMAKE_DIR}
+  EXECUTE_PROCESS( COMMAND ${GANESHA_TOP_CMAKE_DIR}/cmake/gitdesc_from_path.sh  ${GANESHA_TOP_CMAKE_DIR}
 		   WORKING_DIRECTORY ${GANESHA_TOP_CMAKE_DIR}
 		   OUTPUT_STRIP_TRAILING_WHITESPACE
 		   ERROR_QUIET
@@ -1670,6 +1670,18 @@ if(${ALLOCATOR} STREQUAL "tcmalloc")
 else(${ALLOCATOR} STREQUAL "tcmalloc")
     set(BCOND_TCMALLOC "%bcond_with")
 endif(${ALLOCATOR} STREQUAL "tcmalloc")
+
+if(USE_NFS_RDMA)
+    set(BCOND_NFS_RDMA  "%bcond_without")
+else(USE_NFS_RDMA)
+    set(BCOND_NFS_RDMA "%bcond_with")
+endif(USE_NFS_RDMA)
+
+if(USE_RPC_RDMA)
+    set(BCOND_RPC_RDMA "%bcond_without")
+else(USE_RPC_RDMA)
+    set(BCOND_RPC_RDMA "%bcond_with")
+endif(USE_RPC_RDMA)
 
 if(USE_ADMIN_TOOLS)
     set(BCOND_UTILS "%bcond_without")

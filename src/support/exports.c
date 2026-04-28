@@ -930,18 +930,13 @@ static int fsal_update_cfg_commit(void *node, void *link_mem, void *self_struct,
 	LogDebug(COMPONENT_EXPORT, "Export %d FSAL config update processed",
 		 export->export_id);
 
-	/* Invoke asynchronous dynamic delegation option parsing implementation.
-	 * Check if the delegation option was updated and recall an outstanding
-	 * delegation if necessary.
-	 */
-	if (async_deleg_transition_handler(general_fridge, probe_exp) != 0)
-		LogCrit(COMPONENT_STATE,
-			"Failed to start thread to deleg transition");
+#ifdef USE_FSAL_CEPH_LL_DELEGATION
+	if (nfs_param.nfsv4_param.allow_delegations) {
+		/* Handle runtime delegation option transitions */
+		mdcache_handle_deleg_transition(probe_exp->fsal_export, export);
+	}
+#endif
 
-	/* Call enable_delegations() here so that we set the deleg timeout
-	 * if delegation option was enabled dynamically.
-	 */
-	mdcache_enable_delegations(probe_exp->fsal_export, export);
 err:
 
 	release_op_context();
@@ -1276,6 +1271,25 @@ uint32_t export_check_client_options(struct gsh_export *exp)
 }
 
 /**
+ * @brief Validate EXPORT Pseudo path
+ * Pseudo paths are virtual identifiers, not filesystem paths.
+ * Validation is intentionally minimal to preserve backward compatibility.
+ */
+static bool valid_pseudopath(const char *path)
+{
+	const unsigned char *p;
+
+	if (!path || path[0] != '/')
+		return false;
+
+	for (p = (const unsigned char *)path; *p; p++)
+		if (*p < 0x20 || *p == 0x7f)
+			return false;
+
+	return true;
+}
+
+/**
  * @brief Commit an export block
  *
  * Validate the export level parameters.  fsal and client
@@ -1301,8 +1315,7 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 	LogFullDebug(COMPONENT_EXPORT, "Processing %p", export);
 
 	/* Validate the pseudo path if present is an absolute path. */
-	if (export->cfg_pseudopath != NULL &&
-	    export->cfg_pseudopath[0] != '/') {
+	if (!valid_pseudopath(export->cfg_pseudopath)) {
 		LogCrit(COMPONENT_CONFIG,
 			"A Pseudo path must be an absolute path");
 		err_type->invalid = true;
@@ -2118,6 +2131,7 @@ static struct config_item_list delegations[] = {
 	CONFIG_LIST_TOK("R", EXPORT_OPTION_READ_DELEG),
 	CONFIG_LIST_TOK("W", EXPORT_OPTION_DELEGATIONS),
 	CONFIG_LIST_TOK("RW", EXPORT_OPTION_DELEGATIONS),
+	CONFIG_LIST_TOK("RO", EXPORT_OPTION_READ_DELEG),
 	CONFIG_LIST_EOL
 };
 
@@ -2129,6 +2143,7 @@ struct config_item_list deleg_types[] = {
 	CONFIG_LIST_TOK("R", FSAL_OPTION_FILE_READ_DELEG),
 	CONFIG_LIST_TOK("W", FSAL_OPTION_FILE_DELEGATIONS),
 	CONFIG_LIST_TOK("RW", FSAL_OPTION_FILE_DELEGATIONS),
+	CONFIG_LIST_TOK("RO", FSAL_OPTION_FILE_READ_DELEG),
 	CONFIG_LIST_EOL
 };
 
@@ -2141,53 +2156,52 @@ static struct config_item_list read_access_check_policy_type[] = {
 	CONFIG_LIST_TOK("all", READ_ACCESS_CHECK_POLICY_ALL), CONFIG_LIST_EOL
 };
 
-#define CONF_EXPORT_PERMS(_struct_, _perms_)                                             \
-	/* Note: Access_Type defaults to None on purpose */                              \
-	CONF_ITEM_ENUM_BITS_SET(                                                         \
-		"Access_Type", EXPORT_OPTION_NO_ACCESS,                                  \
-		EXPORT_OPTION_ACCESS_MASK, access_types, _struct_,                       \
-		_perms_.options,                                                         \
-		_perms_.set), /* Note: Protocols will now pick up from NFS Core Param */ \
-		CONF_ITEM_LIST_BITS_SET("Protocols",                                     \
-					EXPORT_OPTION_PROTO_DEFAULTS,                    \
-					EXPORT_OPTION_PROTOCOLS,                         \
-					nfs_protocols, _struct_,                         \
-					_perms_.options, _perms_.set),                   \
-		CONF_ITEM_LIST_BITS_SET("Transports",                                    \
-					EXPORT_OPTION_XPORT_DEFAULTS,                    \
-					EXPORT_OPTION_TRANSPORTS, transports,            \
-					_struct_, _perms_.options,                       \
-					_perms_.set),                                    \
-		CONF_ITEM_ANON_ID_SET("Anonymous_uid", ANON_UID, _struct_,               \
-				      _perms_.anonymous_uid,                             \
-				      EXPORT_OPTION_ANON_UID_SET,                        \
-				      _perms_.set),                                      \
-		CONF_ITEM_ANON_ID_SET("Anonymous_gid", ANON_GID, _struct_,               \
-				      _perms_.anonymous_gid,                             \
-				      EXPORT_OPTION_ANON_GID_SET,                        \
-				      _perms_.set),                                      \
-		CONF_ITEM_LIST_BITS_SET("SecType",                                       \
-					EXPORT_OPTION_AUTH_DEFAULTS,                     \
-					EXPORT_OPTION_AUTH_TYPES, sec_types,             \
-					_struct_, _perms_.options,                       \
-					_perms_.set),                                    \
-		CONF_ITEM_BOOLBIT_SET("PrivilegedPort", false,                           \
-				      EXPORT_OPTION_PRIVILEGED_PORT, _struct_,           \
-				      _perms_.options, _perms_.set),                     \
-		CONF_ITEM_BOOLBIT_SET("Manage_Gids", false,                              \
-				      EXPORT_OPTION_MANAGE_GIDS, _struct_,               \
-				      _perms_.options, _perms_.set),                     \
-		CONF_ITEM_LIST_BITS_SET("Squash", EXPORT_OPTION_ROOT_SQUASH,             \
-					EXPORT_OPTION_SQUASH_TYPES,                      \
-					squash_types, _struct_,                          \
-					_perms_.options, _perms_.set),                   \
-		CONF_ITEM_BOOLBIT_SET("NFS_Commit", false,                               \
-				      EXPORT_OPTION_COMMIT, _struct_,                    \
-				      _perms_.options, _perms_.set),                     \
-		CONF_ITEM_ENUM_BITS_SET("Delegations",                                   \
-					EXPORT_OPTION_NO_DELEGATIONS,                    \
-					EXPORT_OPTION_DELEGATIONS,                       \
-					delegations, _struct_,                           \
+/* Note: Access_Type defaults to None on purpose */
+/* Note: Protocols will now pick up from NFS Core Param */
+#define CONF_EXPORT_PERMS(_struct_, _perms_)                                   \
+	CONF_ITEM_ENUM_BITS_SET("Access_Type", EXPORT_OPTION_NO_ACCESS,        \
+				EXPORT_OPTION_ACCESS_MASK, access_types,       \
+				_struct_, _perms_.options, _perms_.set),       \
+		CONF_ITEM_LIST_BITS_SET("Protocols",                           \
+					EXPORT_OPTION_PROTO_DEFAULTS,          \
+					EXPORT_OPTION_PROTOCOLS,               \
+					nfs_protocols, _struct_,               \
+					_perms_.options, _perms_.set),         \
+		CONF_ITEM_LIST_BITS_SET("Transports",                          \
+					EXPORT_OPTION_XPORT_DEFAULTS,          \
+					EXPORT_OPTION_TRANSPORTS, transports,  \
+					_struct_, _perms_.options,             \
+					_perms_.set),                          \
+		CONF_ITEM_ANON_ID_SET("Anonymous_uid", ANON_UID, _struct_,     \
+				      _perms_.anonymous_uid,                   \
+				      EXPORT_OPTION_ANON_UID_SET,              \
+				      _perms_.set),                            \
+		CONF_ITEM_ANON_ID_SET("Anonymous_gid", ANON_GID, _struct_,     \
+				      _perms_.anonymous_gid,                   \
+				      EXPORT_OPTION_ANON_GID_SET,              \
+				      _perms_.set),                            \
+		CONF_ITEM_LIST_BITS_SET("SecType",                             \
+					EXPORT_OPTION_AUTH_DEFAULTS,           \
+					EXPORT_OPTION_AUTH_TYPES, sec_types,   \
+					_struct_, _perms_.options,             \
+					_perms_.set),                          \
+		CONF_ITEM_BOOLBIT_SET("PrivilegedPort", false,                 \
+				      EXPORT_OPTION_PRIVILEGED_PORT, _struct_, \
+				      _perms_.options, _perms_.set),           \
+		CONF_ITEM_BOOLBIT_SET("Manage_Gids", false,                    \
+				      EXPORT_OPTION_MANAGE_GIDS, _struct_,     \
+				      _perms_.options, _perms_.set),           \
+		CONF_ITEM_LIST_BITS_SET("Squash", EXPORT_OPTION_ROOT_SQUASH,   \
+					EXPORT_OPTION_SQUASH_TYPES,            \
+					squash_types, _struct_,                \
+					_perms_.options, _perms_.set),         \
+		CONF_ITEM_BOOLBIT_SET("NFS_Commit", false,                     \
+				      EXPORT_OPTION_COMMIT, _struct_,          \
+				      _perms_.options, _perms_.set),           \
+		CONF_ITEM_ENUM_BITS_SET("Delegations",                         \
+					EXPORT_OPTION_NO_DELEGATIONS,          \
+					EXPORT_OPTION_DELEGATIONS,             \
+					delegations, _struct_,                 \
 					_perms_.options, _perms_.set)
 
 #define CONF_PSEUDOFS_PERMS(_struct_, _perms_)                                 \
@@ -3377,6 +3391,10 @@ void release_export(struct gsh_export *export, bool config)
 		pseudo_unmount_export_tree(export);
 	}
 
+	/* Mark export stale before prepare_unexport so that no new IO should
+	 * entertained but exiting IO in progress should get completed.
+	 */
+	export->export_status = EXPORT_STALE;
 	export->fsal_export->exp_ops.prepare_unexport(export->fsal_export);
 
 	if (!config) {

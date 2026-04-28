@@ -296,7 +296,10 @@ void *PrometheusExposer::server_thread(void *arg)
 
 		SocketStreambuf<> socket_streambuf(client_fd);
 		std::ostream socket_ostream(&socket_streambuf);
-		socket_ostream << "HTTP/1.1 200 OK\r\n\r\n";
+		socket_ostream << "HTTP/1.1 200 OK\r\n";
+		socket_ostream
+			<< "Content-Type: text/plain; version=0.0.4; charset=utf-8\r\n";
+		socket_ostream << "\r\n";
 		prometheus::TextSerializer::Serialize(socket_ostream, families);
 		socket_ostream.flush();
 
@@ -309,7 +312,8 @@ void *PrometheusExposer::server_thread(void *arg)
 			exposer->successLatencies_.Observe(elapsed_ms);
 
 #ifdef HAVE_PROCPS
-		update_mem_info();
+		if (nfs_param.core_param.enable_dynamic_metrics)
+			update_mem_info();
 #endif
 	}
 	return NULL;
