@@ -16,6 +16,24 @@
       "message": "What is the purpose of changing all of the metrics names?\n\nI guess that this change can effect many Ganesha users that may have dashboards / alerts based on the current metrics",
       "revId": "9ce2396288602bbf5d10f4825f5b4acef2dfd988",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eec14b39_7dc717b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-30T22:56:34Z",
+      "side": 1,
+      "message": "We have had a request from our dashboard folks for more consistent naming.\n\nHonestly it feels like the metrics have become a mess. I wish there was a way to configure which metrics to include and what the presentation name is for each. But even that is probably ultimately a mess, so I\u0027m really not sure how to proceed with conflicting needs.",
+      "parentUuid": "406d0209_32afed33",
+      "revId": "9ce2396288602bbf5d10f4825f5b4acef2dfd988",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
