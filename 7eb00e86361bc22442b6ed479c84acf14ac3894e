@@ -52,6 +52,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91d3ab9b_9128e241",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-30T13:16:36Z",
+      "side": 1,
+      "message": "Thanks Martin!\n\nI also replied to a comment from Frank regarding hashing only the last 4 octets, it is possible but why? it weakens the hash\n\nAnd effectively the \"hash\" that we do here is just a simple xor which is very simple and cheap, not a murmur hash or any cryptographic hash, so I think it is better to hash the full IPv6",
+      "parentUuid": "bd5d14c3_7e052932",
+      "revId": "7eb00e86361bc22442b6ed479c84acf14ac3894e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b4c75c8_81c5f7c7",
