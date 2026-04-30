@@ -51,6 +51,24 @@
       "parentUuid": "17dc21fa_475003b2",
       "revId": "cc1a21570015a47b2293c9db06d9a7df681ab5b3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "875122e1_825e6147",
+        "filename": "coverity/ganesha_model.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-30T13:47:30Z",
+      "side": 1,
+      "message": "clang format works by finding a `clang-format` in a top level directory and our `.clang-format` file was under the `src` directory, so it didn\u0027t use it to format this file.\n\nI moved the `.clang-format` file to be at the top directory",
+      "parentUuid": "32569fe7_03912ccd",
+      "revId": "cc1a21570015a47b2293c9db06d9a7df681ab5b3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
