@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59e378c1_4c20684a",
+        "filename": "src/include/log_common.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-30T10:24:10Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    -     COMPONENT_GRPC,\n→ to be replaced with:\n    + \tCOMPONENT_GRPC,",
+      "revId": "442c329a061b1a7dc8cfd42a12f9b34aefb7c4f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14b75351_f57f9ef5",
+        "filename": "src/include/log_common.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-30T10:24:10Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    COMPONENT_GRPC,$",
+      "revId": "442c329a061b1a7dc8cfd42a12f9b34aefb7c4f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
