@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19bfa5cd_7dfb52cd",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-30T13:29:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f09c7f9_d749dd6d",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55924f7d_a4aac3ae",
@@ -380,6 +398,24 @@
       "writtenOn": "2026-04-20T18:52:39Z",
       "side": 1,
       "message": "I made an effort to have gsh_buffdesc strings NUL terminated to avoid having to do swizzling like this. Is there someplace this was missed, if so let\u0027s fix it rather than adding this swizzling.",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88857c70_b3cb6f0a",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-30T13:29:40Z",
+      "side": 1,
+      "message": "The gsh_buffdesc is initialized directly with data from the client\u0027s requests\nin:\n* `decode_acl`\n* `decode_group`\n* `decode_owner`\n\nI\u0027m not sure if that has to be null terminated\n\nAnd it is the logic that\u0027s done in this function in line 1148, so I just copied that logic here",
+      "parentUuid": "4433f3f8_ed0da9a6",
       "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
