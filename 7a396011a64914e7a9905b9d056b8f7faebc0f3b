@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c3902dd_1d41b3cf",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-30T13:46:57Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t/* IPv6 spec allows IPv4 addresses to be mapped as IPv6 addresses.",
+      "revId": "7a396011a64914e7a9905b9d056b8f7faebc0f3b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c275ef6b_1284fa55",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-30T13:46:57Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t * This allows us to ensure that an IPv4 address has the same hash",
+      "revId": "7a396011a64914e7a9905b9d056b8f7faebc0f3b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ab0503f_5adcdabc",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-04-30T13:46:57Z",
+      "side": 1,
+      "message": "WARNING: Prefer \u0027fallthrough;\u0027 over fallthrough comment\n+\t\t/* fallthrough */",
+      "revId": "7a396011a64914e7a9905b9d056b8f7faebc0f3b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
