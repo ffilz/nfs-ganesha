@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daa6bae8_fac1c180",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-30T22:08:26Z",
+      "side": 1,
+      "message": "All the changes look good. Just curious about that one change.\n\nNot too bad for a clean up, especially since a bunch of the changes seem to be a style change somewhere.",
+      "revId": "b83d3aa503e36f35d67650f47e0007ed8e45db40",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a872765d_602b6f0f",
+        "filename": "src/gtest/fsal_api/test_reopen2_latency.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-30T22:08:26Z",
+      "side": 1,
+      "message": "Hmm, did we change the style for this? Or difference between older and newer clang-format? No problems with the style change, just wondering why it\u0027s changing.",
+      "revId": "b83d3aa503e36f35d67650f47e0007ed8e45db40",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
