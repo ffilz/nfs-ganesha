@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56273fe2_e83cf78e",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2026-04-30T22:59:50Z",
+      "side": 1,
+      "message": "\u003e Or hmm, instead of actually converting the IPv4 address, should be just have the hash for IPv4 xor the 4 bytes with a const xor of the encapsulation prefix?\n\nThat is a beautiful idea!",
+      "parentUuid": "110d3b1e_5aa28430",
+      "revId": "7eb00e86361bc22442b6ed479c84acf14ac3894e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bc6e655_6ac9e3fe",
         "filename": "src/support/ip_utils.c",
         "patchSetId": 2
