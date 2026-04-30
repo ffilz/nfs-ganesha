@@ -69,6 +69,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1dbc7c7_7488ca54",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-04-30T13:14:07Z",
+      "side": 1,
+      "message": "We can hash only the last 4 bytes as you suggest, but it is basically ignoring the network prefix for IPv6 and potentially increasing the collision range\n\nThe hash that we are doing here is just xoring the 4 words composing the IPv6, so it should be relatively cheap to do",
+      "parentUuid": "0b4c75c8_81c5f7c7",
+      "revId": "7eb00e86361bc22442b6ed479c84acf14ac3894e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bc6e655_6ac9e3fe",
