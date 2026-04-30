@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d3e7b90_179316df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-30T22:28:39Z",
+      "side": 1,
+      "message": "This does look cleaner, just some thoughts about it.",
+      "revId": "35623b14dcb0e7e0e15ec4f707a6b3fbbffcb002",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81ace2d3_6679ab25",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-30T22:28:39Z",
+      "side": 1,
+      "message": "Do we mean to only try 1000 and 2000 if function didn\u0027t set a hint? Or should we jump to max_groups_membership if 1000 didn\u0027t work and there is no hint?",
+      "revId": "35623b14dcb0e7e0e15ec4f707a6b3fbbffcb002",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14ee5b56_20f2cddd",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-30T22:28:39Z",
+      "side": 1,
+      "message": "Let\u0027s show strerror(errno) - more readable to sysadmin, or as I like to do \"%s (%d)\", sterror(errno), errno)",
+      "revId": "35623b14dcb0e7e0e15ec4f707a6b3fbbffcb002",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e92938c7_3d791355",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-04-30T22:28:39Z",
+      "side": 1,
+      "message": "Let\u0027s show strerror(errno) here?",
+      "revId": "35623b14dcb0e7e0e15ec4f707a6b3fbbffcb002",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
