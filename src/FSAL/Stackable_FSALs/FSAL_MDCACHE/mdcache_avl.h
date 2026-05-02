@@ -126,7 +126,7 @@ mdcache_dir_entry_t *mdcache_avl_lookup(mdcache_entry_t *entry,
 					const char *name);
 void mdcache_avl_clean_trees(mdcache_entry_t *parent);
 
-void unchunk_dirent(mdcache_dir_entry_t *dirent);
+void unchunk_dirent(mdcache_entry_t *parent, mdcache_dir_entry_t *dirent);
 #endif /* MDCACHE_AVL_H */
 
 /** @} */

@@ -154,12 +154,23 @@ void avl_dirent_set_deleted(mdcache_entry_t *entry, mdcache_dir_entry_t *v)
 /**
  * @brief Remove a dirent from a chunk.
  *
+ * @param[in] parent    The parent directory (used instead of chunk->parent
+ *                      because chunk may have been cleaned/freed already)
  * @param[in] dirent    The dirent to remove
  *
  */
-void unchunk_dirent(mdcache_dir_entry_t *dirent)
+void unchunk_dirent(mdcache_entry_t *parent, mdcache_dir_entry_t *dirent)
 {
-	mdcache_entry_t *parent = dirent->chunk->parent;
+	mdcache_entry_t *chunk_parent = dirent->chunk->parent;
+
+	if (chunk_parent != parent) {
+		LogCrit(COMPONENT_MDCACHE,
+			"%s: chunk %p parent %p != caller parent %p"
+			" for dirent %s ck=0x%" PRIx64 " chunk_list={%p,%p}",
+			__func__, dirent->chunk, chunk_parent, parent,
+			dirent->name, dirent->ck, dirent->chunk_list.next,
+			dirent->chunk_list.prev);
+	}
 
 	LogFullDebugAlt(COMPONENT_NFS_READDIR, COMPONENT_MDCACHE,
 			"Unchunking %p %s", dirent, dirent->name);
@@ -221,7 +232,7 @@ void mdcache_avl_remove(mdcache_entry_t *parent, mdcache_dir_entry_t *dirent)
 
 	if (dirent->chunk != NULL) {
 		/* Dirent belongs to a chunk so remove it from the chunk. */
-		unchunk_dirent(dirent);
+		unchunk_dirent(parent, dirent);
 	} else {
 		/* The dirent might be a detached dirent on an LRU list */
 		rmv_detached_dirent(parent, dirent);

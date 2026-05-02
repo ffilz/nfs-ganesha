@@ -1995,6 +1995,7 @@ void place_new_dirent(mdcache_entry_t *parent_dir,
 		 * Nothing to clean up since we haven't done anything
 		 * unreversible, and we no longer trust the chunks.
 		 */
+		new_dir_entry->chunk = NULL; /* found by Opus 4.6 */
 		goto out;
 	}
 
