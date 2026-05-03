@@ -215,6 +215,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c819650a_27eb1d56",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1313,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-05-03T09:27:19Z",
+      "side": 1,
+      "message": "I encountered that checkpatch issue warnings for lines that exceeds 80 columns while in my editor it wasn\u0027t more than 80 columns\n\nIt may be the case here as well",
+      "parentUuid": "e90ee790_0b9a3b1b",
+      "revId": "b187259a27eb12e2ef7cfbf46b2ebc4acfcd3a14",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcf28eeb_c1526938",
