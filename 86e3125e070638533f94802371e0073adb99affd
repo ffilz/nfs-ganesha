@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c23a41d_2464ddef",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-03T10:24:07Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t * When the buffer is too small, ngroups *may* hint for the actual number",
+      "revId": "86e3125e070638533f94802371e0073adb99affd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5dba28e_42d17cdd",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-03T10:24:07Z",
+      "side": 1,
+      "message": "WARNING: line length of 86 exceeds 80 columns\n+\t\t/* If ngroups changed, try with the new value that it was set to as it",
+      "revId": "86e3125e070638533f94802371e0073adb99affd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e578b55f_0ec99b29",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-03T10:24:07Z",
+      "side": 1,
+      "message": "WARNING: line length of 86 exceeds 80 columns\n+\t\t * may hint to the actual ngroups the user is member of, otherwise try",
+      "revId": "86e3125e070638533f94802371e0073adb99affd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c41d54_fc86eca8",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-03T10:24:07Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\"getgrouplist for user: %s failed with error: %d, errno: %s (%d)\", user,\n    - \t\t\tret, strerror(errno), errno);\n→ to be replaced with:\n    + \t\t\t\"getgrouplist for user: %s failed with error: %d, errno: %s (%d)\",\n    + \t\t\tuser, ret, strerror(errno), errno);",
+      "revId": "86e3125e070638533f94802371e0073adb99affd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "befbb20c_769c9a72",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-03T10:24:07Z",
+      "side": 1,
+      "message": "WARNING: line length of 96 exceeds 80 columns\n+\t\t\t\"getgrouplist for user: %s failed with error: %d, errno: %s (%d)\", user,",
+      "revId": "86e3125e070638533f94802371e0073adb99affd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
