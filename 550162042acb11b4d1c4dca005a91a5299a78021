@@ -474,6 +474,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c763639_51e13b45",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-05-03T07:48:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e90b7e99_77911580",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0c87998_34b40c1c",
@@ -487,6 +505,24 @@
       "writtenOn": "2026-04-30T22:42:47Z",
       "side": 1,
       "message": "Ah, I see, the NUL termination isn\u0027t actually necessary... we assure that utf8string is NUL terminated. I guess when I did that, I missed skipping the NUL terminating here...\n\nNot such a big deal here though because we need a copy to mutate... But we could just memcpy(namebuff, name-\u003eaddr, name-\u003elen + 1);",
+      "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db8389aa_520602d9",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-05-03T07:48:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0c87998_34b40c1c",
       "revId": "550162042acb11b4d1c4dca005a91a5299a78021",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
