@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ded080c2_9b4321b6",
+        "filename": "src/include/ip_utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T08:24:05Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - sockaddr_t *ipv4_to_ipv4_mapped_ipv6(sockaddr_t* ipv4, sockaddr_t* ipv6);\n→ to be replaced with:\n    + sockaddr_t *ipv4_to_ipv4_mapped_ipv6(sockaddr_t *ipv4, sockaddr_t *ipv6);",
+      "revId": "867f33b84a97cd39b15540bbba9e45e5b1a5193f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f3411c5_3f3ed30d",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T08:24:05Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t * |---------------------------------------------------------------|",
+      "revId": "867f33b84a97cd39b15540bbba9e45e5b1a5193f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37cc4f79_3689a2aa",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T08:24:05Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t * |   80 bits \u003d 10 bytes  | 16 bits \u003d 2 bytes | 32 bits \u003d 4 bytes |",
+      "revId": "867f33b84a97cd39b15540bbba9e45e5b1a5193f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b825846e_8a7e5b1d",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T08:24:05Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t * |---------------------------------------------------------------|",
+      "revId": "867f33b84a97cd39b15540bbba9e45e5b1a5193f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "835bee1f_13ddc406",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T08:24:05Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t * |            0          |        ffff       |      a.b.c.d      |",
+      "revId": "867f33b84a97cd39b15540bbba9e45e5b1a5193f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "691b0489_dfeeb9cd",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T08:24:05Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t * |---------------------------------------------------------------|",
+      "revId": "867f33b84a97cd39b15540bbba9e45e5b1a5193f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
