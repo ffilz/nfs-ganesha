@@ -40,21 +40,10 @@ install_debian()
 
 	apt-get update
 
-	libnsl_pkg="libnsl-dev"
 	python3_distutils="python3-distutils"
 	case "$ID" in
-	debian)
-		case "$VERSION_ID" in
-		10)
-			libnsl_pkg=""
-			;;
-		esac
-		;;
 	ubuntu)
 		case "$VERSION_ID" in
-		18.04 | 20.04)
-			libnsl_pkg=""
-			;;
 		24.04)
 			python3_distutils=""
 			;;
@@ -80,7 +69,6 @@ install_debian()
 		libdbus-1-dev \
 		libjemalloc-dev \
 		libkrb5-dev \
-		$libnsl_pkg \
 		liburcu-dev \
 		python3 \
 		$python3_distutils \
@@ -178,7 +166,6 @@ install_rh()
 		libblkid-devel \
 		libcap-devel \
 		libnfsidmap-devel \
-		libnsl2-devel \
 		libuuid-devel \
 		"$python_pkg" \
 		"${python_pkg}-qt5-devel" \
@@ -208,7 +195,6 @@ install_suse()
 	       libasan4 \
 	       libblkid-devel \
 	       libcap-devel \
-	       libnsl-devel \
 	       liburcu-devel \
 	       libuuid-devel \
 	       nfsidmap-devel \
