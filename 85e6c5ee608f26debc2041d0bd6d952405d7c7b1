@@ -1,0 +1,752 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5737fb0_b76aa25e",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\trealpath \u003d gsh_strdup(glfs_export-\u003eexport_path,\n    - \t\t\t\t      MEM_COMP_EXPORT);\n→ to be replaced with:\n    + \t\trealpath \u003d\n    + \t\t\tgsh_strdup(glfs_export-\u003eexport_path, MEM_COMP_EXPORT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8a1e493_c80960d7",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tglfsexport-\u003emount_path \u003d gsh_strdup(CTX_FULLPATH(op_ctx),\n    - \t\t\t\t\t    MEM_COMP_EXPORT);\n→ to be replaced with:\n    + \tglfsexport-\u003emount_path \u003d\n    + \t\tgsh_strdup(CTX_FULLPATH(op_ctx), MEM_COMP_EXPORT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c0160a2_5a45a67a",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\thdl-\u003eu.symlink.link_content \u003d gsh_malloc(len,\n    - \t\t\t\t\t\t\t MEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\thdl-\u003eu.symlink.link_content \u003d\n    + \t\t\tgsh_malloc(len, MEM_COMP_PROTOCOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d3d3192_322fc74c",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tmyself-\u003eu.symlink.link_content \u003d gsh_strdup(link_buff,\n    - \t\t\t\t\t\t\t    MEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\tmyself-\u003eu.symlink.link_content \u003d\n    + \t\t\tgsh_strdup(link_buff, MEM_COMP_PROTOCOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e9623f8_c4f5b753",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tlink_content-\u003eaddr \u003d gsh_strdup(myself-\u003eu.symlink.link_content,\n    - \t\t\t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \tlink_content-\u003eaddr \u003d\n    + \t\tgsh_strdup(myself-\u003eu.symlink.link_content, MEM_COMP_PROTOCOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f442320_880e2ba0",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\thdl-\u003eu.symlink.link_content \u003d gsh_malloc(len,\n    - \t\t\t\t\t\t\t MEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\thdl-\u003eu.symlink.link_content \u003d\n    + \t\t\tgsh_malloc(len, MEM_COMP_PROTOCOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e7ea2dd_438d4886",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tcontent_buf-\u003eaddr \u003d gsh_strldup(result, rc, \u0026content_buf-\u003elen,\n    - \t\t\t\t\tMEM_COMP_FSAL);\n→ to be replaced with:\n    + \tcontent_buf-\u003eaddr \u003d\n    + \t\tgsh_strldup(result, rc, \u0026content_buf-\u003elen, MEM_COMP_FSAL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98bbdabf_d2d5269a",
+        "filename": "src/FSAL/FSAL_LIZARDFS/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tlzfs_export-\u003elzfs_params.subfolder \u003d gsh_strdup(CTX_FULLPATH(op_ctx),\n    - \t\t\t\t\t\t\tMEM_COMP_EXPORT);\n→ to be replaced with:\n    + \tlzfs_export-\u003elzfs_params.subfolder \u003d\n    + \t\tgsh_strdup(CTX_FULLPATH(op_ctx), MEM_COMP_EXPORT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c5ea6be_da412601",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \thdl-\u003emh_symlink.link_contents \u003d gsh_strdup(link_path,\n    - \t\t\t\t\t\t   MEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \thdl-\u003emh_symlink.link_contents \u003d\n    + \t\tgsh_strdup(link_path, MEM_COMP_PROTOCOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd1fcb39_9ec0b1e8",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tlink_content-\u003eaddr \u003d gsh_strdup(myself-\u003emh_symlink.link_contents,\n    - \t\t\t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \tlink_content-\u003eaddr \u003d\n    + \t\tgsh_strdup(myself-\u003emh_symlink.link_contents, MEM_COMP_PROTOCOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34474248_16a6165b",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tlink_content-\u003eaddr \u003d gsh_strdup(result.READLINK3res_u.resok.data,\n    - \t\t\t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \tlink_content-\u003eaddr \u003d\n    + \t\tgsh_strdup(result.READLINK3res_u.resok.data, MEM_COMP_PROTOCOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ba5c5cb_a582ddb8",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tdigest_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t   MEM_COMP_DIGEST_POOL);\n    - \thandle_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t   MEM_COMP_HANDLE_POOL);\n→ to be replaced with:\n    + \tdigest_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_DIGEST_POOL);\n    + \thandle_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_HANDLE_POOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5abecbd7_a7709828",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping_db.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tp_thr_info-\u003edbop_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t\t     MEM_COMP_DROP_POOL);\n    - \tp_thr_info-\u003edbop_pool-\u003ename \u003d gsh_strdup(\"drop_pool\",\n    - \t\t\t\t\t\t MEM_COMP_DROP_POOL);\n→ to be replaced with:\n    + \tp_thr_info-\u003edbop_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_DROP_POOL);\n    + \tp_thr_info-\u003edbop_pool-\u003ename \u003d\n    + \t\tgsh_strdup(\"drop_pool\", MEM_COMP_DROP_POOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca7d526b_324c03c4",
+        "filename": "src/FSAL/FSAL_PSEUDO/export.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tmyself-\u003eexport_path \u003d gsh_strdup(myself-\u003eexport_path,\n    - \t\t\t\t\t\t MEM_COMP_EXPORT);\n→ to be replaced with:\n    + \t\tmyself-\u003eexport_path \u003d\n    + \t\t\tgsh_strdup(myself-\u003eexport_path, MEM_COMP_EXPORT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e6c40d3_20958797",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1614,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tcb_arg-\u003eutf8string_val \u003d gsh_strldup(attrs-\u003exattrs-\u003eval.val,\n    - \t\t\t\t\t     attrs-\u003exattrs-\u003eval.len,\n    - \t\t\t\t\t     \u0026cb_arg-\u003eutf8string_len,\n    - \t\t\t\t\t     MEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \tcb_arg-\u003eutf8string_val \u003d\n    + \t\tgsh_strldup(attrs-\u003exattrs-\u003eval.val, attrs-\u003exattrs-\u003eval.len,\n    + \t\t\t    \u0026cb_arg-\u003eutf8string_len, MEM_COMP_PROTOCOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9256bcec_9d94fc85",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1795,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tentry-\u003eutf8string_val \u003d gsh_strldup(xattr-\u003ekey.val,\n    - \t\t\t\t\t\t    xattr-\u003ekey.len,\n    - \t\t\t\t\t\t    \u0026entry-\u003eutf8string_len,\n    - \t\t\t\t\t\t    MEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\tentry-\u003eutf8string_val \u003d\n    + \t\t\tgsh_strldup(xattr-\u003ekey.val, xattr-\u003ekey.len,\n    + \t\t\t\t    \u0026entry-\u003eutf8string_len, MEM_COMP_PROTOCOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8bb5b74_67efc190",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \texport-\u003eparameters.subfolder \u003d gsh_strdup(CTX_FULLPATH(op_ctx),\n    - \t\t\t\t\t\t  MEM_COMP_EXPORT);\n→ to be replaced with:\n    + \texport-\u003eparameters.subfolder \u003d\n    + \t\tgsh_strdup(CTX_FULLPATH(op_ctx), MEM_COMP_EXPORT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23f43053_f0d749dd",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1601,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\tobj-\u003eu.unopenable.name \u003d gsh_strdup(new_name,\n    - \t\t\t\t\t\t\t    MEM_COMP_FSAL);\n→ to be replaced with:\n    + \t\t\tobj-\u003eu.unopenable.name \u003d\n    + \t\t\t\tgsh_strdup(new_name, MEM_COMP_FSAL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0a05a3d_d70260de",
+        "filename": "src/FSAL/FSAL_VFS/xfs/main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \ttemp_name \u003d gsh_strdup(\"/tmp/ganesha.nfsd.locktestXXXXXX\",\n    - \t\t\t       MEM_COMP_FSAL);\n→ to be replaced with:\n    + \ttemp_name \u003d\n    + \t\tgsh_strdup(\"/tmp/ganesha.nfsd.locktestXXXXXX\", MEM_COMP_FSAL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcf7977e_3a961b69",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tmdcache_entry_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t\t  MEM_COMP_MDCACHE);\n    - \tmdcache_entry_pool-\u003ename \u003d gsh_strdup(\"MDCACHE Entry Pool\",\n    - \t\t\t\t\t      MEM_COMP_MDCACHE);\n→ to be replaced with:\n    + \tmdcache_entry_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_MDCACHE);\n    + \tmdcache_entry_pool-\u003ename \u003d\n    + \t\tgsh_strdup(\"MDCACHE Entry Pool\", MEM_COMP_MDCACHE);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92edc6d3_a2c3952a",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2210,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tnames[i].utf8string_val \u003d gsh_memdup(name, len,\n    - \t\t\t\t\t\t     MEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\tnames[i].utf8string_val \u003d\n    + \t\t\tgsh_memdup(name, len, MEM_COMP_PROTOCOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ae032e1_ea4700c1",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1087,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tnfs41_session_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t\t  MEM_COMP_CLIENT);\n    - \tnfs41_session_pool-\u003ename \u003d gsh_strdup(\"NFSv4.1 session pool\",\n    - \t\t\t\t\t      MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \tnfs41_session_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_CLIENT);\n    + \tnfs41_session_pool-\u003ename \u003d\n    + \t\tgsh_strdup(\"NFSv4.1 session pool\", MEM_COMP_CLIENT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "480caf8f_fad207e7",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tqos_class_t *node \u003d\n    - \t\tgsh_calloc(1, sizeof(qos_class_t), MEM_COMP_QOS);\n→ to be replaced with:\n    + \tqos_class_t *node \u003d gsh_calloc(1, sizeof(qos_class_t), MEM_COMP_QOS);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64305c21_923a13e0",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tqos_cb_args \u003d\n    - \t\tgsh_calloc(1, sizeof(struct qos_op_cb_arg), MEM_COMP_QOS);\n→ to be replaced with:\n    + \tqos_cb_args \u003d gsh_calloc(1, sizeof(struct qos_op_cb_arg), MEM_COMP_QOS);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3134a46d_7f6f5aeb",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tnfs41_session \u003d gsh_calloc(1, nfs41_session_pool-\u003eobject_size,\n    - \t\t\t\t   MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \tnfs41_session \u003d\n    + \t\tgsh_calloc(1, nfs41_session_pool-\u003eobject_size, MEM_COMP_CLIENT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77a388bc_774d195a",
+        "filename": "src/Protocols/NFS/nfs4_pseudo.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tchar *pseudo_path \u003d gsh_strdup(ref_pseudopath-\u003egr_val,\n    - \t\t\t\t\t       MEM_COMP_EXPORT);\n→ to be replaced with:\n    + \t\tchar *pseudo_path \u003d\n    + \t\t\tgsh_strdup(ref_pseudopath-\u003egr_val, MEM_COMP_EXPORT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0071a5c_8a3a6cbe",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tdupreq_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t   MEM_COMP_DUP_REQ_POOL);\n    - \tdupreq_pool-\u003ename \u003d gsh_strdup(\"Duplicate Request Pool\",\n    - \t\t\t\t       MEM_COMP_DUP_REQ_POOL);\n    - \tnfs_res_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t    MEM_COMP_NFS_RES_POOL);\n    - \tnfs_res_pool-\u003ename \u003d gsh_strdup(\"nfs_res_t pool\",\n    - \t\t\t\t\tMEM_COMP_NFS_RES_POOL);\n    - \ttcp_drc_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t    MEM_COMP_TCP_DRC_POOL);\n    - \ttcp_drc_pool-\u003ename \u003d gsh_strdup(\"TCP DRC Pool\",\n    - \t\t\t\t\tMEM_COMP_TCP_DRC_POOL);\n→ to be replaced with:\n    + \tdupreq_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_DUP_REQ_POOL);\n    + \tdupreq_pool-\u003ename \u003d\n    + \t\tgsh_strdup(\"Duplicate Request Pool\", MEM_COMP_DUP_REQ_POOL);\n    + \tnfs_res_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_NFS_RES_POOL);\n    + \tnfs_res_pool-\u003ename \u003d\n    + \t\tgsh_strdup(\"nfs_res_t pool\", MEM_COMP_NFS_RES_POOL);\n    + \ttcp_drc_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_TCP_DRC_POOL);\n    + \ttcp_drc_pool-\u003ename \u003d gsh_strdup(\"TCP DRC Pool\", MEM_COMP_TCP_DRC_POOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "677a747f_aeca66e6",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tnfs_client_id_t *client_rec \u003d gsh_calloc(1, client_id_pool-\u003eobject_size,\n    - \t\t\t\t\t\t MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \tnfs_client_id_t *client_rec \u003d\n    + \t\tgsh_calloc(1, client_id_pool-\u003eobject_size, MEM_COMP_CLIENT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e46403c5_8ef5c49d",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2387,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tclient_id_pool-\u003ename \u003d gsh_strdup(\"NFS4 Client ID Pool\",\n    - \t\t\t\t\t  MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \tclient_id_pool-\u003ename \u003d\n    + \t\tgsh_strdup(\"NFS4 Client ID Pool\", MEM_COMP_CLIENT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21a2b701_6fe42810",
+        "filename": "src/SAL/nlm_owner.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tpclient-\u003essc_nlm_caller_name \u003d gsh_strdup(key.ssc_nlm_caller_name,\n    - \t\t\t\t\t\t  MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \tpclient-\u003essc_nlm_caller_name \u003d\n    + \t\tgsh_strdup(key.ssc_nlm_caller_name, MEM_COMP_CLIENT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff7dfd41_15ac442e",
+        "filename": "src/SAL/nlm_owner.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1270,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tpclient-\u003eslc_nlm_caller_name \u003d gsh_strdup(key.slc_nlm_caller_name,\n    - \t\t\t\t\t\t  MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \tpclient-\u003eslc_nlm_caller_name \u003d\n    + \t\tgsh_strdup(key.slc_nlm_caller_name, MEM_COMP_CLIENT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15effa4a_3b689704",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1668,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tnew_node \u003d\n    - \t\t\tgsh_calloc(1, sizeof(struct expr_parse),\n    - \t\t\t\t   MEM_COMP_CONFIG);\n→ to be replaced with:\n    + \t\tnew_node \u003d gsh_calloc(1, sizeof(struct expr_parse),\n    + \t\t\t\t      MEM_COMP_CONFIG);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3882b2d_6be83113",
+        "filename": "src/hashtable/hashtable.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tht-\u003enode_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t     MEM_COMP_NODE_POOL);\n    - \tht-\u003edata_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t     MEM_COMP_DATA_POOL);\n→ to be replaced with:\n    + \tht-\u003enode_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_NODE_POOL);\n    + \tht-\u003edata_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_DATA_POOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db5bf983_2b5b7ecd",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - #define gsh_strldup(s, l, n, comp)                              \\\n    - \t({                                                      \\\n    - \t\tchar *p_ \u003d (char *)gsh_malloc(l + 1, comp);\t\\\n    - \t\tmemcpy(p_, s, l);                               \\\n    - \t\tp_[l] \u003d \u0027\\0\u0027;                                   \\\n    - \t\t*n \u003d l + 1;                                     \\\n    - \t\tp_;                                             \\\n→ to be replaced with:\n    + #define gsh_strldup(s, l, n, comp)                          \\\n    + \t({                                                  \\\n    + \t\tchar *p_ \u003d (char *)gsh_malloc(l + 1, comp); \\\n    + \t\tmemcpy(p_, s, l);                           \\\n    + \t\tp_[l] \u003d \u0027\\0\u0027;                               \\\n    + \t\t*n \u003d l + 1;                                 \\\n    + \t\tp_;                                         \\",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf69dba2_f088c14e",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\ttmp-\u003etmp_fullpath \u003d gsh_refstr_dup(exp-\u003ecfg_fullpath,\n    - \t\t\t\t\t\t   MEM_COMP_EXPORT);\n    - \t\ttmp-\u003etmp_pseudopath \u003d gsh_refstr_dup(exp-\u003ecfg_pseudopath,\n    - \t\t\t\t\t\t     MEM_COMP_EXPORT);\n→ to be replaced with:\n    + \t\ttmp-\u003etmp_fullpath \u003d\n    + \t\t\tgsh_refstr_dup(exp-\u003ecfg_fullpath, MEM_COMP_EXPORT);\n    + \t\ttmp-\u003etmp_pseudopath \u003d\n    + \t\t\tgsh_refstr_dup(exp-\u003ecfg_pseudopath, MEM_COMP_EXPORT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "828f68d0_ceb09f7e",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tcli-\u003eclient.netgroup.netgroupname \u003d gsh_strdup(client_tok + 1,\n    - \t\t\t\t\t\t\t       MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \t\tcli-\u003eclient.netgroup.netgroupname \u003d\n    + \t\t\tgsh_strdup(client_tok + 1, MEM_COMP_CLIENT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ed5e349_4027728e",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1527,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tcli-\u003eclient.wildcard.wildcard \u003d gsh_strdup(client_tok,\n    - \t\t\t\t\t\t\t   MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \t\tcli-\u003eclient.wildcard.wildcard \u003d\n    + \t\t\tgsh_strdup(client_tok, MEM_COMP_CLIENT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc18b83d_dfc828bd",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1358,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tgrp_name \u003d cidr_to_str(client-\u003eclient.network.cidr,\n    - \t\t\t\t       MEM_COMP_DBUS);\n→ to be replaced with:\n    + \t\tgrp_name \u003d\n    + \t\t\tcidr_to_str(client-\u003eclient.network.cidr, MEM_COMP_DBUS);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f34796b5_5d5a6dc1",
+        "filename": "src/support/exports.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \top_ctx-\u003ectx_fullpath \u003d gsh_refstr_dup(export-\u003ecfg_fullpath,\n    - \t\t\t\t\t      MEM_COMP_EXPORT);\n    - \t\top_ctx-\u003ectx_pseudopath \u003d gsh_refstr_dup(export-\u003ecfg_pseudopath,\n    - \t\t\t\t\t\t\tMEM_COMP_EXPORT);\n→ to be replaced with:\n    + \top_ctx-\u003ectx_fullpath \u003d\n    + \t\tgsh_refstr_dup(export-\u003ecfg_fullpath, MEM_COMP_EXPORT);\n    + \t\top_ctx-\u003ectx_pseudopath \u003d\n    + \t\t\tgsh_refstr_dup(export-\u003ecfg_pseudopath, MEM_COMP_EXPORT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c899b7b_648d2846",
+        "filename": "src/support/exports.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tdest-\u003ecfg_fullpath \u003d gsh_strdup(src-\u003ecfg_fullpath,\n    - \t\t\t\t\t\tMEM_COMP_EXPORT);\n→ to be replaced with:\n    + \t\tdest-\u003ecfg_fullpath \u003d\n    + \t\t\tgsh_strdup(src-\u003ecfg_fullpath, MEM_COMP_EXPORT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca61acd1_14cea593",
+        "filename": "src/support/exports.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tdest-\u003ecfg_pseudopath \u003d gsh_strdup(src-\u003ecfg_pseudopath,\n    - \t\t\t\t\t\t  MEM_COMP_EXPORT);\n→ to be replaced with:\n    + \t\tdest-\u003ecfg_pseudopath \u003d\n    + \t\t\tgsh_strdup(src-\u003ecfg_pseudopath, MEM_COMP_EXPORT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "956a3fd2_990beb0f",
+        "filename": "src/support/exports.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1701,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \texport-\u003efullpath \u003d gsh_refstr_dup(export-\u003ecfg_fullpath,\n    - \t\t\t\t\t  MEM_COMP_EXPORT);\n    - \t\texport-\u003epseudopath \u003d gsh_refstr_dup(export-\u003ecfg_pseudopath,\n    - \t\t\t\t\t\t    MEM_COMP_EXPORT);\n→ to be replaced with:\n    + \texport-\u003efullpath \u003d\n    + \t\tgsh_refstr_dup(export-\u003ecfg_fullpath, MEM_COMP_EXPORT);\n    + \t\texport-\u003epseudopath \u003d\n    + \t\t\tgsh_refstr_dup(export-\u003ecfg_pseudopath, MEM_COMP_EXPORT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1bbfad7_bbab4db3",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tfsal_acl_t *acl \u003d\n    - \t\tgsh_calloc(1, sizeof(fsal_acl_t), MEM_COMP_ACL_POOL);\n→ to be replaced with:\n    + \tfsal_acl_t *acl \u003d gsh_calloc(1, sizeof(fsal_acl_t), MEM_COMP_ACL_POOL);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84f1b960_76ca6394",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-05T14:40:28Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tnew_entry \u003d gsh_malloc(sizeof(nfs41_session_list_entry_t),\n    - \t\t\t       MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \tnew_entry \u003d\n    + \t\tgsh_malloc(sizeof(nfs41_session_list_entry_t), MEM_COMP_CLIENT);",
+      "revId": "85e6c5ee608f26debc2041d0bd6d952405d7c7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
