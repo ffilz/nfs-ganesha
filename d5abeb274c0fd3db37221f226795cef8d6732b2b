@@ -16,6 +16,24 @@
       "message": "Do we actually need this since https://github.com/nfs-ganesha/ntirpc/pull/379 has merged?",
       "revId": "d5abeb274c0fd3db37221f226795cef8d6732b2b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "193abe28_e807d4be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2026-05-06T18:23:13Z",
+      "side": 1,
+      "message": "In new distros like sles16, rhel10, libnsl2-devel is not available and BuildRequires check is failing.",
+      "parentUuid": "328e55d1_091da691",
+      "revId": "d5abeb274c0fd3db37221f226795cef8d6732b2b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
