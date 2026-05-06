@@ -284,6 +284,7 @@ struct glist_head global_export_id_list =
 	GLIST_HEAD_INIT(global_export_id_list);
 struct glist_head global_client_ip_list =
 	GLIST_HEAD_INIT(global_client_ip_list);
+bool conditional_logging_configured;
 
 typedef struct loglev {
 	char *str;
@@ -2599,6 +2600,9 @@ static int export_id_list_adder(const char *token, enum term_type type_hint,
 	rc = add_export_id(COMPONENT_CONFIG, &global_export_id_list, export_id,
 			   cnode, err_type);
 
+	if (rc == 0)
+		conditional_logging_configured = true;
+
 out:
 	return rc;
 }
@@ -2619,6 +2623,9 @@ static int client_ip_list_adder(const char *token, enum term_type type_hint,
 
 	rc = add_client(COMPONENT_CONFIG, &global_client_ip_list, token,
 			type_hint, cnode, err_type, NULL, NULL, NULL);
+
+	if (rc == 0)
+		conditional_logging_configured = true;
 
 	return rc;
 }
@@ -3764,6 +3771,8 @@ static bool dbus_conditional_log_export_enable(DBusMessageIter *args,
 		goto out;
 	}
 
+	conditional_logging_configured = true;
+
 	LogEvent(COMPONENT_LOG, "Conditional Logging Enabled for Export_Id: %d",
 		 export_id);
 	errormsg = "Conditional logging enable: Success";
@@ -3814,6 +3823,10 @@ static bool dbus_conditional_log_export_disable(DBusMessageIter *args,
 
 	glist_del(&export_entry->export_id_glist);
 	gsh_free(&export_entry->export_id_glist);
+
+	if (glist_empty(&global_export_id_list) &&
+	    glist_empty(&global_client_ip_list))
+		conditional_logging_configured = false;
 
 	LogEvent(COMPONENT_LOG,
 		 "Conditional Logging disabled for Export_Id: %d", export_id);
@@ -3886,6 +3899,8 @@ static bool dbus_conditional_log_client_enable(DBusMessageIter *args,
 		goto out;
 	}
 
+	conditional_logging_configured = true;
+
 	LogEvent(COMPONENT_LOG, "Conditional logging enable: Success(%s)",
 		 arg_str);
 	errormsg = "Conditional logging enable: Success";
@@ -3927,6 +3942,10 @@ static bool dbus_conditional_log_client_disable(DBusMessageIter *args,
 			"Conditional logging disable: Exact client not found";
 		goto out;
 	}
+
+	if (glist_empty(&global_export_id_list) &&
+	    glist_empty(&global_client_ip_list))
+		conditional_logging_configured = false;
 
 	errormsg = "Conditional logging disable: Base client deleted";
 	LogEvent(COMPONENT_LOG,
