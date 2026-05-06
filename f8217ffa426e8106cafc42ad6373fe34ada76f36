@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b717a95_22bca8e0",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-06T08:00:11Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tuser, ret, ngroups, strerror(local_errno), local_errno);\n→ to be replaced with:\n    + \t\t\t\tuser, ret, ngroups, strerror(local_errno),\n    + \t\t\t\tlocal_errno);",
+      "revId": "f8217ffa426e8106cafc42ad6373fe34ada76f36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ac378b5_f8583a7a",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-06T08:00:11Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+\t\t\t\tuser, ret, ngroups, strerror(local_errno), local_errno);",
+      "revId": "f8217ffa426e8106cafc42ad6373fe34ada76f36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
