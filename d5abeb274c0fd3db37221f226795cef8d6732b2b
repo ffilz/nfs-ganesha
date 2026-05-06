@@ -34,6 +34,41 @@
       "parentUuid": "328e55d1_091da691",
       "revId": "d5abeb274c0fd3db37221f226795cef8d6732b2b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b972a5f6_6e6fbeca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-06T20:22:52Z",
+      "side": 1,
+      "message": "Should we also remove references to libnsl from scripts/podman/install-packages.sh",
+      "revId": "d5abeb274c0fd3db37221f226795cef8d6732b2b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27da8156_a73d98af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-06T20:22:52Z",
+      "side": 1,
+      "message": "Oh, sorry, misunderstood this a bit... yea, we don\u0027t need libnsl so removing any dependencies on it make sense...",
+      "parentUuid": "193abe28_e807d4be",
+      "revId": "d5abeb274c0fd3db37221f226795cef8d6732b2b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
