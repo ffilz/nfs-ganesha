@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "279455f1_9aa059a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-06T17:34:26Z",
+      "side": 1,
+      "message": "Nice. We\u0027ll see if Coverity complains about the unprotected bool, but we\u0027ll just mark those as intentional. The worst that happens is a few messages don\u0027t obey an update to conditional logging right as it is being changed. Just moves the precise point where the race is resolved...",
+      "revId": "97981a3c3ffb44caecd961f82eafe129805fe4a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
