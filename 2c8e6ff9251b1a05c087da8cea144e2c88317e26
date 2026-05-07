@@ -16,6 +16,24 @@
       "message": "Hmm, this changed because of https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1201307\n\nLooking back, I don\u0027t think that was the right fix. But this isn\u0027t quite the right fix either... If RDATTR_ERROR or FS_LOCATIONS aren\u0027t asked for, we still need to pass NFS4ERR_MOVED back as the error for READDIR...",
       "revId": "2c8e6ff9251b1a05c087da8cea144e2c88317e26",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2b20697_16605a74",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-07T22:25:37Z",
+      "side": 1,
+      "message": "Any thoughts?",
+      "parentUuid": "41c05536_733a8ab4",
+      "revId": "2c8e6ff9251b1a05c087da8cea144e2c88317e26",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
