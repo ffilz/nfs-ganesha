@@ -201,18 +201,33 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 	ok = get_state_obj_export_owner_refs(state_found, &state_obj, NULL,
 					     &open_owner);
 	if (!ok) {
-		/* Assume this is a replayed close */
+		/* Assume this is a replayed/duplicate close.
+		 *
+		 * For NFSv4.1+, RFC5661 recommends returning an invalid
+		 * stateid to prevent any possibility of re-use of a stateid
+		 * that the server considers closed. Returning the original
+		 * stateid here can confuse clients when CLOSE/OPEN races
+		 * happen across threads.
+		 */
 		if (state_found)
 			dec_state_t_ref(state_found);
 		res_CLOSE4->status = NFS4_OK;
-		memcpy(res_CLOSE4->CLOSE4res_u.open_stateid.other,
-		       arg_CLOSE4->open_stateid.other, OTHERSIZE);
+		if (data->minorversion == 0) {
+			memcpy(res_CLOSE4->CLOSE4res_u.open_stateid.other,
+			       arg_CLOSE4->open_stateid.other, OTHERSIZE);
 
-		res_CLOSE4->CLOSE4res_u.open_stateid.seqid =
-			arg_CLOSE4->open_stateid.seqid + 1;
+			res_CLOSE4->CLOSE4res_u.open_stateid.seqid =
+				arg_CLOSE4->open_stateid.seqid + 1;
 
-		if (res_CLOSE4->CLOSE4res_u.open_stateid.seqid == 0)
-			res_CLOSE4->CLOSE4res_u.open_stateid.seqid = 1;
+			if (res_CLOSE4->CLOSE4res_u.open_stateid.seqid == 0)
+				res_CLOSE4->CLOSE4res_u.open_stateid.seqid = 1;
+		} else {
+			memcpy(&res_CLOSE4->CLOSE4res_u.open_stateid.other,
+			       all_zero,
+			       sizeof(res_CLOSE4->CLOSE4res_u.open_stateid
+					      .other));
+			res_CLOSE4->CLOSE4res_u.open_stateid.seqid = UINT32_MAX;
+		}
 
 		LogDebug(
 			COMPONENT_STATE,
