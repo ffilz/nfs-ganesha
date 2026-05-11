@@ -692,7 +692,9 @@ static inline void mdcache_lru_clean(mdcache_entry_t *entry)
 
 static uint32_t reap_lane;
 
-static inline mdcache_lru_t *lru_reap_impl(enum lru_q_id qid)
+static inline mdcache_lru_t *lru_reap_impl(enum lru_q_id qid,
+					   mdcache_lru_reap_check_cb reap_check,
+					   void *reap_check_arg)
 {
 	uint32_t lane;
 	struct lru_q_lane *qlane;
@@ -749,6 +751,14 @@ static inline mdcache_lru_t *lru_reap_impl(enum lru_q_id qid)
 		 *  for safety, take only the former
 		 */
 		if (LRU_ENTRY_RECLAIMABLE(entry, refcnt)) {
+			/* caller may veto this candidate */
+			if (reap_check && reap_check(entry, reap_check_arg)) {
+				cih_hash_release(&latch);
+				QUNLOCK(qlane);
+				mdcache_lru_unref(entry, LRU_TEMP_REF);
+				continue;
+			}
+
 			/* it worked */
 			struct lru_q *q = lru_queue_of(entry);
 
@@ -783,7 +793,9 @@ out:
 	return lru;
 }
 
-static inline mdcache_lru_t *lru_try_reap_entry(uint32_t flags)
+static inline mdcache_lru_t *
+lru_try_reap_entry(uint32_t flags, mdcache_lru_reap_check_cb reap_check,
+		   void *reap_check_arg)
 {
 	mdcache_lru_t *lru;
 
@@ -792,9 +804,9 @@ static inline mdcache_lru_t *lru_try_reap_entry(uint32_t flags)
 		return NULL;
 
 	/* XXX dang why not start with the cleanup list? */
-	lru = lru_reap_impl(LRU_ENTRY_L2);
+	lru = lru_reap_impl(LRU_ENTRY_L2, reap_check, reap_check_arg);
 	if (!lru)
-		lru = lru_reap_impl(LRU_ENTRY_L1);
+		lru = lru_reap_impl(LRU_ENTRY_L1, reap_check, reap_check_arg);
 
 	return lru;
 }
@@ -1556,7 +1568,7 @@ size_t mdcache_lru_release_entries(int32_t want_release)
 	if (want_release == 0)
 		return released;
 
-	while ((lru = lru_try_reap_entry(LRU_TEMP_REF))) {
+	while ((lru = lru_try_reap_entry(LRU_TEMP_REF, NULL, NULL))) {
 		entry = container_of(lru, mdcache_entry_t, lru);
 		/* Release the reference taken by lru_try_reap_entry. The
 		 * entry has already been unhashed and the sentinel reference
@@ -1728,6 +1740,8 @@ mdcache_entry_t *alloc_cache_entry(void)
 	/* Initialize the entry locks */
 	init_rw_locks(nentry);
 
+	nentry->populate_origin = NULL;
+
 	(void)atomic_inc_int64_t(&lru_state.entries_used);
 
 	return nentry;
@@ -1751,14 +1765,16 @@ mdcache_entry_t *alloc_cache_entry(void)
  * @return a usable entry or NULL if unexport is in progress.
  */
 mdcache_entry_t *mdcache_lru_get(struct fsal_obj_handle *sub_handle,
-				 uint32_t flags)
+				 uint32_t flags,
+				 mdcache_lru_reap_check_cb reap_check,
+				 void *reap_check_arg)
 {
 	mdcache_lru_t *lru;
 	mdcache_entry_t *nentry = NULL;
 
 	assert(flags & LRU_ACTIVE_REF);
 
-	lru = lru_try_reap_entry(LRU_TEMP_REF);
+	lru = lru_try_reap_entry(LRU_TEMP_REF, reap_check, reap_check_arg);
 	if (lru) {
 		/* we uniquely hold entry with a temp ref that we will
 		 * discard (with no negative consequence) below when we remake
@@ -1774,6 +1790,7 @@ mdcache_entry_t *mdcache_lru_get(struct fsal_obj_handle *sub_handle,
 	}
 
 	nentry->attr_generation = 0;
+	nentry->populate_origin = NULL;
 
 	/* Since the entry isn't in a queue, nobody can bump refcnt. Set both
 	 * the sentinel reference and the active reference. The caller is

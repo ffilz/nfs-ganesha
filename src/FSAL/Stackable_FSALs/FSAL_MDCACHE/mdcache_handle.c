@@ -100,7 +100,7 @@ fsal_status_t mdcache_alloc_and_check_handle(
 
 	status = mdcache_new_entry(export, sub_handle, attrs_in, false,
 				   attrs_out, new_directory, &new_entry, state,
-				   LRU_ACTIVE_REF | LRU_PROMOTE);
+				   LRU_ACTIVE_REF | LRU_PROMOTE, NULL, NULL);
 
 	if (FSAL_IS_ERROR(status)) {
 		*new_obj = NULL;
@@ -1637,7 +1637,7 @@ fsal_status_t mdcache_lookup_path(struct fsal_export *exp_hdl, const char *path,
 
 	status = mdcache_new_entry(export, sub_handle, &attrs, false, attrs_out,
 				   false, &new_entry, NULL,
-				   LRU_ACTIVE_REF | LRU_PROMOTE);
+				   LRU_ACTIVE_REF | LRU_PROMOTE, NULL, NULL);
 
 	fsal_release_attrs(&attrs);
 

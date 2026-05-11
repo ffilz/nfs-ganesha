@@ -82,6 +82,7 @@ extern struct lru_state lru_state;
  * Reference type Flags for functions in the LRU package
  */
 
+#define LRU_FLAG_NONE 0x0000 /* someone deleted this, stop that (Matt) */
 #define LRU_ACTIVE_REF 0x0004
 #define LRU_PROMOTE 0x0008
 #define LRU_FLAG_SENTINEL 0x0001
@@ -103,7 +104,9 @@ fsal_status_t mdcache_lru_pkginit(void);
 fsal_status_t mdcache_lru_pkgshutdown(void);
 
 mdcache_entry_t *mdcache_lru_get(struct fsal_obj_handle *sub_handle,
-				 uint32_t flags);
+				 uint32_t flags,
+				 mdcache_lru_reap_check_cb reap_check,
+				 void *reap_check_arg);
 void mdcache_lru_insert_active(mdcache_entry_t *entry);
 
 #define mdcache_lru_ref(e, f) _mdcache_lru_ref(e, f, __func__, __LINE__)

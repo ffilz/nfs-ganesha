@@ -162,16 +162,15 @@ static inline void add_detached_dirent(mdcache_entry_t *parent,
  *
  * @return The new handle, or NULL if the unexport in progress.
  */
-static mdcache_entry_t *mdcache_alloc_handle(struct mdcache_fsal_export *export,
-					     struct fsal_obj_handle *sub_handle,
-					     struct fsal_filesystem *fs,
-					     uint32_t flags, const char *func,
-					     int line)
+static mdcache_entry_t *mdcache_alloc_handle(
+	struct mdcache_fsal_export *export, struct fsal_obj_handle *sub_handle,
+	struct fsal_filesystem *fs, uint32_t flags, const char *func, int line,
+	mdcache_lru_reap_check_cb reap_check, void *reap_check_arg)
 {
 	mdcache_entry_t *result;
 	fsal_status_t status;
 
-	result = mdcache_lru_get(sub_handle, flags);
+	result = mdcache_lru_get(sub_handle, flags, reap_check, reap_check_arg);
 
 	/* mdcache_lru_get never returns NULL */
 	assert(result);
@@ -676,13 +675,12 @@ void mdcache_dirent_invalidate_all(mdcache_entry_t *entry)
  *
  * @return FSAL status
  */
-fsal_status_t mdcache_new_entry(struct mdcache_fsal_export *export,
-				struct fsal_obj_handle *sub_handle,
-				struct fsal_attrlist *attrs_in,
-				bool prefer_attrs_in,
-				struct fsal_attrlist *attrs_out,
-				bool new_directory, mdcache_entry_t **entry,
-				struct state_t *state, uint32_t flags)
+fsal_status_t mdcache_new_entry(
+	struct mdcache_fsal_export *export, struct fsal_obj_handle *sub_handle,
+	struct fsal_attrlist *attrs_in, bool prefer_attrs_in,
+	struct fsal_attrlist *attrs_out, bool new_directory,
+	mdcache_entry_t **entry, struct state_t *state, uint32_t flags,
+	mdcache_lru_reap_check_cb reap_check, void *reap_check_arg)
 {
 	fsal_status_t status;
 	mdcache_entry_t *oentry, *nentry = NULL;
@@ -728,7 +726,8 @@ fsal_status_t mdcache_new_entry(struct mdcache_fsal_export *export,
 	 * will already be mapped.
 	 */
 	nentry = mdcache_alloc_handle(export, sub_handle, sub_handle->fs, flags,
-				      __func__, __LINE__);
+				      __func__, __LINE__, reap_check,
+				      reap_check_arg);
 
 	if (nentry == NULL) {
 		/* We didn't get an entry because of unexport in progress,
@@ -1136,7 +1135,7 @@ fsal_status_t mdcache_locate_host(struct gsh_buffdesc *fh_desc,
 
 	status = mdcache_new_entry(export, sub_handle, &attrs, false, attrs_out,
 				   false, entry, NULL,
-				   LRU_ACTIVE_REF | LRU_PROMOTE);
+				   LRU_ACTIVE_REF | LRU_PROMOTE, NULL, NULL);
 
 	fsal_release_attrs(&attrs);
 
@@ -1688,7 +1687,7 @@ static enum fsal_dir_result mdc_readdir_uncached_cb(
 		      status = mdcache_new_entry(state->export, sub_handle,
 						 attrs, true, NULL, false,
 						 &new_entry, NULL,
-						 LRU_ACTIVE_REF));
+						 LRU_ACTIVE_REF, NULL, NULL));
 
 	if (FSAL_IS_ERROR(status)) {
 		*state->status = status;
@@ -2165,6 +2164,14 @@ out:
  * @returns fsal_dir_result
  */
 
+static bool skip_populate_dir(mdcache_entry_t *entry, void *arg)
+{
+	mdcache_entry_t *dir = arg;
+
+	return (entry->populate_origin == dir &&
+		atomic_fetch_int32_t(&dir->fsobj.fsdir.populate_count) > 0);
+}
+
 static enum fsal_dir_result mdc_readdir_chunk_object(
 	const char *name, struct fsal_obj_handle *sub_handle,
 	struct fsal_attrlist *attrs_in, void *dir_state, fsal_cookie_t cookie)
@@ -2210,7 +2217,8 @@ static enum fsal_dir_result mdc_readdir_chunk_object(
 			name, cookie, sub_handle);
 
 	status = mdcache_new_entry(export, sub_handle, attrs_in, false, NULL,
-				   false, &new_entry, NULL, LRU_ACTIVE_REF);
+				   false, &new_entry, NULL, LRU_ACTIVE_REF,
+				   skip_populate_dir, state->dir);
 
 	if (FSAL_IS_ERROR(status)) {
 		*state->status = status;
@@ -2458,6 +2466,7 @@ static enum fsal_dir_result mdc_readdir_chunk_object(
 		/* This is a new dirent, or doesn't have an entry. */
 		assert(!new_dir_entry->mde_entry);
 		new_dir_entry->mde_entry = new_entry;
+		new_entry->populate_origin = state->dir;
 	}
 
 	return result;
@@ -2576,6 +2585,8 @@ fsal_status_t mdcache_populate_dir_chunk(mdcache_entry_t *directory,
 	state.whence_search = state.whence_is_name && whence != 0;
 	state.first_hit = false;
 
+	atomic_inc_int32_t(&directory->fsobj.fsdir.populate_count);
+
 	/* Set up chunks */
 	state.first_chunk = mdcache_get_chunk(directory, prev_chunk, whence);
 
@@ -2682,6 +2693,7 @@ again:
 			    "FSAL readdir status=%s",
 			    fsal_err_txt(readdir_status));
 		*dirent = NULL;
+		atomic_dec_int32_t(&directory->fsobj.fsdir.populate_count);
 		drop_state_chunk_refs(state.first_chunk, state.cur_chunk,
 				      state.prev_chunk, NULL);
 		return readdir_status;
@@ -2691,6 +2703,7 @@ again:
 		LogDebugAlt(COMPONENT_NFS_READDIR, COMPONENT_MDCACHE,
 			    "status=%s", fsal_err_txt(status));
 		*dirent = NULL;
+		atomic_dec_int32_t(&directory->fsobj.fsdir.populate_count);
 		drop_state_chunk_refs(state.first_chunk, state.cur_chunk,
 				      state.prev_chunk, NULL);
 		return status;
@@ -2715,6 +2728,8 @@ again:
 			 * return a dirent.
 			 */
 			*dirent = NULL;
+			atomic_dec_int32_t(
+				&directory->fsobj.fsdir.populate_count);
 			mdcache_lru_unref_chunk(state.first_chunk);
 			/* cur_chunk was freed */
 			mdcache_lru_unref_chunk(state.prev_chunk);
@@ -2745,6 +2760,8 @@ again:
 	if (state.whence_search && *dirent == NULL) {
 		if (*eod_met) {
 			/* Did not find cookie. */
+			atomic_dec_int32_t(
+				&directory->fsobj.fsdir.populate_count);
 			drop_state_chunk_refs(state.first_chunk,
 					      state.cur_chunk, state.prev_chunk,
 					      NULL);
@@ -2828,6 +2845,7 @@ again:
 	/* At this point, we have ref's on first_chunk, cur_chunk, and
 	 * prev_chunk.  Drop the refs and make sure the chunk containing dirent
 	 * is ref'd */
+	atomic_dec_int32_t(&directory->fsobj.fsdir.populate_count);
 	drop_state_chunk_refs(state.first_chunk, state.cur_chunk,
 			      state.prev_chunk, (*dirent)->chunk);
 

@@ -303,6 +303,8 @@ struct mdcache_fsal_obj_handle {
 	time_t fs_locations_time;
 	/** New style LRU link */
 	mdcache_lru_t lru;
+	/** Directory this entry was created for during readdir populate */
+	struct mdcache_fsal_obj_handle *populate_origin;
 	/** Exports per entry (protected by attr_lock) */
 	struct glist_head export_list;
 	/** ID of the first mapped export for fast path
@@ -357,6 +359,8 @@ struct mdcache_fsal_obj_handle {
 			 *  0 if not known.
 			 */
 			fsal_cookie_t first_ck;
+			/** Count of active readdir populates on this dir */
+			int32_t populate_count;
 			struct {
 				/** Children by name hash */
 				struct avltree t;
@@ -488,13 +492,23 @@ fsal_status_t mdcache_refresh_attrs(mdcache_entry_t *entry, bool need_acl,
 				    bool need_fslocations, bool need_seclabel,
 				    bool *invalidate);
 
-fsal_status_t mdcache_new_entry(struct mdcache_fsal_export *exp,
-				struct fsal_obj_handle *sub_handle,
-				struct fsal_attrlist *attrs_in,
-				bool prefer_attrs_in,
-				struct fsal_attrlist *attrs_out,
-				bool new_directory, mdcache_entry_t **entry,
-				struct state_t *state, uint32_t flags);
+/**
+ * @brief Callback to check whether an LRU candidate should be skipped
+ *        during reap.
+ *
+ * @param[in] entry  The candidate entry being considered for reap
+ * @param[in] arg    Caller-supplied opaque argument
+ *
+ * @return true if the entry should be skipped (not reaped)
+ */
+typedef bool (*mdcache_lru_reap_check_cb)(mdcache_entry_t *entry, void *arg);
+
+fsal_status_t mdcache_new_entry(
+	struct mdcache_fsal_export *exp, struct fsal_obj_handle *sub_handle,
+	struct fsal_attrlist *attrs_in, bool prefer_attrs_in,
+	struct fsal_attrlist *attrs_out, bool new_directory,
+	mdcache_entry_t **entry, struct state_t *state, uint32_t flags,
+	mdcache_lru_reap_check_cb reap_check, void *reap_check_arg);
 fsal_status_t mdcache_find_keyed_reason(mdcache_key_t *key,
 					mdcache_entry_t **entry,
 					uint32_t flags);
