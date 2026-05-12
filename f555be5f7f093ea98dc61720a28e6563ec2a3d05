@@ -69,6 +69,24 @@
       "parentUuid": "26868342_54b650b3",
       "revId": "f555be5f7f093ea98dc61720a28e6563ec2a3d05",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68981857_a5b1583b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-05-12T03:26:01Z",
+      "side": 1,
+      "message": "@liorsu@google.com,\n\nI think we can simplify the current metrics by:\n1) Keeping nfsv4__op_latency as the source-of-truth metric ( optionally renaming metrics as nfs_op_latency)\n2) Replacing nfs_latency_ms with Prometheus recording rules\n\nBecause, Both(nfsv4__op_latency,nfs_latency_ms) essentially represent the same underlying latency data, but at different abstraction levels.\n\nExample recording rule:\n-----------\ngroups:\n- name: nfs_latency_rules\n  rules:\n  - record: nfs_latency_ms_bucket\n    expr: sum by (le, op) (\n      nfsv4__op_latency_bucket{status\u003d\"NFS4_OK\"}\n    )\n\n  - record: nfs_latency_ms_sum\n    expr: sum by (op) (\n      nfsv4__op_latency_sum{status\u003d\"NFS4_OK\"}\n    )\n\n  - record: nfs_latency_ms_count\n    expr: sum by (op) (\n      nfsv4__op_latency_count{status\u003d\"NFS4_OK\"}\n    )\n-------------\nSO that:\n\n1) Dashboards continue to work (same metric names preserved)\n2) We avoid duplicate instrumentation in code\n3) We keep full fidelity (status-level visibility is still available)",
+      "parentUuid": "e8ad3b85_6673609b",
+      "revId": "f555be5f7f093ea98dc61720a28e6563ec2a3d05",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
