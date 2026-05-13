@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d57fec7_1d8e8684",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-05-13T14:03:56Z",
+      "side": 1,
+      "message": "Thanks for the note — understood that adjusting the CLOSE reply stateid alone doesn’t fix the race.\n\nI’m thinking in this direction - by coordinating OPEN and CLOSE on the share state (e.g. mark the state as closing under the file state lock when CLOSE starts teardown, and have OPEN not reuse a state that is already closing so it allocates a fresh open state / stateid.other). \n\nFor v4.1+, I’d avoid treating the “can’t take refs” CLOSE path as a successful replay and instead return BAD_STATEID, relying on session replay for true duplicates.\n\nWhat do you think of that approach?",
+      "revId": "d2b04fe2aed1c7ffc07066b698c58c6107a563d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fbc3e72_442f3dbc",
