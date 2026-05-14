@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a5f094d_cb717c05",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T10:33:55Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+\tbool state_closing; /**\u003c True once CLOSE begins teardown; OPEN must not reuse */",
+      "revId": "9dcf78db99928e05ec5c017a4fe87e6cd13d5528",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
