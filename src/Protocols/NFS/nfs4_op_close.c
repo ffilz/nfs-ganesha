@@ -201,24 +201,33 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 	ok = get_state_obj_export_owner_refs(state_found, &state_obj, NULL,
 					     &open_owner);
 	if (!ok) {
-		/* Assume this is a replayed close */
 		if (state_found)
 			dec_state_t_ref(state_found);
-		res_CLOSE4->status = NFS4_OK;
-		memcpy(res_CLOSE4->CLOSE4res_u.open_stateid.other,
-		       arg_CLOSE4->open_stateid.other, OTHERSIZE);
 
-		res_CLOSE4->CLOSE4res_u.open_stateid.seqid =
-			arg_CLOSE4->open_stateid.seqid + 1;
+		if (data->minorversion == 0) {
+			/* v4.0 legacy replay/duplicate close handling */
+			res_CLOSE4->status = NFS4_OK;
+			memcpy(res_CLOSE4->CLOSE4res_u.open_stateid.other,
+			       arg_CLOSE4->open_stateid.other, OTHERSIZE);
 
-		if (res_CLOSE4->CLOSE4res_u.open_stateid.seqid == 0)
-			res_CLOSE4->CLOSE4res_u.open_stateid.seqid = 1;
+			res_CLOSE4->CLOSE4res_u.open_stateid.seqid =
+				arg_CLOSE4->open_stateid.seqid + 1;
 
+			if (res_CLOSE4->CLOSE4res_u.open_stateid.seqid == 0)
+				res_CLOSE4->CLOSE4res_u.open_stateid.seqid = 1;
+
+			LogDebug(
+				COMPONENT_STATE,
+				"CLOSE: treating missing refs as replayed close (v4.0)");
+			return NFS_REQ_OK;
+		}
+
+		/* v4.1+: replays/duplicates are handled by SEQUENCE/session */
+		res_CLOSE4->status = NFS4ERR_BAD_STATEID;
 		LogDebug(
 			COMPONENT_STATE,
-			"CLOSE failed nfs4_Check_Stateid must have already been closed. But treating it as replayed close and returning NFS4_OK");
-
-		return NFS_REQ_OK;
+			"CLOSE: missing refs for stateid, returning BAD_STATEID (v4.1+)");
+		return NFS_REQ_ERROR;
 	}
 
 	PTHREAD_MUTEX_lock(&open_owner->so_mutex);
@@ -238,6 +247,11 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 	PTHREAD_MUTEX_unlock(&open_owner->so_mutex);
 
 	STATELOCK_lock(state_obj);
+
+	/* Prevent OPEN from reusing this state while CLOSE tears it down. */
+	PTHREAD_MUTEX_lock(&state_found->state_mutex);
+	state_found->state_closing = true;
+	PTHREAD_MUTEX_unlock(&state_found->state_mutex);
 
 	/* Clean all associated lock states */
 	glist_for_each_safe(glist, glistn,

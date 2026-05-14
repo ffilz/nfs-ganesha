@@ -166,6 +166,7 @@ state_status_t _state_add_impl(struct fsal_obj_handle *obj,
 	pnew_state->state_type = state_type;
 	pnew_state->state_seqid = 0; /* will be incremented to 1 later */
 	pnew_state->state_refcount = 2; /* sentinel plus returned ref */
+	pnew_state->state_closing = false;
 
 	if (refer)
 		pnew_state->state_refer = *refer;
