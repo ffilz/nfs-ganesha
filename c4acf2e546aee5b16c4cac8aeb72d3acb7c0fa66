@@ -1,0 +1,2741 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "066dee46_b717fda6",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t/* This node recovered primary and secondary node addresses.",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "621d1d45_534a2a5c",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1435,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 92 exceeds 80 columns\n+\t\t\t/* If it failed, tsm_initialized will be set to 0 from ack_thread */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2c8c15e_e5e305ca",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+#include \u003cstdlib.h\u003e",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da3ef001_cb72f096",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 97 exceeds 80 columns\n+/* Pending ACK: mutex and msg_id counter (struct tsm_pending_ack is in transparent_recovery.h) */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeef6c2f_d94b11da",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\ttsm_rpc_info msg;\n+\tmemset(\u0026msg, 0, sizeof(msg));",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be8304ba_b5248416",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t/* We will reach here only for the first time a tsm node is booting up */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc802eac_441d8f6a",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: void function return statements are not generally useful\n+\treturn;\n+}",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a545355_6f2ea6ee",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\ttsm_rpc_info tsm_msg \u003d { 0 };\n+\tmemcpy(\u0026tsm_msg.source_addr, \u0026tsm_my_addr, sizeof(sockaddr_t));",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b6227e3_8006e276",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t/* Peer responded but no cluster state present */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8518a28d_aaa565a5",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t/* Register on a (global/legacy) event channel so CLNT_CALL_BACK works */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccd23630_8d59f30f",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tuint64_t ret \u003d 0;\n+\tret \u003d __sync_add_and_fetch(\u0026tsm_msg_id_counter, 1);",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4626f034_2bc52890",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 103 exceeds 80 columns\n+\t\t/* Check if ack is pending. If all acks are processed, trigger export list broadcast */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1087f310_71152066",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1151,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\t/* Drop the lock while we complete the ACK to avoid holding it too long */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8e7e7be_194f196a",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 126 exceeds 80 columns\n+\t\t\t/* After timeout, if the ack is still pending from primary or secondary, disable tsm for the export */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59b82748_46b47c63",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1262,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\t\t\t\ttsm_rpc_info tsm_msg3 \u003d { 0 };\n+\t\t\t\t\tmemcpy(\u0026tsm_msg3.source_addr,",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d948986_ed161f44",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1269,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 87 exceeds 80 columns\n+\t\t\t\t\t/* Delete all records from self node as well */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed236f1f_2d36c996",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1283,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: Too many leading tabs - consider code refactoring\n+\t\t\t\t\t\tif (exp-\u003etsm_export_info",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "053df276_3cd60ba9",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\t    .export_tsm_enabled) {",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f977d40_cec9a981",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1290,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 85 exceeds 80 columns\n+\t\t\t\t\t\t\t\t.export_tsm_enabled \u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6aaaf2d_fa2e8a11",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1293,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\ttsm_broadcast_export_list(",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9073d7e6_a2e64628",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\texp-\u003etsm_export_info",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "101e68ef_af3dbdbe",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1295,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t.export_id,",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76578c34_98cbe2a9",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: Too many leading tabs - consider code refactoring\n+\t\t\t\t\t\t} else {",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cb5a409_b3cb8a1e",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1718,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: Too many leading tabs - consider code refactoring\n+\t\t\t\t\t\tif (open_ptr-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74361910_64ed4d90",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1719,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t    .share_access \u003d\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9926a13_efdf9710",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1721,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t    .share_access \u0026\u0026",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7e72574_a9c7d32f",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1723,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\t\t    .share_deny \u003d\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc396fc_31838f30",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1725,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\t\t    .share_deny \u0026\u0026",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d4db8e3_4f61d55e",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1726,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t    (strcmp(open_ptr-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d94725_c7a33579",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1729,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\t\t    .owner_str) \u003d\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb4d3df_7d0f0005",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1737,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+\t\t\t\t\t\t\t\topen_ptr-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c811b2fd_43657f52",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1738,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 86 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t.share_access,",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8a8ab1b_bce0d45d",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1739,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+\t\t\t\t\t\t\t\topen_ptr-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "106039fd_9435d7a9",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1740,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t.share_deny,",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54122915_64bde914",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1741,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+\t\t\t\t\t\t\t\topen_ptr-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8848f597_274659a1",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1742,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t.owner_str,",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1bb8250_1936ff62",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1744,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t.owner_str);",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac0336e2_5d51190c",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1747,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 86 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\u0026open_ptr-\u003eopen_list);",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e2c7b0a_b9dcd1ea",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1764,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: Too many leading tabs - consider code refactoring\n+\t\t\t\t\t\tif (lock_ptr-\u003etsm_state_lock",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e163383f_9a15d152",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1772,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t    (strcmp(lock_ptr-\u003etsm_state_lock",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04fc987c_f148608f",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1775,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\t\t    .owner_str) \u003d\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46e8de23_e2403ad9",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1783,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+\t\t\t\t\t\t\t\tlock_ptr-\u003etsm_state_lock",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6657013_7870feed",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1785,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+\t\t\t\t\t\t\t\tlock_ptr-\u003etsm_state_lock",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bdbfdac_dae2d547",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1786,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t.length);",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e199b6d2_c9e254c8",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1789,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 86 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\u0026lock_ptr-\u003elock_list);",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56f3c71b_187dd490",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: Too many leading tabs - consider code refactoring\n+\t\t\t\t\t\tif (deleg_ptr-\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "704d6549_966467d5",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1812,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t    .share_access \u003d\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8851faa_5c23a003",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1814,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t    .share_access \u0026\u0026",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b31f9128_ab0761c8",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1816,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 85 exceeds 80 columns\n+\t\t\t\t\t\t\t\t    -\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2b441a7_05d99a49",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1819,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\t\t    .owner_str) \u003d\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ad19e2b_3e26c272",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1828,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 89 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t-\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "579b387e_05f55da2",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1829,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t.sd_type,",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25617a0c_3cbc34e1",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 89 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t-\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "922818ec_1d7a334c",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 86 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t.share_access,",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec052fe3_cecbf574",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1834,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 89 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t-\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8334a7e2_5e74506d",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1835,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t.share_deny,",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e4368f1_a39088b0",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1837,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 89 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t-\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f519773_4b649acf",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1838,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t.owner_str);",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a00418c_39495075",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1848,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t.sd_type);",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47694652_70d9c7c4",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2200,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t !strcmp(open_rec-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75f1b855_fce78ce3",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2210,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t(open_rec-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a103d30e_f23bf084",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2211,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t .owner_str[0] !\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52301eb9_0522070a",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2213,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\t\t\t\t\t\t\t? open_rec-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccd17abe_3c1cb7ca",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2214,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  .owner_str",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc7e7f28_8f996109",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2225,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t(open_rec-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12d840ce_9075e30a",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2226,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t .owner_str[0] !\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d902103_ce5a17d7",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2228,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\t\t\t\t\t\t\t? open_rec-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c42822c9_0badf786",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2229,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  .owner_str",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76d94e16_25393df6",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2234,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 97 exceeds 80 columns\n+\t\t\t\t\t/* Requesting WRITE delegation conflicts with any OPEN */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef0d4c66_90c5a59d",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2241,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t(open_rec-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3c974c5_a4ece341",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2242,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t .owner_str[0] !\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e47a3489_7ba81f82",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2244,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\t\t\t\t\t\t\t? open_rec-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71f99c5e_5dbee5d2",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2245,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  .owner_str",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4930fa9_fcbe7f14",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2267,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t(open_rec-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85f2c17c_b2f48764",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2268,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t .owner_str[0] !\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d085127_b38d3315",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2270,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\t\t\t\t\t\t\t? open_rec-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "722fb942_f49af902",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2271,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  .owner_str",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6dd8af2_8ad12208",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 87 exceeds 80 columns\n+\t\t\t\t\t/* Different owner: allow READ deleg request */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71ec831d_8376cdf6",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2287,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t(open_rec-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9605762b_786ac398",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2288,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t .owner_str[0] !\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ba38fe5_53255870",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2290,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+\t\t\t\t\t\t\t\t? open_rec-\u003etsm_state_open",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a41eabd_204502f0",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2291,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  .owner_str",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7be919bc_6165155a",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2313,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\t\t -\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b966c72_851b6c4a",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2317,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 92 exceeds 80 columns\n+\t\t\t\t\t/* CLAIM_PREVIOUS with same owner → no conflict */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ada7966_8a2d703d",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2325,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\t\t -\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bb2587a_001d80a2",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2326,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t .owner_str[0] !\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99d7b633_2986920c",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2329,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 91 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  -\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eca2577_bc411ca9",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2330,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  .owner_str",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19117708_be22461c",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2342,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\t\t -\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98921966_04b3bb2a",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2343,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t .owner_str[0] !\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "499c7ee6_521a239d",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2346,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 91 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  -\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3d3d9c4_48024b89",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  .owner_str",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7cc3b29_d08976dd",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2350,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t-\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "629307f3_20d77ea2",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2362,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\t\t -\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dff1a4ce_808b4395",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2363,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t .owner_str[0] !\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7863faa_00c83ac8",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2366,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 91 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  -\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "426ff361_a9bdc264",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2367,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  .owner_str",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6d1c985_f7ca332a",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2370,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t-\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69cc2cee_a8c70c3c",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2376,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t    deleg_rec-\u003etsm_state_deleg.sd_type \u003d\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "972b9b29_c80381af",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2384,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\t\t -\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b900a40_fd70d84e",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2385,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t .owner_str[0] !\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ee2d2e2_b3b3d2f5",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2388,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 91 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  -\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfadb794_de7a0c78",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2389,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  .owner_str",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f9ac90d_a7b2278c",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2401,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t\t\t\t -\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64cb105a_3895a9dc",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2402,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t .owner_str[0] !\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92488eb1_39893df6",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2405,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 91 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  -\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87404bd8_22045e2b",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2406,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t\t\t\t\t\t  .owner_str",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c45f6fc0_2963d19f",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2409,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t\t\t-\u003etsm_state_deleg",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9287fd43_d8c18405",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2746,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t    (strcmp(open_state-\u003etsm_state_open.owner_str,",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "507ec95f_f12dacc6",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2795,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t    (strcmp(lock_state-\u003etsm_state_lock.owner_str,",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90dfa731_dc7bd415",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3398,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I^I * EXPORT_REF_DEC will be sent for CLOSE, UNLOCK, DELEGRETURN $",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07d67426_7125d80d",
+        "filename": "src/MainNFSD/transparent_recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3461,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t   \u0026my_node-\u003esecondary_node_addr,",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "552230c3_df69717a",
+        "filename": "src/Protocols/NFS/nfs4_op_close.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\tif (data-\u003epreserved_clientid-\u003ecid_client_record-\u003ecr_client_val) {",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "818a795a_43e4f878",
+        "filename": "src/Protocols/NFS/nfs4_op_delegreturn.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\tif (data-\u003epreserved_clientid-\u003ecid_client_record-\u003ecr_client_val) {",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eacf5e4_d45cc14b",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t/* Return NFS4ERR_GRACE only when tsm is disabled */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "731db4cd_337a6c8c",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\tif (data-\u003epreserved_clientid-\u003ecid_client_record-\u003ecr_client_val) {",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c48e19bb_2d978fb9",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 94 exceeds 80 columns\n+\t\t/* Updated TSM conflict check with correct clientid ptr and claim and owner */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d0698c9_7e143b35",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\tresok-\u003edelegation.open_delegation4_u.od_whynone.ond_why \u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24e5a5e2_52f14cc0",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1489,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\tif (data-\u003epreserved_clientid-\u003ecid_client_record-\u003ecr_client_val) {",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b91560a_8de7f635",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1754,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\tif (data-\u003epreserved_clientid-\u003ecid_client_record-\u003ecr_client_val) {",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "993b9668_d00d948c",
+        "filename": "src/Protocols/XDR/xdr_tsm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/*",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7911422_f05d39bc",
+        "filename": "src/include/client_mgr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - int add_tsm_nodes(enum log_components component,\n    - \t\t  struct glist_head *client_list,\n    - \t\t  const char *client_tok,\n    - \t\t  enum term_type type_hint,\n    - \t\t  void *cnode,\n→ to be replaced with:\n    + int add_tsm_nodes(enum log_components component, struct glist_head *client_list,\n    + \t\t  const char *client_tok, enum term_type type_hint, void *cnode,",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e52270_90888bea",
+        "filename": "src/include/nfs_proto_functions.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - int tsm_rpc_msg_recv(nfs_arg_t *args,\n    - \t\t     struct svc_req *req,\n    - \t\t     nfs_res_t *res);\n    - int tsm_rpc_states_recv(nfs_arg_t *args,\n    - \t\t\tstruct svc_req *req,\n    - \t\t\tnfs_res_t *res);\n    - int tsm_Null(nfs_arg_t *arg,\n    - \t     struct svc_req *req,\n    - \t     nfs_res_t *res);\n→ to be replaced with:\n    + int tsm_rpc_msg_recv(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res);\n    + int tsm_rpc_states_recv(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res);\n    + int tsm_Null(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res);",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86e6dc0c_0b463e71",
+        "filename": "src/include/transparent_recovery.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/*",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29ff5211_2c4d3ad6",
+        "filename": "src/include/transparent_recovery.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+ * \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "076c8789_034fe712",
+        "filename": "src/include/transparent_recovery.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+ * \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "438633ee_93fce6b4",
+        "filename": "src/include/transparent_recovery.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t/*  Once peer node for this node selected, notify peer IP to all nodes. */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c0b3784_f383fde7",
+        "filename": "src/include/transparent_recovery.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t/*  New node fetches state info of  old node state info using this msg. */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6d14de5_180debd0",
+        "filename": "src/include/transparent_recovery.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t/*  Inform all nodes list of export ids of which reclaim is in progress. */",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73304cc2_996701a9",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/*",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe4e5d8_5261d1bb",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    EXPORT_NO_IO \u003d 0,$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "216fda20_b34e357f",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    -     EXPORT_NO_IO \u003d 0,\n    -     EXPORT_IO_IN_PROGRESS,\n    - typedef enum {\n    -     EXPORT_REF_INC,\n    -     EXPORT_REF_DEC\n    - } tsm_export_event_t;\n    -     uint16_t export_id;\n    -     uint16_t export_ref_count;\n    -     bool export_tsm_enabled;\n    -     tsm_export_state_t export_state;\n    -     tsm_export_event_t export_event;\n→ to be replaced with:\n    + \tEXPORT_NO_IO \u003d 0,\n    + \tEXPORT_IO_IN_PROGRESS,\n    + typedef enum { EXPORT_REF_INC, EXPORT_REF_DEC } tsm_export_event_t;\n    + \tuint16_t export_id;\n    + \tuint16_t export_ref_count;\n    + \tbool export_tsm_enabled;\n    + \ttsm_export_state_t export_state;\n    + \ttsm_export_event_t export_event;",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0de007eb_cf9a9054",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    EXPORT_IO_IN_PROGRESS,$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7957e95_9619da77",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    EXPORT_REF_INC,$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92642739_b2618e7c",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    EXPORT_REF_DEC$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2926d45c_a69e0013",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    uint16_t export_id;$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c12be604_bbe950c7",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    uint16_t export_ref_count;$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "004a795b_baacef0b",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    bool export_tsm_enabled;$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "392d3de5_c8d31d5a",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    tsm_export_state_t export_state;$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "443b4db3_f5c0d2a4",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    tsm_export_event_t export_event;$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1a366a8_d856d229",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    -     int sd_type;\n    -     int sd_state;\n    -     int share_access;\n    -     int share_deny;\n    -     char owner_str[1024];\n→ to be replaced with:\n    + \tint sd_type;\n    + \tint sd_state;\n    + \tint share_access;\n    + \tint share_deny;\n    + \tchar owner_str[1024];",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a06e922c_596c8186",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    int sd_type;$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8483876a_1550f657",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    int sd_state;$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48d76ebf_24915009",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    int share_access;$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7936dd96_bfddb879",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    int share_deny;$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7349b2de_05d2ac43",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+    char owner_str[1024];$",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "859018c1_4ec42652",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - Extra blank line to be removed\n    - extern  enum clnt_stat tsmproc_null_1(void *, CLIENT *);\n    - extern  bool tsmproc_null_1_svc(void *, struct svc_req *);\n    - extern  enum clnt_stat tsmproc_send_msg_1(tsm_rpc_info , void *, CLIENT *);\n    - extern  bool tsmproc_send_msg_1_svc(tsm_rpc_info , void *, struct svc_req *);\n    - extern  enum clnt_stat tsmproc_send_states_1(tsm_rpc_states , void *, CLIENT *);\n    - extern  bool tsmproc_send_states_1_svc(tsm_rpc_states , void *, struct svc_req *);\n    - extern int tsmprog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);\n    - extern  enum clnt_stat tsmproc_null_1();\n    - extern  bool tsmproc_null_1_svc();\n    - extern  enum clnt_stat tsmproc_send_msg_1();\n    - extern  bool tsmproc_send_msg_1_svc();\n    - extern  enum clnt_stat tsmproc_send_states_1();\n    - extern  bool tsmproc_send_states_1_svc();\n    - extern int tsmprog_1_freeresult ();\n    - extern  bool xdr_tsm_state_open (XDR *, tsm_state_open*);\n    - extern  bool xdr_tsm_state_lock (XDR *, tsm_state_lock*);\n    - extern  bool xdr_tsm_rpc_info (XDR *, tsm_rpc_info*);\n    - extern  bool xdr_tsm_rpc_states (XDR *, tsm_rpc_states*);\n    - extern bool xdr_tsm_state_open ();\n    - extern bool xdr_tsm_state_lock ();\n    - extern bool xdr_tsm_rpc_info ();\n    - extern bool xdr_tsm_rpc_states ();\n→ to be replaced with:\n    + extern enum clnt_stat tsmproc_null_1(void *, CLIENT *);\n    + extern bool tsmproc_null_1_svc(void *, struct svc_req *);\n    + extern enum clnt_stat tsmproc_send_msg_1(tsm_rpc_info, void *, CLIENT *);\n    + extern bool tsmproc_send_msg_1_svc(tsm_rpc_info, void *, struct svc_req *);\n    + extern enum clnt_stat tsmproc_send_states_1(tsm_rpc_states, void *, CLIENT *);\n    + extern bool tsmproc_send_states_1_svc(tsm_rpc_states, void *, struct svc_req *);\n    + extern int tsmprog_1_freeresult(SVCXPRT *, xdrproc_t, caddr_t);\n    + extern enum clnt_stat tsmproc_null_1();\n    + extern bool tsmproc_null_1_svc();\n    + extern enum clnt_stat tsmproc_send_msg_1();\n    + extern bool tsmproc_send_msg_1_svc();\n    + extern enum clnt_stat tsmproc_send_states_1();\n    + extern bool tsmproc_send_states_1_svc();\n    + extern int tsmprog_1_freeresult();\n    + extern bool xdr_tsm_state_open(XDR *, tsm_state_open *);\n    + extern bool xdr_tsm_state_lock(XDR *, tsm_state_lock *);\n    + extern bool xdr_tsm_rpc_info(XDR *, tsm_rpc_info *);\n    + extern bool xdr_tsm_rpc_states(XDR *, tsm_rpc_states *);\n    + extern bool xdr_tsm_state_open();\n    + extern bool xdr_tsm_state_lock();\n    + extern bool xdr_tsm_rpc_info();\n    + extern bool xdr_tsm_rpc_states();",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09ee0e4a_1dde1a6d",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+extern  bool tsmproc_send_states_1_svc(tsm_rpc_states , void *, struct svc_req *);",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0961f7_a2f3d8aa",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - enum clnt_stat tsmproc_null_1() should probably be enum clnt_stat tsmproc_null_1(void)\n+extern  enum clnt_stat tsmproc_null_1();",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c16ec86f_0494ba53",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - bool tsmproc_null_1_svc() should probably be bool tsmproc_null_1_svc(void)\n+extern  bool tsmproc_null_1_svc();",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87bc1969_d8723250",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - enum clnt_stat tsmproc_send_msg_1() should probably be enum clnt_stat tsmproc_send_msg_1(void)\n+extern  enum clnt_stat tsmproc_send_msg_1();",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55cd214d_c40001a3",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - bool tsmproc_send_msg_1_svc() should probably be bool tsmproc_send_msg_1_svc(void)\n+extern  bool tsmproc_send_msg_1_svc();",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a58a434_e66ca9cd",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - enum clnt_stat tsmproc_send_states_1() should probably be enum clnt_stat tsmproc_send_states_1(void)\n+extern  enum clnt_stat tsmproc_send_states_1();",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5689042_83a27048",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - bool tsmproc_send_states_1_svc() should probably be bool tsmproc_send_states_1_svc(void)\n+extern  bool tsmproc_send_states_1_svc();",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51734013_f96670ad",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - int tsmprog_1_freeresult() should probably be int tsmprog_1_freeresult(void)\n+extern int tsmprog_1_freeresult ();",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "815187a5_fb51aa8c",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - bool xdr_tsm_state_open() should probably be bool xdr_tsm_state_open(void)\n+extern bool xdr_tsm_state_open ();",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e76a08e_c44457ca",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - bool xdr_tsm_state_lock() should probably be bool xdr_tsm_state_lock(void)\n+extern bool xdr_tsm_state_lock ();",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "467879ce_ffa7924d",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - bool xdr_tsm_rpc_info() should probably be bool xdr_tsm_rpc_info(void)\n+extern bool xdr_tsm_rpc_info ();",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66627bfe_cdf9c357",
+        "filename": "src/include/tsm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - bool xdr_tsm_rpc_states() should probably be bool xdr_tsm_rpc_states(void)\n+extern bool xdr_tsm_rpc_states ();",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c741a48_6271d40b",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tCONF_ITEM_UI16(\"TSM_Port\", 0, UINT16_MAX, TSM_PORT,\n    - \t\t\tnfs_core_param, port[P_TSM]),\n    - \tCONF_ITEM_BOOL(\"enable_TSM\", false, nfs_core_param,\n    - \t\t\tenable_TSM),\n→ to be replaced with:\n    + \tCONF_ITEM_UI16(\"TSM_Port\", 0, UINT16_MAX, TSM_PORT, nfs_core_param,\n    + \t\t       port[P_TSM]),\n    + \tCONF_ITEM_BOOL(\"enable_TSM\", false, nfs_core_param, enable_TSM),",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d01dbf04_89bddee4",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-14T06:45:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tstruct config_item *item, void *param_addr,\n    - \t\tvoid *cnode, struct config_error_type *err_type)\n    - \t\t\tcnode, err_type);\n    - \t\t\ttsm_ceph_nodes, node_list),\n    - struct config_block tsm_core \u003d {\n    - \t.dbus_interface_name \u003d \"org.ganesha.nfsd.config.tsm\",\n    - \t.blk_desc.name \u003d \"TSM_NODES_LIST\",\n    - \t.blk_desc.type \u003d CONFIG_BLOCK,\n    - \t.blk_desc.flags \u003d CONFIG_UNIQUE,\n    - \t.blk_desc.u.blk.init \u003d noop_conf_init,\n    - \t.blk_desc.u.blk.params \u003d tsm_global_params,\n    - \t.blk_desc.u.blk.commit \u003d noop_conf_commit\n    - };\n→ to be replaced with:\n    + \t\t\t struct config_item *item, void *param_addr,\n    + \t\t\t void *cnode, struct config_error_type *err_type)\n    + \t\t\t   cnode, err_type);\n    + \t\t\t    tsm_ceph_nodes, node_list),\n    + struct config_block tsm_core \u003d { .dbus_interface_name \u003d\n    + \t\t\t\t\t \"org.ganesha.nfsd.config.tsm\",\n    + \t\t\t\t .blk_desc.name \u003d \"TSM_NODES_LIST\",\n    + \t\t\t\t .blk_desc.type \u003d CONFIG_BLOCK,\n    + \t\t\t\t .blk_desc.flags \u003d CONFIG_UNIQUE,\n    + \t\t\t\t .blk_desc.u.blk.init \u003d noop_conf_init,\n    + \t\t\t\t .blk_desc.u.blk.params \u003d tsm_global_params,\n    + \t\t\t\t .blk_desc.u.blk.commit \u003d noop_conf_commit };",
+      "revId": "c4acf2e546aee5b16c4cac8aeb72d3acb7c0fa66",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
