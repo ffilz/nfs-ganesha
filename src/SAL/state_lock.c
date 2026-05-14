@@ -56,6 +56,11 @@
 #endif
 #include "sal_metrics.h"
 
+#ifdef ENABLE_TSM
+#include "transparent_recovery.h"
+#include "bsd-base64.h"
+#endif
+
 /**
  * @page state_lock_entry_locking state_lock_entry_t locking rule
  *
@@ -2694,6 +2699,74 @@ state_status_t state_lock(struct fsal_obj_handle *obj, state_owner_t *owner,
 
 	LOCK__REQUEST_AUTO_TRACEPOINT(lock, obj, lock_request_start, TRACE_INFO,
 				      "lock request started");
+
+#ifdef ENABLE_TSM
+	if (tsm_initialized) {
+		tsm_rpc_info tsm_rpc_msg;
+
+		memcpy(&tsm_rpc_msg.source_addr, &tsm_my_addr,
+		       sizeof(sockaddr_t));
+
+		/* Adding TSM_SET_STATE */
+		tsm_rpc_msg.msg_type = TSM_SET_STATE;
+		tsm_rpc_msg.fsid_maj = obj->fsid.major;
+		tsm_rpc_msg.fsid_min = obj->fsid.minor;
+		tsm_rpc_msg.fileid = obj->fileid;
+		tsm_rpc_msg.rec_type = 2;
+
+		memset(tsm_rpc_msg.lock_info.owner_str, 0,
+		       sizeof(tsm_rpc_msg.lock_info.owner_str));
+
+		nfs_client_id_t *preserved_client_rec =
+			(*holder)->so_owner.so_nfs4_owner.so_clientrec;
+
+		if (preserved_client_rec->cid_client_record->cr_client_val) {
+			base64url_encode(
+				preserved_client_rec->cid_client_record
+					->cr_client_val,
+				preserved_client_rec->cid_client_record
+					->cr_client_val_len,
+				tsm_rpc_msg.lock_info.owner_str,
+				sizeof(tsm_rpc_msg.lock_info.owner_str));
+		}
+
+		tsm_rpc_msg.lock_info.start = lock->lock_start;
+		tsm_rpc_msg.lock_info.type = lock->lock_type;
+		tsm_rpc_msg.lock_info.length = lock->lock_length;
+
+		tsm_rpc_msg.export_info.export_id =
+			op_ctx->ctx_export->export_id;
+		tsm_rpc_msg.export_info.export_event = EXPORT_REF_INC;
+		tsm_rpc_msg.export_info.export_tsm_enabled = true;
+
+		bool can_open = true;
+
+		if (nfs_get_grace_status(true)) {
+			tsm_rpc_msg.reclaim = lock->lock_reclaim;
+
+			can_open = tsm_is_access_valid(&tsm_rpc_msg,
+						       lock->lock_reclaim);
+		}
+
+		if (can_open) {
+			LogDebug(COMPONENT_TSM, "Valid lock request. Proceed");
+		} else {
+			status = STATE_GRACE_PERIOD;
+
+			LogDebug(COMPONENT_TSM, "Conflicting lock request.");
+
+			return status;
+		}
+
+		LogFullDebug(
+			COMPONENT_TSM,
+			"TSM: Sending SET_STATE (Lock) for FileID=%lu fsid_maj=%lu fsid_min=%lu",
+			tsm_rpc_msg.fileid, tsm_rpc_msg.fsid_maj,
+			tsm_rpc_msg.fsid_min);
+
+		tsm_send_msg_with_ack(&tsm_rpc_msg);
+	}
+#endif
 	if (blocking != STATE_NON_BLOCKING) {
 		/* First search for a blocked request. Client can ignore the
 		 * blocked request and keep sending us new lock request again
@@ -3139,6 +3212,58 @@ state_status_t state_unlock(struct fsal_obj_handle *obj, state_t *state,
 
 	STATELOCK_unlock(obj);
 
+#ifdef ENABLE_TSM
+	if (tsm_initialized) {
+		tsm_rpc_info tsm_rpc_msg;
+
+		memcpy(&tsm_rpc_msg.source_addr, &tsm_my_addr,
+		       sizeof(sockaddr_t));
+
+		/* Adding TSM_DELETE_STATE */
+		tsm_rpc_msg.msg_type = TSM_DELETE_STATE;
+		tsm_rpc_msg.fsid_maj = obj->fsid.major;
+		tsm_rpc_msg.fsid_min = obj->fsid.minor;
+		tsm_rpc_msg.fileid = obj->fileid;
+		tsm_rpc_msg.rec_type = 2;
+
+		memset(tsm_rpc_msg.lock_info.owner_str, 0,
+		       sizeof(tsm_rpc_msg.lock_info.owner_str));
+
+		nfs_client_id_t *preserved_client_rec =
+			owner->so_owner.so_nfs4_owner.so_clientrec;
+
+		if (preserved_client_rec->cid_client_record->cr_client_val) {
+			base64url_encode(
+				preserved_client_rec->cid_client_record
+					->cr_client_val,
+				preserved_client_rec->cid_client_record
+					->cr_client_val_len,
+				tsm_rpc_msg.lock_info.owner_str,
+				sizeof(tsm_rpc_msg.lock_info.owner_str));
+		}
+
+		tsm_rpc_msg.lock_info.start = lock->lock_start;
+		tsm_rpc_msg.lock_info.type = lock->lock_type;
+		tsm_rpc_msg.lock_info.length = lock->lock_length;
+
+		tsm_rpc_msg.export_info.export_id =
+			op_ctx->ctx_export->export_id;
+		tsm_rpc_msg.export_info.export_event = EXPORT_REF_DEC;
+
+		LogFullDebug(
+			COMPONENT_TSM,
+			"TSM: Sending DELETE_STATE (Lock) for FileID=%lu fsid_maj=%lu fsid_min=%lu",
+			tsm_rpc_msg.fileid, tsm_rpc_msg.fsid_maj,
+			tsm_rpc_msg.fsid_min);
+
+		tsm_send_msg_with_ack(&tsm_rpc_msg);
+
+		/* delete any record on the local node */
+		tsm_ceph_nodes_t *node = tsm_find_node_by_addr(&tsm_my_addr);
+
+		tsm_delete_node_state(&tsm_rpc_msg, &node->state_info);
+	}
+#endif
 	return status;
 }
 

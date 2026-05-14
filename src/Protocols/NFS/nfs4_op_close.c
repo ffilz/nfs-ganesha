@@ -46,6 +46,11 @@
 #include "gsh_lttng/generated_traces/nfs4.h"
 #endif
 
+#ifdef ENABLE_TSM
+#include "transparent_recovery.h"
+#include "bsd-base64.h"
+#endif
+
 /* Tag passed to state functions */
 static const char *close_tag = "CLOSE";
 
@@ -299,6 +304,58 @@ enum nfs_req_result nfs4_op_close(struct nfs_argop4 *op, compound_data_t *data,
 	}
 
 out2:
+
+#ifdef ENABLE_TSM
+
+	if (tsm_initialized == 1 && res_CLOSE4->status == NFS4_OK) {
+		tsm_rpc_info tsm_rpc_msg;
+
+		memset(&tsm_rpc_msg, 0, sizeof(tsm_rpc_msg));
+
+		tsm_rpc_msg.msg_type = TSM_DELETE_STATE;
+		tsm_rpc_msg.rec_type = TSM_OPEN_REC;
+		tsm_rpc_msg.fsid_maj = data->current_obj->fsid.major;
+		tsm_rpc_msg.fsid_min = data->current_obj->fsid.minor;
+		tsm_rpc_msg.fileid = data->current_obj->fileid;
+
+		memset(tsm_rpc_msg.open_info.owner_str, 0,
+		       sizeof(tsm_rpc_msg.open_info.owner_str));
+
+		if (data->preserved_clientid->cid_client_record->cr_client_val) {
+			base64url_encode(
+				data->preserved_clientid->cid_client_record
+					->cr_client_val,
+				data->preserved_clientid->cid_client_record
+					->cr_client_val_len,
+				tsm_rpc_msg.open_info.owner_str,
+				sizeof(tsm_rpc_msg.open_info.owner_str));
+		}
+
+		tsm_rpc_msg.open_info.share_access =
+			state_found->state_data.share.share_access;
+		tsm_rpc_msg.open_info.share_deny =
+			state_found->state_data.share.share_deny;
+		tsm_rpc_msg.export_info.export_id =
+			op_ctx->ctx_export->export_id;
+		tsm_rpc_msg.export_info.export_event = EXPORT_REF_DEC;
+
+		memcpy(&tsm_rpc_msg.source_addr, &tsm_my_addr,
+		       sizeof(sockaddr_t));
+
+		LogDebug(
+			COMPONENT_TSM,
+			"Sending DELETE_STATE (CLOSE) fileid=%lu fsid_maj=%lu fsid_min=%lu  owner_str=%s",
+			tsm_rpc_msg.fileid, tsm_rpc_msg.fsid_maj,
+			tsm_rpc_msg.fsid_min, tsm_rpc_msg.open_info.owner_str);
+
+		tsm_send_msg_with_ack(&tsm_rpc_msg);
+
+		/*delete any record on the local node */
+		tsm_ceph_nodes_t *node = tsm_find_node_by_addr(&tsm_my_addr);
+
+		tsm_delete_node_state(&tsm_rpc_msg, &node->state_info);
+	}
+#endif
 	dec_state_owner_ref(open_owner);
 	state_obj->obj_ops->put_ref(state_obj);
 	dec_state_t_ref(state_found);

@@ -77,6 +77,9 @@ Requires: openSUSE-release
 @BCOND_QOS@ qos
 %global use_qos %{on_off_switch qos}
 
+@BCOND_TSM@ tsm
+%global use_tsm %{on_off_switch tsm}
+
 @BCOND_MAN_PAGE@ man_page
 %global use_man_page %{on_off_switch man_page}
 
@@ -568,6 +571,7 @@ cmake3 .	-DCMAKE_BUILD_TYPE=Debug			\
 	-DUSE_FSAL_GLUSTER=%{use_fsal_gluster}		\
 	-DUSE_SYSTEM_NTIRPC=%{use_system_ntirpc}	\
 	-DENABLE_QOS=%{use_qos}				\
+	-DENABLE_TSM=%{use_tsm}                         \
 	-DUSE_NFSIDMAP=%{use_nfsidmap}			\
 	-DUSE_MONITORING=%{use_monitoring}		\
 	-DUSE_9P_RDMA=%{use_rdma}			\

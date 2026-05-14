@@ -70,6 +70,10 @@
 
 #include "nfs_metrics.h"
 
+#ifdef ENABLE_TSM
+#include "tsm.h"
+#endif
+
 #define NFS_pcp nfs_param.core_param
 #define NFS_options NFS_pcp.core_options
 #define NFS_program NFS_pcp.program
@@ -513,6 +517,30 @@ const nfs_function_desc_t nlm4_func_desc[] = {
 			       .dispatch_behaviour = NOTHING_SPECIAL},
 };
 #endif /* _USE_NLM */
+
+#ifdef ENABLE_TSM
+const nfs_function_desc_t tsm_func_desc[] = {
+	[TSMPROC_NULL] = { .service_function = tsm_Null,
+			   .free_function = tsm_Null_Free,
+			   .xdr_decode_func = (xdrproc_t)xdr_void,
+			   .xdr_encode_func = (xdrproc_t)xdr_void,
+			   .funcname = "TSM_NULL",
+			   .dispatch_behaviour = NOTHING_SPECIAL },
+	[TSMPROC_SEND_MSG] = { .service_function = tsm_rpc_msg_recv,
+			       .free_function = tsm_rpc_msg_Free,
+			       .xdr_decode_func = (xdrproc_t)xdr_tsm_rpc_info,
+			       .xdr_encode_func = (xdrproc_t)xdr_void,
+			       .funcname = "TSM_SEND_MSG",
+			       .dispatch_behaviour = NOTHING_SPECIAL },
+	[TSMPROC_SEND_STATES] = { .service_function = tsm_rpc_states_recv,
+				  .free_function = tsm_rpc_msg_Free,
+				  .xdr_decode_func =
+					  (xdrproc_t)xdr_tsm_rpc_states,
+				  .xdr_encode_func = (xdrproc_t)xdr_void,
+				  .funcname = "TSM_SEND_STATES",
+				  .dispatch_behaviour = NOTHING_SPECIAL },
+};
+#endif
 
 #ifdef _USE_RQUOTA
 const nfs_function_desc_t rquota1_func_desc[] = {
@@ -1866,5 +1894,20 @@ enum xprt_stat nfs_rpc_valid_NFS_RDMA(struct svc_req *req)
 	}
 
 	return nfs_rpc_valid_NFS(req);
+}
+#endif
+
+#ifdef ENABLE_TSM
+enum xprt_stat nfs_rpc_valid_TSM(struct svc_req *req)
+{
+	nfs_request_t *reqdata = container_of(req, struct nfs_request, svc);
+	SVCXPRT *xprt = reqdata->svc.rq_xprt;
+
+	if (get_port(svc_getrpclocal(xprt)) ==
+	    nfs_param.core_param.port[P_TSM]) {
+		reqdata->funcdesc = &tsm_func_desc[req->rq_msg.cb_proc];
+		return nfs_rpc_process_request(reqdata, false);
+	}
+	return nfs_rpc_noproc(reqdata);
 }
 #endif

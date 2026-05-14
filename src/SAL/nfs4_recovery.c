@@ -44,6 +44,11 @@
 #include "client_mgr.h"
 #include "fsal.h"
 
+#ifdef ENABLE_TSM
+#include "tsm.h"
+#include "transparent_recovery.h"
+#endif
+
 /* The grace_mutex protects current_grace, clid_list, and clid_count */
 static pthread_mutex_t grace_mutex;
 static struct timespec current_grace; /* current grace period timeout */
@@ -235,6 +240,30 @@ static void nfs_lift_grace_locked(void)
 		       !(cur & GRACE_STATUS_COUNT_MASK));
 		LogEvent(COMPONENT_RECOVERY, "NFS Server Now NOT IN GRACE");
 	}
+
+#ifdef ENABLE_TSM
+	/* Grace is lifted. Enable the TSM if it was disabled earlier
+	 * by this node and broadcast this to all nodes
+	 */
+
+	if (tsm_initialized == 0 && tsm_disabled_source) {
+		/* This node had disabled it. Now enable it back */
+
+		LogInfo(COMPONENT_TSM,
+			"Grace period lifted. Re-enabling TSM on this node");
+		tsm_initialized = 1;
+
+		tsm_rpc_info tsm_msg = { 0 };
+
+		memcpy(&tsm_msg.source_addr, &tsm_my_addr, sizeof(sockaddr_t));
+
+		tsm_msg.msg_type = TSM_ENABLE_NOTIFY;
+
+		tsm_send_msg(&tsm_msg);
+
+		tsm_disabled_source = false;
+	}
+#endif
 }
 
 /*

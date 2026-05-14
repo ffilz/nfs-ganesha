@@ -72,6 +72,10 @@
 #include "nfs_ip_stats.h"
 #include "netgroup_cache.h"
 
+#ifdef ENABLE_TSM
+#include "transparent_recovery.h"
+#endif
+
 /* Clients are stored in an AVL tree
  */
 
@@ -1623,6 +1627,130 @@ out:
 exit:
 	return errcnt;
 }
+
+#ifdef ENABLE_TSM
+int add_tsm_nodes(enum log_components component, struct glist_head *client_list,
+		  const char *client_tok, enum term_type type_hint, void *cnode,
+		  struct config_error_type *err_type)
+{
+	int errcnt = 0;
+	CIDR *cidr;
+	tsm_ceph_nodes_t *cli;
+
+	cli = gsh_calloc(1, sizeof(tsm_ceph_nodes_t));
+
+	glist_init(&cli->node_list);
+	glist_init(&cli->state_info);
+	glist_init(&cli->pending_acks);
+
+	cli->fd = -1;
+	cli->is_my_ip = false;
+	cli->recovery.has_primary = false;
+	cli->recovery.has_secondary = false;
+	cli->clnt = NULL;
+
+	switch (type_hint) {
+	case TERM_V4CIDR:
+		err_type->invalid = true;
+		errcnt++;
+		goto out;
+
+	case TERM_V6CIDR:
+		err_type->invalid = true;
+		errcnt++;
+		goto out;
+
+	case TERM_V4ADDR:
+	case TERM_V6ADDR:
+		if (is_self_ip(client_tok) == true)
+			cli->is_my_ip = true;
+
+		cidr = cidr_from_str(client_tok);
+
+		if (cidr == NULL) {
+			switch (type_hint) {
+			case TERM_V4CIDR:
+				break;
+
+			case TERM_V6CIDR:
+				break;
+
+			case TERM_V4ADDR:
+				config_proc_error(cnode, err_type,
+						  "Incorrect IPv4 addr (%s)",
+						  client_tok);
+				break;
+
+			case TERM_V6ADDR:
+				config_proc_error(cnode, err_type,
+						  "Incorrect IPv6 addr (%s)",
+						  client_tok);
+				break;
+
+			default:
+				break;
+			}
+
+			err_type->invalid = true;
+			errcnt++;
+			goto out;
+		}
+
+		if (type_hint == TERM_V4ADDR) {
+			cli->node_addr.ss_family = AF_INET;
+			memcpy(&((struct sockaddr_in *)&cli->node_addr)
+					->sin_addr.s_addr,
+			       &((struct sockaddr_in *)&cidr->ip_addr)
+					->sin_addr.s_addr,
+			       sizeof(struct in_addr));
+		} else if (type_hint == TERM_V6ADDR) {
+			cli->node_addr.ss_family = AF_INET6;
+			memcpy(&((struct sockaddr_in6 *)&cli->node_addr)
+					->sin6_addr.s6_addr,
+			       &((struct sockaddr_in6 *)&cidr->ip_addr)
+					->sin6_addr.s6_addr,
+			       sizeof(struct in6_addr));
+		}
+
+		if (cli->is_my_ip == true) {
+			memcpy(&tsm_my_addr, &cli->node_addr,
+			       sizeof(sockaddr_t));
+
+			cli->ganesha_id = g_nodeid;
+		}
+
+		break;
+
+	case TERM_REGEX:
+		err_type->invalid = true;
+		errcnt++;
+		goto out;
+
+	case TERM_TOKEN:
+		err_type->invalid = true;
+		errcnt++;
+		goto out;
+
+	default:
+		config_proc_error(cnode, err_type,
+				  "Expected a client, got a %s for (%s)",
+				  config_term_desc(type_hint), client_tok);
+
+		err_type->bogus = true;
+		errcnt++;
+		goto out;
+	}
+
+	glist_add_tail(client_list, &cli->node_list);
+
+	cli = NULL;
+
+out:
+	gsh_free(cli);
+
+	return errcnt;
+}
+#endif
 
 /**
  * @brief Expand the client name token into one or more client entries

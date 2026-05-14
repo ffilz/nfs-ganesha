@@ -76,6 +76,9 @@ typedef enum protos {
 #ifdef _USE_NFS_RDMA
 	P_NFS_RDMA, /*< NFS over RPC/RDMA */
 #endif
+#ifdef ENABLE_TSM
+	P_TSM, /*< Transparent State recovery */
+#endif
 	P_COUNT /*< Number of protocols */
 } protos;
 
@@ -99,6 +102,11 @@ typedef enum protos {
  * @brief Default NFS Over RDMA Port.
  */
 #define NFS_RDMA_PORT 20049
+
+/**
+ * @brief Default Transparent recovery Port.
+ */
+#define TSM_PORT 36369
 
 /**
  * @brief Default value for _9p_param.nb_worker
@@ -450,6 +458,9 @@ typedef struct nfs_core_param {
 #ifdef _USE_NFS3
 	/** Whether to collect NFSv3 Detailed stats.  Defaults to false. */
 	bool enable_FULLV3STATS;
+#endif
+#ifdef ENABLE_TSM
+	bool enable_TSM;
 #endif
 	/** Whether to collect NFSv4 Detailed stats.  Defaults to false. */
 	bool enable_FULLV4STATS;

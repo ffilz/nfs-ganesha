@@ -152,6 +152,15 @@ int add_client(enum log_components component, struct glist_head *client_list,
 	       client_list_entry_allocator_t cle_allocator,
 	       client_list_entry_filler_t cle_filler, void *private_data);
 
+#ifdef ENABLE_TSM
+int add_tsm_nodes(enum log_components component,
+		  struct glist_head *client_list,
+		  const char *client_tok,
+		  enum term_type type_hint,
+		  void *cnode,
+		  struct config_error_type *err_type);
+#endif
+
 bool delete_base_client(enum log_components component,
 			struct glist_head *client_list, const char *client_tok);
 

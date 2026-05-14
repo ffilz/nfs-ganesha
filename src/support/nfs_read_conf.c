@@ -57,6 +57,10 @@
 #include "pwnam_wrappers.h"
 #include "nfs_qos.h"
 
+#ifdef ENABLE_TSM
+#include "transparent_recovery.h"
+#endif
+
 /**
  * @brief Core configuration parameters
  */
@@ -212,6 +216,12 @@ static struct config_item core_params[] = {
 #ifdef _USE_RQUOTA
 	CONF_ITEM_UI16("Rquota_Port", 0, UINT16_MAX, RQUOTA_PORT,
 		       nfs_core_param, port[P_RQUOTA]),
+#endif
+#ifdef ENABLE_TSM
+	CONF_ITEM_UI16("TSM_Port", 0, UINT16_MAX, TSM_PORT,
+			nfs_core_param, port[P_TSM]),
+	CONF_ITEM_BOOL("enable_TSM", false, nfs_core_param,
+			enable_TSM),
 #endif
 #ifdef _USE_NFS_RDMA
 	CONF_ITEM_UI16("NFS_RDMA_Port", 0, UINT16_MAX, NFS_RDMA_PORT,
@@ -522,6 +532,38 @@ struct config_block qos_core = {
 };
 
 #endif
+
+#ifdef ENABLE_TSM
+static int tsm_node_addr(const char *token, enum term_type type_hint,
+		struct config_item *item, void *param_addr,
+		void *cnode, struct config_error_type *err_type)
+{
+	int rc;
+
+	LogMidDebug(COMPONENT_CONFIG, "Adding node %s", token);
+
+	rc = add_tsm_nodes(COMPONENT_CONFIG, &tsm_hosts, token, type_hint,
+			cnode, err_type);
+	return rc;
+}
+
+static struct config_item tsm_global_params[] = {
+	CONF_ITEM_PROC_MULT("Tsm_Nodes", noop_conf_init, tsm_node_addr,
+			tsm_ceph_nodes, node_list),
+	CONFIG_EOL
+};
+
+struct config_block tsm_core = {
+	.dbus_interface_name = "org.ganesha.nfsd.config.tsm",
+	.blk_desc.name = "TSM_NODES_LIST",
+	.blk_desc.type = CONFIG_BLOCK,
+	.blk_desc.flags = CONFIG_UNIQUE,
+	.blk_desc.u.blk.init = noop_conf_init,
+	.blk_desc.u.blk.params = tsm_global_params,
+	.blk_desc.u.blk.commit = noop_conf_commit
+};
+#endif
+
 /**
  * @brief Kerberos/GSSAPI parameters
  */

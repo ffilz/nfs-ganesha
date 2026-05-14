@@ -94,6 +94,13 @@ if(ENABLE_QOS)
     )
 endif(ENABLE_QOS)
 
+if(ENABLE_TSM)
+  SET(MainServices_STAT_SRCS
+    ${MainServices_STAT_SRCS}
+    transparent_recovery.c
+    )
+endif(ENABLE_TSM)
+
 add_library(MainServices OBJECT ${MainServices_STAT_SRCS})
 add_sanitizers(MainServices)
 set_target_properties(MainServices PROPERTIES COMPILE_FLAGS "-fPIC")
@@ -177,6 +184,13 @@ if(USE_RQUOTA)
     $<TARGET_OBJECTS:rquota>
   )
 endif(USE_RQUOTA)
+
+if(ENABLE_TSM)
+set(ganesha_nfsd_OBJS
+  ${ganesha_nfsd_OBJS}
+  $<TARGET_OBJECTS:tsm>
+  )
+endif(ENABLE_TSM)
 
 if(USE_NFSACL3)
   set(ganesha_nfsd_OBJS

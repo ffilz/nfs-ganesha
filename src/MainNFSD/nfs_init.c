@@ -86,6 +86,10 @@
 #include "nfs_metrics.h"
 #include "sal_metrics.h"
 
+#ifdef ENABLE_TSM
+#include "transparent_recovery.h"
+#endif
+
 pthread_mutexattr_t default_mutex_attr;
 pthread_rwlockattr_t default_rwlock_attr;
 
@@ -724,6 +728,31 @@ int nfs_set_param_from_conf(config_file_t parse_tree,
 
 #endif
 
+#ifdef ENABLE_TSM
+	struct dummy_tsm {
+		void *dummy;
+	};
+
+	struct dummy_tsm dummy_tsm_conf;
+
+	/* TSM global parameters */
+	(void)load_config_from_parse(parse_tree, &tsm_core, &dummy_tsm_conf,
+				     true, err_type);
+
+	if (!config_error_is_harmless(err_type)) {
+		LogCrit(COMPONENT_TSM, "Error while parsing tsm configuration");
+		return -1;
+	}
+
+	/*
+	 * TSM should be initialized only if it is enabled and
+	 * user has provided atleast one IP address of each
+	 * available ceph node in the cluster.
+	 */
+	if (nfs_param.core_param.enable_TSM && !glist_empty(&tsm_hosts))
+		tsm_init();
+#endif
+
 	/* Worker parameters: ip/name hash table and expiration
 	 * for each entry
 	 */
@@ -1340,6 +1369,90 @@ void nfs_start(nfs_start_info_t *p_start_info)
 #endif
 
 	nfs_init_complete();
+
+#ifdef ENABLE_TSM
+
+	tsm_ceph_nodes_t **node_array = NULL;
+
+	if (tsm_initialized == 0)
+		goto tsm_out;
+
+	tsm_ceph_nodes_t *my_node = NULL;
+	int my_index = -1;
+	int cluster_size = glist_length(&tsm_hosts);
+	bool ret = false;
+
+	if (cluster_size < 2) {
+		tsm_initialized = 0;
+		goto tsm_out;
+	}
+
+	node_array = gsh_malloc(cluster_size * sizeof(*node_array));
+
+	if (!node_array) {
+		tsm_initialized = 0;
+		goto tsm_out;
+	}
+
+	/* Build node array. Array of nodes in tsm_hosts*/
+	cluster_size = tsm_build_node_array(node_array, &my_node, &my_index);
+
+	foreach_gsh_export(tsm_exp_list_init, true, my_node)
+		;
+
+	tsm_recovery_ctx_t *ctx = &my_node->recovery;
+
+	/* Get peer record info from the cluster */
+	ret = tsm_recover_from_peers(my_node, node_array, cluster_size,
+				     my_index);
+
+	if (!ret) {
+		if (ctx->peer_recovery_state == TSM_PEER_RECORD_RECOVERY_FAILED)
+			LogCrit(COMPONENT_TSM,
+				"TSM_PEER_RECORD_RECOVERY_FAILED");
+		/* Peer nodes did not respond. Disbale TSM */
+		tsm_initialized = 0;
+		goto tsm_out;
+	}
+
+	if (ctx->peer_recovery_state == TSM_PEER_RECORD_FIRST_BOOT_DONE) {
+		LogCrit(COMPONENT_TSM, "TSM_PEER_RECORD_FIRST_BOOT_DONE");
+
+		/* Node is booting for the first time. Move towards
+		 * primary and secondary node selection mechanism
+		 */
+		tsm_handle_peer_node_selection(my_node, node_array,
+					       cluster_size, my_index);
+
+	} else if (ctx->peer_recovery_state == TSM_PEER_RECORD_RECOVERY_DONE) {
+		LogCrit(COMPONENT_TSM, "TSM_PEER_RECORD_RECOVERY_DONE");
+		if (ctx->has_primary && ctx->has_secondary) {
+			/* This node recovered primary and secondary node addresses.
+			 * Now get the states from them
+			 */
+			tsm_request_state_from_peer();
+
+			/* If it failed, tsm_initialized will be set to 0 from ack_thread */
+		}
+	}
+
+tsm_out:
+
+	if (tsm_initialized == 0) {
+		tsm_rpc_info tsm_msg3 = { 0 };
+
+		memcpy(&tsm_msg3.source_addr, &tsm_my_addr, sizeof(sockaddr_t));
+		tsm_msg3.msg_type = TSM_DISABLE_NOTIFY;
+		tsm_disabled_source = true;
+		tsm_send_msg(&tsm_msg3);
+
+		/* Delete all records from self node as well */
+		tsm_delete_all_records_all_nodes();
+	}
+
+	if (nfs_param.core_param.enable_TSM && node_array)
+		gsh_free(node_array);
+#endif
 
 #ifdef _USE_NLM
 	if (nfs_param.core_param.enable_NLM) {

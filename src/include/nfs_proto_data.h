@@ -50,6 +50,8 @@
 #include "nlm4.h"
 #include "nfsacl.h"
 
+#include "tsm.h"
+
 /* ------------------------------ Typedefs and structs----------------------- */
 
 typedef union nfs_arg__ {
@@ -104,6 +106,10 @@ typedef union nfs_arg__ {
 	/* NFSACL */
 	getaclargs arg_getacl;
 	setaclargs arg_setacl;
+
+	/* transparent state migration */
+	tsm_rpc_info arg_tsm_msg;
+	tsm_rpc_states arg_tsm_states;
 } nfs_arg_t;
 
 struct COMPOUND4res_extended {

@@ -19,25 +19,20 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #-------------------------------------------------------------------------------
-add_subdirectory(NFS)
-add_subdirectory(XDR)
-add_subdirectory(TSM)
-if(USE_NLM)
-	add_subdirectory(NLM)
-endif(USE_NLM)
-if(USE_RQUOTA)
-	add_subdirectory(RQUOTA)
-endif(USE_RQUOTA)
-if(USE_NFSACL3)
-	add_subdirectory(NFSACL)
-endif(USE_NFSACL3)
+########### next target ###############
 
-#if(ENABLE_TSM)
-#	add_subdirectory(TSM)
-#endif(ENABLE_TSM)
+SET(tsm_STAT_SRCS
+	tsm_msgsnd.c
+	tsm_Null.c
+)
 
-if(USE_9P)
-  add_subdirectory(9P)
-endif(USE_9P)
+add_library(tsm OBJECT ${tsm_STAT_SRCS})
+add_sanitizers(tsm)
+set_target_properties(tsm PROPERTIES COMPILE_FLAGS "-fPIC")
+
+if (USE_LTTNG)
+add_dependencies(tsm gsh_trace_header_generate)
+include("${CMAKE_BINARY_DIR}/gsh_lttng_generation_file_properties.cmake")
+endif (USE_LTTNG)
 
 ########### install files ###############

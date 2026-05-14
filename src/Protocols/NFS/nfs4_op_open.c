@@ -51,6 +51,11 @@
 #include "gsh_lttng/generated_traces/nfs4.h"
 #endif
 
+#ifdef ENABLE_TSM
+#include "transparent_recovery.h"
+#include "bsd-base64.h"
+#endif
+
 static const char *open_tag = "OPEN";
 
 /**
@@ -624,6 +629,40 @@ static void do_delegation(OPEN4args *arg_OPEN4, OPEN4res *res_OPEN4,
 		return;
 	}
 
+#ifdef ENABLE_TSM
+	/* Check for TSM conflicts */
+	if (tsm_initialized) {
+		open_delegation_type4 req_type =
+			(arg_OPEN4->share_access & OPEN4_SHARE_ACCESS_WRITE)
+				? OPEN_DELEGATE_WRITE
+				: OPEN_DELEGATE_READ;
+
+		/* Encode Owner for TSM check */
+		char rhdlstr[1024];
+
+		rhdlstr[0] = '\0';
+
+		if (data->preserved_clientid->cid_client_record->cr_client_val) {
+			base64url_encode(
+				data->preserved_clientid->cid_client_record
+					->cr_client_val,
+				data->preserved_clientid->cid_client_record
+					->cr_client_val_len,
+				rhdlstr, sizeof(rhdlstr));
+		}
+
+		/* Updated TSM conflict check with correct clientid ptr and claim and owner */
+		if (tsm_is_conflicting_deleg(data->current_obj,
+					     &clientid->cid_clientid, req_type,
+					     arg_OPEN4->claim.claim, rhdlstr)) {
+			resok->delegation.open_delegation4_u.od_whynone.ond_why =
+				WND4_CONTENTION;
+			LogFullDebug(COMPONENT_TSM,
+				     "TSM Conflict prevented delegation");
+			return;
+		}
+	}
+#endif
 	/* Decide if we should delegate, then add it. */
 	if (can_we_grant_deleg(ostate, open_state) &&
 	    should_we_grant_deleg(ostate, clientid, open_state, arg_OPEN4,
@@ -1425,11 +1464,93 @@ enum nfs_req_result nfs4_op_open(struct nfs_argop4 *op, compound_data_t *data,
 		goto out2;
 	}
 
+#ifdef ENABLE_TSM
+	bool_t reclaim = false;
+	tsm_rpc_info tsm_rpc_msg;
+
+	memset(&tsm_rpc_msg, 0, sizeof(tsm_rpc_msg));
+
+	if (tsm_initialized == 1) {
+		tsm_rpc_msg.msg_type = TSM_SET_STATE;
+		tsm_rpc_msg.rec_type = TSM_OPEN_REC;
+		tsm_rpc_msg.fsid_maj = data->current_obj->fsid.major;
+		tsm_rpc_msg.fsid_min = data->current_obj->fsid.minor;
+		tsm_rpc_msg.fileid = data->current_obj->fileid;
+
+		LogDebug(COMPONENT_TSM,
+			 "OPEN on fileid %lu msg fileid %lu before open4_ex",
+			 data->current_obj->fileid, tsm_rpc_msg.fileid);
+
+		tsm_rpc_msg.rec_type = 1;
+
+		memset(tsm_rpc_msg.open_info.owner_str, 0,
+		       sizeof(tsm_rpc_msg.open_info.owner_str));
+
+		if (data->preserved_clientid->cid_client_record->cr_client_val) {
+			base64url_encode(
+				data->preserved_clientid->cid_client_record
+					->cr_client_val,
+				data->preserved_clientid->cid_client_record
+					->cr_client_val_len,
+				tsm_rpc_msg.open_info.owner_str,
+				sizeof(tsm_rpc_msg.open_info.owner_str));
+		}
+
+		tsm_rpc_msg.open_info.share_access = arg_OPEN4->share_access;
+		tsm_rpc_msg.open_info.share_deny = arg_OPEN4->share_deny;
+
+		memcpy(&tsm_rpc_msg.source_addr, &tsm_my_addr,
+		       sizeof(sockaddr_t));
+
+		tsm_rpc_msg.export_info.export_id =
+			op_ctx->ctx_export->export_id;
+		tsm_rpc_msg.export_info.export_event = EXPORT_REF_INC;
+		tsm_rpc_msg.export_info.export_tsm_enabled = true;
+
+		/* Implementation to allow IOs for non conflicting opens
+		 * during grace period. Conflicting opens return ERR GRACE
+		 */
+		bool can_open = true;
+
+		if (nfs_get_grace_status(true)) {
+			if (claim == CLAIM_PREVIOUS)
+				reclaim = true;
+
+			tsm_rpc_msg.reclaim = reclaim;
+
+			can_open = tsm_is_access_valid(&tsm_rpc_msg, reclaim);
+		}
+
+		if (can_open) {
+			LogDebug(COMPONENT_TSM, "Valid open. Proceed");
+		} else {
+			res_OPEN4->status = NFS4ERR_GRACE;
+
+			LogDebug(COMPONENT_TSM,
+				 "Conflicting open. Return GRACE");
+
+			goto out3;
+		}
+	}
+#endif
+
 	/* Do the claim check here, so we can save the result in the
 	 * owner for NFSv4.0.
 	 */
 	res_OPEN4->status =
 		open4_validate_claim(data, claim, clientid, &grace_ref);
+
+#ifdef ENABLE_TSM
+	/* Overwrite NFS4ERR_GRACE if tsm is initialized */
+	if (tsm_initialized == 1 && res_OPEN4->status == NFS4ERR_GRACE) {
+		LogDebug(
+			COMPONENT_TSM,
+			"open4_validate_claim returned NFS4ERR_GRACE, overriding to OK");
+
+		res_OPEN4->status = NFS4_OK;
+	}
+#endif
+
 	if (res_OPEN4->status != NFS4_OK) {
 		LogDebug(COMPONENT_NFS_V4, "open4_validate_claim failed");
 		goto out;
@@ -1588,6 +1709,69 @@ out:
 out2:
 	if (grace_ref)
 		nfs_put_grace_status();
+
+#ifdef ENABLE_TSM
+	if (res_OPEN4->status == NFS4_OK && tsm_initialized == 1) {
+		tsm_rpc_msg.fsid_maj = data->current_obj->fsid.major;
+		tsm_rpc_msg.fsid_min = data->current_obj->fsid.minor;
+		tsm_rpc_msg.fileid = data->current_obj->fileid;
+
+		LogFullDebug(
+			COMPONENT_TSM,
+			"TSM: Sending SET_STATE (Open) for FileID=%lu fsid_maj=%lu fsid_min=%lu",
+			tsm_rpc_msg.fileid, tsm_rpc_msg.fsid_maj,
+			tsm_rpc_msg.fsid_min);
+
+		tsm_send_msg_with_ack(&tsm_rpc_msg);
+	}
+
+	open_delegation_type4 dtype =
+		res_OPEN4->OPEN4res_u.resok4.delegation.delegation_type;
+
+	if (dtype == OPEN_DELEGATE_READ || dtype == OPEN_DELEGATE_WRITE) {
+		memset(&tsm_rpc_msg, 0, sizeof(tsm_rpc_msg));
+
+		tsm_rpc_msg.msg_type = TSM_SET_STATE;
+		tsm_rpc_msg.rec_type = TSM_DELEG_REC;
+		tsm_rpc_msg.fsid_maj = data->current_obj->fsid.major;
+		tsm_rpc_msg.fsid_min = data->current_obj->fsid.minor;
+		tsm_rpc_msg.fileid = data->current_obj->fileid;
+
+		LogDebug(COMPONENT_TSM, "DELEG on fileid %lu msg fileid %lu",
+			 data->current_obj->fileid, tsm_rpc_msg.fileid);
+
+		tsm_rpc_msg.deleg_info.sd_type = dtype;
+		tsm_rpc_msg.deleg_info.share_access = arg_OPEN4->share_access;
+		tsm_rpc_msg.deleg_info.share_deny = arg_OPEN4->share_deny;
+
+		tsm_rpc_msg.export_info.export_id =
+			op_ctx->ctx_export->export_id;
+		tsm_rpc_msg.export_info.export_event = EXPORT_REF_INC;
+
+		tsm_rpc_msg.reclaim = reclaim;
+		tsm_rpc_msg.export_info.export_tsm_enabled = true;
+
+		if (data->preserved_clientid->cid_client_record->cr_client_val) {
+			base64url_encode(
+				data->preserved_clientid->cid_client_record
+					->cr_client_val,
+				data->preserved_clientid->cid_client_record
+					->cr_client_val_len,
+				tsm_rpc_msg.deleg_info.owner_str,
+				sizeof(tsm_rpc_msg.deleg_info.owner_str));
+		}
+
+		memcpy(&tsm_rpc_msg.source_addr, &tsm_my_addr,
+		       sizeof(sockaddr_t));
+
+		LogFullDebug(
+			COMPONENT_TSM,
+			"TSM: Sending SET_STATE (Deleg Grant) for FileID=%lu Type=%d",
+			tsm_rpc_msg.fileid, dtype);
+
+		tsm_send_msg_with_ack(&tsm_rpc_msg);
+	}
+#endif
 
 	/* Update the lease before exit */
 	if (data->minorversion == 0)

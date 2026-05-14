@@ -38,6 +38,13 @@ if(USE_RQUOTA)
   )
 endif(USE_RQUOTA)
 
+if(ENABLE_TSM)
+   SET(nfs_mnt_xdr_STAT_SRCS
+     ${nfs_mnt_xdr_STAT_SRCS}
+     xdr_tsm.c
+    )
+endif(ENABLE_TSM)
+
 add_library(nfs_mnt_xdr OBJECT ${nfs_mnt_xdr_STAT_SRCS})
 add_sanitizers(nfs_mnt_xdr)
 set_target_properties(nfs_mnt_xdr PROPERTIES COMPILE_FLAGS "-fPIC")

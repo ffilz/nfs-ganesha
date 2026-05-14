@@ -122,6 +122,23 @@ int nlm4_Free_All(nfs_arg_t *, struct svc_req *, nfs_res_t *);
  */
 #endif
 
+#ifdef ENABLE_TSM
+int tsm_rpc_msg_recv(nfs_arg_t *args,
+		     struct svc_req *req,
+		     nfs_res_t *res);
+
+int tsm_rpc_states_recv(nfs_arg_t *args,
+			struct svc_req *req,
+			nfs_res_t *res);
+
+int tsm_Null(nfs_arg_t *arg,
+	     struct svc_req *req,
+	     nfs_res_t *res);
+/* @}
+ * -- End of TSM functions. --
+ */
+#endif
+
 #ifdef _USE_RQUOTA
 int rquota_Null(nfs_arg_t *, struct svc_req *, nfs_res_t *);
 
@@ -480,6 +497,11 @@ void nlm4_Unlock_Free(nfs_res_t *);
 void nlm4_Sm_Notify_Free(nfs_res_t *);
 void nlm4_Granted_Res_Free(nfs_res_t *);
 void nlm4_Free_All_Free(nfs_res_t *);
+#endif
+
+#ifdef ENABLE_TSM
+void tsm_rpc_msg_Free(nfs_res_t *res);
+void tsm_Null_Free(nfs_res_t *res);
 #endif
 
 #ifdef _USE_RQUOTA

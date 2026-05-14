@@ -45,6 +45,10 @@
 #include "gsh_lttng/generated_traces/nfs4.h"
 #endif
 
+#include "transparent_recovery.h"
+#include "tsm.h"
+#include "bsd-base64.h"
+
 static const char *lock_tag = "LOCK";
 
 /**
@@ -568,11 +572,20 @@ check_seqid:
 			}
 		} else {
 			if (!nfs_get_grace_status(false)) {
-				LogLock(COMPONENT_NFS_V4_LOCK, NIV_DEBUG,
-					"LOCK failed, non-reclaim while in grace",
-					obj, resp_owner, &lock_desc);
-				res_LOCK4->status = NFS4ERR_GRACE;
-				goto out;
+				/* Return NFS4ERR_GRACE only when tsm is disabled */
+#ifdef ENABLE_TSM
+				if (!tsm_initialized) {
+#endif
+					LogLock(COMPONENT_NFS_V4_LOCK,
+						NIV_DEBUG,
+						"LOCK failed, non-reclaim while in grace",
+						obj, resp_owner, &lock_desc);
+
+					res_LOCK4->status = NFS4ERR_GRACE;
+					goto out;
+#ifdef ENABLE_TSM
+				}
+#endif
 			}
 		}
 		have_grace_ref = true;

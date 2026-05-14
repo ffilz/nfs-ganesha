@@ -80,6 +80,8 @@
 #include "monitoring.h"
 #include "nfs_metrics.h"
 
+#include "tsm.h"
+
 #define NFS_options nfs_param.core_param.core_options
 #define NFS_program nfs_param.core_param.program
 
@@ -141,6 +143,9 @@ const char *tags[P_COUNT] = {
 #endif
 #ifdef _USE_NFS_RDMA
 	"NFS_RDMA",
+#endif
+#ifdef ENABLE_TSM
+	"TSM",
 #endif
 };
 
@@ -222,6 +227,10 @@ static void unregister_rpc(void)
 		unregister(NFS_program[P_NFSACL], NFSACL_V3, NFSACL_V3);
 	}
 #endif
+#ifdef ENABLE_TSM
+	if (nfs_param.core_param.enable_TSM)
+		unregister(NFS_program[P_TSM], 1, TSM_VERS);
+#endif
 }
 
 static inline bool nfs_protocol_enabled(protos p)
@@ -263,6 +272,12 @@ static inline bool nfs_protocol_enabled(protos p)
 		break;
 #endif
 
+#ifdef ENABLE_TSM
+	case P_TSM:
+		if (nfs_param.core_param.enable_TSM)
+			return true;
+		break;
+#endif
 	default:
 		break;
 	}
@@ -532,6 +547,16 @@ static enum xprt_stat nfs_rpc_dispatch_RDMA(SVCXPRT *xprt)
 }
 #endif
 
+#ifdef ENABLE_TSM
+static enum xprt_stat nfs_rpc_dispatch_TSM(SVCXPRT *xprt)
+{
+	LogFullDebug(COMPONENT_TSM, "TSM  TCP request on SVCXPRT %p fd %d",
+		     xprt, xprt->xp_fd);
+	xprt->xp_dispatch.process_cb = nfs_rpc_valid_TSM;
+	return nfs_rpc_tcp_user_data(xprt);
+}
+#endif
+
 const svc_xprt_fun_t tcp_dispatch[P_COUNT] = {
 	nfs_rpc_dispatch_tcp_NFS,
 #ifdef _USE_NFS3
@@ -551,6 +576,9 @@ const svc_xprt_fun_t tcp_dispatch[P_COUNT] = {
 #endif
 #ifdef _USE_NFS_RDMA
 	nfs_rpc_dispatch_RDMA,
+#endif
+#ifdef ENABLE_TSM
+	nfs_rpc_dispatch_TSM,
 #endif
 };
 
@@ -1576,6 +1604,10 @@ void nfs_Init_svc(void)
 		Register_program(P_RQUOTA, RQUOTAVERS);
 		Register_program(P_RQUOTA, EXT_RQUOTAVERS);
 	}
+#endif
+#ifdef ENABLE_TSM
+	if (nfs_param.core_param.enable_TSM)
+		Register_program(P_TSM, TSM_VERS);
 #endif
 #endif /* RPCBIND */
 }

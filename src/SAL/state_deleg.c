@@ -56,6 +56,11 @@
 #include "nfs_convert.h"
 #include "fsal_convert.h"
 
+#ifdef ENABLE_TSM
+#include "transparent_recovery.h"
+#include "bsd-base64.h"
+#endif
+
 /* Keeps track of total number of files delegated */
 int32_t g_total_num_files_delegated;
 int32_t g_max_files_delegatable;
@@ -806,8 +811,65 @@ nfsstat4 deleg_revoke(struct fsal_obj_handle *obj, struct state_t *deleg_state)
 	 */
 	mark_sessions_have_revoked_delegations(clid);
 
+#ifdef ENABLE_TSM
+	tsm_rpc_info tsm_rpc_msg;
+	bool send_tsm_msg = false;
+
+	if (tsm_initialized) {
+		memset(&tsm_rpc_msg, 0, sizeof(tsm_rpc_msg));
+
+		tsm_rpc_msg.msg_type = TSM_DELETE_STATE;
+		tsm_rpc_msg.rec_type = TSM_DELEG_REC;
+		tsm_rpc_msg.fsid_maj = obj->fsid.major;
+		tsm_rpc_msg.fsid_min = obj->fsid.minor;
+		tsm_rpc_msg.fileid = obj->fileid;
+
+		tsm_rpc_msg.deleg_info.sd_type =
+			deleg_state->state_data.deleg.sd_type;
+		tsm_rpc_msg.deleg_info.share_access =
+			deleg_state->state_data.deleg.share_access;
+		tsm_rpc_msg.deleg_info.share_deny =
+			deleg_state->state_data.deleg.share_deny;
+
+		tsm_rpc_msg.export_info.export_id =
+			op_ctx->ctx_export->export_id;
+		tsm_rpc_msg.export_info.export_event = EXPORT_REF_DEC;
+
+		nfs_client_id_t *preserved_client_rec =
+			owner->so_owner.so_nfs4_owner.so_clientrec;
+
+		if (preserved_client_rec->cid_client_record->cr_client_val) {
+			base64url_encode(
+				preserved_client_rec->cid_client_record
+					->cr_client_val,
+				preserved_client_rec->cid_client_record
+					->cr_client_val_len,
+				tsm_rpc_msg.deleg_info.owner_str,
+				sizeof(tsm_rpc_msg.deleg_info.owner_str));
+		}
+		memcpy(&tsm_rpc_msg.source_addr, &tsm_my_addr,
+		       sizeof(sockaddr_t));
+
+		send_tsm_msg = true;
+		LogFullDebug(
+			COMPONENT_TSM,
+			"Sending DELETE_STATE (Deleg Revoke) for FileID=%lu fsid_maj=%lu fsid_min=%lu",
+			tsm_rpc_msg.fileid, tsm_rpc_msg.fsid_maj,
+			tsm_rpc_msg.fsid_min);
+	}
+#endif
 	state_del_locked(deleg_state);
 
+#ifdef ENABLE_TSM
+	if (send_tsm_msg) {
+		tsm_send_msg_with_ack(&tsm_rpc_msg);
+
+		/* delete any record on the local node */
+		tsm_ceph_nodes_t *node = tsm_find_node_by_addr(&tsm_my_addr);
+
+		tsm_delete_node_state(&tsm_rpc_msg, &node->state_info);
+	}
+#endif
 	gsh_free(fhandle.nfs_fh4_val);
 
 	/* Release references taken above */

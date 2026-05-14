@@ -140,5 +140,10 @@ enum xprt_stat nfs_rpc_valid_NFSACL(struct svc_req *);
 #ifdef _USE_NFS_RDMA
 enum xprt_stat nfs_rpc_valid_NFS_RDMA(struct svc_req *);
 #endif
-
+#ifdef ENABLE_TSM
+enum xprt_stat nfs_rpc_valid_TSM(struct svc_req *);
+#endif
+#ifdef ENABLE_TSM
+enum xprt_stat nfs_rpc_valid_TSM(struct svc_req *);
+#endif
 #endif /* !NFS_INIT_H */
