@@ -974,6 +974,19 @@ static void open4_ex(OPEN4args *arg, compound_data_t *data, OPEN4res *res_OPEN4,
 		 */
 		*file_state = nfs4_State_Get_Obj(file_obj, owner);
 
+		if (*file_state != NULL) {
+			bool closing;
+
+			PTHREAD_MUTEX_lock(&(*file_state)->state_mutex);
+			closing = (*file_state)->state_closing;
+			PTHREAD_MUTEX_unlock(&(*file_state)->state_mutex);
+
+			if (closing) {
+				dec_state_t_ref(*file_state);
+				*file_state = NULL;
+			}
+		}
+
 		if (isFullDebug(COMPONENT_STATE) && *file_state != NULL) {
 			char str[LOG_BUFF_LEN] = "\0";
 			struct display_buffer dspbuf = { sizeof(str), str,

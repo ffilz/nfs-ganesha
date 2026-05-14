@@ -44,6 +44,7 @@
 #include <time.h>
 #include <pthread.h>
 #include <dirent.h> /* For having MAXNAMLEN */
+#include <stdbool.h>
 
 #include "abstract_atomic.h"
 #include "abstract_mem.h"
@@ -461,6 +462,7 @@ struct state_t {
 	struct state_refer state_refer; /**< For NFSv4.1, track the
 					   call that created a
 					   state. */
+	bool state_closing; /**< True once CLOSE begins teardown; OPEN must not reuse */
 };
 
 static inline void free_state(struct state_t *state)
