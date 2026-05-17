@@ -429,6 +429,41 @@ nfsstat4 nfs4_Check_Stateid(stateid4 *stateid, struct fsal_obj_handle *fsal_obj,
 			    seqid4 owner_seqid, bool check_seqid,
 			    const char *tag);
 
+/**
+ * @brief Check and look up the supplied stateid, optionally acquiring locks
+ *
+ * This function yields the state for the stateid if it is valid, along with
+ * references to the associated state object and open owner. If requested,
+ * it acquires the state object lock and seqid mutex. The callee (caller of
+ * this function) is responsible for releasing those locks when done, in the
+ * expected release order: first PTHREAD_MUTEX_unlock(&state->seqid_mutex),
+ * and then STATELOCK_unlock(state_obj).
+ *
+ * @param[in]  stateid               Stateid to look up
+ * @param[in]  fsal_obj              Associated file (if any)
+ * @param[in]  data                  Compound data
+ * @param[in]  flags                 Flags governing special stateids
+ * @param[in]  owner_seqid           seqid on v4.0 owner
+ * @param[in]  check_seqid           Whether to validate owner_seqid
+ * @param[in]  should_lock           If true, acquires both STATELOCK
+ *                                   (on state_obj) and seqid_mutex (on state).
+ * @param[in]  tag                   Arbitrary string for logging/debugging
+ * @param[out] out_state_pp          Found state
+ * @param[out] out_state_obj_pp      Object containing state
+ * @param[out] out_open_owner_pp     Open owner for state
+ * @param[out] out_st_lock_held_p    Whether st_lock is held on return
+ * @param[out] out_seqid_lock_held_p Whether seqid_mutex is held on return
+ *
+ * @return NFSv4 status codes
+ */
+nfsstat4 nfs4_check_stateid_acquire_locks(
+	stateid4 *stateid, struct fsal_obj_handle *fsal_obj,
+	compound_data_t *data, int flags, seqid4 owner_seqid, bool check_seqid,
+	bool should_lock, const char *tag, state_t **out_state_pp,
+	struct fsal_obj_handle **out_state_obj_pp,
+	state_owner_t **out_open_owner_pp, bool *out_st_lock_held_p,
+	bool *out_seqid_lock_held_p);
+
 void update_stateid(state_t *state, stateid4 *stateid, compound_data_t *data,
 		    const char *tag);
 

@@ -445,6 +445,18 @@ struct state_t {
 #ifdef DEBUG_SAL
 	struct glist_head state_list_all; /**< Global list of all stateids */
 #endif
+	/**
+	 * @brief Mutex for stateid verification and race prevention.
+	 *
+	 * When acquiring multiple state-related locks in SAL, the required
+	 * locking hierarchy (from outer to inner) to prevent deadlocks is:
+	 * 1. STATELOCK (FSAL object state lock, e.g. via STATELOCK_lock)
+	 * 2. seqid_mutex (State sequence ID mutex, state_t::seqid_mutex)
+	 * 3. so_mutex (State owner mutex, state_owner_t::so_mutex)
+	 * 4. state_mutex (State internal pointer mutex, state_t::state_mutex)
+	 *
+	 */
+	pthread_mutex_t seqid_mutex;
 	pthread_mutex_t state_mutex; /**< Mutex protecting following pointers */
 	state_free_t *state_free; /**< function to free if default gsh_free
 				      doesn't work. */

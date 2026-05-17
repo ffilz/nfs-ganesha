@@ -328,6 +328,7 @@ void dec_nlm_state_ref(state_t *state)
 	}
 
 	PTHREAD_MUTEX_destroy(&state->state_mutex);
+	PTHREAD_MUTEX_destroy(&state->seqid_mutex);
 
 	free_state(state);
 
@@ -458,6 +459,7 @@ int get_nlm_state(enum state_type state_type, struct fsal_obj_handle *state_obj,
 	state->state_seqid = nsm_state;
 
 	PTHREAD_MUTEX_init(&state->state_mutex, NULL);
+	PTHREAD_MUTEX_init(&state->seqid_mutex, NULL);
 
 	if (state_type == STATE_TYPE_NLM_LOCK)
 		glist_init(&state->state_data.lock.state_locklist);
@@ -488,6 +490,7 @@ int get_nlm_state(enum state_type state_type, struct fsal_obj_handle *state_obj,
 			hash_table_err_to_str(rc), str);
 
 		PTHREAD_MUTEX_destroy(&state->state_mutex);
+		PTHREAD_MUTEX_destroy(&state->seqid_mutex);
 
 		/* Free the ref taken above and the state.
 		 * No need to close here, the state was never opened.
