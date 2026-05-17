@@ -288,8 +288,9 @@ state_status_t _state_add_impl(struct fsal_obj_handle *obj,
 
 errout:
 
-	if (mutex_init)
+	if (mutex_init) {
 		PTHREAD_MUTEX_destroy(&pnew_state->state_mutex);
+	}
 
 	if (pnew_state != NULL) {
 		/* Make sure the new state is closed (may have been passed in
