@@ -22,6 +22,30 @@
       },
       "revId": "826cba0eb336cc33be278a602b5ec40c5cd4f132",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5950b7c5_f470db26",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1270,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-17T16:41:48Z",
+      "side": 1,
+      "message": "I don\u0027t think we ever will hit this if block.\nIn case file_obj !\u003d NULL (line 955), we will immediately lock the statelock and then acquire the seqid lock at 978.\nIn case file_obj \u003d\u003d NULL, the statelock will be acquired in line 1135, and the seqid in line 1192.\nthe statelock might be unlocked in line 1220, but in that case we got to out skipping this block again. This looks like legacy code?",
+      "parentUuid": "77baac55_82774ef1",
+      "range": {
+        "startLine": 1268,
+        "startChar": 0,
+        "endLine": 1270,
+        "endChar": 32
+      },
+      "revId": "826cba0eb336cc33be278a602b5ec40c5cd4f132",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
