@@ -34,6 +34,7 @@
 #include <unistd.h>
 #include <streambuf>
 #include <mutex>
+#include "nfs_core.h"
 #include "gsh_config.h"
 #ifdef HAVE_PROCPS
 #include <proc/readproc.h>
@@ -41,7 +42,7 @@
 
 #include "prometheus_exposer.h"
 #include "dynamic_metrics.h"
-
+#include "server_stats.h"
 #ifdef USE_MONITORING
 
 #define PERROR(MESSAGE)                                                    \
@@ -272,6 +273,14 @@ static inline int64_t get_elapsed_ms(uint64_t start_time_ns)
 	return (now_mono_ns() - start_time_ns) / 1000000LL;
 }
 
+static void update_all_metrics(void)
+{
+	update_rpc_metrics();
+	//update_client_metrics(); // Needs to be implemented
+	update_ops_metrics(); // Implemented in patchset 2
+	return;
+}
+
 void *PrometheusExposer::server_thread(void *arg)
 {
 	PrometheusExposer *const exposer =
@@ -286,6 +295,7 @@ void *PrometheusExposer::server_thread(void *arg)
 				PERROR("Failed to accept connection");
 			continue;
 		}
+		update_all_metrics();
 		const uint64_t start_time = now_mono_ns();
 		recv(client_fd, buffer, sizeof(buffer), 0);
 
@@ -321,12 +331,18 @@ void *PrometheusExposer::server_thread(void *arg)
 
 extern "C" {
 
+void register_all_metrics()
+{
+	register_rpcs_metrics();
+}
+
 void prometheus_exposer__start(const sockaddr_t *addr, uint16_t port,
 			       prometheus_registry_handle_t registry_handle)
 {
 	static bool initialized = false;
 	if (initialized)
 		return;
+	register_all_metrics();
 	prometheus::Registry *registry_ptr =
 		static_cast<prometheus::Registry *>(registry_handle.registry);
 	static PrometheusExposer exposer(*registry_ptr);
