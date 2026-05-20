@@ -41,9 +41,6 @@ void nfs_metrics__nfs4_op_completed(nfs_opnum4, nfsstat4, nsecs_elapsed_t);
 void nfs_metrics__gss_request_dropped(void);
 void nfs_metrics__nfs4_compound_completed(nfsstat4, nsecs_elapsed_t,
 					  int num_ops);
-void nfs_metrics__rpc_received(void);
-void nfs_metrics__rpc_completed(void);
-void nfs_metrics__rpcs_in_flight(int64_t value);
 void nfs_metrics__init(void);
 
 /*
