@@ -155,10 +155,8 @@ enum nfsstat4_index {
 	FOREACH_NFS_STAT4(DEFINE_INDEX) NFSSTAT4_INDEX_LAST,
 };
 
-static counter_metric_handle_t rpcs_received_total;
-static counter_metric_handle_t rpcs_completed_total;
-static gauge_metric_handle_t rpcs_inflight;
 gauge_metric_handle_t ganesha_info;
+
 /* NFSv4 Operation Metrics */
 static histogram_metric_handle_t nfsv4_op_latency[NFS4_OP_LAST_ONE]
 						 [NFSSTAT4_INDEX_LAST];
@@ -296,42 +294,6 @@ void nfs_metrics__nfs4_compound_completed(nfsstat4 statcode,
 	monitoring__histogram_observe(compound_ops_count_metric, num_ops);
 }
 
-static void register_rpcs_metrics(void)
-{
-	const metric_label_t labels[] = {};
-
-	rpcs_received_total = monitoring__register_counter(
-		"rpcs_received_total",
-		METRIC_METADATA("Number of NFS requests received",
-				METRIC_UNIT_NONE),
-		labels, ARRAY_SIZE(labels));
-	rpcs_completed_total = monitoring__register_counter(
-		"rpcs_completed_total",
-		METRIC_METADATA("Number of NFS requests completed",
-				METRIC_UNIT_NONE),
-		labels, ARRAY_SIZE(labels));
-	rpcs_inflight = monitoring__register_gauge(
-		"rpcs_in_flight",
-		METRIC_METADATA("Number of NFS requests received or in flight.",
-				METRIC_UNIT_NONE),
-		labels, ARRAY_SIZE(labels));
-}
-
-void nfs_metrics__rpc_received(void)
-{
-	monitoring__counter_inc(rpcs_received_total, 1);
-}
-
-void nfs_metrics__rpc_completed(void)
-{
-	monitoring__counter_inc(rpcs_completed_total, 1);
-}
-
-void nfs_metrics__rpcs_in_flight(int64_t value)
-{
-	monitoring__gauge_set(rpcs_inflight, value);
-}
-
 #ifdef _USE_NFS3
 void nfs_metrics__nfs3_request(uint32_t proc, nsecs_elapsed_t request_time,
 			       enum nfs_req_result result, nfsstat3 nfs_status,
@@ -364,7 +326,6 @@ void nfs_metrics__nfs4_request(uint32_t op, nsecs_elapsed_t request_time,
 
 void nfs_metrics__init(void)
 {
-	register_rpcs_metrics();
 	register_nfsv4_operations_metrics();
 	register_dropped_gss_requests_count_metric();
 	register_compound_operation_metrics();
