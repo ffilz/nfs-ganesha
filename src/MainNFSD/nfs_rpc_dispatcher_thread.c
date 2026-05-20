@@ -79,6 +79,7 @@
 
 #include "monitoring.h"
 #include "nfs_metrics.h"
+#include "prometheus_exposer.h"
 
 #define NFS_options nfs_param.core_param.core_options
 #define NFS_program nfs_param.core_param.program
@@ -174,6 +175,67 @@ SVCXPRT *tcp_xprt[P_COUNT];
 bool v6disabled;
 bool vsock;
 bool rdma;
+
+#ifdef USE_MONITORING
+static counter_metric_handle_t rpcs_received_total;
+static counter_metric_handle_t rpcs_completed_total;
+static gauge_metric_handle_t rpcs_inflight;
+
+static uint64_t last_rpc_received_total;
+static uint64_t last_rpc_completed_total;
+static bool rpc_metrics_initialized;
+
+void register_rpcs_metrics(void)
+{
+        const metric_label_t labels[] = {};
+
+        rpcs_received_total = monitoring__register_counter(
+                "rpcs_received_total",
+                METRIC_METADATA("Number of NFS requests received",
+                                METRIC_UNIT_NONE),
+                labels, ARRAY_SIZE(labels));
+        rpcs_completed_total = monitoring__register_counter(
+                "rpcs_completed_total",
+                METRIC_METADATA("Number of NFS requests completed",
+                                METRIC_UNIT_NONE),
+                labels, ARRAY_SIZE(labels));
+        rpcs_inflight = monitoring__register_gauge(
+                "rpcs_in_flight",
+                METRIC_METADATA("Number of NFS requests received or in flight.",
+                                METRIC_UNIT_NONE),
+                labels, ARRAY_SIZE(labels));
+}
+
+void update_rpc_metrics(void)
+{
+
+	const uint64_t enq = nfs_health_.enqueued_reqs;
+	const uint64_t deq = nfs_health_.dequeued_reqs;
+
+	if (!rpc_metrics_initialized) {
+		last_rpc_received_total = enq;
+		last_rpc_completed_total = deq;
+		rpc_metrics_initialized = true;
+		uint64_t inflight = (enq >= deq) ? (enq - deq) : 0;
+
+		monitoring__gauge_set(rpcs_inflight, (int64_t)inflight);
+		return;
+	}
+	
+	const uint64_t delta_enq = (enq >= last_rpc_received_total) ? (enq - last_rpc_received_total) : 0;
+	const uint64_t delta_deq = (deq >= last_rpc_completed_total) ? (deq - last_rpc_completed_total) : 0;
+
+
+        monitoring__counter_inc(rpcs_received_total, delta_enq);
+        monitoring__counter_inc(rpcs_completed_total, delta_deq);
+	
+	uint64_t inflight = (enq >= deq) ? (enq - deq) : 0;
+        monitoring__gauge_set(rpcs_inflight, inflight);
+
+	last_rpc_received_total = enq;
+	last_rpc_completed_total = deq;
+}
+#endif
 
 /**
  * @brief Unregister an RPC program.
@@ -1658,10 +1720,6 @@ static struct svc_req *alloc_nfs_request(SVCXPRT *xprt, XDR *xdrs)
 
 	(void)atomic_inc_uint64_t(&nfs_health_.enqueued_reqs);
 
-	nfs_metrics__rpc_received();
-	nfs_metrics__rpcs_in_flight(nfs_health_.enqueued_reqs -
-				    nfs_health_.dequeued_reqs);
-
 	/* set up req */
 	SVC_REF(xprt, SVC_REF_FLAG_NONE);
 	reqdata->svc.rq_xprt = xprt;
@@ -1707,5 +1765,4 @@ static void free_nfs_request(struct svc_req *req, enum xprt_stat stat)
 
 	(void)atomic_inc_uint64_t(&nfs_health_.dequeued_reqs);
 
-	nfs_metrics__rpc_completed();
 }
