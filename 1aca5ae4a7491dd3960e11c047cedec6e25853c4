@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ae87cc5_a91cc32c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-05-20T14:57:43Z",
+      "side": 1,
+      "message": "Similar to the way RPC metrics are updated, we can also update client metrics and expose their values by leveraging the server_stats and export_stats structures. As @ffilzlnx@mindspring.com pointed out(https://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/support/server_stats.c#L1521-L1556) , in this section of the code the server_st and exp_st parameters are being updated, and those updated values can be used directly to reflect accurate metric values.",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
