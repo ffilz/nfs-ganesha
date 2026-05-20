@@ -16,6 +16,822 @@
       "message": "Similar to the way RPC metrics are updated, we can also update client metrics and expose their values by leveraging the server_stats and export_stats structures. As @ffilzlnx@mindspring.com pointed out(https://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/support/server_stats.c#L1521-L1556) , in this section of the code the server_st and exp_st parameters are being updated, and those updated values can be used directly to reflect accurate metric values.",
       "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9426fe38_043b31ff",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        const metric_label_t labels[] \u003d {};$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3caec771_b8ac94be",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        const metric_label_t labels[] \u003d {};$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17485a6a_7e6d4c74",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    -         const metric_label_t labels[] \u003d {};\n    - Extra blank line to be removed\n    -         rpcs_received_total \u003d monitoring__register_counter(\n    -                 \"rpcs_received_total\",\n    -                 METRIC_METADATA(\"Number of NFS requests received\",\n    -                                 METRIC_UNIT_NONE),\n    -                 labels, ARRAY_SIZE(labels));\n    -         rpcs_completed_total \u003d monitoring__register_counter(\n    -                 \"rpcs_completed_total\",\n    -                 METRIC_METADATA(\"Number of NFS requests completed\",\n    -                                 METRIC_UNIT_NONE),\n    -                 labels, ARRAY_SIZE(labels));\n    -         rpcs_inflight \u003d monitoring__register_gauge(\n    -                 \"rpcs_in_flight\",\n    -                 METRIC_METADATA(\"Number of NFS requests received or in flight.\",\n    -                                 METRIC_UNIT_NONE),\n    -                 labels, ARRAY_SIZE(labels));\n    - Extra blank line to be removed\n→ to be replaced with:\n    + \tconst metric_label_t labels[] \u003d {};\n    + Blank line to be added\n    + \trpcs_received_total \u003d monitoring__register_counter(\n    + \t\t\"rpcs_received_total\",\n    + \t\tMETRIC_METADATA(\"Number of NFS requests received\",\n    + \t\t\t\tMETRIC_UNIT_NONE),\n    + \t\tlabels, ARRAY_SIZE(labels));\n    + \trpcs_completed_total \u003d monitoring__register_counter(\n    + \t\t\"rpcs_completed_total\",\n    + \t\tMETRIC_METADATA(\"Number of NFS requests completed\",\n    + \t\t\t\tMETRIC_UNIT_NONE),\n    + \t\tlabels, ARRAY_SIZE(labels));\n    + \trpcs_inflight \u003d monitoring__register_gauge(\n    + \t\t\"rpcs_in_flight\",\n    + \t\tMETRIC_METADATA(\"Number of NFS requests received or in flight.\",\n    + \t\t\t\tMETRIC_UNIT_NONE),\n    + \t\tlabels, ARRAY_SIZE(labels));",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12f4c621_6eb1c95a",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        rpcs_received_total \u003d monitoring__register_counter($",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a17fecc_55505632",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        rpcs_received_total \u003d monitoring__register_counter($",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f310c93_70885106",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                \"rpcs_received_total\",$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3422e316_f97d12a4",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                \"rpcs_received_total\",$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f8be958_4862be66",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                METRIC_METADATA(\"Number of NFS requests received\",$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "347b88d7_7056a023",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                METRIC_METADATA(\"Number of NFS requests received\",$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16fe25d1_7e26d5bc",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                METRIC_UNIT_NONE),$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a03c292e_1385f867",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                METRIC_UNIT_NONE),$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd2b0c4c_e4a0ebb6",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                labels, ARRAY_SIZE(labels));$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88e5dacb_c0263a55",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                labels, ARRAY_SIZE(labels));$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "487c461d_3f6c35b5",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        rpcs_completed_total \u003d monitoring__register_counter($",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdd63f06_bb4cfda7",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        rpcs_completed_total \u003d monitoring__register_counter($",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c04ac4b9_284ab481",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                \"rpcs_completed_total\",$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0190a8f9_3864d4ef",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                \"rpcs_completed_total\",$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6af34819_5f9feed8",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                METRIC_METADATA(\"Number of NFS requests completed\",$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c363f8f_e14b0a5a",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                METRIC_METADATA(\"Number of NFS requests completed\",$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53a1a91c_fb3752fb",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                METRIC_UNIT_NONE),$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7401155_a0cd9db4",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                METRIC_UNIT_NONE),$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2635082_059ffa56",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                labels, ARRAY_SIZE(labels));$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33aa88f6_3ef1d2c7",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                labels, ARRAY_SIZE(labels));$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cd37f1b_8bed853b",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        rpcs_inflight \u003d monitoring__register_gauge($",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f43ac09_3ceb9e7b",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        rpcs_inflight \u003d monitoring__register_gauge($",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5905bdf5_7f92752a",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                \"rpcs_in_flight\",$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81cca4fc_ec81b6da",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                \"rpcs_in_flight\",$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c5648db_16d99d56",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                METRIC_METADATA(\"Number of NFS requests received or in flight.\",$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4373e30d_dbb00689",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                METRIC_METADATA(\"Number of NFS requests received or in flight.\",$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "694d86bb_3058162c",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                                METRIC_UNIT_NONE),$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f99bd208_5cada3ff",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                                METRIC_UNIT_NONE),$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4c431ea_64275817",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                labels, ARRAY_SIZE(labels));$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d140d496_b05014a8",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                labels, ARRAY_SIZE(labels));$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ea371b_5f2f6932",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - Extra blank line to be removed\n    - \tconst uint64_t delta_enq \u003d (enq \u003e\u003d last_rpc_received_total) ? (enq - last_rpc_received_total) : 0;\n    - \tconst uint64_t delta_deq \u003d (deq \u003e\u003d last_rpc_completed_total) ? (deq - last_rpc_completed_total) : 0;\n    -         monitoring__counter_inc(rpcs_received_total, delta_enq);\n    -         monitoring__counter_inc(rpcs_completed_total, delta_deq);\n    - Extra blank line to be removed\n    -         monitoring__gauge_set(rpcs_inflight, inflight);\n→ to be replaced with:\n    + \tconst uint64_t delta_enq \u003d (enq \u003e\u003d last_rpc_received_total)\n    + \t\t\t\t\t   ? (enq - last_rpc_received_total)\n    + \t\t\t\t\t   : 0;\n    + \tconst uint64_t delta_deq \u003d (deq \u003e\u003d last_rpc_completed_total)\n    + \t\t\t\t\t   ? (deq - last_rpc_completed_total)\n    + \t\t\t\t\t   : 0;\n    + Blank line to be added\n    + \tmonitoring__counter_inc(rpcs_received_total, delta_enq);\n    + \tmonitoring__counter_inc(rpcs_completed_total, delta_deq);\n    + \tmonitoring__gauge_set(rpcs_inflight, inflight);",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4812631c_4639c2cb",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d303be39_21243ade",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: line length of 106 exceeds 80 columns\n+\tconst uint64_t delta_enq \u003d (enq \u003e\u003d last_rpc_received_total) ? (enq - last_rpc_received_total) : 0;",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6806ca65_ea2653f0",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: line length of 108 exceeds 80 columns\n+\tconst uint64_t delta_deq \u003d (deq \u003e\u003d last_rpc_completed_total) ? (deq - last_rpc_completed_total) : 0;",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "012fa585_b8f70b02",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        monitoring__counter_inc(rpcs_received_total, delta_enq);$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d2760d1_e263931e",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        monitoring__counter_inc(rpcs_received_total, delta_enq);$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a43de9ea_4472eb54",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        monitoring__counter_inc(rpcs_completed_total, delta_deq);$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f60c3627_91f5d04b",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        monitoring__counter_inc(rpcs_completed_total, delta_deq);$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ad2a795_5edc3977",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c0d711a_043d8745",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        monitoring__gauge_set(rpcs_inflight, inflight);$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96096abc_d41407d3",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        monitoring__gauge_set(rpcs_inflight, inflight);$",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "380205b3_3ad572bb",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "clang-format expects to remove the following lines:\n    - Extra blank line to be removed",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24881190_48b122aa",
+        "filename": "src/include/nfs_core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "clang-format expects to remove the following lines:\n    - Extra blank line to be removed",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "702a3809_0a2eaf5a",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - //\tupdate_client_metrics(); // Needs to be implemented\n    - //\tupdate_export_metrics(); // Needs to be implemented\n→ to be replaced with:\n    + \t//\tupdate_client_metrics(); // Needs to be implemented\n    + \t//\tupdate_export_metrics(); // Needs to be implemented",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63aa6fc8_03d34976",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-20T15:43:48Z",
+      "side": 1,
+      "message": "clang-format expects to remove the following lines:\n    - Extra blank line to be removed\n    - Extra blank line to be removed",
+      "revId": "1aca5ae4a7491dd3960e11c047cedec6e25853c4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
