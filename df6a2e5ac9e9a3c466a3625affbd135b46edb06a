@@ -34,6 +34,23 @@
       "parentUuid": "73c5d849_358f220d",
       "revId": "df6a2e5ac9e9a3c466a3625affbd135b46edb06a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acc5cd63_5fe848db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-21T18:37:36Z",
+      "side": 1,
+      "message": "This is exposing an issue that Ganesha and ntirpc can\u0027t agree on whether to build for RDMA or not. This needs to be properly cleaned up so either both build for RDMA or neither build for RDMA.",
+      "revId": "df6a2e5ac9e9a3c466a3625affbd135b46edb06a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
