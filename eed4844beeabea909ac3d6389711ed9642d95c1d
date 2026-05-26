@@ -118,6 +118,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0906718_a3bf4c61",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-26T22:35:28Z",
+      "side": 1,
+      "message": "Yea, it\u0027s always slightly confusing as we have one reference to the fsal_obj_handle from the current_FH from PUTFH. But then a stateid also implies a fsal_obj_handle. Really we should check if they are the same when we reference a stateid, and then only keep a single ref and pointer.",
+      "parentUuid": "2016b16e_eed80531",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 42
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "686d170e_e0e3e996",
         "filename": "src/Protocols/NFS/nfs4_op_lock.c",
         "patchSetId": 3
@@ -233,6 +257,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91bf62bc_89bbba33",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-26T22:35:28Z",
+      "side": 1,
+      "message": "Yea, we should reduce confusion here and opportunity for leaked references.",
+      "parentUuid": "4a574a06_2be147ea",
+      "range": {
+        "startLine": 811,
+        "startChar": 0,
+        "endLine": 813,
+        "endChar": 2
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bcf6058_eec5a984",
         "filename": "src/Protocols/NFS/nfs4_op_locku.c",
         "patchSetId": 3
@@ -267,6 +315,30 @@
       "writtenOn": "2026-05-26T16:58:24Z",
       "side": 1,
       "message": "Assuming all the added checks here, do we still need to differentiate between `out2` and `out3`?",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 2
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "813e1db3_4cdd5c5c",
+        "filename": "src/Protocols/NFS/nfs4_op_locku.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-26T22:35:28Z",
+      "side": 1,
+      "message": "Yea, simplification there makes sense.",
+      "parentUuid": "733ec01c_999d2ac6",
       "range": {
         "startLine": 233,
         "startChar": 0,
@@ -394,6 +466,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "126122db_be8a3e12",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-26T22:35:28Z",
+      "side": 1,
+      "message": "Yea, let\u0027s not add braces.\n\nWhen I do feel like braces for a single statement make sense, I add a comment... (old trick for tricking checkpatch.pl into not complaining...).",
+      "parentUuid": "58467aa8_b4b210cb",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 2
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5977250_143b0ae3",
         "filename": "src/SAL/nfs4_state_id.c",
         "patchSetId": 3
@@ -405,6 +501,30 @@
       "writtenOn": "2026-05-26T16:58:24Z",
       "side": 1,
       "message": "Can we add that? I think it is only `layoutrecall`, ` nfs4_op_layout_get`, `nfs4_op_layout_return`",
+      "range": {
+        "startLine": 1389,
+        "startChar": 0,
+        "endLine": 1392,
+        "endChar": 4
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccefce6f_1eee73b4",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-26T22:35:28Z",
+      "side": 1,
+      "message": "Yes, please do.",
+      "parentUuid": "f5977250_143b0ae3",
       "range": {
         "startLine": 1389,
         "startChar": 0,
@@ -463,6 +583,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "158a22ca_36fb4517",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-26T22:35:28Z",
+      "side": 1,
+      "message": "Yes, I think that is the right order to follow.\n\nAnd yes, we should document more lock ordering requirements",
+      "parentUuid": "ebbf17dc_474676cf",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 457,
+        "endChar": 4
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b7cc1f0_e65ac308",
         "filename": "src/include/sal_data.h",
         "patchSetId": 3
@@ -474,6 +618,30 @@
       "writtenOn": "2026-05-26T16:58:24Z",
       "side": 1,
       "message": "nit: did clang format formatted it that way?\nIt seems a bit weird\n\nI\u0027d move the comment to a separate line if that\u0027s what it does (btw why id doesn\u0027t do it for `stateid_other`?",
+      "range": {
+        "startLine": 460,
+        "startChar": 15,
+        "endLine": 461,
+        "endChar": 12
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9d0d7a7_3e9f94dd",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-26T22:35:28Z",
+      "side": 1,
+      "message": "Yea, if clang-format is making a mess of such comments, might be better to move them to separate line before - but that\u0027s also a massive change...",
+      "parentUuid": "6b7cc1f0_e65ac308",
       "range": {
         "startLine": 460,
         "startChar": 15,
