@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dcf246e_85ca0789",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-05-27T12:10:28Z",
+      "side": 1,
+      "message": "should this be xdr_wrapstring?\nbecause in case of encoding/decoding  : \nnfs_rpc_process_request-\u003e SVCAUTH_CHECKSUM() -\u003e svcauth_none_checksum() -\u003e \nfinal call : (*req-\u003erq_msg.rm_xdr.proc)[svc_auth_none.c:62] (req-\u003erq_xdrs, req-\u003erq_msg.rm_xdr.where)\nabove proc is nothing but xdr_string()\n3rd argument for xdr_string is not populated (which is size and will be garbage in this case).\n\nI am not fully sure, because there are still other references(8) in current file where code ends up using the xdr_string in places of xdr_wrapstring\n\nplease recheck, this may lead to unintended behavior.\nIt might also be possible, I am missing something which needs to be considered here.",
+      "revId": "22243debaa7d0f0ebea1ad1a63bf8f87b351e95e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c22b79d_14a5979a",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-05-27T12:10:28Z",
+      "side": 1,
+      "message": "Is this .funcname \u003d \"v\" correct ? not sure but shouldn\u0027t it be something like\n.funcname \u003d SM_MON , for below also .funcname \u003d SM_UNMON",
+      "revId": "22243debaa7d0f0ebea1ad1a63bf8f87b351e95e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5197ca87_3b9cae25",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-05-27T12:10:28Z",
+      "side": 1,
+      "message": "all values including configurable are assigned as SM_PROG",
+      "revId": "22243debaa7d0f0ebea1ad1a63bf8f87b351e95e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
