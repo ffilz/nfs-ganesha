@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9a3bd3a_c0faf52a",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 1597,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-05-27T17:23:07Z",
+      "side": 1,
+      "message": "should this be \"enable Local NLM support\" instead of \"enable NLM support\"?",
+      "revId": "d89c925363369145b0b84a726e9454e3cf69e88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b835e67a_77908e48",
+        "filename": "src/Protocols/NLM/nlm_async.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-05-27T17:23:07Z",
+      "side": 1,
+      "message": "Please initialize nconf with NULL, it can have garbage which might get passed to clint_tli_ncreate, subcall does have handling specific to NULL.",
+      "revId": "d89c925363369145b0b84a726e9454e3cf69e88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d62ca1d_fbf75806",
+        "filename": "src/Protocols/NLM/nlm_async.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-05-27T17:23:07Z",
+      "side": 1,
+      "message": "\u0026srv_netbuf is bind_addr and \u0026cli_netbuf is server address, a comment should help in understanding why we are doing like this(reversing the parameters, i.e for loopback).",
+      "revId": "d89c925363369145b0b84a726e9454e3cf69e88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
