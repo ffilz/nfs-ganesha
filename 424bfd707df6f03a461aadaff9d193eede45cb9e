@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b13204e3_8a5ef57b",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-05-27T12:38:13Z",
+      "side": 1,
+      "message": "should be endif(INTERNAL_RPCBIND) only, USE_NLM is part of sub condition",
+      "revId": "424bfd707df6f03a461aadaff9d193eede45cb9e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbddb92a_7ad5c6a3",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 1581,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-05-27T12:38:13Z",
+      "side": 1,
+      "message": "should this be : \"enable Internal RPCBIND support\" instead or \"Statd\" ?",
+      "revId": "424bfd707df6f03a461aadaff9d193eede45cb9e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce618224_b768f75d",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-05-27T12:38:13Z",
+      "side": 1,
+      "message": "Not sure, but needs to be validated. please refer NSM patch comments. xdr_wrapstring in place of xdr_string in all other places also.",
+      "revId": "424bfd707df6f03a461aadaff9d193eede45cb9e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f71f289e_d590e8af",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-05-27T12:38:13Z",
+      "side": 1,
+      "message": "PMAP_program missing entry in this file.",
+      "revId": "424bfd707df6f03a461aadaff9d193eede45cb9e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34cc003c_0b01bfa6",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-05-27T12:38:13Z",
+      "side": 1,
+      "message": "Configurable entries but hardcoded to PMAPPORT only , same for PMAP_Program also\n\nganesha-core-config.rst says :\nPMAP_Port (uint16, range 0 to UINT16_MAX, default 111)\n    Port number used by PORTMAP/RPCBIND Protocol.",
+      "revId": "424bfd707df6f03a461aadaff9d193eede45cb9e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
