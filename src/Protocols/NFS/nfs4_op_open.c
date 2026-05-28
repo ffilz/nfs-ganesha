@@ -757,6 +757,19 @@ static void open4_ex_create_args(OPEN4args *arg, compound_data_t *data,
  *
  */
 
+static unsigned int build_atomic_prev_mask(unsigned int share_val,
+					   unsigned int read_bit,
+					   unsigned int write_bit)
+{
+	unsigned int mask = 0;
+
+	if (share_val & read_bit)
+		mask |= (1 << read_bit);
+	if (share_val & write_bit)
+		mask |= (1 << write_bit);
+	return mask;
+}
+
 static void open4_ex(OPEN4args *arg, compound_data_t *data, OPEN4res *res_OPEN4,
 		     nfs_client_id_t *clientid, state_owner_t *owner,
 		     state_t **file_state, bool *new_state,
@@ -1130,10 +1143,13 @@ retry_open_file:
 		candidate_data.share.share_access = arg->share_access &
 						    OPEN4_SHARE_ACCESS_BOTH;
 		candidate_data.share.share_deny = arg->share_deny;
-		candidate_data.share.share_access_prev =
-			(1 << candidate_data.share.share_access);
+		candidate_data.share.share_access_prev = build_atomic_prev_mask(
+			candidate_data.share.share_access,
+			OPEN4_SHARE_ACCESS_READ, OPEN4_SHARE_ACCESS_WRITE);
 		candidate_data.share.share_deny_prev =
-			(1 << candidate_data.share.share_deny);
+			build_atomic_prev_mask(candidate_data.share.share_deny,
+					       OPEN4_SHARE_DENY_READ,
+					       OPEN4_SHARE_DENY_WRITE);
 
 		LogFullDebug(
 			COMPONENT_STATE,
@@ -1227,10 +1243,13 @@ retry_open_file:
 
 		/* Update share_access_prev and share_deny_prev */
 		(*file_state)->state_data.share.share_access_prev |=
-			(1 << (arg->share_access & OPEN4_SHARE_ACCESS_BOTH));
-
+			build_atomic_prev_mask(arg->share_access,
+					       OPEN4_SHARE_ACCESS_READ,
+					       OPEN4_SHARE_ACCESS_WRITE);
 		(*file_state)->state_data.share.share_deny_prev |=
-			(1 << arg->share_deny);
+			build_atomic_prev_mask(arg->share_deny,
+					       OPEN4_SHARE_DENY_READ,
+					       OPEN4_SHARE_DENY_WRITE);
 
 		LogFullDebug(
 			COMPONENT_STATE,
