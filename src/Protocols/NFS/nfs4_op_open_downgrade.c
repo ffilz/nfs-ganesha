@@ -184,6 +184,15 @@ void nfs4_op_open_downgrade_CopyRes(OPEN_DOWNGRADE4res *res_dst,
 	/* Nothing to deep copy */
 }
 
+static bool share_prev_covers(unsigned int prev_mask, unsigned int request,
+			      unsigned int read_bit, unsigned int write_bit)
+{
+	unsigned int required =
+		decompose_share_bits(request, read_bit, write_bit);
+
+	return (prev_mask & required) == required;
+}
+
 static nfsstat4 nfs4_do_open_downgrade(struct nfs_argop4 *op,
 				       compound_data_t *data,
 				       state_owner_t *owner, state_t *state,
@@ -229,11 +238,12 @@ static nfsstat4 nfs4_do_open_downgrade(struct nfs_argop4 *op,
 		return NFS4ERR_INVAL;
 	}
 
-	/* Check if given share access is previously seen */
-	if (((state->state_data.share.share_access_prev &
-	      (1 << args->share_access)) == 0) ||
-	    ((state->state_data.share.share_deny_prev &
-	      (1 << args->share_deny)) == 0)) {
+	if (!share_prev_covers(state->state_data.share.share_access_prev,
+			       args->share_access, OPEN4_SHARE_ACCESS_READ,
+			       OPEN4_SHARE_ACCESS_WRITE) ||
+	    !share_prev_covers(state->state_data.share.share_deny_prev,
+			       args->share_deny, OPEN4_SHARE_DENY_READ,
+			       OPEN4_SHARE_DENY_WRITE)) {
 		*cause = " (share access or deny never seen before)";
 		STATELOCK_unlock(data->current_obj);
 		return NFS4ERR_INVAL;

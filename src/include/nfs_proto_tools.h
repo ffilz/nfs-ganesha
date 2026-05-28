@@ -34,6 +34,7 @@
 #ifndef _NFS_PROTO_TOOLS_H
 #define _NFS_PROTO_TOOLS_H
 
+#include <assert.h>
 #include <stdio.h>
 #include <string.h>
 #include <pthread.h>
@@ -359,5 +360,35 @@ acl_t decode_posix_acl(posix_acl *nfs3_acl, uint32_t type);
 int nfs3_acl_2_fsal_acl(struct fsal_attrlist *attr, nfs3_int32 mask,
 			posix_acl *a_acl, posix_acl *d_acl, bool is_dir);
 #endif /* USE_NFSACL3 */
+
+/**
+ * @brief Decompose a composite share value into atomic per-bit history mask.
+ *
+ * Each defined share constant (READ, WRITE) doubles as both the bitwise test
+ * mask and the shift offset.  static_assert enforces that this mathematical
+ * coincidence holds so future constant additions cannot silently corrupt the
+ * tracking mask.  A request of DENY_NONE (0) yields required=0, which is
+ * trivially covered by any prev_mask, correctly allowing unconditional
+ * downgrade to DENY_NONE per RFC 5661 §18.18.3.
+ *
+ * Use 1u for the shifts to avoid undefined behaviour on 32-bit signed ints.
+ */
+static inline unsigned int decompose_share_bits(unsigned int share_val,
+						unsigned int read_bit,
+						unsigned int write_bit)
+{
+	static_assert(OPEN4_SHARE_ACCESS_READ == 1, "shift invariant broken");
+	static_assert(OPEN4_SHARE_ACCESS_WRITE == 2, "shift invariant broken");
+	static_assert(OPEN4_SHARE_DENY_READ == 1, "shift invariant broken");
+	static_assert(OPEN4_SHARE_DENY_WRITE == 2, "shift invariant broken");
+
+	unsigned int mask = 0;
+
+	if (share_val & read_bit)
+		mask |= (1u << read_bit);
+	if (share_val & write_bit)
+		mask |= (1u << write_bit);
+	return mask;
+}
 
 #endif /* _NFS_PROTO_TOOLS_H */

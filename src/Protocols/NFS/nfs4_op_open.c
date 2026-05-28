@@ -1131,9 +1131,12 @@ retry_open_file:
 						    OPEN4_SHARE_ACCESS_BOTH;
 		candidate_data.share.share_deny = arg->share_deny;
 		candidate_data.share.share_access_prev =
-			(1 << candidate_data.share.share_access);
-		candidate_data.share.share_deny_prev =
-			(1 << candidate_data.share.share_deny);
+			decompose_share_bits(candidate_data.share.share_access,
+					     OPEN4_SHARE_ACCESS_READ,
+					     OPEN4_SHARE_ACCESS_WRITE);
+		candidate_data.share.share_deny_prev = decompose_share_bits(
+			candidate_data.share.share_deny & OPEN4_SHARE_DENY_BOTH,
+			OPEN4_SHARE_DENY_READ, OPEN4_SHARE_DENY_WRITE);
 
 		LogFullDebug(
 			COMPONENT_STATE,
@@ -1227,10 +1230,15 @@ retry_open_file:
 
 		/* Update share_access_prev and share_deny_prev */
 		(*file_state)->state_data.share.share_access_prev |=
-			(1 << (arg->share_access & OPEN4_SHARE_ACCESS_BOTH));
-
+			decompose_share_bits(arg->share_access &
+						     OPEN4_SHARE_ACCESS_BOTH,
+					     OPEN4_SHARE_ACCESS_READ,
+					     OPEN4_SHARE_ACCESS_WRITE);
 		(*file_state)->state_data.share.share_deny_prev |=
-			(1 << arg->share_deny);
+			decompose_share_bits(arg->share_deny &
+						     OPEN4_SHARE_DENY_BOTH,
+					     OPEN4_SHARE_DENY_READ,
+					     OPEN4_SHARE_DENY_WRITE);
 
 		LogFullDebug(
 			COMPONENT_STATE,
