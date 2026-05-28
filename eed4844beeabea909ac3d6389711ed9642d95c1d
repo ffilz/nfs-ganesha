@@ -24,6 +24,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40536dae_87091a8d",
+        "filename": "src/Protocols/NFS/nfs4_op_close.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2764f076_832ee9f3",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 72
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c267bbe_d06dcb1d",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-05-26T16:58:24Z",
       "side": 1,
       "message": "Should Check_nfs4_seqid be `Check_nfs4_seqid_locked`? \nIt seems that it expects the open owner to be locked (there seems to be a couple places that miss doing that)",
+      "range": {
+        "startLine": 213,
+        "startChar": 7,
+        "endLine": 213,
+        "endChar": 23
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33022b63_fc7b833c",
+        "filename": "src/Protocols/NFS/nfs4_op_close.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c267bbe_d06dcb1d",
       "range": {
         "startLine": 213,
         "startChar": 7,
@@ -70,6 +118,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e8d55d8_98708b4d",
+        "filename": "src/Protocols/NFS/nfs4_op_close.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f571f59a_478abf34",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 4
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cbda712_87c3d54b",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-05-26T16:58:24Z",
       "side": 1,
       "message": "Should we assert that if `state_handle_lock_held` than `state_obj` should be !\u003d NULL ?",
+      "range": {
+        "startLine": 285,
+        "startChar": 5,
+        "endLine": 285,
+        "endChar": 49
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f536801_ddac17ae",
+        "filename": "src/Protocols/NFS/nfs4_op_close.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cbda712_87c3d54b",
       "range": {
         "startLine": 285,
         "startChar": 5,
@@ -140,6 +236,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c31a7659_eec40c0d",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0906718_a3bf4c61",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 42
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "686d170e_e0e3e996",
@@ -153,6 +273,30 @@
       "writtenOn": "2026-05-26T16:58:24Z",
       "side": 1,
       "message": "Can we migrate to `nfs4_check_stateid_acquire_locks` here as well instead and assume that we already inc ref\u0027d the open owner?\n\nI think that\u0027s also safer and reduces a potential race that the open owner had a ref count of 1 and was released in the meanwhile",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 47
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66d7584e_bc4447f0",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "I don\u0027t think `nfs4_check_stateid_acquire_locks` is necessary here, since we are not mutating the open state or updating its sequence ID here (similar to `op_read`)\n\nI don\u0027t think we have a race here, because get_state_owner_ref will increase the ref if there is a state and a few lines below we check `if (open_owner \u003d\u003d NULL)` and determine something is gone stale if it is null.",
+      "parentUuid": "686d170e_e0e3e996",
       "range": {
         "startLine": 266,
         "startChar": 0,
@@ -186,6 +330,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af33be0e_b56d3353",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "I think you are right. removed the logline",
+      "parentUuid": "4ad6b29f_0160918f",
+      "range": {
+        "startLine": 364,
+        "startChar": 0,
+        "endLine": 364,
+        "endChar": 38
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76efbe90_8e1d9b5b",
@@ -209,6 +377,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "864081fa_fe0bc60d",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "`nfs4_check_stateid_acquire_locks` increments the reference count on the resolved `lock_owner` (not the `open_owner`). The references for both are subsequently decreased in the out2 block",
+      "parentUuid": "76efbe90_8e1d9b5b",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 392,
+        "endChar": 37
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8ae0d19_e9edd3ae",
@@ -222,6 +414,30 @@
       "writtenOn": "2026-05-26T16:58:24Z",
       "side": 1,
       "message": "Should that release obj or state_obj?",
+      "range": {
+        "startLine": 808,
+        "startChar": 0,
+        "endLine": 808,
+        "endChar": 24
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f54116a6_b404c52b",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "They should point to the same object. With the changes in this CL, we now have a check validating that they indeed point to the same object, after which `state_obj_from_stateid` is set to NULL.\"",
+      "parentUuid": "e8ae0d19_e9edd3ae",
       "range": {
         "startLine": 808,
         "startChar": 0,
@@ -279,6 +495,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a4f6f07_f3c8849e",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91bf62bc_89bbba33",
+      "range": {
+        "startLine": 811,
+        "startChar": 0,
+        "endLine": 813,
+        "endChar": 2
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bcf6058_eec5a984",
@@ -292,6 +532,30 @@
       "writtenOn": "2026-05-26T16:58:24Z",
       "side": 1,
       "message": "Same re asserting if state_obj is null and we think that it is locked",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 51
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b161a2fe_05f04e06",
+        "filename": "src/Protocols/NFS/nfs4_op_locku.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bcf6058_eec5a984",
       "range": {
         "startLine": 235,
         "startChar": 0,
@@ -349,6 +613,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a80e0257_d10f668c",
+        "filename": "src/Protocols/NFS/nfs4_op_locku.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "813e1db3_4cdd5c5c",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 2
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "816fe811_0823171f",
@@ -362,6 +650,30 @@
       "writtenOn": "2026-05-26T16:58:24Z",
       "side": 1,
       "message": "Where is the taken state lock on the original `file_obj` is being released for this case?",
+      "range": {
+        "startLine": 984,
+        "startChar": 0,
+        "endLine": 986,
+        "endChar": 23
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "553ca55a_d174c68d",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "In the out statement at the end of the function.\nWhen we detect `(*file_state)-\u003estate_owner \u003d\u003d NULL`, we simply clear `*file_state` so that Ganesha proceeds to allocate/setup a new state on this open file, but we do not quit the function, the execution continues under the safety of the already-held lock and clears at the end.",
+      "parentUuid": "816fe811_0823171f",
       "range": {
         "startLine": 984,
         "startChar": 0,
@@ -395,6 +707,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eacda41_aa5dcef9",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ace985db_81a8b285",
+      "range": {
+        "startLine": 1273,
+        "startChar": 2,
+        "endLine": 1273,
+        "endChar": 16
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74eb0b47_a564a570",
@@ -418,6 +754,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9df96d0_5011e620",
+        "filename": "src/Protocols/NFS/nfs4_op_open_downgrade.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74eb0b47_a564a570",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 4
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f9df092_52320472",
@@ -431,6 +791,30 @@
       "writtenOn": "2026-05-26T16:58:24Z",
       "side": 1,
       "message": "Same regarding assert",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 51
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7bc5c7c_527cf1f9",
+        "filename": "src/Protocols/NFS/nfs4_op_open_downgrade.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f9df092_52320472",
       "range": {
         "startLine": 160,
         "startChar": 0,
@@ -488,6 +872,54 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33826e5b_03788f80",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "126122db_be8a3e12",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 2
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04adca60_849f4151",
+        "filename": "src/SAL/nfs4_state.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "126122db_be8a3e12",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 2
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5977250_143b0ae3",
@@ -535,6 +967,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1e6b167_e3e1842a",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccefce6f_1eee73b4",
+      "range": {
+        "startLine": 1389,
+        "startChar": 0,
+        "endLine": 1392,
+        "endChar": 4
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ceaa091f_a6136856",
@@ -548,6 +1004,30 @@
       "writtenOn": "2026-05-26T16:58:24Z",
       "side": 1,
       "message": "Is it indeed called under the lock?\nIf so should this function be also have that postfix?",
+      "range": {
+        "startLine": 3188,
+        "startChar": 0,
+        "endLine": 3190,
+        "endChar": 33
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a88ae9fd_ab185a1f",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3190,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceaa091f_a6136856",
       "range": {
         "startLine": 3188,
         "startChar": 0,
@@ -605,6 +1085,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fafef95_15ff35ed",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "158a22ca_36fb4517",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 457,
+        "endChar": 4
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b7cc1f0_e65ac308",
@@ -652,6 +1156,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31454e5b_59a1400b",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9d0d7a7_3e9f94dd",
+      "range": {
+        "startLine": 460,
+        "startChar": 15,
+        "endLine": 461,
+        "endChar": 12
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "635568c5_bd5cc578",
@@ -665,6 +1193,30 @@
       "writtenOn": "2026-05-26T16:58:24Z",
       "side": 1,
       "message": "nit: the state lock",
+      "range": {
+        "startLine": 433,
+        "startChar": 71,
+        "endLine": 433,
+        "endChar": 76
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef29c66_746282f7",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "635568c5_bd5cc578",
       "range": {
         "startLine": 433,
         "startChar": 71,
@@ -698,6 +1250,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbf8e27f_77d49946",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c4dcc28_ccab238e",
+      "range": {
+        "startLine": 438,
+        "startChar": 61,
+        "endLine": 438,
+        "endChar": 65
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44292390_ce9bb1bb",
@@ -711,6 +1287,30 @@
       "writtenOn": "2026-05-26T16:58:24Z",
       "side": 1,
       "message": "nit: lock / state_lock",
+      "range": {
+        "startLine": 456,
+        "startChar": 36,
+        "endLine": 456,
+        "endChar": 41
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08d220c1_ed0a6082",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-28T16:46:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44292390_ce9bb1bb",
       "range": {
         "startLine": 456,
         "startChar": 36,
