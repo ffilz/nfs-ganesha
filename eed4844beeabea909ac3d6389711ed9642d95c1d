@@ -191,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec646084_5309dfa4",
+        "filename": "src/Protocols/NFS/nfs4_op_close.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-28T23:04:59Z",
+      "side": 1,
+      "message": "On consideration, this assert is basically checking that nfs4_check_stateid_acquire_state_lock did the right thing. In general, I prefer not to see such asserts.",
+      "parentUuid": "1f536801_ddac17ae",
+      "range": {
+        "startLine": 285,
+        "startChar": 5,
+        "endLine": 285,
+        "endChar": 49
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2016b16e_eed80531",
         "filename": "src/Protocols/NFS/nfs4_op_lock.c",
         "patchSetId": 3
@@ -250,6 +274,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "f0906718_a3bf4c61",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 42
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69bb879a_8a3306f5",
+        "filename": "src/Protocols/NFS/nfs4_op_lock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-28T23:04:59Z",
+      "side": 1,
+      "message": "Thanks, good fixes there, the rename and the check.",
+      "parentUuid": "c31a7659_eec40c0d",
       "range": {
         "startLine": 159,
         "startChar": 0,
@@ -568,6 +616,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c178a2e6_caaa3d16",
+        "filename": "src/Protocols/NFS/nfs4_op_locku.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-28T23:04:59Z",
+      "side": 1,
+      "message": "Again, let\u0027s not keep checking that the function did the right thing...",
+      "parentUuid": "b161a2fe_05f04e06",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 51
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "733ec01c_999d2ac6",
         "filename": "src/Protocols/NFS/nfs4_op_locku.c",
         "patchSetId": 3
@@ -674,6 +746,30 @@
       "side": 1,
       "message": "In the out statement at the end of the function.\nWhen we detect `(*file_state)-\u003estate_owner \u003d\u003d NULL`, we simply clear `*file_state` so that Ganesha proceeds to allocate/setup a new state on this open file, but we do not quit the function, the execution continues under the safety of the already-held lock and clears at the end.",
       "parentUuid": "816fe811_0823171f",
+      "range": {
+        "startLine": 984,
+        "startChar": 0,
+        "endLine": 986,
+        "endChar": 23
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "114d1201_e6b23d56",
+        "filename": "src/Protocols/NFS/nfs4_op_open.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-28T23:04:59Z",
+      "side": 1,
+      "message": "Hmm, maybe worth a comment with that explanation",
+      "parentUuid": "553ca55a_d174c68d",
       "range": {
         "startLine": 984,
         "startChar": 0,
@@ -1170,6 +1266,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "d9d0d7a7_3e9f94dd",
+      "range": {
+        "startLine": 460,
+        "startChar": 15,
+        "endLine": 461,
+        "endChar": 12
+      },
+      "revId": "eed4844beeabea909ac3d6389711ed9642d95c1d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7294e28_6ffac3c8",
+        "filename": "src/include/sal_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-28T23:04:59Z",
+      "side": 1,
+      "message": "Indentation of the 2nd line is still a bit odd.",
+      "parentUuid": "31454e5b_59a1400b",
       "range": {
         "startLine": 460,
         "startChar": 15,

@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d66f5e0f_1ef8bb5f",
+        "filename": "src/Protocols/NFS/nfs4_op_close.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-28T23:04:59Z",
+      "side": 1,
+      "message": "Hmm, on consideration, could we check if it really is the case that not all of these would be NULL?",
+      "revId": "4ba7aa4b7d566c77799a77454b4f884a5a2c7441",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a11413b9_93364b8c",
+        "filename": "src/Protocols/NFS/nfs4_op_open_confirm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-28T23:04:59Z",
+      "side": 1,
+      "message": "Again, let\u0027s drop the assert.",
+      "revId": "4ba7aa4b7d566c77799a77454b4f884a5a2c7441",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6a68695_6146d275",
+        "filename": "src/Protocols/NFS/nfs4_op_open_downgrade.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-28T23:04:59Z",
+      "side": 1,
+      "message": "Again, let\u0027s drop the assert",
+      "revId": "4ba7aa4b7d566c77799a77454b4f884a5a2c7441",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62b2f5d8_34aaf809",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-28T23:04:59Z",
+      "side": 1,
+      "message": "This comment isn\u0027t quite right now that it\u0027s in a helper function",
+      "revId": "4ba7aa4b7d566c77799a77454b4f884a5a2c7441",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
