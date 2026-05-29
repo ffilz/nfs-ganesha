@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68e4a769_3d5d320b",
+        "filename": "src/Protocols/NLM/nsm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-29T22:49:44Z",
+      "side": 1,
+      "message": "Yes, new patch set coming momentarily.",
+      "parentUuid": "e22a32b6_9aeb99bc",
+      "revId": "921fd0bf41df48c7c5901603f63e2294435d7d57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c99d9e5e_8fcfbba6",
         "filename": "src/SAL/nfs4_recovery.c",
         "patchSetId": 2
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "True, though the error is actually essentially impossible. Also, I think the compiler will optimize it to effectively a jump to the LogCrit.\n\nStill, I could re-arrange as suggested.\n\nWould be interesting to compare the binary from both methods...",
       "parentUuid": "c99d9e5e_8fcfbba6",
+      "revId": "921fd0bf41df48c7c5901603f63e2294435d7d57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00d94d85_c78460c9",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-29T22:49:44Z",
+      "side": 1,
+      "message": "Really this is the style used in many/most of the display functions, so will leave it alone.",
+      "parentUuid": "107d99b1_17c1623a",
       "revId": "921fd0bf41df48c7c5901603f63e2294435d7d57",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

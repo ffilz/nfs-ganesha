@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8667a81_9ede56cd",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-29T22:49:44Z",
+      "side": 1,
+      "message": "Yes, these should be xdr_wrapstring...\n\nHmm, we should also consider fixing the definition of xdrproc_t so we don\u0027t have to do this type casting that allows errors to be introduced.\n\nI need to fix a bunch in the rpcbind patch.",
+      "parentUuid": "6dcf246e_85ca0789",
+      "revId": "22243debaa7d0f0ebea1ad1a63bf8f87b351e95e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c22b79d_14a5979a",
         "filename": "src/MainNFSD/nfs_worker_thread.c",
         "patchSetId": 3
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1eceed6a_aa30731a",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-29T22:49:44Z",
+      "side": 1,
+      "message": "Oops, a victim of the ALT key not working on my old laptop, so an attempt to paste with ALT-V turned into typing \u0027v\u0027...",
+      "parentUuid": "8c22b79d_14a5979a",
+      "revId": "22243debaa7d0f0ebea1ad1a63bf8f87b351e95e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5197ca87_3b9cae25",
         "filename": "src/support/nfs_read_conf.c",
         "patchSetId": 3
@@ -48,6 +84,24 @@
       "writtenOn": "2026-05-27T12:10:28Z",
       "side": 1,
       "message": "all values including configurable are assigned as SM_PROG",
+      "revId": "22243debaa7d0f0ebea1ad1a63bf8f87b351e95e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77fda6f0_26cbe62d",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-29T22:49:44Z",
+      "side": 1,
+      "message": "Yea, basically that\u0027s making it unchangeable - which is a good thing. Should comment though... Also, this variable is specifically not documented for this reason. That will be mentioned in the comment.",
+      "parentUuid": "5197ca87_3b9cae25",
       "revId": "22243debaa7d0f0ebea1ad1a63bf8f87b351e95e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
