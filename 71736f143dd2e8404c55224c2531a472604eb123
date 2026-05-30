@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77168bdf_7b7c1538",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-05-30T04:08:33Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tint err \u003d errno;\n+\t\tLogFatal(COMPONENT_CONFIG, \"getoifaddrs failed %s\",",
+      "revId": "71736f143dd2e8404c55224c2531a472604eb123",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
