@@ -16,6 +16,24 @@
       "message": "an invalid cid (with invalid \"len !\u003d (cid_len + 2)\" ) is silently ignored, should we log it ? \nCaller also doesn\u0027t seems to be log it because of the return value(true).",
       "revId": "5098ad4b131d4525b20d9b5cce6488acb91b7650",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c65ceaed_f3f67bfd",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-30T00:31:18Z",
+      "side": 1,
+      "message": "That\u0027s a fault of the original code, but a good point. Will only return true for success case.",
+      "parentUuid": "3cc4777e_7c6a5073",
+      "revId": "5098ad4b131d4525b20d9b5cce6488acb91b7650",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
