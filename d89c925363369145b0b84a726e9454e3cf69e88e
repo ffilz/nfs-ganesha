@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63c2f062_ada73e40",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 1597,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-30T00:51:18Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "d9a3bd3a_c0faf52a",
+      "revId": "d89c925363369145b0b84a726e9454e3cf69e88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b835e67a_77908e48",
         "filename": "src/Protocols/NLM/nlm_async.c",
         "patchSetId": 3
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cbc567b8_97884812",
+        "filename": "src/Protocols/NLM/nlm_async.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-30T00:51:18Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "b835e67a_77908e48",
+      "revId": "d89c925363369145b0b84a726e9454e3cf69e88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d62ca1d_fbf75806",
         "filename": "src/Protocols/NLM/nlm_async.c",
         "patchSetId": 3
@@ -48,6 +84,24 @@
       "writtenOn": "2026-05-27T17:23:07Z",
       "side": 1,
       "message": "\u0026srv_netbuf is bind_addr and \u0026cli_netbuf is server address, a comment should help in understanding why we are doing like this(reversing the parameters, i.e for loopback).",
+      "revId": "d89c925363369145b0b84a726e9454e3cf69e88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d09558c_89fa4602",
+        "filename": "src/Protocols/NLM/nlm_async.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-05-30T00:51:18Z",
+      "side": 1,
+      "message": "Good point, comment added.",
+      "parentUuid": "2d62ca1d_fbf75806",
       "revId": "d89c925363369145b0b84a726e9454e3cf69e88e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
