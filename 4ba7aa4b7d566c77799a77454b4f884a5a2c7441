@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf114801_8eb46f25",
+        "filename": "src/Protocols/NFS/nfs4_op_close.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-31T09:04:53Z",
+      "side": 1,
+      "message": "Yes, it\u0027s possible for `state_found` to be non-NULL while `open_owner` or `state_obj` is NULL. \n\nLooking closer at `nfs4_check_stateid_acquire_state_lock()`:\nIf a racing thread is mid-teardown, `nfs4_State_Get_Pointer()` can still find the state, but `get_state_obj_export_owner_refs()` will find that `state_obj` or `open_owner` has already been cleared.",
+      "parentUuid": "d66f5e0f_1ef8bb5f",
+      "revId": "4ba7aa4b7d566c77799a77454b4f884a5a2c7441",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a11413b9_93364b8c",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-28T23:04:59Z",
       "side": 1,
       "message": "Again, let\u0027s drop the assert.",
+      "revId": "4ba7aa4b7d566c77799a77454b4f884a5a2c7441",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af7a2110_47a907af",
+        "filename": "src/Protocols/NFS/nfs4_op_open_confirm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-31T09:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a11413b9_93364b8c",
       "revId": "4ba7aa4b7d566c77799a77454b4f884a5a2c7441",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1a7d7e7_45a308df",
+        "filename": "src/Protocols/NFS/nfs4_op_open_downgrade.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-31T09:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6a68695_6146d275",
+      "revId": "4ba7aa4b7d566c77799a77454b4f884a5a2c7441",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62b2f5d8_34aaf809",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-05-28T23:04:59Z",
       "side": 1,
       "message": "This comment isn\u0027t quite right now that it\u0027s in a helper function",
+      "revId": "4ba7aa4b7d566c77799a77454b4f884a5a2c7441",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be1c8923_f9532441",
+        "filename": "src/SAL/nfs4_state_id.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-05-31T09:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62b2f5d8_34aaf809",
       "revId": "4ba7aa4b7d566c77799a77454b4f884a5a2c7441",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
