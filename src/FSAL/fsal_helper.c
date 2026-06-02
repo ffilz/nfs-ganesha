@@ -2248,4 +2248,161 @@ fsal_status_t fsal_close2(struct fsal_obj_handle *obj)
 	}
 	return status;
 }
+
+/**
+ * @brief Buffered copy using the FSAL read/write API
+ *
+ * Copies @count bytes from (src_obj, src_offset) to (dst_obj, dst_offset)
+ * in chunks bounded by the export's MaxRead/MaxWrite limits.  Falls back
+ * to 1 MiB chunks when the export limits are zero/unset.
+ *
+ * This is the generic fallback used by default_copy_file_range().  FSALs
+ * with native offload (FSAL_VFS copy_file_range(2)) override the hook
+ * and never reach this path.
+ *
+ * @param[in]  src_obj     Source FSAL object handle
+ * @param[in]  dst_obj     Destination FSAL object handle
+ * @param[in]  src_state   State for source access (may be NULL for anonymous)
+ * @param[in]  dst_state   State for destination access (may be NULL)
+ * @param[in]  src_offset  Byte offset in source
+ * @param[in]  dst_offset  Byte offset in destination
+ * @param[in]  count       Bytes to copy
+ * @param[out] copied      Bytes actually copied
+ *
+ * @return FSAL status
+ */
+fsal_status_t fsal_buffered_copy_fsal(struct fsal_obj_handle *src_obj,
+				      struct fsal_obj_handle *dst_obj,
+				      struct state_t *src_state,
+				      struct state_t *dst_state,
+				      uint64_t src_offset,
+				      uint64_t dst_offset,
+				      uint64_t count,
+				      uint64_t *copied)
+{
+	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
+	struct gsh_export *src_ctx_exp = (src_state != NULL)
+		? src_state->state_export : op_ctx->ctx_export;
+	bool switch_src_ctx = (src_obj->fsal == src_ctx_exp->fsal_export->fsal);
+	struct saved_export_context saved_src = {NULL};
+	uint64_t src_MaxRead = (src_state != NULL)
+		? atomic_fetch_uint64_t(&src_state->state_export->MaxRead)
+		: atomic_fetch_uint64_t(&op_ctx->ctx_export->MaxRead);
+	uint64_t dst_MaxWrite = (dst_state != NULL)
+		? atomic_fetch_uint64_t(&dst_state->state_export->MaxWrite)
+		: atomic_fetch_uint64_t(&op_ctx->ctx_export->MaxWrite);
+	const uint64_t default_size = 4 * 1024 * 1024ULL; /* 4 MiB */
+	uint64_t max_chunk = default_size;
+	uint64_t bytes_copied = 0;
+	uint64_t remaining = count;
+	uint64_t src_off = src_offset;
+	uint64_t dst_off = dst_offset;
+	char *buffer;
+	pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+	pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+	struct async_process_data apd = {
+		.done = false,
+		.fsa_mutex = &mutex,
+		.fsa_cond = &cond,
+	};
+
+	if (src_MaxRead  > 0)
+		max_chunk = MIN(max_chunk, src_MaxRead);
+	if (dst_MaxWrite > 0)
+		max_chunk = MIN(max_chunk, dst_MaxWrite);
+	if (max_chunk == 0)
+		max_chunk = default_size;
+
+	buffer = gsh_malloc(max_chunk);
+	if (buffer == NULL)
+		return fsalstat(ERR_FSAL_NOMEM, ENOMEM);
+
+	while (remaining > 0) {
+		size_t request = (size_t)MIN(remaining, max_chunk);
+		struct fsal_io_arg read_arg = {
+			.info      = NULL,
+			.state     = src_state,
+			.offset    = src_off,
+			.io_request = request,
+			.iov_count = 1,
+			.iov       = (struct iovec[]){
+				{ .iov_base = buffer, .iov_len = request },
+			},
+			.io_amount  = 0,
+			.end_of_file = false,
+		};
+		struct fsal_io_arg write_arg = {
+			.info       = NULL,
+			.state      = dst_state,
+			.offset     = dst_off,
+			.io_request = 0,         /* filled after read */
+			.iov_count  = 1,
+			.iov        = (struct iovec[]){
+				{ .iov_base = buffer, .iov_len = 0 },
+			},
+			.io_amount  = 0,
+			.fsal_stable = true,
+		};
+
+		/*
+		 * FS/Cross-FSAL guard: when src and dst live on different FSAL
+		 * (e.g. Ceph -> VFS), op_ctx->fsal_export is currently set to
+		 * the dst (VFS) export; switch to the src export for the read,
+		 * then restore for the write.
+		 *
+		 * Exception: when called from default_copy_file_range() inside
+		 * a subcall() (same-FSAL path in mdcache_copy_file_range),
+		 * op_ctx->fsal_export is already the correct sub_export for
+		 * src_obj (e.g. the Ceph fsal_export set by subcall).  In that
+		 * case src_ctx_exp->fsal_export belongs to the MDCache layer,
+		 * not the sub-FSAL.
+		 * Detect this by comparing FSAL modules: if src_obj->fsal does
+		 * not match src_ctx_exp->fsal_export->fsal, op_ctx is already
+		 * at the sub-FSAL layer and must not be overridden.
+		 */
+		if (switch_src_ctx) {
+			get_gsh_export_ref(src_ctx_exp);
+			save_op_context_export_and_set_export(&saved_src,
+							      src_ctx_exp);
+		}
+		apd.done = false;
+		fsal_read(src_obj, true, &read_arg, &apd);
+		if (switch_src_ctx)
+			restore_op_context_export(&saved_src);
+
+		if (FSAL_IS_ERROR(apd.ret)) {
+			status = apd.ret;
+			goto out;
+		}
+		if (read_arg.io_amount == 0)
+			break; /* EOF */
+
+		write_arg.io_request    = read_arg.io_amount;
+		write_arg.iov[0].iov_len = read_arg.io_amount;
+
+		apd.done = false;
+		fsal_write(dst_obj, true, &write_arg, &apd);
+		if (FSAL_IS_ERROR(apd.ret)) {
+			status = apd.ret;
+			goto out;
+		}
+		if (write_arg.io_amount == 0) {
+			status = fsalstat(ERR_FSAL_IO, EIO);
+			goto out;
+		}
+
+		bytes_copied += write_arg.io_amount;
+		src_off      += write_arg.io_amount;
+		dst_off      += write_arg.io_amount;
+		remaining    -= write_arg.io_amount;
+	}
+
+	*copied = bytes_copied;
+out:
+	PTHREAD_MUTEX_destroy(&mutex);
+	PTHREAD_COND_destroy(&cond);
+	gsh_free(buffer);
+	return status;
+}
+
 /** @} */
