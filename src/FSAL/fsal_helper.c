@@ -2248,4 +2248,133 @@ fsal_status_t fsal_close2(struct fsal_obj_handle *obj)
 	}
 	return status;
 }
+
+/**
+ * @brief Buffered copy using the FSAL read/write API
+ *
+ * Copies @count bytes from (src_obj, src_offset) to (dst_obj, dst_offset)
+ * in chunks bounded by the export's MaxRead/MaxWrite limits.  Falls back
+ * to 1 MiB chunks when the export limits are zero/unset.
+ *
+ * This is the generic fallback used by default_copy_file_range().  FSALs
+ * with native offload (FSAL_VFS copy_file_range(2)) override the hook
+ * and never reach this path.
+ *
+ * @param[in]  src_obj     Source FSAL object handle
+ * @param[in]  dst_obj     Destination FSAL object handle
+ * @param[in]  src_state   State for source access (may be NULL for anonymous)
+ * @param[in]  dst_state   State for destination access (may be NULL)
+ * @param[in]  src_offset  Byte offset in source
+ * @param[in]  dst_offset  Byte offset in destination
+ * @param[in]  count       Bytes to copy
+ * @param[out] copied      Bytes actually copied
+ *
+ * @return FSAL status
+ */
+fsal_status_t fsal_buffered_copy_fsal(struct fsal_obj_handle *src_obj,
+				      struct fsal_obj_handle *dst_obj,
+				      struct state_t *src_state,
+				      struct state_t *dst_state,
+				      uint64_t src_offset,
+				      uint64_t dst_offset,
+				      uint64_t count,
+				      uint64_t *copied)
+{
+	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
+	uint64_t src_MaxRead = (src_state != NULL)
+		? atomic_fetch_uint64_t(&src_state->state_export->MaxRead)
+		: atomic_fetch_uint64_t(&op_ctx->ctx_export->MaxRead);
+	uint64_t dst_MaxWrite = (dst_state != NULL)
+		? atomic_fetch_uint64_t(&dst_state->state_export->MaxWrite)
+		: atomic_fetch_uint64_t(&op_ctx->ctx_export->MaxWrite);
+	const uint64_t default_size = 1024 * 1024ULL; /* 1 MiB */
+	uint64_t max_chunk = default_size;
+	uint64_t bytes_copied = 0;
+	uint64_t remaining = count;
+	uint64_t src_off = src_offset;
+	uint64_t dst_off = dst_offset;
+	char *buffer;
+	pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+	pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+	struct async_process_data apd = {
+		.done = false,
+		.fsa_mutex = &mutex,
+		.fsa_cond = &cond,
+	};
+
+	if (src_MaxRead  > 0)
+		max_chunk = MIN(max_chunk, src_MaxRead);
+	if (dst_MaxWrite > 0)
+		max_chunk = MIN(max_chunk, dst_MaxWrite);
+	if (max_chunk == 0)
+		max_chunk = default_size;
+
+	buffer = gsh_malloc(max_chunk);
+	if (buffer == NULL)
+		return fsalstat(ERR_FSAL_NOMEM, ENOMEM);
+
+	while (remaining > 0) {
+		size_t request = (size_t)MIN(remaining, max_chunk);
+		struct fsal_io_arg read_arg = {
+			.info      = NULL,
+			.state     = src_state,
+			.offset    = src_off,
+			.io_request = request,
+			.iov_count = 1,
+			.iov       = (struct iovec[]){
+				{ .iov_base = buffer, .iov_len = request },
+			},
+			.io_amount  = 0,
+			.end_of_file = false,
+		};
+		struct fsal_io_arg write_arg = {
+			.info       = NULL,
+			.state      = dst_state,
+			.offset     = dst_off,
+			.io_request = 0,         /* filled after read */
+			.iov_count  = 1,
+			.iov        = (struct iovec[]){
+				{ .iov_base = buffer, .iov_len = 0 },
+			},
+			.io_amount  = 0,
+			.fsal_stable = true,
+		};
+
+		apd.done = false;
+		fsal_read(src_obj, true, &read_arg, &apd);
+		if (FSAL_IS_ERROR(apd.ret)) {
+			status = apd.ret;
+			goto out;
+		}
+		if (read_arg.io_amount == 0)
+			break; /* EOF */
+
+		write_arg.io_request    = read_arg.io_amount;
+		write_arg.iov[0].iov_len = read_arg.io_amount;
+
+		apd.done = false;
+		fsal_write(dst_obj, true, &write_arg, &apd);
+		if (FSAL_IS_ERROR(apd.ret)) {
+			status = apd.ret;
+			goto out;
+		}
+		if (write_arg.io_amount == 0) {
+			status = fsalstat(ERR_FSAL_IO, EIO);
+			goto out;
+		}
+
+		bytes_copied += write_arg.io_amount;
+		src_off      += write_arg.io_amount;
+		dst_off      += write_arg.io_amount;
+		remaining    -= write_arg.io_amount;
+	}
+
+	*copied = bytes_copied;
+out:
+	PTHREAD_MUTEX_destroy(&mutex);
+	PTHREAD_COND_destroy(&cond);
+	gsh_free(buffer);
+	return status;
+}
+
 /** @} */
