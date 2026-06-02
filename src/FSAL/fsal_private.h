@@ -46,6 +46,13 @@ void destroy_fsal_lock(void);
 
 extern struct glist_head fsal_list;
 
+/* fd-based buffered copy for FSALs with direct fd access (FSAL_VFS, etc.) */
+fsal_status_t fsal_buffered_copy_fd(int src_fd, int dst_fd,
+				    uint64_t src_offset,
+				    uint64_t dst_offset,
+				    uint64_t count,
+				    uint64_t *copied);
+
 /* Definitions for static FSALs */
 void pseudo_fsal_init(void);
 void mdcache_fsal_init(void);
