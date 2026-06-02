@@ -1452,6 +1452,7 @@ if (NOT LIBURCU_INC)
   message(FATAL_ERROR "userspace-rcu includes not found!")
 endif(NOT LIBURCU_INC)
 check_symbol_exists(urcu_ref_get_unless_zero urcu/ref.h HAVE_URCU_REF_GET_UNLESS_ZERO)
+check_symbol_exists(copy_file_range unistd.h HAVE_COPY_FILE_RANGE)
 
 # All the plumbing in the basement
 set(SYSTEM_LIBRARIES
