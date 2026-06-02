@@ -1979,6 +1979,9 @@ void vfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->setxattrs = vfs_setxattrs;
 	ops->listxattrs = vfs_listxattrs;
 	ops->removexattrs = vfs_removexattrs;
+
+	/* Wire in VFS-specific copy hook (uses copy_file_range(2)) */
+	ops->copy_file_range = vfs_copy_file_range_fsal;
 }
 
 /* export methods that create object handles

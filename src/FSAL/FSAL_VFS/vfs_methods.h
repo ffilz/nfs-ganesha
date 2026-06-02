@@ -399,4 +399,15 @@ fsal_status_t find_fd(struct fsal_fd **out_fd, struct fsal_obj_handle *obj_hdl,
 		      struct fsal_fd *tmp_fd, struct state_t *state,
 		      fsal_openflags_t openflags, bool bypass);
 
+/**
+ * @brief FSAL_VFS server-side copy using Linux copy_file_range(2)
+ * Falls back to fsal_buffered_copy_fd() on EOPNOTSUPP/EXDEV/ENOSYS.
+ */
+fsal_status_t vfs_copy_file_range_fsal(struct fsal_obj_handle *src_hdl,
+					struct state_t *src_state,
+					struct fsal_obj_handle *dst_hdl,
+					struct state_t *dst_state,
+					uint64_t src_off, uint64_t dst_off,
+					uint64_t len, uint64_t *copied);
+
 #endif /* VFS_METHODS_H */
