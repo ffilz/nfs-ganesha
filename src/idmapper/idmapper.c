@@ -1109,7 +1109,10 @@ static bool name2id(const struct gsh_buffdesc *name, uint32_t *id, bool group,
 	if (!idmapping_enabled) {
 		/* If idmapping isn't enabled we accept numeric ids only */
 		/* Something we can mutate and count on as terminated */
-		return atless2id(name->addr, name->len, id, anon);
+		namebuff = alloca(name->len + 1);
+		memcpy(namebuff, name->addr, name->len);
+		*(namebuff + name->len) = '\0';
+		return atless2id(namebuff, name->len, id, anon);
 	}
 
 	PTHREAD_RWLOCK_rdlock(group ? &idmapper_group_lock
@@ -1141,7 +1144,9 @@ static bool name2id(const struct gsh_buffdesc *name, uint32_t *id, bool group,
 
 	/* Something we can mutate and count on as terminated */
 	namebuff = alloca(name->len + 1);
-	memcpy(namebuff, name->addr, name->len + 1);
+
+	memcpy(namebuff, name->addr, name->len);
+	*(namebuff + name->len) = '\0';
 	at = memchr(namebuff, '@', name->len);
 
 	if (at == NULL) {
