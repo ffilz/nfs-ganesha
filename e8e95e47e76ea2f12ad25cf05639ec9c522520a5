@@ -16,6 +16,24 @@
       "message": "@ffilzlnx@mindspring.com, this is an important fix\n\nthe gsh_buffdesc we get is not necessarily null terminated, it has a pointer to the used supplied input in the request which may not be null terminated and it can cause security issues",
       "revId": "e8e95e47e76ea2f12ad25cf05639ec9c522520a5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23eac52b_b61b3b5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-02T16:56:02Z",
+      "side": 1,
+      "message": "Where is this gsh_buffdesc coming from? Honestly, I have been starting to wonder if we should stop using gsh_buffdesc for strings, so at the earliest time we create NUL terminated strings that get passed around.\n\nI\u0027m not opposed to merging this, it would just be nice to avoid muddy waters.\n\nOptionally I guess we assume gsh_buffdesc is never NUL terminated and make copies all over the place...",
+      "parentUuid": "f3054aa9_5100bb49",
+      "revId": "e8e95e47e76ea2f12ad25cf05639ec9c522520a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
