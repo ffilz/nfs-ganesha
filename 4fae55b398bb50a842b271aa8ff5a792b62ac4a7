@@ -22,6 +22,98 @@
       },
       "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "708c13b6_915cc4ab",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2070,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:25:50Z",
+      "side": 1,
+      "message": "Add HANDLE_PROP for grpc",
+      "range": {
+        "startLine": 2070,
+        "startChar": 0,
+        "endLine": 2070,
+        "endChar": 18
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e32a9f12_bc121002",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2073,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:25:50Z",
+      "side": 1,
+      "message": "Can you add a CT_ASSERT for this array similar to the one for `default_log_levels`",
+      "range": {
+        "startLine": 2073,
+        "startChar": 29,
+        "endLine": 2073,
+        "endChar": 38
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b91f7514_a464e6b5",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2112,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:25:50Z",
+      "side": 1,
+      "message": "Add log property item for it",
+      "range": {
+        "startLine": 2112,
+        "startChar": 0,
+        "endLine": 2112,
+        "endChar": 34
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74f66e88_5f756c31",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2307,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:25:50Z",
+      "side": 1,
+      "message": "Can you add a CT_ASSERT for this array also similar to the one for `default_log_levels`",
+      "range": {
+        "startLine": 2307,
+        "startChar": 26,
+        "endLine": 2307,
+        "endChar": 42
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
