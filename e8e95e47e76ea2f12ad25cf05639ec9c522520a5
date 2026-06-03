@@ -34,6 +34,24 @@
       "parentUuid": "f3054aa9_5100bb49",
       "revId": "e8e95e47e76ea2f12ad25cf05639ec9c522520a5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d1b31f9_b1bade99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T08:15:03Z",
+      "side": 1,
+      "message": "The callers to this function are-\n`decode_acl`, `decode_owner`, `decode_group`\n\nThey\u0027re not allocating memory, but just pointing to the XDR received buffer that was received from the client",
+      "parentUuid": "23eac52b_b61b3b5d",
+      "revId": "e8e95e47e76ea2f12ad25cf05639ec9c522520a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
