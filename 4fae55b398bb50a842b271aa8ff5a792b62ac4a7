@@ -49,6 +49,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2fa564c_6b4bd5da",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T14:23:07Z",
+      "side": 1,
+      "message": "What is the purpose of the mutex if the assignment to the `server_` is done outside of the mutex?\n\nWhy isn\u0027t there a check inside the mutex if it was previously initialized / started already?",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 49
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e39229_9a69abe4",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T14:23:07Z",
+      "side": 1,
+      "message": "What\u0027s that?",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 19
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1970c4be_ca7421c8",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 14
