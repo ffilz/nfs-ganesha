@@ -52,6 +52,24 @@
       "parentUuid": "23eac52b_b61b3b5d",
       "revId": "e8e95e47e76ea2f12ad25cf05639ec9c522520a5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70458fe9_5c8c51ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-03T16:34:36Z",
+      "side": 1,
+      "message": "Hmm, OK, so decode_acl provides a large enough buffer to inline_xdr_utf8string which NUL terminates the string.\n\nI do see that decode_owner and decode_group do not. Let\u0027s actually fix them so they conform to the expectation that strings in gsh_buffdesc are actually NUL terminated (which they ARE supposed to be - I just didn\u0027t catch those two places...).",
+      "parentUuid": "1d1b31f9_b1bade99",
+      "revId": "e8e95e47e76ea2f12ad25cf05639ec9c522520a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
