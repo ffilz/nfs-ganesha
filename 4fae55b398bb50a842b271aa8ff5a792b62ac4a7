@@ -26,6 +26,299 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c3cd903_546eedd0",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "What\u0027s that?",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 192,
+        "endChar": 25
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00f6f360_f0143ac7",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "Can be done in the same line",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 29
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9f6f3ba_190ee00c",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "It is used only in the loop, so it can be move inside the loop, and make it const",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70e78d76_bf76ccd1",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "Same",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 32
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7316eda_a1bbc4fd",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "Make it const",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 47
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d4b43f2_7669ff72",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "Why create a vector and then copy it? you can add it directly to the response in the loop above",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 14
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f98e282_6d55bd58",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "Why is that commented out?",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 45
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb3cd79f_60f90bda",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "Why is that commented out?",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 59
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92cf0668_afc070ad",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "No need for the `()`",
+      "range": {
+        "startLine": 99,
+        "startChar": 10,
+        "endLine": 99,
+        "endChar": 36
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d728225_ea129d76",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "Same",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 40
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2010d440_4bbd6965",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "You can just define it in the stack without using alloca here",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 60
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72537208_0ce93902",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "nit: redundant new line",
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "127bb4d9_30eae2f2",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "Port type should be uint16_t",
+      "range": {
+        "startLine": 783,
+        "startChar": 1,
+        "endLine": 783,
+        "endChar": 8
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2affc1b_65f65c5d",
         "filename": "src/include/sal_functions.h",
         "patchSetId": 14
@@ -37,6 +330,30 @@
       "writtenOn": "2026-06-03T09:26:45Z",
       "side": 1,
       "message": "It would be better to add it to the cpp file that does the include",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 0
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "274ae904_4634c694",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-03T09:54:35Z",
+      "side": 1,
+      "message": "As we only have one cpp file that uses all of those it simplifies the approach rather than adding it for each c header file (for some of the files)",
+      "parentUuid": "a2affc1b_65f65c5d",
       "range": {
         "startLine": 52,
         "startChar": 0,
