@@ -34,6 +34,24 @@
       "parentUuid": "b1aad7fb_e14895d9",
       "revId": "9bc509e494a5e2456f5f020f11b3d4e4c36bea43",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79429a17_35c23f84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-04T14:42:51Z",
+      "side": 1,
+      "message": "Is our check up front for enough space insufficient? Just trying to understand why the detection is happening so late.\n\nAlso, the issue here may apply to NFSv3 READDDIR and READDIRPLUS so let\u0027s fix there also if appropriate.",
+      "parentUuid": "6b398d7c_39970493",
+      "revId": "9bc509e494a5e2456f5f020f11b3d4e4c36bea43",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
