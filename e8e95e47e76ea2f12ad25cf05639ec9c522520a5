@@ -70,6 +70,24 @@
       "parentUuid": "1d1b31f9_b1bade99",
       "revId": "e8e95e47e76ea2f12ad25cf05639ec9c522520a5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4acbec2d_67b1bec4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-04T11:04:25Z",
+      "side": 1,
+      "message": "Do we want to allocate memory in those functions and trust the callees later on to release it?\n\nSounds a bit error prone to me, also it isn\u0027t used in all code paths",
+      "parentUuid": "70458fe9_5c8c51ab",
+      "revId": "e8e95e47e76ea2f12ad25cf05639ec9c522520a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
