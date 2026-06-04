@@ -51,7 +51,8 @@
  *          with wr_ids=1 / cr_synchronous=FALSE and the copy stateid.
  *       2. An xcopy fridge worker copies data in copy_chunk_size chunks.
  *       3. When done the worker fires CB_OFFLOAD over the back channel.
- *
+ *       4. Client may poll via OFFLOAD_STATUS(copy_stateid) at any time
+ *          between steps 1 and 3.
  *
  *   Fallback (allowed): if the xcopy fridge is full (EWOULDBLOCK), the server
  *   falls back to the sync path silently(at start itself).
@@ -88,7 +89,8 @@
  * condition on the client, not a permanent rejection.
  *
  * After NFS4_COPY_CB_MAX_RETRIES additional attempts the server gives up
- * and destroys the copy state.
+ * and destroys the copy state, making subsequent OFFLOAD_STATUS calls
+ * return NFS4ERR_BAD_STATEID.
  */
 #define NFS4_COPY_CB_MAX_RETRIES 2
 
@@ -311,6 +313,8 @@ static nfsstat4 check_copy_stateid(stateid4 *sid, struct fsal_obj_handle *obj,
  *
  * This is the ONLY place where the copy_offload_state memory is freed.
  * It is invoked automatically through the state_t refcount machinery,
+ * ensuring that OFFLOAD_STATUS callers that hold a transient reference
+ * (via nfs4_Check_Stateid) cannot race with the final cleanup.
  */
 static void copy_offload_state_free(struct state_t *state)
 {
@@ -573,7 +577,9 @@ static void nfs4_copy_send_cb_offload(struct copy_offload_state *cos,
  * ownership transfers to that new hook, on failure it is destroyed.
  *
  * On NFS_CB_CALL_ABORTED (back-channel down) or after exhausting all
- * retries we destroy the state unconditionally
+ * retries we destroy the state unconditionally: any subsequent
+ * OFFLOAD_STATUS from the client will get NFS4ERR_BAD_STATEID, which
+ * is how the client learns the copy is done (one way or another).
  *
  * For NFSv4.1 the back-channel slot must be released via
  * nfs41_release_single() BEFORE we retry or destroy, since
@@ -841,6 +847,9 @@ static void copy_worker(struct fridgethr_context *fridge_ctx)
 		dst_off += chunk_copied;
 		remaining -= chunk_copied;
 		chunk_num++;
+
+		/* Update bytes_copied for OFFLOAD_STATUS progress*/
+		atomic_store_uint64_t(&cos->cos_bytes_copied, bytes_copied);
 
 		if (chunk_copied < chunk) {
 			LogDebug(COMPONENT_NFS_V4,
