@@ -659,6 +659,24 @@ Blocking_Locks(bool, default true)
     due to a conflict, the server will return NFS4ERR_DENIED instead of
     blocking the request and waiting for the lock to become available.
 
+Copy_Offload(bool, default true)
+    Flag decides to allows server copy operation inline or async.
+    For async, client can enquiry about the progress using OFFLOAD_STATUS and
+    can cancel the ongoing operation using OFFLOAD_CANCEL
+
+Copy_Offload_Min_Size(uint64, range 0 to UINT64_MAX, default 16777216)
+    Minimum copy byte-length that qualifies for the asynchronous offload path,
+    in bytes (default 16 MiB). Copies smaller than this threshold always run
+    synchronously even when Copy_Offload = true and the client has not
+    requested synchronous execution.
+
+Max_Copy_Workers(uint32, range 1 to 256, default 8)
+    Maximum number of worker threads in the xcopy fridge pool.
+    Each thread handles one in-flight asynchronous copy at a time.
+    When all workers are occupied and a new async-eligible COPY arrives,
+    the server falls back to synchronous execution for that request rather
+    than queuing it.
+
 RADOS_KV {}
 --------------------------------------------------------------------------------
 

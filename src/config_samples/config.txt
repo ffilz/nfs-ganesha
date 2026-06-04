@@ -338,6 +338,12 @@ NFSV4 {}
 
 	Blocking_Locks(bool, default true)
 
+	Copy_Offload(bool, default true)
+
+	Copy_Offload_Min_Size(uint64, range 0 to UINT64_MAX, default 16777216)
+
+	Max_Copy_Workers(uint32, range 1 to 256, default 8)
+
 DIRECTORY_SERVICES {}
 ---------------------
 
