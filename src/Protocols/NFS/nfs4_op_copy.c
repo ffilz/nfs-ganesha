@@ -735,11 +735,17 @@ static void nfs4_copy_send_cb_offload(struct copy_offload_state *cos,
  * Returns true  — continue copying.
  * Returns false — stop; logs the specific reason.
  *
- * Checked at the top of every chunk iteration so server
+ * Checked at the top of every chunk iteration so OFFLOAD_CANCEL and server
  * shutdown honoured promptly without waiting for a full chunk.
  */
 static bool copy_worker_should_continue(const struct copy_offload_state *cos)
 {
+	if (atomic_fetch_uint8_t((uint8_t *)&cos->cos_cancelled)) {
+		LogDebug(COMPONENT_NFS_V4,
+			"COPY worker stopping OFFLOAD_CANCEL received");
+		return false;
+	}
+
 	if (atomic_fetch_uint8_t(&copy_fridge_stopping)) {
 		LogEvent(COMPONENT_THREAD,
 			 "COPY worker stopping, server shutdown in progress");
@@ -763,11 +769,11 @@ static bool copy_worker_should_continue(const struct copy_offload_state *cos)
  * ASYNC path:
  *  - The COPY response was already sent to the client (wr_ids=1,
  *    cr_synchronous=FALSE) before this worker was dispatched.
- *  - This worker copies data in copy_chunk_size chunks so that
- *    shutdown is honoured promptly between chunks.
+ *  - This worker copies data in COPY_CHUNK_SIZE chunks so that
+ *    OFFLOAD_CANCEL and shutdown is honoured promptly between chunks.
  *  - All execution context (src, dst, state refs, export, offsets) lives
  *    in the cos worker fields populated by copy_run_async().
- *  - When done (success, FSAL error) this worker
+ *  - When done (success, FSAL error, or cancellation) this worker
  *    releases all worker refs, fires CB_OFFLOAD, and returns.  cos itself
  *    is freed when its SAL refcount drops to zero — no gsh_free here.
  */
