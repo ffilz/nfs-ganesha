@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6cc7efc_f37f2daa",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f62e725_812f1c1f",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f98fe829_1aa91f22",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tglfsexport-\u003emount_path \u003d gsh_strdup(CTX_FULLPATH(op_ctx),\n    - \t\t\t\t\t    MEM_COMP_EXPORT);\n→ to be replaced with:\n    + \tglfsexport-\u003emount_path \u003d\n    + \t\tgsh_strdup(CTX_FULLPATH(op_ctx), MEM_COMP_EXPORT);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4bc8d6a_2208f38a",
+        "filename": "src/FSAL/FSAL_GLUSTER/export.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f98fe829_1aa91f22",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa6dbdd3_692a3495",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "591249a4_b400f2e3",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b7acf2e_5e29bb65",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tmyself-\u003eu.symlink.link_content \u003d gsh_strdup(link_buff,\n    - \t\t\t\t\t\t\t    MEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\tmyself-\u003eu.symlink.link_content \u003d\n    + \t\t\tgsh_strdup(link_buff, MEM_COMP_PROTOCOL);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7733a31_32eab1b7",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b7acf2e_5e29bb65",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cd2727b_7fdf48ed",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e67c958c_30404729",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6cc7b49e_6c22661d",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\thdl-\u003eu.symlink.link_content \u003d gsh_malloc(len,\n    - \t\t\t\t\t\t\t MEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\thdl-\u003eu.symlink.link_content \u003d\n    + \t\t\tgsh_malloc(len, MEM_COMP_PROTOCOL);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20167385_5727f8be",
+        "filename": "src/FSAL/FSAL_KVSFS/kvsfs_handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6cc7b49e_6c22661d",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +228,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2a68b64_760e359b",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f82a597e_7219a50d",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68f91799_f28b8943",
@@ -133,6 +259,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tlzfs_export-\u003elzfs_params.subfolder \u003d gsh_strdup(CTX_FULLPATH(op_ctx),\n    - \t\t\t\t\t\t\tMEM_COMP_EXPORT);\n→ to be replaced with:\n    + \tlzfs_export-\u003elzfs_params.subfolder \u003d\n    + \t\tgsh_strdup(CTX_FULLPATH(op_ctx), MEM_COMP_EXPORT);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ab18ef4_863a96ee",
+        "filename": "src/FSAL/FSAL_LIZARDFS/main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68f91799_f28b8943",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -154,6 +298,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec46cc45_ba1900df",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e736d6e_a300cce3",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea0583b7_3f52aff7",
@@ -167,6 +329,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tlink_content-\u003eaddr \u003d gsh_strdup(myself-\u003emh_symlink.link_contents,\n    - \t\t\t\t\tMEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \tlink_content-\u003eaddr \u003d\n    + \t\tgsh_strdup(myself-\u003emh_symlink.link_contents, MEM_COMP_PROTOCOL);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "157d674f_9bef1f1d",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea0583b7_3f52aff7",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -188,6 +368,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18b5ae45_1ac1bf4c",
+        "filename": "src/FSAL/FSAL_PROXY_V3/main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e88ddff0_a0f06161",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0954382_aa379254",
@@ -201,6 +399,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - #define COMPOUNDV4_ARG_FREE                                        \\\n    - \tdo {                                                       \\\n→ to be replaced with:\n    + #define COMPOUNDV4_ARG_FREE                                            \\\n    + \tdo {                                                           \\",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33ce36b8_c67412af",
+        "filename": "src/FSAL/FSAL_PROXY_V4/fsal_nfsv4_macros.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0954382_aa379254",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -222,6 +438,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d37fc0_4ae12b68",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b99bb55_f7229dab",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e740caf_41cb5629",
@@ -235,6 +469,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tp_thr_info-\u003edbop_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t\t     MEM_COMP_DROP_POOL);\n    - \tp_thr_info-\u003edbop_pool-\u003ename \u003d gsh_strdup(\"drop_pool\",\n    - \t\t\t\t\t\t MEM_COMP_DROP_POOL);\n→ to be replaced with:\n    + \tp_thr_info-\u003edbop_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_DROP_POOL);\n    + \tp_thr_info-\u003edbop_pool-\u003ename \u003d\n    + \t\tgsh_strdup(\"drop_pool\", MEM_COMP_DROP_POOL);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa1e8b01_648dc39e",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle_mapping/handle_mapping_db.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e740caf_41cb5629",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -256,6 +508,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a1b8dad_e11b0646",
+        "filename": "src/FSAL/FSAL_PSEUDO/export.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58fbd3b7_967821df",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14e67d22_9369cda0",
@@ -269,6 +539,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tcb_arg-\u003eutf8string_val \u003d gsh_strldup(attrs-\u003exattrs-\u003eval.val,\n    - \t\t\t\t\t     attrs-\u003exattrs-\u003eval.len,\n    - \t\t\t\t\t     \u0026cb_arg-\u003eutf8string_len,\n    - \t\t\t\t\t     MEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \tcb_arg-\u003eutf8string_val \u003d\n    + \t\tgsh_strldup(attrs-\u003exattrs-\u003eval.val, attrs-\u003exattrs-\u003eval.len,\n    + \t\t\t    \u0026cb_arg-\u003eutf8string_len, MEM_COMP_PROTOCOL);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e4ae59f_72999d97",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1614,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14e67d22_9369cda0",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -290,6 +578,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79c09ccc_c93b650a",
+        "filename": "src/FSAL/FSAL_RGW/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1795,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c96f53f7_e1b4f93b",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4f852a3_709f12e9",
@@ -303,6 +609,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \texport-\u003eparameters.subfolder \u003d gsh_strdup(CTX_FULLPATH(op_ctx),\n    - \t\t\t\t\t\t  MEM_COMP_EXPORT);\n→ to be replaced with:\n    + \texport-\u003eparameters.subfolder \u003d\n    + \t\tgsh_strdup(CTX_FULLPATH(op_ctx), MEM_COMP_EXPORT);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee14cb87_b0851cd5",
+        "filename": "src/FSAL/FSAL_SAUNAFS/main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4f852a3_709f12e9",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -324,6 +648,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60873cea_736cd136",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1601,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "add40c6d_0ad35404",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0d58de6_98f03842",
@@ -337,6 +679,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \ttemp_name \u003d gsh_strdup(\"/tmp/ganesha.nfsd.locktestXXXXXX\",\n    - \t\t\t       MEM_COMP_FSAL);\n→ to be replaced with:\n    + \ttemp_name \u003d\n    + \t\tgsh_strdup(\"/tmp/ganesha.nfsd.locktestXXXXXX\", MEM_COMP_FSAL);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfec137b_382ebb76",
+        "filename": "src/FSAL/FSAL_VFS/xfs/main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0d58de6_98f03842",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -358,6 +718,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f0bd6a5_21258c5a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b65bcd3a_f311aa86",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea9afef6_38522fce",
@@ -371,6 +749,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tnames[i].utf8string_val \u003d gsh_memdup(name, len,\n    - \t\t\t\t\t\t     MEM_COMP_PROTOCOL);\n→ to be replaced with:\n    + \t\tnames[i].utf8string_val \u003d\n    + \t\t\tgsh_memdup(name, len, MEM_COMP_PROTOCOL);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acad726f_05c6653f",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2210,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea9afef6_38522fce",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -392,6 +788,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63bbc1b0_85411ffe",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1087,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "083d5875_d88da5cf",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d2d5812_80fb83fd",
@@ -405,6 +819,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tqos_class_t *node \u003d\n    - \t\tgsh_calloc(1, sizeof(qos_class_t), MEM_COMP_QOS);\n→ to be replaced with:\n    + \tqos_class_t *node \u003d gsh_calloc(1, sizeof(qos_class_t), MEM_COMP_QOS);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f74dcf7_b4511b21",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d2d5812_80fb83fd",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -426,6 +858,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bac20fb_09f4b2e8",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81fd7f40_f64973e8",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5cbbb4c_4360386f",
@@ -439,6 +889,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tnfs41_session \u003d gsh_calloc(1, nfs41_session_pool-\u003eobject_size,\n    - \t\t\t\t   MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \tnfs41_session \u003d\n    + \t\tgsh_calloc(1, nfs41_session_pool-\u003eobject_size, MEM_COMP_CLIENT);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77a33ab3_391f2031",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5cbbb4c_4360386f",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -460,6 +928,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65e6271f_56fc6c16",
+        "filename": "src/Protocols/NFS/nfs4_pseudo.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d85c664_a243896e",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbd99628_86ca549c",
@@ -473,6 +959,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tdupreq_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t   MEM_COMP_DUP_REQ_POOL);\n    - \tdupreq_pool-\u003ename \u003d gsh_strdup(\"Duplicate Request Pool\",\n    - \t\t\t\t       MEM_COMP_DUP_REQ_POOL);\n    - \tnfs_res_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t    MEM_COMP_NFS_RES_POOL);\n    - \tnfs_res_pool-\u003ename \u003d gsh_strdup(\"nfs_res_t pool\",\n    - \t\t\t\t\tMEM_COMP_NFS_RES_POOL);\n    - \ttcp_drc_pool \u003d (pool_t *)gsh_malloc(sizeof(pool_t),\n    - \t\t\t\t\t    MEM_COMP_TCP_DRC_POOL);\n    - \ttcp_drc_pool-\u003ename \u003d gsh_strdup(\"TCP DRC Pool\",\n    - \t\t\t\t\tMEM_COMP_TCP_DRC_POOL);\n→ to be replaced with:\n    + \tdupreq_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_DUP_REQ_POOL);\n    + \tdupreq_pool-\u003ename \u003d\n    + \t\tgsh_strdup(\"Duplicate Request Pool\", MEM_COMP_DUP_REQ_POOL);\n    + \tnfs_res_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_NFS_RES_POOL);\n    + \tnfs_res_pool-\u003ename \u003d\n    + \t\tgsh_strdup(\"nfs_res_t pool\", MEM_COMP_NFS_RES_POOL);\n    + \ttcp_drc_pool \u003d\n    + \t\t(pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_TCP_DRC_POOL);\n    + \ttcp_drc_pool-\u003ename \u003d gsh_strdup(\"TCP DRC Pool\", MEM_COMP_TCP_DRC_POOL);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ed63282_a451a876",
+        "filename": "src/RPCAL/nfs_dupreq.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbd99628_86ca549c",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -494,6 +998,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90a3a19a_7c0717e9",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96c2194b_f3490c20",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1dd6a7b3_d48f9227",
@@ -507,6 +1029,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tclient_id_pool-\u003ename \u003d gsh_strdup(\"NFS4 Client ID Pool\",\n    - \t\t\t\t\t  MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \tclient_id_pool-\u003ename \u003d\n    + \t\tgsh_strdup(\"NFS4 Client ID Pool\", MEM_COMP_CLIENT);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3af5cba0_c503188e",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2387,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dd6a7b3_d48f9227",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -528,6 +1068,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b73bd720_fc5a03dd",
+        "filename": "src/SAL/nlm_owner.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74bf6958_60f08cf1",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "298a3a12_b763c2c4",
@@ -541,6 +1099,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tpclient-\u003eslc_nlm_caller_name \u003d gsh_strdup(key.slc_nlm_caller_name,\n    - \t\t\t\t\t\t  MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \tpclient-\u003eslc_nlm_caller_name \u003d\n    + \t\tgsh_strdup(key.slc_nlm_caller_name, MEM_COMP_CLIENT);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af4b044e_33bfdcb9",
+        "filename": "src/SAL/nlm_owner.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1270,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "298a3a12_b763c2c4",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -562,6 +1138,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e99add6_c59cace6",
+        "filename": "src/SAL/recovery/recovery_fs.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71fb7175_e000524b",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa5a006b_3e6308d0",
@@ -575,6 +1169,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tnew_node \u003d\n    - \t\t\tgsh_calloc(1, sizeof(struct expr_parse),\n    - \t\t\t\t   MEM_COMP_CONFIG);\n→ to be replaced with:\n    + \t\tnew_node \u003d gsh_calloc(1, sizeof(struct expr_parse),\n    + \t\t\t\t      MEM_COMP_CONFIG);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15d2ebcf_d4d58233",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1673,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa5a006b_3e6308d0",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -596,6 +1208,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "339447a0_813b570b",
+        "filename": "src/hashtable/hashtable.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6a97e2c_02b6b857",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48ae12cd_5aa2acbe",
@@ -609,6 +1239,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - #define gsh_strldup(s, l, n, comp)                              \\\n    - \t({                                                      \\\n    - \t\tchar *p_ \u003d (char *)gsh_malloc(l + 1, comp);\t\\\n    - \t\tmemcpy(p_, s, l);                               \\\n    - \t\tp_[l] \u003d \u0027\\0\u0027;                                   \\\n    - \t\t*n \u003d l + 1;                                     \\\n    - \t\tp_;                                             \\\n→ to be replaced with:\n    + #define gsh_strldup(s, l, n, comp)                          \\\n    + \t({                                                  \\\n    + \t\tchar *p_ \u003d (char *)gsh_malloc(l + 1, comp); \\\n    + \t\tmemcpy(p_, s, l);                           \\\n    + \t\tp_[l] \u003d \u0027\\0\u0027;                               \\\n    + \t\t*n \u003d l + 1;                                 \\\n    + \t\tp_;                                         \\",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02f3e72d_bc2a5746",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48ae12cd_5aa2acbe",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -630,6 +1278,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba27acc_a1d8eec7",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6838dcb1_cbd10817",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35e756f5_e6685c00",
@@ -643,6 +1309,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tcli-\u003eclient.netgroup.netgroupname \u003d gsh_strdup(client_tok + 1,\n    - \t\t\t\t\t\t\t       MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \t\tcli-\u003eclient.netgroup.netgroupname \u003d\n    + \t\t\tgsh_strdup(client_tok + 1, MEM_COMP_CLIENT);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58fffb3e_8a1a2dca",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35e756f5_e6685c00",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -664,6 +1348,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9be14394_07034ea8",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1527,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4589bcf5_3e20fe30",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58c32c4a_e23128ca",
@@ -677,6 +1379,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tgrp_name \u003d cidr_to_str(client-\u003eclient.network.cidr,\n    - \t\t\t\t       MEM_COMP_DBUS);\n→ to be replaced with:\n    + \t\tgrp_name \u003d\n    + \t\t\tcidr_to_str(client-\u003eclient.network.cidr, MEM_COMP_DBUS);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4d2df38_5254720c",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1358,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58c32c4a_e23128ca",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -698,6 +1418,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "117c1ee8_2433db3e",
+        "filename": "src/support/exports.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7ccbc90_cf8f19c0",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2b4e837_b79e2d15",
@@ -711,6 +1449,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\tdest-\u003ecfg_fullpath \u003d gsh_strdup(src-\u003ecfg_fullpath,\n    - \t\t\t\t\t\tMEM_COMP_EXPORT);\n→ to be replaced with:\n    + \t\tdest-\u003ecfg_fullpath \u003d\n    + \t\t\tgsh_strdup(src-\u003ecfg_fullpath, MEM_COMP_EXPORT);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21327fb9_02d8d818",
+        "filename": "src/support/exports.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2b4e837_b79e2d15",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -732,6 +1488,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1105c4bc_c958762b",
+        "filename": "src/support/exports.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b079d97_99ac9bf2",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76284e26_fc8080dd",
@@ -745,6 +1519,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \texport-\u003efullpath \u003d gsh_refstr_dup(export-\u003ecfg_fullpath,\n    - \t\t\t\t\t  MEM_COMP_EXPORT);\n    - \t\texport-\u003epseudopath \u003d gsh_refstr_dup(export-\u003ecfg_pseudopath,\n    - \t\t\t\t\t\t    MEM_COMP_EXPORT);\n→ to be replaced with:\n    + \texport-\u003efullpath \u003d\n    + \t\tgsh_refstr_dup(export-\u003ecfg_fullpath, MEM_COMP_EXPORT);\n    + \t\texport-\u003epseudopath \u003d\n    + \t\t\tgsh_refstr_dup(export-\u003ecfg_pseudopath, MEM_COMP_EXPORT);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5383572_23ec6bbc",
+        "filename": "src/support/exports.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1701,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76284e26_fc8080dd",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -766,6 +1558,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09dc1410_505e6bed",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a2bbbd8_8a0e8f8a",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "243c4fb5_676507dc",
@@ -779,6 +1589,24 @@
       "writtenOn": "2026-05-06T15:12:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \tnew_entry \u003d gsh_malloc(sizeof(nfs41_session_list_entry_t),\n    - \t\t\t       MEM_COMP_CLIENT);\n→ to be replaced with:\n    + \tnew_entry \u003d\n    + \t\tgsh_malloc(sizeof(nfs41_session_list_entry_t), MEM_COMP_CLIENT);",
+      "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8750d9f7_d48be72d",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-06-04T07:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "243c4fb5_676507dc",
       "revId": "0ad232f9f9179524c680b615bfe75c0b34dc8899",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
