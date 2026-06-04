@@ -16,6 +16,24 @@
       "message": "Should we instead just verify the code is right and remove the assert?",
       "revId": "9bc509e494a5e2456f5f020f11b3d4e4c36bea43",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b398d7c_39970493",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2026-06-04T10:04:45Z",
+      "side": 1,
+      "message": "we found this error as part of our fuzzing efforts.\nThe user input created a case where we won\u0027t have enough memory to reply. \nits not a real problem, as the protocol will probably not do this. but a malicious user can, and it is better to return an error rather than to crash",
+      "parentUuid": "b1aad7fb_e14895d9",
+      "revId": "9bc509e494a5e2456f5f020f11b3d4e4c36bea43",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
