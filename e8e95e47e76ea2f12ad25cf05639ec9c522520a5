@@ -88,6 +88,24 @@
       "parentUuid": "70458fe9_5c8c51ab",
       "revId": "e8e95e47e76ea2f12ad25cf05639ec9c522520a5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f852e1c8_20941dc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-04T15:00:06Z",
+      "side": 1,
+      "message": "Memory doesn\u0027t need to be allocated, the string is only needed to convert the XDR param to a uid or gid. So an alloca or a local char[x] buffer is sufficient. See how decode_acl works, no reason for decode_owner and decode_group to work the same way.\n\nReally the solution would be to not use gsh_buffdesc to pass strings. Then, closer to where the string came from we resolve NUL termination and the expectation of NUL terminated string is more clear in the API.",
+      "parentUuid": "4acbec2d_67b1bec4",
+      "revId": "e8e95e47e76ea2f12ad25cf05639ec9c522520a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
