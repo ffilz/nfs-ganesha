@@ -412,6 +412,11 @@ enum nfs_req_result nfs4_op_copy(struct nfs_argop4 *, compound_data_t *,
 
 void nfs4_op_copy_Free(nfs_resop4 *resp);
 
+enum nfs_req_result nfs4_op_offload_cancel(struct nfs_argop4 *,
+					   compound_data_t *,
+					   struct nfs_resop4 *);
+
+void nfs4_op_offload_cancel_Free(nfs_resop4 *resp);
 
 /* NFSv4.2 OFFLOAD_STATUS (opcode 67) */
 enum nfs_req_result nfs4_op_offload_status(struct nfs_argop4 *,
