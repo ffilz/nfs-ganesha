@@ -1362,6 +1362,98 @@ extern pool_t *state_owner_pool; /*< Pool for NFSv4 files's open owner */
 extern int g_total_num_files_delegated;
 extern int g_max_files_delegatable;
 
+/**
+ * @brief Per-copy offload state
+ *
+ * Tracks a single asynchronous COPY operation.  The embedded state_t must
+ * be the first member so that container_of(ptr, struct copy_offload_state,
+ * state) works from any state_t * returned by nfs4_Check_Stateid().
+ *
+ * Lifecycle:
+ *   Created: nfs4_op_copy() when ca_synchronous == FALSE and
+ *            the copy exceeds COPY_ASYNC_THRESHOLD.
+ *   Destroyed: copy worker on completion, or OFFLOAD_CANCEL handler.
+ */
+struct copy_offload_state {
+	/* Must be first — nfs4_Check_Stateid returns state_t * */
+	struct state_t       state;
+
+	/* Who started the copy — needed to target CB_OFFLOAD */
+	nfs_client_id_t     *clientid;
+
+	/*
+	 * Worker execution context.
+	 *
+	 * Populated by copy_run_async() before the fridge worker starts.
+	 * Each field is released and set to NULL by copy_worker() before it
+	 * fires CB_OFFLOAD, so these are always NULL by the time
+	 * copy_offload_state_free() runs.
+	 *
+	 * Ownership:
+	 *   src, dst      — extra get_ref taken in copy_run_async; put_ref
+	 *                   by worker.  dst is also held as state.state_obj
+	 *                   (SAL ref for nfs4_Check_Stateid); the worker gets
+	 *                   its own independent ref so it never reaches into
+	 *                   the state_t internals.
+	 *   src_state     — ref from check_copy_stateid; dec_state_t_ref by
+	 *                   worker.
+	 *   dst_state     — ref from check_copy_stateid; dec_state_t_ref by
+	 *                   worker.
+	 *   ctx_export    — get_gsh_export_ref in copy_run_async; released by
+	 *                   release_op_context() in worker.
+	 *   fsal_export   — borrowed from ctx_export; no separate ref.
+	 *
+	 * total_count (below) carries the copy length that the worker loops
+	 * over — no separate to_copy field is needed in copy_ctx.
+	 */
+	struct fsal_obj_handle *src;
+	struct fsal_obj_handle *dst;
+	state_t                *src_state;
+	state_t                *dst_state;
+	uint64_t                src_off;
+	uint64_t                dst_off;
+	struct gsh_export      *ctx_export;
+	struct fsal_export     *fsal_export;
+
+	/*
+	 * Progress and completion entries.
+	 */
+	uint64_t             bytes_copied;
+	uint64_t             total_count; /* immutable after create */
+	nfsstat4             status;
+	uint8_t              complete;    /* atomic via abstract_atomic.h */
+	uint8_t              cancelled;   /* atomic via abstract_atomic.h */
+
+	/* When the copy was created, elapsed time by OFFLOAD_STATUS */
+	nfstime4             start_time; /* immutable after create */
+
+	/*
+	 * Destination file handle for CB_OFFLOAD coa_fh (RFC 7862 16.1.1).
+	 *
+	 * CB_OFFLOAD4args MUST carry the destination NFS4 file handle as its
+	 * FIRST field before coa_stateid.  We capture data->currentFH at
+	 * create time (current FH == destination during COPY processing).
+	 * Freed in copy_offload_state_free().
+	 */
+	nfs_fh4              dst_fh;
+
+	/*
+	 * CB_OFFLOAD retry support (RFC 7862 15.9.3).
+	 *
+	 * When the client returns a transient error (e.g. NFS4ERR_RESOURCE)
+	 * to CB_OFFLOAD, the server SHOULD retransmit.  These fields cache
+	 * the completion parameters so cb_offload_completion() can re-send
+	 * without needing the worker's stack frame.
+	 *
+	 * Set by copy_worker() once, before the first CB_OFFLOAD dispatch.
+	 * Read-only after that (no lock needed — happens-before via RPC).
+	 */
+	uint64_t             cb_bytes_copied;
+	fsal_status_t        cb_fsal_status;
+	verifier4            cb_write_verifier;
+	uint8_t              cb_retry_count; /* incremented on each retry */
+};
+
 #ifdef DEBUG_SAL
 extern struct glist_head state_v4_all;
 extern struct glist_head state_owners_all;
