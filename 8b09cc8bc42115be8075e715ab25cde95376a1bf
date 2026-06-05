@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0d242fd_8966268e",
+        "filename": "src/Protocols/NLM/sm_notify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-06-05T16:30:07Z",
+      "side": 1,
+      "message": "Instead of \"exit\", I think should return \"NULL\". OR intentionally going for abrupt termination.",
+      "revId": "8b09cc8bc42115be8075e715ab25cde95376a1bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c465bfec_97befbac",
+        "filename": "src/Protocols/NLM/sm_notify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-06-05T16:30:07Z",
+      "side": 1,
+      "message": "In case of failure \"cc\" is not getting freed here..",
+      "revId": "8b09cc8bc42115be8075e715ab25cde95376a1bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18a59f28_101c71b9",
+        "filename": "src/Protocols/NLM/sm_notify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-06-05T16:30:07Z",
+      "side": 1,
+      "message": "Is there any action required with the boolean return value?",
+      "range": {
+        "startLine": 411,
+        "startChar": 45,
+        "endLine": 411,
+        "endChar": 47
+      },
+      "revId": "8b09cc8bc42115be8075e715ab25cde95376a1bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
