@@ -1050,6 +1050,13 @@ struct state_file {
 	struct glist_head lock_list;
 	/** Pointers for NLM share list. Protected by st_lock */
 	struct glist_head nlm_share_list;
+	/**
+	 * Hint of NFSv4 lock clientids on this file. Protected by st_lock.
+	 * 0           -> no active hint / no locks
+	 * UINT64_MAX  -> locks from multiple or unknown clients seen
+	 * other value -> all tracked NFSv4 locks belong to this clientid
+	 */
+	clientid4 lock_clientid_hint;
 	/** true iff write delegated. Protected by st_lock */
 	bool write_delegated;
 	/** client holding write_deleg. Protected by st_lock */
