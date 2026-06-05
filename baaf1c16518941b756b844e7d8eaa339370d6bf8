@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c8d4cd1_7864ceb3",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-05T17:59:37Z",
+      "side": 1,
+      "message": "Caller assures obj is not NUL and type is REGULAR_FILE and deleg_clid is not NULL\n\nSo this test is not needed.",
+      "revId": "baaf1c16518941b756b844e7d8eaa339370d6bf8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "654ac3d0_645990ca",
+        "filename": "src/FSAL_UP/fsal_up_top.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-05T17:59:37Z",
+      "side": 1,
+      "message": "Use LOCK_CLIENTID_HINT_MIXED here\n\nOptionally, just reduce to just the final test with return...\n\nif hint is 0, hint !\u003d deleg_clid-\u003ecid_clientid\n\nif hint is LOCK_CLIENTID_HINT_MIXED, hint !\u003d deleg_clid-\u003ecid_clientid\n\nWith all of this, this function reduces to:\n\nobj-\u003estate_hdl-\u003efile.lock_clientid_hint \u003d\u003d deleg_clid-\u003ecid_clientid \n\nJustr replace the function call with this test it will make the calling function easier to follow.",
+      "revId": "baaf1c16518941b756b844e7d8eaa339370d6bf8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d63c12e9_6fadcfa3",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-05T17:59:37Z",
+      "side": 1,
+      "message": "Some comments in here would help",
+      "revId": "baaf1c16518941b756b844e7d8eaa339370d6bf8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c530f92_2123d53e",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-05T17:59:37Z",
+      "side": 1,
+      "message": "Why not have a mirror remove_lock_from_file_list function?\n\nThat will make it easier to audit that no adds or removes get missed since it reduces the places where sle_list is referenced.",
+      "revId": "baaf1c16518941b756b844e7d8eaa339370d6bf8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
