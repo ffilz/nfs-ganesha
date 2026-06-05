@@ -69,53 +69,36 @@ static int schedule_delegrecall_task(struct delegrecall_context *ctx,
  *
  * When a backend recalls a delegation while the same NFSv4 client is only
  * transitioning local lock/open state, recalling at NFS layer is noisy and
- * can perturb lock-stateid based I/O ordering. If every active lock on the
- * file belongs to that same client, this helper returns true so caller can
- * skip issuing CB_RECALL.
+ * can perturb lock-stateid based I/O ordering. Uses per-file
+ * lock_clientid_hint (maintained in state_lock.c) to avoid walking the full
+ * lock list on each FSAL_UP delegrecall upcall.
  *
  * @note st_lock must be held by caller.
  *
  * @param[in] obj         File object being considered for delegation recall
  * @param[in] deleg_clid  Client that currently owns the delegation
  *
- * @retval true  All active locks belong to the same delegation client
+ * @retval true  All tracked active locks belong to the delegation client
  * @retval false Otherwise
  *
  */
 static bool delegrecall_skip_for_same_client_locks(struct fsal_obj_handle *obj,
 						   nfs_client_id_t *deleg_clid)
 {
-	struct glist_head *glist;
-	state_lock_entry_t *lock_entry;
-	bool saw_lock = false;
+	clientid4 hint;
 
 	if (obj == NULL || obj->type != REGULAR_FILE || deleg_clid == NULL)
 		return false;
 
-	glist_for_each(glist, &obj->state_hdl->file.lock_list) {
-		state_owner_t *lock_owner;
-		nfs_client_id_t *lock_clid;
+	hint = obj->state_hdl->file.lock_clientid_hint;
 
-		lock_entry = glist_entry(glist, state_lock_entry_t, sle_list);
-		if (lock_entry->sle_lock.lock_type == FSAL_NO_LOCK)
-			continue;
+	if (hint == 0)
+		return false;
 
-		saw_lock = true;
-		lock_owner = lock_entry->sle_owner;
-		if (lock_owner == NULL)
-			return false;
+	if (hint == UINT64_MAX)
+		return false;
 
-		if (lock_owner->so_type != STATE_LOCK_OWNER_NFSV4 &&
-		    lock_owner->so_type != STATE_OPEN_OWNER_NFSV4)
-			return false;
-
-		lock_clid = lock_owner->so_owner.so_nfs4_owner.so_clientrec;
-		if (lock_clid == NULL ||
-		    lock_clid->cid_clientid != deleg_clid->cid_clientid)
-			return false;
-	}
-
-	return saw_lock;
+	return hint == deleg_clid->cid_clientid;
 }
 
 /** Invalidate some or all of a cache entry and close if open
