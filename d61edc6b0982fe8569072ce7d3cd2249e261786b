@@ -16,6 +16,24 @@
       "message": "Instead of duplicating, can we just rename? Raw prometheus output will be confusing with duplicate names.",
       "revId": "d61edc6b0982fe8569072ce7d3cd2249e261786b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00264621_cdbb550c",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-06-05T10:45:24Z",
+      "side": 1,
+      "message": "I missed to update the comments for the function in patchset4, check the latest patchset.",
+      "parentUuid": "fa0aa674_f6257141",
+      "revId": "d61edc6b0982fe8569072ce7d3cd2249e261786b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
