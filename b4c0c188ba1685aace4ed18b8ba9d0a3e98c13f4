@@ -52,6 +52,24 @@
       "parentUuid": "5cbb4f2b_cbf64ce9",
       "revId": "b4c0c188ba1685aace4ed18b8ba9d0a3e98c13f4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d060e54d_11fb793d",
+        "filename": "src/include/ip_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2026-06-06T02:56:02Z",
+      "side": 1,
+      "message": "Wow!  Clearly nobody compiles with `RPC_VSOCK` defined!  The original had been that way since 2019...",
+      "parentUuid": "c726242d_2d3b8ab9",
+      "revId": "b4c0c188ba1685aace4ed18b8ba9d0a3e98c13f4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
