@@ -52,6 +52,24 @@
       "parentUuid": "6b398d7c_39970493",
       "revId": "9bc509e494a5e2456f5f020f11b3d4e4c36bea43",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6922868_b9a265e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1037976
+      },
+      "writtenOn": "2026-06-07T05:35:44Z",
+      "side": 1,
+      "message": "we should be protected by the following checks you mentioned, I just didn\u0027t want to remove the assert completely as such asserts usually are added after a real bug was encountered. and the cost of returning an error up front here is negligible",
+      "parentUuid": "79429a17_35c23f84",
+      "revId": "9bc509e494a5e2456f5f020f11b3d4e4c36bea43",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
