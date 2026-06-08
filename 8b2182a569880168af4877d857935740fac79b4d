@@ -16,6 +16,92 @@
       "message": "Updated changes in patchset 5. Please review.",
       "revId": "8b2182a569880168af4877d857935740fac79b4d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28884306_8209111c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-08T18:57:43Z",
+      "side": 1,
+      "message": "Logic looks solid. Just some minor tweaks.",
+      "revId": "8b2182a569880168af4877d857935740fac79b4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69da524a_309a9e16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-08T18:57:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6bf3edec_193ad0fc",
+      "revId": "8b2182a569880168af4877d857935740fac79b4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c8be7c4_68efe874",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-08T18:57:43Z",
+      "side": 1,
+      "message": "Hmm, file can never be NULL.\n\nAlso, make this an inline function.",
+      "revId": "8b2182a569880168af4877d857935740fac79b4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6223ce60_0f946c3d",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-08T18:57:43Z",
+      "side": 1,
+      "message": "inline...",
+      "revId": "8b2182a569880168af4877d857935740fac79b4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aa78447_a6838ebb",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-08T18:57:43Z",
+      "side": 1,
+      "message": "inline...",
+      "revId": "8b2182a569880168af4877d857935740fac79b4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
