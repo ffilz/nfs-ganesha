@@ -70,6 +70,24 @@
       "parentUuid": "728d1f81_8672bb3f",
       "revId": "ef4004f0e0024351de33090c01323ee071647b2a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d945dd41_95524993",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-08T14:59:54Z",
+      "side": 1,
+      "message": "That\u0027s a good question, I\u0027ll look into that. Some strings are optional so zero length is OK, but other strings are not.\n\nI assume in this case it\u0027s a zero length long form clientid?\n\nMaybe we should set up an xdr_string_noempty and xdr_opaque_no_empty\n\nOr the xdr for the structure could validate any required strings and opaques.\n\nWe should check that max size is also managed...",
+      "parentUuid": "5762516e_c705398b",
+      "revId": "ef4004f0e0024351de33090c01323ee071647b2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
