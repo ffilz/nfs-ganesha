@@ -22,6 +22,30 @@
       },
       "revId": "ad8a653c605afa6b22c6d78216266614faad0402",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d0626e8_4310e30d",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2026-06-08T13:18:08Z",
+      "side": 1,
+      "message": "We do not want to add option of insecure server. These are parameters that can be updated from the ganesha config file provided by the user.",
+      "parentUuid": "03e27f1a_fa829063",
+      "range": {
+        "startLine": 721,
+        "startChar": 0,
+        "endLine": 732,
+        "endChar": 60
+      },
+      "revId": "ad8a653c605afa6b22c6d78216266614faad0402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
