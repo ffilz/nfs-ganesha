@@ -46,6 +46,30 @@
       },
       "revId": "ad8a653c605afa6b22c6d78216266614faad0402",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43e88a0a_63ec0e78",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-08T15:07:40Z",
+      "side": 1,
+      "message": "Why don\u0027t we want that?\nWe internally would want such an option, assuming that Ganesha is running in an internal network, just like with dbus, there\u0027s no actual need for us to create certificates",
+      "parentUuid": "2d0626e8_4310e30d",
+      "range": {
+        "startLine": 721,
+        "startChar": 0,
+        "endLine": 732,
+        "endChar": 60
+      },
+      "revId": "ad8a653c605afa6b22c6d78216266614faad0402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
