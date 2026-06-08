@@ -88,6 +88,24 @@
       "parentUuid": "5762516e_c705398b",
       "revId": "ef4004f0e0024351de33090c01323ee071647b2a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1250007f_e7e6ca83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-08T18:29:41Z",
+      "side": 1,
+      "message": "Looking at this a bit, I suspect there are only a few strings that can be empty (COMPOUND Tag is one that comes to mind immediately). Maybe we should make the basic XDR functions require strings and opaques to be at least length 1. And then have an alternate set of functions that in addition to taking a max size also take a minimum size which can be 0 - actually those are the internal functions, then wrappers wrap the min away, setting it to 1 (some wrappers also wrap the maximum away),\n\nThis would allow minimal code changes to gain lots of protection.\n\nAnd maybe we just merge this patch as is as a particularly insidious case of empty string.",
+      "parentUuid": "d945dd41_95524993",
+      "revId": "ef4004f0e0024351de33090c01323ee071647b2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
