@@ -132,6 +132,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40cbcb5d_a14e2cda",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T15:58:15Z",
+      "side": 1,
+      "message": "Mostly for completeness and robustness if someone decides to refactor the code.",
+      "parentUuid": "d2080d3f_5a891b87",
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2a13056_3f7cc05c",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 15
@@ -167,6 +185,30 @@
       "side": 1,
       "message": "This is supported in Standard C++ 26\nThe compiler we use currently for ganesha does not supports C++ 26",
       "parentUuid": "d2a13056_3f7cc05c",
+      "range": {
+        "startLine": 86,
+        "startChar": 28,
+        "endLine": 86,
+        "endChar": 39
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "819e3c29_af12b00e",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T15:58:15Z",
+      "side": 1,
+      "message": "Ah, I see.\nIn that case, consider passing `ip_addr` as `std::string` to this function as well, and moving it all the way. It would spare a copy.",
+      "parentUuid": "224fb496_1067c7f1",
       "range": {
         "startLine": 86,
         "startChar": 28,
@@ -273,6 +315,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d56fca7_31cd9dd1",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T15:58:15Z",
+      "side": 1,
+      "message": "Ah, I see, it does not work before C++20.\n\nIn this case, it is a waste to copy these strings again, please use `std::move`:\n\n```c++\nssl_opts.pem_key_cert_pairs.push_back(std::move(key_cert_pair));\n```",
+      "parentUuid": "0b3d63e3_dbcdb1f7",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 55
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b8d2b08f_7d34da3f",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 15
@@ -320,6 +386,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73079b10_74fd6907",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T15:58:15Z",
+      "side": 1,
+      "message": "`running_` is used in `GrpcServer::stop()` below.\n\nI agree it can be replaced with comparing `server_` to `nullptr` and then `running_` is completely unneeded.",
+      "parentUuid": "57847c1c_1d045525",
+      "range": {
+        "startLine": 123,
+        "startChar": 3,
+        "endLine": 123,
+        "endChar": 18
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc9f03a0_0385d1e9",
         "filename": "src/grpc_server/GrpcServer.h",
         "patchSetId": 15
@@ -355,6 +445,30 @@
       "side": 1,
       "message": "After making the suggested change, the commit fails due to a pre-commit style check. I’m investigating the specific rule causing the “bad function definition” error.",
       "parentUuid": "bc9f03a0_0385d1e9",
+      "range": {
+        "startLine": 43,
+        "startChar": 11,
+        "endLine": 43,
+        "endChar": 15
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9acb26e1_86b50242",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T15:58:15Z",
+      "side": 1,
+      "message": "Ah, this rule is true for C but not C++, and I guess the pre-commit rule doesn\u0027t distinguish between C or C++ `.h` files. Don\u0027t fight with it 😉",
+      "parentUuid": "9a754363_033869ca",
       "range": {
         "startLine": 43,
         "startChar": 11,

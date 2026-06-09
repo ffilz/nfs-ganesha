@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "614746f2_6f84cac5",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T15:58:15Z",
+      "side": 1,
+      "message": "`ip_addr` should be moved here as well (now it is copied).",
+      "range": {
+        "startLine": 55,
+        "startChar": 37,
+        "endLine": 55,
+        "endChar": 44
+      },
+      "revId": "fedbb48a84cedd1e5d38185f9ac7c2316221fcf9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa5f4ce4_5990fb42",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T15:58:15Z",
+      "side": 1,
+      "message": "Same here (this is another copy).",
+      "range": {
+        "startLine": 60,
+        "startChar": 32,
+        "endLine": 60,
+        "endChar": 39
+      },
+      "revId": "fedbb48a84cedd1e5d38185f9ac7c2316221fcf9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9032cd0a_ef0e23eb",
         "filename": "src/grpc_server/GrpcServer.h",
         "patchSetId": 16
