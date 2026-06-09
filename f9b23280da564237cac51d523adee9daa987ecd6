@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da194d1d_367afd90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:32:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "20f40aaf_c5ef6557",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c49f188_ccd3bf01",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-10T21:37:46Z",
       "side": 1,
       "message": "Formatting definitely has to be fixed here.",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5466d0b7_c712ce54",
+        "filename": "src/config_parsing/conf_url.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c49f188_ccd3bf01",
       "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -65,6 +101,42 @@
       "writtenOn": "2026-04-09T03:45:55Z",
       "side": 1,
       "message": "WARNING: line length of 90 exceeds 80 columns\n+int config_url_fetch(const char *url, FILE **f, void (**rel)(FILE *, void *), void **fbuf)",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54c7f226_3d974270",
+        "filename": "src/config_parsing/conf_url.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf2781ac_26d69f85",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2ac932f_90559344",
+        "filename": "src/config_parsing/conf_url.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32bb1889_7cc9db6e",
       "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -121,6 +193,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fab143c1_2a01fd9d",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09fc1e3f_1f603031",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a33a979e_45427b60",
@@ -155,6 +245,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e55fb1e_c3c0363b",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a33a979e_45427b60",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86d07456_4d32684c",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "008e5e2b_c80281a5",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0eade7d3_246589e6",
@@ -172,6 +298,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c30ee591_7537ed7b",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0eade7d3_246589e6",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66b73a6a_b34f0948",
@@ -185,6 +329,24 @@
       "writtenOn": "2026-04-09T03:45:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tstream \u003d open_memstream(\u0026save-\u003estreambuf, \u0026save-\u003estreamsz);\n→ to be replaced with:\n    + \t\t\tstream \u003d open_memstream(\u0026save-\u003estreambuf,\n    + \t\t\t\t\t\t\u0026save-\u003estreamsz);",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aea6ed98_41cc1225",
+        "filename": "src/config_parsing/conf_url_rados.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66b73a6a_b34f0948",
       "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -223,6 +385,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad228172_bd2bd720",
+        "filename": "src/include/conf_url.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67e68d43_3b454f5c",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58578216_6fb5c144",
+        "filename": "src/include/conf_url.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcfeb971_6f47c305",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e4eab5f_10c1e3ca",
@@ -240,6 +438,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a63fe5fc_cd37bab7",
+        "filename": "src/include/conf_url.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e4eab5f_10c1e3ca",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3b6727e_583eeda9",
@@ -253,6 +469,24 @@
       "writtenOn": "2026-04-09T03:45:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - int config_url_fetch(const char *url, FILE **f, void (**rel)(FILE *, void *), void **fbuf);\n→ to be replaced with:\n    + int config_url_fetch(const char *url, FILE **f, void (**rel)(FILE *, void *),\n    + \t\t     void **fbuf);",
+      "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e08ff7_0447f616",
+        "filename": "src/include/conf_url.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3b6727e_583eeda9",
       "revId": "f9b23280da564237cac51d523adee9daa987ecd6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
