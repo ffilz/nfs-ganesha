@@ -70,6 +70,30 @@
       },
       "revId": "ad8a653c605afa6b22c6d78216266614faad0402",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a8d9275_d75bd700",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2026-06-09T13:22:58Z",
+      "side": 1,
+      "message": "our product management wants it to be secure is one reason. This shrinks the footprint; if someone gets root access on another machine in the private network but doesn\u0027t have the key or keys (because it/they aren\u0027t on that machine) then it keeps them out.\n\nRight now we need to get this merged upstream so that we can rebase our downstream product and this use case isn\u0027t important and we\u0027re up against a deadline.  We would be happy to consider a follow-on PR that adds insecure mode as a compile-time option.",
+      "parentUuid": "43e88a0a_63ec0e78",
+      "range": {
+        "startLine": 721,
+        "startChar": 0,
+        "endLine": 732,
+        "endChar": 60
+      },
+      "revId": "ad8a653c605afa6b22c6d78216266614faad0402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
