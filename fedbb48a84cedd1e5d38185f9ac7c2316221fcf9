@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9032cd0a_ef0e23eb",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-06-09T14:03:21Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tbool running_ \u003d false;\n+\tstd::mutex mutex_;",
+      "revId": "fedbb48a84cedd1e5d38185f9ac7c2316221fcf9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
