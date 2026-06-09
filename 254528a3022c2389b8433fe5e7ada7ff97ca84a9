@@ -71,6 +71,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6e8a7a0_dbf41f48",
+        "filename": "src/FSAL/FSAL_CEPH/ds.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1038984
+      },
+      "writtenOn": "2026-06-09T08:04:33Z",
+      "side": 1,
+      "message": "When I put those in, the ceph fscrypt modified things so that anything that included libcephfs.h would not build without this.  It looks like that\u0027s been somewhat addressed in ceph; I will try a future build with fewer of these.",
+      "parentUuid": "0ddd1ea7_99325380",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86963b78_543967f4",
@@ -141,6 +159,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd17102a_c1595075",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1038984
+      },
+      "writtenOn": "2026-06-09T08:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33e73232_a8b8699c",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eacb3858_9fd81298",
@@ -169,6 +205,24 @@
         "id": 1003571
       },
       "writtenOn": "2026-04-10T21:53:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eacb3858_9fd81298",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b1c9e80_b48bf2b6",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3124,
+      "author": {
+        "id": 1038984
+      },
+      "writtenOn": "2026-06-09T08:04:33Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "eacb3858_9fd81298",
@@ -225,6 +279,24 @@
       "side": 1,
       "message": "Please also add \"TODO\" in the comment",
       "parentUuid": "03c7b068_b5da41a6",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae786f71_909dfb3b",
+        "filename": "src/FSAL/FSAL_CEPH/internal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1038984
+      },
+      "writtenOn": "2026-06-09T08:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6553187e_8ced2884",
       "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -310,6 +382,24 @@
         "id": 1003571
       },
       "writtenOn": "2026-03-18T18:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "705fbd9a_a3833086",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7b0137f_b37870de",
+        "filename": "src/FSAL/FSAL_CEPH/internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1038984
+      },
+      "writtenOn": "2026-06-09T08:04:33Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "705fbd9a_a3833086",
@@ -404,6 +494,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e073d71_687c615c",
+        "filename": "src/cmake/modules/FindCEPHFS.cmake",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1038984
+      },
+      "writtenOn": "2026-06-09T08:04:33Z",
+      "side": 1,
+      "message": "you\u0027d have to have a version of cephfs that had fscrypt but didn\u0027t depend on that header for this situation to happen.  In which case presumably not including the file would work.  I think this is a \"can\u0027t happen\u0027 today; and if it did happen in the future anything we did today would not be helpful.",
+      "parentUuid": "deb1592b_3f924d37",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9eefa929_5a8451b9",
@@ -417,6 +525,24 @@
       "writtenOn": "2025-11-07T00:06:45Z",
       "side": 1,
       "message": "This seems to suggest the comment in the commit message about no way to ensure fscrypt is in libcephfs.",
+      "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dffb502_6a29fb44",
+        "filename": "src/cmake/modules/FindCEPHFS.cmake",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1038984
+      },
+      "writtenOn": "2026-06-09T08:04:33Z",
+      "side": 1,
+      "message": "yup, these are the calls to check to see if fscrypt support is in cephfs.  presumably choffman will have to do something interesting for windows and freebsd.  won\u0027t that be fun?",
+      "parentUuid": "9eefa929_5a8451b9",
       "revId": "254528a3022c2389b8433fe5e7ada7ff97ca84a9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
