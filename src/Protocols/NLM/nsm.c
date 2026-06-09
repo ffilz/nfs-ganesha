@@ -80,7 +80,11 @@ void nsm_disconnect(bool force)
 	if ((nsm_count == 0 || force) && nsm_clnt != NULL) {
 		CLNT_DESTROY(nsm_clnt);
 		nsm_clnt = NULL;
-		AUTH_DESTROY(nsm_auth);
+		/* DO NOT call AUTH_DESTROY(nsm_auth)!
+		 * nsm_auth is a shared singleton from authnone_ncreate() with
+		 * uninitialized refcount. Calling AUTH_DESTROY() causes negative
+		 * refcounts and memory corruption. Just clear the pointer.
+		 */
 		nsm_auth = NULL;
 		gsh_free(nodename);
 		nodename = NULL;
