@@ -16,6 +16,24 @@
       "message": "clang-format expects formatting for these lines:\n    - \tint32_t __attribute__((unused))\n    - \tref \u003d atomic_dec_int32_t(\u0026obj_hdl-\u003eexp_refcnt);\n→ to be replaced with:\n    + \tint32_t __attribute__((unused)) ref \u003d\n    + \t\tatomic_dec_int32_t(\u0026obj_hdl-\u003eexp_refcnt);",
       "revId": "3a2ad59c944a9723bd53b59234379aeff9b24b4b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0efca14d_07ab82e7",
+        "filename": "src/include/fsal_api.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 3263,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-09T14:42:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0f695bfd_17947bc1",
+      "revId": "3a2ad59c944a9723bd53b59234379aeff9b24b4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
