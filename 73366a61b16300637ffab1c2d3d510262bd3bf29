@@ -16,6 +16,24 @@
       "message": "do we need condition around this : if(USE_FSAL_CEPH_FSCRYPT) ?",
       "revId": "73366a61b16300637ffab1c2d3d510262bd3bf29",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0da3b640_49cdfcec",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 1384,
+      "author": {
+        "id": 1038984
+      },
+      "writtenOn": "2026-06-09T08:08:10Z",
+      "side": 1,
+      "message": "Yes.  there\u0027s no reason to build libkmip if you aren\u0027t building the ceph fsal.",
+      "parentUuid": "5f893810_9abbfece",
+      "revId": "73366a61b16300637ffab1c2d3d510262bd3bf29",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
