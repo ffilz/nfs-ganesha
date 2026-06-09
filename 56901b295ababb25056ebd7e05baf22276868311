@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bc23e50_6d8863a4",
+        "filename": "src/Protocols/NLM/nsm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-06-09T11:45:22Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t * uninitialized refcount. Calling AUTH_DESTROY() causes negative",
+      "revId": "56901b295ababb25056ebd7e05baf22276868311",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
