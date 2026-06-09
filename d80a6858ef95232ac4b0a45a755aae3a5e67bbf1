@@ -379,6 +379,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0feae200_8f347202",
+        "filename": "src/grpc_server/CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1038984
+      },
+      "writtenOn": "2026-06-09T08:50:10Z",
+      "side": 1,
+      "message": "This introduces a c++ build requirement.  That\u0027s fine, but there\u0027s one catch: ntirpc header files aren\u0027t entirely compatible with c++.  You\u0027ll need to have something like https://github.com/nfs-ganesha/ntirpc/pull/383 committed to ntirpc before this will build correctly.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 1
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "434ee1d8_3e6a248d",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 7
