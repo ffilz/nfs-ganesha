@@ -3,6 +3,184 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98420a23_1603302a",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T08:32:10Z",
+      "side": 1,
+      "message": "You should move these strings to this lambda as well to avoid copies.",
+      "range": {
+        "startLine": 58,
+        "startChar": 28,
+        "endLine": 58,
+        "endChar": 58
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8801db57_8fc08ab8",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T08:32:10Z",
+      "side": 1,
+      "message": "Since these variable are only used inside the mutex, they should not be declared here.\n\nNote that as opposed to C, in C++ you may declare variable not at the beginning of the function. In fact, you should do that, because their declaration also calls the constructor, which is something you don\u0027t always want to do, like in the case the server is already running and doesn\u0027t have to be created, you don\u0027t need the construcor of `grpc::ServerBuilder` to be called. Another example is `server_creds`, which you construct here and never used the constructed object until you copy a value to it in line 104, which is an anti-pattern in C++.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 55
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e20b4f2_2f2d02e8",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T08:32:10Z",
+      "side": 1,
+      "message": "Should you add a check here to see if the server is already running?",
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2a13056_3f7cc05c",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T08:32:10Z",
+      "side": 1,
+      "message": "You don\u0027t need to cast `ip_addr` to `std::string`, as `std::string::operator+` has an overload for concatenating `std::string` with `std::string_view`. See overload (4) in https://en.cppreference.com/cpp/string/basic_string/operator%2B.\n\nSame below in line 90.",
+      "range": {
+        "startLine": 86,
+        "startChar": 28,
+        "endLine": 86,
+        "endChar": 39
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5584d82_7c3292b6",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T08:32:10Z",
+      "side": 1,
+      "message": "If you are copying these strings anyway, consider moving them: This function should get `server_key` and `server_crt` as `std::string` (instead of `std::string_view`), and their content should be moved both here and when calling this function.",
+      "range": {
+        "startLine": 94,
+        "startChar": 21,
+        "endLine": 95,
+        "endChar": 30
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e40ae64_b432d529",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T08:32:10Z",
+      "side": 1,
+      "message": "This is yet another copy of these strings.\n\nConsider replacing it lines 93-97 with the following single line:\n\n```c++\nssl_opts.pem_key_cert_pairs.emplace_back(std::string(server_key), std::string(server_crt));\n```\n\nAnd if you accept my previous comment, it should be:\n\n```c++\nssl_opts.pem_key_cert_pairs.emplace_back(std::move(server_key), std::move(server_crt));\n```",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 55
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8d2b08f_7d34da3f",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T08:32:10Z",
+      "side": 1,
+      "message": "Shouldn\u0027t you mark it as running only if the server has been constructed?",
+      "range": {
+        "startLine": 123,
+        "startChar": 3,
+        "endLine": 123,
+        "endChar": 18
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc9f03a0_0385d1e9",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T08:32:10Z",
+      "side": 1,
+      "message": "In C++ you don\u0027t need to specify the `void` argument list for a function.",
+      "range": {
+        "startLine": 43,
+        "startChar": 11,
+        "endLine": 43,
+        "endChar": 15
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a70c7a92_88b5e820",
         "filename": "src/grpc_server/GrpcServer.h",
         "patchSetId": 15
@@ -14,6 +192,29 @@
       "writtenOn": "2026-06-08T11:41:42Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tbool running_ \u003d false;\n+\tstd::mutex mutex_;",
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a2ffca8_46fbac74",
+        "filename": "src/grpc_server/nfsServiceUtil.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1038993
+      },
+      "writtenOn": "2026-06-09T08:32:10Z",
+      "side": 1,
+      "message": "Please `#include \u003cfstream\u003e`.",
+      "range": {
+        "startLine": 29,
+        "startChar": 6,
+        "endLine": 29,
+        "endChar": 15
+      },
       "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
