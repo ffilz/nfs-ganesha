@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7300dfeb_41fa28d7",
+        "filename": "src/Protocols/NLM/nsm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-06-10T06:44:39Z",
+      "side": 1,
+      "message": "Should I revert the nsm_disconnect() changes that were added to address the negative reference count issue",
+      "parentUuid": "5c9efbd0_df9a97fa",
+      "revId": "56901b295ababb25056ebd7e05baf22276868311",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80c4ec48_998e7621",
         "filename": "src/SAL/nlm_owner.c",
         "patchSetId": 1
@@ -101,6 +119,24 @@
       "writtenOn": "2026-06-09T22:41:05Z",
       "side": 1,
       "message": "This fix is still valid.",
+      "revId": "56901b295ababb25056ebd7e05baf22276868311",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f30dc6d_1d786995",
+        "filename": "src/SAL/nlm_owner.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1072,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-06-10T06:44:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "80c4ec48_998e7621",
       "revId": "56901b295ababb25056ebd7e05baf22276868311",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
