@@ -1612,6 +1612,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50fc31f9_fc9f35b4",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2073,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2026-06-10T15:11:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e32a9f12_bc121002",
+      "range": {
+        "startLine": 2073,
+        "startChar": 29,
+        "endLine": 2073,
+        "endChar": 38
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b91f7514_a464e6b5",
@@ -1672,6 +1696,30 @@
       "writtenOn": "2026-06-03T09:25:50Z",
       "side": 1,
       "message": "Can you add a CT_ASSERT for this array also similar to the one for `default_log_levels`",
+      "range": {
+        "startLine": 2307,
+        "startChar": 26,
+        "endLine": 2307,
+        "endChar": 42
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ced6ed52_2aa40419",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 2307,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2026-06-10T15:11:44Z",
+      "side": 1,
+      "message": "The array size is larger than log_components as multiple aliases are used for some features, so adding a dedicated compile-time assertion for its bounds is not practical. Instead, we rely on the existing default_log_levels compile-time checks.",
+      "parentUuid": "74f66e88_5f756c31",
       "range": {
         "startLine": 2307,
         "startChar": 26,
