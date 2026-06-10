@@ -150,6 +150,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d27dccdd_ae791d12",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2026-06-10T12:17:10Z",
+      "side": 1,
+      "message": "Have added \"server\" check",
+      "parentUuid": "40cbcb5d_a14e2cda",
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2a13056_3f7cc05c",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 15
@@ -209,6 +227,30 @@
       "side": 1,
       "message": "Ah, I see.\nIn that case, consider passing `ip_addr` as `std::string` to this function as well, and moving it all the way. It would spare a copy.",
       "parentUuid": "224fb496_1067c7f1",
+      "range": {
+        "startLine": 86,
+        "startChar": 28,
+        "endLine": 86,
+        "endChar": 39
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca419f69_ccdda985",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2026-06-10T12:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "819e3c29_af12b00e",
       "range": {
         "startLine": 86,
         "startChar": 28,
@@ -337,6 +379,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf4f013d_8d491163",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2026-06-10T12:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d56fca7_31cd9dd1",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 55
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8d2b08f_7d34da3f",
@@ -410,6 +476,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7a1a519_76a060bd",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2026-06-10T12:17:10Z",
+      "side": 1,
+      "message": "Have used \"server_\" instead of running_",
+      "parentUuid": "73079b10_74fd6907",
+      "range": {
+        "startLine": 123,
+        "startChar": 3,
+        "endLine": 123,
+        "endChar": 18
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc9f03a0_0385d1e9",
         "filename": "src/grpc_server/GrpcServer.h",
         "patchSetId": 15
@@ -469,6 +559,30 @@
       "side": 1,
       "message": "Ah, this rule is true for C but not C++, and I guess the pre-commit rule doesn\u0027t distinguish between C or C++ `.h` files. Don\u0027t fight with it 😉",
       "parentUuid": "9a754363_033869ca",
+      "range": {
+        "startLine": 43,
+        "startChar": 11,
+        "endLine": 43,
+        "endChar": 15
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3ac785f_98d0e760",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2026-06-10T12:17:10Z",
+      "side": 1,
+      "message": "Ok, keeping it as it is",
+      "parentUuid": "9acb26e1_86b50242",
       "range": {
         "startLine": 43,
         "startChar": 11,
