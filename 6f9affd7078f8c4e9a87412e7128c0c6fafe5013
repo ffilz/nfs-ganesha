@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31a7ef80_dceb349d",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-06-10T09:04:59Z",
+      "side": 1,
+      "message": "The (void *) cast for %p is only added to PTHREAD_RWLOCK_rdlock and PTHREAD_RWLOCK_unlock. The same %p-with-typed-pointer pattern exists in PTHREAD_RWLOCK_init, PTHREAD_RWLOCK_destroy, PTHREAD_RWLOCK_wrlock, PTHREAD_MUTEXATTR_init, and all the PTHREAD_COND_* macros (init/destroy/wait/signal/broadcast). \n\nFor consistency, should the cast be applied to those as well, or dropped here?",
+      "revId": "6f9affd7078f8c4e9a87412e7128c0c6fafe5013",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
