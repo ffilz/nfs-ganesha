@@ -34,7 +34,7 @@
 #include <unistd.h>
 #include <streambuf>
 #include <mutex>
-
+#include "nfs_core.h"
 #ifdef HAVE_PROCPS
 #include <proc/readproc.h>
 #endif

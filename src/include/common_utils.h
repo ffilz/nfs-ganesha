@@ -436,13 +436,13 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		if (rc == 0) {                                           \
 			LogFullDebug(COMPONENT_RW_LOCK,                  \
 				     "Got read lock on %p (%s) "         \
-				     "at %s:%d",                         \
-				     _lock, #_lock, __FILE__, __LINE__); \
+				     "at %s:%d", (void *)_lock,          \
+				      #_lock, __FILE__, __LINE__);       \
 		} else {                                                 \
 			LogCrit(COMPONENT_RW_LOCK,                       \
 				"Error %d, read locking %p (%s) "        \
-				"at %s:%d",                              \
-				rc, _lock, #_lock, __FILE__, __LINE__);  \
+				"at %s:%d", rc, (void *)_lock,           \
+				 #_lock, __FILE__, __LINE__);            \
 			abort();                                         \
 		}                                                        \
 	} while (0)
@@ -460,12 +460,13 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		rc = pthread_rwlock_unlock(_lock);                          \
 		if (rc == 0) {                                              \
 			LogFullDebug(COMPONENT_RW_LOCK,                     \
-				     "Unlocked %p (%s) at %s:%d", _lock,    \
-				     #_lock, __FILE__, __LINE__);           \
+				     "Unlocked %p (%s) at %s:%d",           \
+				     (void *)_lock,#_lock, __FILE__,        \
+				      __LINE__);                            \
 		} else {                                                    \
 			LogCrit(COMPONENT_RW_LOCK,                          \
 				"Error %d, unlocking %p (%s) at %s:%d", rc, \
-				_lock, #_lock, __FILE__, __LINE__);         \
+				(void *)_lock, #_lock, __FILE__, __LINE__); \
 			abort();                                            \
 		}                                                           \
 	} while (0)
