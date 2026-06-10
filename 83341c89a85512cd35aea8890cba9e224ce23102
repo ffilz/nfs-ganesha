@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6598005_6c1dd1cc",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-06-10T02:59:25Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        LogDebug(COMPONENT_FSAL, \"EOF %d  rc %d len %d\",$",
+      "revId": "83341c89a85512cd35aea8890cba9e224ce23102",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "532c9bf6_a997824d",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-06-10T02:59:25Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        LogDebug(COMPONENT_FSAL, \"EOF %d  rc %d len %d\",$",
+      "revId": "83341c89a85512cd35aea8890cba9e224ce23102",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30348ca1_0f4d4b1e",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-06-10T02:59:25Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        status \u003d fsal_listxattr_helper(buf, lxarg.name_len, la_maxcount,$",
+      "revId": "83341c89a85512cd35aea8890cba9e224ce23102",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce17933a_b6d9cd7d",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-06-10T02:59:25Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        status \u003d fsal_listxattr_helper(buf, lxarg.name_len, la_maxcount,$",
+      "revId": "83341c89a85512cd35aea8890cba9e224ce23102",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
