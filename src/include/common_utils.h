@@ -165,12 +165,12 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		if (rc == 0) {                                             \
 			LogFullDebug(COMPONENT_RW_LOCK,                    \
 				     "Init pthread attr %p (%s) at %s:%d", \
-				     _attr, #_attr, __FILE__, __LINE__);   \
+				     (void *)_attr, #_attr, __FILE__, __LINE__);   \
 		} else {                                                   \
 			LogCrit(COMPONENT_RW_LOCK,                         \
 				"Error %d, pthread attr init %p (%s) "     \
 				"at %s:%d",                                \
-				rc, _attr, #_attr, __FILE__, __LINE__);    \
+				rc, (void *)_attr, #_attr, __FILE__, __LINE__);    \
 			abort();                                           \
 		}                                                          \
 	} while (0)
@@ -188,12 +188,12 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		if (rc == 0) {                                                \
 			LogFullDebug(COMPONENT_RW_LOCK,                       \
 				     "Destroy pthread attr %p (%s) at %s:%d", \
-				     _attr, #_attr, __FILE__, __LINE__);      \
+				    (void *) _attr, #_attr, __FILE__, __LINE__);      \
 		} else {                                                      \
 			LogCrit(COMPONENT_RW_LOCK,                            \
 				"Error %d, pthread attr destroy %p (%s) "     \
 				"at %s:%d",                                   \
-				rc, _attr, #_attr, __FILE__, __LINE__);       \
+				rc, (void *)_attr, #_attr, __FILE__, __LINE__);       \
 			abort();                                              \
 		}                                                             \
 	} while (0)
@@ -212,12 +212,12 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		if (rc == 0) {                                                 \
 			LogFullDebug(COMPONENT_RW_LOCK,                        \
 				     "pthread_attr_setscope %p (%s) at %s:%d", \
-				     _attr, #_attr, __FILE__, __LINE__);       \
+				     (void *)_attr, #_attr, __FILE__, __LINE__);       \
 		} else {                                                       \
 			LogCrit(COMPONENT_RW_LOCK,                             \
 				"Error %d, pthread_attr_setscope %p (%s) "     \
 				"at %s:%d",                                    \
-				rc, _attr, #_attr, __FILE__, __LINE__);        \
+				rc, (void *)_attr, #_attr, __FILE__, __LINE__); \
 			abort();                                               \
 		}                                                              \
 	} while (0)
@@ -237,12 +237,12 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 			LogFullDebug(                                          \
 			      COMPONENT_RW_LOCK,                               \
 			      "pthread_attr_setdetachstate %p (%s) at %s:%d",  \
-			      _attr, #_attr, __FILE__, __LINE__);              \
+			      (void *)_attr, #_attr, __FILE__, __LINE__);      \
 		} else {                                                       \
 			LogCrit(COMPONENT_RW_LOCK,                             \
 			      "Error %d, pthread_attr_setdetachstate %p (%s) " \
 			      "at %s:%d",                                      \
-			      rc, _attr, #_attr, __FILE__, __LINE__);          \
+			      rc, (void *)_attr, #_attr, __FILE__, __LINE__);  \
 			abort();                                               \
 		}                                                              \
 	} while (0)
@@ -262,12 +262,12 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 			LogFullDebug(                                          \
 				COMPONENT_RW_LOCK,                             \
 				"pthread_attr_setstacksize %p (%s) at %s:%d",  \
-				_attr, #_attr, __FILE__, __LINE__);            \
+				(void *)_attr, #_attr, __FILE__, __LINE__);    \
 		} else {                                                       \
 			LogCrit(COMPONENT_RW_LOCK,                             \
 				"Error %d, pthread_attr_setstacksize %p (%s) " \
 				"at %s:%d",                                    \
-				rc, _attr, #_attr, __FILE__, __LINE__);        \
+				rc, (void *)_attr, #_attr, __FILE__, __LINE__);\
 			abort();                                               \
 		}                                                              \
 	} while (0)
@@ -285,12 +285,12 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		if (rc == 0) {                                           \
 			LogFullDebug(COMPONENT_RW_LOCK,                  \
 				     "Init rwlockattr %p (%s) at %s:%d", \
-				     _attr, #_attr, __FILE__, __LINE__); \
+				     (void *)_attr, #_attr, __FILE__, __LINE__); \
 		} else {                                                 \
 			LogCrit(COMPONENT_RW_LOCK,                       \
 				"Error %d, rwlockattr init %p (%s) "     \
 				"at %s:%d",                              \
-				rc, _attr, #_attr, __FILE__, __LINE__);  \
+				rc, (void *)_attr, #_attr, __FILE__, __LINE__);  \
 			abort();                                         \
 		}                                                        \
 	} while (0)
@@ -311,11 +311,11 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 			LogFullDebug(                                          \
 			     COMPONENT_RW_LOCK,                                \
 			     "pthread_rwlockattr_setkind_np %p (%s) at %s:%d", \
-			     _attr, #_attr, __FILE__, __LINE__);               \
+			     (void *)_attr, #_attr, __FILE__, __LINE__);       \
 		} else {                                                       \
 			LogCrit(COMPONENT_RW_LOCK,                             \
 			   "Error %d, rwlockattr setkind_np %p (%s) at %s:%d", \
-			   rc, _attr, #_attr, __FILE__, __LINE__);             \
+			   rc, (void *)_attr, #_attr, __FILE__, __LINE__);     \
 			abort();                                               \
 		}                                                              \
 	} while (0)
@@ -336,12 +336,12 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		if (rc == 0) {                                              \
 			LogFullDebug(COMPONENT_RW_LOCK,                     \
 				     "Destroy rwlockattr %p (%s) at %s:%d", \
-				     _attr, #_attr, __FILE__, __LINE__);    \
+				     (void *)_attr, #_attr, __FILE__, __LINE__);    \
 		} else {                                                    \
 			LogCrit(COMPONENT_RW_LOCK,                          \
 				"Error %d, rwlockattr destroy %p (%s) "     \
 				"at %s:%d",                                 \
-				rc, _attr, #_attr, __FILE__, __LINE__);     \
+				rc, (void *)_attr, #_attr, __FILE__, __LINE__);     \
 			abort();                                            \
 		}                                                           \
 	} while (0)
@@ -363,13 +363,13 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		rc = pthread_rwlock_init(_lock, attr);                      \
 		if (rc == 0) {                                              \
 			LogFullDebug(COMPONENT_RW_LOCK,                     \
-				     "Init rwlock %p (%s) at %s:%d", _lock, \
+				     "Init rwlock %p (%s) at %s:%d", (void *)_lock, \
 				     #_lock, __FILE__, __LINE__);           \
 		} else {                                                    \
 			LogCrit(COMPONENT_RW_LOCK,                          \
 				"Error %d, Init rwlock %p (%s) "            \
 				"at %s:%d",                                 \
-				rc, _lock, #_lock, __FILE__, __LINE__);     \
+				rc, (void *)_lock, #_lock, __FILE__, __LINE__);     \
 			abort();                                            \
 		}                                                           \
 	} while (0)
@@ -386,13 +386,13 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		rc = pthread_rwlock_destroy(_lock);                           \
 		if (rc == 0) {                                                \
 			LogFullDebug(COMPONENT_RW_LOCK,                       \
-				     "Destroy mutex %p (%s) at %s:%d", _lock, \
+				     "Destroy mutex %p (%s) at %s:%d", (void *)_lock, \
 				     #_lock, __FILE__, __LINE__);             \
 		} else {                                                      \
 			LogCrit(COMPONENT_RW_LOCK,                            \
 				"Error %d, Destroy mutex %p (%s) "            \
 				"at %s:%d",                                   \
-				rc, _lock, #_lock, __FILE__, __LINE__);       \
+				rc, (void *)_lock, #_lock, __FILE__, __LINE__);       \
 			abort();                                              \
 		}                                                             \
 	} while (0)
@@ -412,12 +412,12 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 			LogFullDebug(COMPONENT_RW_LOCK,                  \
 				     "Got write lock on %p (%s) "        \
 				     "at %s:%d",                         \
-				     _lock, #_lock, __FILE__, __LINE__); \
+				     (void *)_lock, #_lock, __FILE__, __LINE__); \
 		} else {                                                 \
 			LogCrit(COMPONENT_RW_LOCK,                       \
 				"Error %d, write locking %p (%s) "       \
 				"at %s:%d",                              \
-				rc, _lock, #_lock, __FILE__, __LINE__);  \
+				rc, (void *)_lock, #_lock, __FILE__, __LINE__);  \
 			abort();                                         \
 		}                                                        \
 	} while (0)
@@ -436,13 +436,13 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		if (rc == 0) {                                           \
 			LogFullDebug(COMPONENT_RW_LOCK,                  \
 				     "Got read lock on %p (%s) "         \
-				     "at %s:%d",                         \
-				     _lock, #_lock, __FILE__, __LINE__); \
+				     "at %s:%d", (void *)_lock,          \
+				      #_lock, __FILE__, __LINE__);       \
 		} else {                                                 \
 			LogCrit(COMPONENT_RW_LOCK,                       \
 				"Error %d, read locking %p (%s) "        \
-				"at %s:%d",                              \
-				rc, _lock, #_lock, __FILE__, __LINE__);  \
+				"at %s:%d", rc, (void *)_lock,           \
+				 #_lock, __FILE__, __LINE__);            \
 			abort();                                         \
 		}                                                        \
 	} while (0)
@@ -460,12 +460,13 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		rc = pthread_rwlock_unlock(_lock);                          \
 		if (rc == 0) {                                              \
 			LogFullDebug(COMPONENT_RW_LOCK,                     \
-				     "Unlocked %p (%s) at %s:%d", _lock,    \
-				     #_lock, __FILE__, __LINE__);           \
+				     "Unlocked %p (%s) at %s:%d",           \
+				     (void *)_lock,#_lock, __FILE__,        \
+				      __LINE__);                            \
 		} else {                                                    \
 			LogCrit(COMPONENT_RW_LOCK,                          \
 				"Error %d, unlocking %p (%s) at %s:%d", rc, \
-				_lock, #_lock, __FILE__, __LINE__);         \
+				(void *)_lock, #_lock, __FILE__, __LINE__); \
 			abort();                                            \
 		}                                                           \
 	} while (0)
@@ -482,13 +483,13 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		rc = pthread_mutexattr_init(_attr);                            \
 		if (rc == 0) {                                                 \
 			LogFullDebug(COMPONENT_RW_LOCK,                        \
-				     "Init mutexattr %p (%s) at %s:%d", _attr, \
+				     "Init mutexattr %p (%s) at %s:%d", (void *)_attr, \
 				     #_attr, __FILE__, __LINE__);              \
 		} else {                                                       \
 			LogCrit(COMPONENT_RW_LOCK,                             \
 				"Error %d, mutexattr init %p (%s) "            \
 				"at %s:%d",                                    \
-				rc, _attr, #_attr, __FILE__, __LINE__);        \
+				rc, (void *)_attr, #_attr, __FILE__, __LINE__);        \
 			abort();                                               \
 		}                                                              \
 	} while (0)
@@ -508,12 +509,12 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 			LogFullDebug(                                         \
 				COMPONENT_RW_LOCK,                            \
 				"pthread_mutexattr_settype %p (%s) at %s:%d", \
-				_attr, #_attr, __FILE__, __LINE__);           \
+				(void *)_attr, #_attr, __FILE__, __LINE__);   \
 		} else {                                                      \
 			LogCrit(COMPONENT_RW_LOCK,                            \
 				"Error %d, mutexattr settype %p (%s) "        \
 				"at %s:%d",                                   \
-				rc, _attr, #_attr, __FILE__, __LINE__);       \
+				rc, (void *)_attr, #_attr, __FILE__, __LINE__);       \
 			abort();                                              \
 		}                                                             \
 	} while (0)
@@ -531,12 +532,12 @@ static inline int PTHREAD_create(pthread_t *thread, pthread_attr_t *attr,
 		if (rc == 0) {                                             \
 			LogFullDebug(COMPONENT_RW_LOCK,                    \
 				     "Destroy mutexattr %p (%s) at %s:%d", \
-				     _attr, #_attr, __FILE__, __LINE__);   \
+				     (void *)_attr, #_attr, __FILE__, __LINE__);   \
 		} else {                                                   \
 			LogCrit(COMPONENT_RW_LOCK,                         \
 				"Error %d, mutexattr destroy %p (%s) "     \
 				"at %s:%d",                                \
-				rc, _attr, #_attr, __FILE__, __LINE__);    \
+				rc, (void *)_attr, #_attr, __FILE__, __LINE__);    \
 			abort();                                           \
 		}                                                          \
 	} while (0)
@@ -702,12 +703,12 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 		if (rc == 0) {                                              \
 			LogFullDebug(COMPONENT_RW_LOCK,                     \
 				     "Acquired spin lock %p (%s) at %s:%d", \
-				     _spin, #_spin, __FILE__, __LINE__);    \
+				     (void *)_spin, #_spin, __FILE__, __LINE__);    \
 		} else {                                                    \
 			LogCrit(COMPONENT_RW_LOCK,                          \
 				"Error %d, acquiring spin lock %p (%s) "    \
 				"at %s:%d",                                 \
-				rc, _spin, #_spin, __FILE__, __LINE__);     \
+				rc, (void *)_spin, #_spin, __FILE__, __LINE__);     \
 			abort();                                            \
 		}                                                           \
 	} while (0)
@@ -720,12 +721,12 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 		if (rc == 0) {                                              \
 			LogFullDebug(COMPONENT_RW_LOCK,                     \
 				     "Released spin lock %p (%s) at %s:%d", \
-				     _spin, #_spin, __FILE__, __LINE__);    \
+				     (void *)_spin, #_spin, __FILE__, __LINE__);    \
 		} else {                                                    \
 			LogCrit(COMPONENT_RW_LOCK,                          \
 				"Error %d, releasing spin lock %p (%s) "    \
 				"at %s:%d",                                 \
-				rc, _spin, #_spin, __FILE__, __LINE__);     \
+				rc, (void *)_spin, #_spin, __FILE__, __LINE__);     \
 			abort();                                            \
 		}                                                           \
 	} while (0)
@@ -743,13 +744,13 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 		rc = pthread_spin_init(_spin, _pshared);                       \
 		if (rc == 0) {                                                 \
 			LogFullDebug(COMPONENT_RW_LOCK,                        \
-				     "Init spin lock %p (%s) at %s:%d", _spin, \
+				     "Init spin lock %p (%s) at %s:%d", (void *)_spin, \
 				     #_spin, __FILE__, __LINE__);              \
 		} else {                                                       \
 			LogCrit(COMPONENT_RW_LOCK,                             \
 				"Error %d, Init spin lock %p (%s) "            \
 				"at %s:%d",                                    \
-				rc, _spin, #_spin, __FILE__, __LINE__);        \
+				rc, (void *)_spin, #_spin, __FILE__, __LINE__);        \
 			abort();                                               \
 		}                                                              \
 	} while (0)
@@ -768,12 +769,12 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 		if (rc == 0) {                                             \
 			LogFullDebug(COMPONENT_RW_LOCK,                    \
 				     "Destroy spin lock %p (%s) at %s:%d", \
-				     _spin, #_spin, __FILE__, __LINE__);   \
+				     (void *)_spin, #_spin, __FILE__, __LINE__);   \
 		} else {                                                   \
 			LogCrit(COMPONENT_RW_LOCK,                         \
 				"Error %d, Destroy spin lock %p (%s) "     \
 				"at %s:%d",                                \
-				rc, _spin, #_spin, __FILE__, __LINE__);    \
+				rc, (void *)_spin, #_spin, __FILE__, __LINE__);    \
 			abort();                                           \
 		}                                                          \
 	} while (0)
@@ -845,13 +846,13 @@ static inline int PTHREAD_mutex_trylock(pthread_mutex_t *mtx,
 		rc = pthread_cond_wait(_cond, _mutex);                    \
 		if (rc == 0) {                                            \
 			LogFullDebug(COMPONENT_RW_LOCK,                   \
-				     "Wait cond %p (%s) at %s:%d", _cond, \
+				     "Wait cond %p (%s) at %s:%d", (void *)_cond, \
 				     #_cond, __FILE__, __LINE__);         \
 		} else {                                                  \
 			LogCrit(COMPONENT_RW_LOCK,                        \
 				"Error %d, Wait cond %p (%s) "            \
 				"at %s:%d",                               \
-				rc, _cond, #_cond, __FILE__, __LINE__);   \
+				rc, (void *)_cond, #_cond, __FILE__, __LINE__);   \
 			abort();                                          \
 		}                                                         \
 	} while (0)
@@ -918,13 +919,13 @@ static inline int PTHREAD_cond_timedwait(pthread_cond_t *cond,
 		rc = pthread_cond_signal(_cond);                            \
 		if (rc == 0) {                                              \
 			LogFullDebug(COMPONENT_RW_LOCK,                     \
-				     "Signal cond %p (%s) at %s:%d", _cond, \
+				     "Signal cond %p (%s) at %s:%d", (void *)_cond, \
 				     #_cond, __FILE__, __LINE__);           \
 		} else {                                                    \
 			LogCrit(COMPONENT_RW_LOCK,                          \
 				"Error %d, Signal cond %p (%s) "            \
 				"at %s:%d",                                 \
-				rc, _cond, #_cond, __FILE__, __LINE__);     \
+				rc, (void *)_cond, #_cond, __FILE__, __LINE__);     \
 			abort();                                            \
 		}                                                           \
 	} while (0)
@@ -944,13 +945,13 @@ static inline int PTHREAD_cond_timedwait(pthread_cond_t *cond,
 		rc = pthread_cond_broadcast(_cond);                            \
 		if (rc == 0) {                                                 \
 			LogFullDebug(COMPONENT_RW_LOCK,                        \
-				     "Broadcast cond %p (%s) at %s:%d", _cond, \
+				     "Broadcast cond %p (%s) at %s:%d", (void *)_cond, \
 				     #_cond, __FILE__, __LINE__);              \
 		} else {                                                       \
 			LogCrit(COMPONENT_RW_LOCK,                             \
 				"Error %d, Broadcast cond %p (%s) "            \
 				"at %s:%d",                                    \
-				rc, _cond, #_cond, __FILE__, __LINE__);        \
+				rc, (void *)_cond, #_cond, __FILE__, __LINE__);        \
 			abort();                                               \
 		}                                                              \
 	} while (0)
