@@ -51,6 +51,23 @@
       "message": "This is exposing an issue that Ganesha and ntirpc can\u0027t agree on whether to build for RDMA or not. This needs to be properly cleaned up so either both build for RDMA or neither build for RDMA.",
       "revId": "df6a2e5ac9e9a3c466a3625affbd135b46edb06a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ca0bf4d_8c1e9ff6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-06-10T08:06:13Z",
+      "side": 1,
+      "message": "Incorporated the review comments from other PR - https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1238808. So, now we don\u0027t need this one!",
+      "revId": "df6a2e5ac9e9a3c466a3625affbd135b46edb06a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
