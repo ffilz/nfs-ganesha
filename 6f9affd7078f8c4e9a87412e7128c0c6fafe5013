@@ -16,6 +16,24 @@
       "message": "The (void *) cast for %p is only added to PTHREAD_RWLOCK_rdlock and PTHREAD_RWLOCK_unlock. The same %p-with-typed-pointer pattern exists in PTHREAD_RWLOCK_init, PTHREAD_RWLOCK_destroy, PTHREAD_RWLOCK_wrlock, PTHREAD_MUTEXATTR_init, and all the PTHREAD_COND_* macros (init/destroy/wait/signal/broadcast). \n\nFor consistency, should the cast be applied to those as well, or dropped here?",
       "revId": "6f9affd7078f8c4e9a87412e7128c0c6fafe5013",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25d5a3e8_ba92abae",
+        "filename": "src/include/common_utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-06-11T14:36:48Z",
+      "side": 1,
+      "message": "Thanks, Suhas.\nAfter including gsh_config.h in prometheus_exposer.cc, I initially saw warnings only in these two places, so I fixed them in the first patch.\nIn the latest patchset, I’ve updated all similar %p usages to include (void *) casting for consistency.",
+      "parentUuid": "31a7ef80_dceb349d",
+      "revId": "6f9affd7078f8c4e9a87412e7128c0c6fafe5013",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
