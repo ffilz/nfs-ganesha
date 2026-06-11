@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fb02d51_82dc8c24",
+        "filename": "src/Protocols/NLM/sm_notify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T14:15:11Z",
+      "side": 1,
+      "message": "Note that this is a simple program that fires an SM_NOTIFY and is done. No real need for graceful exit, it has reported the error to the user.",
+      "parentUuid": "a0d242fd_8966268e",
+      "revId": "8b09cc8bc42115be8075e715ab25cde95376a1bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c465bfec_97befbac",
         "filename": "src/Protocols/NLM/sm_notify.c",
         "patchSetId": 4
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8342800_694ea7c2",
+        "filename": "src/Protocols/NLM/sm_notify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T14:15:11Z",
+      "side": 1,
+      "message": "Yea, we never free it even on success... Again, simple program, no need to clean up all the memory allocation.\n\nI suppose it should at least report the error from CLNT_CALL_WAIT...",
+      "parentUuid": "c465bfec_97befbac",
+      "revId": "8b09cc8bc42115be8075e715ab25cde95376a1bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18a59f28_101c71b9",
         "filename": "src/Protocols/NLM/sm_notify.c",
         "patchSetId": 4
@@ -48,6 +84,30 @@
       "writtenOn": "2026-06-05T16:30:07Z",
       "side": 1,
       "message": "Is there any action required with the boolean return value?",
+      "range": {
+        "startLine": 411,
+        "startChar": 45,
+        "endLine": 411,
+        "endChar": 47
+      },
+      "revId": "8b09cc8bc42115be8075e715ab25cde95376a1bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bfa443b_fd5560e6",
+        "filename": "src/Protocols/NLM/sm_notify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T14:15:11Z",
+      "side": 1,
+      "message": "I suppose the end here should be return !nsm_notify_1()...",
+      "parentUuid": "18a59f28_101c71b9",
       "range": {
         "startLine": 411,
         "startChar": 45,
