@@ -106,6 +106,24 @@
       "parentUuid": "d945dd41_95524993",
       "revId": "ef4004f0e0024351de33090c01323ee071647b2a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3afd4b4_2d662e8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T23:41:08Z",
+      "side": 1,
+      "message": "OK, I\u0027m going to take this, but we need to go back and check for empty strings in a better way. We will leave this code in as suggested that this is a particularly insidious case of an empty string.",
+      "parentUuid": "1250007f_e7e6ca83",
+      "revId": "ef4004f0e0024351de33090c01323ee071647b2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
