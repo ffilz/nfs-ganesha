@@ -87,6 +87,24 @@
       "parentUuid": "57b65ee5_91f10794",
       "revId": "871a456bce35f6b57dac84589fa53a315cd64d79",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acacbc0b_225fe1e0",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4204,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-06-11T14:56:57Z",
+      "side": 1,
+      "message": "If it sets FULL_DEBUG only for conditional_component_log_level and does not change the default log level, then it should be okay. Sorry, I haven\u0027t gone through complete conditional logging implementation.",
+      "parentUuid": "b80a95bd_1d8148b9",
+      "revId": "871a456bce35f6b57dac84589fa53a315cd64d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
