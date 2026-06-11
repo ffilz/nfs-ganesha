@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0089314a_0a3137d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T23:40:31Z",
+      "side": 1,
+      "message": "Error handling in READDIR is very complicated...\n\nI guess there aren\u0027t pynfs test cases for these weird conditions...\n\nI may have to take a stab at fixing things - AND adding comments to better explain what\u0027s going on.",
+      "revId": "2c8e6ff9251b1a05c087da8cea144e2c88317e26",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41c05536_733a8ab4",
         "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
         "patchSetId": 2
@@ -67,6 +84,41 @@
       "side": 1,
       "message": "At this point args.rdattr_error contains errors from subdirectories of the current directory. So it would copy the NFS4ERR_MOVED flag from a subdirectory to the status of the current directory which does not have referral attributes. So copying at this point is wrong.",
       "parentUuid": "b2b20697_16605a74",
+      "revId": "2c8e6ff9251b1a05c087da8cea144e2c88317e26",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec65668d_484f7726",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T23:40:31Z",
+      "side": 1,
+      "message": "OK, that other patch SHOULD have set tracker-\u003eerror to NFSFERR_TOO_SMALL if that\u0027s what rdattr_error was...",
+      "parentUuid": "58da575f_da85b8cc",
+      "revId": "2c8e6ff9251b1a05c087da8cea144e2c88317e26",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2732bd83_4e0adefc",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T23:40:31Z",
+      "side": 1,
+      "message": "And then tracker-\u003eerror needs to be set here because the client didn\u0027t ask for RDATTR_ERR so the NFS4ERR_MOVED would get lost.",
       "revId": "2c8e6ff9251b1a05c087da8cea144e2c88317e26",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
