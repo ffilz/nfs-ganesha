@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5106db93_6fc3fcf7",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 14
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T22:32:33Z",
+      "side": 1,
+      "message": "This is some tricky stuff, actually look at USE_GTEST for how to structure a conditional (we have some bad examples, that looks like a good one). Structure this test that way (GRPC has fewer required packages but same idea). Also make sure your indenting makes things clear.",
+      "parentUuid": "9f72b0b1_5191e0db",
+      "range": {
+        "startLine": 1010,
+        "startChar": 26,
+        "endLine": 1010,
+        "endChar": 34
+      },
+      "revId": "4fae55b398bb50a842b271aa8ff5a792b62ac4a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d38b6ef_2435f6d1",
         "filename": "src/MainNFSD/nfs_init.c",
         "patchSetId": 14
