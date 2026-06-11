@@ -69,6 +69,24 @@
       "parentUuid": "57b65ee5_91f10794",
       "revId": "871a456bce35f6b57dac84589fa53a315cd64d79",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b80a95bd_1d8148b9",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4204,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-06-11T14:54:28Z",
+      "side": 1,
+      "message": "Does this mean that clearing the conditional logging settings will enable full_debug for all components? When Ganesha starts, the debug log level is set to EVENT.",
+      "parentUuid": "57b65ee5_91f10794",
+      "revId": "871a456bce35f6b57dac84589fa53a315cd64d79",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
