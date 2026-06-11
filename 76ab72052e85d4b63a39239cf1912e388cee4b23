@@ -63,6 +63,24 @@
       "message": "So what does this step do?",
       "revId": "76ab72052e85d4b63a39239cf1912e388cee4b23",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1967ef24_591a3bd3",
+        "filename": "src/support/exports.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3041,
+      "author": {
+        "id": 1038984
+      },
+      "writtenOn": "2026-06-11T06:41:06Z",
+      "side": 1,
+      "message": "This does exactly what the comment says.  The previous config passes were done with a \"relax\" block, which caused the config parser not to check for unsupported parameters.  This config pass doesn\u0027t have a \"relax\" block, so it it expects all parameters to have been handled; therefore it looks for any parameters that were not marked \"found\" and generates warning messages for them.  Originally I wanted to glue all the configuration lists together and parse them all out in one pass, but the config data structures weren\u0027t really designed to do that.  Additionally, the kmip key parameter stuff needs to have the export block plumbed out first, so having a multi-pass approach where the export blocks gets created, then the kmip part can stash a key, then then a final check for unhandled config parameters worked out to be the cleanest approach.",
+      "parentUuid": "385ac671_a5874276",
+      "revId": "76ab72052e85d4b63a39239cf1912e388cee4b23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
