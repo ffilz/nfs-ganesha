@@ -48,6 +48,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bfd59fc_db3cccab",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a9eb49b9_cbac9924",
+      "range": {
+        "startLine": 63,
+        "startChar": 26,
+        "endLine": 64,
+        "endChar": 21
+      },
+      "revId": "440d791a6d7ce845f6ebe9eb9ce8e7dd61009013",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8ada7dc_6edaf326",
@@ -79,6 +103,24 @@
       "side": 1,
       "message": "LogFatal aborts the execution\n\n207 #define LogFatal(component, format, ...)                                       \\\n208     do {                                                                   \\\n209         DisplayLogComponentLevel(component, __FILE__, __LINE__,        \\\n210                      __func__, NIV_FATAL, format,          \\\n211                      ##__VA_ARGS__);                       \\\n212         abort();",
       "parentUuid": "b8ada7dc_6edaf326",
+      "revId": "440d791a6d7ce845f6ebe9eb9ce8e7dd61009013",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e30412ae_3d3d26b4",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3c72e295_acdfe4a6",
       "revId": "440d791a6d7ce845f6ebe9eb9ce8e7dd61009013",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

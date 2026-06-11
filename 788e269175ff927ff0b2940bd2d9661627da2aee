@@ -326,6 +326,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d25d08ac_f96c0098",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "23014c26_74f19beb",
+      "range": {
+        "startLine": 94,
+        "startChar": 21,
+        "endLine": 95,
+        "endChar": 30
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e40ae64_b432d529",
@@ -516,6 +540,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f325393_6f156ac0",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b7a1a519_76a060bd",
+      "range": {
+        "startLine": 123,
+        "startChar": 3,
+        "endLine": 123,
+        "endChar": 18
+      },
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc9f03a0_0385d1e9",
@@ -624,6 +672,24 @@
       "writtenOn": "2026-06-08T11:41:42Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tbool running_ \u003d false;\n+\tstd::mutex mutex_;",
+      "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fd3089d_c737ea6e",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Ignore this, checkpatch is confused.",
+      "parentUuid": "a70c7a92_88b5e820",
       "revId": "788e269175ff927ff0b2940bd2d9661627da2aee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

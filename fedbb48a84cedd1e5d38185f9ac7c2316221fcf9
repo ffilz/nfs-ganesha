@@ -110,6 +110,24 @@
       "message": "WARNING: Missing a blank line after declarations\n+\tbool running_ \u003d false;\n+\tstd::mutex mutex_;",
       "revId": "fedbb48a84cedd1e5d38185f9ac7c2316221fcf9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b670dacc_510ffd6a",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Ignore this one... checkpatch is confused.",
+      "parentUuid": "9032cd0a_ef0e23eb",
+      "revId": "fedbb48a84cedd1e5d38185f9ac7c2316221fcf9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

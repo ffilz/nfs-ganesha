@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ec43b9_858a025b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f13c653f_78482073",
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e53f681_448ba638",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "Have updated the file again",
       "parentUuid": "9e53f681_448ba638",
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8b6fdfc_0c52a0fa",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b2a584e_b3280bbd",
       "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -189,6 +225,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d6a22c_e5675e29",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "654e648f_a5ef994b",
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d78eb2c_655323b2",
@@ -202,6 +256,24 @@
       "writtenOn": "2026-04-29T14:47:09Z",
       "side": 1,
       "message": "And this one",
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bfc9bd0_6fbc8f92",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7d78eb2c_655323b2",
       "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -255,6 +327,24 @@
       "side": 1,
       "message": "Removed the block completely",
       "parentUuid": "475c9ba4_c4898cda",
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "126ef119_d5b8ebcb",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1065,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ab66742_998d80d9",
       "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -320,6 +410,30 @@
       "side": 1,
       "message": "FYI: the string \"0.0,0.0\" is actually ignored... CONF_ITEM_IP_ADDR initializes the parameter to the appropriate inaddrany or in6addrany depending on how the system is set up and it\u0027s IP stack.\n\nSo let\u0027s leave it the same as the Bind_Addr param for now.\n\nAt some later time we might clean this up a bit and make the config more clear.",
       "parentUuid": "bb7d7d13_82822dd5",
+      "range": {
+        "startLine": 1257,
+        "startChar": 41,
+        "endLine": 1257,
+        "endChar": 48
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a3222af_214fc6b4",
+        "filename": "src/config_samples/config.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "532929db_bb590cdb",
       "range": {
         "startLine": 1257,
         "startChar": 41,
@@ -486,6 +600,30 @@
       "parentUuid": "434ee1d8_3e6a248d",
       "range": {
         "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 5
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f665e59_1ec4a470",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5243f7fb_0ee9802b",
+      "range": {
+        "startLine": 43,
         "startChar": 0,
         "endLine": 49,
         "endChar": 5
@@ -753,6 +891,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b63ce85_390ffe35",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cd9e5d1b_a8e640cd",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 3
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e074cc97_e33741b0",
@@ -861,6 +1023,30 @@
       "side": 1,
       "message": "have moved server_thread_.join() out of mutex block",
       "parentUuid": "09443b6a_1edec8b9",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 2
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa3bf52b_47b486b0",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "The last comment is a bit confusing, but the resulting code is clear. The join is outside the mutex.",
+      "parentUuid": "d02edd4c_0d32352d",
       "range": {
         "startLine": 175,
         "startChar": 0,
@@ -1221,6 +1407,30 @@
         "startChar": 22,
         "endLine": 37,
         "endChar": 30
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c484df79_bc9bfae0",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ace99db2_8f06010f",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 32
       },
       "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
@@ -1619,6 +1829,30 @@
       "side": 1,
       "message": "Have removed this function, since we do not need it any more",
       "parentUuid": "a3810924_5b6d0c09",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 1
+      },
+      "revId": "d80a6858ef95232ac4b0a45a755aae3a5e67bbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52b28c31_95295405",
+        "filename": "src/include/ip_utils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-11T17:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e068414_dd5d854b",
       "range": {
         "startLine": 79,
         "startChar": 0,
