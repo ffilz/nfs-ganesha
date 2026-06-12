@@ -34,6 +34,24 @@
       "parentUuid": "fa0aa674_f6257141",
       "revId": "d61edc6b0982fe8569072ce7d3cd2249e261786b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a097c2f_8aa95ca6",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-06-12T14:14:14Z",
+      "side": 1,
+      "message": "We are not duplicating metrics; based on conditional compilation, we push either the new metrics or the legacy metrics.",
+      "parentUuid": "00264621_cdbb550c",
+      "revId": "d61edc6b0982fe8569072ce7d3cd2249e261786b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
