@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4425c750_f6e5f652",
+        "filename": "src/Protocols/NLM/sm_notify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-12T18:58:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2fb02d51_82dc8c24",
+      "revId": "8b09cc8bc42115be8075e715ab25cde95376a1bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c465bfec_97befbac",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Yea, we never free it even on success... Again, simple program, no need to clean up all the memory allocation.\n\nI suppose it should at least report the error from CLNT_CALL_WAIT...",
       "parentUuid": "c465bfec_97befbac",
+      "revId": "8b09cc8bc42115be8075e715ab25cde95376a1bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5051612a_70cd9b8b",
+        "filename": "src/Protocols/NLM/sm_notify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-12T18:58:00Z",
+      "side": 1,
+      "message": "Error situation cleaned up with error message shown.",
+      "parentUuid": "f8342800_694ea7c2",
       "revId": "8b09cc8bc42115be8075e715ab25cde95376a1bf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -108,6 +144,30 @@
       "side": 1,
       "message": "I suppose the end here should be return !nsm_notify_1()...",
       "parentUuid": "18a59f28_101c71b9",
+      "range": {
+        "startLine": 411,
+        "startChar": 45,
+        "endLine": 411,
+        "endChar": 47
+      },
+      "revId": "8b09cc8bc42115be8075e715ab25cde95376a1bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "335cbd2a_8104ff7f",
+        "filename": "src/Protocols/NLM/sm_notify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-12T18:58:00Z",
+      "side": 1,
+      "message": "Return value of nsm_notify_1 changed to be usable as the exit code.",
+      "parentUuid": "6bfa443b_fd5560e6",
       "range": {
         "startLine": 411,
         "startChar": 45,
