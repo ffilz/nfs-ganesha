@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51b72857_63e002be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-15T16:08:14Z",
+      "side": 1,
+      "message": "Looks good. I will try and merge this, but I have a feature landing that also changes the recovery code and if I run into too much of a manual merge, I may push this back. That said, this is a simple change so even if there is a manual merge it should be easy to do.\n\nThis flag will be incompatible with the integrated rpc.statd recovery since that relies on the client\u0027s IP address to send SM_NOTIFY (but the scenario you need this in probably precludes NFSv3 locking anyway...).",
+      "revId": "817b1627f72cf3aebf9bc4776d0a53b14fe0e7fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
