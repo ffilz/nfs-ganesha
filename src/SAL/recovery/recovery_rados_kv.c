@@ -129,56 +129,23 @@ char *rados_kv_create_val(nfs_client_id_t *clientid, size_t *size)
 	const char *str_client_addr = "(unknown)";
 	char cidstr[PATH_MAX] = { 0, }, *val;
 	struct display_buffer dspbuf = { sizeof(cidstr), cidstr, cidstr };
-	char cidstr_lenx[5];
-	int total_len, cidstr_len, cidstr_lenx_len, str_client_addr_len;
 	int ret;
-	size_t lsize;
 
 	/* get the caller's IP addr */
 	if (clientid->gsh_client != NULL)
 		str_client_addr = clientid->gsh_client->hostaddr_str;
 
-	str_client_addr_len = strlen(str_client_addr);
-
 	ret = convert_opaque_val(&dspbuf, src, src_len, sizeof(cidstr));
 	assert(ret > 0);
 
-	cidstr_len = display_buffer_len(&dspbuf);
-
-	cidstr_lenx_len =
-		snprintf(cidstr_lenx, sizeof(cidstr_lenx), "%d", cidstr_len);
-
-	if (unlikely(cidstr_lenx_len >= sizeof(cidstr_lenx) ||
-		     cidstr_lenx_len < 0)) {
-		/* cidrstr can at most be PATH_MAX or 1024, so at most
-		 * 4 characters plus NUL are necessary, so we won't
-		 * overrun, nor can we get a -1 with EOVERFLOW or EINVAL
-		 */
-		LogFatal(COMPONENT_RECOVERY, "snprintf returned unexpected %d",
-			 cidstr_lenx_len);
-	}
-
-	lsize = str_client_addr_len + 2 + cidstr_lenx_len + 1 + cidstr_len + 2;
-
-	/* hold both long form clientid and IP */
-	val = gsh_malloc(lsize);
-	memcpy(val, str_client_addr, str_client_addr_len);
-	total_len = str_client_addr_len;
-	memcpy(val + total_len, "-(", 2);
-	total_len += 2;
-	memcpy(val + total_len, cidstr_lenx, cidstr_lenx_len);
-	total_len += cidstr_lenx_len;
-	val[total_len] = ':';
-	total_len += 1;
-	memcpy(val + total_len, cidstr, cidstr_len);
-	total_len += cidstr_len;
-	memcpy(val + total_len, ")", 2);
+	val = nfs4_recovery_build_tag(str_client_addr, cidstr,
+				      display_buffer_len(&dspbuf));
 
 	LogDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
 		    "Created client name [%s]", val);
 
 	if (size)
-		*size = lsize;
+		*size = strlen(val) + 1;
 
 	return val;
 }

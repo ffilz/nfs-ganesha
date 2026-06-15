@@ -108,8 +108,6 @@ static void fs_create_clid_name(nfs_client_id_t *clientid)
 		0,
 	};
 	struct display_buffer dspbuf = { sizeof(cidstr), cidstr, cidstr };
-	char cidstr_lenx[5];
-	int total_size, cidstr_lenx_len, cidstr_len, str_client_addr_len;
 
 	/* get the caller's IP addr */
 	if (clientid->gsh_client != NULL)
@@ -118,35 +116,9 @@ static void fs_create_clid_name(nfs_client_id_t *clientid)
 	if (fs_convert_opaque_value_max_for_dir(&dspbuf, cl_rec->cr_client_val,
 						cl_rec->cr_client_val_len,
 						PATH_MAX) > 0) {
-		cidstr_len = strlen(cidstr);
-		str_client_addr_len = strlen(str_client_addr);
-
-		/* fs_convert_opaque_value_max_for_dir does not prefix
-		 * the "(<length>:". So we need to do it here */
-		cidstr_lenx_len = snprintf(cidstr_lenx, sizeof(cidstr_lenx),
-					   "%d", cidstr_len);
-
-		if (unlikely(cidstr_lenx_len >= sizeof(cidstr_lenx) ||
-			     cidstr_lenx_len < 0)) {
-			/* cidrstr can at most be PATH_MAX or 1024, so at most
-			 * 4 characters plus NUL are necessary, so we won't
-			 * overrun, nor can we get a -1 with EOVERFLOW or EINVAL
-			 */
-			LogFatal(COMPONENT_RECOVERY,
-				 "snprintf returned unexpected %d",
-				 cidstr_lenx_len);
-		}
-
-		total_size =
-			cidstr_len + str_client_addr_len + 5 + cidstr_lenx_len;
-
-		/* hold both long form clientid and IP */
-		clientid->cid_recov_tag = gsh_malloc(total_size);
-
-		/* Can't overrun and shouldn't return EOVERFLOW or EINVAL */
-		(void)snprintf(clientid->cid_recov_tag, total_size,
-			       "%s-(%s:%s)", str_client_addr, cidstr_lenx,
-			       cidstr);
+		clientid->cid_recov_tag =
+			nfs4_recovery_build_tag(str_client_addr, cidstr,
+						strlen(cidstr));
 	}
 
 	LogDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,

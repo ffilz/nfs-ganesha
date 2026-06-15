@@ -1079,6 +1079,8 @@ void nfs4_record_revoke(nfs_client_id_t *, nfs_fh4 *);
 
 /* Recovery backend management */
 const char *recovery_backend_str(enum recovery_backend recovery_backend);
+char *nfs4_recovery_build_tag(const char *client_addr, const char *cidstr,
+			      int cidstr_len);
 int nfs4_recovery_init(void);
 void nfs4_recovery_shutdown(void);
 

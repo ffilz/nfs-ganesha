@@ -922,6 +922,40 @@ const char *recovery_backend_str(enum recovery_backend recovery_backend)
 }
 
 /**
+ * @brief Build a recovery tag string from a display-form client opaque value.
+ *
+ * The tag has the form "IP-(len:opaque)".
+ *
+ * @param[in] client_addr  Client IP string.
+ * @param[in] cidstr       Display-form opaque client owner bytes.
+ * @param[in] cidstr_len   Length of cidstr.
+ * @return Heap-allocated tag string; caller must free with gsh_free().
+ */
+char *nfs4_recovery_build_tag(const char *client_addr, const char *cidstr,
+			      int cidstr_len)
+{
+	char cidstr_lenx[5];
+	int cidstr_lenx_len, total, addr_len;
+	char *tag;
+
+	cidstr_lenx_len =
+		snprintf(cidstr_lenx, sizeof(cidstr_lenx), "%d", cidstr_len);
+	if (unlikely(cidstr_lenx_len >= (int)sizeof(cidstr_lenx) ||
+		     cidstr_lenx_len < 0)) {
+		LogFatal(COMPONENT_RECOVERY, "snprintf returned unexpected %d",
+			 cidstr_lenx_len);
+	}
+
+	addr_len = strlen(client_addr);
+	total = addr_len + 2 + cidstr_lenx_len + 1 + cidstr_len + 2;
+	tag = gsh_malloc(total);
+	(void)snprintf(tag, total, "%s-(%s:%s)", client_addr, cidstr_lenx,
+		       cidstr);
+
+	return tag;
+}
+
+/**
  * @brief Create the recovery directory
  *
  * The recovery directory may not exist yet, so create it.  This
