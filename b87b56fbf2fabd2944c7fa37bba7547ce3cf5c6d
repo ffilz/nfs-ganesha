@@ -16,6 +16,24 @@
       "message": "This will currently double-wrap the client ID. display_opaque_value_max_impl already produces the \"(%d:%s)\" format.\n\nI\u0027m currently working on a change to skip the client address with a configuration option, and added some tests for this function: https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1239050\n\nCurrently this test fails with:\n\n   FAIL expect:66: want [192.168.1.10-(20:Linux NFSv4.1 client)] got [192.168.1.10-(25:(20:Linux NFSv4.1 client))]\n   FAIL expect:66: want [10.0.0.1-(1:A)] got [10.0.0.1-(5:(1:A))]\n   FAIL expect:66: want [fe80::1-(6:client)] got [fe80::1-(10:(6:client))]\n   FAIL expect:66: want [(20:Linux NFSv4.1 client)] got [(25:(20:Linux NFSv4.1 client))]\n   FAIL expect:66: want [(1:A)] got [(5:(1:A))]\n   FAIL expect:66: want [(6:client)] got [(10:(6:client))]\n   FAIL expect:66: want [(unknown)-(1:A)] got [(unknown)-(5:(1:A))]\n   FAIL expect:66: want [(1:A)] got [(5:(1:A))]\n\nThis would also mean that on upgrade, this change would break all lease recovery, as the clid changed.",
       "revId": "b87b56fbf2fabd2944c7fa37bba7547ce3cf5c6d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12d60b2d_16e6ac29",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-15T16:15:13Z",
+      "side": 1,
+      "message": "Oops, well, that\u0027s an easy fix...",
+      "parentUuid": "05537ce5_3637ba32",
+      "revId": "b87b56fbf2fabd2944c7fa37bba7547ce3cf5c6d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
