@@ -152,12 +152,13 @@ char *nfs4_create_clid_name(nfs_client_id_t *clientid, size_t *len)
 {
 	nfs_client_record_t *cl_rec = clientid->cid_client_record;
 	const char *str_client_addr = "(unknown)";
+	bool skip_ip = nfs_param.nfsv4_param.recovery_skip_ip;
 	char cidstr[PATH_MAX], *encoded;
 	struct display_buffer dspbuf = { sizeof(cidstr), cidstr, cidstr };
 	int total_size, cidstr_len, str_client_addr_len, rc;
 
-	/* get the caller's IP addr */
-	if (clientid->gsh_client != NULL)
+	/* get the caller's IP addr, unless RecoverySkipIp omits it */
+	if (!skip_ip && clientid->gsh_client != NULL)
 		str_client_addr = clientid->gsh_client->hostaddr_str;
 
 	rc = display_opaque_value_max_impl(&dspbuf, cl_rec->cr_client_val,
@@ -179,9 +180,14 @@ char *nfs4_create_clid_name(nfs_client_id_t *clientid, size_t *len)
 	dspbuf.b_start = encoded;
 	dspbuf.b_current = encoded;
 
-	/* format is %s-(%d:%s) client_address-(cidstr_len:cid_str) */
-	rc = display_printf(&dspbuf, "%s-(%d:%s)", str_client_addr, cidstr_len,
-			    cidstr);
+	/* format is %s-(%d:%s) client_address-(cidstr_len:cid_str), or just
+	 * (cidstr_len:cid_str) when RecoverySkipIp omits the address
+	 */
+	if (skip_ip)
+		rc = display_printf(&dspbuf, "(%d:%s)", cidstr_len, cidstr);
+	else
+		rc = display_printf(&dspbuf, "%s-(%d:%s)", str_client_addr,
+				    cidstr_len, cidstr);
 
 	LogDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY,
 		    "Created clientid encoding [%s]", encoded);
