@@ -34,6 +34,24 @@
       "parentUuid": "05537ce5_3637ba32",
       "revId": "b87b56fbf2fabd2944c7fa37bba7547ce3cf5c6d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "247eb9a8_62f89590",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-15T23:28:03Z",
+      "side": 1,
+      "message": "OK, I think I fixed that. And then I made a friendly update of your patch giving consideration to the now simpler printf format, which then suggested handling the RecoverySkipIP option even more streamlined.",
+      "parentUuid": "12d60b2d_16e6ac29",
+      "revId": "b87b56fbf2fabd2944c7fa37bba7547ce3cf5c6d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
