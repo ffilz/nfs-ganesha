@@ -118,6 +118,18 @@ LOG { COMPONENTS {} }
 
         FULL_DEBUG: 0xffffffff
 
+    Enable RDMA component debug logs of Ganesha & TIRPC both
+
+    Example :
+        COMPONENTS
+    {
+	    RDMA = FULL_DEBUG;
+
+	    TIRPC = DEBUG;
+    }
+
+    RPC_Debug_Flags = 0x0C20200;
+
 LOG { CONDITIONAL {} }
 ----------------------
 Conditional logging allows selective override of log levels for specific
