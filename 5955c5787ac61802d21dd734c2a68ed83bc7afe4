@@ -34,6 +34,24 @@
       "parentUuid": "b0c692ee_bfd3b06d",
       "revId": "5955c5787ac61802d21dd734c2a68ed83bc7afe4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b8389cf_f42bdf4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-19T16:56:27Z",
+      "side": 1,
+      "message": "What this really needs to be, instead of some code elsewhere in Ganesha pushing data into the C++ object, when there is a Prometheus scrape, we make an fsinfo call for each export to get this information directly from the filesystem.",
+      "parentUuid": "98548910_ca3a710a",
+      "revId": "5955c5787ac61802d21dd734c2a68ed83bc7afe4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
