@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51798e1d_248dde09",
+        "filename": "src/Protocols/NLM/CMakeLists.txt",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-19T22:56:59Z",
+      "side": 1,
+      "message": "No... Will remove.",
+      "parentUuid": "390ba2b0_fd5ad301",
+      "revId": "6ffcc92e892c72f93849b8663e9b0b618a07fc6f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43e89f23_5f5fd511",
         "filename": "src/Protocols/NLM/nsm.c",
         "patchSetId": 11
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-19T06:37:36Z",
       "side": 1,
       "message": "due to assert condition, code execution never reaches for this else part. Is it that some thing missed in code cleanup(removing assert) ?",
+      "revId": "6ffcc92e892c72f93849b8663e9b0b618a07fc6f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39e36687_2cf21ba0",
+        "filename": "src/Protocols/NLM/nsm.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1115,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-19T22:56:59Z",
+      "side": 1,
+      "message": "Asserts are not active in production code. Will remove the assert, not needed for internal debug. The LogFatal isn\u0027t strictly necessary either, but at least it documents that other cases are unexpected. A subsequent patch does add an additional case here, so will leave the if statement.",
+      "parentUuid": "43e89f23_5f5fd511",
       "revId": "6ffcc92e892c72f93849b8663e9b0b618a07fc6f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +122,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3108397c_0178b489",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-19T22:56:59Z",
+      "side": 1,
+      "message": "Acknowledged. Found a couple other mispellings...",
+      "parentUuid": "e8566f9b_579a138a",
+      "revId": "6ffcc92e892c72f93849b8663e9b0b618a07fc6f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ab80b93_e5f267ec",
@@ -99,6 +153,24 @@
       "writtenOn": "2026-06-19T06:37:36Z",
       "side": 1,
       "message": "From the code flow netid cannot be NULL, because it\u0027s endstr+2.",
+      "revId": "6ffcc92e892c72f93849b8663e9b0b618a07fc6f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f16a741_db95eb8e",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-19T22:56:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6ab80b93_e5f267ec",
       "revId": "6ffcc92e892c72f93849b8663e9b0b618a07fc6f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
