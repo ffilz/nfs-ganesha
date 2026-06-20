@@ -37,6 +37,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76bcc670_0b3c312f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-20T00:24:22Z",
+      "side": 1,
+      "message": "OK, I have a different fix in progress. Will continue working it on Monday.",
+      "revId": "2c8e6ff9251b1a05c087da8cea144e2c88317e26",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3f83b70_0e11198c",
+        "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-20T00:24:22Z",
+      "side": 1,
+      "message": "OK, working this more, I think what we really need to do is handle referral here. There\u0027s actually a bit more complexity to it than any of the code here admits to. So handle it all here, only doing goto skip if we have to try and return NFS4ERR_MOVED in FATTR4_RDATTR_ERROR (and if that fails, return it in tracker-\u003eerror as the READDIR status).\n\nIf we somehow have a failure in filling in the referral attributes, then we can also goto skip and maybe failure.",
+      "revId": "2c8e6ff9251b1a05c087da8cea144e2c88317e26",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41c05536_733a8ab4",
         "filename": "src/Protocols/NFS/nfs4_op_readdir.c",
         "patchSetId": 2
