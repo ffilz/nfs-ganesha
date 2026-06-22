@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9fa58370_06688758",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-22T11:08:39Z",
+      "side": 1,
+      "message": "In monitoring.cc you can make that change in the registration phase-\nhttp://github.com/nfs-ganesha/ntirpc/blob/96e980def1c2d4538ff4708b0908670dd6a8946d/src/monitoring/monitoring.cc\n\nFor example in `monitoring__register_histogram` for all the static metrics\n(all the dynamic metrics should become static and they will benefit from it as well)",
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff947e5b_586ae306",
         "filename": "src/monitoring/prometheus_exposer.cc",
         "patchSetId": 7
