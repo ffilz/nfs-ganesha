@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "975627ce_327e9138",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-22T22:23:45Z",
+      "side": 1,
+      "message": "Thanks for your review Lior.",
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff947e5b_586ae306",
@@ -146,6 +163,30 @@
       "writtenOn": "2026-06-22T11:05:48Z",
       "side": 1,
       "message": "`rename_metric_names` ?",
+      "range": {
+        "startLine": 333,
+        "startChar": 36,
+        "endLine": 333,
+        "endChar": 53
+      },
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf5f820_a4dcaa98",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-22T22:23:45Z",
+      "side": 1,
+      "message": "Yea, this would be a better name.",
+      "parentUuid": "13add691_52ef2520",
       "range": {
         "startLine": 333,
         "startChar": 36,
