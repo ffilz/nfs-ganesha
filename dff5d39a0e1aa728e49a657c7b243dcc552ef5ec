@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff947e5b_586ae306",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-22T11:05:48Z",
+      "side": 1,
+      "message": "Families is passed by non-const reference \u0026, but it is never modified. It should be passed by const \u0026 to signal intent and allow passing temporaries.",
+      "range": {
+        "startLine": 168,
+        "startChar": 56,
+        "endLine": 168,
+        "endChar": 64
+      },
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3a357a2_92f7ed0c",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-22T11:05:48Z",
+      "side": 1,
+      "message": "Using a std::map to store string replacements comes with a few drawbacks:\n\nOrder of Execution: std::map is sorted alphabetically by key. It will always execute the replacements in the order \"__\", \"mdcache_cache\", \"nfsv4\". If replacing \"mdcache_cache\" creates a double underscore \"__\", that double underscore will not be caught because \"__\" was already processed first.\n\nOverhead: std::map allocates tree nodes.\n\nFix: Use a static constexpr std::array of std::string_view pairs. This guarantees the exact order of execution you define and removes dynamic allocation overhead for the keys/values.",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 3
+      },
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "841b504a_672805ea",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-22T11:05:48Z",
+      "side": 1,
+      "message": "MetricFamilies is a vector-like container, you should call .reserve() on it before the loop to prevent reallocation as the container grows.",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 32
+      },
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a7a9ce_d8f89116",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-22T11:05:48Z",
+      "side": 1,
+      "message": "Inside your push_back loop, you are defining a lambda and immediately invoking it: [...](){ ... }();. This is an anti-pattern in C++ when used outside of complex initialization. It makes the code harder to read and debug. You can achieve the same result with standard sequential statements.",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 3
+      },
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2c14b04_6694c172",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-22T11:05:48Z",
+      "side": 1,
+      "message": "Your sanitize_and_prefix takes a std::string by value and returns a std::string by value. This is a great signature, but you are passing mf.name by copy. By using std::move(), you can recycle the memory already allocated inside the copied MetricFamily and avoid unnecessary string reallocations.",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 28
+      },
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13add691_52ef2520",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-22T11:05:48Z",
+      "side": 1,
+      "message": "`rename_metric_names` ?",
+      "range": {
+        "startLine": 333,
+        "startChar": 36,
+        "endLine": 333,
+        "endChar": 53
+      },
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "288cc88f_22ebeea1",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-06-22T11:05:48Z",
+      "side": 1,
+      "message": "I think it would be better to do that upon registering the metrics rather than on its collection phase, as it will happen many more times",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 335,
+        "endChar": 6
+      },
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
