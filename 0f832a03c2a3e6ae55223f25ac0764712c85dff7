@@ -33,6 +33,74 @@
       "message": "All the clang-format comments have been addressed in patchset#7.",
       "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "830f53d3_c901eece",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-23T16:42:02Z",
+      "side": 1,
+      "message": "Thanks for the significant work here. I still need to do another pass.\n\nOne question - do you have any thought on how to audit that component on free matches the component on allocate?",
+      "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c5337cf_a9a10620",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-23T16:42:02Z",
+      "side": 1,
+      "message": "Good catch, also add comment about open_memstream here.\n\nShould we consider adding a gsh_alloc_account function that basically completes something that was allocated with malloc in a library function into as if it had been gsh allocated? That would save the double allocation.\n\nNot so critical for config which are freed shortly, but might also contribute to fragmentation.",
+      "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cab4d14b_24f301ce",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-23T16:42:02Z",
+      "side": 1,
+      "message": "Let\u0027s do add MEM_COMP_DIRENT and assign all mdcache allocations related to directory cache to that component. That should leave MEM_COMP_MDCACHE as the entry cache allocations",
+      "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd38dd49_6a5ce579",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-23T16:42:02Z",
+      "side": 1,
+      "message": "Let\u0027s get rid of all the _POOL designations.\n\nAnd really, since we\u0027re hitting every allocation, please completely eradicate the old pool mechanism and just directly use gsh_alloc/gsh_free",
+      "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
