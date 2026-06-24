@@ -31,6 +31,8 @@
 #include <grpcpp/grpcpp.h>
 #include "nfsService.pb.h"
 #include "nfsService.grpc.pb.h"
+#include "exportService.pb.h"
+#include "exportService.grpc.pb.h"
 #include "nfsProtoUtil.pb.h"
 #include "nfsProtoUtil.grpc.pb.h"
 #include "nfsServiceUtil.h"
@@ -69,5 +71,40 @@ class GetSessionIdService final : public nfsService::GetSessionId::Service {
 	GetSessionIds(grpc::ServerContext *context,
 		      const nfsProtoUtil::EmptyRequest *request,
 		      nfsService::GetSessionIdsResponse *response) override;
+};
+
+class ShowIdMapperService final
+	: public nfsService::ShowIdMapperService::Service {
+    public:
+	grpc::Status
+	ShowIdMapper(grpc::ServerContext *context,
+		     const nfsProtoUtil::EmptyRequest *request,
+		     nfsService::ShowIdMapperResponse *response) override;
+};
+
+class ExportService final : public exportService::ExportService::Service {
+    public:
+	grpc::Status
+	DisplayExport(grpc::ServerContext *context,
+		      const exportService::DisplayExportRequest *request,
+		      exportService::DisplayExportResponse *response) override;
+
+	grpc::Status
+	ShowExports(grpc::ServerContext *context,
+		    const nfsProtoUtil::EmptyRequest *request,
+		    exportService::ShowExportsResponse *response) override;
+
+	grpc::Status
+	AddExport(grpc::ServerContext *context,
+		  const exportService::AddExportRequest *request,
+		  exportService::AddExportResponse *response) override;
+	grpc::Status
+	RemoveExport(grpc::ServerContext *context,
+		     const exportService::RemoveExportRequest *request,
+		     exportService::RemoveExportResponse *response) override;
+	grpc::Status
+	UpdateExport(grpc::ServerContext *context,
+		     const exportService::UpdateExportRequest *request,
+		     exportService::UpdateExportResponse *response) override;
 };
 #endif //NFSSERVICE_H
