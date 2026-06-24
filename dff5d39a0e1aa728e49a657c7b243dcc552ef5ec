@@ -218,6 +218,30 @@
       },
       "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1512d137_132aa759",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-06-24T05:55:20Z",
+      "side": 1,
+      "message": "Good point — renaming at registration time would avoid doing the transformation on every scrape.\n\nI chose to handle it at collection time because it is gated by `#ifndef LEGACY_METRICS` and keeps the naming migration centralized in one place, instead of requiring changes across all metric registration sites. This keeps the legacy/non-legacy behavior isolated to the exposer path and reduces code churn.",
+      "parentUuid": "288cc88f_22ebeea1",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 335,
+        "endChar": 6
+      },
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
