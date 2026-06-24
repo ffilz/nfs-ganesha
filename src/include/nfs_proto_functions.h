@@ -606,6 +606,15 @@ void create_pseudofs(void);
 void pseudo_unmount_export_tree(struct gsh_export *exp);
 void prune_pseudofs_subtree(struct gsh_export *exp, uint64_t generation,
 			    bool ancestor_is_defunct);
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void synchronize_updated_exports(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 /* Slot functions */
 static inline void release_slot(nfs41_session_slot_t *slot)

@@ -855,3 +855,48 @@ void prune_pseudofs_subtree(struct gsh_export *export, uint64_t generation,
 
 	gsh_refstr_put(ref_pseudopath);
 }
+
+/**
+ * Synchronize the PseudoFS after gRPC UpdateExport().
+ *
+ * Rebuilds the pseudofs for exports marked with update_prune_unmount
+ * or update_remount.
+ */
+void synchronize_updated_exports(void)
+{
+	struct gsh_export *export;
+	struct glist_head *glist;
+	struct glist_head *exportlist;
+	struct req_op_context op_context;
+
+	EXPORT_ADMIN_LOCK();
+
+	exportlist = get_exportlist_head();
+
+	init_op_context(&op_context, NULL, NULL, NULL, NULL, NFS_V4, 0,
+			NFS_RELATED);
+	op_ctx->flags.pseudo_fsal_internal_lookup = true;
+
+	glist_for_each(glist, exportlist) {
+		export = glist_entry(glist, struct gsh_export, exp_list);
+
+		if (!export->update_prune_unmount && !export->update_remount)
+			continue;
+
+		LogDebug(COMPONENT_EXPORT, "Synchronizing updated export %d",
+			 export->export_id);
+
+		pseudo_unmount_export_tree(export);
+
+		export_add_to_mount_work(export);
+
+		export->update_prune_unmount = false;
+		export->update_remount = false;
+	}
+
+	create_pseudofs();
+
+	release_op_context();
+
+	EXPORT_ADMIN_UNLOCK();
+}

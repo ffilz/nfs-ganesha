@@ -320,6 +320,20 @@ static int StrExportOptions(struct display_buffer *dspbuf,
 	return b_left;
 }
 
+/*
+ * Wrapper for the internal StrExportOptions() helper.
+ *
+ * StrExportOptions() is a static function used by the export display
+ * code. This wrapper exposes the same formatting logic for the gRPC
+ * service so that export permissions are formatted consistently without
+ * duplicating the implementation.
+ */
+int grpc_StrExportOptions(struct display_buffer *dspbuf,
+			  struct export_perms *perms)
+{
+	return StrExportOptions(dspbuf, perms);
+}
+
 void LogExportClientListEntry(log_levels_t level, int line, const char *func,
 			      const char *tag,
 			      struct exportlist_client_entry *entry)

@@ -65,6 +65,8 @@ class GrpcServer {
 	GetNfsGraceService nfsIngrace;
 	GetSessionIdService getClientSessionIds;
 	StartNfsGraceService startNfsGrace;
+	ShowIdMapperService ShowIdMapper;
+	ExportService exportService;
 };
 
 extern GrpcServer ganesha_grpc_server;
