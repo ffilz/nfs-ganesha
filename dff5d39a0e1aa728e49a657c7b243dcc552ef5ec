@@ -248,6 +248,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44d2dd87_a7a96abf",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-06-24T14:59:36Z",
+      "side": 1,
+      "message": "There is a compatibility issue between different Centos versions if we use std::move(), For ref: https://github.com/nfs-ganesha/nfs-ganesha/commit/211d7006e8f545a7808b1ea194e2bf4cd9ff6453",
+      "parentUuid": "b2c14b04_6694c172",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 28
+      },
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13add691_52ef2520",
         "filename": "src/monitoring/prometheus_exposer.cc",
         "patchSetId": 7
