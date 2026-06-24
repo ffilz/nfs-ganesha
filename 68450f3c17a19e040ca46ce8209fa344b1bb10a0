@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "362d99d3_febd78fa",
+        "filename": "src/grpc_server/nfsService.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-06-24T13:46:22Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t       nfsService::AddExportResponse *response) override;",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db02031e_dd9d5ef5",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-06-24T13:46:22Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - pthread_rwlock_t *get_export_id_lock() should probably be pthread_rwlock_t *get_export_id_lock(void)\n+pthread_rwlock_t *get_export_id_lock();",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1daf44f_0f9c4514",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-06-24T13:46:22Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - struct glist_head *get_exportlist_head() should probably be struct glist_head *get_exportlist_head(void)\n+struct glist_head *get_exportlist_head();",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "239fe866_09543f0a",
+        "filename": "src/include/idmapper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-06-24T13:46:22Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\ttime_t epoch;\n+\tTAILQ_ENTRY(cache_user) queue_entry; /* Node in user-fifo-queue */",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd9bfd17_495bf2bb",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-06-24T13:46:22Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tstruct gsh_export *export \u003d get_gsh_export(export_id);\n+\tif (export \u003d\u003d NULL) {",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b045cd58_54dfa6a0",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-06-24T13:46:22Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - pthread_rwlock_t *get_export_id_lock() should probably be pthread_rwlock_t *get_export_id_lock(void)\n+pthread_rwlock_t *get_export_id_lock()",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "286fe8bc_f31c70d7",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-06-24T13:46:22Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - struct glist_head *get_exportlist_head() should probably be struct glist_head *get_exportlist_head(void)\n+struct glist_head *get_exportlist_head()",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
