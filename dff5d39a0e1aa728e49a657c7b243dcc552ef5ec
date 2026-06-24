@@ -58,6 +58,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c793e1e_96b4096a",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-06-24T14:55:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ff947e5b_586ae306",
+      "range": {
+        "startLine": 168,
+        "startChar": 56,
+        "endLine": 168,
+        "endChar": 64
+      },
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3a357a2_92f7ed0c",
@@ -71,6 +95,30 @@
       "writtenOn": "2026-06-22T11:05:48Z",
       "side": 1,
       "message": "Using a std::map to store string replacements comes with a few drawbacks:\n\nOrder of Execution: std::map is sorted alphabetically by key. It will always execute the replacements in the order \"__\", \"mdcache_cache\", \"nfsv4\". If replacing \"mdcache_cache\" creates a double underscore \"__\", that double underscore will not be caught because \"__\" was already processed first.\n\nOverhead: std::map allocates tree nodes.\n\nFix: Use a static constexpr std::array of std::string_view pairs. This guarantees the exact order of execution you define and removes dynamic allocation overhead for the keys/values.",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 3
+      },
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00499010_65e3f86d",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-06-24T14:55:16Z",
+      "side": 1,
+      "message": "Updated in new patch",
+      "parentUuid": "a3a357a2_92f7ed0c",
       "range": {
         "startLine": 170,
         "startChar": 0,
