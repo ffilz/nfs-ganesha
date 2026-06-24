@@ -135,3 +135,69 @@ void StartGraceWithEvent(const std::string &server_address)
 	grpc::Status status =
 		stub->StartGraceWithEvent(&context, request, &response);
 }
+
+void ShowIdMapper(const std::string &server_address)
+{
+	// Create a communication channel with insecure credentials
+	std::shared_ptr<grpc::Channel> channel =
+		grpc::CreateChannel(server_address,
+				    grpc::InsecureChannelCredentials());
+
+	// Create a stub for the IdMapperService
+	std::unique_ptr<nfsService::ShowIdMapperService::Stub> stub =
+		nfsService::ShowIdMapperService::NewStub(channel);
+
+	// Prepare the request and response messages
+	nfsService::ShowIdMapperRequest request;
+	nfsService::ShowIdMapperResponse response;
+	grpc::ClientContext context;
+
+	// Make the gRPC call
+	grpc::Status status = stub->ShowIdMapper(&context, request, &response);
+
+	if (status.ok()) {
+		// Process and display the response
+		for (const auto &entry : response.entries()) {
+			std::cout << "UID: " << entry.uid()
+				  << ", GID: " << entry.gid()
+				  << ", Name: " << entry.name() << std::endl;
+		}
+	} else {
+		std::cerr
+			<< "ShowIdMapper RPC failed: " << status.error_message()
+			<< std::endl;
+	}
+}
+
+void ShowPosixFileSystems(const std::string &server_address)
+{
+	// Create a communication channel with insecure credentials
+	std::shared_ptr<grpc::Channel> channel =
+		grpc::CreateChannel(server_address,
+				    grpc::InsecureChannelCredentials());
+
+	// Create a stub for the FileSystemService
+	std::unique_ptr<nfsService::FileSystemService::Stub> stub =
+		nfsService::FileSystemService::NewStub(channel);
+
+	// Prepare the request and response messages
+	nfsService::ShowPosixFileSystemsRequest request;
+	nfsService::ShowPosixFileSystemsResponse response;
+	grpc::ClientContext context;
+
+	// Make the gRPC call
+	grpc::Status status =
+		stub->ShowPosixFileSystems(&context, request, &response);
+
+	if (status.ok()) {
+		// Process and display the response
+		for (const auto &fs : response.file_systems()) {
+			std::cout << "Path: " << fs.path()
+				  << ", Major: " << fs.major_dev()
+				  << ", Minor: " << fs.minor_dev() << std::endl;
+		}
+	} else {
+		std::cerr << "ShowPosixFileSystems RPC failed: "
+			  << status.error_message() << std::endl;
+	}
+}

@@ -70,4 +70,46 @@ class GetSessionIdService final : public nfsService::GetSessionId::Service {
 		      const nfsProtoUtil::EmptyRequest *request,
 		      nfsService::GetSessionIdsResponse *response) override;
 };
+
+class ShowIdMapperService final
+	: public nfsService::ShowIdMapperService::Service {
+    public:
+	grpc::Status
+	ShowIdMapper(grpc::ServerContext *context,
+		     const nfsService::ShowIdMapperRequest *request,
+		     nfsService::ShowIdMapperResponse *response) override;
+};
+
+class FileSystemService final : public nfsService::FileSystemService::Service {
+    public:
+	grpc::Status ShowPosixFileSystems(
+		grpc::ServerContext *context,
+		const nfsService::ShowPosixFileSystemsRequest *request,
+		nfsService::ShowPosixFileSystemsResponse *response) override;
+};
+
+class ExportService final : public nfsService::ExportService::Service {
+    public:
+	grpc::Status
+	DisplayExport(grpc::ServerContext *context,
+		      const nfsService::DisplayExportRequest *request,
+		      nfsService::DisplayExportResponse *response) override;
+
+    public:
+	grpc::Status
+	ShowExports(grpc::ServerContext *context,
+		    const nfsService::ShowExportsRequest *request,
+		    nfsService::ShowExportsResponse *response) override;
+
+    public:
+	grpc::Status AddExport(grpc::ServerContext *context,
+			       const nfsService::AddExportRequest *request,
+			       nfsService::AddExportResponse *response) override;
+
+    public:
+	grpc::Status
+	RemoveExport(grpc::ServerContext *context,
+		     const nfsService::RemoveExportRequest *request,
+		     nfsService::RemoveExportResponse *response) override;
+};
 #endif //NFSSERVICE_H

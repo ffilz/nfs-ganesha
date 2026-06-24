@@ -80,3 +80,128 @@ message GetSessionIdsResponse
 {
 	repeated string session_ids = 1;
 }
+
+message ShowIdMapperRequest
+{
+}
+
+message IdMapperEntry
+{
+	string name = 1;
+	uint32 uid = 2;
+	bool gid_set = 3;
+	uint32 gid = 4;
+}
+
+message ShowIdMapperResponse
+{
+	uint64 timestamp_sec = 1;
+	uint64 timestamp_nsec = 2;
+	repeated IdMapperEntry entries = 3;
+}
+
+message ShowPosixFileSystemsRequest
+{
+}
+
+message FileSystemEntry
+{
+	string path = 1;
+	uint32 major_dev = 2;
+	uint32 minor_dev = 3;
+}
+
+message ShowPosixFileSystemsResponse
+{
+	uint64 timestamp_sec = 1;
+	uint64 timestamp_nsec = 2;
+	repeated FileSystemEntry file_systems = 3;
+}
+
+service ShowIdMapperService
+{
+	rpc ShowIdMapper(ShowIdMapperRequest) returns (ShowIdMapperResponse);
+}
+
+service FileSystemService
+{
+	rpc ShowPosixFileSystems(ShowPosixFileSystemsRequest)
+		returns (ShowPosixFileSystemsResponse);
+}
+
+message DisplayExportRequest
+{
+	uint32 export_id = 1;
+}
+
+message ExportClientEntry
+{
+	string client_name = 1;
+	int32 uid = 2;
+	int32 gid = 3;
+	bool is_rw = 4;
+	bool is_root = 5;
+}
+
+message DisplayExportResponse
+{
+	uint32 export_id = 1;
+	string full_path = 2;
+	string config_path = 3;
+	string fs_tag = 4;
+	repeated ExportClientEntry clients = 5;
+	bool success = 6;
+	string error_message = 7;
+}
+
+service ExportService
+{
+	rpc DisplayExport(DisplayExportRequest) returns (DisplayExportResponse);
+	rpc ShowExports(ShowExportsRequest) returns (ShowExportsResponse);
+	rpc AddExport(AddExportRequest) returns (AddExportResponse);
+	rpc RemoveExport(RemoveExportRequest) returns (RemoveExportResponse);
+}
+
+message ShowExportsRequest
+{
+}
+
+message ExportInfo
+{
+	uint32 export_id = 1;
+	string path = 2;
+	string fs_tag = 3;
+	// Add other fields here as needed
+}
+
+message ShowExportsResponse
+{
+	uint64 timestamp_sec = 1;
+	uint64 timestamp_nsec = 2;
+	repeated ExportInfo exports = 3;
+	bool success = 4;
+	string error_message = 5;
+}
+
+message AddExportRequest
+{
+	string file_path = 1; // Path to config file with EXPORT {...}
+	string export_expression = 2; // Expression to select parts of config
+}
+
+message AddExportResponse
+{
+	bool success = 1;
+	string message = 2; // Success message or error details
+}
+
+message RemoveExportRequest
+{
+	uint32 id = 1; // Export ID to remove
+}
+
+message RemoveExportResponse
+{
+	bool success = 1;
+	string message = 2; // Success or error message
+}

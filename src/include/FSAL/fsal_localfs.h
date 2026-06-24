@@ -153,7 +153,7 @@ extern pthread_rwlock_t fs_lock;
 		     (fs)->claims[CLAIM_ROOT], (fs)->claims[CLAIM_SUBTREE],  \
 		     (fs)->claims[CLAIM_CHILD], (fs)->claims[CLAIM_TEMP])
 
-int populate_posix_file_systems(const char *path, struct gsh_export *export);
+int populate_posix_file_systems(const char *path, struct gsh_export *exp);
 
 int resolve_posix_filesystem(const char *path, struct fsal_module *fsal,
 			     struct fsal_export *exp,
@@ -197,13 +197,14 @@ bool is_filesystem_exported(struct fsal_filesystem *fs,
 
 void unclaim_all_export_maps(struct fsal_export *exp);
 
-void get_fs_first_export_ref(struct fsal_filesystem *this,
+void get_fs_first_export_ref(struct fsal_filesystem *self,
 			     struct gsh_export **gsh_export,
 			     struct fsal_export **fsal_export);
 
 #ifdef USE_DBUS
 void dbus_cache_init(void);
 #endif
+extern struct glist_head posix_file_systems;
 
 #endif /* GSH_CAN_HOST_LOCAL_FS */
 
