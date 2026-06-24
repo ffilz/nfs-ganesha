@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ded4638e_6cb1ab54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-24T15:12:30Z",
+      "side": 1,
+      "message": "What is the thought about the filesystems? That\u0027s something only of interest to FSAL_VFS and FSAL_GPFS and really duplicates information that can be queried on the Ganesha host. If we do present this information, we should share a lot more details than (type, fsid type and actual fsid - most filesystems Ganesha doesn\u0027t actually use dev.major and dev.minor).",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "362d99d3_febd78fa",
         "filename": "src/grpc_server/nfsService.h",
         "patchSetId": 1
