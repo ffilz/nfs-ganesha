@@ -70,4 +70,34 @@ class GetSessionIdService final : public nfsService::GetSessionId::Service {
 		      const nfsProtoUtil::EmptyRequest *request,
 		      nfsService::GetSessionIdsResponse *response) override;
 };
+
+class ShowIdMapperService final
+	: public nfsService::ShowIdMapperService::Service {
+    public:
+	grpc::Status
+	ShowIdMapper(grpc::ServerContext *context,
+		     const nfsProtoUtil::EmptyRequest *request,
+		     nfsService::ShowIdMapperResponse *response) override;
+};
+
+class ExportService final : public nfsService::ExportService::Service {
+    public:
+	grpc::Status
+	DisplayExport(grpc::ServerContext *context,
+		      const nfsService::DisplayExportRequest *request,
+		      nfsService::DisplayExportResponse *response) override;
+
+	grpc::Status
+	ShowExports(grpc::ServerContext *context,
+		    const nfsProtoUtil::EmptyRequest *request,
+		    nfsService::ShowExportsResponse *response) override;
+
+	grpc::Status AddExport(grpc::ServerContext *context,
+		    const nfsService::AddExportRequest *request,
+		    nfsService::AddExportResponse *response) override;
+	grpc::Status
+	RemoveExport(grpc::ServerContext *context,
+		     const nfsService::RemoveExportRequest *request,
+		     nfsService::RemoveExportResponse *response) override;
+};
 #endif //NFSSERVICE_H
