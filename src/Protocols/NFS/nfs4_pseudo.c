@@ -855,3 +855,17 @@ void prune_pseudofs_subtree(struct gsh_export *export, uint64_t generation,
 
 	gsh_refstr_put(ref_pseudopath);
 }
+
+/**
+ * Synchronize the PseudoFS after gRPC UpdateExport().
+ *
+ * Rebuilds the pseudofs for exports marked with update_prune_unmount
+ * or update_remount.
+ */
+void synchronize_updated_exports(uint64_t generation)
+{
+	/* Reuse the existing pseudofs update flow, matches the SIGHUP flow */
+	prune_pseudofs_subtree(NULL, generation, false);
+	prune_defunct_exports(generation);
+	create_pseudofs();
+}

@@ -1,0 +1,118 @@
+/* Copyright (C) 2025, IBM
+ * Contributor : Vidya Thumukunta <vthumuku@redhat.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
+ *
+ * -------------
+ */
+
+syntax = "proto3";
+
+import "nfsProtoUtil.proto";
+
+package exportService;
+
+message DisplayExportRequest
+{
+	uint32 export_id = 1;
+}
+
+message ExportClientEntry
+{
+	string client_name = 1;
+	int32 cidr_version = 2;
+	bytes cidr_addr = 3;
+	bytes cidr_mask = 4;
+	int32 cidr_proto = 5;
+	uint32 anonymous_uid = 6;
+	uint32 anonymous_gid = 7;
+	uint32 expire_time_attr = 8;
+	uint32 options = 9;
+	uint32 set = 10;
+	string client_type = 11;
+	string permissions = 12;
+}
+
+message DisplayExportResponse
+{
+	uint32 export_id = 1;
+	string full_path = 2;
+	string pseudo_path = 3;
+	repeated ExportClientEntry clients = 4;
+	bool success = 5;
+	string error_message = 6;
+}
+
+service ExportService
+{
+	rpc DisplayExport(DisplayExportRequest) returns (DisplayExportResponse);
+	rpc ShowExports(nfsProtoUtil.EmptyRequest)
+		returns (ShowExportsResponse);
+	rpc AddExport(AddExportRequest) returns (AddExportResponse);
+	rpc RemoveExport(RemoveExportRequest) returns (RemoveExportResponse);
+	rpc UpdateExport(UpdateExportRequest) returns (UpdateExportResponse);
+}
+
+message ExportInfo
+{
+	uint32 export_id = 1;
+	string full_path = 2;
+	string pseudo_path = 3;
+	string fs_tag = 4;
+	// Add other fields here as needed
+}
+message ShowExportsResponse
+{
+	uint64 timestamp_sec = 1;
+	uint64 timestamp_nsec = 2;
+	repeated ExportInfo exports = 3;
+	bool success = 4;
+	string error_message = 5;
+}
+
+message AddExportRequest
+{
+	string file_path = 1; // Path to config file with EXPORT {...}
+	string export_expression = 2; // Expression to select parts of config
+}
+
+message AddExportResponse
+{
+	bool success = 1;
+	string message = 2; // Success message or error details
+}
+
+message RemoveExportRequest
+{
+	uint32 id = 1; // Export ID to remove
+}
+
+message RemoveExportResponse
+{
+	bool success = 1;
+	string message = 2; // Success or error message
+}
+
+message UpdateExportRequest
+{
+	string file_path = 1;
+	string export_expr = 2;
+}
+
+message UpdateExportResponse
+{
+	bool success = 1;
+	string message = 2;
+}
