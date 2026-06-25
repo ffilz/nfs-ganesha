@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b75ea8b2_8b1e91b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "That\u0027s valid. This API mainly exposes information already available on the host and is currently only useful for a subset of FSALs. I\u0027ll remove this API from this patch and keep the Export APIs only.",
+      "parentUuid": "ded4638e_6cb1ab54",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8dd6c1ee_8e044ecb",
@@ -48,6 +66,30 @@
       "writtenOn": "2026-06-25T06:14:58Z",
       "side": 1,
       "message": "The additional `public` access specifiers are redundant. A single `public:` declaration on line 92 is sufficient, as it remains in effect until the next access specifier (`private:` or `protected:`) is specified.",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 10
+      },
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e8cc1b9_41772cfb",
+        "filename": "src/grpc_server/nfsService.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "My bad, Done",
+      "parentUuid": "8dd6c1ee_8e044ecb",
       "range": {
         "startLine": 98,
         "startChar": 4,
@@ -81,6 +123,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a711025f_e7bb7d45",
+        "filename": "src/grpc_server/nfsService.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35fdcd4a_fbac226f",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 10
+      },
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "362d99d3_febd78fa",
@@ -98,6 +164,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cb42f05_c98551c2",
+        "filename": "src/grpc_server/nfsService.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "362d99d3_febd78fa",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fce5a921_a676a19b",
@@ -111,6 +195,30 @@
       "writtenOn": "2026-06-25T06:14:58Z",
       "side": 1,
       "message": "Same as mentioned above",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 10
+      },
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78828e2c_bc532469",
+        "filename": "src/grpc_server/nfsService.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fce5a921_a676a19b",
       "range": {
         "startLine": 109,
         "startChar": 4,
@@ -144,6 +252,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9a44e7d_59e9d969",
+        "filename": "src/grpc_server/nfsServiceClient.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Agreed. These client helpers were only added for testing. I\u0027ve removed them from this patch.",
+      "parentUuid": "dd0cfaa0_3a19dcdd",
+      "range": {
+        "startLine": 139,
+        "startChar": 5,
+        "endLine": 139,
+        "endChar": 17
+      },
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "446eb318_33ae340c",
@@ -157,6 +289,30 @@
       "writtenOn": "2026-06-25T06:14:58Z",
       "side": 1,
       "message": "If you still plan to keep this API, please update the code. We connect to gRPC server now via secure channels.",
+      "range": {
+        "startLine": 144,
+        "startChar": 14,
+        "endLine": 144,
+        "endChar": 40
+      },
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6c3caed_6ad787c4",
+        "filename": "src/grpc_server/nfsServiceClient.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "446eb318_33ae340c",
       "range": {
         "startLine": 144,
         "startChar": 14,
@@ -190,6 +346,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e0d9ff2_dff2881e",
+        "filename": "src/grpc_server/nfsServiceClient.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f582c10_b089df79",
+      "range": {
+        "startLine": 172,
+        "startChar": 5,
+        "endLine": 172,
+        "endChar": 25
+      },
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ae66a8e_86716193",
@@ -203,6 +383,30 @@
       "writtenOn": "2026-06-25T06:14:58Z",
       "side": 1,
       "message": "Same as mentioned above",
+      "range": {
+        "startLine": 177,
+        "startChar": 14,
+        "endLine": 177,
+        "endChar": 40
+      },
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f965123b_0acb003a",
+        "filename": "src/grpc_server/nfsServiceClient.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ae66a8e_86716193",
       "range": {
         "startLine": 177,
         "startChar": 14,
@@ -236,6 +440,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1b240be_7c584ede",
+        "filename": "src/grpc_server/proto/nfsService.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cd75d95_ae9c48c9",
+      "range": {
+        "startLine": 123,
+        "startChar": 18,
+        "endLine": 123,
+        "endChar": 37
+      },
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f210d8b_e45d60f4",
@@ -249,6 +477,30 @@
       "writtenOn": "2026-06-25T06:14:58Z",
       "side": 1,
       "message": "Since ShowPosixFileSystemRequest is an empty request we can use the utility structure EmptyRequest instead. See line 75",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 54
+      },
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0944e27_3b63f113",
+        "filename": "src/grpc_server/proto/nfsService.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f210d8b_e45d60f4",
       "range": {
         "startLine": 128,
         "startChar": 0,
@@ -282,6 +534,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "112b7617_ca860c27",
+        "filename": "src/grpc_server/proto/nfsService.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "615cd930_5b7a62ea",
+      "range": {
+        "startLine": 157,
+        "startChar": 8,
+        "endLine": 157,
+        "endChar": 21
+      },
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99f19de5_e60f1710",
@@ -295,6 +571,30 @@
       "writtenOn": "2026-06-25T06:14:58Z",
       "side": 1,
       "message": "Since ShowExportsRequest is an empty request we can use the utility structure EmptyRequest instead. See line 75",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 67
+      },
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "940496ab_53705294",
+        "filename": "src/grpc_server/proto/nfsService.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99f19de5_e60f1710",
       "range": {
         "startLine": 160,
         "startChar": 0,
@@ -322,6 +622,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17e900a2_3957da06",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db02031e_dd9d5ef5",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1daf44f_0f9c4514",
@@ -335,6 +653,24 @@
       "writtenOn": "2026-06-24T13:46:22Z",
       "side": 1,
       "message": "ERROR: Bad function definition - struct glist_head *get_exportlist_head() should probably be struct glist_head *get_exportlist_head(void)\n+struct glist_head *get_exportlist_head();",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e3965e0_0528a415",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1daf44f_0f9c4514",
       "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -356,6 +692,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df6b9528_7af7d6d7",
+        "filename": "src/include/idmapper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "239fe866_09543f0a",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd9bfd17_495bf2bb",
@@ -369,6 +723,24 @@
       "writtenOn": "2026-06-24T13:46:22Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tstruct gsh_export *export \u003d get_gsh_export(export_id);\n+\tif (export \u003d\u003d NULL) {",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62701aae_8c036416",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd9bfd17_495bf2bb",
       "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -390,6 +762,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be109cfe_fd1fe33d",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b045cd58_54dfa6a0",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "286fe8bc_f31c70d7",
@@ -403,6 +793,24 @@
       "writtenOn": "2026-06-24T13:46:22Z",
       "side": 1,
       "message": "ERROR: Bad function definition - struct glist_head *get_exportlist_head() should probably be struct glist_head *get_exportlist_head(void)\n+struct glist_head *get_exportlist_head()",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ba09b79_e97e3275",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-06-25T12:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "286fe8bc_f31c70d7",
       "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
