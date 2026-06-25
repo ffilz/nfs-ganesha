@@ -419,6 +419,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "afa9d257_03a6d9b8",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-25T20:30:54Z",
+      "side": 1,
+      "message": "I was a bit confused by this block and then why you\u0027re removing it. We should enumerate the CLIENT entries for each export.",
+      "revId": "68450f3c17a19e040ca46ce8209fa344b1bb10a0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cd75d95_ae9c48c9",
         "filename": "src/grpc_server/proto/nfsService.proto",
         "patchSetId": 1
