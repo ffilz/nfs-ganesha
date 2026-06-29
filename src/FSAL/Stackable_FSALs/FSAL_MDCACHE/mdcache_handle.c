@@ -238,14 +238,19 @@ static fsal_status_t mdcache_mkdir(struct fsal_obj_handle *dir_hdl,
 		return status;
 	}
 
-	PTHREAD_RWLOCK_wrlock(&parent->content_lock);
+	const bool hold_content_lock =
+		get_readdir_mode() == FSAL_RDDIR_CHUNK_ALWAYS;
+
+	if (hold_content_lock)
+		PTHREAD_RWLOCK_wrlock(&parent->content_lock);
 
 	status = mdcache_alloc_and_check_handle(export, sub_handle, handle,
 						true, &attrs, attrs_out,
 						"mkdir ", parent, name,
 						&invalidate, NULL);
 
-	PTHREAD_RWLOCK_unlock(&parent->content_lock);
+	if (hold_content_lock)
+		PTHREAD_RWLOCK_unlock(&parent->content_lock);
 
 	fsal_release_attrs(&attrs);
 
@@ -325,14 +330,19 @@ static fsal_status_t mdcache_mknode(struct fsal_obj_handle *dir_hdl,
 		return status;
 	}
 
-	PTHREAD_RWLOCK_wrlock(&parent->content_lock);
+	const bool hold_content_lock =
+		get_readdir_mode() == FSAL_RDDIR_CHUNK_ALWAYS;
+
+	if (hold_content_lock)
+		PTHREAD_RWLOCK_wrlock(&parent->content_lock);
 
 	status = mdcache_alloc_and_check_handle(export, sub_handle, handle,
 						false, &attrs, attrs_out,
 						"mknode ", parent, name,
 						&invalidate, NULL);
 
-	PTHREAD_RWLOCK_unlock(&parent->content_lock);
+	if (hold_content_lock)
+		PTHREAD_RWLOCK_unlock(&parent->content_lock);
 
 	fsal_release_attrs(&attrs);
 
@@ -410,14 +420,19 @@ static fsal_status_t mdcache_symlink(
 		return status;
 	}
 
-	PTHREAD_RWLOCK_wrlock(&parent->content_lock);
+	const bool hold_content_lock =
+		get_readdir_mode() == FSAL_RDDIR_CHUNK_ALWAYS;
+
+	if (hold_content_lock)
+		PTHREAD_RWLOCK_wrlock(&parent->content_lock);
 
 	status = mdcache_alloc_and_check_handle(export, sub_handle, handle,
 						false, &attrs, attrs_out,
 						"symlink ", parent, name,
 						&invalidate, NULL);
 
-	PTHREAD_RWLOCK_unlock(&parent->content_lock);
+	if (hold_content_lock)
+		PTHREAD_RWLOCK_unlock(&parent->content_lock);
 
 	fsal_release_attrs(&attrs);
 
