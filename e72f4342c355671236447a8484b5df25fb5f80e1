@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc573764_d33b61bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-29T22:52:27Z",
+      "side": 1,
+      "message": "This is nice. As a next step, we should enhance use of this new config for FSALs that don\u0027t actually use file descriptors for open file (they may use them for various sockets and such - something we can\u0027t control or track...)",
+      "revId": "e72f4342c355671236447a8484b5df25fb5f80e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "828a1f2e_56b86af5",
+        "filename": "src/doc/man/ganesha-cache-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-29T22:52:27Z",
+      "side": 1,
+      "message": "Document the cap.",
+      "revId": "e72f4342c355671236447a8484b5df25fb5f80e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
