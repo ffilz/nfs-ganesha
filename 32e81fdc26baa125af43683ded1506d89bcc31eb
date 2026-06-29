@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fee2369d_a653c7c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-29T22:24:34Z",
+      "side": 1,
+      "message": "So mdcache_alloc_and_check_handle only needs content lock if dirent caching is on. In one place, from mdc_lookup_uncached, the caller must hold the lock for other reasons. All other callers take the lock only around the call to mdcache_alloc_and_check_handle. Let\u0027s add a bool param to that function indicating if the lock is held. Then when calling mdcache_dirent_add, if the lock is not held, take it and release it. Coding will be simpler and we can remove all the wrapper locks benefiting other paths also.",
+      "revId": "32e81fdc26baa125af43683ded1506d89bcc31eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e00dc5ce_2b5521a4",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-06-29T22:24:34Z",
+      "side": 1,
+      "message": "This patch changes this requirement.",
+      "revId": "32e81fdc26baa125af43683ded1506d89bcc31eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
