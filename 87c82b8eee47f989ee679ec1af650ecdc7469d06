@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d060f2c2_506b9a23",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2026-06-30T13:14:31Z",
+      "side": 1,
+      "message": "I do not see this being used, if we do not need this, please remove it",
+      "range": {
+        "startLine": 69,
+        "startChar": 15,
+        "endLine": 69,
+        "endChar": 28
+      },
+      "revId": "87c82b8eee47f989ee679ec1af650ecdc7469d06",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b47ee8a3_5d6d0ab2",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2026-06-30T13:14:31Z",
+      "side": 1,
+      "message": "Since we are already using extern C in nfs_exports.h\nWe don\u0027t need this",
+      "range": {
+        "startLine": 29,
+        "startChar": 11,
+        "endLine": 29,
+        "endChar": 12
+      },
+      "revId": "87c82b8eee47f989ee679ec1af650ecdc7469d06",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efe0dbad_6c9848a6",
         "filename": "src/grpc_server/nfsServiceServer.cc",
         "patchSetId": 3
