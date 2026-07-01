@@ -5158,6 +5158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "247c8012_87673932",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-01T21:11:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0b58043d_ca6ee140",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbec5179_1c7df4eb",
@@ -5776,6 +5794,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee250dc4_4ba2cb06",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3076,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-01T21:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb514b4e_4b4009b3",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd90e492_27e13408",
@@ -6037,6 +6073,24 @@
       "side": 1,
       "message": "OH, can we fix so FS_tag is allocated to MEM_COMP_EXPORT?",
       "parentUuid": "988d564d_edb41e13",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4edf6bf7_5261dd4d",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3060,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-01T21:11:30Z",
+      "side": 1,
+      "message": "Hmm, cfg_fullpath and cfg_pseudopath are also allocated in config...\n\nWe need to be able to pass a MEM_COMP to the config processing code so ALL these export bits can be assigned to MEM_COMP_EXPORT.",
+      "parentUuid": "8e3ae424_8448777c",
       "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
