@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93113b92_49505911",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-01T09:57:55Z",
+      "side": 1,
+      "message": "Clang warnings and erros incorporated in patchset#10. Rebased with ganesha V11 version.",
+      "revId": "4ed84c6bed5e141c7d067d3c45725bfd510aa06b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3c915f6_99214392",
@@ -18,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63c764d7_6b34cee4",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-01T09:57:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b3c915f6_99214392",
+      "revId": "4ed84c6bed5e141c7d067d3c45725bfd510aa06b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c6f3e54_9b0eaa8c",
@@ -31,6 +66,24 @@
       "writtenOn": "2026-07-01T09:51:28Z",
       "side": 1,
       "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\tcluster \u003d (char *)gsh_malloc(clen, MEM_COMP_FSAL);",
+      "revId": "4ed84c6bed5e141c7d067d3c45725bfd510aa06b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f867b920_1d2fe692",
+        "filename": "src/FSAL/FSAL_RGW/main.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-01T09:57:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0c6f3e54_9b0eaa8c",
       "revId": "4ed84c6bed5e141c7d067d3c45725bfd510aa06b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
