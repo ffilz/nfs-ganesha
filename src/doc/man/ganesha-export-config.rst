@@ -237,6 +237,28 @@ Read_Access_Check_Policy(enum, values [pre, post, all], default pre)
     It also allow to optimize for security by running permission check both
     before and after.
 
+Lookup_Access_Check_Policy(enum, values [pre, post, all], default pre)
+    Whether to run permission check for lookup before sending the lookup to the
+    FSAL, after getting the lookup response from the FSAL, or both before and after.
+    This allows to optimize performance for failure flow by always
+    checking access before sending the lookup, or to optimize performance for
+    success path by storing access check result in the FSAL cache during the
+    lookup and perform the access check after the lookup (requires the FSAL
+    implementation to support it, so should only be used with supported FSALs).
+    It also allow to optimize for security by running permission check both
+    before and after.
+
+Readdir_Access_Check_Policy(enum, values [pre, post, all], default pre)
+    Whether to run permission check for readdir before sending the readdir to the
+    FSAL, after getting the readdir response from the FSAL, or both before and after.
+    This allows to optimize performance for failure flow by always
+    checking access before sending the readdir, or to optimize performance for
+    success path by storing access check result in the FSAL cache during the
+    readdir and perform the access check after the readdir (requires the FSAL
+    implementation to support it, so should only be used with supported FSALs).
+    It also allow to optimize for security by running permission check both
+    before and after.
+
 MaxRead (64*1024*1024)
     The maximum read size on this export
 

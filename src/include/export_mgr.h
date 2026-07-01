@@ -205,6 +205,10 @@ struct gsh_export {
 	fsal_fsid_t filesystem_id;
 	/** CFG: Controls when to run permission check for read. */
 	uint32_t read_access_check_policy;
+	/** CFG: Controls when to run permission check for lookup. */
+	uint32_t lookup_access_check_policy;
+	/** CFG: Controls when to run permission check for readdir. */
+	uint32_t readdir_access_check_policy;
 	/** References to this export */
 	int64_t refcnt;
 	/** Read/Write lock protecting export */
