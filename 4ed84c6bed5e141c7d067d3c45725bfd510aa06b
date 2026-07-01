@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c915f6_99214392",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1203,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-01T09:51:28Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\thdl-\u003emh_symlink.link_contents \u003d gsh_strdup(link_path, MEM_COMP_PROTOCOL);",
+      "revId": "4ed84c6bed5e141c7d067d3c45725bfd510aa06b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c6f3e54_9b0eaa8c",
+        "filename": "src/FSAL/FSAL_RGW/main.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-01T09:51:28Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\tcluster \u003d (char *)gsh_malloc(clen, MEM_COMP_FSAL);",
+      "revId": "4ed84c6bed5e141c7d067d3c45725bfd510aa06b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
