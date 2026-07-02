@@ -41,6 +41,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba6ba7d9_5d423b3c",
+        "filename": "src/grpc_server/GrpcServer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-02T09:55:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d060f2c2_506b9a23",
+      "range": {
+        "startLine": 69,
+        "startChar": 15,
+        "endLine": 69,
+        "endChar": 28
+      },
+      "revId": "87c82b8eee47f989ee679ec1af650ecdc7469d06",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b47ee8a3_5d6d0ab2",
@@ -77,6 +101,24 @@
       "writtenOn": "2026-06-25T20:30:54Z",
       "side": 1,
       "message": "I need to validate those paths. Let\u0027s not bother exposing Tag, I actually want to deprecate it.\n\nHow about showing the export options?",
+      "revId": "87c82b8eee47f989ee679ec1af650ecdc7469d06",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c21dc45a_e039d039",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-02T09:55:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efe0dbad_6c9848a6",
       "revId": "87c82b8eee47f989ee679ec1af650ecdc7469d06",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
