@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbb3e5e6_dfd5a769",
+        "filename": "src/Protocols/XDR/xdr_cqos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/*",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7a20f64_0e850469",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/include/cqos.h\u0027, please use \u0027/*\u0027 instead\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c4343e0_8373d17c",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "943a5709_85f1bb09",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - enum clnt_stat cqosproc_pubsub_null_1() should probably be enum clnt_stat cqosproc_pubsub_null_1(void)\n+extern enum clnt_stat cqosproc_pubsub_null_1();",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "058949f3_b050fc22",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - bool_t cqosproc_pubsub_null_1_svc() should probably be bool_t cqosproc_pubsub_null_1_svc(void)\n+extern bool_t cqosproc_pubsub_null_1_svc();",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bda7f9bf_247df71c",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - enum clnt_stat cqosproc_pubsub_msg_1() should probably be enum clnt_stat cqosproc_pubsub_msg_1(void)\n+extern enum clnt_stat cqosproc_pubsub_msg_1();",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd048b1d_5387a37b",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - bool_t cqosproc_pubsub_msg_1_svc() should probably be bool_t cqosproc_pubsub_msg_1_svc(void)\n+extern bool_t cqosproc_pubsub_msg_1_svc();",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85cb93da_0ab8f16d",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - int cqosprog_1_freeresult() should probably be int cqosprog_1_freeresult(void)\n+extern int cqosprog_1_freeresult();",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bf80018_b9c2552a",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "ERROR: Bad function definition - bool xdr_cluster_qos_msg() should probably be bool xdr_cluster_qos_msg(void)\n+extern bool xdr_cluster_qos_msg();",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "711b482f_576746c9",
+        "filename": "src/include/nfs_cluster_qos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/include/nfs_cluster_qos.h\u0027, please use \u0027/*\u0027 instead\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b1830f5_f798af5c",
+        "filename": "src/include/nfs_cluster_qos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27f22b50_5551b94d",
+        "filename": "src/include/nfs_proto_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I$",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80cb9d0c_6368c321",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                cli-\u003enode_addr \u003d client-\u003ecidr-\u003eip_addr;$",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d6bf10c_5bef506b",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                cli-\u003enode_addr \u003d client-\u003ecidr-\u003eip_addr;$",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c9a19d_8a9d627c",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                        cli-\u003eis_my_ip \u003d true;$",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a391bc03_31931f31",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                        cli-\u003eis_my_ip \u003d true;$",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8c2c0de_9615ecf6",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-02T11:55:52Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+^I$",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
