@@ -308,6 +308,9 @@ Requires:	python3-dbus
 BuildRequires:  python3-wheel
 BuildRequires:  python3-build
 BuildRequires:  python3-installer
+%if ( 0%{?rhel} > 9 )
+BuildRequires:  python3-setuptools
+%endif
 %endif
 %endif
 
@@ -714,10 +717,8 @@ rm -f %{buildroot}/%{python_sitelib}/__init__.*
 rm -rf %{buildroot}/%{python3_sitelib}/gpfs*
 rm -rf %{buildroot}/%{python3_sitelib}/ganeshactl*
 rm -f %{buildroot}/%{python3_sitelib}/__init__.*
-rm -rf %{buildroot}/%{python3_sitelib}/__pycache__
 rm -f %{buildroot}/%{python3_sitelib}/Ganesha/__init__.*
 rm -f %{buildroot}/%{python3_sitelib}/Ganesha/QtUI/__init__.*
-rm -rf %{buildroot}/%{python3_sitelib}/Ganesha/QtUI/__pycache__
 %endif
 
 %post
@@ -826,7 +827,9 @@ exit 0
 %if %{with monitoring}
 %files monitoring
 %{_libdir}/libganesha_monitoring*
+%if ! %{with system_ntirpc}
 %{_libdir}/libntirpcmonitoring*
+%endif
 %endif
 
 %files vfs
@@ -968,6 +971,10 @@ exit 0
 %if ( 0%{?rhel} && 0%{?rhel} < 8 )
 %{python_sitelib}/Ganesha/*
 %{python_sitelib}/ganeshactl-*-info
+%endif
+%if ( 0%{?rhel} > 8 )
+%{python3_sitelib}/Ganesha/*
+%exclude %{python3_sitelib}/ganesha*-*-info
 %endif
 %if %{with gui_utils}
 %{_bindir}/ganesha-admin
