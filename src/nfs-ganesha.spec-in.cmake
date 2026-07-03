@@ -969,6 +969,10 @@ exit 0
 %{python_sitelib}/Ganesha/*
 %{python_sitelib}/ganeshactl-*-info
 %endif
+%if ( 0%{?rhel} > 8 )
+%{python3_sitelib}/Ganesha/*
+%exclude %{python3_sitelib}/ganesha*-*-info
+%endif
 %if %{with gui_utils}
 %{_bindir}/ganesha-admin
 %{_bindir}/manage_clients
