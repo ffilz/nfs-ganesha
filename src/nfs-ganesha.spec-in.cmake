@@ -714,10 +714,8 @@ rm -f %{buildroot}/%{python_sitelib}/__init__.*
 rm -rf %{buildroot}/%{python3_sitelib}/gpfs*
 rm -rf %{buildroot}/%{python3_sitelib}/ganeshactl*
 rm -f %{buildroot}/%{python3_sitelib}/__init__.*
-rm -rf %{buildroot}/%{python3_sitelib}/__pycache__
 rm -f %{buildroot}/%{python3_sitelib}/Ganesha/__init__.*
 rm -f %{buildroot}/%{python3_sitelib}/Ganesha/QtUI/__init__.*
-rm -rf %{buildroot}/%{python3_sitelib}/Ganesha/QtUI/__pycache__
 %endif
 
 %post
