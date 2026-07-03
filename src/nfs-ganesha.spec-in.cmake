@@ -308,6 +308,9 @@ Requires:	python3-dbus
 BuildRequires:  python3-wheel
 BuildRequires:  python3-build
 BuildRequires:  python3-installer
+%if ( 0%{?rhel} > 9 )
+BuildRequires:  python3-setuptools
+%endif
 %endif
 %endif
 
