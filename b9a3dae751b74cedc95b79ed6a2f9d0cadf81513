@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "209689ae_116a7ef2",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "389fc2ab_58d430e4",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5aaa7fd2_ed9c23b4",
@@ -52,6 +70,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d285eb03_0e20d462",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5aaa7fd2_ed9c23b4",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f59ef3da_97d3817f",
@@ -65,6 +101,24 @@
       "writtenOn": "2025-09-18T11:12:07Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tstruct avltree_node *node;\n+\tfor (node \u003d avltree_first(\u0026class_ptr-\u003ecqos_subnodes); node !\u003d NULL;",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "002399e4_c52f6ddd",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f59ef3da_97d3817f",
       "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -972,6 +1026,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "008a4b99_de22af78",
+        "filename": "src/Protocols/XDR/xdr_cqos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "You do need the SPDX header, // style comment for .c file",
+      "parentUuid": "6a547846_3a0d456c",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8aa5b10d_45387404",
         "filename": "src/include/cqos.h",
         "patchSetId": 2
@@ -1004,6 +1076,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd4fac7f_d0273a4e",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3c680469_7070c97c",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1fcf44f_9cac6d98",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "It\u0027s really odd, but in .h files you need to use /* */ style comment for SPDX header...",
+      "parentUuid": "8aa5b10d_45387404",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "046e6cf0_a0f0c7a1",
@@ -1017,6 +1125,24 @@
       "writtenOn": "2025-09-18T11:12:07Z",
       "side": 1,
       "message": "ERROR: Bad function definition - enum clnt_stat cqosproc_pubsub_null_1() should probably be enum clnt_stat cqosproc_pubsub_null_1(void)\n+extern enum clnt_stat cqosproc_pubsub_null_1();",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "098d6364_6f6361e1",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Need the void on all of these function declarations",
+      "parentUuid": "046e6cf0_a0f0c7a1",
       "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1038,6 +1164,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "baa55751_1eaa626f",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "05815913_6732bdca",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9067a09_f449f5f2",
@@ -1051,6 +1195,24 @@
       "writtenOn": "2025-09-18T11:12:07Z",
       "side": 1,
       "message": "ERROR: Bad function definition - enum clnt_stat cqosproc_pubsub_msg_1() should probably be enum clnt_stat cqosproc_pubsub_msg_1(void)\n+extern enum clnt_stat cqosproc_pubsub_msg_1();",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d83c7fd_3b1d3df3",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f9067a09_f449f5f2",
       "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1072,6 +1234,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d593261_1be72c1a",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "63474fb0_d6ddd11c",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f992760c_32c976b5",
@@ -1089,6 +1269,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f99b0695_48844007",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f992760c_32c976b5",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8dd75de7_29673bc8",
@@ -1102,6 +1300,24 @@
       "writtenOn": "2025-09-18T11:12:07Z",
       "side": 1,
       "message": "ERROR: Bad function definition - bool xdr_cluster_qos_msg() should probably be bool xdr_cluster_qos_msg(void)\n+extern bool xdr_cluster_qos_msg();",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6731fd49_158e8c0d",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8dd75de7_29673bc8",
       "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1142,6 +1358,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb0fd952_f8c4709e",
+        "filename": "src/include/nfs_cluster_qos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "This does need to change to /* */",
+      "parentUuid": "feed5a89_8ffd7b51",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85c63578_d69ef0e5",
+        "filename": "src/include/nfs_cluster_qos.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5c3a721e_f57b9525",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "65c18b4e_db19de8a",
         "filename": "src/support/client_mgr.c",
         "patchSetId": 2
@@ -1153,6 +1405,24 @@
       "writtenOn": "2025-09-18T11:12:07Z",
       "side": 1,
       "message": "ERROR: code indent should use tabs where possible\n+^I           const char *client_tok, enum term_type type_hint,$",
+      "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e60b41ed_c8789fac",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1556,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "65c18b4e_db19de8a",
       "revId": "b9a3dae751b74cedc95b79ed6a2f9d0cadf81513",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

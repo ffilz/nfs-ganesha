@@ -3,6 +3,567 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b40c2cd1_cab68696",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Don\u0027t #define this, people expect fd -1 to mean error/invalid",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbdbea18_c93eab80",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "You need to lock the bucket-\u003elock to update these",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e2e3e15_f9112f8d",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "You need to lock the bucket-\u003elock to update these",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73960860_5c2e2c5d",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Somewhere in here you need the class_ptr-\u003elock",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bceb52a_c0f38ed7",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "This param description looks wrong",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54388655_a6b05943",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "cluster_qos_msg can\u0027t be NULL (ultimate caller uses cluster_qos_msg *arg \u003d \u0026args-\u003earg_cqos_msg;)",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a6c0684_f8de91d9",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "This should at least have a LogDebug",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80af3e21_01d2987a",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "cluster_qos_msg can\u0027t be NULL (ultimate caller uses cluster_qos_msg *arg \u003d \u0026args-\u003earg_cqos_msg;)",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e15cff39_583ffcc7",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "This should at have at least a LogDebug",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8becd14_58e8d0d2",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "This seems to only do per-export, not per-export/per-client?",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fc0b25c_5082e437",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "You don\u0027t need this function, Cluster_Members parameter has already been processed to remove self addresses from cluster_members list, they are added to cluster_self list.",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e5ae6b6_065ee3b1",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "You really don\u0027t have to roll your own socket create",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c23ca711_88dbe053",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Just be explicit \u003c 0",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff5b7111_01ca135a",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Use clnt_tli_ncreate_opt(RPC_ANYFD, nconf, local address netbuf, remote address netbuf, CQOSPROG, CQOS_VERS, 0, 0, IPV6_V6ONLY)\n\nnconf is either netconfig_tcp4 or netconfig_tcp6\n\nIPV6_V6ONLY flag is needed to work with IPv4 encapsulated in IPv6 addresses",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53fe63ee_954533e0",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Use rpc_sperror to add text error description",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b77c00e7_3f022e16",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Why do you want to set this? What does it accomplish?",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51611c5c_cff71f4d",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Please don\u0027t split strings",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0600c8da_5364fb28",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Use rpc_sperror to get a text error message to display, don\u0027t make people lookup an error code.",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58607b34_14294f7e",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "No need to test for empty list, glist_for_each will have no iterations on empty list.",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a08a845_2b2ca450",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "No need for this test, it can\u0027t be NULL",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c7982ad_c4ca00e0",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Please don\u0027t break strings, they are allowed to go past column 80",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f08afaf7_bfb596a6",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Why do you recreate the client?\n\nAlso, can we avoid having to walk the list to find the right entry?\n\ncontainer_of...",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "027c065f_fcdcb2a8",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Setting fd to -1 is not necessary, you immediately set it again",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7f1f4b9_d5113a20",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Just be explicit \u003e\u003d 0 (actually should never be 0,1, or 2...)",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5362b93f_564225c4",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Extra closing brace?",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4971351_1e50badb",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Should you only retry on RPC_TIMEDOUT?",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8b273e0_469911bd",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Use rpc_sperror to get an error message to display a text error message",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2350cc06_26437cbe",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Use CLNT_CALL_WAIT here.",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdb84ea6_830cfe0b",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Use rpc_sperror to add text for the error",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9c02f5c_e6975f1f",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "I would really like to understand why we need this. Is there a bug in libntirpc that we need to fix?\n\n@dang@redhat.com - could you look at this and chime in?",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "883cff84_24687512",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Use rpc_sperror to add text for the error",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21773302_341fb735",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "No need to test for empty list, glist_for_each will have no iterations on empty list.",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b611f865_85c37770",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "No need to test for empty list, glist_for_each will do no iterations if list is empty, will save you a nesting level...",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bbb3e5e6_dfd5a769",
         "filename": "src/Protocols/XDR/xdr_cqos.c",
         "patchSetId": 3
@@ -14,6 +575,24 @@
       "writtenOn": "2026-07-02T11:55:52Z",
       "side": 1,
       "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/*",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22207fd2_477dc382",
+        "filename": "src/Protocols/XDR/xdr_cqos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bbb3e5e6_dfd5a769",
       "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +631,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43eb6358_2951d676",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e7a20f64_0e850469",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b01c6013_33056c96",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6c4343e0_8373d17c",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "943a5709_85f1bb09",
@@ -65,6 +680,24 @@
       "writtenOn": "2026-07-02T11:55:52Z",
       "side": 1,
       "message": "ERROR: Bad function definition - enum clnt_stat cqosproc_pubsub_null_1() should probably be enum clnt_stat cqosproc_pubsub_null_1(void)\n+extern enum clnt_stat cqosproc_pubsub_null_1();",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c88ba91c_831c9c46",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "943a5709_85f1bb09",
       "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +719,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a2a1c66_8f3f9635",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "058949f3_b050fc22",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bda7f9bf_247df71c",
@@ -99,6 +750,24 @@
       "writtenOn": "2026-07-02T11:55:52Z",
       "side": 1,
       "message": "ERROR: Bad function definition - enum clnt_stat cqosproc_pubsub_msg_1() should probably be enum clnt_stat cqosproc_pubsub_msg_1(void)\n+extern enum clnt_stat cqosproc_pubsub_msg_1();",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d4d7be2_bf0dfabf",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bda7f9bf_247df71c",
       "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +789,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c13200b_2ec26af3",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cd048b1d_5387a37b",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85cb93da_0ab8f16d",
@@ -137,6 +824,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9555b7c8_0e354bd0",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "85cb93da_0ab8f16d",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bf80018_b9c2552a",
@@ -150,6 +855,24 @@
       "writtenOn": "2026-07-02T11:55:52Z",
       "side": 1,
       "message": "ERROR: Bad function definition - bool xdr_cluster_qos_msg() should probably be bool xdr_cluster_qos_msg(void)\n+extern bool xdr_cluster_qos_msg();",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e343f10_c97184ec",
+        "filename": "src/include/cqos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4bf80018_b9c2552a",
       "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -188,6 +911,59 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "899b081a_0874f992",
+        "filename": "src/include/nfs_cluster_qos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9b1830f5_f798af5c",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5387ef7_296ff66a",
+        "filename": "src/include/nfs_cluster_qos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "711b482f_576746c9",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52a8feda_ceb5d2d6",
+        "filename": "src/include/nfs_cluster_qos.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "You don\u0027t need this",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27f22b50_5551b94d",
@@ -201,6 +977,58 @@
       "writtenOn": "2026-07-02T11:55:52Z",
       "side": 1,
       "message": "ERROR: trailing whitespace\n+^I$",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0b40934_f388a676",
+        "filename": "src/include/nfs_proto_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Please fix",
+      "parentUuid": "27f22b50_5551b94d",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca7d560_3657211a",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "If there\u0027s no cqos code in this file, it shouldn\u0027t need the header file",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54d44837_aa648ae4",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "You should verify the entry type before just grabbing the address.",
       "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -235,6 +1063,59 @@
       "writtenOn": "2026-07-02T11:55:52Z",
       "side": 1,
       "message": "ERROR: code indent should use tabs where possible\n+                cli-\u003enode_addr \u003d client-\u003ecidr-\u003eip_addr;$",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a990ae_83bd8078",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "80cb9d0c_6368c321",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "171b4424_7beb051b",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Please fix",
+      "parentUuid": "8d6bf10c_5bef506b",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1828bf02_4d582136",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "You don\u0027t need this chunk, self has already been identified and is available in cluster_self.\n\nDo you actually need an entry for self?",
       "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -275,6 +1156,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebbad462_42c68d3d",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Please fix",
+      "parentUuid": "d8c9a19d_8a9d627c",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99fb729a_4cb50358",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a391bc03_31931f31",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8c2c0de_9615ecf6",
         "filename": "src/support/nfs_read_conf.c",
         "patchSetId": 3
@@ -286,6 +1203,24 @@
       "writtenOn": "2026-07-02T11:55:52Z",
       "side": 1,
       "message": "ERROR: trailing whitespace\n+^I$",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71b42467_084bd435",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-03T04:06:13Z",
+      "side": 1,
+      "message": "Please make this an empty line",
+      "parentUuid": "e8c2c0de_9615ecf6",
       "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
