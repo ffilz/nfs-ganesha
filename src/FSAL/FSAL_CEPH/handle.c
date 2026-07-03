@@ -380,6 +380,24 @@ ceph_fsal_mkdir(struct fsal_obj_handle *dir_hdl, const char *name,
 		     (int)op_ctx->creds.caller_uid,
 		     (int)op_ctx->creds.caller_gid);
 
+#ifdef CEPHFS_POSIX_ACL
+	{
+		struct fsal_attrlist parent_attrs;
+
+		fsal_prepare_attrs(&parent_attrs, ATTR_ACL);
+		status = dir_hdl->obj_ops->getattrs(dir_hdl, &parent_attrs);
+		if (FSAL_IS_ERROR(status)) {
+			fsal_release_attrs(&parent_attrs);
+			return status;
+		}
+		status.major = fsal_inherit_acls(attrib, parent_attrs.acl,
+						 FSAL_ACE_FLAG_DIR_INHERIT);
+		fsal_release_attrs(&parent_attrs);
+		if (FSAL_IS_ERROR(status))
+			return status;
+	}
+#endif /* CEPHFS_POSIX_ACL */
+
 	unix_mode = fsal2unix_mode(attrib->mode) &
 		    ~op_ctx->fsal_export->exp_ops.fs_umask(op_ctx->fsal_export);
 
