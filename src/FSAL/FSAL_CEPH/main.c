@@ -642,7 +642,9 @@ static void dentry_invalidate_cb(void *handle, vinodeno_t dir_ino,
 {
 	struct ceph_mount *cm = handle;
 	struct ceph_handle_key dir_key;
+	struct ceph_handle_key dentry_key;
 	struct gsh_buffdesc dir_fh_desc;
+	struct gsh_buffdesc dentry_fh_desc;
 	const struct fsal_up_vector *event_func;
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 
@@ -662,17 +664,34 @@ static void dentry_invalidate_cb(void *handle, vinodeno_t dir_ino,
 	dir_fh_desc.addr = &dir_key;
 	dir_fh_desc.len = sizeof(dir_key);
 
+	PTHREAD_RWLOCK_rdlock(&cmount_lock);
 	/* Fetch the up vector */
 	event_func = cm->cm_export->export.up_ops;
-	PTHREAD_RWLOCK_rdlock(&cmount_lock);
-	status = event_func->invalidate(cm->cm_export->export.up_ops,
-					&dir_fh_desc,
+	status = event_func->invalidate(event_func, &dir_fh_desc,
 					FSAL_UP_INVALIDATE_DIR_POPULATED |
 						FSAL_UP_INVALIDATE_DIR_CHUNKS);
 	PTHREAD_RWLOCK_unlock(&cmount_lock);
 
 	if (status.major != ERR_FSAL_NO_ERROR)
 		LogWarn(COMPONENT_FSAL, "Directory invalidation failed");
+
+	if (dentry_ino.ino.val == 0)
+		return;
+
+	dentry_key.hhdl.chk_ino = dentry_ino.ino.val;
+	dentry_key.hhdl.chk_snap = dentry_ino.snapid.val;
+	dentry_key.hhdl.chk_fscid = cm->cm_fscid;
+	dentry_key.export_id = cm->cm_export_id;
+	dentry_fh_desc.addr = &dentry_key;
+	dentry_fh_desc.len = sizeof(dentry_key);
+
+	PTHREAD_RWLOCK_rdlock(&cmount_lock);
+	event_func = cm->cm_export->export.up_ops;
+	status = event_func->try_release(event_func, &dentry_fh_desc, 0);
+	PTHREAD_RWLOCK_unlock(&cmount_lock);
+
+	if (status.major != ERR_FSAL_NO_ERROR)
+		LogDebug(COMPONENT_FSAL, "Dentry inode release failed");
 }
 
 static mode_t umask_cb(void *handle)
