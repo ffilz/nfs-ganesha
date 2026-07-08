@@ -16,6 +16,23 @@
       "message": "This change is based on current next and is mergeable. The listed conflicts appear to be against other open changes, not against the target branch.",
       "revId": "b58275215b5a9e669021e33eef0be09f3e5de75f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16294448_00e7db1e",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2026-07-08T21:31:13Z",
+      "side": 1,
+      "message": "why is a lock on the mount needed here?  I guess that\u0027s ganesha logic, I\u0027m slightly surprised to see that...\n\nmore broadly, this doesn\u0027t feel natural to me.  why do we want to try-release?",
+      "revId": "b58275215b5a9e669021e33eef0be09f3e5de75f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
