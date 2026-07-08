@@ -642,7 +642,9 @@ static void dentry_invalidate_cb(void *handle, vinodeno_t dir_ino,
 {
 	struct ceph_mount *cm = handle;
 	struct ceph_handle_key dir_key;
+	struct ceph_handle_key dentry_key;
 	struct gsh_buffdesc dir_fh_desc;
+	struct gsh_buffdesc dentry_fh_desc;
 	const struct fsal_up_vector *event_func;
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 
@@ -673,6 +675,24 @@ static void dentry_invalidate_cb(void *handle, vinodeno_t dir_ino,
 
 	if (status.major != ERR_FSAL_NO_ERROR)
 		LogWarn(COMPONENT_FSAL, "Directory invalidation failed");
+
+	if (dentry_ino.ino.val == 0)
+		return;
+
+	dentry_key.hhdl.chk_ino = dentry_ino.ino.val;
+	dentry_key.hhdl.chk_snap = dentry_ino.snapid.val;
+	dentry_key.hhdl.chk_fscid = cm->cm_fscid;
+	dentry_key.export_id = cm->cm_export_id;
+	dentry_fh_desc.addr = &dentry_key;
+	dentry_fh_desc.len = sizeof(dentry_key);
+
+	PTHREAD_RWLOCK_rdlock(&cmount_lock);
+	status = event_func->try_release(cm->cm_export->export.up_ops,
+					 &dentry_fh_desc, 0);
+	PTHREAD_RWLOCK_unlock(&cmount_lock);
+
+	if (status.major != ERR_FSAL_NO_ERROR)
+		LogDebug(COMPONENT_FSAL, "Dentry inode release failed");
 }
 
 static mode_t umask_cb(void *handle)
