@@ -333,6 +333,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "269e1927_cbd1985d",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-08T15:35:05Z",
+      "side": 1,
+      "message": "Naresh is having trouble responding, per the following explanation, this is acceptable:\n\nFor Cluster QoS we support only Per_Export and Per_Client. We dont support PePc. Reason for PePc it requires per client configuration and it needs lot of messages between nodes. Practically not possible. User can configure Per_Export instead.",
+      "parentUuid": "a8becd14_58e8d0d2",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fc0b25c_5082e437",
@@ -385,6 +403,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d85aabc4_801239cd",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-08T15:35:05Z",
+      "side": 1,
+      "message": "Naresh is having trouble responding. Per the following explanation this is acceptable: \n\nAs far as socket creation is concerned,  the code i have after handling TCP errors that i got after from cloud testing and QE testing.  TCP connections are getting closed in multizone environment.  So i wanted to have socket creation and deletion in my control instead of rpc handling it. It solves the problem of persistent TCP connections and TCP timeouts,  it is well tested code",
+      "parentUuid": "0e5ae6b6_065ee3b1",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c23ca711_88dbe053",
@@ -433,6 +469,24 @@
       "writtenOn": "2026-07-03T04:06:13Z",
       "side": 1,
       "message": "Use clnt_tli_ncreate_opt(RPC_ANYFD, nconf, local address netbuf, remote address netbuf, CQOSPROG, CQOS_VERS, 0, 0, IPV6_V6ONLY)\n\nnconf is either netconfig_tcp4 or netconfig_tcp6\n\nIPV6_V6ONLY flag is needed to work with IPv4 encapsulated in IPv6 addresses",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64635016_6c316f01",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-08T15:35:05Z",
+      "side": 1,
+      "message": "Since socket management is being handled above, this code is appropriate.",
+      "parentUuid": "ff5b7111_01ca135a",
       "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1602,6 +1656,24 @@
       "writtenOn": "2026-07-03T04:06:13Z",
       "side": 1,
       "message": "You don\u0027t need this chunk, self has already been identified and is available in cluster_self.\n\nDo you actually need an entry for self?",
+      "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7a31cb9_0b0dbf02",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-08T15:35:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1828bf02_4d582136",
       "revId": "a81a52b21d1efaed608ee43315b3aeac57e01f85",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
