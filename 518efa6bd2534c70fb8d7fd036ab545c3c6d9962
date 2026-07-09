@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37320d98_0bfc68d1",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2346,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:47:47Z",
+      "side": 1,
+      "message": "As suggested in earlier patch, this would really benefit from scheduling the copy work onto a thread pool and suspending the COPY request.",
+      "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5fb1448_49f4c727",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2390,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:47:47Z",
+      "side": 1,
+      "message": "This needs to use the fsal_fd handling. Also, what kind of state is passed for the two files? Is it an OPEN state? If so, it already has a fd associated.",
+      "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4150192f_6ab72846",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2413,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:47:47Z",
+      "side": 1,
+      "message": "use of copy_file_range needs to be conditional compile with cmake detecting support.\n\nThat might also get out of having to handle EOPONOTSUPP and ENOSYS",
+      "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80226c34_279d8367",
         "filename": "src/FSAL/FSAL_VFS/file.c",
         "patchSetId": 2
@@ -14,6 +65,41 @@
       "writtenOn": "2026-07-07T13:30:36Z",
       "side": 1,
       "message": "WARNING: ENOSYS means \u0027invalid syscall nr\u0027 and nothing else\n+\t\t\t     errno \u003d\u003d ENOSYS)) {",
+      "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad05a9cb_b00f8c4f",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2420,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:47:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "80226c34_279d8367",
+      "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7534e51b_88818738",
+        "filename": "src/FSAL/FSAL_VFS/vfs_methods.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:47:47Z",
+      "side": 1,
+      "message": "Please move declaration to proper place to be similarly ordered to fsal_api.h",
       "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
