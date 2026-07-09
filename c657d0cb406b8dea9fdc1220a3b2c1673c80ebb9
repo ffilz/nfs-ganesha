@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad128d93_7cd071d8",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2250,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:37:30Z",
+      "side": 1,
+      "message": "Just make this the default copy method, put all this code in default_copy_file_range",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "146e8b99_57bb6c32",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2273,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:37:30Z",
+      "side": 1,
+      "message": "This really screams for dispatch to a thread pool, with request suspending (as used for READ and WRITE). And also needs to hook into QoS.",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e7f2b47_f54c0f13",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2285,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:37:30Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be !\u003d?",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3475545_27bba7ad",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2287,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:37:30Z",
+      "side": 1,
+      "message": "The following can be simplied to just use src_ctx_exp with no ? : operator.",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60148e7a_8198ffa0",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2293,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:37:30Z",
+      "side": 1,
+      "message": "Use constant defined in header file as mentioned in other patch.",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9a5c0a5_c243ff74",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2312,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:37:30Z",
+      "side": 1,
+      "message": "max_chunk can\u0027t end up zero.\n\nAlso, maybe define an inline function for this calculation since other patch uses same logic.",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38f00c73_56905945",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2316,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:37:30Z",
+      "side": 1,
+      "message": "gsh_malloc aborts instead of returning NULL, no need to check (in fact checking may make Coverity complain about all the unchecked gsh_malloc...",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cbff07a_757d9326",
+        "filename": "src/include/fsal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:37:30Z",
+      "side": 1,
+      "message": "Subsume this into default_copy_file_range, then no need for header file declaration",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
