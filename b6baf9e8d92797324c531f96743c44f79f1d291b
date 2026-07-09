@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30f0d11b_f6bb7415",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3901,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T16:57:00Z",
+      "side": 1,
+      "message": "Thus function should go in localfs.c",
+      "revId": "b6baf9e8d92797324c531f96743c44f79f1d291b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "148cc28a_3dd1a5af",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3931,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T16:57:00Z",
+      "side": 1,
+      "message": "This constant should be defined in a header file, near FSAL_MAXIOSIZE (or just use FSAL_MAXIOSIZE)",
+      "revId": "b6baf9e8d92797324c531f96743c44f79f1d291b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b074b92d_d1986679",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3940,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T16:57:00Z",
+      "side": 1,
+      "message": "max_chunk can\u0027t end up 0 since you test MaxRead and MaxWrite for \u003e 0 before using them.",
+      "revId": "b6baf9e8d92797324c531f96743c44f79f1d291b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a4f5871_e470bb4a",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3949,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T16:57:00Z",
+      "side": 1,
+      "message": "gsh_malloc aborts instead of returning NULL, no need to check",
+      "revId": "b6baf9e8d92797324c531f96743c44f79f1d291b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19e26b82_4c826733",
+        "filename": "src/FSAL/fsal_private.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T16:57:00Z",
+      "side": 1,
+      "message": "Declare in include/FSAL/fsal_localfs.c",
+      "revId": "b6baf9e8d92797324c531f96743c44f79f1d291b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
