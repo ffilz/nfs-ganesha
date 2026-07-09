@@ -63,6 +63,7 @@
 #include "nfs_proto_functions.h"
 #include "nfs_convert.h"
 #include "nfs_metrics.h"
+#include "server_stats_grpc.h"
 
 #ifdef USE_DBUS
 
@@ -3155,6 +3156,86 @@ void reset_v4_full_stats(void)
 		v4_full_stats[op].latency.min = 0;
 		v4_full_stats[op].latency.max = 0;
 	}
+}
+
+/**
+ * @brief Copy transfer counters into the gRPC-safe stats snapshot
+ *
+ * @param iop [IN] read or write transfer counter
+ * @param out [OUT] gRPC-safe I/O stats snapshot
+ */
+static void grpc_iostats_from_xfer(struct xfer_op *iop,
+				   struct grpc_iostats *out)
+{
+	/* Keep field order aligned with D-Bus IOSTATS_REPLY (tttttt). */
+	out->requested = iop->requested;
+	out->transferred = iop->transferred;
+	out->total_ops = iop->cmd.total;
+	out->errors = iop->cmd.errors;
+	out->latency = iop->cmd.latency.latency;
+	out->queue_wait = 0;
+}
+
+#ifdef _USE_NFS3
+/**
+ * @brief Extract NFSv3 read/write counters for gRPC cltmgr stats
+ *
+ * @param v3p [IN] NFSv3 statistics
+ * @param read_out [OUT] read statistics
+ * @param write_out [OUT] write statistics
+ */
+void server_grpc_fill_v3_iostats(struct nfsv3_stats *v3p,
+				 struct grpc_iostats *read_out,
+				 struct grpc_iostats *write_out)
+{
+	grpc_iostats_from_xfer(&v3p->read, read_out);
+	grpc_iostats_from_xfer(&v3p->write, write_out);
+}
+#endif
+
+/**
+ * @brief Extract NFSv4.0 read/write counters for gRPC cltmgr stats
+ *
+ * @param v40p [IN] NFSv4.0 statistics
+ * @param read_out [OUT] read statistics
+ * @param write_out [OUT] write statistics
+ */
+void server_grpc_fill_v40_iostats(struct nfsv40_stats *v40p,
+				  struct grpc_iostats *read_out,
+				  struct grpc_iostats *write_out)
+{
+	grpc_iostats_from_xfer(&v40p->read, read_out);
+	grpc_iostats_from_xfer(&v40p->write, write_out);
+}
+
+/**
+ * @brief Extract NFSv4.1 read/write counters for gRPC cltmgr stats
+ *
+ * @param v41p [IN] NFSv4.1 statistics
+ * @param read_out [OUT] read statistics
+ * @param write_out [OUT] write statistics
+ */
+void server_grpc_fill_v41_iostats(struct nfsv41_stats *v41p,
+				  struct grpc_iostats *read_out,
+				  struct grpc_iostats *write_out)
+{
+	grpc_iostats_from_xfer(&v41p->read, read_out);
+	grpc_iostats_from_xfer(&v41p->write, write_out);
+}
+
+/**
+ * @brief Extract NFSv4.2 read/write counters for gRPC cltmgr stats
+ *
+ * @param v42p [IN] NFSv4.2 statistics
+ * @param read_out [OUT] read statistics
+ * @param write_out [OUT] write statistics
+ */
+void server_grpc_fill_v42_iostats(struct nfsv41_stats *v42p,
+				  struct grpc_iostats *read_out,
+				  struct grpc_iostats *write_out)
+{
+	grpc_iostats_from_xfer(&v42p->read, read_out);
+	grpc_iostats_from_xfer(&v42p->write, write_out);
 }
 
 /** @} */
