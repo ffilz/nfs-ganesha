@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdd000ea_f5ca2171",
+        "filename": "src/grpc_server/proto/cltmgrService.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T16:39:42Z",
+      "side": 1,
+      "message": "Will need SPDX header",
+      "revId": "e26fe1325f3c2cc5ab568d02fead5615bd2be004",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8c9a8e9_051022fd",
+        "filename": "src/grpc_server/proto/nfsProtoUtil.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T16:39:42Z",
+      "side": 1,
+      "message": "This file should have an SPDX header",
+      "revId": "e26fe1325f3c2cc5ab568d02fead5615bd2be004",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7af5eb79_e431107f",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1206,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T16:39:42Z",
+      "side": 1,
+      "message": "Please use ip_str_to_sockaddr from ip_utils.h",
+      "revId": "e26fe1325f3c2cc5ab568d02fead5615bd2be004",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be3dc178_187f1ad6",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T16:39:42Z",
+      "side": 1,
+      "message": "Why do we have these thin wrappers of other new functions? Just merge, for example,\n\ngrpc_fill_v3_stats with server_grpc_fill_v3_iostats",
+      "revId": "e26fe1325f3c2cc5ab568d02fead5615bd2be004",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
