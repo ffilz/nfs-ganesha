@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbb60698_8dba2c41",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-09T18:58:57Z",
+      "side": 1,
+      "message": "I see now why you separate fsal_buffered_copy_fsal from default_copy_file_range (though really they can be the same function). Does this all work properly though when called either from mdcache with mdcache obj_handle or from the individual FSALs with the sub_fsal handle?",
+      "revId": "57e5114655c673d1c5626e7510987544e8d9e078",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
