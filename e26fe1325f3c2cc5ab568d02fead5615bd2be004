@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2c6e5a7_d52e36e6",
+        "filename": "src/grpc_server/proto/cltmgrService.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-07-10T08:01:10Z",
+      "side": 1,
+      "message": "Added the header",
+      "parentUuid": "fdd000ea_f5ca2171",
+      "revId": "e26fe1325f3c2cc5ab568d02fead5615bd2be004",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b8c9a8e9_051022fd",
         "filename": "src/grpc_server/proto/nfsProtoUtil.proto",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-09T16:39:42Z",
       "side": 1,
       "message": "This file should have an SPDX header",
+      "revId": "e26fe1325f3c2cc5ab568d02fead5615bd2be004",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bd98747_505572f9",
+        "filename": "src/grpc_server/proto/nfsProtoUtil.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-07-10T08:01:10Z",
+      "side": 1,
+      "message": "Added the header.",
+      "parentUuid": "b8c9a8e9_051022fd",
       "revId": "e26fe1325f3c2cc5ab568d02fead5615bd2be004",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68563474_0561f2f5",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1206,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-07-10T08:01:10Z",
+      "side": 1,
+      "message": "Removed earlier implemented \"parse_client_ipaddr_str()\" and using ip_str_to_sockaddr() at line no 1241.",
+      "parentUuid": "7af5eb79_e431107f",
+      "revId": "e26fe1325f3c2cc5ab568d02fead5615bd2be004",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be3dc178_187f1ad6",
         "filename": "src/support/client_mgr.c",
         "patchSetId": 2
@@ -65,6 +119,24 @@
       "writtenOn": "2026-07-09T16:39:42Z",
       "side": 1,
       "message": "Why do we have these thin wrappers of other new functions? Just merge, for example,\n\ngrpc_fill_v3_stats with server_grpc_fill_v3_iostats",
+      "revId": "e26fe1325f3c2cc5ab568d02fead5615bd2be004",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b2d1b07_900375ae",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-07-10T08:01:10Z",
+      "side": 1,
+      "message": "Removed grpc_fill_v*_stats() and it\u0027s merged into server_grpc_fill_v*_iostats().",
+      "parentUuid": "be3dc178_187f1ad6",
       "revId": "e26fe1325f3c2cc5ab568d02fead5615bd2be004",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
