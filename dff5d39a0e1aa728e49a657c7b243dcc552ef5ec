@@ -308,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a4cc5ca_c424eab9",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-07-12T14:42:55Z",
+      "side": 1,
+      "message": "In the reference you mentioned, there\u0027s actually a redundant move as get_value is passed by value anyways, so there\u0027s no need to std::move it\n\nThat\u0027s no the case here",
+      "parentUuid": "44d2dd87_a7a96abf",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 28
+      },
+      "revId": "dff5d39a0e1aa728e49a657c7b243dcc552ef5ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13add691_52ef2520",
         "filename": "src/monitoring/prometheus_exposer.cc",
         "patchSetId": 7

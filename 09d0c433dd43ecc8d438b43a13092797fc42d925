@@ -34,6 +34,98 @@
       "parentUuid": "f1e8108c_53c08fc9",
       "revId": "09d0c433dd43ecc8d438b43a13092797fc42d925",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b39895a9_241dcb00",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-07-12T14:42:55Z",
+      "side": 1,
+      "message": "Consider the following implementation-\n\n```\nstatic MetricFamilies rename_metric_names(const MetricFamilies \u0026Families)\n{\n    // Cleaned hidden chars. Order matters: replace specific phrases before generic \"__\".\n    static constexpr std::array\u003cstd::pair\u003cstd::string_view, std::string_view\u003e, 3\u003e replacements \u003d {{\n        { \"mdcache_cache\", \"mdcache\" },\n        { \"nfsv4\",         \"v4\"      },\n        { \"__\",            \"_\"       }\n    }};\n\n    MetricFamilies latest_families;\n    latest_families.reserve(Families.size());\n\n    for (const auto \u0026family : Families) {\n        // 1. Start with the required prefix\n        std::string new_name \u003d \"nfs_\";\n        new_name +\u003d family.name;\n\n        // 2. Perform substitutions on the combined string\n        for (const auto \u0026[from, to] : replacements) {\n            size_t pos \u003d new_name.find(from);\n            while (pos !\u003d std::string::npos) {\n                new_name.replace(pos, from.size(), to);\n                // Advance by to.size() to avoid checking inside the newly inserted text\n                pos \u003d new_name.find(from, pos + to.size());\n            }\n        }\n\n        // 3. Move the family metadata but swap in the newly generated name string\n        MetricFamily mf \u003d family; // If MetricFamily supports moving its internals, leverage that instead\n        mf.name \u003d std::move(new_name);\n        \n        latest_families.push_back(std::move(mf));\n    }\n    \n    return latest_families;\n}\n```",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 73
+      },
+      "revId": "09d0c433dd43ecc8d438b43a13092797fc42d925",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecc1e858_d7265b01",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-07-12T14:42:55Z",
+      "side": 1,
+      "message": "MetricFamily mf \u003d family; performs a deep copy of the entire MetricFamily structure (including its internal vectors/metrics) before you modify the name string. If the name doesn\u0027t change, or even if it does, copying everything upfront is expensive.\n\nFix: Use a move-constructible approach or modify the name during the insertion into latest_families.",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 27
+      },
+      "revId": "09d0c433dd43ecc8d438b43a13092797fc42d925",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51f70230_97fe8f06",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-07-12T14:42:55Z",
+      "side": 1,
+      "message": "The code loops using pos \u003d mf.name.find(from, pos + to.size());.\nIf from is \"__\" and to is \"_\", substituting \"__\" with \"_\" shortens the string.\n\nThe Issue: pos + to.size() advances the search index by 1. If your metric name contains three underscores in a row (___), replacing the first two leaves __. Because you advanced the index past the first character of this new pair, you might skip it or, in other string-replacement contexts, risk infinite loops if the replacement text contains the search text.\n\nFix: When replacing substrings where the to string cannot trigger a new match at the current position, it\u0027s safer to simply search from pos or compute the next position dynamically based on the updated layout.",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 46
+      },
+      "revId": "09d0c433dd43ecc8d438b43a13092797fc42d925",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "067fc715_8aab9f15",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-07-12T14:42:55Z",
+      "side": 1,
+      "message": "Your comment states:\n\nRestructuring metric names by adding the \"nfs_\" prefix...\n\nHowever, if a metric name already has double underscores (e.g., __rpc_calls), your code converts it to _rpc_calls and then unconditionally tacks \"nfs_\" to the front, resulting in nfs__rpc_calls. It\u0027s highly likely you want to ensure double underscores are cleaned up after adding the prefix, or that the prefix shouldn\u0027t create new double underscores.",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 29
+      },
+      "revId": "09d0c433dd43ecc8d438b43a13092797fc42d925",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
