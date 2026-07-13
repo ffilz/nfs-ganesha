@@ -123,6 +123,9 @@ static inline void nfs_check_malloc(void)
 
 /* in nfs_worker_thread.c */
 
+#ifdef _INTERNAL_RPCBIND
+enum xprt_stat nfs_rpc_valid_RPCBIND(struct svc_req *);
+#endif
 enum xprt_stat nfs_rpc_valid_NFS(struct svc_req *);
 #ifdef _USE_NLM
 enum xprt_stat nfs_rpc_valid_NLM(struct svc_req *);

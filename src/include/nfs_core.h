@@ -159,10 +159,21 @@ void _9p_rdma_cleanup_conn(msk_trans_t *trans);
 /************** in nfs_rpc_dispatcher_thread.c ************/
 
 /* RPC Service Sockets and Transports */
+extern int udp_socket[P_COUNT];
+extern int tcp_socket[P_COUNT];
+extern SVCXPRT *udp_xprt[P_COUNT];
+extern SVCXPRT *tcp_xprt[P_COUNT];
+extern bool udp_registrations[P_COUNT][MAX_PROTO_VERS + 1];
+extern bool tcp_registrations[P_COUNT][MAX_PROTO_VERS + 1];
 extern struct netconfig *netconfig_udpv4;
 extern struct netconfig *netconfig_tcpv4;
 extern struct netconfig *netconfig_udpv6;
 extern struct netconfig *netconfig_tcpv6;
+
+/* Flag to indicate if V6 interfaces on the host are enabled */
+extern bool v6disabled;
+extern bool vsock;
+extern bool rdma;
 
 void Clean_RPC(void);
 struct netconfig *nfs_Get_netconfig(char *netid);

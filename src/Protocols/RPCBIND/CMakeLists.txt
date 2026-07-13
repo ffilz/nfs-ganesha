@@ -19,28 +19,20 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #-------------------------------------------------------------------------------
-add_subdirectory(NFS)
-add_subdirectory(XDR)
-if(USE_NLM)
-	add_subdirectory(NLM)
-endif(USE_NLM)
-if(USE_RQUOTA)
-	add_subdirectory(RQUOTA)
-endif(USE_RQUOTA)
-if(USE_NFSACL3)
-	add_subdirectory(NFSACL)
-endif(USE_NFSACL3)
-if(ENABLE_QOS)
-if(ENABLE_CLUSTER_QOS)
-	add_subdirectory(CQOS)
-endif(ENABLE_CLUSTER_QOS)
-endif(ENABLE_QOS)
-if(INTERNAL_RPCBIND)
-	add_subdirectory(RPCBIND)
-endif(INTERNAL_RPCBIND)
 
-if(USE_9P)
-  add_subdirectory(9P)
-endif(USE_9P)
+########### next target ###############
+
+SET(rpcbind_SRCS
+   rpcbind.c
+)
+
+add_library(rpcbind OBJECT ${rpcbind_SRCS})
+add_sanitizers(rpcbind)
+set_target_properties(rpcbind PROPERTIES COMPILE_FLAGS "-fPIC")
+
+if (USE_LTTNG)
+add_dependencies(rpcbind gsh_trace_header_generate)
+include("${CMAKE_BINARY_DIR}/gsh_lttng_generation_file_properties.cmake")
+endif (USE_LTTNG)
 
 ########### install files ###############
