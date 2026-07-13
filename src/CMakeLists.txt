@@ -434,6 +434,16 @@ if(ENABLE_CLUSTER_QOS)
 	endif(NOT ENABLE_QOS)
 endif(ENABLE_CLUSTER_QOS)
 
+option(INTERNAL_RPCBIND "Provide rpcbind if ON" OFF)
+
+if(INTERNAL_RPCBIND)
+    if(USE_NLM)
+        if(NOT INTERNAL_STATD)
+            message(FATAL_ERROR "Cannot set INTERNAL_RPCBIND AND USE_NLM without INTERNAL_STATD")
+        endif(NOT INTERNAL_STATD)
+    endif(USE_NLM)
+endif(INTERNAL_RPCBIND)
+
 # Enable RQUOTA support
 option(USE_RQUOTA "enable RQUOTA support" ON)
 
@@ -1195,6 +1205,7 @@ set(_USE_9P_RDMA ${USE_9P_RDMA})
 set(_USE_NFS3 ${USE_NFS3})
 set(_USE_NLM ${USE_NLM})
 set(_INTERNAL_STATD ${INTERNAL_STATD})
+set(_INTERNAL_RPCBIND ${INTERNAL_RPCBIND})
 set(_USE_RQUOTA ${USE_RQUOTA})
 set(_USE_CB_SIMULATOR ${USE_CB_SIMULATOR})
 
@@ -1607,6 +1618,7 @@ message(STATUS "USE_RPC_RDMA (libntirpc) = ${USE_RPC_RDMA}")
 message(STATUS "USE_NFS3 = ${USE_NFS3}")
 message(STATUS "USE_NLM = ${USE_NLM}")
 message(STATUS "INTERNAL_STATD = ${INTERNAL_STATD}")
+message(STATUS "INTERNAL_RPCBIND = ${INTERNAL_RPCBIND}")
 message(STATUS "USE_NFSACL3 = ${USE_NFSACL3}")
 message(STATUS "USE_ACL_MAPPING = ${USE_ACL_MAPPING}")
 message(STATUS "KRB5_PREFIX = ${KRB5_PREFIX}")
@@ -1706,6 +1718,11 @@ set(USE_NLM ${USE_NLM}
 set(INTERNAL_STATD ${INTERNAL_STATD}
   CACHE BOOL
    "enable Internal Statd support"
+   FORCE)
+
+set(INTERNAL_RPCBIND ${INTERNAL_RPCBIND}
+  CACHE BOOL
+   "enable Internal RPCBIND support"
    FORCE)
 
 set(USE_NFS_RDMA ${USE_NFS_RDMA}
@@ -2005,6 +2022,12 @@ if("${NTIRPC_VERSION_EMBED}" STREQUAL "${NTIRPC_ABI_EMBED}")
 else()
     set(NTIRPC_COMMENT_IF_EQUAL_ELSE_PERCENT "%")
 endif()
+
+if(INTERNAL_RPCBIND)
+  set(BCOND_RPCBIND "%bcond_without")
+else(INTERNAL_RPCBIND)
+  set(BCOND_RPCBIND "%bcond_with")
+endif(INTERNAL_RPCBIND)
 
 # Now create a usable specfile
 configure_file(
