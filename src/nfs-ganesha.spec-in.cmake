@@ -121,6 +121,9 @@ Requires: openSUSE-release
 @BCOND_MONITORING@ monitoring
 %global use_monitoring %{on_off_switch monitoring}
 
+BCOND_INTERNAL_RPCBIND rpcbind
+%global internal_rpcbind %{on_off_switch rpcbind}
+
 %global dev_version %{lua: s = string.gsub('@GANESHA_EXTRA_VERSION@', '^%-', ''); s2 = string.gsub(s, '%-', '.'); print((s2 ~= nil and s2 ~= '') and s2 or "0.1") }
 
 @BCOND_NFS_RDMA@ nfs_rdma
@@ -588,6 +591,7 @@ cmake3 .	-DCMAKE_BUILD_TYPE=Debug			\
 	-DENABLE_QOS=%{use_qos}				\
 	-DUSE_NFSIDMAP=%{use_nfsidmap}			\
 	-DUSE_MONITORING=%{use_monitoring}		\
+	-DINTERNAL_RPCBIND=%{internal_rpcbind}		\
 	-DUSE_TLS=%{use_tls}                            \
 	-DUSE_OPENSSL=%{use_openssl}                    \
 	-DUSE_GNUTLS=%{use_gnutls}                      \
