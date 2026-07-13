@@ -66,6 +66,7 @@
 #cmakedefine _USE_NFS3 1
 #cmakedefine _USE_NLM 1
 #cmakedefine _INTERNAL_STATD 1
+#cmakedefine _INTERNAL_RPCBIND 1
 #cmakedefine _USE_RQUOTA 1
 #cmakedefine USE_NFSACL3 1
 #cmakedefine DEBUG_SAL 1
