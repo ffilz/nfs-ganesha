@@ -193,7 +193,8 @@ int ip_str_to_sockaddr(char *ip_str, sockaddr_t *sp)
 
 		sp->ss_family = AF_INET;
 		/* Canonicalise, does the right thing with IPv4 input */
-		server_addr_conv = convert_ipv6_to_ipv4(sp, &server_addr_ipv4);
+		server_addr_conv = convert_ipv6_to_ipv4(COMPONENT_DISPATCH, sp,
+							&server_addr_ipv4);
 		if (server_addr_conv == &server_addr_ipv4)
 			memcpy(&((struct sockaddr_in *)sp)->sin_addr,
 			       &((struct sockaddr_in *)server_addr_conv)
@@ -308,7 +309,8 @@ static char ten_bytes_all_0[10];
  *
  * @returns ipv6 unless an encapsulated address was converted, then ipv4
  */
-sockaddr_t *convert_ipv6_to_ipv4(sockaddr_t *ipv6, sockaddr_t *ipv4)
+sockaddr_t *convert_ipv6_to_ipv4(log_components_t component, sockaddr_t *ipv6,
+				 sockaddr_t *ipv4)
 {
 	struct sockaddr_in *paddr = (struct sockaddr_in *)ipv4;
 	struct sockaddr_in6 *psockaddr_in6 = (struct sockaddr_in6 *)ipv6;
@@ -335,7 +337,7 @@ sockaddr_t *convert_ipv6_to_ipv4(sockaddr_t *ipv6, sockaddr_t *ipv4)
 		paddr->sin_addr.s_addr = *(in_addr_t *)ab;
 		ipv4->ss_family = AF_INET;
 
-		if (isMidDebug(COMPONENT_EXPORT)) {
+		if (isMidDebug(component)) {
 			char ipstring4[SOCK_NAME_MAX];
 			char ipstring6[SOCK_NAME_MAX];
 			struct display_buffer dspbuf4 = { sizeof(ipstring4),
@@ -348,7 +350,7 @@ sockaddr_t *convert_ipv6_to_ipv4(sockaddr_t *ipv6, sockaddr_t *ipv4)
 			display_sockip(&dspbuf4, ipv4);
 			display_sockip(&dspbuf6, ipv6);
 			LogMidDebug(
-				COMPONENT_EXPORT,
+				component,
 				"Converting IPv6 encapsulated IPv4 address %s to IPv4 %s",
 				ipstring6, ipstring4);
 		}
@@ -904,7 +906,8 @@ void normalize_v4_mapped_cidr(CIDR *cidr)
 	if (!cidr)
 		return;
 
-	result = convert_ipv6_to_ipv4(&cidr->ip_addr, &ipv4);
+	result =
+		convert_ipv6_to_ipv4(COMPONENT_DISPATCH, &cidr->ip_addr, &ipv4);
 
 	if (result == &ipv4) {
 		cidr->ip_addr = ipv4;

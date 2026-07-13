@@ -920,7 +920,8 @@ state_nsm_client_t *get_nsm_client(care_t care, char *caller_name)
 		}
 
 		/* Fixup any encapsulated IPv4 addresses */
-		host = convert_ipv6_to_ipv4(op_ctx->caller_addr, &alt_host);
+		host = convert_ipv6_to_ipv4(COMPONENT_STATE,
+					    op_ctx->caller_addr, &alt_host);
 
 		/* Generate caller name from fixed up address */
 		if (!sprint_sockip(host, hostaddr_str, sizeof(hostaddr_str))) {

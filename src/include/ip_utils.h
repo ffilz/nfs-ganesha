@@ -36,6 +36,7 @@
 #include <stdbool.h>
 #include "display.h"
 #include "mem_components.h"
+#include "log.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -77,7 +78,8 @@ int ip_str_to_sockaddr(char *, sockaddr_t *);
 
 int get_port(sockaddr_t *);
 
-sockaddr_t *convert_ipv6_to_ipv4(sockaddr_t *ipv6, sockaddr_t *ipv4);
+sockaddr_t *convert_ipv6_to_ipv4(log_components_t component, sockaddr_t *ipv6,
+				 sockaddr_t *ipv4);
 sockaddr_t *ipv4_to_ipv4_mapped_ipv6(sockaddr_t *ipv4, sockaddr_t *ipv6);
 bool is_loopback(sockaddr_t *addr);
 bool is_inaddrany(sockaddr_t *addr);

@@ -2591,7 +2591,7 @@ client_match(enum log_components component, const char *str,
 	sockaddr_t alt_hostaddr;
 	sockaddr_t *hostaddr = NULL;
 
-	hostaddr = convert_ipv6_to_ipv4(clientaddr, &alt_hostaddr);
+	hostaddr = convert_ipv6_to_ipv4(component, clientaddr, &alt_hostaddr);
 
 	if (isMidDebug(component)) {
 		char ipstring[SOCK_NAME_MAX];

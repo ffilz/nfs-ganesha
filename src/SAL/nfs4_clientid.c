@@ -2136,9 +2136,11 @@ nfs_client_record_t *get_client_record(const char *const value,
 	record->cr_pnfs_flags = pnfs_flags;
 	record->cr_extra_flags = flags;
 	/* Canonicalise, does the right thing with IPv4 input */
-	server_addr_conv = convert_ipv6_to_ipv4((sockaddr_t *)server_addr,
+	server_addr_conv = convert_ipv6_to_ipv4(COMPONENT_CLIENTID,
+						(sockaddr_t *)server_addr,
 						&server_addr_ipv4);
-	client_addr_conv = convert_ipv6_to_ipv4((sockaddr_t *)client_addr,
+	client_addr_conv = convert_ipv6_to_ipv4(COMPONENT_CLIENTID,
+						(sockaddr_t *)client_addr,
 						&client_addr_ipv4);
 	record->cr_client_addr = *client_addr_conv;
 	record->cr_server_addr = *server_addr_conv;
