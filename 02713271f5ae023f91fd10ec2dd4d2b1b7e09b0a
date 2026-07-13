@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ac4c5c0_3f76e6df",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-13T17:59:17Z",
+      "side": 1,
+      "message": "Hmm, I wonder if we should clean these up and set most to OFF, and leave:\n\nVFS, CEPH, GPFS, NULL, RGW, and MEM ON.\n\nThe rest are not actively supported anymore",
+      "revId": "02713271f5ae023f91fd10ec2dd4d2b1b7e09b0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
