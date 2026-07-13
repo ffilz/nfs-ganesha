@@ -107,6 +107,13 @@ typedef union nfs_arg__ {
 	getaclargs arg_getacl;
 	setaclargs arg_setacl;
 
+	/* RPCBIND */
+	struct pmap arg_pmap;
+	struct rpcb arg_rpcb;
+	char *arg_uaddr;
+	struct netbuf arg_taddr;
+	struct r_rpcb_rmtcallargs arg_callit;
+
 	/* STATUS MONITOR */
 	struct sm_stat_args sm_stat_args;
 	struct mon mon_args;
@@ -172,6 +179,19 @@ typedef union nfs_res__ {
 	/* NFSACL */
 	getaclres res_getacl;
 	setaclres res_setacl;
+
+	/* RPCBIND */
+	bool res_pmap_set_unset;
+	uint32_t res_pmap_getport;
+	int32_t res_time;
+	char *res_uaddr;
+	struct netbuf *res_taddr;
+
+	/* Not actually part of the response, but the XDR function needs access
+	 * to the callers xprt
+	 */
+	SVCXPRT *rpcbind_caller_xprt;
+	struct nfs_request *nfs_request;
 
 	/* STATUS MONITOR */
 	struct sm_stat_res sm_stat_res;
