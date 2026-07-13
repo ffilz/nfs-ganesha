@@ -119,6 +119,9 @@ void nfs_rpc_dispatch_dummy(struct svc_req *req)
 }
 
 const char *tags[P_COUNT] = {
+#ifdef _INTERNAL_RPCBIND
+	"RPCBIND",
+#endif
 	"NFS",
 #ifdef _USE_NFS3
 	"MNT",
@@ -168,6 +171,8 @@ int udp_socket[P_COUNT];
 int tcp_socket[P_COUNT];
 SVCXPRT *udp_xprt[P_COUNT];
 SVCXPRT *tcp_xprt[P_COUNT];
+bool udp_registrations[P_COUNT][MAX_PROTO_VERS + 1];
+bool tcp_registrations[P_COUNT][MAX_PROTO_VERS + 1];
 
 /* Flag to indicate if V6 interfaces on the host are enabled */
 bool v6disabled;
@@ -198,6 +203,13 @@ static void unregister(const rpcprog_t prog, const rpcvers_t vers1,
 
 static void unregister_rpc(void)
 {
+#ifdef _INTERNAL_RPCBIND
+	if (NFS_pcp.internal_rpcbind) {
+		LogInfo(COMPONENT_DISPATCH,
+			"Skipping Unregister as irrelevant with internal rpcbind.");
+		return;
+	}
+#endif
 	if ((NFS_options & CORE_OPTION_NFSV3) != 0) {
 #ifdef _USE_NFS3
 		unregister(NFS_program[P_NFS], NFS_V3, NFS_V4);
@@ -234,6 +246,13 @@ static inline bool nfs_protocol_enabled(protos p)
 #endif
 
 	switch (p) {
+#ifdef _INTERNAL_RPCBIND
+	case P_RPCBIND:
+		/* If we have chosen not to use rpcbind, i.e. use internal
+		 * then P_RPCBIND is enabled from this perspective.
+		 */
+		return NFS_pcp.internal_rpcbind;
+#endif
 	case P_NFS:
 		return true;
 
@@ -296,7 +315,7 @@ static void close_rpc_fd(void)
 {
 	protos p;
 
-	for (p = P_NFS; p < P_COUNT; p++) {
+	for (p = 0; p < P_COUNT; p++) {
 		if (udp_socket[p] != -1)
 			close(udp_socket[p]);
 		if (udp_xprt[p])
@@ -331,6 +350,20 @@ uint32_t nfs_get_evchannel_id(enum evchan channel)
  * TCP initial connections are bound to socket NFS_TCPSocket
  * all the other cases are requests from already connected TCP Clients
  */
+
+#ifdef _INTERNAL_RPCBIND
+static enum xprt_stat nfs_rpc_dispatch_udp_RPCBIND(SVCXPRT *xprt)
+{
+	LogFullDebug(COMPONENT_DISPATCH,
+		     "RPCBIND UDP request for SVCXPRT %p fd %d", xprt,
+		     xprt->xp_fd);
+	GSH_XPRT_UNIQUE_AUTO_TRACEPOINT(nfs_rpc, before_recv, TRACE_INFO, xprt,
+					"rpcbind udp dispatch");
+
+	xprt->xp_dispatch.process_cb = nfs_rpc_valid_RPCBIND;
+	return SVC_RECV(xprt);
+}
+#endif
 
 #ifdef _INTERNAL_STATD
 static enum xprt_stat nfs_rpc_dispatch_udp_SMMON(SVCXPRT *xprt)
@@ -410,6 +443,9 @@ static enum xprt_stat nfs_rpc_dispatch_udp_NFSACL(SVCXPRT *xprt)
 #endif
 
 const svc_xprt_fun_t udp_dispatch[] = {
+#ifdef _INTERNAL_RPCBIND
+	nfs_rpc_dispatch_udp_RPCBIND,
+#endif
 	nfs_rpc_dispatch_udp_NFS,
 #ifdef _USE_NFS3
 	nfs_rpc_dispatch_udp_MNT,
@@ -460,6 +496,17 @@ static enum xprt_stat nfs_rpc_dispatch_remote_addr_set_tcp(SVCXPRT *xprt)
 	}
 	return XPRT_IDLE;
 }
+
+#ifdef _INTERNAL_RPCBIND
+static enum xprt_stat nfs_rpc_dispatch_tcp_RPCBIND(SVCXPRT *xprt)
+{
+	LogFullDebug(COMPONENT_DISPATCH,
+		     "RPCBIND TCP dispatch setup for SVCXPRT %p fd %d", xprt,
+		     xprt->xp_fd);
+	xprt->xp_dispatch.process_cb = nfs_rpc_valid_RPCBIND;
+	return nfs_rpc_tcp_user_data(xprt);
+}
+#endif
 
 #ifdef _INTERNAL_STATD
 static enum xprt_stat nfs_rpc_dispatch_tcp_SMMON(SVCXPRT *xprt)
@@ -573,6 +620,9 @@ static enum xprt_stat nfs_rpc_dispatch_RDMA(SVCXPRT *xprt)
 #endif
 
 const svc_xprt_fun_t tcp_dispatch[P_COUNT] = {
+#ifdef _INTERNAL_RPCBIND
+	nfs_rpc_dispatch_tcp_RPCBIND,
+#endif
 	nfs_rpc_dispatch_tcp_NFS,
 #ifdef _USE_NFS3
 	nfs_rpc_dispatch_tcp_MNT,
@@ -608,6 +658,10 @@ void Create_udp(protos prot)
 			LogFatal(COMPONENT_DISPATCH,
 				 "Cannot allocate %s/UDP SVCXPRT", tags[prot]);
 
+#ifdef _INTERNAL_RPCBIND
+		if (NFS_pcp.internal_rpcbind)
+			udp_xprt[prot]->xp_flags |= SVC_XPRT_FLAG_NO_SET;
+#endif
 		udp_xprt[prot]->xp_dispatch.rendezvous_cb = udp_dispatch[prot];
 
 		/* Hook xp_free_user_data (finalize/free private data) */
@@ -630,6 +684,11 @@ void Create_tcp(protos prot)
 	if (tcp_xprt[prot] == NULL)
 		LogFatal(COMPONENT_DISPATCH, "Cannot allocate %s/TCP SVCXPRT",
 			 tags[prot]);
+
+#ifdef _INTERNAL_RPCBIND
+	if (NFS_pcp.internal_rpcbind)
+		tcp_xprt[prot]->xp_flags |= SVC_XPRT_FLAG_NO_SET;
+#endif
 
 	tcp_xprt[prot]->xp_dispatch.rendezvous_cb = tcp_dispatch[prot];
 
@@ -707,7 +766,7 @@ void Create_SVCXPRTs(void)
 	protos p;
 
 	LogFullDebug(COMPONENT_DISPATCH, "Allocation of the SVCXPRT");
-	for (p = P_NFS; p < P_COUNT; p++)
+	for (p = 0; p < P_COUNT; p++)
 		if (nfs_protocol_enabled(p)) {
 			Create_udp(p);
 			Create_tcp(p);
@@ -745,7 +804,7 @@ static int Bind_sockets_V6(void)
 		LogInfo(COMPONENT_DISPATCH, "Binding to address %s", str);
 	}
 
-	for (p = P_NFS; p < P_COUNT; p++) {
+	for (p = 0; p < P_COUNT; p++) {
 		if (nfs_protocol_enabled(p)) {
 			proto_data *pdatap = &pdata[p];
 
@@ -884,7 +943,7 @@ static int Bind_sockets_V4(void)
 		LogInfo(COMPONENT_DISPATCH, "Binding to address %s", str);
 	}
 
-	for (p = P_NFS; p < P_COUNT; p++) {
+	for (p = 0; p < P_COUNT; p++) {
 		if (nfs_protocol_enabled(p)) {
 			proto_data *pdatap = &pdata[p];
 
@@ -1273,7 +1332,7 @@ static void Allocate_sockets(void)
 
 	LogFullDebug(COMPONENT_DISPATCH, "Allocation of the sockets");
 
-	for (p = P_NFS; p < P_COUNT; p++) {
+	for (p = 0; p < P_COUNT; p++) {
 		/* Initialize all the sockets to -1 because
 		 * it makes some code later easier */
 		udp_socket[p] = tcp_socket[p] = -1;
@@ -1387,20 +1446,39 @@ void Clean_RPC(void)
 	freenetconfigent(netconfig_tcpv6);
 }
 
-#define UDP_REGISTER(prot, vers, netconfig)                      \
-	svc_reg(udp_xprt[prot], NFS_program[prot], (u_long)vers, \
-		nfs_rpc_dispatch_dummy, netconfig)
+static inline bool UDP_REGISTER(int prot, int vers, struct netconfig *netconfig)
+{
+#ifdef _INTERNAL_RPCBIND
+	if (NFS_pcp.internal_rpcbind)
+		return true;
+#endif
+	return svc_reg(udp_xprt[prot], NFS_program[prot], (u_long)vers,
+		       nfs_rpc_dispatch_dummy, netconfig);
+}
 
-#define TCP_REGISTER(prot, vers, netconfig)                      \
-	svc_reg(tcp_xprt[prot], NFS_program[prot], (u_long)vers, \
-		nfs_rpc_dispatch_dummy, netconfig)
+static inline bool TCP_REGISTER(int prot, int vers, struct netconfig *netconfig)
+{
+#ifdef _INTERNAL_RPCBIND
+	if (NFS_pcp.internal_rpcbind)
+		return true;
+#endif
+	return svc_reg(tcp_xprt[prot], NFS_program[prot], (u_long)vers,
+		       nfs_rpc_dispatch_dummy, netconfig);
+}
 
 #ifdef RPCBIND
 static bool __Register_program(protos prot, int vers)
 {
+	assert(vers <= MAX_PROTO_VERS);
+
 	if (enable_udp_listener(prot)) {
 		LogInfo(COMPONENT_DISPATCH, "Registering %s V%d/UDP",
 			tags[prot], (int)vers);
+#ifdef _INTERNAL_RPCBIND
+		LogInfo(COMPONENT_DISPATCH, "%s",
+			NFS_pcp.internal_rpcbind ? "internal rpcbind"
+						 : "external rpcbind");
+#endif
 
 		/* XXXX fix svc_register! */
 		if (!UDP_REGISTER(prot, vers, netconfig_udpv4)) {
@@ -1420,6 +1498,8 @@ static bool __Register_program(protos prot, int vers)
 				return false;
 			}
 		}
+
+		udp_registrations[prot][vers] = true;
 	}
 
 #ifndef _NO_TCP_REGISTER
@@ -1442,6 +1522,8 @@ static bool __Register_program(protos prot, int vers)
 			return false;
 		}
 	}
+
+	tcp_registrations[prot][vers] = true;
 #endif /* _NO_TCP_REGISTER */
 	return true;
 }
@@ -1627,6 +1709,15 @@ void nfs_Init_svc(void)
 	 */
 	LogDebug(COMPONENT_DISPATCH, "About to register services");
 
+#ifdef _INTERNAL_RPCBIND
+	if (NFS_pcp.internal_rpcbind) {
+		Register_program(P_RPCBIND, PMAPVERS);
+#ifdef USE_RPCBIND_V34
+		Register_program(P_RPCBIND, RPCBVERS_3);
+		Register_program(P_RPCBIND, RPCBVERS_4);
+#endif
+	}
+#endif
 #ifdef _USE_NFS3
 	if (NFS_options & CORE_OPTION_NFSV3) {
 		Register_program(P_NFS, NFS_V3);
