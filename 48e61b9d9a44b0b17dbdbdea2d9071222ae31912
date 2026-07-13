@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e311d5b_f950746f",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-13T23:29:05Z",
+      "side": 1,
+      "message": "Please use pseudo_path here, DBUS really doesn\u0027t get this right",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59c7905f_18f8b1e0",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-13T23:29:05Z",
+      "side": 1,
+      "message": "Since this IS a new service, we should probably display the details for these",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ee32651_a02ba365",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-13T23:29:05Z",
+      "side": 1,
+      "message": "What is left todo?",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4005c39c_c9882996",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-13T23:29:05Z",
+      "side": 1,
+      "message": "Please use pseudo path here, DBUS really didn\u0027t get this right",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce3a6b4d_a6afa5ce",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-13T23:29:05Z",
+      "side": 1,
+      "message": "Please output both full path and pseudo path, DBUS really didn\u0027t get this right.",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f07e1134_23c3df11",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-13T23:29:05Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m a little wary of this since how exports are added, removed, and updated has changed some since the original DBUS implementation.\n\nThere are considerations for changing the pseudofs that these procedures may not properly handle.\n\nSince this all works with config files, it might be better to just replicate what SIGHUP does which:\n\nAdds any exports that are new from the file\nUpdates any exports that already exist and are present in the file\nRemoves any exports that already exist but are NOT present in the file",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d3d0e56_ae59480e",
+        "filename": "src/grpc_server/proto/exportService.proto",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-13T23:29:05Z",
+      "side": 1,
+      "message": "please use pseduo_path here (DBUS really doesn\u0027t get this right)",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
