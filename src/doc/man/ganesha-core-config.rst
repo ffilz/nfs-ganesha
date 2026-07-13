@@ -307,6 +307,10 @@ Internal_statd(bool, default false)
   If false, use external rpc.statd. If true, provide NSM protocol internally
   on NSM_Port.
 
+Internal_rpcbind(bool, default false)
+  If false, use external rpcbind. If true, provide PORTMAP/RPCBIND protocol
+  internally on PMAP_Port.
+
 Parameters controlling TCP DRC behavior:
 ----------------------------------------
 
