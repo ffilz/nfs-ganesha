@@ -413,7 +413,7 @@ void free_client_id(nfs_client_id_t *clientid)
 	/* This is where we finally let go of the client record. */
 	dec_client_record_ref(clientid->cid_client_record);
 
-	gsh_free(clientid->cid_recov_tag);
+	gsh_free(clientid->cid_recov_tag, MEM_COMP_CLIENT);
 	clientid->cid_recov_tag = NULL;
 
 	PTHREAD_MUTEX_destroy(&clientid->cid_mutex);
@@ -423,7 +423,7 @@ void free_client_id(nfs_client_id_t *clientid)
 
 	put_gsh_client(clientid->gsh_client);
 
-	pool_free(client_id_pool, clientid);
+	gsh_free(clientid, MEM_COMP_CLIENT);
 }
 
 /**
@@ -590,7 +590,8 @@ nfs_client_id_t *create_client_id(clientid4 clientid,
 				  nfs_client_cred_t *credential,
 				  uint32_t minorversion)
 {
-	nfs_client_id_t *client_rec = pool_alloc(client_id_pool);
+	nfs_client_id_t *client_rec =
+		gsh_calloc(1, client_id_pool->object_size, MEM_COMP_CLIENT);
 	state_owner_t *owner;
 
 	PTHREAD_MUTEX_init(&client_rec->cid_mutex, NULL);
@@ -1393,7 +1394,7 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 
 	if (clientid->cid_recov_tag != NULL && !make_stale) {
 		nfs4_rm_clid(clientid);
-		gsh_free(clientid->cid_recov_tag);
+		gsh_free(clientid->cid_recov_tag, MEM_COMP_CLIENT);
 		clientid->cid_recov_tag = NULL;
 	}
 
@@ -1854,7 +1855,7 @@ void free_client_record(nfs_client_record_t *record)
 {
 	PTHREAD_MUTEX_destroy(&record->cr_mutex);
 
-	gsh_free(record);
+	gsh_free(record, MEM_COMP_CLIENT);
 }
 
 /**
@@ -2129,7 +2130,7 @@ nfs_client_record_t *get_client_record(const char *const value,
 		return NULL;
 	}
 
-	record = gsh_malloc(sizeof(nfs_client_record_t) + len);
+	record = gsh_malloc(sizeof(nfs_client_record_t) + len, MEM_COMP_CLIENT);
 
 	record->cr_refcount = 1;
 	record->cr_client_val_len = len;
@@ -2168,7 +2169,7 @@ nfs_client_record_t *get_client_record(const char *const value,
 
 		/* Use the existing record */
 		hashtable_releaselatched(ht_client_record, &latch);
-		gsh_free(record);
+		gsh_free(record, MEM_COMP_CLIENT);
 		return old;
 
 	case HASHTABLE_ERROR_NO_SUCH_KEY:
@@ -2211,8 +2212,8 @@ static void client_cb(struct fridgethr_context *ctx)
 	cb_arg = ctx->arg;
 	cb_arg->cb(cb_arg->pclientid, cb_arg->state);
 	dec_client_id_ref(cb_arg->pclientid);
-	gsh_free(cb_arg->state);
-	gsh_free(cb_arg);
+	gsh_free(cb_arg->state, MEM_COMP_FILE_AND_STATE_LOCK);
+	gsh_free(cb_arg, MEM_COMP_CLIENT);
 }
 
 /**
@@ -2250,7 +2251,8 @@ void nfs41_foreach_client_callback(bool (*cb)(nfs_client_id_t *cl, void *state),
 
 			if (pclientid->cid_minorversion > 0) {
 				cb_arg = gsh_malloc(
-					sizeof(struct client_callback_arg));
+					sizeof(struct client_callback_arg),
+					MEM_COMP_CLIENT);
 
 				cb_arg->cb = cb;
 				cb_arg->state = state;
@@ -2262,7 +2264,7 @@ void nfs41_foreach_client_callback(bool (*cb)(nfs_client_id_t *cl, void *state),
 					LogCrit(COMPONENT_CLIENTID,
 						"unable to start client cb thread %d",
 						rc);
-					gsh_free(cb_arg);
+					gsh_free(cb_arg, MEM_COMP_CLIENT);
 					dec_client_id_ref(pclientid);
 				}
 			}
@@ -2390,8 +2392,10 @@ int nfs_Init_client_id(void)
 		return -1;
 	}
 
-	client_id_pool =
-		pool_basic_init("NFS4 Client ID Pool", sizeof(nfs_client_id_t));
+	client_id_pool = (pool_t *)gsh_malloc(sizeof(pool_t), MEM_COMP_CLIENT);
+	client_id_pool->object_size = sizeof(nfs_client_id_t);
+	client_id_pool->name =
+		gsh_strdup("NFS4 Client ID Pool", MEM_COMP_CLIENT);
 
 	PTHREAD_MUTEX_init(&expired_client_ids_list_lock, NULL);
 	glist_init(&expired_client_ids_list);

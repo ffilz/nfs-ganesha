@@ -70,7 +70,7 @@ bool nsm_connect(void)
 		return false;
 	}
 
-	nodename = gsh_strdup(utsname.nodename);
+	nodename = gsh_strdup(utsname.nodename, MEM_COMP_PROTOCOL);
 
 	nsm_clnt = clnt_ncreate("localhost", SM_PROG, SM_VERS, "tcp");
 
@@ -78,10 +78,10 @@ bool nsm_connect(void)
 		char *err = rpc_sperror(&nsm_clnt->cl_error, "failed");
 
 		LogEventLimited(COMPONENT_NLM, "connect to statd %s", err);
-		gsh_free(err);
+		gsh_free(err, MEM_COMP_LIBNTIRPC);
 		CLNT_DESTROY(nsm_clnt);
 		nsm_clnt = NULL;
-		gsh_free(nodename);
+		gsh_free(nodename, MEM_COMP_PROTOCOL);
 		nodename = NULL;
 	}
 
@@ -93,7 +93,7 @@ void nsm_disconnect(bool force)
 	if ((nsm_count == 0 || force) && nsm_clnt != NULL) {
 		CLNT_DESTROY(nsm_clnt);
 		nsm_clnt = NULL;
-		gsh_free(nodename);
+		gsh_free(nodename, MEM_COMP_PROTOCOL);
 		nodename = NULL;
 	}
 }
@@ -138,7 +138,7 @@ static bool nsm_monitor_noretry(state_nsm_client_t *host)
 	/* Set this after we call nsm_connect() */
 	nsm_mon.mon_id.my_id.my_name = nodename;
 
-	cc = gsh_malloc(sizeof(*cc));
+	cc = gsh_malloc(sizeof(*cc), MEM_COMP_FILE_AND_STATE_LOCK);
 	clnt_req_fill(cc, nsm_clnt, authnone_ncreate(), SM_MON,
 		      (xdrproc_t)xdr_mon, &nsm_mon, (xdrproc_t)xdr_sm_stat_res,
 		      &res);
@@ -151,7 +151,7 @@ static bool nsm_monitor_noretry(state_nsm_client_t *host)
 		t = rpc_sperror(&cc->cc_error, "failed");
 		LogEventLimited(COMPONENT_NLM, "Monitor %s SM_MON %s",
 				nsm_mon.mon_id.mon_name, t);
-		gsh_free(t);
+		gsh_free(t, MEM_COMP_LIBNTIRPC);
 
 		clnt_req_release(cc);
 		nsm_disconnect(true);
@@ -270,7 +270,7 @@ static bool nsm_unmonitor_noretry(state_nsm_client_t *host)
 	/* Set this after we call nsm_connect() */
 	nsm_mon_id.my_id.my_name = nodename;
 
-	cc = gsh_malloc(sizeof(*cc));
+	cc = gsh_malloc(sizeof(*cc), MEM_COMP_FILE_AND_STATE_LOCK);
 	clnt_req_fill(cc, nsm_clnt, authnone_ncreate(), SM_UNMON,
 		      (xdrproc_t)xdr_mon_id, &nsm_mon_id,
 		      (xdrproc_t)xdr_sm_stat, &res);
@@ -283,7 +283,7 @@ static bool nsm_unmonitor_noretry(state_nsm_client_t *host)
 		t = rpc_sperror(&cc->cc_error, "failed");
 		LogEventLimited(COMPONENT_NLM, "Unmonitor %s SM_UNMON %s",
 				nsm_mon_id.mon_name, t);
-		gsh_free(t);
+		gsh_free(t, MEM_COMP_LIBNTIRPC);
 
 		clnt_req_release(cc);
 		nsm_disconnect(true);
@@ -391,7 +391,7 @@ void nsm_unmonitor_all(void)
 	/* Set this after we call nsm_connect() */
 	nsm_id.my_name = nodename;
 
-	cc = gsh_malloc(sizeof(*cc));
+	cc = gsh_malloc(sizeof(*cc), MEM_COMP_FILE_AND_STATE_LOCK);
 	clnt_req_fill(cc, nsm_clnt, authnone_ncreate(), SM_UNMON_ALL,
 		      (xdrproc_t)xdr_my_id, &nsm_id, (xdrproc_t)xdr_sm_stat,
 		      &res);
@@ -403,7 +403,7 @@ void nsm_unmonitor_all(void)
 	if (ret != RPC_SUCCESS) {
 		t = rpc_sperror(&cc->cc_error, "failed");
 		LogEventLimited(COMPONENT_NLM, "Unmonitor all %s", t);
-		gsh_free(t);
+		gsh_free(t, MEM_COMP_LIBNTIRPC);
 		nsm_disconnect(true);
 	} else {
 		nsm_disconnect(false);
@@ -513,14 +513,16 @@ void req_call_init(struct local_nlm_info *info);
 void fill_forward_sm_notify(nfs_arg_t *arg, struct svc_req *req,
 			    sockaddr_t *peer)
 {
-	struct local_nlm_info *info = gsh_calloc(1, sizeof(*info));
+	struct local_nlm_info *info = gsh_calloc(1, sizeof(*info),
+						 MEM_COMP_PROTOCOL);
 	sockaddr_t *local = svc_getrpclocal(req->rq_xprt);
 	struct display_buffer dspbuf;
 
 	info->client_name = arg->notify_args.my_name;
 	info->nsm_state = arg->notify_args.state;
 	info->client_address = *peer;
-	info->client_address_str = gsh_calloc(SOCK_NAME_MAX, sizeof(char));
+	info->client_address_str = gsh_calloc(SOCK_NAME_MAX, sizeof(char),
+					      MEM_COMP_PROTOCOL);
 	info->recovery_type = NSM_FORWARD_NOTIFY;
 	/* If NSM_Port was configured, it is expected to be the same for all
 	 * cluster members. Otherwise, the default is 0 which is the right
@@ -538,7 +540,8 @@ void fill_forward_sm_notify(nfs_arg_t *arg, struct svc_req *req,
 	display_sockip(&dspbuf, &info->client_address);
 
 	info->server_address = *local;
-	info->server_address_str = gsh_calloc(SOCK_NAME_MAX, sizeof(char));
+	info->server_address_str = gsh_calloc(SOCK_NAME_MAX, sizeof(char),
+					      MEM_COMP_PROTOCOL);
 
 	dspbuf.b_size = SOCK_NAME_MAX;
 	dspbuf.b_current = info->server_address_str;
@@ -694,7 +697,7 @@ bool local_nlm_info_client_create(struct local_nlm_info *info)
 
 		LogEventLimited(COMPONENT_NLM, "connect to client %s", err);
 
-		gsh_free(err);
+		gsh_free(err, MEM_COMP_LIBNTIRPC);
 		CLNT_DESTROY(info->rpc_client);
 		info->rpc_client = NULL;
 		return false;
@@ -721,7 +724,7 @@ static void local_nlm_info_cb(struct clnt_req *req)
 			     "cc_process_cb for %s status %s info %p",
 			     info->client_address_str, err, info);
 
-		gsh_free(err);
+		gsh_free(err, MEM_COMP_LIBNTIRPC);
 	}
 
 	PTHREAD_MUTEX_lock(&nsm_mutex);
@@ -796,7 +799,7 @@ static void local_nlm_info_cb(struct clnt_req *req)
 
 			LogEventLimited(COMPONENT_NLM, "%s", err);
 
-			gsh_free(err);
+			gsh_free(err, MEM_COMP_LIBNTIRPC);
 			break;
 		}
 
@@ -811,7 +814,7 @@ static void local_nlm_info_cb(struct clnt_req *req)
 
 		LogEventLimited(COMPONENT_NLM, "Request failed %s", err);
 
-		gsh_free(err);
+		gsh_free(err, MEM_COMP_LIBNTIRPC);
 		break;
 	}
 
@@ -848,13 +851,13 @@ void local_nlm_info_free(struct local_nlm_info *info)
 		CLNT_DESTROY(info->rpc_client);
 
 	/* Free all the strings that might have been allocated */
-	gsh_free(info->mon.mon_id.my_id.my_name);
-	gsh_free(info->mon.mon_id.mon_name);
-	gsh_free(info->client_name);
-	gsh_free(info->client_address_str);
-	gsh_free(info->server_address_str);
+	gsh_free(info->mon.mon_id.my_id.my_name, MEM_COMP_PROTOCOL);
+	gsh_free(info->mon.mon_id.mon_name, MEM_COMP_FILE_AND_STATE_LOCK);
+	gsh_free(info->client_name, MEM_COMP_FILE_AND_STATE_LOCK);
+	gsh_free(info->client_address_str, MEM_COMP_PROTOCOL);
+	gsh_free(info->server_address_str, MEM_COMP_PROTOCOL);
 
-	gsh_free(info);
+	gsh_free(info, MEM_COMP_PROTOCOL);
 }
 
 static void local_nlm_info_free_caller(struct clnt_req *req, size_t size)
@@ -1145,7 +1148,7 @@ void *nsm_notify_thread(void *unused)
 				 strerror(save_errno));
 		}
 
-		nodename = gsh_strdup(utsname.nodename);
+		nodename = gsh_strdup(utsname.nodename, MEM_COMP_PROTOCOL);
 	}
 
 	/* Start by blasting out all the SM_NOTIFY calls */

@@ -424,7 +424,7 @@ static fsal_status_t lzfs_fsal_readlink(struct fsal_obj_handle *link_hdl,
 		return lzfs_fsal_last_err();
 	}
 
-	copy_into_utf8string(content_buf, result, rc);
+	copy_into_utf8string(content_buf, result, rc, MEM_COMP_PROTOCOL);
 
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }

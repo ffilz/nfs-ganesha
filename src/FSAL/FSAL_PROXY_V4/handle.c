@@ -134,8 +134,9 @@ struct state_t *proxyv4_alloc_state(struct fsal_export *exp_hdl,
 				    enum state_type state_type,
 				    struct state_t *related_state)
 {
-	return init_state(gsh_calloc(1, sizeof(struct proxyv4_state)), NULL,
-			  state_type, related_state);
+	return init_state(gsh_calloc(1, sizeof(struct proxyv4_state),
+				     MEM_COMP_FILE_AND_STATE_LOCK),
+			  NULL, state_type, related_state);
 }
 
 #define FSAL_VERIFIER_T_TO_VERIFIER4(verif4, fsal_verif)                    \
@@ -761,7 +762,7 @@ static int proxyv4_compoundv4_call(struct proxyv4_rpc_io_context *pcontext,
 		char *err = rpc_sperror(&au->ah_error, "failed");
 
 		LogDebug(COMPONENT_FSAL, "%s", err);
-		gsh_free(err);
+		gsh_free(err, MEM_COMP_LIBNTIRPC);
 		AUTH_DESTROY(au);
 		return RPC_AUTHERROR;
 	}
@@ -1225,7 +1226,7 @@ void free_io_contexts(struct proxyv4_export *proxyv4_exp)
 		glist_del(cur);
 		PTHREAD_MUTEX_destroy(&c->iolock);
 		PTHREAD_COND_destroy(&c->iowait);
-		gsh_free(c);
+		gsh_free(c, MEM_COMP_PROTOCOL);
 	}
 }
 
@@ -1307,7 +1308,8 @@ int proxyv4_init_rpc(struct proxyv4_export *proxyv4_exp)
 	for (i = NB_RPC_SLOT - 1; i >= 0; i--) {
 		struct proxyv4_rpc_io_context *c =
 			gsh_malloc(sizeof(*c) + proxyv4_exp->info.srv_sendsize +
-				   proxyv4_exp->info.srv_recvsize);
+					   proxyv4_exp->info.srv_recvsize,
+				   MEM_COMP_PROTOCOL);
 		PTHREAD_MUTEX_init(&c->iolock, NULL);
 		PTHREAD_COND_init(&c->iowait, NULL);
 		c->nfs_prog = proxyv4_exp->info.srv_prognum;
@@ -1753,13 +1755,14 @@ static fsal_status_t proxyv4_readlink(struct fsal_obj_handle *obj_hdl,
 	   the file handle. */
 
 	rlok = &resoparray[opcnt].nfs_resop4_u.opreadlink.READLINK4res_u.resok4;
-	rlok->link.utf8string_val = gsh_malloc(fsal_default_linksize + 1);
+	rlok->link.utf8string_val = gsh_malloc(fsal_default_linksize + 1,
+					       MEM_COMP_PROTOCOL);
 	rlok->link.utf8string_len = fsal_default_linksize;
 	COMPOUNDV4_ARG_ADD_OP_READLINK(opcnt, argoparray);
 
 	rc = proxyv4_nfsv4_call(&op_ctx->creds, opcnt, argoparray, resoparray);
 	if (rc != NFS4_OK) {
-		gsh_free(rlok->link.utf8string_val);
+		gsh_free(rlok->link.utf8string_val, MEM_COMP_PROTOCOL);
 		return nfsstat4_to_fsal(rc);
 	}
 
@@ -2137,7 +2140,7 @@ static void proxyv4_hdl_release(struct fsal_obj_handle *obj_hdl)
 
 	fsal_obj_handle_fini(obj_hdl, true);
 
-	gsh_free(ph);
+	gsh_free(ph, MEM_COMP_FSAL);
 }
 
 /*
@@ -2913,7 +2916,7 @@ proxyv4_alloc_handle(struct fsal_export *exp, const nfs_fh4 *fh,
 		     fattr4 *obj_attributes, struct fsal_attrlist *attrs_out)
 {
 	struct proxyv4_obj_handle *n =
-		gsh_calloc(1, sizeof(*n) + fh->nfs_fh4_len);
+		gsh_calloc(1, sizeof(*n) + fh->nfs_fh4_len, MEM_COMP_FSAL);
 
 	compound_data_t data;
 	struct fsal_attrlist attributes;
@@ -2925,7 +2928,7 @@ proxyv4_alloc_handle(struct fsal_export *exp, const nfs_fh4 *fh,
 
 	if (nfs4_Fattr_To_FSAL_attr(&attributes, obj_attributes, &data) !=
 	    NFS4_OK) {
-		gsh_free(n);
+		gsh_free(n, MEM_COMP_FSAL);
 		return NULL;
 	}
 
@@ -2945,7 +2948,7 @@ proxyv4_alloc_handle(struct fsal_export *exp, const nfs_fh4 *fh,
 
 	rc = HandleMap_SetFH(&n->h23, &n->blob, n->blob.len);
 	if ((rc != HANDLEMAP_SUCCESS) && (rc != HANDLEMAP_EXISTS)) {
-		gsh_free(n);
+		gsh_free(n, MEM_COMP_FSAL);
 		return NULL;
 	}
 #endif
@@ -2983,14 +2986,14 @@ fsal_status_t proxyv4_lookup_path(struct fsal_export *exp_hdl, const char *path,
 	char *p, *pnext;
 	struct user_cred *creds = &op_ctx->creds;
 
-	pcopy = gsh_strdup(path);
+	pcopy = gsh_strdup(path, MEM_COMP_FSAL);
 
 	p = strtok_r(pcopy, "/", &saved);
 	if (!p) {
 		fsal_status_t st = proxyv4_lookup_impl(parent, exp_hdl, creds,
 						       NULL, &next, attrs_out);
 		if (FSAL_IS_ERROR(st)) {
-			gsh_free(pcopy);
+			gsh_free(pcopy, MEM_COMP_FSAL);
 			return st;
 		}
 	}
@@ -3000,7 +3003,7 @@ fsal_status_t proxyv4_lookup_path(struct fsal_export *exp_hdl, const char *path,
 			LogInfo(COMPONENT_FSAL,
 				"Attempt to use \"..\" element in path %s",
 				path);
-			gsh_free(pcopy);
+			gsh_free(pcopy, MEM_COMP_FSAL);
 			return fsalstat(ERR_FSAL_ACCESS, EACCES);
 		}
 		/* Get the next token now, so we know if we are at the
@@ -3016,7 +3019,7 @@ fsal_status_t proxyv4_lookup_path(struct fsal_export *exp_hdl, const char *path,
 			proxyv4_lookup_impl(parent, exp_hdl, creds, p, &next,
 					    pnext == NULL ? attrs_out : NULL);
 		if (FSAL_IS_ERROR(st)) {
-			gsh_free(pcopy);
+			gsh_free(pcopy, MEM_COMP_FSAL);
 			return st;
 		}
 
@@ -3027,7 +3030,7 @@ fsal_status_t proxyv4_lookup_path(struct fsal_export *exp_hdl, const char *path,
 	 * will not work with a symlink, so no security exposure there.
 	 */
 
-	gsh_free(pcopy);
+	gsh_free(pcopy, MEM_COMP_FSAL);
 	*handle = next;
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
 }

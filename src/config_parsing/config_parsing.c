@@ -127,11 +127,12 @@ void config_Free(config_file_t config)
 char *err_type_str(struct config_error_type *err_type)
 {
 	char *buf = NULL;
+	char *r = NULL;
 	size_t bufsize;
 	FILE *fp;
 
 	if (config_error_no_error(err_type))
-		return gsh_strdup("(no errors)");
+		return gsh_strdup("(no errors)", MEM_COMP_CONFIG);
 	fp = open_memstream(&buf, &bufsize);
 	if (fp == NULL) {
 		LogCrit(COMPONENT_CONFIG,
@@ -181,7 +182,11 @@ char *err_type_str(struct config_error_type *err_type)
 		buf[bufsize - 2] = ')';
 		buf[bufsize - 1] = '\0';
 	}
-	return buf;
+
+	r = gsh_strdup(buf, MEM_COMP_CONFIG);
+	free(buf);
+
+	return r;
 }
 
 bool init_error_type(struct config_error_type *err_type)
@@ -281,7 +286,11 @@ int report_config_errors(struct config_error_type *err_type, void *dest,
 		}
 		count++;
 	}
-	gsh_free(err_type->diag_buf);
+	/*
+	 * diag_buf allocated by open_memstream() via libc malloc;
+	 * must use free(), not gsh_free()
+	 */
+	free(err_type->diag_buf);
 	err_type->diag_buf = NULL;
 	return count;
 }
@@ -824,7 +833,8 @@ static bool do_block_init(struct config_node *blk_node,
 		case CONFIG_PATH:
 			if (item->u.str.def)
 				*(char **)param_addr =
-					gsh_strdup(item->u.str.def);
+					gsh_strdup(item->u.str.def,
+						   MEM_COMP_CONFIG);
 			else
 				*(char **)param_addr = NULL;
 			break;
@@ -1122,16 +1132,20 @@ static int do_block_load(struct config_node *blk, struct config_item *params,
 				break;
 			case CONFIG_STRING:
 				if (*(char **)param_addr != NULL)
-					gsh_free(*(char **)param_addr);
+					gsh_free(*(char **)param_addr,
+						 MEM_COMP_CONFIG);
 				*(char **)param_addr =
-					gsh_strdup(term_node->u.term.varvalue);
+					gsh_strdup(term_node->u.term.varvalue,
+						   MEM_COMP_CONFIG);
 				break;
 			case CONFIG_PATH:
 				if (*(char **)param_addr != NULL)
-					gsh_free(*(char **)param_addr);
+					gsh_free(*(char **)param_addr,
+						 MEM_COMP_CONFIG);
 				/** @todo validate path with access() */
 				*(char **)param_addr =
-					gsh_strdup(term_node->u.term.varvalue);
+					gsh_strdup(term_node->u.term.varvalue,
+						   MEM_COMP_CONFIG);
 				break;
 			case CONFIG_TOKEN:
 				if (convert_enum(term_node, item, &num32,
@@ -1542,9 +1556,9 @@ static void free_expr_parse_arg(struct expr_parse_arg *argp)
 		return;
 	for (arg = argp; arg != NULL; arg = nxtarg) {
 		nxtarg = arg->next;
-		gsh_free(arg->name);
-		gsh_free(arg->value);
-		gsh_free(arg);
+		gsh_free(arg->name, MEM_COMP_CONFIG);
+		gsh_free(arg->value, MEM_COMP_CONFIG);
+		gsh_free(arg, MEM_COMP_CONFIG);
 	}
 }
 
@@ -1560,9 +1574,9 @@ static void free_expr_parse(struct expr_parse *snode)
 		return;
 	for (node = snode; node != NULL; node = nxtnode) {
 		nxtnode = node->next;
-		gsh_free(node->name);
+		gsh_free(node->name, MEM_COMP_CONFIG);
 		free_expr_parse_arg(node->arg);
-		gsh_free(node);
+		gsh_free(node, MEM_COMP_CONFIG);
 	}
 }
 
@@ -1609,9 +1623,9 @@ static char *parse_args(char *arg_str, struct expr_parse_arg **argp)
 		return NULL;
 	saved_char = *sp;
 	*sp = '\0';
-	arg = gsh_calloc(1, sizeof(struct expr_parse_arg));
-	arg->name = gsh_strdup(name);
-	arg->value = gsh_strdup(val);
+	arg = gsh_calloc(1, sizeof(struct expr_parse_arg), MEM_COMP_CONFIG);
+	arg->name = gsh_strdup(name, MEM_COMP_CONFIG);
+	arg->value = gsh_strdup(val, MEM_COMP_CONFIG);
 	*argp = arg;
 	if (saved_char != ',') {
 		*sp = saved_char;
@@ -1656,8 +1670,9 @@ static char *parse_block(char *str, struct expr_parse **node)
 		goto errout;
 	sp = skip_white(sp);
 	if (*sp == ')') { /* name ( ... ) */
-		new_node = gsh_calloc(1, sizeof(struct expr_parse));
-		new_node->name = gsh_strdup(name);
+		new_node = gsh_calloc(1, sizeof(struct expr_parse),
+				      MEM_COMP_CONFIG);
+		new_node->name = gsh_strdup(name, MEM_COMP_CONFIG);
 		new_node->arg = arg;
 		*node = new_node;
 		return sp + 1;
@@ -1844,7 +1859,8 @@ again:
 				expr = expr->next;
 				goto again;
 			}
-			list = gsh_calloc(1, sizeof(struct config_node_list));
+			list = gsh_calloc(1, sizeof(struct config_node_list),
+					  MEM_COMP_CONFIG);
 			list->tree_node = sub_node;
 			if (*node_list == NULL)
 				*node_list = list;
@@ -2037,7 +2053,7 @@ int load_config_from_parse(config_file_t config, struct config_block *conf_blk,
 				  err_type->errors - prev_errs,
 				  errstr != NULL ? errstr : "unknown", blkname);
 		if (errstr != NULL)
-			gsh_free(errstr);
+			gsh_free(errstr, MEM_COMP_CONFIG);
 	}
 	return found;
 }
