@@ -60,6 +60,7 @@
 #include "client_mgr.h"
 #include "server_stats_private.h"
 #include "server_stats.h"
+#include "abstract_mem.h"
 #include "abstract_atomic.h"
 #include "gsh_intrinsic.h"
 #include "nfs_exports.h"
@@ -79,6 +80,7 @@ struct timespec v3_full_stats_time;
 struct timespec v4_full_stats_time;
 struct timespec auth_stats_time;
 struct timespec clnt_allops_stats_time;
+
 /**
  * @brief Exports are stored in an AVL tree with front-end cache.
  *
@@ -214,7 +216,8 @@ struct gsh_export *alloc_export(void)
 	struct export_stats *export_st;
 	struct gsh_export *export;
 
-	export_st = gsh_calloc(1, sizeof(struct export_stats));
+	export_st = gsh_calloc(1, sizeof(struct export_stats), MEM_COMP_EXPORT);
+	export_st->st.comp = MEM_COMP_EXPORT;
 
 	export = &export_st->export;
 
@@ -733,7 +736,7 @@ void _put_gsh_export(struct gsh_export *export, bool config, char *file,
 	server_stats_free(&export_st->st);
 	PTHREAD_RWLOCK_destroy(&export->exp_lock);
 	PTHREAD_RWLOCK_destroy(&export->exp_state_lock);
-	gsh_free(export_st);
+	gsh_free(export_st, MEM_COMP_EXPORT);
 }
 
 /**
@@ -939,7 +942,8 @@ void nfs_init_stats_time(void)
 {
 	now(&nfs_stats_time);
 	fsal_stats_time = v3_full_stats_time = v4_full_stats_time =
-		auth_stats_time = clnt_allops_stats_time = nfs_stats_time;
+		auth_stats_time = clnt_allops_stats_time = mem_stats_time =
+			nfs_stats_time;
 }
 
 #ifdef USE_DBUS
@@ -1187,34 +1191,20 @@ static bool gsh_export_addexport(DBusMessageIter *args, DBusMessage *reply,
 			else if (!err_type.exists)
 				status = false;
 		}
-		gsh_free(lp);
+		gsh_free(lp, MEM_COMP_CONFIG);
 	}
 	(void)report_config_errors(&err_type, &conf_errs, config_errs_to_dbus);
 	if (conf_errs.fp != NULL)
 		fclose(conf_errs.fp);
 	if (status) {
 		if (exp_cnt > 0) {
-			size_t msg_size = sizeof("%d exports added") + 10;
-			char *message;
+			char message[32];
 
-			if (conf_errs.buf != NULL &&
-			    strlen(conf_errs.buf) > 0) {
-				msg_size += (strlen(conf_errs.buf) +
-					     strlen(". Errors found:\n"));
-				message = gsh_calloc(1, msg_size);
-				(void)snprintf(
-					message, msg_size,
-					"%d exports added. Errors found:\n%s",
-					exp_cnt, conf_errs.buf);
-			} else {
-				message = gsh_calloc(1, msg_size);
-				(void)snprintf(message, msg_size,
-					       "%d exports added", exp_cnt);
-			}
+			(void)snprintf(message, sizeof(message),
+				       "%d exports added", exp_cnt);
 			dbus_message_iter_init_append(reply, &iter);
 			dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING,
 						       &message);
-			gsh_free(message);
 		} else if (err_type.exists) {
 			LogWarn(COMPONENT_EXPORT,
 				"Selected entries in %s already active!!!",
@@ -1254,9 +1244,9 @@ out_unlock:
 
 out:
 	if (conf_errs.buf)
-		gsh_free(conf_errs.buf);
+		gsh_free(conf_errs.buf, MEM_COMP_CONFIG);
 	if (err_detail != NULL)
-		gsh_free(err_detail);
+		gsh_free(err_detail, MEM_COMP_CONFIG);
 	config_Free(config_struct);
 	return status;
 }
@@ -1701,34 +1691,20 @@ static bool gsh_export_update_export(DBusMessageIter *args, DBusMessage *reply,
 			else if (!err_type.exists)
 				status = false;
 		}
-		gsh_free(lp);
+		gsh_free(lp, MEM_COMP_CONFIG);
 	}
 	(void)report_config_errors(&err_type, &conf_errs, config_errs_to_dbus);
 	if (conf_errs.fp != NULL)
 		fclose(conf_errs.fp);
 	if (status) {
 		if (exp_cnt > 0) {
-			size_t msg_size = sizeof("%d exports updated") + 10;
-			char *message;
+			char message[32];
 
-			if (conf_errs.buf != NULL &&
-			    strlen(conf_errs.buf) > 0) {
-				msg_size += (strlen(conf_errs.buf) +
-					     strlen(". Errors found:\n"));
-				message = gsh_calloc(1, msg_size);
-				(void)snprintf(
-					message, msg_size,
-					"%d exports updated. Errors found:\n%s",
-					exp_cnt, conf_errs.buf);
-			} else {
-				message = gsh_calloc(1, msg_size);
-				(void)snprintf(message, msg_size,
-					       "%d exports updated", exp_cnt);
-			}
+			(void)snprintf(message, sizeof(message),
+				       "%d exports updated", exp_cnt);
 			dbus_message_iter_init_append(reply, &iter);
 			dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING,
 						       &message);
-			gsh_free(message);
 		} else if (err_type.exists) {
 			LogWarn(COMPONENT_EXPORT,
 				"Selected entries in %s already active!!!",
@@ -1764,9 +1740,9 @@ static bool gsh_export_update_export(DBusMessageIter *args, DBusMessage *reply,
 
 out:
 	if (conf_errs.buf)
-		gsh_free(conf_errs.buf);
+		gsh_free(conf_errs.buf, MEM_COMP_CONFIG);
 	if (err_detail != NULL)
-		gsh_free(err_detail);
+		gsh_free(err_detail, MEM_COMP_CONFIG);
 	config_Free(config_struct);
 	return status;
 }
@@ -2929,6 +2905,7 @@ void dbus_export_init(void)
 {
 	gsh_dbus_register_path("ExportMgr", export_interfaces);
 }
+
 #endif /* USE_DBUS */
 
 /* Cleanup on shutdown */
@@ -2984,6 +2961,7 @@ out:
  * @param component     [IN]  component for logging
  * @param export_list   [IN]  the export list this gets linked to in tail order
  * @param export_id     [IN]  the export_id
+ * @param mem_comp      [IN]  memory component
  * @param cnode         [IN]  opaque pointer needed for config_proc_error()
  * @param err_type      [OUT] error handling ref
  *
@@ -2991,7 +2969,7 @@ out:
  */
 
 int add_export_id(enum log_components component, struct glist_head *export_list,
-		  uint16_t export_id, void *cnode,
+		  uint16_t export_id, mem_components_t mem_comp, void *cnode,
 		  struct config_error_type *err_type)
 {
 	struct export_id_list *expidli;
@@ -3012,8 +2990,9 @@ int add_export_id(enum log_components component, struct glist_head *export_list,
 		goto exit;
 	}
 
-	expidli = gsh_calloc(1, sizeof(struct export_id_list));
+	expidli = gsh_calloc(1, sizeof(struct export_id_list), mem_comp);
 	expidli->export_id = export_id;
+	expidli->mem_comp = mem_comp;
 
 	glist_add_tail(export_list, &expidli->export_id_glist);
 

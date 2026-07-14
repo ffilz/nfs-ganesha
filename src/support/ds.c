@@ -95,7 +95,7 @@ static int server_id_cmpf(const struct avltree_node *lhs,
 
 struct fsal_pnfs_ds *pnfs_ds_alloc(void)
 {
-	return gsh_calloc(1, sizeof(struct fsal_pnfs_ds));
+	return gsh_calloc(1, sizeof(struct fsal_pnfs_ds), MEM_COMP_FSAL);
 }
 
 /**
@@ -107,7 +107,7 @@ void pnfs_ds_free(struct fsal_pnfs_ds *pds)
 	if (!pds->ds_refcount)
 		return;
 
-	gsh_free(pds);
+	gsh_free(pds, MEM_COMP_FSAL);
 }
 
 /**
@@ -498,7 +498,8 @@ static struct config_block pds_block = {
 	.blk_desc.u.blk.init = pds_init,
 	.blk_desc.u.blk.params = pds_items,
 	.blk_desc.u.blk.commit = pds_commit,
-	.blk_desc.u.blk.display = pds_display
+	.blk_desc.u.blk.display = pds_display,
+	.mem_comp = MEM_COMP_CONFIG
 };
 
 /**
