@@ -42,6 +42,70 @@
 
 #include <sys/types.h>
 
+extern const char *mem_stat_names[];
+extern struct timespec mem_stats_time;
+
+/*
+ * @brief Ganesha per-component memory statistics
+ *
+ * Always counted; there is no runtime enable/disable for capture.
+ */
+struct gsh_mem_stats {
+	/* Lifetime: monotonic for the process; never cleared by reset. */
+	uint64_t lifetime_alloc_calls;
+	uint64_t lifetime_free_calls;
+	uint64_t lifetime_alloc_bytes;
+	uint64_t lifetime_freed_bytes;
+
+	/* Interval: zeroed on reset; "since last reset" rate/volume. */
+	uint64_t interval_alloc_calls;
+	uint64_t interval_free_calls;
+	uint64_t interval_alloc_bytes;
+	uint64_t interval_freed_bytes;
+
+	/*
+	 * current_active_bytes/peak_active_bytes: live, lifetime-scoped
+	 * (survive reset). baseline/interval_peak/interval_min: rebased
+	 * on every reset.
+	 *
+	 * current_active_bytes is signed: an alloc/free mem_comp mismatch
+	 * (freeing more than was ever allocated under this comp) is
+	 * allowed to go negative instead of clamping to 0, so it stays
+	 * visible in the value itself, not just in the LogWarn that fires
+	 * alongside it. In a bug-free run this equals
+	 * (lifetime_alloc_bytes - lifetime_freed_bytes).
+	 */
+	int64_t current_active_bytes;
+	/* Lifetime high-water of current_active_bytes. */
+	int64_t peak_active_bytes;
+	/* current_active_bytes at last reset. */
+	int64_t baseline_active_bytes;
+	/*
+	 * Max of (current - baseline) since last reset, floored at 0 -
+	 * a "growth since reset" metric, not a signed delta. See
+	 * Current_Interval_Delta (derived, not stored) for the signed
+	 * version.
+	 */
+	int64_t interval_peak_active_delta;
+	/* Min of current_active_bytes since last reset (floor,
+	 * mirrors interval_peak_active_delta).
+	 */
+	int64_t interval_min_active_bytes;
+};
+
+struct mem_stats_info {
+	const char *mem_stat_name; /* stat name */
+};
+
+/*
+ * If adding any new value to gsh_mem_stats, increment
+ * MAX_MEMORY_STATS_FIELD_COUNT. Indices 0-11 are the original stored
+ * fields; 12 (Interval_Min_Active_Bytes) is a new stored field; 13
+ * (Current_Interval_Delta) is derived on demand in
+ * gsh_mem_stats_get_stat_by_index_and_comp(), not a struct field.
+ */
+#define MAX_MEMORY_STATS_FIELD_COUNT 14
+
 void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup);
 
 #ifdef _USE_9P
@@ -64,6 +128,19 @@ void dec_grants(struct gsh_client *client);
 void inc_revokes(struct gsh_client *client);
 void inc_recalls(struct gsh_client *client);
 void inc_failed_recalls(struct gsh_client *client);
+
+void gsh_mem_stats_update_alloc(void *p, mem_components_t comp,
+				const char *file, int line,
+				const char *function);
+void gsh_mem_stats_update_free(void *p, mem_components_t comp,
+			       const char *file, int line,
+			       const char *function);
+int64_t gsh_mem_stats_get_stat_by_index_and_comp(uint32_t index,
+						 mem_components_t comp);
+/** comp is gshMC[] index: 0 = libntirpc, 1+ = Ganesha mem_components_t. */
+const char *gsh_mem_stats_get_mem_comp_str(mem_components_t comp);
+void gsh_log_mem_stats(void);
+void gsh_mem_stats_reset(void);
 
 #endif /* !SERVER_STATS_H */
 /** @} */
