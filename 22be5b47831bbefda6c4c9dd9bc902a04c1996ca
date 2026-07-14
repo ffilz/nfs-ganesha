@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a89496a_60b1f5be",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-14T21:20:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a46905ee_6deef1cd",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3607f146_6fe79539",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-07-01T21:11:30Z",
       "side": 1,
       "message": "Consistency FSAL or PROTOCOL?\n\nActually, who does the free? Should we have the MEM_COMP set by the function?\n\nAnd add a free_utf8string to free them?",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90460f45_c5e2b908",
+        "filename": "src/FSAL/FSAL_LIZARDFS/handle.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-14T21:20:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3607f146_6fe79539",
       "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -116,6 +152,24 @@
       "writtenOn": "2026-07-01T21:11:30Z",
       "side": 1,
       "message": "Consistency MEM_COMP_PROTOCOL",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29ee3501_813ea992",
+        "filename": "src/FSAL/FSAL_SAUNAFS/handle.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2096,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-14T21:20:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccfd891a_9d91f472",
       "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -732,6 +786,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e24aa6c2_9059371a",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-14T21:20:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e48450c_784e96ce",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8728efd6_52df8859",
@@ -762,6 +834,24 @@
       "writtenOn": "2026-07-01T21:11:30Z",
       "side": 1,
       "message": "Let\u0027s not inherit any MEM_COMP from ntirpc, in fact, do this without any changes to ntirpc.\n\nSo just have:\nMEM_COMP_LIBNTIRPC,\nMEM_COMP_LIBNTIRPC,\n...",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb7806ca_392b5889",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-14T21:20:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ef62d19_c94216a4",
       "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
