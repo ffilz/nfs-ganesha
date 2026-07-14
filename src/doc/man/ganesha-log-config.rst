@@ -57,6 +57,11 @@ Match_Policy(token, default MATCH_ANY)
     MATCH_ALL
         Enable conditional logging only if both the client AND the export match.
 
+Mem_Stats_Enabled(bool, default true)
+    Flag to enable counting of memory statistics. Per-allocation
+    `LogFullDebug` lines for the MEM_ALLOC component are emitted when this
+    is on and the MEM_ALLOC log level is FULL_DEBUG.
+
 LOG { COMPONENTS {} }
 --------------------------------------------------------------------------------
 **Default_log_level(token,default EVENT)**

@@ -1524,3 +1524,241 @@ class DumpFULLV4Stats(Report):
                 output += " %12.6f" % (self.stats[3][i][5])
                 i += 1
             return output
+
+class RetrieveMemoryStats():
+    def __init__(self):
+        self.dbus_service_name = "org.ganesha.nfsd"
+        self.dbus_memstats_name = "org.ganesha.nfsd.memstats"
+        self.mem_interface = "/org/ganesha/nfsd/MemMgr"
+
+        self.bus = dbus.SystemBus()
+        self.memmgrobj = self.bus.get_object(self.dbus_service_name,
+                                             self.mem_interface)
+
+    # get memory stats
+    def get_mem_stats(self):
+        stats_state = self.memmgrobj.get_dbus_method("GetMemoryStats",
+                                                     self.dbus_memstats_name)
+        return DumpMemStats(stats_state())
+
+    # reset memory stats
+    def reset_mem_stats(self):
+        stats_state = self.memmgrobj.get_dbus_method("ResetMemoryStats",
+                                                     self.dbus_memstats_name)
+        return MemStatsStatus(stats_state())
+
+    # enable memory stats couting
+    def enable_mem_stats(self):
+        stats_state = self.memmgrobj.get_dbus_method("EnableMemoryStats",
+                                                     self.dbus_memstats_name)
+        return MemStatsStatus(stats_state())
+
+    # disable memory stats counting
+    def disable_mem_stats(self):
+        stats_state = self.memmgrobj.get_dbus_method("DisableMemoryStats",
+                                                     self.dbus_memstats_name)
+        return MemStatsStatus(stats_state())
+
+class MemStatsStatus():
+    def __init__(self, status):
+        self.status = status
+
+    def __str__(self):
+            return "GANESHA RESPONSE STATUS: " + self.status[1]
+
+class DumpMemStats(Report):
+    def __init__(self, stats):
+        super().__init__(stats)
+
+        self.curtime = time.time()
+        self.success = stats[0]
+        self.status = stats[1]
+        self.mem_stats_enabled = None
+        if self.success:
+            self.timestamp = (stats[2][0], stats[2][1])
+            if len(self.result) > 4:
+                self.mem_stats_enabled = dbus_to_std(self.result[4])
+
+    def fill_report(self, report):
+        def op_stats(stat_list):
+            # a(st): (name, uint64) per field from the server
+            out = {}
+            for pair in stat_list:
+                if (isinstance(pair, (list, tuple)) and len(pair) == 2):
+                    k, v = pair
+                    out[str(k)] = dbus_to_std(v)
+            return out
+
+        if self.mem_stats_enabled is not None:
+            report['mem_stats_enabled'] = self.mem_stats_enabled
+        stats = self.result[3]
+        for item in stats:
+            if isinstance(item, (list, tuple)) and len(item) == 2:
+                comp_name, stat_tuples = item
+                report[str(comp_name)] = op_stats(stat_tuples)
+
+    def __str__(self):
+        output = ""
+        if self.status != "OK":
+            return ("GANESHA RESPONSE STATUS: " + self.status)
+        else:
+            if self.mem_stats_enabled is None:
+                # Old server without mem_stats_enabled in GetMemoryStats reply.
+                state = "Active"
+            else:
+                state = "Active" if self.mem_stats_enabled else "Inactive"
+            output += (
+                "\nMemory Stats : " + state + "\n"
+                "Stats collected since: "
+                + time.ctime(self.timestamp[0]) + " " +
+                str(self.timestamp[1]) + " nsecs\n")
+
+            stats = self.result[3]
+
+            # self.stats is expected to be the array (a(sa(st)))
+            # So it's a list of tuples: (component_name, [(stat_name, value), ...])
+            #stats_dict = {name: dict(stat_list) for name, stat_list in self.stats}
+            stats_dict = {
+                name: dict(stat_list)
+                for item in stats
+                if isinstance(item, (list, tuple)) and len(item) == 2
+                for name, stat_list in [item]
+            }
+
+            total_l_alloc = total_l_free = 0
+            total_l_ab = total_l_fb = 0
+            total_i_alloc = total_i_free = 0
+            total_i_ab = total_i_fb = 0
+            total_cur = total_pk = 0
+            total_bsl = total_idt = 0
+            k_lac = "Lifetime_Alloc_Calls"
+            k_lfc = "Lifetime_Free_Calls"
+            k_lab = "Lifetime_Alloc_Bytes"
+            k_lfd = "Lifetime_Freed_Bytes"
+            k_iac = "Interval_Alloc_Calls"
+            k_ifc = "Interval_Free_Calls"
+            k_iab = "Interval_Alloc_Bytes"
+            k_ifd = "Interval_Freed_Bytes"
+            k_cur = "Current_Active_Bytes"
+            k_pk = "Peak_Active_Bytes"
+            k_bsl = "Baseline_Active_Bytes"
+            k_idt = "Interval_Peak_Active_Delta"
+
+            _mem_labels = []
+            _seen = set()
+            for item in stats:
+                if isinstance(item, (list, tuple)) and len(item) == 2:
+                    name, _ = item
+                    n = str(name)
+                    if n not in _seen:
+                        _seen.add(n)
+                        _mem_labels.append(n)
+            w_comp = 10
+            wn = 11
+            w_byte = 14
+            # Short tags = column headers; long names = gsh / D-Bus stat keys.
+            output += (
+                "Column tags (full gsh / D-Bus mem stat field names). "
+                "Data rows: L_ac/L_fc/I_ac/I_fc = call counts; all other columns = bytes.\n"
+                "  L_ac=Lifetime_Alloc_Calls, L_fc=Lifetime_Free_Calls, "
+                "L_ab=Lifetime_Alloc_Bytes, L_fd=Lifetime_Freed_Bytes\n"
+                "  I_ac=Interval_Alloc_Calls, I_fc=Interval_Free_Calls, "
+                "I_ab=Interval_Alloc_Bytes, I_fd=Interval_Freed_Bytes\n"
+                "  C_ab=Current_Active_Bytes, P_ab=Peak_Active_Bytes, "
+                "B_ab=Baseline_Active_Bytes, I_pd=Interval_Peak_Active_Delta\n"
+                "TOTAL: sums of L_ac, L_fc, I_ac, I_fc (integers); sums of the eight byte "
+                "columns in MiB (1024*1024), e.g. 12.16M.\n"
+            )
+
+            def _hdr_line():
+                h = f"{'Component':<{w_comp}}"
+                h += f" {'L_ac':>{wn}} {'L_fc':>{wn}} {'L_ab':>{w_byte}} {'L_fd':>{w_byte}}"
+                h += f" {'I_ac':>{wn}} {'I_fc':>{wn}} {'I_ab':>{w_byte}} {'I_fd':>{w_byte}}"
+                h += f" {'C_ab':>{w_byte}} {'P_ab':>{w_byte}} "
+                h += f" {'B_ab':>{w_byte}} {'I_pd':>{w_byte}}\n"
+                return h
+
+            def _row(lbl, v):
+                s = f"{(lbl + ':'):<{w_comp}}"
+                s += f" {v[0]:>{wn}} {v[1]:>{wn}} {v[2]:>{w_byte}} {v[3]:>{w_byte}}"
+                s += f" {v[4]:>{wn}} {v[5]:>{wn}} {v[6]:>{w_byte}} {v[7]:>{w_byte}}"
+                s += f" {v[8]:>{w_byte}} {v[9]:>{w_byte}}"
+                s += f" {v[10]:>{w_byte}} {v[11]:>{w_byte}}\n"
+                return s
+
+            def _mbv(x, mb_):
+                return f"{x / mb_:.2f}M" if x is not None else "n/a"
+
+            def _row_total(v, mb_):
+                s = f"{'TOTAL:':<{w_comp}}"
+                s += f" {v[0]:>{wn}} {v[1]:>{wn}} {_mbv(v[2], mb_):>{w_byte}}"
+                s += f" {_mbv(v[3], mb_):>{w_byte}}"
+                s += f" {v[4]:>{wn}} {v[5]:>{wn}} {_mbv(v[6], mb_):>{w_byte}}"
+                s += f" {_mbv(v[7], mb_):>{w_byte}}"
+                s += f" {_mbv(v[8], mb_):>{w_byte}} {_mbv(v[9], mb_):>{w_byte}}"
+                s += f" {_mbv(v[10], mb_):>{w_byte}} {_mbv(v[11], mb_):>{w_byte}}\n"
+                return s
+
+            output += _hdr_line()
+
+            for label in _mem_labels:
+                if label in stats_dict:
+                    stat_map = stats_dict[label]
+                    try:
+                        lac = int(stat_map[k_lac])
+                        lfc = int(stat_map[k_lfc])
+                        lab = int(stat_map[k_lab])
+                        lfd = int(stat_map[k_lfd])
+                        iac = int(stat_map[k_iac])
+                        ifc = int(stat_map[k_ifc])
+                        iab = int(stat_map[k_iab])
+                        ifd = int(stat_map[k_ifd])
+                        cur = int(stat_map[k_cur])
+                        pk = int(stat_map[k_pk])
+                        bsl = int(stat_map[k_bsl])
+                        idt = int(stat_map[k_idt])
+                        output += _row(
+                            label,
+                            [
+                                lac, lfc, lab, lfd, iac, ifc, iab, ifd, cur, pk, bsl, idt,
+                            ],
+                        )
+                        total_l_alloc += lac
+                        total_l_free += lfc
+                        total_l_ab += lab
+                        total_l_fb += lfd
+                        total_i_alloc += iac
+                        total_i_free += ifc
+                        total_i_ab += iab
+                        total_i_fb += ifd
+                        total_cur += cur
+                        total_pk += pk
+                        total_bsl += bsl
+                        total_idt += idt
+                    except KeyError as e:
+                        output += f"{(label + ':'):<{w_comp}} <Missing Stat: {e}>\n"
+                else:
+                    output += f"{(label + ':'):<{w_comp}} <Invalid Data>\n"
+
+            mb = 1024 * 1024
+            outlen = w_comp + 4 * wn + 8 * w_byte + 20
+            output += "-" * min(200, outlen) + "\n"
+            output += _row_total(
+                [
+                    total_l_alloc,
+                    total_l_free,
+                    total_l_ab,
+                    total_l_fb,
+                    total_i_alloc,
+                    total_i_free,
+                    total_i_ab,
+                    total_i_fb,
+                    total_cur,
+                    total_pk,
+                    total_bsl,
+                    total_idt,
+                ],
+                mb,
+            )
+
+        return output
