@@ -148,7 +148,7 @@ static bool idmapper_set_owner_domain(void)
 		return false;
 	}
 	PTHREAD_RWLOCK_wrlock(&owner_domain.lock);
-	owner_domain.domain.addr = gsh_strdup(domain_addr);
+	owner_domain.domain.addr = gsh_strdup(domain_addr, MEM_COMP_IDMAPPER);
 	owner_domain.domain.len = strlen(owner_domain.domain.addr);
 	PTHREAD_RWLOCK_unlock(&owner_domain.lock);
 	return true;
@@ -164,7 +164,7 @@ static void idmapper_clear_owner_domain(void)
 		PTHREAD_RWLOCK_unlock(&owner_domain.lock);
 		return;
 	}
-	gsh_free(owner_domain.domain.addr);
+	gsh_free(owner_domain.domain.addr, MEM_COMP_IDMAPPER);
 	owner_domain.domain.addr = NULL;
 	owner_domain.domain.len = 0;
 	PTHREAD_RWLOCK_unlock(&owner_domain.lock);
@@ -807,7 +807,7 @@ static int name_to_gid(const char *name, gid_t *gid)
 		buflen = PWENT_BEST_GUESS_LEN;
 
 	do {
-		buf = gsh_malloc(buflen);
+		buf = gsh_malloc(buflen, MEM_COMP_IDMAPPER);
 
 		now_mono(&s_time);
 		err = pwnam_wrappers__getgrnam_r(name, &g, buf, buflen, &gres);
@@ -825,7 +825,7 @@ static int name_to_gid(const char *name, gid_t *gid)
 				"getgrnam_r buffer size of: %lu, is too small increasing to %lu.",
 				buflen, buflen * 16);
 			buflen *= 16;
-			gsh_free(buf);
+			gsh_free(buf, MEM_COMP_IDMAPPER);
 		}
 	} while (buflen <= GROUP_MAX_SIZE && err == ERANGE);
 
@@ -853,7 +853,7 @@ static int name_to_gid(const char *name, gid_t *gid)
 	}
 
 	if (err != ERANGE)
-		gsh_free(buf);
+		gsh_free(buf, MEM_COMP_IDMAPPER);
 
 	return err;
 }
@@ -893,7 +893,7 @@ static int name_to_uid(const char *name, uint32_t *uid, gid_t *gid)
 		buflen = PWENT_BEST_GUESS_LEN;
 
 	while (buflen <= PWENT_MAX_SIZE) {
-		buf = gsh_malloc(buflen);
+		buf = gsh_malloc(buflen, MEM_COMP_IDMAPPER);
 
 		now_mono(&s_time);
 		err = pwnam_wrappers__getpwnam_r(name, &p, buf, buflen, &pres);
@@ -906,7 +906,7 @@ static int name_to_uid(const char *name, uint32_t *uid, gid_t *gid)
 				    err, TP_BYTE_ARR_TRUNCATED(name, name_len));
 
 		/* We don't use any strings from the buffer, so free it */
-		gsh_free(buf);
+		gsh_free(buf, MEM_COMP_IDMAPPER);
 		if (err != ERANGE)
 			break;
 		buflen *= 16;

@@ -502,9 +502,9 @@ bool is_inaddrany(sockaddr_t *addr)
  *
  * @return CIDR struct
 */
-CIDR *cidr_alloc(void)
+CIDR *cidr_alloc(mem_components_t comp)
 {
-	return gsh_calloc(1, sizeof(CIDR));
+	return gsh_calloc(1, sizeof(CIDR), comp);
 }
 
 /**
@@ -512,9 +512,9 @@ CIDR *cidr_alloc(void)
  *
  * @in cidr      CIDR structure
  */
-void cidr_free(CIDR *cidr)
+void cidr_free(CIDR *cidr, mem_components_t comp)
 {
-	gsh_free(cidr);
+	gsh_free(cidr, comp);
 }
 
 /**
@@ -525,7 +525,7 @@ void cidr_free(CIDR *cidr)
  *
  * @return CIDR structure, NULL on parse failure with errno=EINVAL
  */
-CIDR *cidr_from_str(const char *addr)
+CIDR *cidr_from_str(const char *addr, mem_components_t comp)
 {
 	CIDR *cidr;
 	char addr_str[SOCK_NAME_MAX];
@@ -545,10 +545,10 @@ CIDR *cidr_from_str(const char *addr)
 		mask_str = slash + 1;
 	}
 
-	cidr = cidr_alloc();
+	cidr = cidr_alloc(comp);
 	ret = ip_str_to_sockaddr(addr_str, &(cidr->ip_addr));
 	if (ret) {
-		cidr_free(cidr);
+		cidr_free(cidr, comp);
 		errno = EINVAL;
 		return NULL;
 	}
@@ -560,7 +560,7 @@ CIDR *cidr_from_str(const char *addr)
 		mask = strtoul(mask_str, &end, 10);
 
 		if (mask_str == end || *end != '\0') {
-			cidr_free(cidr);
+			cidr_free(cidr, comp);
 			errno = EINVAL;
 			return NULL;
 		}
@@ -568,14 +568,14 @@ CIDR *cidr_from_str(const char *addr)
 		switch (cidr->ip_addr.ss_family) {
 		case AF_INET:
 			if (mask > 32) {
-				cidr_free(cidr);
+				cidr_free(cidr, comp);
 				errno = EINVAL;
 				return NULL;
 			}
 			break;
 		case AF_INET6:
 			if (mask > 128) {
-				cidr_free(cidr);
+				cidr_free(cidr, comp);
 				errno = EINVAL;
 				return NULL;
 			}
@@ -603,11 +603,11 @@ CIDR *cidr_from_str(const char *addr)
  *
  * @return CIDR structure
  */
-char *cidr_to_str(CIDR *cidr)
+char *cidr_to_str(CIDR *cidr, mem_components_t comp)
 {
 	char *cidr_string;
 
-	cidr_string = gsh_calloc(SOCK_NAME_MAX, sizeof(char));
+	cidr_string = gsh_calloc(SOCK_NAME_MAX, sizeof(char), comp);
 
 	struct display_buffer dspbuf = { SOCK_NAME_MAX * sizeof(char),
 					 cidr_string, cidr_string };
@@ -694,11 +694,11 @@ int cidr_contains_ip(CIDR *cidr, sockaddr_t *ipaddr)
  *
  * @return CIDR structure
 */
-CIDR *cidr_from_inaddr(const struct in_addr *addr)
+CIDR *cidr_from_inaddr(const struct in_addr *addr, mem_components_t comp)
 {
 	CIDR *cidr;
 
-	cidr = cidr_alloc();
+	cidr = cidr_alloc(comp);
 	memcpy(&((struct sockaddr_in *)&cidr->ip_addr)->sin_addr.s_addr, addr,
 	       sizeof(struct in_addr));
 	cidr->ip_addr.ss_family = AF_INET;
@@ -714,11 +714,11 @@ CIDR *cidr_from_inaddr(const struct in_addr *addr)
  *
  * @return CIDR structure
  */
-CIDR *cidr_from_in6addr(const struct in6_addr *addr)
+CIDR *cidr_from_in6addr(const struct in6_addr *addr, mem_components_t comp)
 {
 	CIDR *cidr;
 
-	cidr = cidr_alloc();
+	cidr = cidr_alloc(comp);
 	cidr->ip_addr.ss_family = AF_INET6;
 
 	memcpy(&((struct sockaddr_in6 *)&cidr->ip_addr)->sin6_addr.s6_addr,
