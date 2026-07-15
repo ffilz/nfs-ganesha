@@ -34,6 +34,24 @@
       "parentUuid": "d126ce78_182d0199",
       "revId": "23d1b5734dbaaf7172e4c575e5e8048d6061e94a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5261a9a8_181c1d9f",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2420,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T14:23:23Z",
+      "side": 1,
+      "message": "Handled via cmake, before enabling copy_file_range check in unistd.h copy_file_range is available.",
+      "parentUuid": "82393f71_7b8b3135",
+      "revId": "23d1b5734dbaaf7172e4c575e5e8048d6061e94a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

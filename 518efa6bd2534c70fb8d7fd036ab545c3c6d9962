@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2d230b4_3e6e8ea7",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2346,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T14:23:23Z",
+      "side": 1,
+      "message": "this already uses Xcopy pool, which is available in later patches",
+      "parentUuid": "37320d98_0bfc68d1",
+      "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5fb1448_49f4c727",
         "filename": "src/FSAL/FSAL_VFS/file.c",
         "patchSetId": 2
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f85b20b_e77eb42a",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2390,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T14:23:23Z",
+      "side": 1,
+      "message": "added the fsal_fd handling",
+      "parentUuid": "a5fb1448_49f4c727",
+      "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4150192f_6ab72846",
         "filename": "src/FSAL/FSAL_VFS/file.c",
         "patchSetId": 2
@@ -48,6 +84,24 @@
       "writtenOn": "2026-07-09T18:47:47Z",
       "side": 1,
       "message": "use of copy_file_range needs to be conditional compile with cmake detecting support.\n\nThat might also get out of having to handle EOPONOTSUPP and ENOSYS",
+      "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ea5d011_66e7bb85",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2413,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T14:23:23Z",
+      "side": 1,
+      "message": "Handled via cmake, before enabling copy_file_range check in unistd.h copy_file_range is available.",
+      "parentUuid": "4150192f_6ab72846",
       "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -100,6 +154,24 @@
       "writtenOn": "2026-07-09T18:47:47Z",
       "side": 1,
       "message": "Please move declaration to proper place to be similarly ordered to fsal_api.h",
+      "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f3ef797_0cda9aef",
+        "filename": "src/FSAL/FSAL_VFS/vfs_methods.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T14:23:23Z",
+      "side": 1,
+      "message": "this is VFS specific and per understanding, this should be part of this file only.\nplease correct me if I\u0027m getting it wrong",
+      "parentUuid": "7534e51b_88818738",
       "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
