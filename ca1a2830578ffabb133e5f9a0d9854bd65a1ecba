@@ -16,6 +16,24 @@
       "message": "Should bytes_copied be atomic?",
       "revId": "ca1a2830578ffabb133e5f9a0d9854bd65a1ecba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bb86813_318d96b0",
+        "filename": "src/Protocols/NFS/nfs4_op_offload_status.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T14:30:22Z",
+      "side": 1,
+      "message": "above line number 132, already is fetching it in atomic way, and its not necessary the bytes_copied to be atomically precise when OFFLOAD_STATUS is requested.",
+      "parentUuid": "dd3067e6_cac809fa",
+      "revId": "ca1a2830578ffabb133e5f9a0d9854bd65a1ecba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
