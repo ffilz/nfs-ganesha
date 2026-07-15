@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f61c6a8_ca1ecf37",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2346,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-15T17:47:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a2d230b4_3e6e8ea7",
+      "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5fb1448_49f4c727",
@@ -71,6 +89,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02e43b4e_4dc78369",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2390,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-15T17:47:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f85b20b_e77eb42a",
+      "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4150192f_6ab72846",
@@ -102,6 +138,24 @@
       "side": 1,
       "message": "Handled via cmake, before enabling copy_file_range check in unistd.h copy_file_range is available.",
       "parentUuid": "4150192f_6ab72846",
+      "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9580ac20_edfd2291",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2413,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-15T17:47:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ea5d011_66e7bb85",
       "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -172,6 +226,24 @@
       "side": 1,
       "message": "this is VFS specific and per understanding, this should be part of this file only.\nplease correct me if I\u0027m getting it wrong",
       "parentUuid": "7534e51b_88818738",
+      "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aafb64ee_18a57bc9",
+        "filename": "src/FSAL/FSAL_VFS/vfs_methods.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-15T17:47:40Z",
+      "side": 1,
+      "message": "Oh, what I meant is within this file, match the position of this declaration with the order of obj_handle methods in fsal_api.h",
+      "parentUuid": "8f3ef797_0cda9aef",
       "revId": "518efa6bd2534c70fb8d7fd036ab545c3c6d9962",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
