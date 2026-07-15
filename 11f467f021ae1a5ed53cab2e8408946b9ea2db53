@@ -51,6 +51,23 @@
       "message": "Adding -1 vote to make it clear this has to wait until mem_stats is ready to merge.",
       "revId": "11f467f021ae1a5ed53cab2e8408946b9ea2db53",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71cd90c_c195852f",
+        "filename": "src/scripts/ganeshactl/ganesha_stats.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T07:48:43Z",
+      "side": 1,
+      "message": "this change should be part of https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1218867, since he is already working on that. \"status\" support if required, should have been asked as review comment. if you want to enhance with your changes then wait for merge of original patch by NishatPuri",
+      "revId": "11f467f021ae1a5ed53cab2e8408946b9ea2db53",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
