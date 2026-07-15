@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b6f6fd7_e8103c81",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2250,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T14:23:13Z",
+      "side": 1,
+      "message": "this gets called from 2 different places, when Cross FSAL(from mdcache directly) as well as default_copy_file_range. so it should be better to keep the naming differences.\nultimately default_copy_file_range calls fsal_buffered_copy_fsal only.",
+      "parentUuid": "ad128d93_7cd071d8",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "146e8b99_57bb6c32",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-09T18:37:30Z",
       "side": 1,
       "message": "This really screams for dispatch to a thread pool, with request suspending (as used for READ and WRITE). And also needs to hook into QoS.",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90dba1b8_917092b5",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2273,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T14:23:13Z",
+      "side": 1,
+      "message": "this will be part of Copy thread pool(part of later patches in PatchSet), which is configurable.\n\nand copy_file_range is the provision which will be provided by underlying FS,and if we reduce the amount of data to be copied based on the QOS value and do the iteration for copying based on the values, then it defeats the main purpose of having the cp acceleration offload feature itself.\n\nlet me know your thoughts on this.",
+      "parentUuid": "146e8b99_57bb6c32",
       "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "048e37c9_806d1b93",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2285,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T14:23:13Z",
+      "side": 1,
+      "message": "please see the comments below line 2348-2362",
+      "parentUuid": "3e7f2b47_f54c0f13",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c3475545_27bba7ad",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 2
@@ -65,6 +119,24 @@
       "writtenOn": "2026-07-09T18:37:30Z",
       "side": 1,
       "message": "The following can be simplied to just use src_ctx_exp with no ? : operator.",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a67832a3_62046100",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2287,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T14:23:13Z",
+      "side": 1,
+      "message": "we can do it only for src_MaxRead and not dst_MaxWrite, so to follow same pattern it is currently using src_state and dst_state",
+      "parentUuid": "c3475545_27bba7ad",
       "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6545f9c_1446c3ce",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2293,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T14:23:13Z",
+      "side": 1,
+      "message": "updated the patch to use the  get_copy_chunk_size()",
+      "parentUuid": "60148e7a_8198ffa0",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9a5c0a5_c243ff74",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 2
@@ -105,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5107e12a_c1914162",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2312,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T14:23:13Z",
+      "side": 1,
+      "message": "changes done",
+      "parentUuid": "c9a5c0a5_c243ff74",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "38f00c73_56905945",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 2
@@ -116,6 +224,24 @@
       "writtenOn": "2026-07-09T18:37:30Z",
       "side": 1,
       "message": "gsh_malloc aborts instead of returning NULL, no need to check (in fact checking may make Coverity complain about all the unchecked gsh_malloc...",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2414a153_6bd6ed3c",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2316,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-15T14:23:13Z",
+      "side": 1,
+      "message": "removed the NULL check",
+      "parentUuid": "38f00c73_56905945",
       "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
