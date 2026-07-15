@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28ae933d_15d9708f",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2273,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-15T17:43:45Z",
+      "side": 1,
+      "message": "The thread pool sounds good. Really not sure what to do about thread pool overflow. I guess we will just have to monitor things. It might be good to have an optional way of disabling XCOPY so if it presents issues in certain environments, we have a work around to disable while we come up with a good fix to the particular workload issue.",
+      "parentUuid": "90dba1b8_917092b5",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e7f2b47_f54c0f13",
         "filename": "src/FSAL/fsal_helper.c",
         "patchSetId": 2
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "please see the comments below line 2348-2362",
       "parentUuid": "3e7f2b47_f54c0f13",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15922477_3930abad",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2285,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-15T17:43:45Z",
+      "side": 1,
+      "message": "Ah, OK, I understand now. Maybe add a comment here to better explain.",
+      "parentUuid": "048e37c9_806d1b93",
       "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -141,6 +177,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2845a8a_473e5f0e",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2287,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-15T17:43:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a67832a3_62046100",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60148e7a_8198ffa0",
@@ -172,6 +226,24 @@
       "side": 1,
       "message": "updated the patch to use the  get_copy_chunk_size()",
       "parentUuid": "60148e7a_8198ffa0",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fff6e8f9_1b4946fb",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2293,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-15T17:43:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6545f9c_1446c3ce",
       "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -211,6 +283,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46d41cc5_2f5d2ce9",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2312,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-15T17:43:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5107e12a_c1914162",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38f00c73_56905945",
@@ -246,6 +336,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42872a0b_77ed2e70",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2316,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-15T17:43:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2414a153_6bd6ed3c",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6cbff07a_757d9326",
@@ -259,6 +367,24 @@
       "writtenOn": "2026-07-09T18:37:30Z",
       "side": 1,
       "message": "Subsume this into default_copy_file_range, then no need for header file declaration",
+      "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b207a315_b1e72065",
+        "filename": "src/include/fsal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-15T17:43:45Z",
+      "side": 1,
+      "message": "OK, I get why you want this separate.",
+      "parentUuid": "6cbff07a_757d9326",
       "revId": "c657d0cb406b8dea9fdc1220a3b2c1673c80ebb9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
