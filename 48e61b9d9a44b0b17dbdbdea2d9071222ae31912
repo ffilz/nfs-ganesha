@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "389add1a_f3502bc6",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-16T11:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e311d5b_f950746f",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59c7905f_18f8b1e0",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-13T23:29:05Z",
       "side": 1,
       "message": "Since this IS a new service, we should probably display the details for these",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0115dac7_a9a80946",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-16T11:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59c7905f_18f8b1e0",
       "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "621913b7_2cf58938",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-16T11:47:48Z",
+      "side": 1,
+      "message": "Yet to include the server_stats_summary information.\nThis will be implemented together with the remaining export statistics gRPC APIs.",
+      "parentUuid": "9ee32651_a02ba365",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4005c39c_c9882996",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-07-13T23:29:05Z",
       "side": 1,
       "message": "Please use pseudo path here, DBUS really didn\u0027t get this right",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09ef2854_aa25e0fe",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-16T11:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4005c39c_c9882996",
       "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8c3f851_02d65762",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-16T11:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3a6b4d_a6afa5ce",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f07e1134_23c3df11",
@@ -103,6 +193,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9878c0a4_f7b0cb76",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-16T11:47:48Z",
+      "side": 1,
+      "message": "I looked into the SIGHUP reload path and agree that it performs a full configuration synchronization..\n\nFor the current patch, I verified that the existing add and remove gRPC APIs already correctly handle their respective pseudofs operations through the existing add/remove paths. For the update path, I reworked the implementation to perform an explicit pseudofs synchronization after a successful export update.\n\nThis is intended as an initial improvement to better handle export updates. Let me know your comments if further improvements needed.",
+      "parentUuid": "f07e1134_23c3df11",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d3d0e56_ae59480e",
@@ -116,6 +224,24 @@
       "writtenOn": "2026-07-13T23:29:05Z",
       "side": 1,
       "message": "please use pseduo_path here (DBUS really doesn\u0027t get this right)",
+      "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81d53e62_18e51863",
+        "filename": "src/grpc_server/proto/exportService.proto",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-16T11:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d3d0e56_ae59480e",
       "revId": "48e61b9d9a44b0b17dbdbdea2d9071222ae31912",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
