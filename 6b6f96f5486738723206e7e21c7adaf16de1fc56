@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1a08210_5931c63c",
+        "filename": "src/Protocols/NFS/nfs4_pseudo.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-16T21:35:48Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m pretty sure you need to do a lot more of what is in prune_pseudofs_subtree\n\nReally, you should see if you can use that.",
+      "revId": "6b6f96f5486738723206e7e21c7adaf16de1fc56",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01f6f308_71928b24",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-16T21:35:48Z",
+      "side": 1,
+      "message": "You need synchronize_updated_exports for add export also",
+      "revId": "6b6f96f5486738723206e7e21c7adaf16de1fc56",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb14f56f_4e04c24e",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-16T21:35:48Z",
+      "side": 1,
+      "message": "You need synchronize_updated_exports for remove export also",
+      "revId": "6b6f96f5486738723206e7e21c7adaf16de1fc56",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bcbd820_3db62eae",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-16T21:35:48Z",
+      "side": 1,
+      "message": "You need the EXPORT_ADMIN_LOCK here too",
+      "revId": "6b6f96f5486738723206e7e21c7adaf16de1fc56",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
