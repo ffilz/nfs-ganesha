@@ -279,6 +279,89 @@ static int core_commit(void *node, void *link_mem, void *self_struct,
 	return 0;
 }
 
+static int core_update(void *node, void *link_mem, void *self_struct,
+		       struct config_error_type *err_type)
+{
+	nfs_core_parameter_t *updates = self_struct;
+	int errcnt = 0;
+
+	PTHREAD_RWLOCK_wrlock(&nfs_core_lock);
+
+	LogEvent(COMPONENT_CONFIG, "NFS_CORE_PARAM update");
+
+	/* Process RPC parameter that cannot be updated */
+	if (updates->rpc.gss.ctx_hash_partitions !=
+	    NFS_pcp.rpc.gss.ctx_hash_partitions) {
+		LogWarn(COMPONENT_CONFIG,
+			"NFS_CORE_PARAM RPC_GSS_Npart can not be updated.");
+		err_type->invalid = true;
+		errcnt++;
+	}
+
+#ifdef _USE_NFS_RDMA
+	if (updates->rpc.rdma_credits != NFS_pcp.rpc.rdma_credits) {
+		LogWarn(COMPONENT_CONFIG,
+			"NFS_CORE_PARAM MaxRPCRdmaCredits can not be updated.");
+		err_type->invalid = true;
+		errcnt++;
+	}
+#endif
+
+	if (updates->rpc.max_recv_buffer_size !=
+	    NFS_pcp.rpc.max_recv_buffer_size) {
+		LogWarn(COMPONENT_CONFIG,
+			"NFS_CORE_PARAM MaxRPCRecvBufferSize can not be updated.");
+		err_type->invalid = true;
+		errcnt++;
+	}
+
+	if (updates->rpc.max_send_buffer_size !=
+	    NFS_pcp.rpc.max_send_buffer_size) {
+		LogWarn(COMPONENT_CONFIG,
+			"NFS_CORE_PARAM MaxRPCSendBufferSize can not be updated.");
+		err_type->invalid = true;
+		errcnt++;
+	}
+
+	if (errcnt > 0)
+		goto out;
+
+	/* Process the RPC parameters that can be updated */
+	if (memcmp(&NFS_pcp.rpc, &updates->rpc, sizeof(updates->rpc)) != 0) {
+		/* RPC parameters have changed */
+		NFS_pcp.rpc = updates->rpc;
+		if (!rpc_init_or_update()) {
+			LogWarn(COMPONENT_CONFIG,
+				"NFS_CORE_PARAM Update of RPC parameters failed.");
+			err_type->invalid = true;
+			errcnt++;
+		}
+	}
+
+	/* Deal with update of HAProxy_Hosts and Cluster_Members */
+	glist_swap_lists(&NFS_pcp.haproxy_hosts, &updates->haproxy_hosts);
+	glist_swap_lists(&NFS_pcp.cluster_members, &updates->cluster_members);
+	remove_self_cluster_members();
+
+out:
+
+	/* Free any unused or swapped allocated memory */
+	FreeClientList(&updates->haproxy_hosts, NULL);
+	FreeClientList(&updates->cluster_members, NULL);
+	gsh_free(updates->interface_name);
+	updates->interface_name = NULL;
+	gsh_free(updates->interface_name);
+	updates->interface_name = NULL;
+	gsh_free(updates->ganesha_modules_loc);
+	updates->ganesha_modules_loc = NULL;
+	gsh_free(updates->dbus_name_prefix);
+	updates->dbus_name_prefix = NULL;
+
+	PTHREAD_RWLOCK_unlock(&nfs_core_lock);
+
+	return errcnt;
+}
+
 static struct config_item core_params[] = {
 	CONF_ITEM_PROC_MULT("HAProxy_Hosts", noop_conf_init, haproxy_host_adder,
 			    nfs_core_param, haproxy_hosts),
@@ -393,7 +476,7 @@ static struct config_item core_params[] = {
 	CONF_ITEM_UI32("MaxRPCRdmaCredits", 1, 4096, 64, nfs_core_param,
 		       rpc.rdma_credits),
 #endif
-	CONF_ITEM_UI32("rpc_ioq_thrdmin", 2, 1024 * 128, 2, nfs_core_param,
+	CONF_ITEM_UI32("RPC_Ioq_ThrdMin", 2, 1024 * 128, 2, nfs_core_param,
 		       rpc.ioq_thrd_min),
 	CONF_ITEM_UI32("RPC_Ioq_ThrdMax", 2, 1024 * 128, 200, nfs_core_param,
 		       rpc.ioq_thrd_max),
@@ -510,6 +593,16 @@ struct config_block nfs_core = {
 	.blk_desc.u.blk.init = noop_conf_init,
 	.blk_desc.u.blk.params = core_params,
 	.blk_desc.u.blk.commit = core_commit
+};
+
+struct config_block nfs_core_update = {
+	.dbus_interface_name = "org.ganesha.nfsd.config.core",
+	.blk_desc.name = "NFS_Core_Param",
+	.blk_desc.type = CONFIG_BLOCK,
+	.blk_desc.flags = CONFIG_UNIQUE, /* too risky to have more */
+	.blk_desc.u.blk.init = noop_conf_init,
+	.blk_desc.u.blk.params = core_params,
+	.blk_desc.u.blk.commit = core_update
 };
 
 #ifdef ENABLE_QOS

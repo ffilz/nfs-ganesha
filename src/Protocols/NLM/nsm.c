@@ -635,6 +635,8 @@ int smmon_proc_notify(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		dec_nsm_client_ref(nsm_client);
 	}
 
+	PTHREAD_RWLOCK_rdlock(&nfs_core_lock);
+
 	if (!client_match(COMPONENT_NLM, "for Cluster Self list",
 			  op_ctx->caller_addr,
 			  &nfs_param.core_param.cluster_members, NULL)) {
@@ -643,6 +645,8 @@ int smmon_proc_notify(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		 */
 		forward_sm_notify(arg, req);
 	}
+
+	PTHREAD_RWLOCK_unlock(&nfs_core_lock);
 
 	LogDebug(COMPONENT_DISPATCH, "REQUEST RESULT: SM_NOTIFY DONE");
 
