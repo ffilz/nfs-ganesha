@@ -29,3 +29,8 @@ message ActionResponse
 {
 	optional bool success = 1;
 }
+message MessageResponse
+{
+	optional bool success = 1;
+	string error = 2;
+}
