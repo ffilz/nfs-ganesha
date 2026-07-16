@@ -940,7 +940,7 @@ error:
 
 	LogEvent(COMPONENT_NLM, "%s %s", message, err);
 
-	gsh_free(err);
+	gsh_free(err, MEM_COMP_RECOVERY);
 
 	/* Remove it from the waitlist before destroying it. */
 	glist_del(&info->infolist);

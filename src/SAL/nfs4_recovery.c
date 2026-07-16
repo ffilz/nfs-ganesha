@@ -428,9 +428,9 @@ char *parse_cli_srv_netid_client(char *start, struct local_nlm_info *info)
 	}
 
 	/* now we have what we need to fire off task to send SM_NOTIFY */
-	info->client_name = gsh_strdup(client_name_string);
-	info->client_address_str = gsh_strdup(cli_ipstring);
-	info->server_address_str = gsh_strdup(srv_ipstring);
+	info->client_name = gsh_strdup(client_name_string, MEM_COMP_RECOVERY);
+	info->client_address_str = gsh_strdup(cli_ipstring, MEM_COMP_RECOVERY);
+	info->server_address_str = gsh_strdup(srv_ipstring, MEM_COMP_RECOVERY);
 
 	return endstr;
 }
@@ -482,7 +482,7 @@ bool parse_nlm_entry(char *entry, enum recovery_type recovery_type)
 	    recovery_type > NLM_CLIENT_ENTRY)
 		goto bad_entry;
 
-	info = gsh_calloc(1, sizeof(*info));
+	info = gsh_calloc(1, sizeof(*info), MEM_COMP_RECOVERY);
 	info->recovery_type = recovery_type;
 
 	LogDebug(COMPONENT_NLM, "Parsing NLM entry %s, type = %d", entry,
