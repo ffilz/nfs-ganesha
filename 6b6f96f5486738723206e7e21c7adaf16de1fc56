@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38ffd048_a52dc5ae",
+        "filename": "src/Protocols/NFS/nfs4_pseudo.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-17T10:31:17Z",
+      "side": 1,
+      "message": "Reuse of the reread_exports() flow is the only option we can use is what I think.",
+      "parentUuid": "f1a08210_5931c63c",
+      "revId": "6b6f96f5486738723206e7e21c7adaf16de1fc56",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01f6f308_71928b24",
@@ -70,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e053215b_25c2087d",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-17T10:31:17Z",
+      "side": 1,
+      "message": "I disagree calling synchronize_updated_exports for remove export, After a RemoveExport, the export disappears from the pseudo root and subsequent mount attempts fail as expected.",
+      "parentUuid": "cb14f56f_4e04c24e",
+      "revId": "6b6f96f5486738723206e7e21c7adaf16de1fc56",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bcbd820_3db62eae",
@@ -83,6 +119,24 @@
       "writtenOn": "2026-07-16T21:35:48Z",
       "side": 1,
       "message": "You need the EXPORT_ADMIN_LOCK here too",
+      "revId": "6b6f96f5486738723206e7e21c7adaf16de1fc56",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef1ab67f_2a00bd59",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-17T10:31:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bcbd820_3db62eae",
       "revId": "6b6f96f5486738723206e7e21c7adaf16de1fc56",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
