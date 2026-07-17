@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a54d4a44_59191197",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-17T22:22:16Z",
+      "side": 1,
+      "message": "Not ready for merge, does not compile without conditional compile enabled.",
+      "revId": "b3fbb983ac6db8dca422f4928bc1490a0965226a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78e6a7df_5ec3c321",
+        "filename": "src/include/nfs_cluster_qos.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-17T22:22:16Z",
+      "side": 1,
+      "message": "This needs a conditional to prevent double inclusion",
+      "revId": "b3fbb983ac6db8dca422f4928bc1490a0965226a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
