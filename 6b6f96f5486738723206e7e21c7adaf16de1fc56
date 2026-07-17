@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40b2be13_9506ac4b",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-17T07:47:32Z",
+      "side": 1,
+      "message": "I looked into this further. add_export_commit() already mounts the export directly into the pseudofs. As noted in export_commit_common():\n\n\"add_export_commit deals with creating pseudo mount directly.\"\n\nI also verified this by testing: after AddExport, the new export is immediately visible under the NFSv4 pseudo root and can be mounted without invoking synchronize_updated_exports(). Similarly, after RemoveExport, the export disappears from the pseudo root and subsequent mount attempts fail as expected.",
+      "parentUuid": "01f6f308_71928b24",
+      "revId": "6b6f96f5486738723206e7e21c7adaf16de1fc56",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb14f56f_4e04c24e",
