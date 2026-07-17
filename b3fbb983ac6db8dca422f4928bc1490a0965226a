@@ -33,6 +33,23 @@
       "message": "This needs a conditional to prevent double inclusion",
       "revId": "b3fbb983ac6db8dca422f4928bc1490a0965226a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d9ae0d1_9287fe39",
+        "filename": "src/include/nfs_cluster_qos.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-17T22:32:50Z",
+      "side": 1,
+      "message": "One more thing - if ENABLE_CLUSTER_QOS is dependent on ENABLE_QOS, you actually need to error check that in CMakeLists.txt - and then you ONLY need to conditional on ENABLE_CLUSTER_QOS",
+      "revId": "b3fbb983ac6db8dca422f4928bc1490a0965226a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
