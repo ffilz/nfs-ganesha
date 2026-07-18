@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9572169_59fffb98",
+        "filename": "src/grpc_server/proto/exportService.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-18T10:46:42Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+ * D-Bus to gRPC without changing semantics. Shared request/response $",
+      "revId": "ab2ced3de1412e69a7a5eef081b3f1e35fded672",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d99681_6ac8e61c",
+        "filename": "src/grpc_server/proto/exportService.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-18T10:46:42Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+ * may be reused by other gRPC modules. $",
+      "revId": "ab2ced3de1412e69a7a5eef081b3f1e35fded672",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "160bb854_8b7ed132",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3344,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-18T10:46:42Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+ * @brief Retrieves aggregated total NFS operation statistics across all exports.",
+      "revId": "ab2ced3de1412e69a7a5eef081b3f1e35fded672",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
