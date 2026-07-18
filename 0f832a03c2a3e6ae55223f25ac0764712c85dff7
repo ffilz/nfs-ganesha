@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8bff342e_07648738",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cab4d14b_24f301ce",
+      "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd38dd49_6a5ce579",
         "filename": "src/include/mem_components.h",
         "patchSetId": 7
@@ -99,6 +117,24 @@
       "writtenOn": "2026-06-23T16:42:02Z",
       "side": 1,
       "message": "Let\u0027s get rid of all the _POOL designations.\n\nAnd really, since we\u0027re hitting every allocation, please completely eradicate the old pool mechanism and just directly use gsh_alloc/gsh_free",
+      "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd618c04_546fd37c",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bd38dd49_6a5ce579",
       "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

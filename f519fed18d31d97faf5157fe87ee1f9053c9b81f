@@ -355,6 +355,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fdb4d24_66940f1a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1522,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c0d1e369_3025c933",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6cf902d2_ff3fde86",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
         "patchSetId": 4
@@ -514,6 +532,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a44a3f0_0d3241ca",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3503,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Allocated by the sub-FSAL (e.g. Ceph/Gluster gsh_memdup(..., MEM_COMP_FSAL)) or by fsal_copy_attrs when duplicating sec_label. Freeing with MEM_COMP_FSAL matches those alloc sites.",
+      "parentUuid": "fa33bfa9_2ed8a47a",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "937d3624_ac73d619",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 4
@@ -561,6 +597,24 @@
       "side": 1,
       "message": "A good that you called it MEM_COMP_MDACHE not MEM_COMP_CACHE as I originally suggested.\n\nBut let\u0027s not reference mdcache_entry_pool-\u003eobject_size and just use sizeof(*nentry) or sizeof(mdcache_entry_t)",
       "parentUuid": "673401b4_557f025c",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0e3f715_ac4fb962",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1690,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8da5194e_4c7ba11f",
       "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -985,6 +1039,24 @@
       "side": 1,
       "message": "No let\u0027s completely get rid of mdcache_entry_pool.\n\nAnywhere mdcache_entry_pool-\u003eobject_size is used, just replace with sizeof(mdcache_entry_t)",
       "parentUuid": "79a387ef_d84d324c",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a750b398_c46c0c00",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4bdcd416_37b90be9",
       "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -2363,6 +2435,24 @@
       "side": 1,
       "message": "Again, get rid of the pool object and just directly use sizeof()",
       "parentUuid": "8f918891_8ac534fc",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "403acc3a_98dad7e4",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "21f32758_12d66578",
       "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -4542,6 +4632,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "81a35781_951f30cb",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5227,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "674c17b0_3a9d5b75",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e846b271_b70c8d29",
         "filename": "src/config_parsing/analyse.c",
         "patchSetId": 4
@@ -4695,6 +4803,24 @@
       "side": 1,
       "message": "You could remove the if test, gsh_free is safe to call with NULL pointer.\n\nI hope doing so isn\u0027t counted...",
       "parentUuid": "f682e365_58194616",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01b093aa_98da10a6",
+        "filename": "src/config_parsing/analyse.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b10967d8_e7f2c5eb",
       "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -6097,6 +6223,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f0d73f3_9234099a",
+        "filename": "src/support/exports.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3060,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4edf6bf7_5261dd4d",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd0aeab3_955bd991",
         "filename": "src/support/ip_utils.c",
         "patchSetId": 4
@@ -6203,6 +6347,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d8cf9a2_e1b506f5",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "64143e13_6e9e4e12",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b87a2e84_95aa1e84",
         "filename": "src/support/nfs4_acls.c",
         "patchSetId": 4
@@ -6250,6 +6412,24 @@
       "side": 1,
       "message": "Good, but let\u0027s make the component MEM_COMP_ACL",
       "parentUuid": "f26024bf_feb8bb67",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdcc6650_31b59825",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cf67225b_e718ad70",
       "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -6309,6 +6489,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7be9e0bf_f5f0be42",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a12cf27b_7505d40c",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7608f097_2aa53a0e",
         "filename": "src/support/nfs4_acls.c",
         "patchSetId": 4
@@ -6362,6 +6560,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a554c8c_e95a019d",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "71920617_450df74d",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebd712bb_e78c5c5d",
         "filename": "src/support/nfs4_acls.c",
         "patchSetId": 4
@@ -6409,6 +6625,24 @@
       "side": 1,
       "message": "Again, let\u0027s completely get rid of pool_t objects.",
       "parentUuid": "6ba43e0c_9384a5f0",
+      "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85c1df1c_f593df2b",
+        "filename": "src/support/nfs4_acls.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-18T14:10:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8521d842_e278378b",
       "revId": "f519fed18d31d97faf5157fe87ee1f9053c9b81f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
