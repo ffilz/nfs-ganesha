@@ -1455,6 +1455,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdc51195_ece54748",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-19T10:00:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8a31857d_597d6286",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e48450c_784e96ce",
         "filename": "src/include/abstract_mem.h",
         "patchSetId": 10
@@ -1501,6 +1519,24 @@
       "writtenOn": "2026-07-01T21:11:30Z",
       "side": 1,
       "message": "Alphabetically sort the components.",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "175d389d_dfce9b87",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-19T10:00:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8728efd6_52df8859",
       "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1559,6 +1595,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb4b9a9f_d8233f90",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-19T10:00:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b0ca4e55_f6d6b03a",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b9d2961_7f34c6f5",
         "filename": "src/include/mem_components.h",
         "patchSetId": 10
@@ -1570,6 +1624,24 @@
       "writtenOn": "2026-07-01T21:11:30Z",
       "side": 1,
       "message": "MEM_COMP_DB_THREAD_POOL and MEM_COMP_DROP_POOL are only used by one source file in FSAL_PROXY_V4 which is not really a supported FSAL anymore, just use MEM_COMP_FSAL (and as mentioned before, please completely eradicate all remains of the memory pool structure - it just obfuscates allocations and frees.)",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3820a8f_215bdc41",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-19T10:00:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3b9d2961_7f34c6f5",
       "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1593,6 +1665,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0d7bbdd_44d0d507",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-19T10:00:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0169ab47_1a4e09aa",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a478b03_a37b2423",
         "filename": "src/include/mem_components.h",
         "patchSetId": 10
@@ -1604,6 +1694,24 @@
       "writtenOn": "2026-07-01T21:11:30Z",
       "side": 1,
       "message": "Use MEM_COMP_PROTOCOL and eradicate the old pool stuff",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "385871a4_e52b9166",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-19T10:00:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3a478b03_a37b2423",
       "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1627,6 +1735,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "228e9fc7_ece41a4d",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-19T10:00:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "09d9795d_f43aed67",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8f6c8a4_d071f3ec",
         "filename": "src/include/mem_components.h",
         "patchSetId": 10
@@ -1638,6 +1764,24 @@
       "writtenOn": "2026-07-01T21:11:30Z",
       "side": 1,
       "message": "Use MEM_COMP_STATE and eradicate the old pool stuff",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f22a1285_0d6ba83a",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-19T10:00:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e8f6c8a4_d071f3ec",
       "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

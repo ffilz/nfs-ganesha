@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "553c5ae8_4020a6de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-19T10:00:22Z",
+      "side": 1,
+      "message": "Two-tier approach:\n------------------\nNow (this patch): \ngsh_mem_stats_update_free() already has an underflow-clamp when current_active_bytes \u003c size (freeing more than was ever accounted). Today that\u0027s silently clamped to 0. Added a LogWarn there — it\u0027s a free, always-on tripwire that fires on the most common mismatch pattern (freeing against a component that never had this memory).\n\nFollow-up (separate patch):\nFor a precise, exhaustive check, add a debug/test-only shadow table (pointer -\u003e mem_comp, gated behind a build/runtime flag like _INTERNAL_STATD) populated in gsh_mem_stats_update_alloc() and checked and erased in gsh_mem_stats_update_free(). Mismatch -\u003e LogCrit. Run the full test suite once with it enabled to catch every mismatch precisely.",
+      "parentUuid": "830f53d3_c901eece",
+      "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c5337cf_a9a10620",
         "filename": "src/config_parsing/config_parsing.c",
         "patchSetId": 7
@@ -65,6 +83,24 @@
       "writtenOn": "2026-06-23T16:42:02Z",
       "side": 1,
       "message": "Good catch, also add comment about open_memstream here.\n\nShould we consider adding a gsh_alloc_account function that basically completes something that was allocated with malloc in a library function into as if it had been gsh allocated? That would save the double allocation.\n\nNot so critical for config which are freed shortly, but might also contribute to fragmentation.",
+      "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea0a29bc_7ed00c8a",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-19T10:00:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7c5337cf_a9a10620",
       "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
