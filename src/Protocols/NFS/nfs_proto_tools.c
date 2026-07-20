@@ -1256,13 +1256,14 @@ void nfs4_pathname4_alloc(pathname4 *pathname4, char *path)
 	int i = 0;
 
 	if (path == NULL) {
-		pathname4->pathname4_val = gsh_malloc(sizeof(component4));
+		pathname4->pathname4_val =
+			gsh_malloc(sizeof(component4), MEM_COMP_PROTOCOL);
 		pathname4->pathname4_len = 1;
 		pathname4->pathname4_val->utf8string_val =
-			gsh_calloc(MAXPATHLEN, sizeof(char));
+			gsh_calloc(MAXPATHLEN, sizeof(char), MEM_COMP_PROTOCOL);
 		pathname4->pathname4_val->utf8string_len = MAXPATHLEN;
 	} else {
-		path_sav = gsh_strdup(path);
+		path_sav = gsh_strdup(path, MEM_COMP_PROTOCOL);
 		/* count tokens */
 		path_work = path_sav;
 		while ((token = strsep(&path_work, "/")) != NULL) {
@@ -1276,19 +1277,21 @@ void nfs4_pathname4_alloc(pathname4 *pathname4, char *path)
 		path_work = path_sav;
 
 		/* fill component4 */
-		pathname4->pathname4_val = gsh_malloc(i * sizeof(component4));
+		pathname4->pathname4_val =
+			gsh_malloc(i * sizeof(component4), MEM_COMP_PROTOCOL);
 		i = 0;
 		while ((token = strsep(&path_work, "/")) != NULL) {
 			if (strlen(token) > 0) {
 				LogDebug(COMPONENT_NFS_V4, "token %d is %s", i,
 					 token);
 				utf8string_dup(&pathname4->pathname4_val[i],
-					       token, strlen(token));
+					       token, strlen(token),
+					       MEM_COMP_PROTOCOL);
 				i++;
 			}
 		}
 		pathname4->pathname4_len = i;
-		gsh_free(path_sav);
+		gsh_free(path_sav, MEM_COMP_PROTOCOL);
 	}
 }
 
@@ -1315,11 +1318,12 @@ void nfs4_pathname4_free(pathname4 *pathname4)
 			LogFullDebug(COMPONENT_NFS_V4,
 				     "freeing component %d: %s", i + 1,
 				     pathname4->pathname4_val[i].utf8string_val);
-			gsh_free(pathname4->pathname4_val[i].utf8string_val);
+			gsh_free(pathname4->pathname4_val[i].utf8string_val,
+				 MEM_COMP_PROTOCOL);
 			pathname4->pathname4_val[i].utf8string_val = NULL;
 		}
 	}
-	gsh_free(pathname4->pathname4_val);
+	gsh_free(pathname4->pathname4_val, MEM_COMP_PROTOCOL);
 	pathname4->pathname4_val = NULL;
 }
 
@@ -3693,7 +3697,7 @@ error:
 void nfs4_Fattr_Free(fattr4 *fattr)
 {
 	if (fattr->attr_vals.attrlist4_val != NULL) {
-		gsh_free(fattr->attr_vals.attrlist4_val);
+		gsh_free(fattr->attr_vals.attrlist4_val, MEM_COMP_PROTOCOL);
 		fattr->attr_vals.attrlist4_val = NULL;
 		fattr->attr_vals.attrlist4_len = 0;
 	}
@@ -3840,6 +3844,20 @@ nfsstat4 file_To_Fattr(compound_data_t *data, attrmask_t request_mask,
 							      attr);
 		if (FSAL_IS_ERROR(status))
 			return nfs4_Errno_status(status);
+	}
+
+	/* Inject fs_locations for trunking AFTER getattrs so all other
+	 * attributes are still populated. Take a ref so fsal_release_attrs
+	 * can safely call nfs4_fs_locations_release without freeing the
+	 * export's copy.
+	 */
+	if (attribute_is_set(Bitmap, FATTR4_FS_LOCATIONS) &&
+	    nfs_param.core_param.trunking &&
+	    op_ctx->ctx_export->export_fs_location != NULL) {
+		nfs4_fs_locations_get_ref(
+			op_ctx->ctx_export->export_fs_location);
+		attr->fs_locations = op_ctx->ctx_export->export_fs_location;
+		FSAL_SET_MASK(attr->valid_mask, ATTR4_FS_LOCATIONS);
 	}
 
 	/* Restore originally requested mask */
@@ -4131,7 +4149,8 @@ int nfs4_FSALattr_To_Fattr(struct xdr_attrs_args *args, struct bitmap4 *Bitmap,
 	if (attrvals_buflen > nfs_param.core_param.rpc.max_send_buffer_size)
 		attrvals_buflen = nfs_param.core_param.rpc.max_send_buffer_size;
 
-	Fattr->attr_vals.attrlist4_val = gsh_malloc(attrvals_buflen);
+	Fattr->attr_vals.attrlist4_val =
+		gsh_malloc(attrvals_buflen, MEM_COMP_PROTOCOL);
 
 	memset(&attr_body, 0, sizeof(attr_body));
 	xdrmem_create(&attr_body, Fattr->attr_vals.attrlist4_val,
@@ -5011,7 +5030,7 @@ posix_acl *encode_posix_acl(const acl_t acl, uint32_t type,
 	real_size = sizeof(struct posix_acl) +
 		    count * sizeof(struct posix_acl_entry);
 
-	encode_acl = gsh_malloc(real_size);
+	encode_acl = gsh_malloc(real_size, MEM_COMP_PROTOCOL);
 	if (!encode_acl)
 		return NULL;
 
@@ -5259,9 +5278,9 @@ int nfs3_acl_2_fsal_acl(struct fsal_attrlist *attr, nfs3_int32 mask,
 	}
 
 	/* Reallocating acldata into the required size */
-	acldata.aces =
-		(fsal_ace_t *)gsh_realloc(acldata.aces,
-					  new_count * sizeof(fsal_ace_t));
+	acldata.aces = (fsal_ace_t *)gsh_realloc(acldata.aces,
+						 new_count * sizeof(fsal_ace_t),
+						 MEM_COMP_ACL);
 	acldata.naces = new_count;
 
 	//Cache?

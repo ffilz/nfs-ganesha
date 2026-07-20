@@ -83,11 +83,6 @@ uint32_t clientid_counter;
  */
 uint64_t clientid_verifier;
 
-/**
- * @brief Pool for client data structures
- */
-pool_t *client_id_pool;
-
 static uint64_t num_confirmed_client_ids;
 
 uint32_t num_of_curr_expired_clients;
@@ -413,7 +408,7 @@ void free_client_id(nfs_client_id_t *clientid)
 	/* This is where we finally let go of the client record. */
 	dec_client_record_ref(clientid->cid_client_record);
 
-	gsh_free(clientid->cid_recov_tag);
+	gsh_free(clientid->cid_recov_tag, MEM_COMP_RECOVERY);
 	clientid->cid_recov_tag = NULL;
 
 	PTHREAD_MUTEX_destroy(&clientid->cid_mutex);
@@ -423,7 +418,7 @@ void free_client_id(nfs_client_id_t *clientid)
 
 	put_gsh_client(clientid->gsh_client);
 
-	pool_free(client_id_pool, clientid);
+	gsh_free(clientid, MEM_COMP_CLIENTID);
 }
 
 /**
@@ -590,7 +585,8 @@ nfs_client_id_t *create_client_id(clientid4 clientid,
 				  nfs_client_cred_t *credential,
 				  uint32_t minorversion)
 {
-	nfs_client_id_t *client_rec = pool_alloc(client_id_pool);
+	nfs_client_id_t *client_rec =
+		gsh_calloc(1, sizeof(nfs_client_id_t), MEM_COMP_CLIENTID);
 	state_owner_t *owner;
 
 	PTHREAD_MUTEX_init(&client_rec->cid_mutex, NULL);
@@ -1393,7 +1389,7 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 
 	if (clientid->cid_recov_tag != NULL && !make_stale) {
 		nfs4_rm_clid(clientid);
-		gsh_free(clientid->cid_recov_tag);
+		gsh_free(clientid->cid_recov_tag, MEM_COMP_RECOVERY);
 		clientid->cid_recov_tag = NULL;
 	}
 
@@ -1854,7 +1850,7 @@ void free_client_record(nfs_client_record_t *record)
 {
 	PTHREAD_MUTEX_destroy(&record->cr_mutex);
 
-	gsh_free(record);
+	gsh_free(record, MEM_COMP_CLIENTID);
 }
 
 /**
@@ -1952,7 +1948,14 @@ uint64_t client_record_value_hash(nfs_client_record_t *key)
 	other = key->cr_pnfs_flags;
 	if (nfs_param.nfsv4_param.ip_based_client_owner_separation)
 		other = other ^ hash_sockaddr(&key->cr_client_addr, true);
-	other = (other << 32) | hash_sockaddr(&key->cr_server_addr, true);
+	/* When trunking is enabled multiple server IPs share the same
+	 * client record.  Exclude cr_server_addr from the hash so that
+	 * an EXCHANGE_ID arriving on the trunk IP finds the same bucket
+	 * as the one that arrived on the primary IP.
+	 */
+	if (!nfs_param.core_param.trunking)
+		other = (other << 32) |
+			hash_sockaddr(&key->cr_server_addr, true);
 	return CityHash64WithSeed(key->cr_client_val, key->cr_client_val_len,
 				  other);
 }
@@ -2041,11 +2044,20 @@ int compare_client_record(struct gsh_buffdesc *buff1,
 		return 1;
 	}
 
-	rc = sockaddr_cmp(&pkey1->cr_server_addr, &pkey2->cr_server_addr, true);
-	if (rc != 0) {
-		if (isDebug(COMPONENT_HASHTABLE))
-			LogFullDebug(COMPONENT_CLIENTID, "sockaddr mismatch");
-		return 1;
+	/* When trunking is enabled, different server IPs serve the same
+	 * ganesha instance.  An EXCHANGE_ID arriving on the trunk IP must
+	 * find the same client record as the primary IP, so skip the
+	 * server address comparison.
+	 */
+	if (!nfs_param.core_param.trunking) {
+		rc = sockaddr_cmp(&pkey1->cr_server_addr,
+				  &pkey2->cr_server_addr, true);
+		if (rc != 0) {
+			if (isDebug(COMPONENT_HASHTABLE))
+				LogFullDebug(COMPONENT_CLIENTID,
+					     "sockaddr mismatch");
+			return 1;
+		}
 	}
 
 	if (nfs_param.nfsv4_param.ip_based_client_owner_separation) {
@@ -2129,7 +2141,8 @@ nfs_client_record_t *get_client_record(const char *const value,
 		return NULL;
 	}
 
-	record = gsh_malloc(sizeof(nfs_client_record_t) + len);
+	record = gsh_malloc(sizeof(nfs_client_record_t) + len,
+			    MEM_COMP_CLIENTID);
 
 	record->cr_refcount = 1;
 	record->cr_client_val_len = len;
@@ -2168,7 +2181,7 @@ nfs_client_record_t *get_client_record(const char *const value,
 
 		/* Use the existing record */
 		hashtable_releaselatched(ht_client_record, &latch);
-		gsh_free(record);
+		gsh_free(record, MEM_COMP_CLIENTID);
 		return old;
 
 	case HASHTABLE_ERROR_NO_SUCH_KEY:
@@ -2211,8 +2224,8 @@ static void client_cb(struct fridgethr_context *ctx)
 	cb_arg = ctx->arg;
 	cb_arg->cb(cb_arg->pclientid, cb_arg->state);
 	dec_client_id_ref(cb_arg->pclientid);
-	gsh_free(cb_arg->state);
-	gsh_free(cb_arg);
+	gsh_free(cb_arg->state, MEM_COMP_STATE);
+	gsh_free(cb_arg, MEM_COMP_CLIENTID);
 }
 
 /**
@@ -2250,7 +2263,8 @@ void nfs41_foreach_client_callback(bool (*cb)(nfs_client_id_t *cl, void *state),
 
 			if (pclientid->cid_minorversion > 0) {
 				cb_arg = gsh_malloc(
-					sizeof(struct client_callback_arg));
+					sizeof(struct client_callback_arg),
+					MEM_COMP_CLIENTID);
 
 				cb_arg->cb = cb;
 				cb_arg->state = state;
@@ -2262,7 +2276,7 @@ void nfs41_foreach_client_callback(bool (*cb)(nfs_client_id_t *cl, void *state),
 					LogCrit(COMPONENT_CLIENTID,
 						"unable to start client cb thread %d",
 						rc);
-					gsh_free(cb_arg);
+					gsh_free(cb_arg, MEM_COMP_CLIENTID);
 					dec_client_id_ref(pclientid);
 				}
 			}
@@ -2389,9 +2403,6 @@ int nfs_Init_client_id(void)
 			"NFS CLIENT_ID: Cannot init Client Record cache");
 		return -1;
 	}
-
-	client_id_pool =
-		pool_basic_init("NFS4 Client ID Pool", sizeof(nfs_client_id_t));
 
 	PTHREAD_MUTEX_init(&expired_client_ids_list_lock, NULL);
 	glist_init(&expired_client_ids_list);

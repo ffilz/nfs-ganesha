@@ -78,6 +78,9 @@ typedef enum protos {
 #ifdef _USE_NFS_RDMA
 	P_NFS_RDMA, /*< NFS over RPC/RDMA */
 #endif
+#ifdef ENABLE_CLUSTER_QOS
+	P_CQOS, /*< Cluster level QoS */
+#endif
 	P_COUNT /*< Number of protocols */
 } protos;
 
@@ -101,7 +104,10 @@ typedef enum protos {
  * @brief Default NFS Over RDMA Port.
  */
 #define NFS_RDMA_PORT 20049
-
+/**
+ * @brief Default Cluster QoS Port.
+ */
+#define CQOS_PORT 18189
 /**
  * @brief Default value for _9p_param.nb_worker
  */
@@ -565,6 +571,8 @@ typedef struct nfs_core_param {
 	/** Enable creating metrics and pushing to MONITORING IP address */
 	bool enable_metrics;
 #endif
+	/** Enable fs_locations trunking support */
+	bool trunking;
 	/** if  Manage_Gids=True and group resolution fails,
 	 *  then use gid data from rpc request */
 	bool enable_rpc_cred_fallback;
@@ -749,6 +757,21 @@ typedef struct nfs_version4_parameter {
 	/** Whether to allow blocking locks (READW_LT/WRITEW_LT). Defaults to
 	 * true and settable with Blocking_Locks. */
 	bool allow_blocking_locks;
+	/** Whether to enable NFSv4.2 server-side copy offload */
+	bool allow_copy_offload;
+	/** Short copy support for copy_offload*/
+	bool short_copy;
+	/**
+	 * Minimum byte count at which an COPY offload copying is done.
+	 * Default: 16 MiB for sync. 16*4  MiB for async.
+	 */
+	uint64_t copy_offload_chunk_size;
+	/**
+	 * This controls the size of the dedicated xcopy fridger thread pool,
+	 * which also controls number of concurrent XCOPY supported by server.
+	 * Default: 8.  Settable with Max_Copy_Workers.
+	 */
+	uint32_t max_copy_workers;
 
 } nfs_version4_parameter_t;
 

@@ -51,7 +51,7 @@
 #include "pnfs_utils.h"
 #include "mdcache.h"
 #include "nfs_qos.h"
-
+#include "abstract_mem.h"
 /**
  * @brief Protect EXPORT_DEFAULTS structure for dynamic update.
  *
@@ -82,8 +82,8 @@ struct global_export_perms export_opt = { GLOBAL_EXPORT_PERMS_INITIALIZER(
 struct global_export_perms export_opt_cfg = { GLOBAL_EXPORT_PERMS_INITIALIZER(
 	export_opt_cfg) };
 
-static int StrExportOptions(struct display_buffer *dspbuf,
-			    struct export_perms *p_perms)
+int StrExportOptions(struct display_buffer *dspbuf,
+		     struct export_perms *p_perms)
 {
 	int b_left = display_start(dspbuf);
 
@@ -396,7 +396,7 @@ void FreeExportClient(struct base_client_entry *client)
 	expclient = container_of(client, struct exportlist_client_entry,
 				 client_entry);
 
-	gsh_free(expclient);
+	gsh_free(expclient, MEM_COMP_EXPORT);
 }
 
 /**
@@ -424,7 +424,8 @@ static void *client_init(void *link_mem, void *self_struct)
 	if (link_mem == NULL) {
 		return self_struct;
 	} else if (self_struct == NULL) {
-		expcli = gsh_calloc(1, sizeof(struct exportlist_client_entry));
+		expcli = gsh_calloc(1, sizeof(struct exportlist_client_entry),
+				    MEM_COMP_EXPORT);
 
 		cli = &expcli->client_entry;
 		glist_init(&cli->cle_list);
@@ -437,7 +438,7 @@ static void *client_init(void *link_mem, void *self_struct)
 		if (!glist_empty(&cli->cle_list))
 			FreeClientList(&cli->cle_list, FreeExportClient);
 		assert(glist_empty(&cli->cle_list));
-		gsh_free(expcli);
+		gsh_free(expcli, MEM_COMP_EXPORT);
 		return NULL;
 	}
 }
@@ -451,7 +452,8 @@ static void *qos_block_init(void *link_mem, void *self_struct)
 	struct qos_block_config *qos_block;
 
 	if (self_struct == NULL) {
-		qos_block = gsh_calloc(1, sizeof(struct qos_block_config));
+		qos_block = gsh_calloc(1, sizeof(struct qos_block_config),
+				       MEM_COMP_EXPORT);
 		LogFullDebug(COMPONENT_CONFIG, "Allocating args: %p: %p",
 			     link_mem, qos_block);
 	} else {
@@ -496,7 +498,7 @@ static int qos_block_commit(void *node, void *link_mem, void *self_struct,
 			     qos_block, qos_block->enable_qos,
 			     gsh_export->export_id, gsh_export->cfg_fullpath);
 		if (qos_block) {
-			gsh_free(qos_block);
+			gsh_free(qos_block, MEM_COMP_EXPORT);
 			gsh_export->qos_block = NULL;
 		}
 	}
@@ -835,6 +837,14 @@ void clean_export_paths(struct gsh_export *export)
 }
 
 /**
+ * @brief Init for FSAL sub-block under EXPORT.
+ */
+static void *export_fsal_init(void *link_mem, void *self_struct)
+{
+	return fsal_init(link_mem, self_struct, MEM_COMP_EXPORT);
+}
+
+/**
  * @brief Commit a FSAL sub-block
  *
  * Use the Name parameter passed in via the link_mem to lookup the
@@ -870,9 +880,11 @@ static int fsal_cfg_commit(void *node, void *link_mem, void *self_struct,
 	/* Since as yet, we don't have gsh_refstr for op_ctx, we need to
 	 * create temporary ones here.
 	 */
-	op_ctx->ctx_fullpath = gsh_refstr_dup(export->cfg_fullpath);
+	op_ctx->ctx_fullpath =
+		gsh_refstr_dup(export->cfg_fullpath, MEM_COMP_EXPORT);
 	if (export->cfg_pseudopath != NULL) {
-		op_ctx->ctx_pseudopath = gsh_refstr_dup(export->cfg_pseudopath);
+		op_ctx->ctx_pseudopath =
+			gsh_refstr_dup(export->cfg_pseudopath, MEM_COMP_EXPORT);
 	} else {
 		/* An export that does not export NFSv4 may not have a
 		 * Pseudo Path.
@@ -1142,14 +1154,16 @@ static inline void copy_gsh_export(struct gsh_export *dest,
 		old_pseudopath = rcu_dereference(dest->pseudopath);
 
 	/* Free old cfg_fullpath and cfg_pseudopath */
-	gsh_free(dest->cfg_fullpath);
-	gsh_free(dest->cfg_pseudopath);
+	gsh_free(dest->cfg_fullpath, MEM_COMP_EXPORT);
+	gsh_free(dest->cfg_pseudopath, MEM_COMP_EXPORT);
 
 	/* Copy config fullpath and create new refstr */
 	if (src->cfg_fullpath != NULL) {
-		dest->cfg_fullpath = gsh_strdup(src->cfg_fullpath);
+		dest->cfg_fullpath =
+			gsh_strdup(src->cfg_fullpath, MEM_COMP_EXPORT);
 		rcu_set_pointer(&(dest->fullpath),
-				gsh_refstr_dup(dest->cfg_fullpath));
+				gsh_refstr_dup(dest->cfg_fullpath,
+					       MEM_COMP_EXPORT));
 	} else {
 		dest->cfg_fullpath = NULL;
 		rcu_set_pointer(&(dest->fullpath), NULL);
@@ -1161,9 +1175,11 @@ static inline void copy_gsh_export(struct gsh_export *dest,
 
 	/* Copy config pseudopath and create new refstr */
 	if (src->cfg_pseudopath != NULL) {
-		dest->cfg_pseudopath = gsh_strdup(src->cfg_pseudopath);
+		dest->cfg_pseudopath =
+			gsh_strdup(src->cfg_pseudopath, MEM_COMP_EXPORT);
 		rcu_set_pointer(&(dest->pseudopath),
-				gsh_refstr_dup(dest->cfg_pseudopath));
+				gsh_refstr_dup(dest->cfg_pseudopath,
+					       MEM_COMP_EXPORT));
 	} else {
 		dest->cfg_pseudopath = NULL;
 		rcu_set_pointer(&(dest->pseudopath), NULL);
@@ -1784,9 +1800,11 @@ static int export_commit_common(void *node, void *link_mem, void *self_struct,
 	/* Convert fullpath and pseudopath into gsh_refstr. Do this now so that
 	 * init_export_root() has them available when it creates root context.
 	 */
-	export->fullpath = gsh_refstr_dup(export->cfg_fullpath);
+	export->fullpath =
+		gsh_refstr_dup(export->cfg_fullpath, MEM_COMP_EXPORT);
 	if (export->cfg_pseudopath != NULL) {
-		export->pseudopath = gsh_refstr_dup(export->cfg_pseudopath);
+		export->pseudopath =
+			gsh_refstr_dup(export->cfg_pseudopath, MEM_COMP_EXPORT);
 	} else {
 		/* An export that does not export NFSv4 may not have a
 		 * Pseudo Path.
@@ -2336,11 +2354,12 @@ static struct config_item_list read_access_check_policy_type[] = {
 				      _perms_.options, _perms_.set),           \
 		CONF_XPRT_SEC_PARAM(_struct_, _perms_)
 
-void *export_client_allocator(void)
+void *export_client_allocator(mem_components_t mem_comp)
 {
 	struct exportlist_client_entry *expcli;
 
-	expcli = gsh_calloc(1, sizeof(struct exportlist_client_entry));
+	expcli =
+		gsh_calloc(1, sizeof(struct exportlist_client_entry), mem_comp);
 
 	return &expcli->client_entry;
 }
@@ -2396,8 +2415,9 @@ static int client_adder(const char *token, enum term_type type_hint,
 	LogMidDebug(COMPONENT_EXPORT, "Adding client %s", token);
 
 	rc = add_client(COMPONENT_EXPORT, &client->cle_list, token, type_hint,
-			cnode, err_type, export_client_allocator,
-			export_client_filler, proto_cli);
+			MEM_COMP_EXPORT, cnode, err_type,
+			export_client_allocator, export_client_filler,
+			proto_cli);
 	return rc;
 }
 
@@ -2558,6 +2578,84 @@ static struct config_item fsal_params[] = {
 				      options, options_set)
 
 /**
+ * @brief FS_LOCATION block configuration
+ */
+
+struct fs_locations_config {
+	uint32_t nservers;
+	char *fs_root;
+	char *rootpath;
+	char *server;
+};
+
+static void *fsloc_block_init(void *link_mem, void *self_struct)
+{
+	assert(link_mem != NULL || self_struct != NULL);
+
+	if (link_mem == NULL) {
+		return self_struct; /* NOP */
+	} else if (self_struct == NULL) {
+		return gsh_calloc(1, sizeof(struct fs_locations_config),
+				  MEM_COMP_CONFIG);
+	} else {
+		return NULL;
+	}
+}
+
+static int fsloc_block_commit(void *node, void *link_mem, void *self_struct,
+			      struct config_error_type *err_type)
+{
+	fsal_fs_locations_t **exp_fs_loc = link_mem;
+	struct gsh_export *gsh_export =
+		container_of(exp_fs_loc, struct gsh_export, export_fs_location);
+	struct fs_locations_config *fs_locations = self_struct;
+
+	if (fs_locations == NULL)
+		return 0;
+
+	/* Release any previous value */
+	if (gsh_export->export_fs_location != NULL) {
+		nfs4_fs_locations_release(gsh_export->export_fs_location);
+		gsh_export->export_fs_location = NULL;
+	}
+
+	/* Use the ref-counted allocator so fsal_release_attrs works correctly */
+	gsh_export->export_fs_location =
+		nfs4_fs_locations_new(fs_locations->fs_root,
+				      fs_locations->rootpath,
+				      fs_locations->nservers);
+	if (gsh_export->export_fs_location == NULL)
+		return -1;
+
+	gsh_export->export_fs_location->nservers = 1;
+	gsh_export->export_fs_location->server->utf8string_len =
+		strlen(fs_locations->server);
+	gsh_export->export_fs_location->server->utf8string_val =
+		gsh_strdup(fs_locations->server, MEM_COMP_FSAL);
+
+	LogFullDebug(COMPONENT_CONFIG,
+		     "FS_LOCATION nservers=%u fs_root=%s server=%s rootpath=%s",
+		     fs_locations->nservers,
+		     fs_locations->fs_root ? fs_locations->fs_root : "NULL",
+		     fs_locations->server ? fs_locations->server : "NULL",
+		     fs_locations->rootpath ? fs_locations->rootpath : "NULL");
+
+	return 0;
+}
+
+static struct config_item fsloc_params[] = {
+	CONF_ITEM_UI32("Nservers", 0, UINT32_MAX, 0, fs_locations_config,
+		       nservers),
+	CONF_ITEM_STR("Fs_root", 1, MAXPATHLEN, NULL, fs_locations_config,
+		      fs_root),
+	CONF_ITEM_STR("Rootpath", 1, MAXPATHLEN, NULL, fs_locations_config,
+		      rootpath),
+	CONF_ITEM_STR("Server", 1, MAXPATHLEN, NULL, fs_locations_config,
+		      server),
+	CONFIG_EOL
+};
+
+/**
  * @brief Table of EXPORT block parameters
  */
 
@@ -2572,6 +2670,8 @@ static struct config_item export_params[] = {
 	CONF_ITEM_BLOCK("QOS_BLOCK", qos_block_params, qos_block_init,
 			qos_block_commit, gsh_export, qos_block),
 #endif
+	CONF_ITEM_BLOCK("FS_LOCATION", fsloc_params, fsloc_block_init,
+			fsloc_block_commit, gsh_export, export_fs_location),
 	/* NOTE: the Client and FSAL sub-blocks must be the *last*
 	 * two entries in the list.  This is so all other
 	 * parameters have been processed before these sub-blocks
@@ -2579,7 +2679,7 @@ static struct config_item export_params[] = {
 	 */
 	CONF_ITEM_BLOCK_MULT("Client", client_params, client_init,
 			     client_commit, gsh_export, clients),
-	CONF_RELAX_BLOCK("FSAL", fsal_params, fsal_init, fsal_cfg_commit,
+	CONF_RELAX_BLOCK("FSAL", fsal_params, export_fsal_init, fsal_cfg_commit,
 			 gsh_export, fsal_export),
 	CONFIG_EOL
 };
@@ -2604,6 +2704,8 @@ static struct config_item export_update_params[] = {
 	CONF_ITEM_BLOCK("QOS_BLOCK", qos_block_params, qos_block_init,
 			qos_block_commit, gsh_export, qos_block),
 #endif
+	CONF_ITEM_BLOCK("FS_LOCATION", fsloc_params, fsloc_block_init,
+			fsloc_block_commit, gsh_export, export_fs_location),
 
 	/* NOTE: the Client and FSAL sub-blocks must be the *last*
 	 * two entries in the list.  This is so all other
@@ -2612,8 +2714,8 @@ static struct config_item export_update_params[] = {
 	 */
 	CONF_ITEM_BLOCK_MULT("Client", client_params, client_init,
 			     client_commit, gsh_export, clients),
-	CONF_RELAX_BLOCK("FSAL", fsal_params, fsal_init, fsal_update_cfg_commit,
-			 gsh_export, fsal_export),
+	CONF_RELAX_BLOCK("FSAL", fsal_params, export_fsal_init,
+			 fsal_update_cfg_commit, gsh_export, fsal_export),
 	CONFIG_EOL
 };
 
@@ -2672,13 +2774,13 @@ static void *pseudofs_init(void *link_mem, void *self_struct)
 		EXPORT_OPTION_PREFREAD_SET | EXPORT_OPTION_PREFWRITE_SET;
 
 	/* Set the fullpath to "/" */
-	export->cfg_fullpath = gsh_strdup("/");
+	export->cfg_fullpath = gsh_strdup("/", MEM_COMP_EXPORT);
 
 	/* Set Pseudo Path to "/" */
-	export->cfg_pseudopath = gsh_strdup("/");
+	export->cfg_pseudopath = gsh_strdup("/", MEM_COMP_EXPORT);
 
-	export->pseudopath = gsh_refstr_dup("/");
-	export->fullpath = gsh_refstr_dup("/");
+	export->pseudopath = gsh_refstr_dup("/", MEM_COMP_EXPORT);
+	export->fullpath = gsh_refstr_dup("/", MEM_COMP_EXPORT);
 
 	LOG_EXPORT(NIV_FULL_DEBUG, "pseudofs_init", export, true);
 
@@ -2767,7 +2869,8 @@ static struct config_block export_param = {
 	.blk_desc.u.blk.init = export_init,
 	.blk_desc.u.blk.params = export_params,
 	.blk_desc.u.blk.commit = export_commit,
-	.blk_desc.u.blk.display = export_display
+	.blk_desc.u.blk.display = export_display,
+	.mem_comp = MEM_COMP_EXPORT
 };
 
 /**
@@ -2782,7 +2885,8 @@ struct config_block add_export_param = {
 	.blk_desc.u.blk.params = export_params,
 	.blk_desc.u.blk.commit = add_export_commit,
 	.blk_desc.u.blk.display = export_display,
-	.blk_desc.u.blk.check = check_export_duplicate
+	.blk_desc.u.blk.check = check_export_duplicate,
+	.mem_comp = MEM_COMP_EXPORT
 };
 
 /**
@@ -2797,7 +2901,8 @@ struct config_block update_export_param = {
 	.blk_desc.u.blk.init = export_init,
 	.blk_desc.u.blk.params = export_update_params,
 	.blk_desc.u.blk.commit = update_export_commit,
-	.blk_desc.u.blk.display = export_display
+	.blk_desc.u.blk.display = export_display,
+	.mem_comp = MEM_COMP_EXPORT
 };
 
 /**
@@ -2811,6 +2916,7 @@ static struct config_block unrelax_export_param = {
 	.blk_desc.u.blk.init = noop_conf_init,
 	.blk_desc.u.blk.params = unrelax_export_params,
 	.blk_desc.u.blk.commit = noop_conf_commit,
+	.mem_comp = MEM_COMP_EXPORT
 };
 
 /**
@@ -2826,7 +2932,8 @@ static struct config_block pseudofs_param = {
 	.blk_desc.u.blk.init = pseudofs_init,
 	.blk_desc.u.blk.params = pseudofs_params,
 	.blk_desc.u.blk.commit = pseudofs_commit,
-	.blk_desc.u.blk.display = export_display
+	.blk_desc.u.blk.display = export_display,
+	.mem_comp = MEM_COMP_EXPORT
 };
 
 /**
@@ -2842,7 +2949,8 @@ struct config_block update_pseudofs_param = {
 	.blk_desc.u.blk.init = pseudofs_init,
 	.blk_desc.u.blk.params = pseudofs_update_params,
 	.blk_desc.u.blk.commit = update_pseudofs_commit,
-	.blk_desc.u.blk.display = export_display
+	.blk_desc.u.blk.display = export_display,
+	.mem_comp = MEM_COMP_EXPORT
 };
 
 /**
@@ -2857,7 +2965,8 @@ struct config_block export_defaults_param = {
 	.blk_desc.u.blk.init = export_defaults_init,
 	.blk_desc.u.blk.params = export_defaults_params,
 	.blk_desc.u.blk.commit = export_defaults_commit,
-	.blk_desc.u.blk.display = export_defaults_display
+	.blk_desc.u.blk.display = export_defaults_display,
+	.mem_comp = MEM_COMP_EXPORT
 };
 
 /**
@@ -3242,6 +3351,11 @@ void free_export_resources(struct gsh_export *export, bool config)
 		restore_op_ctx = true;
 	}
 
+	if (export->export_fs_location != NULL) {
+		nfs4_fs_locations_release(export->export_fs_location);
+		export->export_fs_location = NULL;
+	}
+
 	LogDebug(COMPONENT_EXPORT, "Export root %p", export->exp_root_obj);
 
 	release_export(export, config);
@@ -3271,9 +3385,9 @@ void free_export_resources(struct gsh_export *export, bool config)
 	}
 
 	/* free strings here */
-	gsh_free(export->cfg_fullpath);
-	gsh_free(export->cfg_pseudopath);
-	gsh_free(export->FS_tag);
+	gsh_free(export->cfg_fullpath, MEM_COMP_EXPORT);
+	gsh_free(export->cfg_pseudopath, MEM_COMP_EXPORT);
+	gsh_free(export->FS_tag, MEM_COMP_EXPORT);
 
 	/* Release the refstr if they have been created. Note that we
 	 * normally expect a refstr to be created, but we could be freeing an
@@ -4043,4 +4157,11 @@ void add_to_export_callbacks(struct gsh_export *export,
 	callback->_exp = export;
 	callback->sw = sw;
 	glist_add_tail(&export->exp_root_callbacks, &callback->link);
+}
+
+void synchronize_exports(uint64_t generation)
+{
+	prune_pseudofs_subtree(NULL, generation, false);
+	prune_defunct_exports(generation);
+	create_pseudofs();
 }

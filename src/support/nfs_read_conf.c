@@ -489,6 +489,7 @@ static struct config_item core_params[] = {
 	CONF_ITEM_BOOL("Enable_Dynamic_Metrics", true, nfs_core_param,
 		       enable_dynamic_metrics),
 #endif
+	CONF_ITEM_BOOL("Trunking", true, nfs_core_param, trunking),
 	CONF_ITEM_BOOL("enable_rpc_cred_fallback", false, nfs_core_param,
 		       enable_rpc_cred_fallback),
 	CONF_ITEM_UI32("Unique_Server_Id", 0, UINT32_MAX, 0, nfs_core_param,

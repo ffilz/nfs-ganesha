@@ -41,6 +41,8 @@
 #include "avltree.h"
 #include "abstract_atomic.h"
 #include "fsal.h"
+#include <pthread.h>
+#include "mem_components.h"
 
 #ifndef EXPORT_MGR_H
 #define EXPORT_MGR_H
@@ -233,6 +235,15 @@ struct gsh_export {
 	bool update_prune_unmount;
 	/** Due to an update, this export will need to be remounted. */
 	bool update_remount;
+	/** fs_locations for trunking - ref-counted via nfs4_fs_locations_get_ref */
+	fsal_fs_locations_t *export_fs_location;
+};
+
+/* Private state for config_errs_to_dbus and config_errs_to_grpc */
+struct error_detail {
+	char *buf;
+	size_t bufsize;
+	FILE *fp;
 };
 
 /* Use macro to define this to get around include file order. */
@@ -286,14 +297,16 @@ static inline void tmp_get_exp_paths(struct tmp_export_paths *tmp,
 	if (gr != NULL)
 		tmp->tmp_fullpath = gsh_refstr_get(gr);
 	else
-		tmp->tmp_fullpath = gsh_refstr_dup(exp->cfg_fullpath);
+		tmp->tmp_fullpath =
+			gsh_refstr_dup(exp->cfg_fullpath, MEM_COMP_EXPORT);
 
 	gr = rcu_dereference(exp->pseudopath);
 
 	if (gr != NULL)
 		tmp->tmp_pseudopath = gsh_refstr_get(gr);
 	else if (exp->cfg_pseudopath != NULL)
-		tmp->tmp_pseudopath = gsh_refstr_dup(exp->cfg_pseudopath);
+		tmp->tmp_pseudopath =
+			gsh_refstr_dup(exp->cfg_pseudopath, MEM_COMP_EXPORT);
 	else
 		tmp->tmp_pseudopath = gsh_refstr_get(no_export);
 
@@ -319,6 +332,7 @@ static inline bool op_ctx_export_has_option_set(uint32_t option)
 void export_pkginit(void);
 #ifdef USE_DBUS
 void dbus_export_init(void);
+void dbus_mem_stats_init(void);
 #endif
 struct gsh_export *alloc_export(void);
 bool insert_gsh_export(struct gsh_export *a_export);
@@ -332,8 +346,18 @@ struct gsh_export *get_gsh_export_by_tag(char *tag);
 bool mount_gsh_export(struct gsh_export *exp);
 void unmount_gsh_export(struct gsh_export *exp);
 void remove_gsh_export(uint16_t export_id);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 bool foreach_gsh_export(bool (*cb)(struct gsh_export *exp, void *state),
 			bool wrlock, void *state);
+struct gsh_export *lookup_export_by_id(uint16_t export_id, char **errormsg);
+pthread_rwlock_t *get_export_id_lock(void);
+struct glist_head *get_exportlist_head(void);
+#ifdef __cplusplus
+}
+#endif
 
 /**
  * @brief Advisory check of export readiness.
@@ -359,9 +383,14 @@ void _get_gsh_export_ref(struct gsh_export *a_export, char *file, int line,
 #define get_gsh_export_ref(a_export)                              \
 	_get_gsh_export_ref(a_export, (char *)__FILE__, __LINE__, \
 			    (char *)__func__)
-
+#ifdef __cplusplus
+extern "C" {
+#endif
 void _put_gsh_export(struct gsh_export *a_export, bool config, char *file,
 		     int line, char *function);
+#ifdef __cplusplus
+}
+#endif
 
 #define put_gsh_export(a_export)                                     \
 	_put_gsh_export(a_export, false, (char *)__FILE__, __LINE__, \
@@ -390,7 +419,7 @@ extern int async_deleg_transition_handler(struct fridgethr *fr,
 					  struct gsh_export *probe_exp);
 
 int add_export_id(enum log_components component, struct glist_head *export_list,
-		  uint16_t export_id, void *cnode,
+		  uint16_t export_id, mem_components_t mem_comp, void *cnode,
 		  struct config_error_type *err_type);
 struct export_id_list *is_export_id_match(enum log_components component,
 					  struct glist_head *export_list,
@@ -429,5 +458,13 @@ struct export_extension_sw {
 void add_export_extension(struct export_extension *);
 void remove_export_extension(struct export_extension *);
 int load_export_extensions(config_file_t, struct config_error_type *);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+void synchronize_exports(uint64_t generation);
+#ifdef __cplusplus
+}
+#endif
 #endif /* !EXPORT_MGR_H */
 /** @} */
