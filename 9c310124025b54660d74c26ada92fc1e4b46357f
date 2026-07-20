@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21f8d216_bf3e395c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "clang format review comments incorporated in PatchSet#14",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07536aeb_60243ac1",
@@ -18,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2caebfc1_b96cb16f",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "07536aeb_60243ac1",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80e83a27_0a0291ae",
@@ -31,6 +66,24 @@
       "writtenOn": "2026-07-20T10:57:34Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_UNSET \u003d 0, ^I/* Do not touch this position */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b59f59a_a59527fc",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "80e83a27_0a0291ae",
       "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +122,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97b4773c_3b6bfb06",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "40c2014c_21bc18c2",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4372d83_119036a0",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0e364987_88d76699",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "660e4821_68902bcf",
@@ -82,6 +171,24 @@
       "writtenOn": "2026-07-20T10:57:34Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_CONFIG, ^I/* ganesha.conf, parser */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa4397f0_43b23ffc",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "660e4821_68902bcf",
       "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -103,6 +210,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3242f323_87792aac",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f84f0e2d_48ccd7ae",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b06377c_8867cd5e",
@@ -116,6 +241,24 @@
       "writtenOn": "2026-07-20T10:57:34Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_DIRENT, ^I/* MDCACHE directory / dirent cache */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e10b7c8_6cc3654a",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9b06377c_8867cd5e",
       "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -154,6 +297,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "578716de_69ed14a9",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0f626a93_a2a821bc",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aed1df7_c6999cbe",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "54803d79_b7bebf2e",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26fa8149_35527108",
@@ -184,6 +363,42 @@
       "writtenOn": "2026-07-20T10:57:34Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_EXPORT, ^I/* Export list, per-export stats, export-related SAL */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dff31e5d_a1ce994d",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0a78bff5_e7aec687",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b015553d_c425b09a",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "26fa8149_35527108",
       "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -222,6 +437,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dedbd8ae_cbf92ed2",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8bca6092_3d848710",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa92d054_81383a40",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cff6d7dc_6e4db28d",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e964325_58a45b96",
@@ -235,6 +486,24 @@
       "writtenOn": "2026-07-20T10:57:34Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_FSAL, ^I^I/* FSAL \u0026 filesystem semantics */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1f597ed_d9e0f85f",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4e964325_58a45b96",
       "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -256,6 +525,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c374daab_bcfe575f",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6426d046_877d3d89",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc9fa107_5aedfb50",
@@ -269,6 +556,24 @@
       "writtenOn": "2026-07-20T10:57:34Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_HASHTABLE, ^I/* Generic hashtable node/data storage */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1884fd6f_8f60cf76",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cc9fa107_5aedfb50",
       "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -290,6 +595,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e84ae8af_03f8210b",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7eb15128_f5fe1246",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9356e79_19cfc928",
@@ -303,6 +626,24 @@
       "writtenOn": "2026-07-20T10:57:34Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_IO_BUFFER, ^I/* READ / WRITE data buffers only */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e273a223_ba76f5fc",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e9356e79_19cfc928",
       "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -341,6 +682,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a8fb88b_c2040569",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "64f3e752_5dbf8ecf",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a9f8e73_659f3a8c",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "09c2ddbb_2c4fa4c3",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fee9575_323da45c",
@@ -371,6 +748,42 @@
       "writtenOn": "2026-07-20T10:57:34Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_MDCACHE, ^I/* MDCACHE entry/handle cache (directory cache is DIRENT) */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ead93e1_29ac1712",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2b354c57_870eac76",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "226949fc_75e1d56e",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4fee9575_323da45c",
       "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -409,6 +822,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bd56768_dd4e00d9",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c2d7e98e_2e42ce89",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9434580b_c5d81e08",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "67b305af_298dbbdf",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3e17c52_5fb2af8d",
@@ -422,6 +871,24 @@
       "writtenOn": "2026-07-20T10:57:34Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_QOS, ^I^I/* QoS rate-control */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b05976f3_f89e39fd",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c3e17c52_5fb2af8d",
       "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -443,6 +910,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74c72838_ab8b5504",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2ae96ad3_cc138ffd",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "308d42aa_4f235ca3",
@@ -456,6 +941,24 @@
       "writtenOn": "2026-07-20T10:57:34Z",
       "side": 1,
       "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_STATE, ^I/* State and lock owners, delegations */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c60b9479_168eb423",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "308d42aa_4f235ca3",
       "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -494,6 +997,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13345eb3_7e457b70",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ed145d2b_c263f8ce",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a790fb5_fea277d2",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a757b296_cd87d034",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5425aa75_16c816da",
@@ -524,6 +1063,42 @@
       "writtenOn": "2026-07-20T10:57:34Z",
       "side": 1,
       "message": "ERROR: code indent should use tabs where possible\n+        const char *mem_comp_name; /* component name */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67c737bb_ba34683f",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5425aa75_16c816da",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93470d09_028dfe44",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4769d401_2ea1c35c",
       "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -562,6 +1137,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58dbc25a_dd708580",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1adf6d66_5be8e9ef",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06fda77e_a85d6cd1",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "134fe5a0_61a057ad",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce4fde8a_fdfb0ab4",
@@ -575,6 +1186,24 @@
       "writtenOn": "2026-07-20T10:57:34Z",
       "side": 1,
       "message": "WARNING: line length of 164 exceeds 80 columns\n+\t\t\t\"mem_comp underflow on %s: freeing %zu bytes but current_active_bytes is %\" PRIu64 \" - possible alloc/free mem_comp mismatch at %s:%d (%s)\",",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b71013a_7277885d",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3460,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T12:18:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ce4fde8a_fdfb0ab4",
       "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
