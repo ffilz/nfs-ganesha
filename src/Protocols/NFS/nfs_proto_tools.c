@@ -3809,10 +3809,15 @@ nfsstat4 file_To_Fattr(compound_data_t *data, attrmask_t request_mask,
 			? data->current_obj->state_hdl->file.cbgetattr.state
 			: -1);
 
-	if (data->current_obj->type == REGULAR_FILE &&
-	    data->current_obj->state_hdl != NULL &&
-	    data->current_obj->state_hdl->file.cbgetattr.state ==
-		    CB_GETATTR_RSP_OK) {
+	if (attribute_is_set(Bitmap, FATTR4_FS_LOCATIONS) &&
+	    nfs_param.core_param.trunking) {
+		attr->fs_locations = op_ctx->ctx_export->export_fs_location;
+		FSAL_SET_MASK(attr->valid_mask, ATTR4_FS_LOCATIONS);
+
+	} else if (data->current_obj->type == REGULAR_FILE &&
+		   data->current_obj->state_hdl != NULL &&
+		   data->current_obj->state_hdl->file.cbgetattr.state ==
+			   CB_GETATTR_RSP_OK) {
 		LogDebug(COMPONENT_NFS_V4,
 			 "Using callback attributes instead of FSAL getattrs");
 

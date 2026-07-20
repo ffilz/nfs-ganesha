@@ -2558,6 +2558,87 @@ static struct config_item fsal_params[] = {
 				      options, options_set)
 
 /**
+ * @brief FS_LOCATION block configuration
+ */
+
+struct fs_locations_config {
+	uint32_t nservers;
+	char *fs_root;
+	char *rootpath;
+	char *server;
+};
+
+void *fsloc_block_init(void *link_mem, void *self_struct)
+{
+	assert(link_mem != NULL || self_struct != NULL);
+
+	if (link_mem == NULL) {
+		return self_struct; /* NOP */
+	} else if (self_struct == NULL) {
+		void *args = gsh_calloc(1, sizeof(struct fs_locations_config));
+		LogFullDebug(COMPONENT_CONFIG,
+			     "Allocating args fsal_fs_locations_t %p/%p",
+			     link_mem, args);
+		return args;
+	} else {
+		return NULL;
+	}
+}
+
+static int fsloc_block_commit(void *node, void *link_mem, void *self_struct,
+			      struct config_error_type *err_type)
+{
+	fsal_fs_locations_t **exp_fs_loc = link_mem;
+	struct gsh_export *gsh_export =
+		container_of(exp_fs_loc, struct gsh_export, export_fs_location);
+	struct fs_locations_config *fs_locations = self_struct;
+
+	LogFullDebug(COMPONENT_CONFIG, "export %s", gsh_export->cfg_fullpath);
+
+	if (fs_locations != NULL) {
+		gsh_export->export_fs_location =
+			gsh_calloc(1, sizeof(fsal_fs_locations_t));
+		gsh_export->export_fs_location->nservers =
+			fs_locations->nservers;
+		gsh_export->export_fs_location->fs_root =
+			gsh_strdup(fs_locations->fs_root);
+		gsh_export->export_fs_location->rootpath =
+			gsh_strdup(fs_locations->rootpath);
+		gsh_export->export_fs_location->server =
+			gsh_calloc(1, sizeof(utf8string));
+		gsh_export->export_fs_location->server->utf8string_len =
+			strlen(fs_locations->server);
+		gsh_export->export_fs_location->server->utf8string_val =
+			gsh_strdup(fs_locations->server);
+		LogFullDebug(
+			COMPONENT_CONFIG,
+			"FS_LOCATION nservers=%u fs_root is %s server=%s rootpath=%s",
+			fs_locations->nservers,
+			fs_locations->fs_root ? fs_locations->fs_root : "NULL",
+			fs_locations->server ? (char *)fs_locations->server
+					     : "NULL",
+			fs_locations->rootpath ? fs_locations->rootpath
+					       : "NULL");
+	}
+
+	return 0;
+}
+
+/* Configuration parameters for FS_LOCATION block */
+static struct config_item fsloc_params[] = {
+	CONF_ITEM_UI32("Nservers", 0, UINT32_MAX, 0, fs_locations_config,
+		       nservers),
+	CONF_ITEM_STR("Fs_root", 1, MAXPATHLEN, NULL, fs_locations_config,
+		      fs_root),
+	CONF_ITEM_STR("Rootpath", 1, MAXPATHLEN, NULL, fs_locations_config,
+		      rootpath),
+	CONF_ITEM_STR("Server", 1, MAXPATHLEN, NULL, fs_locations_config,
+		      server),
+	/* Server list - handled via client_adder pattern */
+	CONFIG_EOL
+};
+
+/**
  * @brief Table of EXPORT block parameters
  */
 
@@ -2572,6 +2653,8 @@ static struct config_item export_params[] = {
 	CONF_ITEM_BLOCK("QOS_BLOCK", qos_block_params, qos_block_init,
 			qos_block_commit, gsh_export, qos_block),
 #endif
+	CONF_ITEM_BLOCK("FS_LOCATION", fsloc_params, fsloc_block_init,
+			fsloc_block_commit, gsh_export, export_fs_location),
 	/* NOTE: the Client and FSAL sub-blocks must be the *last*
 	 * two entries in the list.  This is so all other
 	 * parameters have been processed before these sub-blocks
@@ -2604,6 +2687,8 @@ static struct config_item export_update_params[] = {
 	CONF_ITEM_BLOCK("QOS_BLOCK", qos_block_params, qos_block_init,
 			qos_block_commit, gsh_export, qos_block),
 #endif
+	CONF_ITEM_BLOCK("FS_LOCATION", fsloc_params, fsloc_block_init,
+			fsloc_block_commit, gsh_export, export_fs_location),
 
 	/* NOTE: the Client and FSAL sub-blocks must be the *last*
 	 * two entries in the list.  This is so all other
@@ -2768,6 +2853,15 @@ static struct config_block export_param = {
 	.blk_desc.u.blk.params = export_params,
 	.blk_desc.u.blk.commit = export_commit,
 	.blk_desc.u.blk.display = export_display
+};
+
+struct config_block add_fslocation_param = {
+	.dbus_interface_name = "org.ganesha.nfsd.config.%d",
+	.blk_desc.name = "FS_LOCATIONS",
+	.blk_desc.type = CONFIG_BLOCK,
+	.blk_desc.u.blk.init = fsloc_block_init,
+	.blk_desc.u.blk.params = fsloc_params,
+	.blk_desc.u.blk.commit = fsloc_block_commit,
 };
 
 /**
@@ -3239,6 +3333,10 @@ void free_export_resources(struct gsh_export *export, bool config)
 		 */
 		init_op_context_simple(&op_context, export,
 				       export->fsal_export);
+		if (export->export_fs_location != NULL) {
+			gsh_free(export->export_fs_location);
+			export->export_fs_location = NULL;
+		}
 		restore_op_ctx = true;
 	}
 

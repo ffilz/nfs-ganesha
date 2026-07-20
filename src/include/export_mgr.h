@@ -233,6 +233,7 @@ struct gsh_export {
 	bool update_prune_unmount;
 	/** Due to an update, this export will need to be remounted. */
 	bool update_remount;
+	fsal_fs_locations_t *export_fs_location; // Newly added field
 };
 
 /* Use macro to define this to get around include file order. */
