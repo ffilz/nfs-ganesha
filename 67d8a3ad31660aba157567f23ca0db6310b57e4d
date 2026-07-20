@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fa170fe_2c834ed7",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2579,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T11:47:07Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tvoid *args \u003d gsh_calloc(1, sizeof(struct fs_locations_config));\n+\t\tLogFullDebug(COMPONENT_CONFIG,",
+      "revId": "67d8a3ad31660aba157567f23ca0db6310b57e4d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
