@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b63eefb2_fa71b122",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-20T09:39:23Z",
+      "side": 1,
+      "message": "I am going with approach not discussed here but started my design with that. Will add the MEM_DEV_DEBUG flag under which will add mem_hdr structure and populate it during alloc call and during free will check that comp provided in hdr should match the free one. This will be only available in debug build.",
+      "parentUuid": "553c5ae8_4020a6de",
+      "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c5337cf_a9a10620",
         "filename": "src/config_parsing/config_parsing.c",
         "patchSetId": 7
