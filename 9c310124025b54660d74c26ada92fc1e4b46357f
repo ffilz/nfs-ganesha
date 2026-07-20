@@ -1,0 +1,582 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07536aeb_60243ac1",
+        "filename": "src/include/abstract_mem.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\tgsh_mem_stats_update_alloc(p2, MEM_COMP_LIBNTIRPC, file, line, function);",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e83a27_0a0291ae",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_UNSET \u003d 0, ^I/* Do not touch this position */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c2014c_21bc18c2",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_CLIENT, ^I/* Client identity, clientid, connections, sessions */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e364987_88d76699",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: line length of 86 exceeds 80 columns\n+\tMEM_COMP_CLIENT, \t/* Client identity, clientid, connections, sessions */",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "660e4821_68902bcf",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_CONFIG, ^I/* ganesha.conf, parser */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f84f0e2d_48ccd7ae",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_DBUS, ^I^I/* D-Bus handlers, broadcast items */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b06377c_8867cd5e",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_DIRENT, ^I/* MDCACHE directory / dirent cache */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f626a93_a2a821bc",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+\tMEM_COMP_DUP_REQ, \t/* Duplicate request cache (dupreq entries + TCP DRC) */",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54803d79_b7bebf2e",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_DUP_REQ, ^I/* Duplicate request cache (dupreq entries + TCP DRC) */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26fa8149_35527108",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: line length of 87 exceeds 80 columns\n+\tMEM_COMP_EXPORT, \t/* Export list, per-export stats, export-related SAL */",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a78bff5_e7aec687",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_EXPORT, ^I/* Export list, per-export stats, export-related SAL */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bca6092_3d848710",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_FRIDGE, ^I/* firdge thread pool, delayed-exec scheduling */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cff6d7dc_6e4db28d",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\tMEM_COMP_FRIDGE, \t/* firdge thread pool, delayed-exec scheduling */",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e964325_58a45b96",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_FSAL, ^I^I/* FSAL \u0026 filesystem semantics */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6426d046_877d3d89",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_GTEST, ^I/* Allocation and free in GTEST only */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc9fa107_5aedfb50",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_HASHTABLE, ^I/* Generic hashtable node/data storage */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eb15128_f5fe1246",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_IDMAPPER, ^I/* idmapper subsystem allocations */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9356e79_19cfc928",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_IO_BUFFER, ^I/* READ / WRITE data buffers only */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64f3e752_5dbf8ecf",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_LIBNTIRPC, ^I/* libntirpc (single bucket; libntirpc itself unchanged) */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09c2ddbb_2c4fa4c3",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: line length of 91 exceeds 80 columns\n+\tMEM_COMP_LIBNTIRPC, \t/* libntirpc (single bucket; libntirpc itself unchanged) */",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fee9575_323da45c",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: line length of 92 exceeds 80 columns\n+\tMEM_COMP_MDCACHE, \t/* MDCACHE entry/handle cache (directory cache is DIRENT) */",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b354c57_870eac76",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_MDCACHE, ^I/* MDCACHE entry/handle cache (directory cache is DIRENT) */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d7e98e_2e42ce89",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_PROTOCOL, ^I/* NFS / NLM / 9P / NFS4 / NFS3, incl. nfs_res_t */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67b305af_298dbbdf",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\tMEM_COMP_PROTOCOL, \t/* NFS / NLM / 9P / NFS4 / NFS3, incl. nfs_res_t */",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3e17c52_5fb2af8d",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_QOS, ^I^I/* QoS rate-control */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ae96ad3_cc138ffd",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_RECOVERY, ^I/* NFS recovery state (clid_entry, rdel_fh) */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "308d42aa_4f235ca3",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_STATE, ^I/* State and lock owners, delegations */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed145d2b_c263f8ce",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: line length of 85 exceeds 80 columns\n+\tMEM_COMP_TRANSIENT, \t/* Short-lived scratch, freed within same function */",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a757b296_cd87d034",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no space before tabs\n+^IMEM_COMP_TRANSIENT, ^I/* Short-lived scratch, freed within same function */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5425aa75_16c816da",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        const char *mem_comp_name; /* component name */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4769d401_2ea1c35c",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        const char *mem_comp_name; /* component name */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1adf6d66_5be8e9ef",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        const char *mem_comp_str; /* shorter, more useful name */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "134fe5a0_61a057ad",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        const char *mem_comp_str; /* shorter, more useful name */$",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce4fde8a_fdfb0ab4",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3460,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-20T10:57:34Z",
+      "side": 1,
+      "message": "WARNING: line length of 164 exceeds 80 columns\n+\t\t\t\"mem_comp underflow on %s: freeing %zu bytes but current_active_bytes is %\" PRIu64 \" - possible alloc/free mem_comp mismatch at %s:%d (%s)\",",
+      "revId": "9c310124025b54660d74c26ada92fc1e4b46357f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
