@@ -63,6 +63,14 @@ Ceph_Conf(path, default "")
 
 umask(mode, range 0 to 0777, default 0)
 
+client_per_export(bool, default false)
+    Use this flag to indicate that Ganesha can use a separate ceph client for
+    every NFS export. Please note that, enabling this falg will increase memory
+    footprint of Ganesha, as well Ganesha will consume more threads. This
+    defaults to false.
+    It is recommended that, do not enable client_oc if this flag is true. This
+    will help in limiting Ganesha meomry footprint.
+
 client_oc(bool, default false)
     Enable or disable client_oc (object cache). This defaults to false because
     Ganesha runs better with it disabled.
