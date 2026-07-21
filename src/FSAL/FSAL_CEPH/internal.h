@@ -64,6 +64,7 @@ struct ceph_fsal_module {
 	struct fsal_module fsal;
 	struct fsal_obj_ops handle_ops;
 	char *conf_path;
+	bool client_per_export;
 	bool client_oc;
 	uint64_t client_oc_size;
 	uint64_t client_oc_max_dirty;

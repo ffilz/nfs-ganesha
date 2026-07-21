@@ -1139,6 +1139,8 @@ CEPH {}
 
 	umask(mode, range 0 to 0777, default 0)
 
+	client_per_export(bool, default false)
+
 	client_oc(bool, default false)
 
 	client_oc_size(uint64, range 0 to UINT64_MAX, default 209715200)
