@@ -889,8 +889,9 @@ static int fsal_cfg_commit(void *node, void *link_mem, void *self_struct,
 	if (FSAL_IS_ERROR(status)) {
 		fsal_put(fsal);
 		LogCrit(COMPONENT_CONFIG,
-			"Could not create export for (%s) to (%s)",
-			export->cfg_pseudopath, export->cfg_fullpath);
+			"Could not create export for (%s) to (%s), Error: %s",
+			export->cfg_pseudopath, export->cfg_fullpath,
+			fsal_err_txt(status));
 		LogFullDebug(COMPONENT_FSAL, "FSAL %s fsal_refcount %" PRIu32,
 			     fsal->name, atomic_fetch_int32_t(&fsal->refcount));
 		err_type->cur_exp_create_err = true;
@@ -1925,8 +1926,8 @@ int pseudofs_fsal_commit(void *self_struct, struct config_error_type *err_type)
 		if (FSAL_IS_ERROR(rc)) {
 			fsal_put(fsal_hdl);
 			LogCrit(COMPONENT_CONFIG,
-				"Could not create FSAL export for %s",
-				export->cfg_fullpath);
+				"Could not create FSAL export for %s, Error: %s",
+				export->cfg_fullpath, fsal_err_txt(rc));
 			LogFullDebug(COMPONENT_FSAL,
 				     "FSAL %s fsal_refcount %" PRIu32,
 				     fsal_hdl->name,
@@ -2926,8 +2927,8 @@ static int build_default_root(struct config_error_type *err_type)
 		if (FSAL_IS_ERROR(rc)) {
 			fsal_put(fsal_hdl);
 			LogCrit(COMPONENT_CONFIG,
-				"Could not create FSAL export for %s",
-				export->cfg_fullpath);
+				"Could not create FSAL export for %s, Error: %s",
+				export->cfg_fullpath, fsal_err_txt(rc));
 			LogFullDebug(COMPONENT_FSAL,
 				     "FSAL %s fsal_refcount %" PRIu32,
 				     fsal_hdl->name,
