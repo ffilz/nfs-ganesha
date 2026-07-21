@@ -125,6 +125,8 @@ static struct config_item ceph_items[] = {
 	CONF_ITEM_PATH("ceph_conf", 1, MAXPATHLEN, NULL, ceph_fsal_module,
 		       conf_path),
 	CONF_ITEM_MODE("umask", 0, ceph_fsal_module, fsal.fs_info.umask),
+	CONF_ITEM_BOOL("client_per_export", false, ceph_fsal_module,
+		       client_per_export),
 	CONF_ITEM_BOOL("client_oc", false, ceph_fsal_module, client_oc),
 	CONF_ITEM_UI64_ZERO("client_oc_size", 0, UINT64_MAX, 209715200,
 			    ceph_fsal_module, client_oc_size),
@@ -792,6 +794,15 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	else
 		cm_key.cm_mount_path = CTX_FULLPATH(op_ctx);
 
+	/* Override cmount path when client_per_export is enabled */
+	if (my_module->client_per_export) {
+		/* Use the export path as cmount_path */
+		cm_key.cm_mount_path = CTX_FULLPATH(op_ctx);
+		LogDebug(COMPONENT_FSAL,
+			 "Overriding provided cmount path %s, with %s",
+			 export->cmount_path, cm_key.cm_mount_path);
+	}
+
 	PTHREAD_RWLOCK_wrlock(&cmount_lock);
 
 	cm = ceph_mount_lookup(&cm_key.cm_avl_mount);
@@ -817,10 +828,10 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	if (export->fs_name)
 		cm->cm_fs_name = gsh_strdup(export->fs_name);
 
-	if (export->cmount_path)
-		cm->cm_mount_path = gsh_strdup(export->cmount_path);
-	else
+	if (my_module->client_per_export || (export->cmount_path == NULL))
 		cm->cm_mount_path = gsh_strdup(CTX_FULLPATH(op_ctx));
+	else
+		cm->cm_mount_path = gsh_strdup(export->cmount_path);
 
 	if (export->user_id)
 		cm->cm_user_id = gsh_strdup(export->user_id);
