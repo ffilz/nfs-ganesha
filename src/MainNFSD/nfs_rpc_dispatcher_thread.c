@@ -162,6 +162,10 @@ struct netconfig *netconfig_udpv4;
 struct netconfig *netconfig_tcpv4;
 struct netconfig *netconfig_udpv6;
 struct netconfig *netconfig_tcpv6;
+#ifdef _USE_NFS_RDMA
+struct netconfig *netconfig_rdma;
+struct netconfig *netconfig_rdma6;
+#endif
 
 /* RPC Service Sockets and Transports */
 int udp_socket[P_COUNT];
@@ -193,6 +197,12 @@ static void unregister(const rpcprog_t prog, const rpcvers_t vers1,
 			rpcb_unset(prog, vers, netconfig_udpv6);
 		if (!v6disabled && netconfig_tcpv6)
 			rpcb_unset(prog, vers, netconfig_tcpv6);
+#ifdef _USE_NFS_RDMA
+		if (netconfig_rdma)
+			rpcb_unset(prog, vers, netconfig_rdma);
+		if (!v6disabled && netconfig_rdma6)
+			rpcb_unset(prog, vers, netconfig_rdma6);
+#endif
 	}
 }
 
@@ -1385,6 +1395,12 @@ void Clean_RPC(void)
 	freenetconfigent(netconfig_tcpv4);
 	freenetconfigent(netconfig_udpv6);
 	freenetconfigent(netconfig_tcpv6);
+#ifdef _USE_NFS_RDMA
+	if (netconfig_rdma)
+		freenetconfigent(netconfig_rdma);
+	if (netconfig_rdma6)
+		freenetconfigent(netconfig_rdma6);
+#endif
 }
 
 #define UDP_REGISTER(prot, vers, netconfig)                      \
@@ -1394,6 +1410,12 @@ void Clean_RPC(void)
 #define TCP_REGISTER(prot, vers, netconfig)                      \
 	svc_reg(tcp_xprt[prot], NFS_program[prot], (u_long)vers, \
 		nfs_rpc_dispatch_dummy, netconfig)
+
+#ifdef _USE_NFS_RDMA
+#define RDMA_REGISTER(prot, vers, netconfig)                     \
+	svc_reg(tcp_xprt[prot], NFS_program[prot], (u_long)vers, \
+		nfs_rpc_dispatch_dummy, netconfig)
+#endif
 
 #ifdef RPCBIND
 static bool __Register_program(protos prot, int vers)
@@ -1443,6 +1465,33 @@ static bool __Register_program(protos prot, int vers)
 		}
 	}
 #endif /* _NO_TCP_REGISTER */
+
+#ifdef _USE_NFS_RDMA
+	/* Register RDMA transport if enabled and this is the RDMA protocol */
+	if (prot == P_NFS_RDMA && netconfig_rdma) {
+		LogInfo(COMPONENT_RDMA, "Registering %s V%d/RDMA",
+			tags[prot], (int)vers);
+
+		if (!RDMA_REGISTER(prot, vers, netconfig_rdma)) {
+			LogMajor(COMPONENT_RDMA,
+				 "Cannot register %s V%d on RDMA", tags[prot],
+				 (int)vers);
+			return false;
+		}
+
+		if (!v6disabled && netconfig_rdma6) {
+			LogInfo(COMPONENT_RDMA, "Registering %s V%d/RDMAv6",
+				tags[prot], (int)vers);
+			if (!RDMA_REGISTER(prot, vers, netconfig_rdma6)) {
+				LogMajor(COMPONENT_RDMA,
+					 "Cannot register %s V%d on RDMAv6",
+					 tags[prot], (int)vers);
+				return false;
+			}
+		}
+	}
+#endif /* _USE_NFS_RDMA */
+
 	return true;
 }
 
@@ -1518,6 +1567,31 @@ void nfs_Init_netconfig(void)
 	if (netconfig_udpv6 && netconfig_tcpv6)
 		LogFullDebug(COMPONENT_DISPATCH,
 			     "netconfig found for UDPv6 and TCPv6");
+
+#ifdef _USE_NFS_RDMA
+	if (rdma) {
+		/* Get netconfig entries for RDMA from /etc/netconfig */
+		netconfig_rdma = (struct netconfig *)getnetconfigent("rdma");
+		if (netconfig_rdma == NULL)
+			LogInfo(COMPONENT_RDMA,
+				"Cannot get rdma netconfig entry. "
+				"Check /etc/netconfig for 'rdma' entry. "
+				"RDMA service will not be registered with rpcbind.");
+		else
+			LogFullDebug(COMPONENT_RDMA, "netconfig found for RDMA");
+
+		if (!v6disabled) {
+			netconfig_rdma6 = (struct netconfig *)getnetconfigent("rdma6");
+			if (netconfig_rdma6 == NULL)
+				LogInfo(COMPONENT_RDMA,
+					"Cannot get rdma6 netconfig entry. "
+					"Check /etc/netconfig for 'rdma6' entry.");
+			else
+				LogFullDebug(COMPONENT_RDMA,
+					     "netconfig found for RDMAv6");
+		}
+	}
+#endif
 }
 
 /**
@@ -1650,6 +1724,24 @@ void nfs_Init_svc(void)
 	/* v4 registration is optional */
 	if (NFS_options & CORE_OPTION_NFSV4)
 		__Register_program(P_NFS, NFS_V4);
+
+#ifdef _USE_NFS_RDMA
+	/* Register RDMA transport for NFS versions if RDMA is enabled */
+	if (rdma) {
+#ifdef _USE_NFS3
+		if (NFS_options & CORE_OPTION_NFSV3) {
+			LogInfo(COMPONENT_RDMA,
+				"Registering NFS_RDMA protocol for NFSv3");
+			Register_program(P_NFS_RDMA, NFS_V3);
+		}
+#endif
+		if (NFS_options & CORE_OPTION_NFSV4) {
+			LogInfo(COMPONENT_RDMA,
+				"Registering NFS_RDMA protocol for NFSv4");
+			__Register_program(P_NFS_RDMA, NFS_V4);
+		}
+	}
+#endif /* _USE_NFS_RDMA */
 
 #ifdef _USE_RQUOTA
 	if (nfs_param.core_param.enable_RQUOTA &&
