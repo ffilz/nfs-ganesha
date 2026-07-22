@@ -16,6 +16,24 @@
       "message": "Could we possibly find a way to not have to duplicate op names? We already have op names in nfs_worker_thread.c and nfs4_Compound.c\n\nI really hate to see duplicate stuff like this that is prone to errors",
       "revId": "6d5d3fc2eebf569fba2e7e8588809a8992a5077e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d024798a_58c4d374",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3477,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-07-22T07:18:38Z",
+      "side": 1,
+      "message": "Removed the duplicate grpc_nlm_op_names table. NLM op names now come from\nnlm4_func_desc[].funcname (defined in nfs_worker_thread.c). \n\nnlm4_func_desc[].funcname used at line no 3545.",
+      "parentUuid": "c049b3dc_8c08f06a",
+      "revId": "6d5d3fc2eebf569fba2e7e8588809a8992a5077e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
