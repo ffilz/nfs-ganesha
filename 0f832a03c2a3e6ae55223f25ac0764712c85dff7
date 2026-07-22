@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d18ef18_e08dc86a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-22T14:18:39Z",
+      "side": 1,
+      "message": "Do you actually need to clamp at 0? Allowing it to go negative will really call out underflow.",
+      "parentUuid": "b63eefb2_fa71b122",
+      "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c5337cf_a9a10620",
         "filename": "src/config_parsing/config_parsing.c",
         "patchSetId": 7
@@ -176,6 +194,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9726216_80aea81f",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-22T14:18:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bff342e_07648738",
+      "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd38dd49_6a5ce579",
@@ -207,6 +243,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "bd38dd49_6a5ce579",
+      "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "000ca5d3_2608f4f6",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-22T14:18:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd618c04_546fd37c",
       "revId": "0f832a03c2a3e6ae55223f25ac0764712c85dff7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
