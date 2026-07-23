@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea11b550_aecb5c50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-23T22:28:22Z",
+      "side": 1,
+      "message": "Don\u0027t add this config, all you have to do to have an export use it\u0027s own cephfs client is to not specify cmount_path.\n\nOn the other hand, to support groups of exports using the same cephfs client, see suggestions in main.c\n\nOptionally instead of configuring cmount_index, you could have a CEPH config num_shared_clients.\n\nThen set cm_key.cm_index \u003d export_id % num_shared_clients",
+      "revId": "a9028c490c14a2e54a6a578f55eccd983b1c4e41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe092048_c159c286",
+        "filename": "src/FSAL/FSAL_CEPH/internal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-23T22:28:22Z",
+      "side": 1,
+      "message": "Add\n\nint cm_index here",
+      "revId": "a9028c490c14a2e54a6a578f55eccd983b1c4e41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3cf3c10_76a19b29",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-23T22:28:22Z",
+      "side": 1,
+      "message": "Instead of this, to have several exports share a cephfs client but all exports use the same cmount_path, add a field:\n\nint client_index;\n\nSet client_index the same for several exports.",
+      "revId": "a9028c490c14a2e54a6a578f55eccd983b1c4e41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7254b5ee_4751115a",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-23T22:28:22Z",
+      "side": 1,
+      "message": "cm_key.cm_index \u003d export-\u003ecmount_index;",
+      "revId": "a9028c490c14a2e54a6a578f55eccd983b1c4e41",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
