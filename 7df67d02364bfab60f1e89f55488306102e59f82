@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90d04f09_80ad92b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-23T22:05:16Z",
+      "side": 1,
+      "message": "One pretty simple change to utilize frp.thread_initialize for one time initialization like SetNameFunction.",
+      "revId": "7df67d02364bfab60f1e89f55488306102e59f82",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "698c3568_fba7b341",
+        "filename": "src/Protocols/NFS/nfs4_op_copy.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-23T22:05:16Z",
+      "side": 1,
+      "message": "Use frp.thread_initialize for the one time initialize for SetNameFunction",
+      "revId": "7df67d02364bfab60f1e89f55488306102e59f82",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c5cb80b_e7a0d6ed",
+        "filename": "src/Protocols/NFS/nfs4_op_copy.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-23T22:05:16Z",
+      "side": 1,
+      "message": "See frp.thread_initialize above",
+      "revId": "7df67d02364bfab60f1e89f55488306102e59f82",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c582592_51917862",
+        "filename": "src/Protocols/NFS/nfs4_op_copy.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-23T22:05:16Z",
+      "side": 1,
+      "message": "see frp.thread_initialize above instead of calling this here",
+      "revId": "7df67d02364bfab60f1e89f55488306102e59f82",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
