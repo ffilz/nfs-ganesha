@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "18cb535b_406f4969",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1039709
+      },
+      "writtenOn": "2026-07-23T10:35:39Z",
+      "side": 1,
+      "message": "Done in patch set 2. The commit message now describes the reproduced\n  failure scenario, its root cause, and the resulting stray inode and\n  space-retention problem.",
+      "parentUuid": "ecc2eae4_18846031",
+      "revId": "b58275215b5a9e669021e33eef0be09f3e5de75f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d62c5b31_64d1e0af",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2026-07-08T21:31:13Z",
       "side": 1,
       "message": "why is a lock on the mount needed here?  I guess that\u0027s ganesha logic, I\u0027m slightly surprised to see that...\n\nmore broadly, this doesn\u0027t feel natural to me.  why do we want to try-release?",
+      "revId": "b58275215b5a9e669021e33eef0be09f3e5de75f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aaaa121_c371546f",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1039709
+      },
+      "writtenOn": "2026-07-23T10:35:39Z",
+      "side": 1,
+      "message": "The cmount_lock read lock follows the existing pattern used by the\n  cache-related upcall callbacks in this file: ino_invalidate_cb,\n  ino_release_cb, and the directory-invalidation part of this callback.\n\n  It is not intended to serialize a libcephfs mount operation. Export\n  release takes cmount_lock for writing before removing or reassigning\n  cm-\u003ecm_export, or shutting down the final shared cmount. The read lock\n  therefore keeps the export and its upcall vector stable while the upcall\n  is issued. I will also move the up_ops lookup under the read lock to make\n  that lifetime protection explicit.\n\n  As for try_release, the reproduced scenario is a file created through\n  Ganesha and then unlinked by another CephFS client. The MDS moves the\n  inode to the stray directory and libcephfs delivers a delete-style\n  dentry-invalidation callback with the child inode. Ganesha currently\n  invalidates only the parent directory cache, leaving the child MDCACHE\n  entry in place and retaining its FSAL_CEPH handle and libcephfs Inode\n  reference. While that reference remains, the MDS cannot purge the stray\n  inode and its storage remains allocated.\n\n  try_release is used because the object may still legitimately be in use\n  by Ganesha, for example by an open state or an in-flight operation. It\n  removes the cached handle only when the entry is otherwise unused, and\n  returns STILL_IN_USE otherwise. This is also the operation used by\n  ino_release_cb when libcephfs explicitly asks Ganesha to release an inode\n  reference.",
+      "parentUuid": "16294448_00e7db1e",
       "revId": "b58275215b5a9e669021e33eef0be09f3e5de75f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
