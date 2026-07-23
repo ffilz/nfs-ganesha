@@ -16,6 +16,24 @@
       "message": "This looks good. Just a question about testing.",
       "revId": "ca2ab89c2356d8c16c043d9f95fe7a8b854d7c0f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "990bcad4_cfbbffe4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-07-23T15:17:46Z",
+      "side": 1,
+      "message": "testing has been done for same FSAL different export and different FSAL\u0027s as well.\n\nhas seen substantial decrease in resource consumption (Network and CPU) at server end(1thread at 50% consuption) and client end(~\u003c 1%).\nNetwork consumption between between server and client negligible.\n\nbelow are some results for using 2 FS, ext4 and ceph (4GiB file)\n\nWithout copy_offload: ./script.sh\nVFS1 -\u003e VFS1\nreal 0m12.046s\nuser 0m0.001s\nsys 0m4.064s\n0c41a04c1dfc2193b4f54c534fb752ed /mnt1/copy_file.txt\n0c41a04c1dfc2193b4f54c534fb752ed /mnt1/file_copy_local.txt\n\nCeph1 -\u003e Ceph1\nreal 0m44.762s\nuser 0m0.002s\nsys 0m3.835s\n0c41a04c1dfc2193b4f54c534fb752ed /mnt2/copy_file.txt\n0c41a04c1dfc2193b4f54c534fb752ed /mnt2/file_copy_local.txt\n\nCeph1 -\u003e VFS1\nreal 0m23.779s\nuser 0m0.000s\nsys 0m4.018s\n0c41a04c1dfc2193b4f54c534fb752ed /mnt2/copy_file.txt\n0c41a04c1dfc2193b4f54c534fb752ed /mnt1/file_copy_CtoV.txt\n\nVFS 1-\u003e Ceph1\nreal 0m30.807s\nuser 0m0.000s\nsys 0m4.580s\n0c41a04c1dfc2193b4f54c534fb752ed /mnt1/copy_file.txt\n0c41a04c1dfc2193b4f54c534fb752ed /mnt2/file_copy_VtoC.txt\n\nWith Copy_offload:\u2028./script.sh\nVFS1 -\u003e VFS1\nreal 0m8.569s\nuser 0m0.000s\nsys 0m0.003s\n0c41a04c1dfc2193b4f54c534fb752ed /mnt1/copy_file.txt\n0c41a04c1dfc2193b4f54c534fb752ed /mnt1/file_copy_local.txt\n\nCeph1 -\u003e Ceph1\nreal 0m39.732s\nuser 0m0.000s\nsys 0m0.003s\n0c41a04c1dfc2193b4f54c534fb752ed /mnt2/copy_file.txt\n0c41a04c1dfc2193b4f54c534fb752ed /mnt2/file_copy_local.txt\n\nCeph1 -\u003e VFS1\nreal 0m17.115s\nuser 0m0.001s\nsys 0m0.002s\n0c41a04c1dfc2193b4f54c534fb752ed /mnt2/copy_file.txt\n0c41a04c1dfc2193b4f54c534fb752ed /mnt1/file_copy_CtoV.txt\n\nVFS1 -\u003e Ceph1\nreal 0m31.205s\nuser 0m0.000s\nsys 0m0.003s\n0c41a04c1dfc2193b4f54c534fb752ed /mnt1/copy_file.txt\n0c41a04c1dfc2193b4f54c534fb752ed /mnt2/file_copy_VtoC.txt",
+      "parentUuid": "35b4bb53_d19da841",
+      "revId": "ca2ab89c2356d8c16c043d9f95fe7a8b854d7c0f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
