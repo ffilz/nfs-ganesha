@@ -86,6 +86,24 @@
       "parentUuid": "16294448_00e7db1e",
       "revId": "b58275215b5a9e669021e33eef0be09f3e5de75f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b889b185_75db033f",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1039709
+      },
+      "writtenOn": "2026-07-23T10:50:29Z",
+      "side": 1,
+      "message": "The up_ops lookups are now performed under cmount_lock in patch set 3, as described above.",
+      "parentUuid": "4aaaa121_c371546f",
+      "revId": "b58275215b5a9e669021e33eef0be09f3e5de75f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
