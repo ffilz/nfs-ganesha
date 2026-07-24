@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "570303f5_8cc0a6cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-24T20:57:54Z",
+      "side": 1,
+      "message": "Missing some definitions:\n\n/home/ffilz/ganesha/review/src/MainNFSD/nfs_qos.c:1381:24: error: ‘MAX_LABEL_KEY_LEN’ undeclared (first use in this function)\n 1381 |         char label_key[MAX_LABEL_KEY_LEN];\n      |                        ^~~~~~~~~~~~~~~~~\n/home/ffilz/ganesha/review/src/MainNFSD/nfs_qos.c:1381:24: note: each undeclared identifier is reported only once for each function it appears in\n/home/ffilz/ganesha/review/src/MainNFSD/nfs_qos.c:1390:28: error: ‘MAX_METADATA_KEY_LEN’ undeclared (first use in this function)\n 1390 |         char meta_data_key[MAX_METADATA_KEY_LEN];\n      |                            ^~~~~~~~~~~~~~~~~~~~\n/home/ffilz/ganesha/review/src/MainNFSD/nfs_qos.c:1398:26: error: ‘MAX_METRIC_NAME_LEN’ undeclared (first use in this function); did you mean ‘MAXNETNAMELEN’?\n 1398 |         char metric_name[MAX_METRIC_NAME_LEN];\n      |                          ^~~~~~~~~~~~~~~~~~~\n      |                          MAXNETNAMELEN\n/home/ffilz/ganesha/review/src/MainNFSD/nfs_qos.c:1398:14: error: unused variable ‘metric_name’ [-Werror\u003dunused-variable]\n 1398 |         char metric_name[MAX_METRIC_NAME_LEN];\n      |              ^~~~~~~~~~~\n/home/ffilz/ganesha/review/src/MainNFSD/nfs_qos.c:1390:14: error: unused variable ‘meta_data_key’ [-Werror\u003dunused-variable]\n 1390 |         char meta_data_key[MAX_METADATA_KEY_LEN];\n      |              ^~~~~~~~~~~~~\n/home/ffilz/ganesha/review/src/MainNFSD/nfs_qos.c:1381:14: error: unused variable ‘label_key’ [-Werror\u003dunused-variable]\n 1381 |         char label_key[MAX_LABEL_KEY_LEN];\n      |              ^~~~~~~~~\n/home/ffilz/ganesha/review/src/MainNFSD/nfs_qos.c: In function ‘register_bucket_metrics’:\n/home/ffilz/ganesha/review/src/MainNFSD/nfs_qos.c:1436:24: error: ‘QOS_MAX_LONG_STR_LEN’ undeclared (first use in this function)\n 1436 |         char max_value[QOS_MAX_LONG_STR_LEN];\n      |                        ^~~~~~~~~~~~~~~~~~~~\n/home/ffilz/ganesha/review/src/MainNFSD/nfs_qos.c:1436:14: error: unused variable ‘max_value’ [-Werror\u003dunused-variable]\n 1436 |         char max_value[QOS_MAX_LONG_STR_LEN];\n      |              ^~~~~~~~~\ncc1: all warnings being treated as errors\nmake[2]: *** [MainNFSD/CMakeFiles/MainServices.dir/build.make:238: MainNFSD/CMakeFiles/MainServices.dir/nfs_qos.c.o] Error 1\nmake[1]: *** [CMakeFiles/Makefile2:2860: MainNFSD/CMakeFiles/MainServices.dir/all] Error 2\nmake: *** [Makefile:171: all] Error 2",
+      "revId": "b7f0e4cd075ca1f39c7c6d9a2027b63dfcfd546a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
