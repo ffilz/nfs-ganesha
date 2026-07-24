@@ -1,0 +1,327 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "646b2dd7_34d47607",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: Prefer using \u0027\"%s...\", __func__\u0027 to using \u0027Create_RDMA\u0027, this function\u0027s name, in a string\n+\t\t\t     \"Create_RDMA: Retrieved netconfig_rdma\u003d%p\",",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2322950_d70d7867",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: Prefer using \u0027\"%s...\", __func__\u0027 to using \u0027Create_RDMA\u0027, this function\u0027s name, in a string\n+\t\t\t \"Create_RDMA: Set xp_netid\u003d%s on transport\",",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70c2848c_404b8d15",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1459,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 85 exceeds 80 columns\n+\t\t\t\t\t \"Cannot register %s V%d on UDP\", tags[prot],",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62ac3741_0dfb1a2a",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1465,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 87 exceeds 80 columns\n+\t\t\t\tLogInfo(COMPONENT_DISPATCH, \"Registering %s V%d/UDPv6\",",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8968615_e27a24c8",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1467,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\tif (!UDP_REGISTER(prot, vers, netconfig_udpv6)) {",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "578985a4_02310c24",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1478,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t/* RDMA protocol uses its own transport, skip regular TCP registration */",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a7eae14_584d1b93",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1483,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\tLogInfo(COMPONENT_DISPATCH, \"Registering %s V%d/TCP\", tags[prot],",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "165f5e35_5844736f",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1487,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 85 exceeds 80 columns\n+\t\t\tLogMajor(COMPONENT_DISPATCH, \"Cannot register %s V%d on TCP\",",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc5c942d_d6ef0c2a",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 87 exceeds 80 columns\n+\t\t\t\t\t \"Cannot register %s V%d on TCPv6\", tags[prot],",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e924484b_cd54a272",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 87 exceeds 80 columns\n+\t\t\t netconfig_rdma-\u003enc_netid ? netconfig_rdma-\u003enc_netid : \"NULL\");",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09e04294_6743fb89",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+\t\t\t \"RDMA Registration SUCCESS for %s V%d\", tags[prot], (int)vers);",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b89b0d1d_3a35538d",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 97 exceeds 80 columns\n+\t\t\tstruct sockaddr *sa \u003d (struct sockaddr *)tcp_xprt[prot]-\u003exp_local.nb.buf;",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "652a4189_01ea8b8a",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\t\tstruct sockaddr *sa \u003d (struct sockaddr *)tcp_xprt[prot]-\u003exp_local.nb.buf;\n+\t\t\tif (sa \u0026\u0026 tcp_xprt[prot]-\u003exp_local.nb.len \u003e 0 \u0026\u0026 sa-\u003esa_family \u003d\u003d AF_INET6) {",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4862d43d_975a02d5",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 101 exceeds 80 columns\n+\t\t\tif (sa \u0026\u0026 tcp_xprt[prot]-\u003exp_local.nb.len \u003e 0 \u0026\u0026 sa-\u003esa_family \u003d\u003d AF_INET6) {",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "854e5baf_43515e3a",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1531,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\tLogInfo(COMPONENT_RDMA, \"Registering %s V%d/RDMAv6\",",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1335340d_fb087b70",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\tif (!RDMA_REGISTER(prot, vers, netconfig_rdma6)) {",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad756c39_86b98925",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1630,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: Prefer using \u0027\"%s...\", __func__\u0027 to using \u0027nfs_Init_netconfig\u0027, this function\u0027s name, in a string\n+\t\t\t \"nfs_Init_netconfig: Getting RDMA netconfig entry\");",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f4acfd_744993f5",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: Prefer using \u0027\"%s...\", __func__\u0027 to using \u0027nfs_Init_netconfig\u0027, this function\u0027s name, in a string\n+\t\t\t\t \"nfs_Init_netconfig: RDMA netconfig found - nc_netid\u003d%s\",",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7d06c5b_ca3d1e8e",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1644,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-24T15:23:08Z",
+      "side": 1,
+      "message": "WARNING: line length of 87 exceeds 80 columns\n+\t\t\tnetconfig_rdma6 \u003d (struct netconfig *)getnetconfigent(\"rdma6\");",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
