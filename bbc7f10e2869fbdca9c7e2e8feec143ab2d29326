@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edf9f1d2_4c41a2f0",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "646b2dd7_34d47607",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2322950_d70d7867",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-24T15:23:08Z",
       "side": 1,
       "message": "WARNING: Prefer using \u0027\"%s...\", __func__\u0027 to using \u0027Create_RDMA\u0027, this function\u0027s name, in a string\n+\t\t\t \"Create_RDMA: Set xp_netid\u003d%s on transport\",",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80aa6953_0c1467fa",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2322950_d70d7867",
       "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6627767_a2059406",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1459,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70c2848c_404b8d15",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62ac3741_0dfb1a2a",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-07-24T15:23:08Z",
       "side": 1,
       "message": "WARNING: line length of 87 exceeds 80 columns\n+\t\t\t\tLogInfo(COMPONENT_DISPATCH, \"Registering %s V%d/UDPv6\",",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b56fd502_b30db959",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1465,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62ac3741_0dfb1a2a",
       "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b308437_4c63819c",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1467,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8968615_e27a24c8",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "578985a4_02310c24",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-07-24T15:23:08Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t/* RDMA protocol uses its own transport, skip regular TCP registration */",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "242116c3_c15d6beb",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1478,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "578985a4_02310c24",
       "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +228,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cb522c5_fa5b7383",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1483,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a7eae14_584d1b93",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "165f5e35_5844736f",
@@ -133,6 +259,24 @@
       "writtenOn": "2026-07-24T15:23:08Z",
       "side": 1,
       "message": "WARNING: line length of 85 exceeds 80 columns\n+\t\t\tLogMajor(COMPONENT_DISPATCH, \"Cannot register %s V%d on TCP\",",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cab6dd31_138a064a",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1487,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "165f5e35_5844736f",
       "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -154,6 +298,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb21a94a_7a0d6407",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc5c942d_d6ef0c2a",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e924484b_cd54a272",
@@ -167,6 +329,24 @@
       "writtenOn": "2026-07-24T15:23:08Z",
       "side": 1,
       "message": "WARNING: line length of 87 exceeds 80 columns\n+\t\t\t netconfig_rdma-\u003enc_netid ? netconfig_rdma-\u003enc_netid : \"NULL\");",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ca2edef_81e9627d",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e924484b_cd54a272",
       "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -188,6 +368,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d098ff4c_713f5f17",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09e04294_6743fb89",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b89b0d1d_3a35538d",
@@ -201,6 +399,24 @@
       "writtenOn": "2026-07-24T15:23:08Z",
       "side": 1,
       "message": "WARNING: line length of 97 exceeds 80 columns\n+\t\t\tstruct sockaddr *sa \u003d (struct sockaddr *)tcp_xprt[prot]-\u003exp_local.nb.buf;",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1a6d9a7_31282e20",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b89b0d1d_3a35538d",
       "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -239,6 +455,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44724a3f_0dce581b",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "652a4189_01ea8b8a",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "763ef07f_e04680c8",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4862d43d_975a02d5",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "854e5baf_43515e3a",
@@ -252,6 +504,24 @@
       "writtenOn": "2026-07-24T15:23:08Z",
       "side": 1,
       "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\tLogInfo(COMPONENT_RDMA, \"Registering %s V%d/RDMAv6\",",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99ba1937_8493ec9d",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1531,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "854e5baf_43515e3a",
       "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -273,6 +543,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42392555_c67157b8",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1335340d_fb087b70",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad756c39_86b98925",
@@ -286,6 +574,24 @@
       "writtenOn": "2026-07-24T15:23:08Z",
       "side": 1,
       "message": "WARNING: Prefer using \u0027\"%s...\", __func__\u0027 to using \u0027nfs_Init_netconfig\u0027, this function\u0027s name, in a string\n+\t\t\t \"nfs_Init_netconfig: Getting RDMA netconfig entry\");",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d259cd31_9ae1ddc8",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1630,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad756c39_86b98925",
       "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -307,6 +613,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd0752c_d836de08",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37f4acfd_744993f5",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7d06c5b_ca3d1e8e",
@@ -320,6 +644,24 @@
       "writtenOn": "2026-07-24T15:23:08Z",
       "side": 1,
       "message": "WARNING: line length of 87 exceeds 80 columns\n+\t\t\tnetconfig_rdma6 \u003d (struct netconfig *)getnetconfigent(\"rdma6\");",
+      "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6f46fc9_825f0717",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1644,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-07-24T15:51:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7d06c5b_ca3d1e8e",
       "revId": "bbc7f10e2869fbdca9c7e2e8feec143ab2d29326",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
