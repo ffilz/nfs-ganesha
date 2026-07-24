@@ -85,6 +85,29 @@
       "parentUuid": "7a4d8334_37fc820e",
       "revId": "294997d259264007e4f8162b8700a4b4918a8fe3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a7fd8bb_78cd8395",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-07-24T10:31:53Z",
+      "side": 1,
+      "message": "gsh_all_clients_all_ops() calls gsh_dbus_status_reply() (lines 825/829), and the Python client expects [status, error, timestamp, clients], but this method\u0027s .args omit STATUS_REPLY.\n\nWould changing .args as below be better?\n\n.args \u003d { STATUS_REPLY, TIMESTAMP_REPLY, CE_ALL_OPS_ARRAY_REPLY, END_ARG_LIST }\n\nto match GetClientAllops and the actual reply payload.",
+      "range": {
+        "startLine": 868,
+        "startChar": 0,
+        "endLine": 868,
+        "endChar": 1
+      },
+      "revId": "294997d259264007e4f8162b8700a4b4918a8fe3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
