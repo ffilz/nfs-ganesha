@@ -16,6 +16,227 @@
       "message": "I want to hold off on this one for more discussion about how we want to handle EXPORT add/remove/update in gRPC.",
       "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9956cd12_8841467d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-27T23:23:52Z",
+      "side": 1,
+      "message": "Could you maybe split out add/remove/update to a separate patch? Then working through how those will work won\u0027t delay the other parts of this patch.",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c2629f_eac96180",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-27T23:23:52Z",
+      "side": 1,
+      "message": "Do not directly access cfg_pseudopath, use TMP_PSEUDOPATH instead",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05aae680_07ba0013",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-27T23:23:52Z",
+      "side": 1,
+      "message": "For the other client types also need to display the associated string (well, not for MATCH_ANY_CLIENT).",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9daa3dcc_74f97a93",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-27T23:23:52Z",
+      "side": 1,
+      "message": "Options and set really should be converted to string, numeric values will be meaningless to sysadmin",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "869fce86_e3911c69",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-27T23:23:52Z",
+      "side": 1,
+      "message": "Should also display the export level options and permissions",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8006cad0_bf94952d",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-27T23:23:52Z",
+      "side": 1,
+      "message": "Do not directly access cfg_pseudopath use TMP_PSEUDOPATH instead",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feef75b7_62599304",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-27T23:23:52Z",
+      "side": 1,
+      "message": "Somewhere you need to call process_extension_callbacks();",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b92795a9_da6ad5eb",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-27T23:23:52Z",
+      "side": 1,
+      "message": "Also should check pseudo path is not \"/\" (pseudo root doesn\u0027t need to be export ID 0)",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81124131_786b23a9",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-27T23:23:52Z",
+      "side": 1,
+      "message": "This should probably actually be done first. It means this command is looking at stable export config.",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b39e169_5f910d97",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-27T23:23:52Z",
+      "side": 1,
+      "message": "We should consider removing this restriction, however, we will then have to make remove individual exports compatible with the prune process.\n\nHmm, otherwise not sure when/where this export is removed from pseudofs\n\nWe probably need to bump the config generation on all the other exports and then do the prune process",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb9cf957_6f9ddafb",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-27T23:23:52Z",
+      "side": 1,
+      "message": "Somewhere you need to call process_extension_callbacks();",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d26af81b_1b753670",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-27T23:23:52Z",
+      "side": 1,
+      "message": "OK, this won\u0027t work if the update is just updating a selection of exports. Any exports not \"updated\" will be removed...\n\nI think what we need to do is set all the exports to the new generation? Really this is where we really need to look carefully.",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4ba1948_d2ab9c75",
+        "filename": "src/support/exports.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-27T23:23:52Z",
+      "side": 1,
+      "message": "Why do you need this wrapper that doesn\u0027t do anything different? Just make StrExportOptions an extern instead of static",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
