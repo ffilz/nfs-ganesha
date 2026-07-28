@@ -16,6 +16,24 @@
       "message": "Does this result in no change in behavior for FSALs that don\u0027t implement the notification bits?",
       "revId": "6ae75a462ebc79a09dd8b2fedd7b572fdb8b5155",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b766786c_454ba922",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038959
+      },
+      "writtenOn": "2026-07-28T00:26:19Z",
+      "side": 1,
+      "message": "yes, it still return 0 notification for those FSALs not implemented",
+      "parentUuid": "4f20ca38_22f3ac2e",
+      "revId": "6ae75a462ebc79a09dd8b2fedd7b572fdb8b5155",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
