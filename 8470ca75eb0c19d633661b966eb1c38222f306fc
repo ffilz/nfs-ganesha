@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f250f997_c21937c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T11:24:28Z",
+      "side": 1,
+      "message": "Done, Separate patch for  add/remove/update export will be posted soon",
+      "parentUuid": "9956cd12_8841467d",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57c2629f_eac96180",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-07-27T23:23:52Z",
       "side": 1,
       "message": "Do not directly access cfg_pseudopath, use TMP_PSEUDOPATH instead",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56c97d75_f4d324ea",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T11:24:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57c2629f_eac96180",
       "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +105,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f250d728_2b810616",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T11:24:28Z",
+      "side": 1,
+      "message": "This is already handled at top. client_name is populated from client-\u003estr, which contains the associated client string (CIDR, netgroup name, wildcard, GSS principal, etc.), while client_type identifies the client type. Were you expecting additional information beyond client-\u003estr?",
+      "parentUuid": "05aae680_07ba0013",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9daa3dcc_74f97a93",
@@ -82,6 +136,24 @@
       "writtenOn": "2026-07-27T23:23:52Z",
       "side": 1,
       "message": "Options and set really should be converted to string, numeric values will be meaningless to sysadmin",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60c339df_65a98440",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T11:24:28Z",
+      "side": 1,
+      "message": "Removed the options and set fields. The decoded client_permissions and export_permissions strings now provide the same information in a human-readable format, making the raw numeric values unnecessary",
+      "parentUuid": "9daa3dcc_74f97a93",
       "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -103,6 +175,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6e8f9e1_be260183",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T11:24:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "869fce86_e3911c69",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8006cad0_bf94952d",
@@ -116,6 +206,24 @@
       "writtenOn": "2026-07-27T23:23:52Z",
       "side": 1,
       "message": "Do not directly access cfg_pseudopath use TMP_PSEUDOPATH instead",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2f88cb3_6612dc6e",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T11:24:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8006cad0_bf94952d",
       "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -137,6 +245,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7cbb8b0_674d4440",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T11:24:28Z",
+      "side": 1,
+      "message": "will address in separate patch for  add/remove/update export",
+      "parentUuid": "feef75b7_62599304",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b92795a9_da6ad5eb",
@@ -150,6 +276,24 @@
       "writtenOn": "2026-07-27T23:23:52Z",
       "side": 1,
       "message": "Also should check pseudo path is not \"/\" (pseudo root doesn\u0027t need to be export ID 0)",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4de5ac1_85def874",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T11:24:28Z",
+      "side": 1,
+      "message": "will address in separate patch for add/remove/update export",
+      "parentUuid": "b92795a9_da6ad5eb",
       "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -171,6 +315,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b04c9cee_23fec90b",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T11:24:28Z",
+      "side": 1,
+      "message": "will address in separate patch for add/remove/update export",
+      "parentUuid": "81124131_786b23a9",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b39e169_5f910d97",
@@ -184,6 +346,24 @@
       "writtenOn": "2026-07-27T23:23:52Z",
       "side": 1,
       "message": "We should consider removing this restriction, however, we will then have to make remove individual exports compatible with the prune process.\n\nHmm, otherwise not sure when/where this export is removed from pseudofs\n\nWe probably need to bump the config generation on all the other exports and then do the prune process",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4f938dd_c55d655d",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T11:24:28Z",
+      "side": 1,
+      "message": "will address in separate patch for add/remove/update export",
+      "parentUuid": "3b39e169_5f910d97",
       "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -205,6 +385,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c303299_39bf7576",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T11:24:28Z",
+      "side": 1,
+      "message": "will address in separate patch for add/remove/update export",
+      "parentUuid": "fb9cf957_6f9ddafb",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d26af81b_1b753670",
@@ -222,6 +420,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7b37f6a_b8380c3e",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T11:24:28Z",
+      "side": 1,
+      "message": "will address in separate patch for add/remove/update export",
+      "parentUuid": "d26af81b_1b753670",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4ba1948_d2ab9c75",
@@ -235,6 +451,24 @@
       "writtenOn": "2026-07-27T23:23:52Z",
       "side": 1,
       "message": "Why do you need this wrapper that doesn\u0027t do anything different? Just make StrExportOptions an extern instead of static",
+      "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9b9aad2_3d683bac",
+        "filename": "src/support/exports.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T11:24:28Z",
+      "side": 1,
+      "message": "will address in separate patch for add/remove/update export",
+      "parentUuid": "d4ba1948_d2ab9c75",
       "revId": "8470ca75eb0c19d633661b966eb1c38222f306fc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
