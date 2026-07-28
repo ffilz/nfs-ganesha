@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f36ffe96_da61c0e3",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T04:57:33Z",
+      "side": 1,
+      "message": "I\u0027ve updated the implementation to separate the FD management statistics from the MDCACHE statistics. ShowMDCache now reports only MDCACHE statistics, while the FD/LRU-related info is exposed through the existing ShowFDUsage gRPC API.",
+      "parentUuid": "39f0d97f_0fb1e21a",
+      "revId": "1a89c306d7cc03bdd8c51148c9f301056c402cdf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57d9deca_100d9f1c",
@@ -35,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "109a8fce_6be5b299",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1417,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T04:57:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57d9deca_100d9f1c",
+      "revId": "1a89c306d7cc03bdd8c51148c9f301056c402cdf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9b7bbb4_0617642a",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-07-27T22:26:40Z",
       "side": 1,
       "message": "Again, we really should separate fd stats from mdcache stats",
+      "revId": "1a89c306d7cc03bdd8c51148c9f301056c402cdf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9670413b_6025223c",
+        "filename": "src/include/server_stats_grpc.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-07-28T04:57:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9b7bbb4_0617642a",
       "revId": "1a89c306d7cc03bdd8c51148c9f301056c402cdf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
