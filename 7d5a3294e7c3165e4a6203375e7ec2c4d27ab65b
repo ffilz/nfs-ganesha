@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dcbaf61_36df7611",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-28T17:30:52Z",
+      "side": 1,
+      "message": "Put this inside the ifdef otherwise compile error if _USE_NFS_RDMA is not defined",
+      "revId": "7d5a3294e7c3165e4a6203375e7ec2c4d27ab65b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
