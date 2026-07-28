@@ -16,6 +16,24 @@
       "message": "Why is this NFSv4.1 specific?",
       "revId": "6241bfcf31ea975e9107c2d883bafaa901116c4b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c034bf49_e09bb9b8",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-07-28T02:16:32Z",
+      "side": 1,
+      "message": "The RPC is named DisconnectNfsv41Client because that is the existing D-Bus method on org.ganesha.nfsd.clientmgr (cltmgr_disconnect_nfsv41_client). Kept the same name so gRPC callers map 1:1.\n\nBehavior is not 4.1-only: destroy_all_client_connections() skips only cid_minorversion \u003d\u003d 0 (NFSv4.0) and destroys session connections for NFSv4.1 and NFSv4.2. The brief comment above the handler was too narrow; I’ve updated it to say that.",
+      "parentUuid": "de87a1cf_af06f5aa",
+      "revId": "6241bfcf31ea975e9107c2d883bafaa901116c4b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
