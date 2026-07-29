@@ -67,6 +67,7 @@ struct ceph_fsal_module {
 	bool client_oc;
 	uint64_t client_oc_size;
 	uint64_t client_oc_max_dirty;
+	uint16_t max_ceph_clients;
 	bool async;
 	bool zerocopy;
 	bool use_old_uuid;
@@ -90,6 +91,8 @@ struct ceph_mount {
 	char *cm_fs_name;
 	/** The cephfs mount point (may be different than export path */
 	char *cm_mount_path;
+	/** The ceph client index */
+	uint16_t cm_clnt_index;
 	/** The RADOS user_id */
 	char *cm_user_id;
 	/** The RADOS secret key */
