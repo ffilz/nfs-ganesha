@@ -235,6 +235,13 @@ struct gsh_export {
 	bool update_remount;
 };
 
+/* Private state for config_errs_to_dbus and config_errs_to_grpc */
+struct error_detail {
+	char *buf;
+	size_t bufsize;
+	FILE *fp;
+};
+
 /* Use macro to define this to get around include file order. */
 #define ctx_export_path(ctx)                                            \
 	((nfs_param.core_param.mount_path_pseudo) ? CTX_PSEUDOPATH(ctx) \
@@ -332,8 +339,16 @@ struct gsh_export *get_gsh_export_by_tag(char *tag);
 bool mount_gsh_export(struct gsh_export *exp);
 void unmount_gsh_export(struct gsh_export *exp);
 void remove_gsh_export(uint16_t export_id);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 bool foreach_gsh_export(bool (*cb)(struct gsh_export *exp, void *state),
 			bool wrlock, void *state);
+struct gsh_export *lookup_export_by_id(uint16_t export_id, char **errormsg);
+#ifdef __cplusplus
+}
+#endif
 
 /**
  * @brief Advisory check of export readiness.
@@ -359,10 +374,14 @@ void _get_gsh_export_ref(struct gsh_export *a_export, char *file, int line,
 #define get_gsh_export_ref(a_export)                              \
 	_get_gsh_export_ref(a_export, (char *)__FILE__, __LINE__, \
 			    (char *)__func__)
-
+#ifdef __cplusplus
+extern "C" {
+#endif
 void _put_gsh_export(struct gsh_export *a_export, bool config, char *file,
 		     int line, char *function);
-
+#ifdef __cplusplus
+}
+#endif
 #define put_gsh_export(a_export)                                     \
 	_put_gsh_export(a_export, false, (char *)__FILE__, __LINE__, \
 			(char *)__func__)
@@ -429,5 +448,13 @@ struct export_extension_sw {
 void add_export_extension(struct export_extension *);
 void remove_export_extension(struct export_extension *);
 int load_export_extensions(config_file_t, struct config_error_type *);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+void synchronize_exports(uint64_t generation);
+#ifdef __cplusplus
+}
+#endif
 #endif /* !EXPORT_MGR_H */
 /** @} */

@@ -1019,16 +1019,14 @@ static struct gsh_export *lookup_export(DBusMessageIter *args, char **errormsg)
 	return export;
 }
 
-/* Private state for config_errs_to_dbus to convert
- * parsing error stream in to a string of '\n' terminated
- * message lines.
- */
-
-struct error_detail {
-	char *buf;
-	size_t bufsize;
-	FILE *fp;
-};
+struct gsh_export *lookup_export_by_id(uint16_t export_id, char **errormsg)
+{
+	struct gsh_export *export = get_gsh_export(export_id);
+	if (export == NULL) {
+		*errormsg = "Export id not found";
+	}
+	return export;
+}
 
 /**
  * @brief Report processing errors to the DBUS client.

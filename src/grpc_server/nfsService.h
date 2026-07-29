@@ -240,4 +240,19 @@ class ExportStatsService final : public exportService::ExportStats::Service {
 		 const nfsProtoUtil::EmptyRequest *request,
 		 exportService::GetNFSIOResponse *response) override;
 };
+
+class ExportService final : public exportService::ExportService::Service {
+    public:
+	grpc::Status AddExport(grpc::ServerContext *context,
+			       const exportService::ExportRequest *request,
+			       exportService::ExportResponse *response) override;
+	grpc::Status
+	RemoveExport(grpc::ServerContext *context,
+		     const nfsProtoUtil::ExportIdRequest *request,
+		     exportService::ExportResponse *response) override;
+	grpc::Status
+	UpdateExport(grpc::ServerContext *context,
+		     const exportService::ExportRequest *request,
+		     exportService::ExportResponse *response) override;
+};
 #endif //NFSSERVICE_H
