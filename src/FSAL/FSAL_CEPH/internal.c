@@ -488,6 +488,9 @@ int ceph_mount_key_cmpf(const struct avltree_node *lhs,
 	 */
 	assert(lk->cm_mount_path != NULL && rk->cm_mount_path != NULL);
 
+	if (lk->cm_clnt_index != rk->cm_clnt_index)
+		return -1;
+
 	rc = key_strcmp(lk->cm_fs_name, rk->cm_fs_name);
 
 	if (rc != 0)
