@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef348411_b0ad8632",
+        "filename": "src/FSAL/FSAL_CEPH/internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-29T16:52:59Z",
+      "side": 1,
+      "message": "This needs to return -1 or 1 to allow sorting",
+      "revId": "228712ae5dec9324ec2683f115e01715d0eafe9b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6583828_0b587851",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-29T16:52:59Z",
+      "side": 1,
+      "message": "Need to creat uuid without cm_clnt_index if max_ceph_clients is 0 for backward compatibility",
+      "revId": "228712ae5dec9324ec2683f115e01715d0eafe9b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf940362_75032e65",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-29T16:52:59Z",
+      "side": 1,
+      "message": "Please use another name, this use of client_id risks too much confusion with NFSv4 client_id...",
+      "revId": "228712ae5dec9324ec2683f115e01715d0eafe9b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
