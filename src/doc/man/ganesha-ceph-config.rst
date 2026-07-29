@@ -73,6 +73,12 @@ client_oc_size(uint64, range 0 to UINT64_MAX, default 209715200)
 client_oc_max_dirty(uint64, range 0 to UINT64_MAX, default 104857600)
     Sets the maximum number of dirty bytes in object cache. Default is 100Mi.
 
+max_ceph_clients(uint16, range 0 to 64, default 0)
+    Sets the maximum number of ceph clients attached to Ganesha. Default is 0,
+    meaning this feature is disabled. When the value is 1 or more, then cmount
+    path will be over-riden with "/", and mentioned number of ceph clients will
+    be attached to Ganesha process.
+
 async(bool, default false)
     Enable ceph async operations (read and write).
 
