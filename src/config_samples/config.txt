@@ -1145,6 +1145,8 @@ CEPH {}
 
 	client_oc_max_dirty(uint64, range 0 to UINT64_MAX, default 104857600)
 
+	max_ceph_clients(uint16, range 0 to 64, default 0)
+
 	async(bool, default false)
 
 	zerocopy(bool, default false)

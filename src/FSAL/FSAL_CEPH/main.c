@@ -130,6 +130,8 @@ static struct config_item ceph_items[] = {
 			    ceph_fsal_module, client_oc_size),
 	CONF_ITEM_UI64_ZERO("client_oc_max_dirty", 0, UINT64_MAX, 104857600,
 			    ceph_fsal_module, client_oc_max_dirty),
+	CONF_ITEM_UI16("max_ceph_clients", 0, 64, 0, ceph_fsal_module,
+		       max_ceph_clients),
 	CONF_ITEM_BOOL("async", false, ceph_fsal_module, async),
 	CONF_ITEM_BOOL("zerocopy", false, ceph_fsal_module, zerocopy),
 	CONF_ITEM_BOOL("use_old_uuid", false, ceph_fsal_module, use_old_uuid),
@@ -444,8 +446,14 @@ void create_unique_id(struct ceph_mount *cm, char *nodeid, char **uniq_id)
 		LogEvent(COMPONENT_FSAL, "New logic of uuid for ceph");
 		/* create string containing nodeid, userid, fs_name and mount
 		 * path for hashing purpose*/
-		(void)snprintf(buff, 8192, "%s%s%s%s", nodeid, cm->cm_user_id,
-			       cm->cm_fs_name, cm->cm_mount_path);
+		if (my_module->max_ceph_clients)
+			(void)snprintf(buff, 8192, "%s%s%s%s%d", nodeid,
+				       cm->cm_user_id, cm->cm_fs_name,
+				       cm->cm_mount_path, cm->cm_clnt_index);
+		else
+			(void)snprintf(buff, 8192, "%s%s%s%s", nodeid,
+				       cm->cm_user_id, cm->cm_fs_name,
+				       cm->cm_mount_path);
 		LogDebug(COMPONENT_FSAL, "ceph_mount hash data: %s", buff);
 		hashkey = CityHash64(buff, strlen(buff));
 		len = strlen(RECLAIM_UUID_PREFIX) + 128 + 1;
@@ -757,6 +765,8 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	struct ceph_mount *cm;
 	/* stx is filled in */
 	bool stxr = false;
+	/* ceph_client_id - unique for every ceph client */
+	char ceph_client_id[1024];
 
 	fsal_export_init(&export->export);
 	export_ops_init(&export->export.exp_ops);
@@ -792,6 +802,12 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	else
 		cm_key.cm_mount_path = CTX_FULLPATH(op_ctx);
 
+	if (my_module->max_ceph_clients)
+		cm_key.cm_clnt_index =
+			export->export.export_id % my_module->max_ceph_clients;
+	else
+		cm_key.cm_clnt_index = 0;
+
 	PTHREAD_RWLOCK_wrlock(&cmount_lock);
 
 	cm = ceph_mount_lookup(&cm_key.cm_avl_mount);
@@ -822,6 +838,12 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	else
 		cm->cm_mount_path = gsh_strdup(CTX_FULLPATH(op_ctx));
 
+	if (my_module->max_ceph_clients)
+		cm->cm_clnt_index =
+			export->export.export_id % my_module->max_ceph_clients;
+	else
+		cm->cm_clnt_index = 0;
+
 	if (export->user_id)
 		cm->cm_user_id = gsh_strdup(export->user_id);
 
@@ -838,8 +860,12 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 
 	ceph_mount_insert(&cm->cm_avl_mount);
 
+	/* Set the client id */
+	snprintf(ceph_client_id, 1024, "%s.%d", cm->cm_user_id,
+		 cm->cm_clnt_index);
+
 	/* allocates ceph_mount_info */
-	ceph_status = ceph_create(&cm->cmount, cm->cm_user_id);
+	ceph_status = ceph_create(&cm->cmount, ceph_client_id);
 
 	if (ceph_status != 0) {
 		status.major = ERR_FSAL_SERVERFAULT;
