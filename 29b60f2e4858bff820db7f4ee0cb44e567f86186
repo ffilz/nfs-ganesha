@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3ca865c_9a5e11c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-30T08:36:27Z",
+      "side": 1,
+      "message": "Review Comments incorporated in Patchset#15.",
+      "revId": "29b60f2e4858bff820db7f4ee0cb44e567f86186",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6c14e85_9cccd0d9",
@@ -31,6 +48,24 @@
       "writtenOn": "2026-07-21T18:22:47Z",
       "side": 1,
       "message": "These should all be MEM_COMP_FSAL",
+      "revId": "29b60f2e4858bff820db7f4ee0cb44e567f86186",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b742f59_0be76da0",
+        "filename": "src/FSAL/FSAL_MEM/mem_handle.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1954,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-30T08:36:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b6c14e85_9cccd0d9",
       "revId": "29b60f2e4858bff820db7f4ee0cb44e567f86186",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -54,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f2a9e10_1f495439",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-30T08:36:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f08b3ec1_e0cfb9dd",
+      "revId": "29b60f2e4858bff820db7f4ee0cb44e567f86186",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f158f2e_4c55b7cd",
         "filename": "src/Protocols/NLM/nsm.c",
         "patchSetId": 14
@@ -65,6 +118,24 @@
       "writtenOn": "2026-07-21T18:22:47Z",
       "side": 1,
       "message": "Hmm, I would really prefer to see these as MEM_COMP_PROTOCOL\n\nMaybe what we need is a mem_comp field in local_nlm_info that can be set to the component used for allocations associated with a particular local_nlm_info",
+      "revId": "29b60f2e4858bff820db7f4ee0cb44e567f86186",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "314f07c0_6607a3af",
+        "filename": "src/Protocols/NLM/nsm.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-30T08:36:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2f158f2e_4c55b7cd",
       "revId": "29b60f2e4858bff820db7f4ee0cb44e567f86186",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -88,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cabddbcc_4fa07f6c",
+        "filename": "src/Protocols/NLM/nsm.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 954,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-30T08:36:27Z",
+      "side": 1,
+      "message": "free_sperror() is a legitimate future libntirpc API improvement, but out of scope since we\u0027re not touching libntirpc in this serie",
+      "parentUuid": "4596f34b_c6e5a635",
+      "revId": "29b60f2e4858bff820db7f4ee0cb44e567f86186",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe1b14a6_454c3b35",
         "filename": "src/SAL/nfs4_recovery.c",
         "patchSetId": 14
@@ -99,6 +188,24 @@
       "writtenOn": "2026-07-21T18:22:47Z",
       "side": 1,
       "message": "See note in nsm.c about having mem_comp as a field in local_nlm_info so different uses can be associated with different components",
+      "revId": "29b60f2e4858bff820db7f4ee0cb44e567f86186",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f167099_e7c8e157",
+        "filename": "src/SAL/nfs4_recovery.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-30T08:36:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fe1b14a6_454c3b35",
       "revId": "29b60f2e4858bff820db7f4ee0cb44e567f86186",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -134,6 +241,24 @@
       "side": 1,
       "message": "Need to break up this line at the PRIu64",
       "parentUuid": "d6a146fa_ddd6646b",
+      "revId": "29b60f2e4858bff820db7f4ee0cb44e567f86186",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e7a81dc_f011e611",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3457,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-30T08:36:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b294566d_9e160146",
       "revId": "29b60f2e4858bff820db7f4ee0cb44e567f86186",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

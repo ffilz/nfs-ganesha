@@ -232,6 +232,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d265d18c_55da71af",
+        "filename": "src/FSAL/FSAL_PROXY_V4/handle.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1757,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-30T08:36:27Z",
+      "side": 1,
+      "message": "Used a fixed-size stack array instead of literal alloca(). Since the buffer size here is a compile-time constant (XDR_STRING_MAXLEN + 1, not a runtime-computed value), a plain char buf[N]; gets the same benefit — no heap alloc/free, freed automatically on return — without alloca()\u0027s downsides: no bounds/error checking if the stack is exhausted. This also matches the existing pattern FSAL_KVSFS::kvsfs_readsymlink() already uses for the identical problem (char content[fsal_default_linksize];), so it\u0027s consistent with precedent in the tree rather than introducing a new technique.",
+      "parentUuid": "4fdd26c1_0c220f47",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68a20ca4_7d3106ac",
         "filename": "src/FSAL/FSAL_PROXY_V4/handle.c",
         "patchSetId": 10
@@ -1056,6 +1074,24 @@
       "side": 1,
       "message": "Oh, yea, quite a mess... Glad you caught that.\n\nSee note above about having component in local_nlm_info",
       "parentUuid": "0e00deb6_9d04dea7",
+      "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "600388e0_6813f308",
+        "filename": "src/Protocols/NLM/nsm.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-07-30T08:36:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "20421814_59b10f50",
       "revId": "22be5b47831bbefda6c4c9dd9bc902a04c1996ca",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
