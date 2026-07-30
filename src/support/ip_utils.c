@@ -83,19 +83,24 @@ uint64_t hash_sockaddr(sockaddr_t *addr, bool ignore_port)
 
 	switch (addr->ss_family) {
 	case AF_INET: {
-		/* IPv4 addresses are hashed as if they are IPv4-mapped IPv6
-		 * addresses to ensure consistent hashing. An IPv4-mapped IPv6
-		 * address is ::ffff:a.b.c.d,
-		 * |------------------------------------------------------------|
-		 * | 80 bits = 10 bytes | 16 bits = 2 bytes | 32 bits = 4 bytes |
-		 * |------------------------------------------------------------|
-		 * |          0         |        ffff       |      a.b.c.d      |
-		 * |------------------------------------------------------------|
-		 * which results in a hash of: 0 ^ 0 ^ 0xffff ^ ipv4_addr.
+		/* IPv4 must hash identically to the same address stored as
+		 * IPv4-mapped IPv6 (::ffff:a.b.c.d). Do not use a hardcoded
+		 * 0xffff constant: on little-endian hosts, the mapped form's
+		 * third uint32_t is 0xffff0000, so AF_INET and mapped AF_INET6
+		 * previously produced different hashes. That left a stale
+		 * client_mgr cache entry after RemoveClient and caused a
+		 * use-after-free crash in sockaddr_cmp on remount.
 		 */
+		sockaddr_t addr_ipv6;
 		struct sockaddr_in *paddr = (struct sockaddr_in *)addr;
-		addr_hash = 0xffff ^ paddr->sin_addr.s_addr;
+		struct sockaddr_in6 *paddr6;
+		uint32_t *va;
+
 		port_hash = paddr->sin_port << 16;
+		ipv4_to_ipv4_mapped_ipv6(addr, &addr_ipv6);
+		paddr6 = (struct sockaddr_in6 *)&addr_ipv6;
+		va = (uint32_t *)&paddr6->sin6_addr;
+		addr_hash = va[0] ^ va[1] ^ va[2] ^ va[3];
 		break;
 	}
 	case AF_INET6: {
