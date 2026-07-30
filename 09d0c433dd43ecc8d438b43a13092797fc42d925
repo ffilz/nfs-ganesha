@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6419442_36aae692",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-30T17:06:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9f42d4ca_381ff270",
+      "revId": "09d0c433dd43ecc8d438b43a13092797fc42d925",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b39895a9_241dcb00",
@@ -85,6 +103,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d6d64bd_aa681044",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-30T17:06:27Z",
+      "side": 1,
+      "message": "@liorsu@google.com could you check on this and Ack if you\u0027re satisfied the change was made?",
+      "parentUuid": "e8112a0b_160eae21",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 73
+      },
+      "revId": "09d0c433dd43ecc8d438b43a13092797fc42d925",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecc1e858_d7265b01",
         "filename": "src/monitoring/prometheus_exposer.cc",
         "patchSetId": 9
@@ -96,6 +138,30 @@
       "writtenOn": "2026-07-12T14:42:55Z",
       "side": 1,
       "message": "MetricFamily mf \u003d family; performs a deep copy of the entire MetricFamily structure (including its internal vectors/metrics) before you modify the name string. If the name doesn\u0027t change, or even if it does, copying everything upfront is expensive.\n\nFix: Use a move-constructible approach or modify the name during the insertion into latest_families.",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 27
+      },
+      "revId": "09d0c433dd43ecc8d438b43a13092797fc42d925",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "368aa6cd_0c46474f",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-30T17:06:27Z",
+      "side": 1,
+      "message": "This does seem worth avoiding. Please address this.",
+      "parentUuid": "ecc1e858_d7265b01",
       "range": {
         "startLine": 181,
         "startChar": 0,
@@ -131,6 +197,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e01a8ce_6e0c4d2a",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-30T17:06:27Z",
+      "side": 1,
+      "message": "Good point, please fix this niggle.",
+      "parentUuid": "51f70230_97fe8f06",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 46
+      },
+      "revId": "09d0c433dd43ecc8d438b43a13092797fc42d925",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "067fc715_8aab9f15",
         "filename": "src/monitoring/prometheus_exposer.cc",
         "patchSetId": 9
@@ -142,6 +232,30 @@
       "writtenOn": "2026-07-12T14:42:55Z",
       "side": 1,
       "message": "Your comment states:\n\nRestructuring metric names by adding the \"nfs_\" prefix...\n\nHowever, if a metric name already has double underscores (e.g., __rpc_calls), your code converts it to _rpc_calls and then unconditionally tacks \"nfs_\" to the front, resulting in nfs__rpc_calls. It\u0027s highly likely you want to ensure double underscores are cleaned up after adding the prefix, or that the prefix shouldn\u0027t create new double underscores.",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 29
+      },
+      "revId": "09d0c433dd43ecc8d438b43a13092797fc42d925",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2679bdfd_aecdfefa",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-07-30T17:06:27Z",
+      "side": 1,
+      "message": "Ah, good point, please fix this little niggle.",
+      "parentUuid": "067fc715_8aab9f15",
       "range": {
         "startLine": 191,
         "startChar": 0,
