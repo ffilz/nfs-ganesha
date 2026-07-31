@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e744482_c030122a",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-07-31T08:38:33Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t * so: 0xffff ^ ntohl(ipv4) \u003d\u003d ntohl(va[0]) ^ ... ^ ntohl(va[3]).",
+      "revId": "3aa416aa45861f8caa96e209763379358ad40672",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
