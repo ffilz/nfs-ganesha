@@ -3,6 +3,142 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82a3a3cc_2c4a19e1",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2331,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:31:55Z",
+      "side": 1,
+      "message": "Let\u0027s make this MEM_COMP_XCOPY - we want to know how much memory XCOPY is consuming",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b862f4a_160326ec",
+        "filename": "src/FSAL/localfs.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1979,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:31:55Z",
+      "side": 1,
+      "message": "Let\u0027s make this MEM_COMP_XCOPY - we want to know how much memory XCOPY is consuming",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21f2849b_15a244b6",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:31:55Z",
+      "side": 1,
+      "message": "This is a Cluster QoS message, not a client message. MEM_COMP_QOS",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81fa682e_b1da88cf",
+        "filename": "src/Protocols/NFS/nfs4_op_copy.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:31:55Z",
+      "side": 1,
+      "message": "Make this protocol, it isn\u0027t like LOCK or OPEN state\n\nOr actually, let\u0027s add a new component MEM_COMP_XCOPY for all allocations in this file, we want to see how much memory XCOPY consumes.",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18b1d02b_2fb9c6d7",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:31:55Z",
+      "side": 1,
+      "message": "See log/log_functions.c use of CT_ASSERT - do similar for MEM_COMP arrays",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dad369b_0e79030a",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:31:55Z",
+      "side": 1,
+      "message": "Hmm, we should make this component MEM_COMP_MANAGE for DBUS and GRPC",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b491d4ba_bbb6a232",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:31:55Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m wondering if this actually deserves a separate component than used for clientid and sessions. Those are 4.x specific. This is ALL clients, v3, v4.x, or even 9P.\n\nLet\u0027s change MEM_COMP_CLIENT to MEM_COMP_CLIENTID and just use MEM_COMP_CLIENT here",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f951e98_2802f255",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2040,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:31:55Z",
+      "side": 1,
+      "message": "These are all grpc/dbus related, let\u0027s use MEM_COMP_MANAGE (renamed MEM_COMP_DBUS)",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c03da28e_9a26766c",
         "filename": "src/support/server_stats.c",
         "patchSetId": 16
@@ -14,6 +150,41 @@
       "writtenOn": "2026-08-03T17:13:00Z",
       "side": 1,
       "message": "WARNING: line length of 106 exceeds 80 columns\n+\t\t\t\"mem_comp underflow on %s: freeing %zu bytes but current_active_bytes is %\" PRId64",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ca14739_2129d0b2",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 4407,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:31:55Z",
+      "side": 1,
+      "message": "You need to put the PRId64 on a separate line",
+      "parentUuid": "c03da28e_9a26766c",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df5460a8_21459490",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 4414,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:31:55Z",
+      "side": 1,
+      "message": "Hmm, don\u0027t you just need to do the LogWarn if current_bytes ends up \u003c 0?",
       "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
