@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32cfe8b8_8b1c1f5b",
+        "filename": "src/grpc_server/nfsService.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-03T09:32:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccd97f42_f69d6298",
+      "revId": "63e6a08e502dda367de0eff6c854a081d2bee872",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6301b215_fb69f0e2",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-29T18:58:04Z",
       "side": 1,
       "message": "WARNING: Missing a blank line after declarations\n+\tstruct gsh_export *export \u003d get_gsh_export(export_id);\n+\tif (export \u003d\u003d NULL) {",
+      "revId": "63e6a08e502dda367de0eff6c854a081d2bee872",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de76c44c_f41c3530",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-03T09:32:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6301b215_fb69f0e2",
       "revId": "63e6a08e502dda367de0eff6c854a081d2bee872",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9737c7f_e1237918",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4051,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-03T09:32:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cc3568f_f976d837",
+      "revId": "63e6a08e502dda367de0eff6c854a081d2bee872",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "228eec0b_c88d90e0",
@@ -69,6 +123,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69ad610c_06cf2875",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4052,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-03T09:32:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "228eec0b_c88d90e0",
+      "revId": "63e6a08e502dda367de0eff6c854a081d2bee872",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6a6f86c_62a776d9",
@@ -82,6 +154,24 @@
       "writtenOn": "2026-07-29T18:58:04Z",
       "side": 1,
       "message": "WARNING: please, no spaces at the start of a line\n+    create_pseudofs();$",
+      "revId": "63e6a08e502dda367de0eff6c854a081d2bee872",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0876b77b_2202a5a8",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4053,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-03T09:32:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6a6f86c_62a776d9",
       "revId": "63e6a08e502dda367de0eff6c854a081d2bee872",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
