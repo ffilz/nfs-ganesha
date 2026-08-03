@@ -73,6 +73,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ddb4c29_fe6dbabb",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1421,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:48:00Z",
+      "side": 1,
+      "message": "entries and chunks are mdcache",
+      "revId": "1a89c306d7cc03bdd8c51148c9f301056c402cdf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9b7bbb4_0617642a",
         "filename": "src/include/server_stats_grpc.h",
         "patchSetId": 3
@@ -102,6 +119,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "c9b7bbb4_0617642a",
+      "revId": "1a89c306d7cc03bdd8c51148c9f301056c402cdf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fee561e_caeeb8d7",
+        "filename": "src/include/server_stats_grpc.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:48:00Z",
+      "side": 1,
+      "message": "You need to keep grpc_lru_utilization, but only the entries and chunks fields",
+      "parentUuid": "9670413b_6025223c",
       "revId": "1a89c306d7cc03bdd8c51148c9f301056c402cdf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

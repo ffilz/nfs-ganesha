@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bfbe9c3_0519f07c",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:48:00Z",
+      "side": 1,
+      "message": "This is fd related and therefore FSAL related",
+      "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55eecfe9_20844bd2",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:48:00Z",
+      "side": 1,
+      "message": "These two are mdcache LRUs",
+      "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "928f2f02_4f11d1a6",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3951,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:48:00Z",
+      "side": 1,
+      "message": "Just add this here instead of the call:\n\nsummary_out-\u003eopen_fds \u003d atomic_fetch_int32_t(\u0026fsal_fd_global_counter);",
+      "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62375d57_67829fdc",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1737,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:48:00Z",
+      "side": 1,
+      "message": "You still need to show the mdcache LRU counts here",
+      "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5407d56f_bba8c14c",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1797,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:48:00Z",
+      "side": 1,
+      "message": "entries and chunks are mdcache",
+      "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a1ddea3_7b0184ab",
+        "filename": "src/include/server_stats_grpc.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:48:00Z",
+      "side": 1,
+      "message": "You don\u0027t want entries and chunks here, those are mdcache",
+      "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
