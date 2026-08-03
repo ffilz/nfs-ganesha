@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc058a52_cb3cdd75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:58:02Z",
+      "side": 1,
+      "message": "I think this looks good other than commenting.\n\nWhat testing have you done for this?",
+      "revId": "27fa3c6c5e20ad259c049f75cf75e7ab55fdd9ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38069415_1dd16708",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:58:02Z",
+      "side": 1,
+      "message": "I would add some detail, that by setting config_gen to zero, it is making this export older than the current config_gen and therefore appears not to have been present in the latest config, and therefore will be removed.",
+      "revId": "27fa3c6c5e20ad259c049f75cf75e7ab55fdd9ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c57910f2_ebaba7cc",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-03T22:58:02Z",
+      "side": 1,
+      "message": "Blank line\n\nAnd then add a comment that update_all_export_generations will mark all existing exports as also \"updated\" so synchronize_exports won\u0027t remove any.\n\nHmm, there IS still one odd bit - if someone tries to change the export_id of an export using this update, the old export will still be there whereas a SIGHUP update where export_id is changed winds up looking like a remove and an add.\n\nNothing we can do about that, to do that they have to remove the old explicitly and add the new explicitly.\n\nNote that this update probably can be used to add also...",
+      "revId": "27fa3c6c5e20ad259c049f75cf75e7ab55fdd9ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
