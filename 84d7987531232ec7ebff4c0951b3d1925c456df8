@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a54e173_9699f9a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-04T12:37:31Z",
+      "side": 1,
+      "message": "Review comments incorporated in Patchset#17.",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82a3a3cc_2c4a19e1",
@@ -14,6 +31,24 @@
       "writtenOn": "2026-08-03T22:31:55Z",
       "side": 1,
       "message": "Let\u0027s make this MEM_COMP_XCOPY - we want to know how much memory XCOPY is consuming",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16ce7a7d_c7df1d5e",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2331,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-04T12:37:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "82a3a3cc_2c4a19e1",
       "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -37,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a693f157_293a1e29",
+        "filename": "src/FSAL/localfs.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1979,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-04T12:37:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7b862f4a_160326ec",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21f2849b_15a244b6",
         "filename": "src/MainNFSD/nfs_cluster_qos.c",
         "patchSetId": 16
@@ -48,6 +101,24 @@
       "writtenOn": "2026-08-03T22:31:55Z",
       "side": 1,
       "message": "This is a Cluster QoS message, not a client message. MEM_COMP_QOS",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29354d4e_e57c000b",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-04T12:37:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "21f2849b_15a244b6",
       "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -71,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a13c360_c7c1eda8",
+        "filename": "src/Protocols/NFS/nfs4_op_copy.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-04T12:37:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "81fa682e_b1da88cf",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18b1d02b_2fb9c6d7",
         "filename": "src/include/mem_components.h",
         "patchSetId": 16
@@ -82,6 +171,24 @@
       "writtenOn": "2026-08-03T22:31:55Z",
       "side": 1,
       "message": "See log/log_functions.c use of CT_ASSERT - do similar for MEM_COMP arrays",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c484e2_0e2363e8",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-04T12:37:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "18b1d02b_2fb9c6d7",
       "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -105,6 +212,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58ddfa3f_78cd339b",
+        "filename": "src/include/mem_components.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-04T12:37:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3dad369b_0e79030a",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b491d4ba_bbb6a232",
         "filename": "src/support/client_mgr.c",
         "patchSetId": 16
@@ -122,6 +247,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b402a947_4517f011",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-04T12:37:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b491d4ba_bbb6a232",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f951e98_2802f255",
         "filename": "src/support/client_mgr.c",
         "patchSetId": 16
@@ -133,6 +276,24 @@
       "writtenOn": "2026-08-03T22:31:55Z",
       "side": 1,
       "message": "These are all grpc/dbus related, let\u0027s use MEM_COMP_MANAGE (renamed MEM_COMP_DBUS)",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "312c961e_9852ec38",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2040,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-04T12:37:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6f951e98_2802f255",
       "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -174,6 +335,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9fa273d2_faeb5b65",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 4407,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-04T12:37:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2ca14739_2129d0b2",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "df5460a8_21459490",
         "filename": "src/support/server_stats.c",
         "patchSetId": 16
@@ -185,6 +364,24 @@
       "writtenOn": "2026-08-03T22:31:55Z",
       "side": 1,
       "message": "Hmm, don\u0027t you just need to do the LogWarn if current_bytes ends up \u003c 0?",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b206ae1_84f8a240",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 4414,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-04T12:37:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "df5460a8_21459490",
       "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
