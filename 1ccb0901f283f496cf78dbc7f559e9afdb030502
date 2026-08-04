@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5530126_3c153c39",
+        "filename": "src/Protocols/NFS/nfs4_op_create_session.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-04T19:18:40Z",
+      "side": 1,
+      "message": "Oops, please fix",
+      "parentUuid": "06b32057_14af7079",
+      "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0050ee8_b98751f4",
         "filename": "src/SAL/nfs41_session_id.c",
         "patchSetId": 17
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-04T15:05:56Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\tgsh_free(session-\u003ecb_sec_parms.sec_parms_val, MEM_COMP_CLIENTID);",
+      "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b71390c1_b0990fc7",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-04T19:18:40Z",
+      "side": 1,
+      "message": "Oops, please fix",
+      "parentUuid": "e0050ee8_b98751f4",
       "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90044c8d_f6f59d10",
+        "filename": "src/SAL/nfs41_session_id.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-04T19:18:40Z",
+      "side": 1,
+      "message": "Oops, please fix",
+      "parentUuid": "da6c0536_b159613c",
+      "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "014d4f85_dea225d4",
         "filename": "src/SAL/nfs4_clientid.c",
         "patchSetId": 17
@@ -65,6 +119,24 @@
       "writtenOn": "2026-08-04T15:05:56Z",
       "side": 1,
       "message": "WARNING: line length of 82 exceeds 80 columns\n+\trecord \u003d gsh_malloc(sizeof(nfs_client_record_t) + len, MEM_COMP_CLIENTID);",
+      "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a3946e_9c218c72",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2128,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-04T19:18:40Z",
+      "side": 1,
+      "message": "Oops, please fix",
+      "parentUuid": "014d4f85_dea225d4",
       "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e71c3299_3aa6edf6",
+        "filename": "src/dbus/dbus_server.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-04T19:18:40Z",
+      "side": 1,
+      "message": "Oops, we should fix that.",
+      "parentUuid": "cd914698_36ae798a",
+      "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4874b007_05e028f1",
         "filename": "src/log/log_functions.c",
         "patchSetId": 17
@@ -99,6 +189,41 @@
       "writtenOn": "2026-08-04T15:05:56Z",
       "side": 1,
       "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\tTERM_V4CIDR, MEM_COMP_MANAGE, NULL, \u0026err_type, NULL, NULL,",
+      "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4befcf78_53d6e869",
+        "filename": "src/log/log_functions.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 4008,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-04T19:18:40Z",
+      "side": 1,
+      "message": "Oops, fix this",
+      "parentUuid": "4874b007_05e028f1",
+      "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8c584cf_3303f5a0",
+        "filename": "src/scripts/bpftrace/README.md",
+        "patchSetId": 17
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-04T19:18:40Z",
+      "side": 1,
+      "message": "I don\u0027t know what we do for SPDX identifier in files like this - please investigate and add",
       "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -122,6 +247,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da34b3d8_62f54189",
+        "filename": "src/scripts/bpftrace/mem_comp_audit.bt",
+        "patchSetId": 17
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-04T19:18:40Z",
+      "side": 1,
+      "message": "Please add and SPDX header in this file",
+      "parentUuid": "cfc1c8aa_3fad9a0a",
+      "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff2e3e6b_09e5d1a3",
         "filename": "src/scripts/bpftrace/mem_comp_audit.bt",
         "patchSetId": 17
@@ -133,6 +276,24 @@
       "writtenOn": "2026-08-04T15:05:56Z",
       "side": 1,
       "message": "WARNING: It\u0027s generally not useful to have the filename in the file\n+ *   3. src/scripts/bpftrace/mem_comp_audit.bt — @NAMES[index] and @comp_max[0]",
+      "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68743110_6ee28012",
+        "filename": "src/scripts/bpftrace/mem_comp_audit.bt",
+        "patchSetId": 17
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-04T19:18:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ff2e3e6b_09e5d1a3",
       "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -150,6 +311,24 @@
       "writtenOn": "2026-08-04T15:05:56Z",
       "side": 1,
       "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\tgsh_malloc(sizeof(nfs41_session_list_entry_t), MEM_COMP_CLIENTID);",
+      "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "211a0f65_c2e5b2b8",
+        "filename": "src/support/xprt_handler.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-04T19:18:40Z",
+      "side": 1,
+      "message": "Oops, please fix",
+      "parentUuid": "453d2a9c_9c41c761",
       "revId": "1ccb0901f283f496cf78dbc7f559e9afdb030502",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
