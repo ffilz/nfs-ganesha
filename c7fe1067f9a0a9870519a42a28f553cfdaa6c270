@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7063a5b2_8e5f126d",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-04T07:00:57Z",
+      "side": 1,
+      "message": "Done. I removed the FD-related metric (open_fds) from the MDCACHE helper. open_fds is now populated directly in the FSAL FD usage path, and the MDCACHE helper only reports MDCACHE-specific LRU metrics.",
+      "parentUuid": "8bfbe9c3_0519f07c",
+      "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55eecfe9_20844bd2",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-03T22:48:00Z",
       "side": 1,
       "message": "These two are mdcache LRUs",
+      "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00077dbf_fe17fdac",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-04T07:00:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55eecfe9_20844bd2",
       "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "792cae62_be44f76c",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3951,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-04T07:00:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "928f2f02_4f11d1a6",
+      "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62375d57_67829fdc",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-08-03T22:48:00Z",
       "side": 1,
       "message": "You still need to show the mdcache LRU counts here",
+      "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46d806fd_97fcd4f3",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1737,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-04T07:00:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62375d57_67829fdc",
       "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4b0c2fe_c8766979",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1797,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-04T07:00:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5407d56f_bba8c14c",
+      "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a1ddea3_7b0184ab",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-08-03T22:48:00Z",
       "side": 1,
       "message": "You don\u0027t want entries and chunks here, those are mdcache",
+      "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74cfa5f0_c1866d2d",
+        "filename": "src/include/server_stats_grpc.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-04T07:00:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a1ddea3_7b0184ab",
       "revId": "c7fe1067f9a0a9870519a42a28f553cfdaa6c270",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
