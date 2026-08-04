@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5dcdcef_ee1c4234",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-04T09:56:36Z",
+      "side": 1,
+      "message": "I tested the following scenarios:\n\n* Added a new export using the AddExport API and verified that it was mounted correctly in the pseudo filesystem by performing mount, umount, and I/O operations from the client.\n* Updated an existing export (mount path and supported NFS version) using the UpdateExport API and verified that the exports remained accessible after the update.\n* Verified that the updated configuration was reflected correctly through the DisplayExport and ShowExports gRPC APIs.\n* Removed an export using the RemoveExport API and verified that it was removed from the pseudo filesystem by attempting to mount it from the client and by checking the output of `showmount -e \u003cserver_ip\u003e`.\n* Verified the final export state using the ShowExports and DisplayExport gRPC APIs.",
+      "parentUuid": "bc058a52_cb3cdd75",
+      "revId": "27fa3c6c5e20ad259c049f75cf75e7ab55fdd9ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38069415_1dd16708",
@@ -35,6 +53,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b22ff2cd_7d24c03a",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-04T09:56:36Z",
+      "side": 1,
+      "message": "Added a detailed comment",
+      "parentUuid": "38069415_1dd16708",
+      "revId": "27fa3c6c5e20ad259c049f75cf75e7ab55fdd9ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c57910f2_ebaba7cc",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-08-03T22:58:02Z",
       "side": 1,
       "message": "Blank line\n\nAnd then add a comment that update_all_export_generations will mark all existing exports as also \"updated\" so synchronize_exports won\u0027t remove any.\n\nHmm, there IS still one odd bit - if someone tries to change the export_id of an export using this update, the old export will still be there whereas a SIGHUP update where export_id is changed winds up looking like a remove and an add.\n\nNothing we can do about that, to do that they have to remove the old explicitly and add the new explicitly.\n\nNote that this update probably can be used to add also...",
+      "revId": "27fa3c6c5e20ad259c049f75cf75e7ab55fdd9ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c591957f_4e605c3e",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 1038396
+      },
+      "writtenOn": "2026-08-04T09:56:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c57910f2_ebaba7cc",
       "revId": "27fa3c6c5e20ad259c049f75cf75e7ab55fdd9ec",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
