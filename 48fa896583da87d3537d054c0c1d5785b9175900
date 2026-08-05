@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b2eb59e_05c079df",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-08-05T11:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63dec835_7153200c",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0203a98_e5fb4a02",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-05T08:51:26Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t       exportService::ExportResponse *response) override;",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "090f25c4_3da737d6",
+        "filename": "src/grpc_server/nfsService.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-08-05T11:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0203a98_e5fb4a02",
       "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +105,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c03db1c5_f8072177",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-08-05T11:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d955d3c_8cf85c3a",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b9db771_a2f8ef8a",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-08-05T11:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22f12bfa_a37d9cb6",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a93f6bd_eeb97899",
@@ -82,6 +154,24 @@
       "writtenOn": "2026-08-05T08:51:26Z",
       "side": 1,
       "message": "WARNING: line length of 96 exceeds 80 columns\n+\t\t\t\"Cluster_Members allows only individual IPv4/IPv6 addresses, not CIDRs\";",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5fffa5a_0591119f",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-08-05T11:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93f6bd_eeb97899",
       "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -103,6 +193,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f6ec219_ae63f321",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-08-05T11:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0eb6bf7d_45cb5142",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2beabd98_0aa452b8",
@@ -120,6 +228,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e026b405_d4ef0c33",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-08-05T11:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2beabd98_0aa452b8",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4660a820_4cf0aa1d",
@@ -133,6 +259,24 @@
       "writtenOn": "2026-08-05T08:51:26Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t/* Drop list lock before touching nsm_notify_thread lifecycle. */",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "805cc723_c5f1de98",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-08-05T11:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4660a820_4cf0aa1d",
       "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
