@@ -34,6 +34,7 @@
 #include "sal_data.h"
 #include "sal_functions.h"
 #include "nfs_proto_functions.h"
+#include "client_mgr.h"
 
 pthread_t nsm_notify_thread_p;
 bool run_nsm_notify_thread;
@@ -42,6 +43,14 @@ pthread_cond_t nsm_cond;
 CLIENT *nsm_clnt;
 unsigned long nsm_count;
 char *nodename;
+
+#ifdef _INTERNAL_STATD
+/* True while nsm_notify_thread is executing. */
+static bool nsm_notify_thread_live;
+
+/* True after create until joined (covers exited-but-not-joined). */
+static bool nsm_notify_thread_created;
+#endif
 
 struct glist_head local_nlm_info_list = GLIST_HEAD_INIT(local_nlm_info_list);
 struct glist_head callback_wait_list = GLIST_HEAD_INIT(callback_wait_list);
@@ -635,14 +644,16 @@ int smmon_proc_notify(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 		dec_nsm_client_ref(nsm_client);
 	}
 
-	if (!client_match(COMPONENT_NLM, "for Cluster Self list",
+	PTHREAD_RWLOCK_rdlock(&nfs_core_lock);
+	if (!client_match(COMPONENT_NLM, "for Cluster_Members list",
 			  op_ctx->caller_addr,
 			  &nfs_param.core_param.cluster_members, NULL)) {
 		/* SM_NOTIFY did not come from another cluster member, forward
-		 * it to all cluster members.
+		 * it to all cluster members while still holding nfs_core_lock.
 		 */
 		forward_sm_notify(arg, req);
 	}
+	PTHREAD_RWLOCK_unlock(&nfs_core_lock);
 
 	LogDebug(COMPONENT_DISPATCH, "REQUEST RESULT: SM_NOTIFY DONE");
 
@@ -1235,10 +1246,91 @@ void *nsm_notify_thread(void *unused)
 	}
 
 	/* All done, drop the mutex and exit. */
+	nsm_notify_thread_live = false;
 	PTHREAD_MUTEX_unlock(&nsm_mutex);
 
 	rcu_unregister_thread();
 	return NULL;
+}
+
+void ensure_nsm_notify_thread_running(bool need_run)
+{
+	int rc;
+	pthread_attr_t attr_thr;
+	bool do_join = false;
+
+	PTHREAD_MUTEX_lock(&nsm_mutex);
+
+	if (!need_run) {
+		run_nsm_notify_thread = false;
+		PTHREAD_COND_signal(&nsm_cond);
+		PTHREAD_MUTEX_unlock(&nsm_mutex);
+		return;
+	}
+
+	run_nsm_notify_thread = true;
+
+	if (nsm_notify_thread_live) {
+		PTHREAD_COND_signal(&nsm_cond);
+		PTHREAD_MUTEX_unlock(&nsm_mutex);
+		return;
+	}
+
+	/* Thread has exited (or never started). Join stale handle if needed. */
+	if (nsm_notify_thread_created) {
+		do_join = true;
+		nsm_notify_thread_created = false;
+	}
+	PTHREAD_MUTEX_unlock(&nsm_mutex);
+
+	if (do_join)
+		pthread_join(nsm_notify_thread_p, NULL);
+
+	PTHREAD_ATTR_init(&attr_thr);
+	PTHREAD_ATTR_setscope(&attr_thr, PTHREAD_SCOPE_SYSTEM);
+	PTHREAD_ATTR_setdetachstate(&attr_thr, PTHREAD_CREATE_JOINABLE);
+
+	PTHREAD_MUTEX_lock(&nsm_mutex);
+	if (nsm_notify_thread_live || nsm_notify_thread_created) {
+		/* Lost the race to another creator; keep run flag set. */
+		run_nsm_notify_thread = true;
+		PTHREAD_COND_signal(&nsm_cond);
+		PTHREAD_MUTEX_unlock(&nsm_mutex);
+		PTHREAD_ATTR_destroy(&attr_thr);
+		return;
+	}
+
+	rc = PTHREAD_create(&nsm_notify_thread_p, &attr_thr, nsm_notify_thread,
+			    NULL);
+	if (rc != 0) {
+		PTHREAD_MUTEX_unlock(&nsm_mutex);
+		PTHREAD_ATTR_destroy(&attr_thr);
+		LogFatal(COMPONENT_NLM,
+			 "Could not create nsm_notify_thread, error = %d (%s)",
+			 rc, strerror(rc));
+	}
+
+	nsm_notify_thread_created = true;
+	nsm_notify_thread_live = true;
+	run_nsm_notify_thread = true;
+	PTHREAD_MUTEX_unlock(&nsm_mutex);
+	PTHREAD_ATTR_destroy(&attr_thr);
+}
+
+void nsm_notify_thread_join_if_created(void)
+{
+	bool do_join = false;
+
+	PTHREAD_MUTEX_lock(&nsm_mutex);
+	if (nsm_notify_thread_created) {
+		do_join = true;
+		nsm_notify_thread_created = false;
+		nsm_notify_thread_live = false;
+	}
+	PTHREAD_MUTEX_unlock(&nsm_mutex);
+
+	if (do_join)
+		pthread_join(nsm_notify_thread_p, NULL);
 }
 
 void process_local_nlm_info(void)
@@ -1260,11 +1352,25 @@ void process_local_nlm_info(void)
 			 errno, strerror(errno));
 	}
 
-	/* Keep the nsm_notify_thread running if we have cluster members
-	 * identified to forward SM_NOTIFY to.
-	 */
-	run_nsm_notify_thread =
-		!glist_empty(&nfs_param.core_param.cluster_members);
+	PTHREAD_ATTR_destroy(&attr_thr);
+
+	{
+		bool need_run;
+
+		/* Lock order: nfs_core_lock then nsm_mutex. */
+		PTHREAD_RWLOCK_rdlock(&nfs_core_lock);
+		need_run = !glist_empty(&nfs_param.core_param.cluster_members);
+		PTHREAD_RWLOCK_unlock(&nfs_core_lock);
+
+		PTHREAD_MUTEX_lock(&nsm_mutex);
+		nsm_notify_thread_created = true;
+		nsm_notify_thread_live = true;
+		/* Keep the nsm_notify_thread running if we have cluster members
+		 * identified to forward SM_NOTIFY to.
+		 */
+		run_nsm_notify_thread = need_run;
+		PTHREAD_MUTEX_unlock(&nsm_mutex);
+	}
 }
 
 #endif

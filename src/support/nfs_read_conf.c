@@ -57,6 +57,10 @@
 #include "pwnam_wrappers.h"
 #include "nfs_qos.h"
 #include "nfs_cluster_qos.h"
+#include "cluster_members.h"
+#ifdef _INTERNAL_STATD
+#include "nsm.h"
+#endif
 
 /**
  * @brief Core configuration parameters
@@ -223,50 +227,6 @@ static int cluster_members_adder(const char *token, enum term_type type_hint,
 	return rc;
 }
 
-void remove_self_cluster_members(void)
-{
-	struct ifaddrs *ifap, *ifa;
-
-	if (glist_empty(&nfs_param.core_param.cluster_members))
-		return;
-
-	if (getifaddrs(&ifap) != 0) {
-		int err = errno;
-
-		LogFatal(COMPONENT_CONFIG, "getoifaddrs failed %s",
-			 strerror(err));
-	}
-
-	for (ifa = ifap; ifa != NULL; ifa = ifa->ifa_next) {
-		sockaddr_t *sa = (sockaddr_t *)ifa->ifa_addr;
-		struct base_client_entry *bce;
-
-		if (sa->ss_family != AF_INET && sa->ss_family != AF_INET6)
-			continue;
-
-		bce = client_match(COMPONENT_CONFIG,
-				   " for Cluster_Members list", sa,
-				   &nfs_param.core_param.cluster_members, NULL);
-
-		if (bce != NULL) {
-			char ip[SOCK_NAME_MAX];
-			struct display_buffer dspbuf = { sizeof(ip), ip, ip };
-
-			display_sockip(&dspbuf, sa);
-
-			LogInfo(COMPONENT_CONFIG,
-				"Moving %s from Cluster_Members list to Cluster Self list",
-				ip);
-
-			glist_del(&bce->cle_list);
-			glist_add_tail(&nfs_param.core_param.cluster_self,
-				       &bce->cle_list);
-		}
-	}
-
-	freeifaddrs(ifap);
-}
-
 #ifdef ENABLE_CLUSTER_QOS
 void populate_cqos_hosts(void)
 {
@@ -278,7 +238,7 @@ void populate_cqos_hosts(void)
 		return;
 
 	glist_for_each(glist, &nfs_param.core_param.cluster_members) {
-	      client = glist_entry(glist, struct base_client_entry, cle_list);
+		client = glist_entry(glist, struct base_client_entry, cle_list);
 
 		cli = gsh_calloc(1, sizeof(struct cqos_ceph_nodes));
 		glist_init(&cli->node_list);
@@ -297,6 +257,7 @@ static int core_commit(void *node, void *link_mem, void *self_struct,
 {
 	LogDebug(COMPONENT_CONFIG, "NFS_CORE_PARAM commit");
 
+	PTHREAD_RWLOCK_wrlock(&nfs_core_lock);
 	remove_self_cluster_members();
 
 #ifdef ENABLE_CLUSTER_QOS
@@ -309,6 +270,49 @@ static int core_commit(void *node, void *link_mem, void *self_struct,
 
 	Log_ClientList_Level(COMPONENT_CONFIG, NIV_INFO, "Cluster_Members",
 			     &nfs_param.core_param.cluster_members);
+	PTHREAD_RWLOCK_unlock(&nfs_core_lock);
+
+	return 0;
+}
+
+static int core_update(void *node, void *link_mem, void *self_struct,
+		       struct config_error_type *err_type)
+{
+	nfs_core_parameter_t *updates = self_struct;
+
+	PTHREAD_RWLOCK_wrlock(&nfs_core_lock);
+
+	LogEvent(COMPONENT_CONFIG, "NFS_CORE_PARAM update");
+
+	/* Deal with update of HAProxy_Hosts and Cluster_Members */
+	glist_swap_lists(&NFS_pcp.haproxy_hosts, &updates->haproxy_hosts);
+	glist_swap_lists(&NFS_pcp.cluster_members, &updates->cluster_members);
+	/* Drop prior self-stripped entries; rebuild from the new peer list. */
+	FreeClientList(&NFS_pcp.cluster_self, NULL);
+	remove_self_cluster_members();
+
+#ifdef _INTERNAL_STATD
+	{
+		bool need_run = !glist_empty(&NFS_pcp.cluster_members);
+		/*
+		 * Hold nfs_core_lock across ensure_* (see set_cluster_members).
+		 * Lock order: nfs_core_lock outside nsm_mutex.
+		 */
+		ensure_nsm_notify_thread_running(need_run);
+	}
+#endif
+
+	/* Free any unused or swapped allocated memory */
+	FreeClientList(&updates->haproxy_hosts, NULL);
+	FreeClientList(&updates->cluster_members, NULL);
+	gsh_free(updates->interface_name);
+	updates->interface_name = NULL;
+	gsh_free(updates->ganesha_modules_loc);
+	updates->ganesha_modules_loc = NULL;
+	gsh_free(updates->dbus_name_prefix);
+	updates->dbus_name_prefix = NULL;
+
+	PTHREAD_RWLOCK_unlock(&nfs_core_lock);
 
 	return 0;
 }
@@ -348,8 +352,8 @@ static struct config_item core_params[] = {
 		       nfs_core_param, port[P_RQUOTA]),
 #endif
 #ifdef ENABLE_CLUSTER_QOS
-	CONF_ITEM_UI16("Cqos_Port", 0, UINT16_MAX, CQOS_PORT,
-		       nfs_core_param, port[P_CQOS]),
+	CONF_ITEM_UI16("Cqos_Port", 0, UINT16_MAX, CQOS_PORT, nfs_core_param,
+		       port[P_CQOS]),
 #endif
 #ifdef _USE_NFS_RDMA
 	CONF_ITEM_UI16("NFS_RDMA_Port", 0, UINT16_MAX, NFS_RDMA_PORT,
@@ -377,8 +381,8 @@ static struct config_item core_params[] = {
 		       nfs_core_param, program[P_RQUOTA]),
 #endif
 #ifdef ENABLE_CLUSTER_QOS
-	CONF_ITEM_UI32("Cqos_Program", 1, INT32_MAX, CQOSPROG,
-		       nfs_core_param, program[P_CQOS]),
+	CONF_ITEM_UI32("Cqos_Program", 1, INT32_MAX, CQOSPROG, nfs_core_param,
+		       program[P_CQOS]),
 #endif
 #ifdef USE_NFSACL3
 	CONF_ITEM_UI32("NFSACL_Program", 1, INT32_MAX, NFSACLPROG,
@@ -554,6 +558,16 @@ struct config_block nfs_core = {
 	.blk_desc.u.blk.commit = core_commit
 };
 
+struct config_block nfs_core_update = {
+	.dbus_interface_name = "org.ganesha.nfsd.config.core",
+	.blk_desc.name = "NFS_Core_Param",
+	.blk_desc.type = CONFIG_BLOCK,
+	.blk_desc.flags = CONFIG_UNIQUE, /* too risky to have more */
+	.blk_desc.u.blk.init = noop_conf_init,
+	.blk_desc.u.blk.params = core_params,
+	.blk_desc.u.blk.commit = core_update
+};
+
 #ifdef ENABLE_QOS
 static struct config_item_list qos_types_supported[] = {
 	CONFIG_LIST_TOK("Per_Export", QOS_PER_EXPORT_ENABLED),
@@ -568,7 +582,7 @@ static struct config_item qos_global_params[] = {
 
 #if ENABLE_CLUSTER_QOS
 	CONF_ITEM_BOOL("enable_cluster_qos", true, qos_block_config,
-			enable_cluster_qos),
+		       enable_cluster_qos),
 	CONF_ITEM_UI32("cqos_msg_interval", CQOS_MIN_MSGTIME, CQOS_MAX_MSGTIME,
 		       CQOS_DEF_MSGTIME, qos_block_config, cqos_msg_interval),
 #endif
