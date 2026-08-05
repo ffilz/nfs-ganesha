@@ -79,6 +79,24 @@ class GetSessionIdService final : public nfsService::GetSessionId::Service {
 		      nfsService::GetSessionIdsResponse *response) override;
 };
 
+/**
+ * @brief gRPC service for runtime Cluster_Members update/show
+ *
+ * Mirrors org.ganesha.nfsd.admin SetClusterMembers / ShowClusterMembers.
+ */
+class ClusterMembersService final : public nfsService::ClusterMembers::Service {
+    public:
+	grpc::Status
+	SetClusterMembers(grpc::ServerContext *context,
+			  const nfsService::SetClusterMembersRequest *request,
+			  nfsProtoUtil::StatusResponse *response) override;
+
+	grpc::Status ShowClusterMembers(
+		grpc::ServerContext *context,
+		const nfsProtoUtil::EmptyRequest *request,
+		nfsService::ShowClusterMembersResponse *response) override;
+};
+
 class ClientStatsService final : public cltmgrService::ClientStats::Service {
     public:
 	grpc::Status
@@ -359,6 +377,7 @@ class ExportService final : public exportService::ExportService::Service {
 	ShowExports(grpc::ServerContext *context,
 		    const nfsProtoUtil::EmptyRequest *request,
 		    exportService::ShowExportsResponse *response) override;
+
 	grpc::Status
 	AddExport(grpc::ServerContext *context,
 		  const exportService::ExportRequest *request,

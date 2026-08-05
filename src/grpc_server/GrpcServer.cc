@@ -127,6 +127,8 @@ void GrpcServer::gRPCServerStart(uint16_t port, std::string server_crt,
 
 		builder.RegisterService(&clientMgrService);
 
+		builder.RegisterService(&clusterMembersService);
+
 		builder.RegisterService(&nfsAdmin);
 
 		builder.RegisterService(&exportStatsService);
