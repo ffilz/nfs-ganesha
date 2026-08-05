@@ -174,6 +174,7 @@ uint32_t nfs_get_evchannel_id(enum evchan);
 /* Config parsing routines */
 extern config_file_t nfs_config_struct;
 extern struct config_block nfs_core;
+extern struct config_block nfs_core_update;
 extern struct config_block nfs_ip_name;
 #ifdef _HAVE_GSSAPI
 extern struct config_block krb5_param;

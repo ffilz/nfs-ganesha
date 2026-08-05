@@ -2220,7 +2220,10 @@ void FreeClientList(struct glist_head *clients, client_free_func free_func)
 		glist_del(&client->cle_list);
 		cidr_free(client->cidr);
 		gsh_free(client->str);
-		free_func(client);
+		if (free_func == NULL)
+			gsh_free(client);
+		else
+			free_func(client);
 	}
 }
 
@@ -2694,13 +2697,18 @@ bool haproxy_match(SVCXPRT *xprt)
 {
 	struct base_client_entry *host = NULL;
 
+	PTHREAD_RWLOCK_rdlock(&nfs_core_lock);
+
 	if (glist_empty(&nfs_param.core_param.haproxy_hosts))
-		return false;
+		goto out;
 
 	/* Does the host match anyone on the host list? */
 	host = client_match(COMPONENT_DISPATCH, " for HAProxy",
 			    &xprt->xp_proxy.ss,
 			    &nfs_param.core_param.haproxy_hosts, NULL);
+out:
+
+	PTHREAD_RWLOCK_unlock(&nfs_core_lock);
 
 	return host != NULL;
 }
