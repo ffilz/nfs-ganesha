@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63dec835_7153200c",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-05T08:51:26Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t\t\t\"Failed to append Cluster_Members address\";",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0203a98_e5fb4a02",
+        "filename": "src/grpc_server/nfsService.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-05T08:51:26Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t       exportService::ExportResponse *response) override;",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22f12bfa_a37d9cb6",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-05T08:51:26Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d955d3c_8cf85c3a",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-05T08:51:26Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/support/cluster_members.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a93f6bd_eeb97899",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-05T08:51:26Z",
+      "side": 1,
+      "message": "WARNING: line length of 96 exceeds 80 columns\n+\t\t\t\"Cluster_Members allows only individual IPv4/IPv6 addresses, not CIDRs\";",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eb6bf7d_45cb5142",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-05T08:51:26Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\"Cluster_Members entry is not a valid IPv4 or IPv6 address\";",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2beabd98_0aa452b8",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-05T08:51:26Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\t\t: \"Failed to add Cluster_Members address\";",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4660a820_4cf0aa1d",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-05T08:51:26Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t/* Drop list lock before touching nsm_notify_thread lifecycle. */",
+      "revId": "48fa896583da87d3537d054c0c1d5785b9175900",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
