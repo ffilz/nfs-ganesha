@@ -113,6 +113,21 @@ extern int recov_nsm_state;
 
 void process_local_nlm_info(void);
 
+/**
+ * @brief Keep nsm_notify_thread aligned with Cluster_Members emptiness.
+ *
+ * @param[in] need_run  true if Cluster_Members is non-empty (keep/create
+ *                      thread for SM_NOTIFY fan-out); false to allow exit
+ *                      when idle.
+ *
+ * Lock order: do not call while holding nsm_mutex. Prefer not holding
+ * nfs_core_lock across this call (it may join/create threads).
+ */
+void ensure_nsm_notify_thread_running(bool need_run);
+
+/** Join nsm_notify_thread if it was created and not yet joined. */
+void nsm_notify_thread_join_if_created(void);
+
 struct local_nlm_info {
 	struct glist_head infolist;
 	struct clnt_req cc;

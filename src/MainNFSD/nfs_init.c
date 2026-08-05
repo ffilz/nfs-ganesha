@@ -106,6 +106,7 @@ struct nfs_init nfs_init;
 /* global information exported to all layers (as extern vars) */
 nfs_parameter_t nfs_param;
 struct _nfs_health nfs_health_;
+pthread_rwlock_t nfs_core_lock = RWLOCK_INITIALIZER;
 
 static struct _nfs_health healthstats;
 
@@ -426,6 +427,24 @@ bool reread_config(void)
 	if (!config_error_is_harmless(&err_type)) {
 		LogCrit(COMPONENT_CONFIG,
 			"Error while parsing DIRECTORY_SERVICES configuration");
+		goto reread_error;
+	}
+
+	/* Reread NFS_CORE_PARAM, actual parameter update is handled by the
+	 * commit function core_update().
+	 */
+	nfs_core_parameter_t nfs_core_param;
+
+	memset(&nfs_core_param, 0, sizeof(nfs_core_param));
+	glist_init(&nfs_core_param.haproxy_hosts);
+	glist_init(&nfs_core_param.cluster_members);
+	glist_init(&nfs_core_param.cluster_self);
+
+	(void)load_config_from_parse(config_struct, &nfs_core_update,
+				     &nfs_core_param, true, &err_type);
+	if (!config_error_is_harmless(&err_type)) {
+		LogCrit(COMPONENT_CONFIG,
+			"Error while parsing NFS_CORE_PARAM configuration");
 		goto reread_error;
 	}
 
@@ -751,12 +770,10 @@ int nfs_set_param_from_conf(config_file_t parse_tree,
 	 * in the cluster.
 	 */
 	if (qos_block_config.enable_qos &&
-	    qos_block_config.enable_cluster_qos &&
-	    !glist_empty(&cqos_hosts)) {
+	    qos_block_config.enable_cluster_qos && !glist_empty(&cqos_hosts)) {
 		cluster_qos_init();
 	}
 #endif
-
 
 	/* Worker parameters: ip/name hash table and expiration
 	 * for each entry

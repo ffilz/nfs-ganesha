@@ -49,6 +49,13 @@ Cluster_Members (address list, empty)
     This is the list of IP addresses representing the nodes in a Ganesha
     cluster. Only individual IPv4 or IPv6 addresses are allowed.
 
+    This parameter may be updated dynamically with a SIGHUP /
+    reread_config. When built with INTERNAL_STATD, it may also be
+    replaced at runtime via the D-Bus methods SetClusterMembers /
+    ShowClusterMembers on org.ganesha.nfsd.admin, or the gRPC
+    ClusterMembers service. Runtime D-Bus/gRPC updates do not rewrite
+    the config file.
+
 NFS_Port (uint16, range 0 to UINT16_MAX, default 2049)
     Port number used by NFS Protocol.
 
