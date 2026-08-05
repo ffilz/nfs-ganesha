@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef9fa9e8_31643089",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-05T13:07:38Z",
+      "side": 1,
+      "message": "Clang fixes in Patchset#19.",
+      "revId": "83913f4760bd2e0ce46c04ce7aa8f08c9e580d6e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b21553f9_201ed5c8",
@@ -14,6 +31,24 @@
       "writtenOn": "2026-08-05T12:32:26Z",
       "side": 1,
       "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 2\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "83913f4760bd2e0ce46c04ce7aa8f08c9e580d6e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "269f6910_6a4185f9",
+        "filename": "src/scripts/bpftrace/mem_comp_audit.bt",
+        "patchSetId": 18
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-05T13:07:38Z",
+      "side": 1,
+      "message": "Acknowledged.",
+      "parentUuid": "b21553f9_201ed5c8",
       "revId": "83913f4760bd2e0ce46c04ce7aa8f08c9e580d6e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
