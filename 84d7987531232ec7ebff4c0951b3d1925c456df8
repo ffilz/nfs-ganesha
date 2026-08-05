@@ -197,6 +197,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86138642_bc4adbfe",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-05T16:41:59Z",
+      "side": 1,
+      "message": "So that\u0027s a memory leak exposed by the mem_stats effort?",
+      "parentUuid": "11c17c83_0a60ff91",
+      "revId": "84d7987531232ec7ebff4c0951b3d1925c456df8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81fa682e_b1da88cf",
         "filename": "src/Protocols/NFS/nfs4_op_copy.c",
         "patchSetId": 16
