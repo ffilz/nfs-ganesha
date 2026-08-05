@@ -1041,23 +1041,16 @@ state_status_t state_async_init(void);
 state_status_t state_async_shutdown(void);
 
 #ifdef _INTERNAL_STATD
+void nsm_notify_thread_join_if_created(void);
+
 static inline void shutdown_nsm_notify_thread(void)
 {
-	bool wait;
-
 	PTHREAD_MUTEX_lock(&nsm_mutex);
-
-	wait = run_nsm_notify_thread;
-
 	run_nsm_notify_thread = false;
-
-	if (wait)
-		PTHREAD_COND_signal(&nsm_cond);
-
+	PTHREAD_COND_signal(&nsm_cond);
 	PTHREAD_MUTEX_unlock(&nsm_mutex);
 
-	if (wait)
-		pthread_join(nsm_notify_thread_p, NULL);
+	nsm_notify_thread_join_if_created();
 }
 #endif
 
