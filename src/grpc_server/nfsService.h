@@ -361,8 +361,8 @@ class ExportService final : public exportService::ExportService::Service {
 		    exportService::ShowExportsResponse *response) override;
 	grpc::Status
 	AddExport(grpc::ServerContext *context,
-		const exportService::ExportRequest *request,
-		exportService::ExportResponse *response) override;
+		  const exportService::ExportRequest *request,
+		  exportService::ExportResponse *response) override;
 
 	grpc::Status
 	RemoveExport(grpc::ServerContext *context,
