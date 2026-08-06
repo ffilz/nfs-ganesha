@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c445c08_f18b72bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-06T16:25:43Z",
+      "side": 1,
+      "message": "Will be working to unify this patch with my NFS_CORE_PARAM dynamic update patch.",
+      "revId": "02d920fdc402ebd79c69871d675685a668c097ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "611cfb3c_dfa1a2f8",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-06T16:25:43Z",
+      "side": 1,
+      "message": "Actually, I think we need to hold the lock otherwise we could have race between multiple callers of ensure_nsm_notify_thread_running().",
+      "revId": "02d920fdc402ebd79c69871d675685a668c097ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
