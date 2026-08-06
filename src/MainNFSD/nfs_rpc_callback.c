@@ -1021,6 +1021,16 @@ static void nfs_rpc_call_free(struct clnt_req *cc, size_t unused)
 	(void)atomic_inc_uint64_t(&nfs_health_.dequeued_reqs);
 }
 
+static inline bool nfs_rpc_uses_shared_backchannel(rpc_call_channel_t *chan)
+{
+	/* v4.1 backchannels share the session fore-channel xprt and must use
+	 * CLNT_CALL_BACK so replies are multiplexed by the TI-RPC event loop.
+	 * v4.0 callback sockets are standalone and use CLNT_CALL_WAIT
+	 * (see rpc_cb_null()).
+	 */
+	return chan->type == RPC_CHAN_V41;
+}
+
 /**
  * @brief Call response processing
  *
@@ -1050,7 +1060,48 @@ static void nfs_rpc_call_process(struct clnt_req *cc)
 }
 
 /**
+ * @brief Finish a synchronously completed callback RPC
+ *
+ * @param[in] call NFS callback call object
+ */
+static void nfs_rpc_call_finish_success(rpc_call_t *call)
+{
+	call->states |= NFS_CB_CALL_FINISHED;
+
+	if (call->call_hook)
+		call->call_hook(call);
+
+	LogDebug(COMPONENT_NFS_CB, "(rpc_call_t *)call = %p", call);
+	free_rpc_call(call);
+}
+
+/**
+ * @brief Issue a callback RPC using CLNT_CALL_WAIT
+ *
+ * Used for standalone v4.0 callback TCP connections.  These do not have
+ * an svc_rqst expire context (ev_p) and must not use CLNT_CALL_BACK.
+ */
+static enum clnt_stat nfs_rpc_call_wait_locked(struct clnt_req *cc)
+{
+	enum clnt_stat re_status;
+
+	cc->cc_refreshes = 1;
+	re_status = CLNT_CALL_WAIT(cc);
+	while (re_status == RPC_AUTHERROR && cc->cc_refreshes-- > 0 &&
+	       AUTH_REFRESH(cc->cc_auth, NULL)) {
+		if (clnt_req_refresh(cc) != RPC_SUCCESS)
+			break;
+		re_status = CLNT_CALL_WAIT(cc);
+	}
+	return re_status;
+}
+
+/**
  * @brief Dispatch a call
+ *
+ * Shared v4.1 backchannels use CLNT_CALL_BACK so replies are multiplexed
+ * on the session TCP connection by the TI-RPC event loop.  Standalone v4.0
+ * callback sockets use CLNT_CALL_WAIT (see rpc_cb_null()).
  *
  * @param[in,out] call  The call to dispatch
  * @param[in]     flags The flags governing call
@@ -1063,6 +1114,7 @@ enum clnt_stat nfs_rpc_call(rpc_call_t *call, uint32_t flags)
 	struct clnt_req *cc = &call->call_req;
 	rpc_call_channel_t *chan = call->chan;
 	enum clnt_stat re_status;
+	bool sync_finish = false;
 
 	call->states = NFS_CB_CALL_DISPATCH;
 
@@ -1083,23 +1135,41 @@ enum clnt_stat nfs_rpc_call(rpc_call_t *call, uint32_t flags)
 
 	re_status = clnt_req_setup(cc, tout);
 	if (re_status == RPC_SUCCESS) {
-		cc->cc_process_cb = nfs_rpc_call_process;
-		re_status = CLNT_CALL_BACK(cc);
+		if (nfs_rpc_uses_shared_backchannel(chan)) {
+			cc->cc_process_cb = nfs_rpc_call_process;
+			re_status = CLNT_CALL_BACK(cc);
+		} else {
+			re_status = nfs_rpc_call_wait_locked(cc);
+			if (re_status == RPC_SUCCESS)
+				sync_finish = true;
+		}
 	}
 
 	/* If a call fails, we have to assume path down, or equally fatal
 	 * error.  We may need back-off. */
 	if (re_status != RPC_SUCCESS) {
 		cc->cc_error.re_status = re_status;
-		nfs_rpc_destroy_chan_no_lock(call->chan);
-		call->states |= NFS_CB_CALL_ABORTED;
+		if (chan->type == RPC_CHAN_V41) {
+			/* Shared session xprt: do not CLNT_DESTROY the client;
+			 * that tears down the fore-channel TCP connection.
+			 * nfs_rpc_v41_single() clears session_bc_up instead.
+			 */
+			call->states |= NFS_CB_CALL_ABORTED;
+		} else {
+			nfs_rpc_destroy_chan_no_lock(chan);
+			if (chan->source.clientid != NULL)
+				set_cb_chan_down(chan->source.clientid, true);
+			call->states |= NFS_CB_CALL_ABORTED;
+		}
 	}
 
 unlock:
 	LogDebug(COMPONENT_NFS_CB, "(rpc_call_t *)call = %p", call);
 	PTHREAD_MUTEX_unlock(&chan->chan_mtx);
 
-	/* any broadcast or signalling done in completion function */
+	if (sync_finish)
+		nfs_rpc_call_finish_success(call);
+
 	return re_status;
 }
 
@@ -1443,8 +1513,8 @@ static int nfs_rpc_v40_single(nfs_client_id_t *clientid, nfs_cb_argop4 *op,
 
 	/* Attempt a recall only if channel state is UP */
 	if (get_cb_chan_down(clientid)) {
-		LogCrit(COMPONENT_NFS_CB,
-			"Call back channel down, not issuing a recall");
+		LogFullDebug(COMPONENT_NFS_CB,
+			     "Call back channel down, not issuing a recall");
 		return ENOTCONN;
 	}
 
