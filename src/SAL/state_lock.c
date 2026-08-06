@@ -55,6 +55,7 @@
 #include "gsh_lttng/generated_traces/lock.h"
 #endif
 #include "sal_metrics.h"
+#include "nfs_rpc_callback.h"
 
 /**
  * @page state_lock_entry_locking state_lock_entry_t locking rule
@@ -1940,6 +1941,17 @@ void try_to_grant_lock(state_lock_entry_t *lock_entry)
 		reason = "Removing blocked lock entry due to stale export";
 	} else if (admin_shutdown) {
 		reason = "Removing blocked lock entry due to shutdown";
+	} else if (lock_entry->sle_owner->so_owner.so_nfs4_owner.so_clientrec !=
+			   NULL &&
+		   lock_entry->sle_owner->so_owner.so_nfs4_owner.so_clientrec
+				   ->cid_minorversion == 0 &&
+		   get_cb_chan_down(lock_entry->sle_owner->so_owner
+					    .so_nfs4_owner.so_clientrec)) {
+		/* Cannot send CB_NOTIFY_LOCK without a v4.0 callback channel */
+		LogFullDebug(
+			COMPONENT_STATE,
+			"Deferring blocked lock grant, callback channel down");
+		return;
 	} else {
 		call_back = lock_entry->sle_block_data->sbd_granted_callback;
 		/* Mark the lock_entry as provisionally granted and make the
@@ -2051,8 +2063,17 @@ static void grant_blocked_locks(struct state_hdl *ostate)
 					  &found_entry->sle_lock) != NULL)
 			continue;
 
-		/* Found an entry that might work, try to grant it. */
-		try_to_grant_lock(found_entry);
+		/* Found an entry that might work.  Schedule the grant on the
+		 * state async thread so CB_NOTIFY_LOCK is not issued from
+		 * inside fore-channel RPC dispatch (LOCKU, etc.).
+		 */
+		lock_entry_inc_ref(found_entry);
+
+		if (state_block_schedule(found_entry) != STATE_SUCCESS) {
+			LogMajor(COMPONENT_STATE,
+				 "Unable to schedule lock notification.");
+			lock_entry_dec_ref(found_entry);
+		}
 	}
 }
 
