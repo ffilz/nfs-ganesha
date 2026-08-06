@@ -55,6 +55,7 @@
 #include "gsh_lttng/generated_traces/lock.h"
 #endif
 #include "sal_metrics.h"
+#include "nfs_rpc_callback.h"
 
 /**
  * @page state_lock_entry_locking state_lock_entry_t locking rule
@@ -1940,6 +1941,20 @@ void try_to_grant_lock(state_lock_entry_t *lock_entry)
 		reason = "Removing blocked lock entry due to stale export";
 	} else if (admin_shutdown) {
 		reason = "Removing blocked lock entry due to shutdown";
+	} else if (lock_entry->sle_protocol == LOCK_NFSv4 &&
+		   lock_entry->sle_owner != NULL &&
+		   lock_entry->sle_owner->so_type >= STATE_OPEN_OWNER_NFSV4 &&
+		   lock_entry->sle_owner->so_owner.so_nfs4_owner.so_clientrec !=
+			   NULL &&
+		   lock_entry->sle_owner->so_owner.so_nfs4_owner.so_clientrec
+				   ->cid_minorversion == 0 &&
+		   get_cb_chan_down(lock_entry->sle_owner->so_owner
+					    .so_nfs4_owner.so_clientrec)) {
+		/* Cannot send CB_NOTIFY_LOCK without a v4.0 callback channel */
+		LogFullDebug(
+			COMPONENT_STATE,
+			"Deferring blocked lock grant, callback channel down");
+		return;
 	} else {
 		call_back = lock_entry->sle_block_data->sbd_granted_callback;
 		/* Mark the lock_entry as provisionally granted and make the
@@ -1952,8 +1967,32 @@ void try_to_grant_lock(state_lock_entry_t *lock_entry)
 		    STATE_GRANT_NONE)
 			lock_entry->sle_block_data->sbd_grant_type =
 				STATE_GRANT_INTERNAL;
+		/* NFSv4 grant callbacks may issue a synchronous CB
+		 * (CLNT_CALL_WAIT on v4.0). Drop st_lock around that so
+		 * other LOCK ops on this file are not stalled for the
+		 * full CB RTT/timeout. NLM callbacks stay under st_lock.
+		 */
+		if (lock_entry->sle_protocol == LOCK_NFSv4)
+			STATELOCK_unlock(lock_entry->sle_obj);
 
 		status = call_back(lock_entry->sle_obj, lock_entry);
+
+		if (lock_entry->sle_protocol == LOCK_NFSv4) {
+			STATELOCK_lock(lock_entry->sle_obj);
+
+			/* Entry may have been cancelled or removed while
+			 * unlocked
+			 */
+			if (glist_null(&lock_entry->sle_list) ||
+			    lock_entry->sle_block_data == NULL)
+				return;
+
+			if (lock_entry->sle_blocked == STATE_CANCELED) {
+				reason = "Removing canceled blocked lock entry";
+				goto remove_entry;
+			}
+		}
+
 		LOCK_AUTO_TRACEPOINT(lock_entry, granted_callback, TRACE_INFO,
 				     "Sent granted callback and got {}",
 				     status);
@@ -1989,6 +2028,7 @@ void try_to_grant_lock(state_lock_entry_t *lock_entry)
 		reason = "Removing unsuccessfully granted blocked lock";
 	}
 
+remove_entry:
 	/* There was no call back data, the call back failed,
 	 * or the block was cancelled.
 	 * Remove lock from list.
@@ -2051,8 +2091,17 @@ static void grant_blocked_locks(struct state_hdl *ostate)
 					  &found_entry->sle_lock) != NULL)
 			continue;
 
-		/* Found an entry that might work, try to grant it. */
-		try_to_grant_lock(found_entry);
+		/* Found an entry that might work.  Schedule the grant on the
+		 * state async thread so CB_NOTIFY_LOCK is not issued from
+		 * inside fore-channel RPC dispatch (LOCKU, etc.).
+		 */
+		lock_entry_inc_ref(found_entry);
+
+		if (state_block_schedule(found_entry) != STATE_SUCCESS) {
+			LogMajor(COMPONENT_STATE,
+				 "Unable to schedule lock notification.");
+			lock_entry_dec_ref(found_entry);
+		}
 	}
 }
 
