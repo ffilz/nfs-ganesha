@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0179f1f8_b7004fa8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-07T15:00:57Z",
+      "side": 1,
+      "message": "If you guys have earlier benchmark numbers without this patch, please share that.",
+      "parentUuid": "39d5d44f_c8975180",
+      "revId": "98548f1c85d3a0aec7909567bf3630f2c188dce0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ba3aac1_5d13f2a8",
         "filename": "src/scripts/bpftrace/mem_comp_audit.bt",
         "patchSetId": 20
@@ -101,6 +119,30 @@
       "writtenOn": "2026-08-06T18:58:41Z",
       "side": 1,
       "message": "pls remove enable and disable option",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 27
+      },
+      "revId": "98548f1c85d3a0aec7909567bf3630f2c188dce0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba9fc04_97d77ffe",
+        "filename": "src/scripts/ganeshactl/ganesha_stats.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-07T15:00:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f680a8b3_739faf43",
       "range": {
         "startLine": 152,
         "startChar": 0,
