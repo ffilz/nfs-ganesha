@@ -33,6 +33,24 @@
       "message": "Actually, I think we need to hold the lock otherwise we could have race between multiple callers of ensure_nsm_notify_thread_running().",
       "revId": "02d920fdc402ebd79c69871d675685a668c097ba",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19203391_dd43691e",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-08-07T11:24:05Z",
+      "side": 1,
+      "message": "Holding the lock here and also in core_update(), have removed unlock/relock around ensure_nsm_notify_thread_running()[nfs_read_conf.c]",
+      "parentUuid": "611cfb3c_dfa1a2f8",
+      "revId": "02d920fdc402ebd79c69871d675685a668c097ba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
