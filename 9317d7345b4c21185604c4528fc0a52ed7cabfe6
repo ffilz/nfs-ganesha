@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6563adb_71d9a12c",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-08-07T08:30:12Z",
+      "side": 1,
+      "message": "Duplicate code of Line 669, as event_func is already populated. Is it intentional and defensible?",
+      "revId": "9317d7345b4c21185604c4528fc0a52ed7cabfe6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
