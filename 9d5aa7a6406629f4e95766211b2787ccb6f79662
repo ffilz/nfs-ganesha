@@ -50,6 +50,59 @@
       "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 2\n+//SPDX-License-Identifier: LGPL-3.0-or-later",
       "revId": "9d5aa7a6406629f4e95766211b2787ccb6f79662",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfc950af_784fdeaa",
+        "filename": "src/scripts/bpftrace/mem_comp_audit.bt",
+        "patchSetId": 23
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-07T23:10:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9e0b5268_e58e03b2",
+      "revId": "9d5aa7a6406629f4e95766211b2787ccb6f79662",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a267d307_4d4da361",
+        "filename": "src/scripts/bpftrace/mem_comp_audit.bt",
+        "patchSetId": 23
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-07T23:10:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "59c3c5d0_e09139b9",
+      "revId": "9d5aa7a6406629f4e95766211b2787ccb6f79662",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f0b7d95_eebe6ece",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 4551,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-07T23:10:02Z",
+      "side": 1,
+      "message": "This looks real nice now. Only 4 atomics when not in debug, and only 2 more in debug mode.",
+      "revId": "9d5aa7a6406629f4e95766211b2787ccb6f79662",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

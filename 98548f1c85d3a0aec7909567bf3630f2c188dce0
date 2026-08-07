@@ -71,6 +71,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "098eef95_846a7d32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-07T23:10:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0179f1f8_b7004fa8",
+      "revId": "98548f1c85d3a0aec7909567bf3630f2c188dce0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ba3aac1_5d13f2a8",
@@ -143,6 +161,30 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "f680a8b3_739faf43",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 27
+      },
+      "revId": "98548f1c85d3a0aec7909567bf3630f2c188dce0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cb7eb99_760321e8",
+        "filename": "src/scripts/ganeshactl/ganesha_stats.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-07T23:10:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dba9fc04_97d77ffe",
       "range": {
         "startLine": 152,
         "startChar": 0,
