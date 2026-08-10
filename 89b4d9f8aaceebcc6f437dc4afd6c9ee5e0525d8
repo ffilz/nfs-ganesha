@@ -16,6 +16,40 @@
       "message": "Now that Cluster QoS has been merged, this needs to be modified for that. I will do that in my next cycle.\n\nIn the meantime, this has been merged with my dynamic config work and with mem_stats.",
       "revId": "89b4d9f8aaceebcc6f437dc4afd6c9ee5e0525d8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "162458db_069ac418",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-10T22:48:28Z",
+      "side": 1,
+      "message": "WARNING: line length of 87 exceeds 80 columns\n+\t\t\t\"Change of Cluster_Members from non-empty to empty is invalid\";",
+      "revId": "89b4d9f8aaceebcc6f437dc4afd6c9ee5e0525d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a275953b_7010969e",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-10T22:48:28Z",
+      "side": 1,
+      "message": "WARNING: line length of 87 exceeds 80 columns\n+\t\t\t\"Change of Cluster_Members from empty to non-empty is invalid\";",
+      "revId": "89b4d9f8aaceebcc6f437dc4afd6c9ee5e0525d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
