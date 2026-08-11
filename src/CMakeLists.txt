@@ -817,6 +817,11 @@ gopt_test(USE_NFSACL3)
   endif(USE_NFSACL3)
 
 gopt_test(USE_FSAL_GPFS)
+if(USE_FSAL_GPFS)
+  # GPFS requires NFSACL3 to be disabled and ACL_MAPPING enabled.
+  set(USE_NFSACL3 OFF)
+  set(USE_ACL_MAPPING ON)
+endif(USE_FSAL_GPFS)
 
 gopt_test(USE_FSAL_XFS)
 if(USE_FSAL_XFS)
