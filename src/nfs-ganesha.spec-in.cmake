@@ -717,6 +717,7 @@ install -m 644 config_samples/gpfs.ganesha.nfsd.conf %{buildroot}%{_sysconfdir}/
 install -m 644 config_samples/gpfs.ganesha.main.conf %{buildroot}%{_sysconfdir}/ganesha
 install -m 644 config_samples/gpfs.ganesha.log.conf %{buildroot}%{_sysconfdir}/ganesha
 install -m 644 config_samples/gpfs.ganesha.exports.conf	%{buildroot}%{_sysconfdir}/ganesha
+install -m 644 config_samples/gpfs_logrotate_ganesha	%{buildroot}%{_sysconfdir}/logrotate.d/ganesha
 %endif
 
 make DESTDIR=%{buildroot} install
