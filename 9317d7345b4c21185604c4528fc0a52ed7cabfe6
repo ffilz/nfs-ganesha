@@ -33,6 +33,24 @@
       "message": "Duplicate code of Line 669, as event_func is already populated. Is it intentional and defensible?",
       "revId": "9317d7345b4c21185604c4528fc0a52ed7cabfe6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50b7c6cd_a9227790",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1039709
+      },
+      "writtenOn": "2026-08-11T09:23:37Z",
+      "side": 1,
+      "message": "Good point. The second lookup was intentional because cmount_lock is dropped between the two upcalls and cm-\u003ecm_export may change while the lock is released. I removed the local event_func and now access cm-\u003ecm_export-\u003eexport.up_ops inside each cmount_lock section, consistent with ino_release_cb() and ino_invalidate_cb().",
+      "parentUuid": "d6563adb_71d9a12c",
+      "revId": "9317d7345b4c21185604c4528fc0a52ed7cabfe6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
