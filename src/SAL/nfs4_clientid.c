@@ -1948,7 +1948,14 @@ uint64_t client_record_value_hash(nfs_client_record_t *key)
 	other = key->cr_pnfs_flags;
 	if (nfs_param.nfsv4_param.ip_based_client_owner_separation)
 		other = other ^ hash_sockaddr(&key->cr_client_addr, true);
-	other = (other << 32) | hash_sockaddr(&key->cr_server_addr, true);
+	/* When trunking is enabled multiple server IPs share the same
+	 * client record.  Exclude cr_server_addr from the hash so that
+	 * an EXCHANGE_ID arriving on the trunk IP finds the same bucket
+	 * as the one that arrived on the primary IP.
+	 */
+	if (!nfs_param.core_param.trunking)
+		other = (other << 32) | hash_sockaddr(&key->cr_server_addr,
+						      true);
 	return CityHash64WithSeed(key->cr_client_val, key->cr_client_val_len,
 				  other);
 }
@@ -2036,13 +2043,20 @@ int compare_client_record(struct gsh_buffdesc *buff1,
 			LogFullDebug(COMPONENT_CLIENTID, "ExtraFlags mismatch");
 		return 1;
 	}
-
-	rc = sockaddr_cmp(COMPONENT_HASHTABLE, &pkey1->cr_server_addr,
-			  &pkey2->cr_server_addr, true);
-	if (rc != 0) {
-		if (isDebug(COMPONENT_HASHTABLE))
-			LogFullDebug(COMPONENT_CLIENTID, "sockaddr mismatch");
-		return 1;
+	/* When trunking is enabled, different server IPs serve the same
+	 * ganesha instance.  An EXCHANGE_ID arriving on the trunk IP must
+	 * find the same client record as the primary IP, so skip the
+	 * server address comparison.
+	 */
+	if (!nfs_param.core_param.trunking) {
+		rc = sockaddr_cmp(COMPONENT_HASHTABLE, &pkey1->cr_server_addr,
+				  &pkey2->cr_server_addr, true);
+		if (rc != 0) {
+			if (isDebug(COMPONENT_HASHTABLE))
+				LogFullDebug(COMPONENT_CLIENTID,
+					     "sockaddr mismatch");
+			return 1;
+		}
 	}
 
 	if (nfs_param.nfsv4_param.ip_based_client_owner_separation) {

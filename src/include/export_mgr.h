@@ -242,6 +242,10 @@ struct gsh_export {
 	/** Due to an update, this export will need to be remounted. */
 	bool update_remount;
 	gauge_metric_handle_t metadata_metric; /* Prometheus metric handle */
+	/* fs_locations for trunking - ref-counted via
+	 * nfs4_fs_locations_get_ref
+	 */
+	fsal_fs_locations_t *export_fs_location;
 };
 
 /* Private state for config_errs_to_dbus and config_errs_to_grpc */

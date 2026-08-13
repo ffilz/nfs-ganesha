@@ -51,7 +51,7 @@
 #include "pnfs_utils.h"
 #include "mdcache.h"
 #include "nfs_qos.h"
-
+#include "abstract_mem.h"
 /**
  * @brief Protect EXPORT_DEFAULTS structure for dynamic update.
  *
@@ -1240,6 +1240,14 @@ static inline void copy_gsh_export(struct gsh_export *dest,
 
 	/* Copy the export perms into the existing export. */
 	dest->export_perms = src->export_perms;
+
+	/* Transfer export_fs_location from the new config
+	* to the live export.
+	*/
+	if (dest->export_fs_location != NULL)
+		nfs4_fs_locations_release(dest->export_fs_location);
+	dest->export_fs_location = src->export_fs_location;
+	src->export_fs_location = NULL;
 
 	/* Swap the client list from the src export and the dest
 	 * export. When we then dispose of the new export, the
@@ -2662,6 +2670,143 @@ static struct config_item fsal_params[] = {
 				    server_addr_adder, _struct_, server_addrs)
 
 /**
+ * @brief FS_LOCATION block configuration
+ */
+
+struct fs_locations_config {
+	uint32_t nservers;
+	char *fs_root;
+	char *rootpath;
+	char **servers;
+};
+
+static void fsloc_config_free(struct fs_locations_config *fs_locations)
+{
+	uint32_t i;
+	if (fs_locations == NULL)
+		return;
+	gsh_free(fs_locations->fs_root, MEM_COMP_EXPORT);
+	gsh_free(fs_locations->rootpath, MEM_COMP_EXPORT);
+	if (fs_locations->servers != NULL) {
+		for (i = 0; i < fs_locations->nservers; i++)
+			gsh_free(fs_locations->servers[i], MEM_COMP_EXPORT);
+		gsh_free(fs_locations->servers, MEM_COMP_EXPORT);
+	}
+	gsh_free(fs_locations, MEM_COMP_EXPORT);
+}
+
+static void *fsloc_block_init(void *link_mem, void *self_struct)
+{
+	assert(link_mem != NULL || self_struct != NULL);
+
+	if (link_mem == NULL) {
+		return self_struct; /* NOP */
+	} else if (self_struct == NULL) {
+		return gsh_calloc(1, sizeof(struct fs_locations_config),
+				  MEM_COMP_EXPORT);
+	} else {
+		fsloc_config_free(self_struct);
+		return NULL;
+	}
+}
+
+/**
+ * @brief CONF_ITEM_PROC_MULT handler: append one server token to the array
+ */
+static int server_adder(const char *token, enum term_type type_hint,
+			struct config_item *item, void *param_addr, void *cnode,
+			struct config_error_type *err_type)
+{
+	struct fs_locations_config *fs_locations =
+		container_of(param_addr, struct fs_locations_config, servers);
+	uint32_t new_count = fs_locations->nservers + 1;
+	char **new_servers;
+
+	new_servers = gsh_realloc(fs_locations->servers,
+				  new_count * sizeof(char *), MEM_COMP_EXPORT);
+	new_servers[fs_locations->nservers] =
+		gsh_strdup(token, MEM_COMP_EXPORT);
+	fs_locations->servers = new_servers;
+	fs_locations->nservers = new_count;
+
+	LogFullDebug(COMPONENT_CONFIG, "FS_LOCATION added server[%u]=%s",
+		     fs_locations->nservers - 1, token);
+	return 0;
+}
+
+static int fsloc_block_commit(void *node, void *link_mem, void *self_struct,
+			      struct config_error_type *err_type)
+{
+	fsal_fs_locations_t **exp_fs_loc = link_mem;
+	struct gsh_export *export =
+		container_of(exp_fs_loc, struct gsh_export, export_fs_location);
+	struct fs_locations_config *fs_locations = self_struct;
+	const char *fs_root;
+	const char *rootpath;
+	uint32_t i;
+
+	if (fs_locations == NULL)
+		return 0;
+
+	fs_root = fs_locations->fs_root ? fs_locations->fs_root
+					: export->cfg_pseudopath;
+	rootpath = fs_locations->rootpath ? fs_locations->rootpath
+					  : export->cfg_fullpath;
+
+	/* Release any previous value */
+	if (export->export_fs_location != NULL) {
+		nfs4_fs_locations_release(export->export_fs_location);
+		export->export_fs_location = NULL;
+	}
+
+	/* Use the ref-counted allocator so fsal_release_attrs works
+	* correctly
+	*/
+	export->export_fs_location =
+		nfs4_fs_locations_new(fs_root, rootpath,
+				      fs_locations->nservers);
+	if (export->export_fs_location == NULL)
+		return -1;
+
+	PTHREAD_RWLOCK_wrlock(&export->export_fs_location->fsloc_lock);
+	export->export_fs_location->nservers = fs_locations->nservers;
+
+	for (i = 0; i < fs_locations->nservers; i++) {
+		copy_into_utf8string(&export->export_fs_location->server[i],
+				     fs_locations->servers[i],
+				     strlen(fs_locations->servers[i]));
+	}
+	PTHREAD_RWLOCK_unlock(&export->export_fs_location->fsloc_lock);
+
+	LogFullDebug(COMPONENT_CONFIG,
+		     "FS_LOCATION nservers=%u fs_root=%s rootpath=%s",
+		     fs_locations->nservers,
+		     fs_locations->fs_root ? fs_locations->fs_root : "NULL",
+		     fs_locations->rootpath ? fs_locations->rootpath : "NULL");
+
+
+	/* Free parse-time config.  Same pattern as client_commit():
+	 * add_export success does not invoke fsloc_block_init cleanup
+	 * from proc_block, so we must do it here.
+	 */
+	fsloc_block_init(link_mem, fs_locations);
+
+	return 0;
+}
+
+static struct config_item fsloc_params[] = {
+	CONF_ITEM_UI32("Nservers", 0, UINT32_MAX, 0, fs_locations_config,
+		       nservers),
+	CONF_ITEM_STR("Fs_root", 1, MAXPATHLEN, NULL, fs_locations_config,
+		      fs_root),
+	CONF_ITEM_STR("Rootpath", 1, MAXPATHLEN, NULL, fs_locations_config,
+		      rootpath),
+	CONF_ITEM_PROC_MULT("Server", noop_conf_init, server_adder,
+			    fs_locations_config, servers),
+	CONFIG_EOL
+};
+
+/**
  * @brief Table of EXPORT block parameters
  */
 
@@ -2676,6 +2821,8 @@ static struct config_item export_params[] = {
 	CONF_ITEM_BLOCK("QOS_BLOCK", qos_block_params, qos_block_init,
 			qos_block_commit, gsh_export, qos_block),
 #endif
+	CONF_ITEM_BLOCK("FS_LOCATION", fsloc_params, fsloc_block_init,
+			fsloc_block_commit, gsh_export, export_fs_location),
 	/* NOTE: the Client and FSAL sub-blocks must be the *last*
 	 * two entries in the list.  This is so all other
 	 * parameters have been processed before these sub-blocks
@@ -2708,6 +2855,8 @@ static struct config_item export_update_params[] = {
 	CONF_ITEM_BLOCK("QOS_BLOCK", qos_block_params, qos_block_init,
 			qos_block_commit, gsh_export, qos_block),
 #endif
+	CONF_ITEM_BLOCK("FS_LOCATION", fsloc_params, fsloc_block_init,
+			fsloc_block_commit, gsh_export, export_fs_location),
 
 	/* NOTE: the Client and FSAL sub-blocks must be the *last*
 	 * two entries in the list.  This is so all other
@@ -3361,6 +3510,11 @@ void free_export_resources(struct gsh_export *export, bool config)
 		init_op_context_simple(&op_context, export,
 				       export->fsal_export);
 		restore_op_ctx = true;
+	}
+
+	if (export->export_fs_location != NULL) {
+		nfs4_fs_locations_release(export->export_fs_location);
+		export->export_fs_location = NULL;
 	}
 
 	LogDebug(COMPONENT_EXPORT, "Export root %p", export->exp_root_obj);
