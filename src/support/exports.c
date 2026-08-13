@@ -51,7 +51,7 @@
 #include "pnfs_utils.h"
 #include "mdcache.h"
 #include "nfs_qos.h"
-
+#include "abstract_mem.h"
 /**
  * @brief Protect EXPORT_DEFAULTS structure for dynamic update.
  *
@@ -2358,8 +2358,8 @@ void *export_client_allocator(mem_components_t mem_comp)
 {
 	struct exportlist_client_entry *expcli;
 
-	expcli = gsh_calloc(1, sizeof(struct exportlist_client_entry),
-			    mem_comp);
+	expcli =
+		gsh_calloc(1, sizeof(struct exportlist_client_entry), mem_comp);
 
 	return &expcli->client_entry;
 }
@@ -2578,6 +2578,136 @@ static struct config_item fsal_params[] = {
 				      options, options_set)
 
 /**
+ * @brief FS_LOCATION block configuration
+ */
+
+struct fs_locations_config {
+	uint32_t nservers;
+	char *fs_root;
+	char *rootpath;
+	char **servers;
+};
+
+static void *fsloc_block_init(void *link_mem, void *self_struct)
+{
+	assert(link_mem != NULL || self_struct != NULL);
+
+	if (link_mem == NULL) {
+		return self_struct; /* NOP */
+	} else if (self_struct == NULL) {
+		return gsh_calloc(1, sizeof(struct fs_locations_config),
+				  MEM_COMP_CONFIG);
+	} else {
+		uint32_t i;
+		struct fs_locations_config *fs_locations = self_struct;
+		for (i = 0; i < fs_locations->nservers; i++)
+			gsh_free(fs_locations->servers[i], MEM_COMP_CONFIG);
+		gsh_free(fs_locations->servers, MEM_COMP_CONFIG);
+		return NULL;
+	}
+}
+
+/**
+ * @brief CONF_ITEM_PROC_MULT handler: append one server token to the array
+ */
+static int server_adder(const char *token, enum term_type type_hint,
+			struct config_item *item, void *param_addr, void *cnode,
+			struct config_error_type *err_type)
+{
+	struct fs_locations_config *fs_locations =
+		container_of(param_addr, struct fs_locations_config, servers);
+	uint32_t new_count = fs_locations->nservers + 1;
+	char **new_servers;
+
+	new_servers = gsh_realloc(fs_locations->servers,
+				  new_count * sizeof(char *), MEM_COMP_CONFIG);
+	if (new_servers == NULL) {
+		config_proc_error(cnode, err_type,
+				  "Out of memory adding server %s", token);
+		err_type->resource = true;
+		return 1;
+	}
+	new_servers[fs_locations->nservers] =
+		gsh_strdup(token, MEM_COMP_CONFIG);
+	fs_locations->servers = new_servers;
+	fs_locations->nservers = new_count;
+
+	LogFullDebug(COMPONENT_CONFIG, "FS_LOCATION added server[%u]=%s",
+		     fs_locations->nservers - 1, token);
+	return 0;
+}
+
+static int fsloc_block_commit(void *node, void *link_mem, void *self_struct,
+			      struct config_error_type *err_type)
+{
+	fsal_fs_locations_t **exp_fs_loc = link_mem;
+	struct gsh_export *gsh_export =
+		container_of(exp_fs_loc, struct gsh_export, export_fs_location);
+	struct fs_locations_config *fs_locations = self_struct;
+	const char *fs_root;
+	const char *rootpath;
+	uint32_t i;
+
+	if (fs_locations == NULL)
+		return 0;
+
+	fs_root = fs_locations->fs_root ? fs_locations->fs_root
+					: gsh_export->cfg_pseudopath;
+	rootpath = fs_locations->rootpath ? fs_locations->rootpath
+					  : gsh_export->cfg_fullpath;
+
+	/* Release any previous value */
+	if (gsh_export->export_fs_location != NULL) {
+		nfs4_fs_locations_release(gsh_export->export_fs_location);
+		gsh_export->export_fs_location = NULL;
+	}
+
+	/* Use the ref-counted allocator so fsal_release_attrs works correctly */
+	gsh_export->export_fs_location =
+		nfs4_fs_locations_new(fs_root, rootpath,
+				      fs_locations->nservers);
+	if (gsh_export->export_fs_location == NULL)
+		return -1;
+
+	gsh_export->export_fs_location->nservers = fs_locations->nservers;
+	/*
+	gsh_export->export_fs_location->server->utf8string_len =
+		strlen(fs_locations->server);
+	gsh_export->export_fs_location->server->utf8string_val =
+		gsh_strdup(fs_locations->server, MEM_COMP_FSAL);
+*/
+	for (i = 0; i < fs_locations->nservers; i++) {
+		gsh_export->export_fs_location->server[i].utf8string_len =
+			strlen(fs_locations->servers[i]);
+		gsh_export->export_fs_location->server[i].utf8string_val =
+			gsh_strdup(fs_locations->servers[i], MEM_COMP_FSAL);
+		LogFullDebug(COMPONENT_CONFIG, "SERVER is %s",
+			     gsh_export->export_fs_location->server[i]
+				     .utf8string_val);
+	}
+
+	LogFullDebug(COMPONENT_CONFIG,
+		     "FS_LOCATION nservers=%u fs_root=%s rootpath=%s",
+		     fs_locations->nservers,
+		     fs_locations->fs_root ? fs_locations->fs_root : "NULL",
+		     fs_locations->rootpath ? fs_locations->rootpath : "NULL");
+
+	return 0;
+}
+
+static struct config_item fsloc_params[] = {
+	CONF_ITEM_UI32("Nservers", 0, UINT32_MAX, 0, fs_locations_config,
+		       nservers),
+	CONF_ITEM_STR("Fs_root", 1, MAXPATHLEN, NULL, fs_locations_config,
+		      fs_root),
+	CONF_ITEM_STR("Rootpath", 1, MAXPATHLEN, NULL, fs_locations_config,
+		      rootpath),
+	CONF_ITEM_PROC_MULT("Server", noop_conf_init, server_adder,
+			    fs_locations_config, servers),
+	CONFIG_EOL
+};
+
+/**
  * @brief Table of EXPORT block parameters
  */
 
@@ -2592,6 +2722,8 @@ static struct config_item export_params[] = {
 	CONF_ITEM_BLOCK("QOS_BLOCK", qos_block_params, qos_block_init,
 			qos_block_commit, gsh_export, qos_block),
 #endif
+	CONF_ITEM_BLOCK("FS_LOCATION", fsloc_params, fsloc_block_init,
+			fsloc_block_commit, gsh_export, export_fs_location),
 	/* NOTE: the Client and FSAL sub-blocks must be the *last*
 	 * two entries in the list.  This is so all other
 	 * parameters have been processed before these sub-blocks
@@ -2624,6 +2756,8 @@ static struct config_item export_update_params[] = {
 	CONF_ITEM_BLOCK("QOS_BLOCK", qos_block_params, qos_block_init,
 			qos_block_commit, gsh_export, qos_block),
 #endif
+	CONF_ITEM_BLOCK("FS_LOCATION", fsloc_params, fsloc_block_init,
+			fsloc_block_commit, gsh_export, export_fs_location),
 
 	/* NOTE: the Client and FSAL sub-blocks must be the *last*
 	 * two entries in the list.  This is so all other
@@ -3267,6 +3401,11 @@ void free_export_resources(struct gsh_export *export, bool config)
 		init_op_context_simple(&op_context, export,
 				       export->fsal_export);
 		restore_op_ctx = true;
+	}
+
+	if (export->export_fs_location != NULL) {
+		nfs4_fs_locations_release(export->export_fs_location);
+		export->export_fs_location = NULL;
 	}
 
 	LogDebug(COMPONENT_EXPORT, "Export root %p", export->exp_root_obj);

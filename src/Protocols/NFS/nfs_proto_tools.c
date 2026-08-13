@@ -3846,6 +3846,19 @@ nfsstat4 file_To_Fattr(compound_data_t *data, attrmask_t request_mask,
 			return nfs4_Errno_status(status);
 	}
 
+	/* Inject fs_locations for trunking AFTER getattrs so all other
+	 * attributes are still populated. Take a ref so fsal_release_attrs
+	 * can safely call nfs4_fs_locations_release without freeing the
+	 * export's copy.
+	 */
+	if (attribute_is_set(Bitmap, FATTR4_FS_LOCATIONS) &&
+	    nfs_param.core_param.trunking &&
+	    op_ctx->ctx_export->export_fs_location != NULL) {
+		nfs4_fs_locations_get_ref(op_ctx->ctx_export->export_fs_location);
+		attr->fs_locations = op_ctx->ctx_export->export_fs_location;
+		FSAL_SET_MASK(attr->valid_mask, ATTR4_FS_LOCATIONS);
+	}
+
 	/* Restore originally requested mask */
 	attr->request_mask = request_mask;
 

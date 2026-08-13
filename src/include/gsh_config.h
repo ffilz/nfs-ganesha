@@ -571,6 +571,8 @@ typedef struct nfs_core_param {
 	/** Enable creating metrics and pushing to MONITORING IP address */
 	bool enable_metrics;
 #endif
+	/** Enable fs_locations trunking support */
+	bool trunking;
 	/** if  Manage_Gids=True and group resolution fails,
 	 *  then use gid data from rpc request */
 	bool enable_rpc_cred_fallback;
