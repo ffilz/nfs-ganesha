@@ -34,6 +34,24 @@
       "parentUuid": "0c23e510_a4a80128",
       "revId": "21c3257021d892ae8e0a29c67232485446fd1245",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4efee75_cf4df77a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-13T15:30:10Z",
+      "side": 1,
+      "message": "I can\u0027t support this upstream. I depend on cmake building both NFSACL3 and GPFS to make sure as much code is compiled as possible.\n\nIs NFSACL3 actually incompatible with GPFS or is it a product preference?",
+      "parentUuid": "0451de77_64c35811",
+      "revId": "21c3257021d892ae8e0a29c67232485446fd1245",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
