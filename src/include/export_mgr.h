@@ -235,6 +235,8 @@ struct gsh_export {
 	bool update_prune_unmount;
 	/** Due to an update, this export will need to be remounted. */
 	bool update_remount;
+	/* fs_locations for trunking - ref-counted via nfs4_fs_locations_get_ref */
+	fsal_fs_locations_t *export_fs_location;
 };
 
 /* Private state for config_errs_to_dbus and config_errs_to_grpc */

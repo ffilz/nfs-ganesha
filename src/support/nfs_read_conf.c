@@ -493,6 +493,7 @@ static struct config_item core_params[] = {
 		       short_file_handle),
 	CONF_ITEM_I64("Manage_Gids_Expiration", 0, 7 * 24 * 60 * 60, 30 * 60,
 		      nfs_core_param, manage_gids_expiration),
+	CONF_ITEM_BOOL("Trunking", false, nfs_core_param, trunking),
 	CONF_ITEM_PATH("Plugins_Dir", 1, MAXPATHLEN, FSAL_MODULE_LOC,
 		       nfs_core_param, ganesha_modules_loc),
 	CONF_ITEM_UI32("heartbeat_freq", 0, 5000, 1000, nfs_core_param,
