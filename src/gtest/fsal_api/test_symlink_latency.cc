@@ -188,7 +188,7 @@ TEST_F(SymlinkEmptyLatencyTest, SIMPLE_BYPASS)
 			     link_content.utf8string_len);
 	EXPECT_EQ(ret, 0);
 
-	gsh_free(link_content.utf8string_val, MEM_COMP_GTEST);
+	gsh_free(link_content.utf8string_val, MEM_COMP_PROTOCOL);
 
 	symlink->obj_ops->put_ref(symlink);
 	lookup->obj_ops->put_ref(lookup);
