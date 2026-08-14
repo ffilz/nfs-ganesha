@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3c3b2b4_7ad07ded",
+        "filename": "src/gtest/fsal_api/test_symlink_latency.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-14T15:16:59Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this use free_utf8string?",
+      "revId": "77f93d1dc2cf7c5f05d17e77c8db465887743eca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfb32f67_5fad90bd",
+        "filename": "src/hashtable/hashtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-14T15:16:59Z",
+      "side": 1,
+      "message": "Ooh, sorry I didn\u0027t catch this originally",
+      "revId": "77f93d1dc2cf7c5f05d17e77c8db465887743eca",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
