@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ddaec3c_9d6cecde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039709
+      },
+      "writtenOn": "2026-08-14T05:47:06Z",
+      "side": 1,
+      "message": "Changes in this patch set. The fix itself is unchanged.\n\n- Both up-calls are now issued from a single cmount_lock read-side critical section, instead of dropping and retaking the lock between them.\n- Added the in-code comment documenting the libcephfs zero/non-zero dentry inode convention, as promised, plus a short comment on why try_release() is the operation used.\n\nI have also replied in Matt\u0027s comment thread with a fuller answer to his questions.",
+      "revId": "e1587cbaab069567101b8052729f1314eb396b35",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

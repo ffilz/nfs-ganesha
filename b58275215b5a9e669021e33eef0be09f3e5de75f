@@ -122,6 +122,24 @@
       "parentUuid": "b889b185_75db033f",
       "revId": "b58275215b5a9e669021e33eef0be09f3e5de75f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c3d5fa1_6bff5f1c",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1039709
+      },
+      "writtenOn": "2026-08-14T05:47:06Z",
+      "side": 1,
+      "message": "Thanks, Frank. That is fair. My previous reply explained the Ganesha lifetime protection, but did not clearly explain why the delete-style dentry callback is the right place to handle the release case.\n\nOn the callback semantics:\n\nThis change applies only to the child-carrying form of client_dentry_callback_t. libcephfs passes a zero inode for invalidate-only notifications and the child vino when the dentry is being removed from its cache (del \u003d\u003d true). ceph-fuse consumes the latter as a delete-style notification, while the former remains an invalidate-only notification.\n\nGanesha currently handles the parent/name part by invalidating the directory\u0027s cached dirents. However, the child MDCACHE entry is a separate cache object. It owns the FSAL_CEPH handle, and normal destruction of that handle releases the corresponding libcephfs inode reference. Therefore, libcephfs can remove its dentry while Ganesha still keeps the child\u0027s handle alive through MDCACHE.\n\nlibcephfs in fact only queues this callback when the application still holds a low-level reference on the inode (_schedule_invalidate_dentry_callback() checks dn-\u003einode-\u003ell_ref \u003e 0), so the notification is specifically about the reference Ganesha is holding. The existing ino_release_cb does not cover this: its only producer is trim_caps(), which runs when the MDS asks the session to trim caps, so with no cap pressure it never fires.\n\ntry_release() is the conditional MDCACHE operation for this case. It is not an unconditional inode release. MDCACHE removes the entry only when it is otherwise idle; if the object is still referenced by an open state, an in-flight request, or another active reference, it returns ERR_FSAL_STILL_IN_USE and leaves the entry intact.\n\nThis is why the delete-style dentry notification is the appropriate place to attempt cleanup: it tells Ganesha that the child dentry disappeared, and allows Ganesha to drop its own cache ownership if no one else is using the object.\n\nOn cmount_lock, it is an FSAL_CEPH lifetime lock, not a libcephfs mount serialization lock. The callback accesses cm-\u003ecm_export-\u003eexport.up_ops, while export teardown may reassign cm-\u003ecm_export or tear down the final shared cmount under the write lock. The read lock protects the upcall vector while it is used.\n\nThe updated patch keeps both upcalls from this callback under the same cmount_lock read-side critical section, so the parent invalidation and optional child release use the same export context.",
+      "parentUuid": "6c1ff9be_ed9c8f84",
+      "revId": "b58275215b5a9e669021e33eef0be09f3e5de75f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

@@ -34,6 +34,24 @@
       "parentUuid": "7218e78a_1e85337a",
       "revId": "5dd8c33c7ee029879bda5a47361ae9dba6f2859c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "668d11b8_933b68de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039709
+      },
+      "writtenOn": "2026-08-14T05:47:06Z",
+      "side": 1,
+      "message": "The patch does not replace the existing invalidation. dentry_invalidate_cb() still invalidates the parent directory for every callback, exactly as before. The added try_release() is reached only when libcephfs supplies a non-zero dentry inode.\n\nThe zero/non-zero distinction already exists in libcephfs. C_Client_DentryInvalidate sets ino only when del \u003d\u003d true and explicitly zeroes it when del \u003d\u003d false. The current producer call sites use false for invalidate-only kernel-dcache invalidation and true when trimming/removing a dentry. ceph-fuse relies on the same value: it passes either zero or the child inode to fuse_lowlevel_notify_delete(), which otherwise behaves like entry invalidation and adds the delete-specific notification when the supplied child matches. The callback is also queued only when the inode has an outstanding low-level reference (ll_ref \u003e 0).\n\nI agree that this convention should be documented in both Ganesha and ceph_ll_client.h as a follow-up.  \n\ntry_release() is deliberately advisory. mdc_up_try_release() removes an entry only when its only LRU reference is the sentinel; otherwise it returns ERR_FSAL_STILL_IN_USE. It therefore cannot remove an entry with active users. If a future producer supplied a non-zero inode for a broader case, the possible effect would be an unnecessary eviction of an otherwise idle entry and a subsequent cache rebuild, rather than the removal of an in-use object.\n\nBoth current del \u003d\u003d true producer call sites are cache-trimming paths (trim_caps() and _try_to_trim_inode()), not assertions that the file was necessarily unlinked. That is precisely why try_release() is the appropriate strength here and why a forced close or removal would be too strong.\n\nThere is currently no explicit event-flags channel in this callback. Supporting another semantic would require a new/versioned callback API or a documented change to the inode convention; documenting the existing convention makes this dependency explicit.",
+      "parentUuid": "a007b4f6_38b7d4f3",
+      "revId": "5dd8c33c7ee029879bda5a47361ae9dba6f2859c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
