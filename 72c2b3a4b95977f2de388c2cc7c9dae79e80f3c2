@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32930aed_ec186764",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1280,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-16T14:48:27Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t * READ_PLUS returns the content type at the requested offset.  Use",
+      "revId": "72c2b3a4b95977f2de388c2cc7c9dae79e80f3c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "931aeba1_af191e4a",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1281,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-16T14:48:27Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t * SEEK_DATA/SEEK_HOLE to avoid reading (and transmitting) sparse",
+      "revId": "72c2b3a4b95977f2de388c2cc7c9dae79e80f3c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d140ac07_a3ac6b63",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1282,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-16T14:48:27Z",
+      "side": 1,
+      "message": "WARNING: line length of 85 exceeds 80 columns\n+\t\t * regions.  A single content element is enough: the client can issue",
+      "revId": "72c2b3a4b95977f2de388c2cc7c9dae79e80f3c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff5f0cf_6d19a34f",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-16T14:48:27Z",
+      "side": 1,
+      "message": "WARNING: line length of 85 exceeds 80 columns\n+\t\t\t/* The protocol layer allocated a data buffer before the FSAL",
+      "revId": "72c2b3a4b95977f2de388c2cc7c9dae79e80f3c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd22c712_f2e190e7",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-16T14:48:27Z",
+      "side": 1,
+      "message": "WARNING: line length of 89 exceeds 80 columns\n+\t\t\t * knew this was a hole.  A hole result does not own that buffer.",
+      "revId": "72c2b3a4b95977f2de388c2cc7c9dae79e80f3c2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
