@@ -1242,6 +1242,8 @@ void vfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	       void *caller_arg)
 {
 	ssize_t nb_read;
+	off_t next_data, next_hole;
+	struct stat statbuf;
 	fsal_status_t status = { 0, 0 }, status2;
 	struct vfs_fd *my_fd;
 	struct vfs_fd temp_fd = { FSAL_FD_INIT, -1 };
@@ -1249,12 +1251,6 @@ void vfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	struct vfs_fsal_obj_handle *myself;
 
 	myself = container_of(obj_hdl, struct vfs_fsal_obj_handle, obj_handle);
-
-	if (read_arg->info != NULL) {
-		/* Currently we don't support READ_PLUS */
-		status = posix2fsal_status(ENOTSUP);
-		goto exit;
-	}
 
 	if (obj_hdl->fsal != obj_hdl->fs->fsal) {
 		LogDebug(
@@ -1279,6 +1275,91 @@ void vfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 
 	my_fd = container_of(out_fd, struct vfs_fd, fsal_fd);
 
+	if (read_arg->info != NULL) {
+		/*
+		 * READ_PLUS returns the content type at the requested offset.  Use
+		 * SEEK_DATA/SEEK_HOLE to avoid reading (and transmitting) sparse
+		 * regions.  A single content element is enough: the client can issue
+		 * another READ_PLUS for the following extent.
+		 */
+		if (fstat(my_fd->fd, &statbuf) != 0) {
+			status = posix2fsal_status(errno);
+			goto out;
+		}
+
+		if (read_arg->offset >= (uint64_t)statbuf.st_size) {
+			read_arg->io_amount = 0;
+			read_arg->end_of_file = true;
+			read_arg->info->io_content.what = NFS4_CONTENT_DATA;
+			read_arg->info->io_content.data.d_offset =
+				read_arg->offset;
+			read_arg->info->io_content.data.d_data.data_len = 0;
+			read_arg->info->io_content.data.d_data.data_val =
+				read_arg->iov[0].iov_base;
+			goto out;
+		}
+
+		next_data = lseek(my_fd->fd, read_arg->offset, SEEK_DATA);
+		if (next_data < 0 && errno != ENXIO) {
+			/* EINVAL is how filesystems report no extent-seeking
+			 * support.  READ_PLUS is optional, so expose that as
+			 * NFS4ERR_NOTSUPP rather than NFS4ERR_INVAL.
+			 */
+			status = posix2fsal_status(errno == EINVAL ? ENOTSUP
+								   : errno);
+			goto out;
+		}
+
+		if (next_data < 0 || next_data > read_arg->offset) {
+			uint64_t hole_end = next_data < 0 ? statbuf.st_size
+							  : next_data;
+			uint64_t requested_end;
+
+			if (read_arg->iov[0].iov_len >
+			    UINT64_MAX - read_arg->offset)
+				requested_end = UINT64_MAX;
+			else
+				requested_end = read_arg->offset +
+						read_arg->iov[0].iov_len;
+			if (hole_end > requested_end)
+				hole_end = requested_end;
+
+			read_arg->io_amount = hole_end - read_arg->offset;
+			read_arg->end_of_file = hole_end >=
+						(uint64_t)statbuf.st_size;
+			read_arg->info->io_content.what = NFS4_CONTENT_HOLE;
+			read_arg->info->io_content.hole.di_offset =
+				read_arg->offset;
+			read_arg->info->io_content.hole.di_length =
+				read_arg->io_amount;
+
+			/* The protocol layer allocated a data buffer before the FSAL
+			 * knew this was a hole.  A hole result does not own that buffer.
+			 */
+			if (read_arg->iov_release != NULL) {
+				read_arg->iov_release(read_arg->release_data);
+				read_arg->iov_release = NULL;
+				read_arg->release_data = NULL;
+				read_arg->iov[0].iov_base = NULL;
+			}
+			goto out;
+		}
+
+		next_hole = lseek(my_fd->fd, read_arg->offset, SEEK_HOLE);
+		if (next_hole < 0) {
+			if (errno != ENXIO) {
+				status = posix2fsal_status(
+					errno == EINVAL ? ENOTSUP : errno);
+				goto out;
+			}
+			next_hole = statbuf.st_size;
+		}
+
+		if ((uint64_t)next_hole - read_arg->offset <
+		    read_arg->iov[0].iov_len)
+			read_arg->iov[0].iov_len = next_hole - read_arg->offset;
+	}
+
 	nb_read = preadv(my_fd->fd, read_arg->iov, read_arg->iov_count,
 			 read_arg->offset);
 
@@ -1291,23 +1372,18 @@ void vfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 
 	read_arg->io_amount = nb_read;
 
-	read_arg->end_of_file = (nb_read == 0);
+	read_arg->end_of_file =
+		(nb_read == 0 ||
+		 (read_arg->info != NULL &&
+		  read_arg->offset + nb_read >= (uint64_t)statbuf.st_size));
 
-#if 0
-	/** @todo
-	 *
-	 * Is this all we really need to do to support READ_PLUS? Will anyone
-	 * ever get upset that we don't return holes, even for blocks of all
-	 * zeroes?
-	 *
-	 */
-	if (info != NULL) {
-		info->io_content.what = NFS4_CONTENT_DATA;
-		info->io_content.data.d_offset = offset + nb_read;
-		info->io_content.data.d_data.data_len = nb_read;
-		info->io_content.data.d_data.data_val = buffer;
+	if (read_arg->info != NULL) {
+		read_arg->info->io_content.what = NFS4_CONTENT_DATA;
+		read_arg->info->io_content.data.d_offset = read_arg->offset;
+		read_arg->info->io_content.data.d_data.data_len = nb_read;
+		read_arg->info->io_content.data.d_data.data_val =
+			read_arg->iov[0].iov_base;
 	}
-#endif
 
 out:
 
