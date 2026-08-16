@@ -1293,22 +1293,6 @@ void vfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 
 	read_arg->end_of_file = (nb_read == 0);
 
-#if 0
-	/** @todo
-	 *
-	 * Is this all we really need to do to support READ_PLUS? Will anyone
-	 * ever get upset that we don't return holes, even for blocks of all
-	 * zeroes?
-	 *
-	 */
-	if (info != NULL) {
-		info->io_content.what = NFS4_CONTENT_DATA;
-		info->io_content.data.d_offset = offset + nb_read;
-		info->io_content.data.d_data.data_len = nb_read;
-		info->io_content.data.d_data.data_val = buffer;
-	}
-#endif
-
 out:
 
 	status2 = fsal_complete_io(obj_hdl, out_fd);
