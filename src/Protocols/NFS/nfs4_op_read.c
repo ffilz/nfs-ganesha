@@ -207,7 +207,9 @@ static void nfs4_complete_read_plus(struct nfs_resop4 *resp,
 		contentp->data.d_data.data_len =
 			info->io_content.data.d_data.data_len;
 		contentp->data.d_data.data_val =
-			info->io_content.data.d_data.data_val;
+			contentp->data.d_data.data_len == 0
+				? NULL
+				: info->io_content.data.d_data.data_val;
 	}
 }
 
