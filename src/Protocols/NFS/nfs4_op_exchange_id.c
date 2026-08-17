@@ -90,6 +90,7 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 	sockaddr_t *server_addr = NULL;
 	sockaddr_t *client_addr = NULL;
 	uint32_t server_exflags = 0;
+	const char *str_client_addr = "(unknown)";
 
 	/* Arguments and response */
 	EXCHANGE_ID4args *const arg_EXCHANGE_ID4 =
@@ -193,6 +194,8 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 
 	server_addr = svc_getrpclocal(data->req->rq_xprt);
 	client_addr = svc_getrpccaller(data->req->rq_xprt);
+	if (op_ctx->client != NULL)
+		str_client_addr = op_ctx->client->hostaddr_str;
 
 #ifdef _USE_NFS_RDMA
 	/* True if this xprt is RDMA enabled */
@@ -234,6 +237,33 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 	if (conf != NULL) {
 		/* Need a reference to the confirmed record for below */
 		inc_client_id_ref(conf);
+
+		if (sockaddr_cmp(&client_record->cr_client_addr, client_addr,
+				 true) != 0) {
+			char str_name_buf[CLIENTNAME_BUFSIZE];
+			struct display_buffer dspbuf_name = {
+				sizeof(str_name_buf), str_name_buf, str_name_buf
+			};
+			display_clientid_name(&dspbuf_name, conf);
+
+			char str_new_ip[SOCK_NAME_MAX] = "\0";
+			struct display_buffer dspbuf_new = { sizeof(str_new_ip),
+							     str_new_ip,
+							     str_new_ip };
+			display_sockip(&dspbuf_new, client_addr);
+
+			char str_old_ip[SOCK_NAME_MAX] = "\0";
+			struct display_buffer dspbuf_old = { sizeof(str_old_ip),
+							     str_old_ip,
+							     str_old_ip };
+			display_sockip(&dspbuf_old,
+				       &client_record->cr_client_addr);
+
+			LogWarnLimited(
+				COMPONENT_CLIENTID,
+				"EXCHANGE_ID client name=%s: same client name from different IP! new addr=%s old addr=%s",
+				str_name_buf, str_new_ip, str_old_ip);
+		}
 	}
 
 	if (conf != NULL && !update) {

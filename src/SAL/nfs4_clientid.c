@@ -294,6 +294,104 @@ int display_clientid_name(struct display_buffer *dspbuf,
 }
 
 /**
+ * @brief Dump all open owners, lock owners, and their states for a client ID.
+ */
+void dump_client_owners_and_states(nfs_client_id_t *clientid)
+{
+	struct glist_head *glist_owner, *glist_state;
+	char str[LOG_BUFF_LEN] = "\0";
+	struct display_buffer dspbuf = { sizeof(str), str, str };
+	const char *str_addr = "NULL";
+	char str_addr_buf[SOCK_NAME_MAX] = "\0";
+	struct display_buffer dspbuf_addr = { sizeof(str_addr_buf),
+					      str_addr_buf, str_addr_buf };
+
+	if (clientid == NULL)
+		return;
+
+	if (!isInfo(COMPONENT_CLIENTID))
+		return;
+
+	PTHREAD_MUTEX_lock(&clientid->cid_mutex);
+
+	if (clientid->cid_client_record == NULL) {
+		display_client_id_rec_int(&dspbuf, clientid, false);
+	} else {
+		display_sockip(&dspbuf_addr,
+			       &clientid->cid_client_record->cr_client_addr);
+		display_client_id_rec(&dspbuf, clientid);
+		str_addr = str_addr_buf;
+	}
+	LogInfo(COMPONENT_CLIENTID, "Client ID Details: %s Client Address: %s",
+		str, str_addr);
+
+	display_reset_buffer(&dspbuf);
+	display_owner(&dspbuf, &clientid->cid_owner);
+	LogInfo(COMPONENT_CLIENTID, "  Client Owner (cid_owner): %s", str);
+
+	LogInfo(COMPONENT_CLIENTID,
+		"------------- Open Owners for Client ID %p -------------",
+		clientid);
+
+	glist_for_each(glist_owner, &clientid->cid_openowners) {
+		state_nfs4_owner_t *nfs4_owner = glist_entry(glist_owner,
+							     state_nfs4_owner_t,
+							     so_perclient);
+		state_owner_t *owner = container_of(nfs4_owner, state_owner_t,
+						    so_owner.so_nfs4_owner);
+
+		display_reset_buffer(&dspbuf);
+		display_owner(&dspbuf, owner);
+		LogInfo(COMPONENT_CLIENTID, "Open Owner {%s} refcount %" PRId32,
+			str, owner->so_refcount);
+
+		PTHREAD_MUTEX_lock(&owner->so_mutex);
+		glist_for_each(glist_state, &nfs4_owner->so_state_list) {
+			state_t *state = glist_entry(glist_state, state_t,
+						     state_owner_list);
+			display_reset_buffer(&dspbuf);
+			display_stateid(&dspbuf, state);
+			LogInfo(COMPONENT_CLIENTID, "  Attached State {%s}",
+				str);
+		}
+		PTHREAD_MUTEX_unlock(&owner->so_mutex);
+	}
+
+	LogInfo(COMPONENT_CLIENTID,
+		"------------- Lock Owners for Client ID %p -------------",
+		clientid);
+
+	glist_for_each(glist_owner, &clientid->cid_lockowners) {
+		state_nfs4_owner_t *nfs4_owner = glist_entry(glist_owner,
+							     state_nfs4_owner_t,
+							     so_perclient);
+		state_owner_t *owner = container_of(nfs4_owner, state_owner_t,
+						    so_owner.so_nfs4_owner);
+
+		display_reset_buffer(&dspbuf);
+		display_owner(&dspbuf, owner);
+		LogInfo(COMPONENT_CLIENTID, "Lock Owner {%s} refcount %" PRId32,
+			str, owner->so_refcount);
+
+		PTHREAD_MUTEX_lock(&owner->so_mutex);
+		glist_for_each(glist_state, &nfs4_owner->so_state_list) {
+			state_t *state = glist_entry(glist_state, state_t,
+						     state_owner_list);
+			display_reset_buffer(&dspbuf);
+			display_stateid(&dspbuf, state);
+			LogInfo(COMPONENT_CLIENTID, "  Attached State {%s}",
+				str);
+		}
+		PTHREAD_MUTEX_unlock(&owner->so_mutex);
+	}
+
+	LogInfo(COMPONENT_CLIENTID,
+		"-----------------------------------------------------");
+
+	PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
+}
+
+/**
  * @brief Increment the clientid refcount in the hash table
  *
  * @param[in] val Buffer pointing to client record
@@ -1077,6 +1175,8 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 			  bool force_expire)
 {
 	int rc, held;
+	int lockowner_loop_count = 0;
+	int openowner_loop_count = 0;
 	struct gsh_buffdesc buffkey;
 	struct gsh_buffdesc old_key;
 	struct gsh_buffdesc old_value;
@@ -1210,9 +1310,12 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 	 * and it will spam the log with warnings... Such a refcount bug will
 	 * be quickly fixed :-).
 	 */
+	lockowner_loop_count = 0;
 	while (true) {
 		state_owner_t *owner;
 		int32_t refcount;
+
+		lockowner_loop_count++;
 
 		PTHREAD_MUTEX_lock(&clientid->cid_mutex);
 
@@ -1232,7 +1335,11 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 				&owner->so_owner.so_nfs4_owner.so_perclient);
 
 		/* Hold a reference to the owner while we drop the cid_mutex. */
-		held = hold_state_owner_ref(owner);
+		if (lockowner_loop_count <= 100) {
+			held = hold_state_owner_ref(owner);
+		} else {
+			held = hold_state_owner_ref_notrace(owner);
+		}
 
 		PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
 
@@ -1268,7 +1375,11 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 					str);
 		}
 
-		dec_state_owner_ref(owner);
+		if (lockowner_loop_count <= 100) {
+			dec_state_owner_ref(owner);
+		} else {
+			dec_state_owner_ref_notrace(owner);
+		}
 		if (refcount > 1) {
 			/* Allow other threads to proceed and release
 			 * references. */
@@ -1285,9 +1396,12 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 	 * and it will spam the log with warnings... Such a refcount bug will
 	 * be quickly fixed :-).
 	 */
+	openowner_loop_count = 0;
 	while (true) {
 		state_owner_t *owner;
 		int32_t refcount;
+
+		openowner_loop_count++;
 
 		PTHREAD_MUTEX_lock(&clientid->cid_mutex);
 
@@ -1307,7 +1421,11 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 				&owner->so_owner.so_nfs4_owner.so_perclient);
 
 		/* Hold a reference to the owner while we drop the cid_mutex. */
-		held = hold_state_owner_ref(owner);
+		if (openowner_loop_count <= 100) {
+			held = hold_state_owner_ref(owner);
+		} else {
+			held = hold_state_owner_ref_notrace(owner);
+		}
 
 		PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
 
@@ -1343,7 +1461,11 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 					str);
 		}
 
-		dec_state_owner_ref(owner);
+		if (openowner_loop_count <= 100) {
+			dec_state_owner_ref(owner);
+		} else {
+			dec_state_owner_ref_notrace(owner);
+		}
 		if (refcount > 1) {
 			/* Allow other threads to proceed and release
 			 * references.*/

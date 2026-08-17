@@ -82,10 +82,16 @@ int display_owner(struct display_buffer *dspbuf, state_owner_t *owner);
 void _inc_state_owner_ref(state_owner_t *owner, char *file, int line,
 			  char *func);
 bool hold_state_owner_ref(state_owner_t *owner);
+bool hold_state_owner_ref_notrace(state_owner_t *owner);
 #define dec_state_owner_ref(s) \
 	_dec_state_owner_ref(s, (char *)__FILE__, __LINE__, (char *)__func__)
 void _dec_state_owner_ref(state_owner_t *owner, char *file, int line,
 			  char *func);
+#define dec_state_owner_ref_notrace(s)                              \
+	_dec_state_owner_ref_notrace(s, (char *)__FILE__, __LINE__, \
+				     (char *)__func__)
+void _dec_state_owner_ref_notrace(state_owner_t *owner, char *file, int line,
+				  char *func);
 void free_state_owner(state_owner_t *owner);
 
 #define LogStateOwner(note, owner)                                         \
@@ -318,6 +324,8 @@ bool clientid_has_state(nfs_client_id_t *clientid);
 
 bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 			  bool force_expire);
+
+void dump_client_owners_and_states(nfs_client_id_t *clientid);
 
 extern uint32_t num_of_curr_expired_clients;
 int reap_expired_client_list(nfs_client_id_t *clientid);
