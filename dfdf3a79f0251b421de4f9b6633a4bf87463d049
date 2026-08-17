@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27c0cdbb_c4c26cf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-17T15:39:43Z",
+      "side": 1,
+      "message": "One more question - should we actually do this solution as a fsal_helper function, using the FSAL\u0027s seek2 if the FSAL returns ENOTSUP for READ_PLUS? Then this could be generic across more FSALs.",
+      "revId": "dfdf3a79f0251b421de4f9b6633a4bf87463d049",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ab3307e_bf06c6f7",
