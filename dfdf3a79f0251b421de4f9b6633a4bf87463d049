@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ab3307e_bf06c6f7",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1307,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-17T15:37:10Z",
+      "side": 1,
+      "message": "Hmm, should READ_PLUS just fall back to just supplying the data without any holes? What if FSAL_VFS is exporting two filesystems, one that supports SEEK_DATA/SEEK_HOLE and one that doesn\u0027t? Will the client interpret the ENOTSUP as per filesystem?",
+      "revId": "dfdf3a79f0251b421de4f9b6633a4bf87463d049",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50689c43_dfeb80d7",
         "filename": "src/FSAL/FSAL_VFS/file.c",
         "patchSetId": 4
@@ -14,6 +31,41 @@
       "writtenOn": "2026-08-16T19:51:54Z",
       "side": 1,
       "message": "WARNING: line length of 86 exceeds 80 columns\n+\t\t\t * FSAL knew this was a hole.  A hole does not own the buffer.",
+      "revId": "dfdf3a79f0251b421de4f9b6633a4bf87463d049",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66e2d068_579819fa",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-17T15:37:10Z",
+      "side": 1,
+      "message": "Please re-wrap comment.",
+      "parentUuid": "50689c43_dfeb80d7",
+      "revId": "dfdf3a79f0251b421de4f9b6633a4bf87463d049",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c896e5d0_69af3176",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-17T15:37:10Z",
+      "side": 1,
+      "message": "Again, I would fall back to just reading the data if SEEK_DATA/SEEK_HOLE is not supported.",
       "revId": "dfdf3a79f0251b421de4f9b6633a4bf87463d049",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
