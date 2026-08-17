@@ -234,6 +234,33 @@ enum nfs_req_result nfs4_op_exchange_id(struct nfs_argop4 *op,
 	if (conf != NULL) {
 		/* Need a reference to the confirmed record for below */
 		inc_client_id_ref(conf);
+
+		if (sockaddr_cmp(&client_record->cr_client_addr, client_addr,
+				 true) != 0) {
+			char str_name_buf[CLIENTNAME_BUFSIZE];
+			char str_new_ip[SOCK_NAME_MAX];
+			char str_old_ip[SOCK_NAME_MAX];
+
+			struct display_buffer dspbuf_name = {
+				sizeof(str_name_buf), str_name_buf, str_name_buf
+			};
+			struct display_buffer dspbuf_new = { sizeof(str_new_ip),
+							     str_new_ip,
+							     str_new_ip };
+			struct display_buffer dspbuf_old = { sizeof(str_old_ip),
+							     str_old_ip,
+							     str_old_ip };
+
+			display_clientid_name(&dspbuf_name, conf);
+			display_sockip(&dspbuf_new, client_addr);
+			display_sockip(&dspbuf_old,
+				       &client_record->cr_client_addr);
+
+			LogWarnLimited(
+				COMPONENT_CLIENTID,
+				"EXCHANGE_ID client name=%s: same client name from different IP! new addr=%s old addr=%s",
+				str_name_buf, str_new_ip, str_old_ip);
+		}
 	}
 
 	if (conf != NULL && !update) {
