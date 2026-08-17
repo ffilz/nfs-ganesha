@@ -903,8 +903,8 @@ hash_table_t *get_state_owner_hash_table(state_owner_t *owner)
  *
  * @param[in] owner The owner to release
  */
-void _dec_state_owner_ref(state_owner_t *owner, char *file, int line,
-			  char *func)
+void _dec_state_owner_ref_trace(state_owner_t *owner, char *file, int line,
+				char *func, bool trace)
 {
 	char str[LOG_BUFF_LEN] = "\0";
 	struct display_buffer dspbuf = { sizeof(str), str, str };
@@ -933,8 +933,11 @@ void _dec_state_owner_ref(state_owner_t *owner, char *file, int line,
 					 owner->so_refcount, str);
 	}
 
-	GSH_AUTO_TRACEPOINT(state, decref, TRACE_INFO,
-			    "State ({}) decref. Refcount={}", owner, refcount);
+	if (trace) {
+		GSH_AUTO_TRACEPOINT(state, decref, TRACE_INFO,
+				    "State ({}) decref. Refcount={}", owner,
+				    refcount);
+	}
 
 	if (refcount != 0) {
 		if (str_valid)
@@ -996,6 +999,18 @@ void _dec_state_owner_ref(state_owner_t *owner, char *file, int line,
 		LogFullDebug(COMPONENT_STATE, "Free {%s}", str);
 
 	free_state_owner(owner);
+}
+
+void _dec_state_owner_ref(state_owner_t *owner, char *file, int line,
+			  char *func)
+{
+	_dec_state_owner_ref_trace(owner, file, line, func, /*trace=*/true);
+}
+
+void _dec_state_owner_ref_notrace(state_owner_t *owner, char *file, int line,
+				  char *func)
+{
+	_dec_state_owner_ref_trace(owner, file, line, func, /*trace=*/false);
 }
 
 /** @brief Remove an NFS 4 open owner from the cached owners list.
@@ -1190,8 +1205,8 @@ not_found:
 		init_owner(owner);
 
 	if (key->so_owner_len != 0) {
-		owner->so_owner_val = gsh_malloc(key->so_owner_len,
-						 MEM_COMP_STATE);
+		owner->so_owner_val =
+			gsh_malloc(key->so_owner_len, MEM_COMP_STATE);
 
 		memcpy(owner->so_owner_val, key->so_owner_val,
 		       key->so_owner_len);
@@ -1250,7 +1265,7 @@ not_found:
  *
  * @return true if we are able to hold a reference, false otherwise.
  */
-bool hold_state_owner_ref(state_owner_t *owner)
+bool hold_state_owner_ref_trace(state_owner_t *owner, bool trace)
 {
 	char str[LOG_BUFF_LEN] = "\0";
 	struct display_buffer dspbuf = { sizeof(str), str, str };
@@ -1264,8 +1279,11 @@ bool hold_state_owner_ref(state_owner_t *owner)
 
 	refcount = atomic_inc_unless_0_int32_t(&owner->so_refcount);
 
-	GSH_AUTO_TRACEPOINT(state, hold_state, TRACE_INFO,
-			    "State ({}) hold. Refcount={}", owner, refcount);
+	if (trace) {
+		GSH_AUTO_TRACEPOINT(state, hold_state, TRACE_INFO,
+				    "State ({}) hold. Refcount={}", owner,
+				    refcount);
+	}
 
 	if (str_valid) {
 		if (refcount == 0) {
@@ -1280,6 +1298,16 @@ bool hold_state_owner_ref(state_owner_t *owner)
 	}
 
 	return refcount != 0;
+}
+
+bool hold_state_owner_ref(state_owner_t *owner)
+{
+	return hold_state_owner_ref_trace(owner, /*trace=*/true);
+}
+
+bool hold_state_owner_ref_notrace(state_owner_t *owner)
+{
+	return hold_state_owner_ref_trace(owner, /*trace=*/false);
 }
 
 /**

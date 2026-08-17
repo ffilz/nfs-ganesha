@@ -1077,6 +1077,8 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 			  bool force_expire)
 {
 	int rc, held;
+	int lockowner_loop_count = 0;
+	int openowner_loop_count = 0;
 	struct gsh_buffdesc buffkey;
 	struct gsh_buffdesc old_key;
 	struct gsh_buffdesc old_value;
@@ -1210,9 +1212,12 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 	 * and it will spam the log with warnings... Such a refcount bug will
 	 * be quickly fixed :-).
 	 */
+	lockowner_loop_count = 0;
 	while (true) {
 		state_owner_t *owner;
 		int32_t refcount;
+
+		lockowner_loop_count++;
 
 		PTHREAD_MUTEX_lock(&clientid->cid_mutex);
 
@@ -1232,7 +1237,11 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 				&owner->so_owner.so_nfs4_owner.so_perclient);
 
 		/* Hold a reference to the owner while we drop the cid_mutex. */
-		held = hold_state_owner_ref(owner);
+		if (lockowner_loop_count <= 100) {
+			held = hold_state_owner_ref(owner);
+		} else {
+			held = hold_state_owner_ref_notrace(owner);
+		}
 
 		PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
 
@@ -1268,7 +1277,11 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 					str);
 		}
 
-		dec_state_owner_ref(owner);
+		if (lockowner_loop_count <= 100) {
+			dec_state_owner_ref(owner);
+		} else {
+			dec_state_owner_ref_notrace(owner);
+		}
 		if (refcount > 1) {
 			/* Allow other threads to proceed and release
 			 * references. */
@@ -1285,9 +1298,12 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 	 * and it will spam the log with warnings... Such a refcount bug will
 	 * be quickly fixed :-).
 	 */
+	openowner_loop_count = 0;
 	while (true) {
 		state_owner_t *owner;
 		int32_t refcount;
+
+		openowner_loop_count++;
 
 		PTHREAD_MUTEX_lock(&clientid->cid_mutex);
 
@@ -1307,7 +1323,11 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 				&owner->so_owner.so_nfs4_owner.so_perclient);
 
 		/* Hold a reference to the owner while we drop the cid_mutex. */
-		held = hold_state_owner_ref(owner);
+		if (openowner_loop_count <= 100) {
+			held = hold_state_owner_ref(owner);
+		} else {
+			held = hold_state_owner_ref_notrace(owner);
+		}
 
 		PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
 
@@ -1343,7 +1363,11 @@ bool nfs_client_id_expire(nfs_client_id_t *clientid, bool make_stale,
 					str);
 		}
 
-		dec_state_owner_ref(owner);
+		if (openowner_loop_count <= 100) {
+			dec_state_owner_ref(owner);
+		} else {
+			dec_state_owner_ref_notrace(owner);
+		}
 		if (refcount > 1) {
 			/* Allow other threads to proceed and release
 			 * references.*/
