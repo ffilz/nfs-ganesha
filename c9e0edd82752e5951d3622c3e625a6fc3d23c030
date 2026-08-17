@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33476173_06870dc7",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-08-17T16:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e6e0a94_5f5bf5ef",
+      "revId": "c9e0edd82752e5951d3622c3e625a6fc3d23c030",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a8c9cb1_7f78d067",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-01T15:43:25Z",
       "side": 1,
       "message": "I\u0027m wondering if we should consider a single field for all the policies rather than keep growing the export structure by 32 bits for something that is a 2 bit field.",
+      "revId": "c9e0edd82752e5951d3622c3e625a6fc3d23c030",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2006aa0_c879cbfd",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-08-17T16:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a8c9cb1_7f78d067",
       "revId": "c9e0edd82752e5951d3622c3e625a6fc3d23c030",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed23e85f_c48a3d72",
+        "filename": "src/include/nfs_exports.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-08-17T16:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "738895fd_2b1ffd58",
+      "revId": "c9e0edd82752e5951d3622c3e625a6fc3d23c030",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba17564c_4d8b0087",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-07-01T15:43:25Z",
       "side": 1,
       "message": "Do we really want to check permission both before and after?",
+      "revId": "c9e0edd82752e5951d3622c3e625a6fc3d23c030",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7762423_f6616421",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2267,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-08-17T16:32:43Z",
+      "side": 1,
+      "message": "removed the all option entirely. Policies now support pre and post options",
+      "parentUuid": "ba17564c_4d8b0087",
       "revId": "c9e0edd82752e5951d3622c3e625a6fc3d23c030",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
