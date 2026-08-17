@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad90be8d_5a92f68a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-17T20:43:20Z",
+      "side": 1,
+      "message": "Looking good, though particularly see my comment on iovec.\n\nAlso, we need to double check against the RFC.\n\nNOTE: at least the version I just read actually says not to return success if holes aren\u0027t supported - that doesn\u0027t make sense to me...\n\nAlso the version of the RFC I read said it was expected that a read of all 0s was supposed to be converted to a hole (so the server is supposed to read the data?). Interesting, that would also be incompatible with encryption where a hole could legitimately exist, but a block of all zeros actually present would be encrypted to something not all 0s...",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "372a7aed_b63540e2",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1253,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-17T20:43:20Z",
+      "side": 1,
+      "message": "Let\u0027s change this comment to:\n\n\"We don\u0027t do anything special for READ_PLUS so return ENOTSUP so fsal_read2 will do fallback READ_PLUS support.\"",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c47e03ba_3a52d46d",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2019,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-17T20:43:20Z",
+      "side": 1,
+      "message": "Hmm... We need to enable READ_PLUS to be able to have an iovec also...\n\nSome FSALs may return an iovec from read2...",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca2b4daf_55e5ae1d",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2049,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-17T20:43:20Z",
+      "side": 1,
+      "message": "Comments here would help.",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d9a7f5_fd1ae118",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2080,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-17T20:43:20Z",
+      "side": 1,
+      "message": "Comments here would help.",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c71057bf_89b3ec5f",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2106,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-17T20:43:20Z",
+      "side": 1,
+      "message": "Hmm, according to at least the version of the RFC, this isn\u0027t actually the case...\n\nHonestly I can\u0027t see why not. What is the client going to do if it never gets any holes...\n\nAlso, not sure if it is still expected to convert reads of all 0s into a hole...",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38aac3b1_135b59da",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-17T20:43:20Z",
+      "side": 1,
+      "message": "Hmm, we need to add iovec support in d_data...\n\nAlso we need to make sure all handles both RDMA that passes in buffer and non-RDMA that accepts an iovec from the FSAL or if FSAL doesn\u0027t work that way, allocating and passing in a buffer.",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
