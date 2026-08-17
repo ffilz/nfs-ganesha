@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "743fcb3a_3a8385f4",
+        "filename": "src/Protocols/NFS/nfs4_op_exchange_id.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-17T20:51:47Z",
+      "side": 1,
+      "message": "Please re-order so all declarations are at top of block followed by a blank line.\n\nAlso, no need to initialize the char buffers.",
+      "revId": "720c4634c0f0aa45d06765d957d24c47080439a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58885249_0620b36e",
+        "filename": "src/include/sal_functions.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-17T20:51:47Z",
+      "side": 1,
+      "message": "Is this actually used? If not maybe it could be in a separate patch?",
+      "revId": "720c4634c0f0aa45d06765d957d24c47080439a8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
