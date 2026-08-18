@@ -80,6 +80,56 @@ static state_status_t nfsv4_granted_callback(struct fsal_obj_handle *obj,
 	CB_NOTIFY_LOCK4args *argslock = &argop.nfs_cb_argop4_u.opcbnotify_lock;
 	state_nfsv4_block_data_t *bdata =
 		&lock_entry->sle_block_data->sbd_prot.sbd_v4;
+	nfs_client_id_t *clientrec =
+		lock_entry->sle_owner->so_owner.so_nfs4_owner.so_clientrec;
+
+	/*
+	 * Before attempting the callback RPC, verify the client still has a
+	 * working back channel.  A disconnected client will have its callback
+	 * channel marked as down (v4.0) or will have no session with the
+	 * backchannel flag set (v4.1/4.2).  In either case, sending the RPC
+	 * would dereference the already-destroyed transport (ev_p == NULL)
+	 * and crash.  Remove this blocked lock entry so the next waiter in
+	 * the queue can be considered.
+	 */
+	if (clientrec->cid_minorversion == 0) {
+		if (get_cb_chan_down(clientrec)) {
+			LogWarn(COMPONENT_NFS_V4_LOCK,
+				"Skipping granted callback: v4.0 callback channel is down for client %p",
+				clientrec);
+			return STATE_ESTALE;
+		}
+	} else {
+		/*
+		 * For v4.1+, check whether at least one session still has an
+		 * active backchannel.  nfs_rpc_v41_single() performs the same
+		 * check, but doing it here avoids building and then discarding
+		 * the CB_COMPOUND payload when we already know the call cannot
+		 * succeed.
+		 */
+		bool bc_available = false;
+		struct glist_head *glist;
+
+		PTHREAD_MUTEX_lock(&clientrec->cid_mutex);
+		glist_for_each(glist, &clientrec->cid_cb.v41.cb_session_list) {
+			nfs41_session_t *session = glist_entry(glist,
+							       nfs41_session_t,
+							       session_link);
+			if (atomic_fetch_uint32_t(&session->flags) &
+			    session_bc_up) {
+				bc_available = true;
+				break;
+			}
+		}
+		PTHREAD_MUTEX_unlock(&clientrec->cid_mutex);
+
+		if (!bc_available) {
+			LogWarn(COMPONENT_NFS_V4_LOCK,
+				"Skipping granted callback: no v4.1 session with active backchannel for client %p",
+				clientrec);
+			return STATE_ESTALE;
+		}
+	}
 
 	argop.argop = NFS4_OP_CB_NOTIFY_LOCK;
 	if (!nfs4_FSALToFhandle(true, &argslock->cnla_fh, obj,
@@ -99,16 +149,28 @@ static state_status_t nfsv4_granted_callback(struct fsal_obj_handle *obj,
 	argslock->cnla_lock_owner.clientid =
 		lock_entry->sle_owner->so_owner.so_nfs4_owner.so_clientid;
 
-	ret = nfs_rpc_cb_single(
-		lock_entry->sle_owner->so_owner.so_nfs4_owner.so_clientrec,
-		&argop, NULL, notify_granted_completion, NULL);
+	ret = nfs_rpc_cb_single(clientrec, &argop, NULL,
+				notify_granted_completion, NULL);
 	LogDebug(COMPONENT_FSAL_UP, "nfs_rpc_cb_single returned %d", ret);
 
 	bdata->snbd_notified_eligible_time = time(NULL);
 
-	gsh_free(argslock->cnla_lock_owner.owner.owner_val,
-		 MEM_COMP_STATE);
+	gsh_free(argslock->cnla_lock_owner.owner.owner_val, MEM_COMP_STATE);
 	nfs4_freeFH(&argslock->cnla_fh);
+
+	if (ret != 0) {
+		/*
+		 * The RPC send failed (e.g. transport destroyed mid-flight).
+		 * Return a non-blocked, non-success status so try_to_grant_lock
+		 * removes this entry and allows the next blocked client to be
+		 * considered.
+		 */
+		LogWarn(COMPONENT_NFS_V4_LOCK,
+			"Granted callback RPC failed (%d) for client %p;"
+			" removing blocked lock entry",
+			ret, clientrec);
+		return STATE_ESTALE;
+	}
 
 	return STATE_SUCCESS;
 }
@@ -735,8 +797,8 @@ check_seqid:
 	}
 
 	if (blocking == STATE_BLOCKING) {
-		pblock_data = gsh_calloc(1, sizeof(*pblock_data),
-					 MEM_COMP_STATE);
+		pblock_data =
+			gsh_calloc(1, sizeof(*pblock_data), MEM_COMP_STATE);
 		pblock_data->sbd_granted_callback = nfsv4_granted_callback;
 		pblock_data->sbd_prot.sbd_v4.snbd_last_poll_time = time(NULL);
 		pblock_data->sbd_prot.sbd_v4.snbd_notified_eligible_time = 0;
