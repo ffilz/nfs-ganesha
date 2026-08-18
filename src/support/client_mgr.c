@@ -486,6 +486,40 @@ void client_state_stats(DBusMessageIter *iter, struct gsh_client *cl_node)
 	dbus_message_iter_close_container(iter, &ss_iter);
 }
 
+/**
+ * @brief Check if a client is actively connected
+ *
+ * A client is considered connected if:
+ * 1. It has active operations or NFSv4 state (refcnt > 0), OR
+ * 2. It has had recent activity within the configured timeout period
+ *
+ * @param[in] cl_node  The client to check
+ *
+ * @return true if connected, false otherwise
+ */
+static inline bool client_is_connected(struct gsh_client *cl_node)
+{
+	int64_t refcnt;
+	struct timespec now;
+	time_t last_sec, elapsed;
+
+	/* Check if client has active operations or NFSv4 state */
+	refcnt = atomic_fetch_int64_t(&cl_node->refcnt);
+	if (refcnt > 0)
+		return true;
+
+	/* Check recent activity */
+	clock_gettime(CLOCK_REALTIME, &now);
+
+	/* Atomic read of last_update timestamp */
+	last_sec = (time_t)atomic_fetch_uint64_t(
+		(uint64_t *)&cl_node->last_update.tv_sec);
+
+	elapsed = now.tv_sec - last_sec;
+
+	return (elapsed < nfs_param.core_param.client_activity_timeout_sec);
+}
+
 static bool client_to_dbus(struct gsh_client *cl_node, void *state)
 {
 	struct showclients_state *iter_state =
@@ -493,15 +527,21 @@ static bool client_to_dbus(struct gsh_client *cl_node, void *state)
 	struct server_stats *cl;
 	char *ipaddr = alloca(SOCK_NAME_MAX);
 	DBusMessageIter struct_iter;
+	dbus_bool_t is_connected;
 
 	cl = container_of(cl_node, struct server_stats, client);
 
 	if (!sprint_sockip(&cl_node->cl_addrbuf, ipaddr, SOCK_NAME_MAX))
 		(void)strlcpy(ipaddr, "<unknown>", SOCK_NAME_MAX);
 
+	/* Check if client is actively connected */
+	is_connected = client_is_connected(cl_node);
+
 	dbus_message_iter_open_container(&iter_state->client_iter,
 					 DBUS_TYPE_STRUCT, NULL, &struct_iter);
 	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_STRING, &ipaddr);
+	dbus_message_iter_append_basic(&struct_iter, DBUS_TYPE_BOOLEAN,
+				       &is_connected);
 	server_stats_summary(&struct_iter, &cl->st);
 	client_state_stats(&struct_iter, cl_node);
 	gsh_dbus_append_timestamp(&struct_iter, &cl_node->last_update);
@@ -2010,6 +2050,9 @@ static bool grpc_show_fill_cb(struct gsh_client *cl_node, void *state)
 			   sizeof(info->ipaddr)))
 		(void)strlcpy(info->ipaddr, "<unknown>", sizeof(info->ipaddr));
 
+	/* Check if client is actively connected */
+	info->is_connected = client_is_connected(cl_node);
+
 	server_grpc_fill_stats_summary(&cl->st, info->protocols,
 				       &info->protocol_count, &info->total_ops);
 
@@ -2448,9 +2491,8 @@ int add_client(enum log_components component, struct glist_head *client_list,
 					    memcmp(&infoaddr, &in_addr_last,
 						   sizeof(struct in_addr)) == 0)
 						continue;
-					cli->cidr =
-						cidr_from_inaddr(&infoaddr,
-								 mem_comp);
+					cli->cidr = cidr_from_inaddr(&infoaddr,
+								     mem_comp);
 					cli->type = NETWORK_CLIENT;
 					ap_last = ap;
 					in_addr_last = infoaddr;
@@ -2470,9 +2512,8 @@ int add_client(enum log_components component, struct glist_head *client_list,
 						    sizeof(struct in6_addr)))
 						continue;
 					/* IPv6 address */
-					cli->cidr =
-						cidr_from_in6addr(&infoaddr,
-								  mem_comp);
+					cli->cidr = cidr_from_in6addr(&infoaddr,
+								      mem_comp);
 					cli->type = NETWORK_CLIENT;
 					ap_last = ap;
 					in6_addr_last = infoaddr;

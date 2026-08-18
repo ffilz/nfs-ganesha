@@ -365,8 +365,9 @@ class ProtocolsStats(object):
 
 class Client(ProtocolsStats):
     def __init__(self, client):
-        super().__init__(client[1])
+        super().__init__(client[2])
         self.clientaddr = client[0]
+        self.is_connected = client[1]
         self.nfsv3_stats_avail = self.protocols_stats['NFSv3']
         self.nfsv40_stats_avail = self.protocols_stats['NFSv40']
         self.nfsv41_stats_avail = self.protocols_stats['NFSv41']
