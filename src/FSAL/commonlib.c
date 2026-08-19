@@ -1531,32 +1531,45 @@ uint32_t reaper_work;
 /**
  * @brief Function that executes in the fd_lru thread
  *
- * This function is responsible for cleaning the FD cache.  It works
- * by the following rules:
+ * This function is responsible for cleaning the FD cache. It uses the
+ * total number of open FDs (global + state + temp) to detect process-wide
+ * FD pressure, while using only the global FD count to determine whether
+ * the FD LRU is making reclaim progress.
  *
- *  - If the number of open FDs is below the low water mark, do
+ * FD Types:
+ *  - Global FDs: Cached FDs that can be reclaimed by the LRU
+ *  - State FDs: FDs held by active state, cannot be reclaimed by LRU
+ *  - Temp FDs: Temporary FDs, short-lived
+ *  - Total FDs: Sum of all three types
+ *
+ * It works by the following rules:
+ *
+ *  - If the total number of open FDs is below the low water mark, do
  *    nothing.
  *
- *  - If the number of open FDs is between the low and high water
- *    mark, make one pass through...
+ *  - If the total number of open FDs is between the low and high water
+ *    marks, make one pass through the FD cache.
  *
- *  - If the number of open FDs is greater than the high water mark,
- *    we consider ourselves to be in extremis.  In this case we make a
- *    number of passes through the queue not to exceed the number of
- *    passes that would be required to process the number of entries
- *    equal to a biggest_window percent of the system specified
- *    maximum.
+ *  - If the total number of open FDs is greater than the high water
+ *    mark, we consider ourselves to be in extremis. In this case:
+ *    * First check if state FDs alone exceed the high water mark
+ *    * If so, skip aggressive reaping (LRU cannot help, would waste CPU)
+ *    * Otherwise, make multiple passes through the queue, not exceeding
+ *      the amount of work specified by biggest_window
  *
- *  - If we are in extremis, and performing the maximum amount of work
- *    allowed has not moved the open FD count required_progress%
- *    toward the high water mark, increment fd_lru_state.futility.  If
- *    fd_lru_state.futility reaches futility_count, temporarily disable
- *    FD caching.
+ *  - While in extremis, if the global FD count does not decrease by at
+ *    least required_progress percent of the initial global FD count,
+ *    increment fd_lru_state.futility. This indicates that the LRU failed
+ *    to make sufficient progress reclaiming global FDs.
  *
- *  - Every time we wake through timeout, reset futility_count to 0.
+ *  - If fd_lru_state.futility reaches futility_count, temporarily
+ *    disable FD caching.
  *
- *  - If we fall below the low water mark and FD caching has been
- *    temporarily disabled, re-enable it.
+ *  - Every time the thread wakes due to timeout, reset
+ *    fd_lru_state.futility to 0.
+ *
+ *  - If the total open FD count falls below the low water mark and FD
+ *    caching has been temporarily disabled, return to normal FD reaping.
  *
  * @param[in] ctx Fridge context
  */
@@ -1575,8 +1588,11 @@ void fd_lru_run(struct fridgethr_context *ctx)
 	 * window, stop.
 	 */
 	uint32_t totalwork = 0;
-	/* The current count (after reaping) of open FDs */
-	int32_t currentopen = 0;
+	/* Current total count of open FDs (from total counter) */
+	int32_t current_total_fds = 0;
+	/* Global FD count before and after reaping */
+	int32_t global_fds_before = 0;
+	int32_t global_fds_after = 0;
 	time_t new_thread_wait;
 	static bool first_time = TRUE;
 
@@ -1590,9 +1606,10 @@ void fd_lru_run(struct fridgethr_context *ctx)
 
 	fds_avg = (fd_lru_state.fds_hiwat - fd_lru_state.fds_lowat) / 2;
 
-	currentopen = atomic_fetch_int32_t(&fsal_fd_global_counter);
+	/* Check total FD usage for pressure detection */
+	current_total_fds = atomic_fetch_int32_t(&fsal_fd_total_counter);
 
-	extremis = currentopen > fd_lru_state.fds_hiwat;
+	extremis = current_total_fds > fd_lru_state.fds_hiwat;
 
 	LogFullDebug(COMPONENT_FSAL, "FD LRU awakes.");
 
@@ -1609,22 +1626,26 @@ void fd_lru_run(struct fridgethr_context *ctx)
 	/* Check for fd_state transitions */
 
 	LogDebug(COMPONENT_FSAL,
-		 "FD count fsal_fd_global_counter is %" PRIi32
-		 " and low water mark is %" PRIi32
-		 " and high water mark is %" PRIi32 " %s",
-		 currentopen, fd_lru_state.fds_lowat, fd_lru_state.fds_hiwat,
-		 ((currentopen >= fd_lru_state.fds_lowat) ||
+		 "FD count: total=%" PRIi32 " (global=%" PRIi32
+		 " state=%" PRIi32 " temp=%" PRIi32 ") lowat=%" PRIi32
+		 " hiwat=%" PRIi32 " %s",
+		 current_total_fds,
+		 atomic_fetch_int32_t(&fsal_fd_global_counter),
+		 atomic_fetch_int32_t(&fsal_fd_state_counter),
+		 atomic_fetch_int32_t(&fsal_fd_temp_counter),
+		 fd_lru_state.fds_lowat, fd_lru_state.fds_hiwat,
+		 ((current_total_fds >= fd_lru_state.fds_lowat) ||
 		  (Cache_FDs == false))
 			 ? "(reaping)"
 			 : "(not reaping)");
 
-	if (currentopen < fd_lru_state.fds_lowat) {
+	if (current_total_fds < fd_lru_state.fds_lowat) {
 		if (atomic_fetch_uint32_t(&fd_lru_state.fd_state) > FD_LOW) {
 			LogEvent(COMPONENT_FSAL,
 				 "Return to normal fd reaping.");
 			atomic_store_uint32_t(&fd_lru_state.fd_state, FD_LOW);
 		}
-	} else if (currentopen < fd_lru_state.fds_hiwat &&
+	} else if (current_total_fds < fd_lru_state.fds_hiwat &&
 		   atomic_fetch_uint32_t(&fd_lru_state.fd_state) == FD_LIMIT) {
 		LogEvent(COMPONENT_FSAL,
 			 "Count of fd is below high water mark.");
@@ -1637,10 +1658,11 @@ void fd_lru_run(struct fridgethr_context *ctx)
 	 * API, for example.)
 	 */
 
-	if ((currentopen >= fd_lru_state.fds_lowat) || (Cache_FDs == false)) {
+	if ((current_total_fds >= fd_lru_state.fds_lowat) ||
+	    (Cache_FDs == false)) {
 		/* The count of open file descriptors before this run
 		   of the reaper. */
-		int32_t formeropen = currentopen;
+		int32_t former_total_fds = current_total_fds;
 		/* Work done in the most recent pass of all queues.  if
 		   value is less than the work to do in a single queue,
 		   don't spin through more passes. */
@@ -1654,21 +1676,60 @@ void fd_lru_run(struct fridgethr_context *ctx)
 
 		fdratepersec =
 			((curr_time <= fd_lru_state.prev_time) ||
-			 (formeropen < fd_lru_state.prev_fd_count))
+			 (former_total_fds < fd_lru_state.prev_fd_count))
 				? 1
-				: (formeropen - fd_lru_state.prev_fd_count) /
+				: (former_total_fds -
+				   fd_lru_state.prev_fd_count) /
 					  (curr_time - fd_lru_state.prev_time);
 
 		LogFullDebug(COMPONENT_FSAL,
 			     "fdrate:%u fdcount:%" PRIu32 " slept for %" PRIu64
 			     " sec",
-			     fdratepersec, formeropen,
+			     fdratepersec, former_total_fds,
 			     ((uint64_t)(curr_time - fd_lru_state.prev_time)));
 
 		if (extremis) {
-			LogDebug(
-				COMPONENT_FSAL,
-				"Open FDs over high water mark, reaping aggressively.");
+			int32_t state_fds, temp_fds;
+
+			/*
+			 * Capture all FD counters before reaping to analyze
+			 * the source of FD pressure and determine if the LRU
+			 * can effectively help.
+			 */
+			global_fds_before =
+				atomic_fetch_int32_t(&fsal_fd_global_counter);
+			state_fds =
+				atomic_fetch_int32_t(&fsal_fd_state_counter);
+			temp_fds = atomic_fetch_int32_t(&fsal_fd_temp_counter);
+
+			LogDebug(COMPONENT_FSAL,
+				 "Total FDs exceed high water mark"
+				 "(%" PRIi32 "). Breakdown: global=%" PRIi32
+				 " state=%" PRIi32 " temp=%" PRIi32,
+				 fd_lru_state.fds_hiwat, global_fds_before,
+				 state_fds, temp_fds);
+
+			/*
+			 * Detect futile reaping scenario: If state FDs alone
+			 * meet or exceed the high water mark, the FD pressure
+			 * is from state FDs which the LRU cannot reclaim (they
+			 * are held by active NFS state). In this case:
+			 * - Aggressive reaping would waste CPU cycles
+			 * - The LRU can only reclaim global (cached) FDs
+			 * - Performance would degrade from futile work
+			 * Therefore, skip aggressive reaping and let the system
+			 * handle the pressure through other means (e.g., state
+			 * expiration, client disconnection).
+			 */
+			if (state_fds >= fd_lru_state.fds_hiwat) {
+				LogWarnLimited(
+					COMPONENT_FSAL,
+					"State FDs (%" PRIi32 ") exceed hiwat"
+					"(%" PRIi32 "). Skipping aggressive "
+					"reaping to avoid futile CPU work.",
+					state_fds, fd_lru_state.fds_hiwat);
+				extremis = false;
+			}
 		}
 
 		/* Attempt to close fds. */
@@ -1681,9 +1742,9 @@ void fd_lru_run(struct fridgethr_context *ctx)
 				 "Reaping up to %" PRIu32 " fds", reaper_work);
 
 			LogFullDebug(COMPONENT_FSAL,
-				     "formeropen=%" PRIu32
+				     "former_total_fds=%" PRIu32
 				     " totalwork=%" PRIu32,
-				     formeropen, totalwork);
+				     former_total_fds, totalwork);
 
 			for (i = 0; i < reaper_work; ++i)
 				workpass += lru_try_one();
@@ -1692,18 +1753,70 @@ void fd_lru_run(struct fridgethr_context *ctx)
 		} while (extremis && (workpass >= reaper_work) &&
 			 (totalwork < fd_lru_state.biggest_window));
 
-		currentopen = atomic_fetch_int32_t(&fsal_fd_global_counter);
+		current_total_fds =
+			atomic_fetch_int32_t(&fsal_fd_total_counter);
 
-		if (extremis && ((currentopen > formeropen) ||
-				 (formeropen - currentopen <
-				  (((formeropen - fd_lru_state.fds_hiwat) *
-				    required_progress) /
-				   100)))) {
-			if (++fd_lru_state.futility == futility_count) {
-				LogWarn(COMPONENT_FSAL,
-					"Futility count exceeded.  Client load is opening FDs faster than the LRU thread can close them. current_open = %" PRIi32
-					", former_open = %" PRIi32,
-					currentopen, formeropen);
+		/*
+		 * Futility check: Determine if the LRU made sufficient progress
+		 * reclaiming global FDs.
+		 *
+		 * We use total FD count (global + state + temp) to detect
+		 * process-wide FD pressure, but use only the global FD count
+		 * to measure LRU effectiveness, because:
+		 * - The LRU can only reclaim global (cached) FDs
+		 * - State FDs are held by active NFS operations
+		 * - Temp FDs are short-lived and managed separately
+		 *
+		 * Progress calculation:
+		 *- Baseline: global_fds_before (global FDs at start of reaping)
+		 *- Target: Reduce by at least required_progress% of baseline
+		 *- Actual: global_fds_before - global_fds_after
+		 *
+		 * Why not use fds_hiwat in the calculation?
+		 *- fds_hiwat is a threshold for TOTAL FDs (all types combined)
+		 *- global_fds_before is the count of GLOBAL FDs only
+		 *- Mixing them creates a semantic mismatch and can produce
+		 *  negative thresholds when global FDs are already below hiwat
+		 *  but total FDs exceed it (e.g., due to state FD pressure)
+		 *
+		 * If progress is insufficient, increment futility counter. When
+		 * futility reaches futility_count, FD caching is temporarily
+		 * disabled to prevent the LRU from consuming CPU on futile work
+		 */
+		if (extremis) {
+			/* Capture global FD count after reaping */
+			global_fds_after =
+				atomic_fetch_int32_t(&fsal_fd_global_counter);
+
+			LogDebug(COMPONENT_FSAL,
+				 "Extremis check: global_fds_before=%" PRIi32
+				 " global_fds_after=%" PRIi32
+				 " required_progress=%u%%",
+				 global_fds_before, global_fds_after,
+				 required_progress);
+
+			if ((global_fds_after > global_fds_before) ||
+			    (global_fds_before - global_fds_after <
+			     ((global_fds_before * required_progress) / 100))) {
+				if (++fd_lru_state.futility == futility_count) {
+					LogWarnLimited(
+						COMPONENT_FSAL,
+						"Futility count exceeded. Client load is opening FDs faster than the LRU thread can close them. "
+						"total_fds=%" PRIi32
+						" (was %" PRIi32 "), "
+						"global_fds=%" PRIi32
+						" (was %" PRIi32 "), "
+						"state_fds=%" PRIi32
+						", temp_fds=%" PRIi32,
+						current_total_fds,
+						former_total_fds,
+						global_fds_after,
+						global_fds_before,
+						atomic_fetch_int32_t(
+							&fsal_fd_state_counter),
+						atomic_fetch_int32_t(
+							&fsal_fd_temp_counter));
+				}
 			}
 		}
 	}
@@ -1719,12 +1832,12 @@ void fd_lru_run(struct fridgethr_context *ctx)
 	 * When there is a lot of activity, the thread will sleep for a
 	 * much shorter time.
 	 */
-	fd_lru_state.prev_fd_count = currentopen;
+	fd_lru_state.prev_fd_count = current_total_fds;
 	fd_lru_state.prev_time = time(NULL);
 
 	fdnorm = (fdratepersec + fds_avg) / fds_avg;
-	fddelta = (currentopen > fd_lru_state.fds_lowat)
-			  ? (currentopen - fd_lru_state.fds_lowat)
+	fddelta = (current_total_fds > fd_lru_state.fds_lowat)
+			  ? (current_total_fds - fd_lru_state.fds_lowat)
 			  : 0;
 	fdmulti = (fddelta * 10) / fds_avg;
 	fdmulti = fdmulti ? fdmulti : 1;
@@ -1748,9 +1861,10 @@ void fd_lru_run(struct fridgethr_context *ctx)
 		 atomic_fetch_int32_t(&fsal_fd_global_counter), fdratepersec,
 		 (uint64_t)new_thread_wait);
 	LogFullDebug(COMPONENT_FSAL,
-		     "currentopen=%" PRIu32 " futility=%d totalwork=%" PRIu32
+		     "current_total_fds=%" PRIu32
+		     " futility=%d totalwork=%" PRIu32
 		     " biggest_window=%d extremis=%d fds_lowat=%d ",
-		     currentopen, fd_lru_state.futility, totalwork,
+		     current_total_fds, fd_lru_state.futility, totalwork,
 		     fd_lru_state.biggest_window, extremis,
 		     fd_lru_state.fds_lowat);
 }
@@ -2350,19 +2464,24 @@ fsal_status_t reopen_fsal_fd(struct fsal_obj_handle *obj_hdl,
 static inline bool cant_reopen(struct fsal_fd *fsal_fd, bool may_open,
 			       bool may_reopen)
 {
-	int32_t open_fds = atomic_fetch_int32_t(&fsal_fd_global_counter);
+	int32_t total_fds = atomic_fetch_int32_t(&fsal_fd_total_counter);
+	bool is_throttleable_type = (fsal_fd->fd_type == FSAL_FD_GLOBAL ||
+				     fsal_fd->fd_type == FSAL_FD_STATE);
 
-	if (fsal_fd->fd_type == FSAL_FD_GLOBAL &&
-	    open_fds >= fd_lru_state.fds_hard_limit) {
+	if (is_throttleable_type && total_fds >= fd_lru_state.fds_hard_limit) {
 		LogAtLevel(COMPONENT_FSAL,
 			   atomic_fetch_uint32_t(&fd_lru_state.fd_state) !=
 					   FD_LIMIT
 				   ? NIV_CRIT
 				   : NIV_DEBUG,
 			   "FD Hard Limit (%" PRIu32
-			   ") Exceeded (fsal_fd_global_counter = %" PRIi32
+			   ") Exceeded (total_fds=%" PRIi32 " global=%" PRIi32
+			   " state=%" PRIi32 " temp=%" PRIi32
 			   "), waking LRU thread.",
-			   fd_lru_state.fds_hard_limit, open_fds);
+			   fd_lru_state.fds_hard_limit, total_fds,
+			   atomic_fetch_int32_t(&fsal_fd_global_counter),
+			   atomic_fetch_int32_t(&fsal_fd_state_counter),
+			   atomic_fetch_int32_t(&fsal_fd_temp_counter));
 		atomic_store_uint32_t(&fd_lru_state.fd_state, FD_LIMIT);
 		fridgethr_wake(fd_lru_fridge);
 
@@ -2370,17 +2489,20 @@ static inline bool cant_reopen(struct fsal_fd *fsal_fd, bool may_open,
 		return true;
 	}
 
-	if (fsal_fd->fd_type == FSAL_FD_GLOBAL &&
-	    open_fds >= fd_lru_state.fds_hiwat) {
+	if (is_throttleable_type && total_fds >= fd_lru_state.fds_hiwat) {
 		LogAtLevel(COMPONENT_FSAL,
 			   atomic_fetch_uint32_t(&fd_lru_state.fd_state) ==
 					   FD_LOW
 				   ? NIV_INFO
 				   : NIV_DEBUG,
 			   "FDs above high water mark (%" PRIu32
-			   ", fsal_fd_global_counter = %" PRIi32
+			   ", total_fds=%" PRIi32 " global=%" PRIi32
+			   " state=%" PRIi32 " temp=%" PRIi32
 			   "), waking LRU thread.",
-			   fd_lru_state.fds_hiwat, open_fds);
+			   fd_lru_state.fds_hiwat, total_fds,
+			   atomic_fetch_int32_t(&fsal_fd_global_counter),
+			   atomic_fetch_int32_t(&fsal_fd_state_counter),
+			   atomic_fetch_int32_t(&fsal_fd_temp_counter));
 		atomic_store_uint32_t(&fd_lru_state.fd_state, FD_HIGH);
 		fridgethr_wake(fd_lru_fridge);
 	}
@@ -2414,20 +2536,24 @@ fsal_status_t wait_to_start_io(struct fsal_obj_handle *obj_hdl,
 {
 	fsal_status_t status = { ERR_FSAL_NO_ERROR, 0 };
 	bool retried = false;
+	int32_t total_fds = atomic_fetch_int32_t(&fsal_fd_total_counter);
+	bool is_throttleable_type = (fsal_fd->fd_type == FSAL_FD_GLOBAL ||
+				     fsal_fd->fd_type == FSAL_FD_STATE);
 
-	int32_t open_fds = atomic_fetch_int32_t(&fsal_fd_global_counter);
-
-	if (fsal_fd->fd_type == FSAL_FD_GLOBAL &&
-	    open_fds >= fd_lru_state.fds_hard_limit) {
+	if (is_throttleable_type && total_fds >= fd_lru_state.fds_hard_limit) {
 		LogAtLevel(COMPONENT_FSAL,
 			   atomic_fetch_uint32_t(&fd_lru_state.fd_state) !=
 					   FD_LIMIT
 				   ? NIV_CRIT
 				   : NIV_DEBUG,
 			   "FD Hard Limit (%" PRIu32
-			   ") Exceeded (fsal_fd_global_counter = %" PRIi32
+			   ") Exceeded (total_fds=%" PRIi32 " global=%" PRIi32
+			   " state=%" PRIi32 " temp=%" PRIi32
 			   "), waking LRU thread.",
-			   fd_lru_state.fds_hard_limit, open_fds);
+			   fd_lru_state.fds_hard_limit, total_fds,
+			   atomic_fetch_int32_t(&fsal_fd_global_counter),
+			   atomic_fetch_int32_t(&fsal_fd_state_counter),
+			   atomic_fetch_int32_t(&fsal_fd_temp_counter));
 		atomic_store_uint32_t(&fd_lru_state.fd_state, FD_LIMIT);
 		fridgethr_wake(fd_lru_fridge);
 
