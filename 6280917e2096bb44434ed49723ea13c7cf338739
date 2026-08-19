@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "491cf072_d667ddd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T22:03:53Z",
+      "side": 1,
+      "message": "OK, this looks good.",
+      "parentUuid": "ad90be8d_5a92f68a",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "372a7aed_b63540e2",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-17T20:43:20Z",
       "side": 1,
       "message": "Let\u0027s change this comment to:\n\n\"We don\u0027t do anything special for READ_PLUS so return ENOTSUP so fsal_read2 will do fallback READ_PLUS support.\"",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65890fcf_47ebb3dd",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1253,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T22:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "372a7aed_b63540e2",
       "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f79eb58_bf803b49",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2019,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T22:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c47e03ba_3a52d46d",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca2b4daf_55e5ae1d",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-08-17T20:43:20Z",
       "side": 1,
       "message": "Comments here would help.",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56be0d41_4b305cb8",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2049,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T22:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca2b4daf_55e5ae1d",
       "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e12d2da_dd6bc613",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2080,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T22:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61d9a7f5_fd1ae118",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c71057bf_89b3ec5f",
@@ -103,6 +193,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d854ea78_50646b8d",
+        "filename": "src/FSAL/fsal_helper.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2106,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T22:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c71057bf_89b3ec5f",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38aac3b1_135b59da",
@@ -116,6 +224,24 @@
       "writtenOn": "2026-08-17T20:43:20Z",
       "side": 1,
       "message": "Hmm, we need to add iovec support in d_data...\n\nAlso we need to make sure all handles both RDMA that passes in buffer and non-RDMA that accepts an iovec from the FSAL or if FSAL doesn\u0027t work that way, allocating and passing in a buffer.",
+      "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aac8275b_07f4e2d3",
+        "filename": "src/Protocols/NFS/nfs4_op_read.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T22:03:53Z",
+      "side": 1,
+      "message": "Thanks. That all looks good.",
+      "parentUuid": "38aac3b1_135b59da",
       "revId": "6280917e2096bb44434ed49723ea13c7cf338739",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
