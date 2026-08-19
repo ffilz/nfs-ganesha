@@ -753,6 +753,7 @@ struct fd_lru_parameter {
 
 extern int32_t fsal_fd_global_counter;
 extern int32_t fsal_fd_state_counter;
+extern int32_t fsal_fd_total_counter;
 
 extern bool close_fast;
 
