@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e3a0abb_0012a417",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1326,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2026-08-19T02:24:38Z",
+      "side": 1,
+      "message": "This is subjective.  I just wonder if we really need 2 functions to just flick the trace on/off and 5 lines here.  Similarly for dec_state_owner_ref/dec_state_owner_ref_notrace.  Could we just have\ntrace \u003d (openowner_loop_count \u003c\u003d 100)\nheld \u003d hold_state_owner_ref_trace(owner, trace)\n\nI know that if I look at the code, I would go an see the differences between both functions and then look in hold_state_owner_ref_trace.\n\nModern code beauty checkers might have a pink fit if you put the trace boolean calc in the function args:\nheld \u003d hold_state_owner_ref_trace(owner, (openowner_loop_count \u003c\u003d 100));",
+      "revId": "e1f9cd2639dfafbf7c76c7ce6c6bb602741e4f35",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
