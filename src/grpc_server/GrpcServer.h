@@ -72,6 +72,7 @@ class GrpcServer {
 	ExportStatsService exportStatsService;
 	ExportService exportService;
 	CacheMgrService cachemgr;
+	QosMgrService qosMgrService;
 };
 
 extern GrpcServer ganesha_grpc_server;
