@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f9016fa_4e701fbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T22:08:48Z",
+      "side": 1,
+      "message": "Would also like @skmprabhu2@gmail.com to review",
+      "revId": "ea2260dfd21beef8be93988d4cba9f53aab86f23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e5feaf8_b1432664",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1142,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T22:08:48Z",
+      "side": 1,
+      "message": "Let\u0027s keep this a LogEvent, no need to trigger anything that monitors the log file when the sysadmin intentionally disabled.",
+      "revId": "ea2260dfd21beef8be93988d4cba9f53aab86f23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "923c2dcd_fde734c2",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T22:08:48Z",
+      "side": 1,
+      "message": "Also add in src/config_samples/config.txt",
+      "revId": "ea2260dfd21beef8be93988d4cba9f53aab86f23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d128aa51_9df8a51e",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4826,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T22:08:48Z",
+      "side": 1,
+      "message": "Let\u0027s add gRPC for this also.",
+      "revId": "ea2260dfd21beef8be93988d4cba9f53aab86f23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
