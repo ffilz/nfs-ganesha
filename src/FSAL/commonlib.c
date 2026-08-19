@@ -1466,6 +1466,14 @@ time_t lru_run_interval;
 bool Cache_FDs;
 bool close_fast;
 static struct fridgethr *fd_lru_fridge;
+/*
+ * Total number of active FSAL file descriptors.
+ *
+ * Maintained together with the individual FD type counters:
+ *
+ * total = global + state + temp
+ */
+int32_t fsal_fd_total_counter;
 
 uint32_t lru_try_one(void)
 {
@@ -1780,19 +1788,20 @@ void bump_fd_lru(struct fsal_fd *fsal_fd)
 
 void insert_fd_lru(struct fsal_fd *fsal_fd)
 {
-	LogFullDebug(
-		COMPONENT_FSAL,
-		"Inserting fsal_fd(%p) to fd_lru for type(%d) count(%d/%d/%d)",
-		fsal_fd, fsal_fd->fd_type,
-		atomic_fetch_int32_t(&fsal_fd_global_counter),
-		atomic_fetch_int32_t(&fsal_fd_state_counter),
-		atomic_fetch_int32_t(&fsal_fd_temp_counter));
+	LogFullDebug(COMPONENT_FSAL,
+		     "Inserting fsal_fd(%p) to fd_lru for type(%d) "
+		     "counts(global=%d state=%d temp=%d total=%d)",
+		     fsal_fd, fsal_fd->fd_type,
+		     atomic_fetch_int32_t(&fsal_fd_global_counter),
+		     atomic_fetch_int32_t(&fsal_fd_state_counter),
+		     atomic_fetch_int32_t(&fsal_fd_temp_counter),
+		     atomic_fetch_int32_t(&fsal_fd_total_counter));
 
 	switch (fsal_fd->fd_type) {
 	case FSAL_FD_OLD_STYLE:
 		/* OOPS - we shouldn't get here... */
 		assert(fsal_fd->fd_type < FSAL_FD_GLOBAL);
-		break;
+		return;
 	case FSAL_FD_GLOBAL:
 		atomic_inc_int32_t(&fsal_fd_global_counter);
 		bump_fd_lru(fsal_fd);
@@ -1803,7 +1812,12 @@ void insert_fd_lru(struct fsal_fd *fsal_fd)
 	case FSAL_FD_TEMP:
 		atomic_inc_int32_t(&fsal_fd_temp_counter);
 		break;
+	default:
+		return;
 	}
+
+	/* Increment total counter for all valid FD types */
+	atomic_inc_int32_t(&fsal_fd_total_counter);
 }
 
 /**
@@ -1818,19 +1832,20 @@ void remove_fd_lru(struct fsal_fd *fsal_fd)
 {
 	int32_t count;
 
-	LogFullDebug(
-		COMPONENT_FSAL,
-		"Removing fsal_fd(%p) from fd_lru for type(%d) count(%d/%d/%d)",
-		fsal_fd, fsal_fd->fd_type,
-		atomic_fetch_int32_t(&fsal_fd_global_counter),
-		atomic_fetch_int32_t(&fsal_fd_state_counter),
-		atomic_fetch_int32_t(&fsal_fd_temp_counter));
+	LogFullDebug(COMPONENT_FSAL,
+		     "Removing fsal_fd(%p) from fd_lru for type(%d) "
+		     "counts(global=%d state=%d temp=%d total=%d)",
+		     fsal_fd, fsal_fd->fd_type,
+		     atomic_fetch_int32_t(&fsal_fd_global_counter),
+		     atomic_fetch_int32_t(&fsal_fd_state_counter),
+		     atomic_fetch_int32_t(&fsal_fd_temp_counter),
+		     atomic_fetch_int32_t(&fsal_fd_total_counter));
 
 	switch (fsal_fd->fd_type) {
 	case FSAL_FD_OLD_STYLE:
 		/* OOPS - we shouldn't get here... */
 		assert(fsal_fd->fd_type < FSAL_FD_GLOBAL);
-		break;
+		return;
 	case FSAL_FD_GLOBAL:
 		count = atomic_dec_int32_t(&fsal_fd_global_counter);
 
@@ -1853,6 +1868,16 @@ void remove_fd_lru(struct fsal_fd *fsal_fd)
 	case FSAL_FD_TEMP:
 		atomic_dec_int32_t(&fsal_fd_temp_counter);
 		break;
+	default:
+		return;
+	}
+
+	/* Decrement total counter for all valid FD types */
+	count = atomic_dec_int32_t(&fsal_fd_total_counter);
+	if (count < 0) {
+		LogCrit(COMPONENT_FSAL,
+			"fsal_fd_total_counter is negative: %" PRIi32, count);
+		abort();
 	}
 }
 
@@ -2013,6 +2038,9 @@ fsal_status_t fd_lru_pkginit(struct fd_lru_parameter *params)
 	frp.flavor = fridgethr_flavor_looper;
 
 	atomic_store_int32_t(&fsal_fd_global_counter, 0);
+	atomic_store_int32_t(&fsal_fd_state_counter, 0);
+	atomic_store_int32_t(&fsal_fd_temp_counter, 0);
+	atomic_store_int32_t(&fsal_fd_total_counter, 0);
 	fd_lru_state.prev_fd_count = 0;
 	atomic_store_uint32_t(&fd_lru_state.fd_state, FD_LOW);
 	fsal_init_fds_limit(params);
@@ -3959,7 +3987,8 @@ bool grpc_show_fd_usage(struct grpc_fd_usage_summary *summary_out,
 
 	summary_out->v4_open_states = get_total_count_of_open_states();
 
-	summary_out->open_fds = atomic_fetch_int32_t(&fsal_fd_global_counter);
+	/* Use total counter for open_fds */
+	summary_out->open_fds = atomic_fetch_int32_t(&fsal_fd_total_counter);
 
 	return true;
 }
