@@ -295,6 +295,20 @@ Attr_Expiration_Time(int32, range -1 to INT32_MAX, default 60)
     is created, so the dynamic effect of this option may
     be constrained to new entries.
 
+Server_addrs(comma-separated IP/CIDR list, no default)
+    An optional list of server IP addresses (or CIDR prefixes) that restrict
+    which local network interface an incoming request must have arrived on in
+    order to be granted access to this export.
+    When this parameter is set, Ganesha checks the destination address of each
+    incoming RPC request (i.e. the IP address on the server side of the
+    connection) against the list.  If the destination address does not match
+    any entry in the list, the request is denied with no access.
+    When this parameter is absent or empty, no server-address filtering is
+    applied (all local interfaces are accepted).
+    Each entry may be a plain IPv4 or IPv6 address (e.g. ``192.0.2.1``,
+    ``2001:db8::1``) or a CIDR prefix (e.g. ``192.0.2.0/24``,``2001:db8::/32``).
+    Example:
+        Server_addrs = 192.0.2.1, 198.51.100.0/24;
 
 CLIENT (optional)
     See the ``CLIENT  {}`` block description.
