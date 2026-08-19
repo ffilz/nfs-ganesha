@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1cb50819_b4e84519",
+        "filename": "src/MainNFSD/nfs_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T21:51:49Z",
+      "side": 1,
+      "message": "Does this file have any actual changes, or is it call clang-format thrashing?",
+      "revId": "8c554a10613c5a5e939596e22882e3b2b2ccc3df",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7323f381_2d32c06e",
         "filename": "src/grpc_server/nfsService.h",
         "patchSetId": 2
@@ -14,6 +31,24 @@
       "writtenOn": "2026-08-19T11:27:59Z",
       "side": 1,
       "message": "ERROR: trailing whitespace\n+^Igrpc::Status $",
+      "revId": "8c554a10613c5a5e939596e22882e3b2b2ccc3df",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37cc5678_a0f43670",
+        "filename": "src/grpc_server/nfsService.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T21:51:49Z",
+      "side": 1,
+      "message": "Can we do something so we don\u0027t constantly have clang-format thrashing muddying up patches.",
+      "parentUuid": "7323f381_2d32c06e",
       "revId": "8c554a10613c5a5e939596e22882e3b2b2ccc3df",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
