@@ -2100,20 +2100,31 @@ fsal_status_t close_fsal_fd(struct fsal_obj_handle *obj_hdl,
 	if (status.major == ERR_FSAL_NOT_OPENED)
 		status = fsalstat(ERR_FSAL_NO_ERROR, 0);
 
-	/* For global FDs, always remove from the LRU list if still present.
+	/* Remove from LRU and decrement count for FD types except OLD_STYLE
 	 * The reaper and the release path can both call close_fsal_fd; the
 	 * first caller removes the entry, the second finds it already gone.
-	 * in Case of fd already in closed state, Skipping removal leaves a
+	 * In case of fd already in closed state, skipping removal leaves a
 	 * dangling fd_lru pointer causing release() freeing this entry.
+	 *
+	 * For global FDs, we need to manage the LRU list.
+	 * For state and temp FDs, we just need to decrement the counters.
 	 */
-	if (is_globalfd) {
-		/* Check makes sure that alreday removed entry
-		 * is not getting removed causing ref count issue */
-		if (!glist_null(&fsal_fd->fd_lru))
+	if (fsal_fd->fd_type != FSAL_FD_OLD_STYLE) {
+		if (is_globalfd) {
+			/* Global FDs need LRU list management */
+			/* Check makes sure that already removed entry
+			 * is not getting removed causing ref count issue */
+			if (!glist_null(&fsal_fd->fd_lru))
+				remove_fd_lru(fsal_fd);
+			else
+				LogFullDebug(COMPONENT_FSAL,
+					     "fsal_fd %p (release path race)",
+					     fsal_fd);
+		} else {
+			/* State and Temp FDs just need counter decrement
+			 * (they are not on the LRU list) */
 			remove_fd_lru(fsal_fd);
-		else
-			LogFullDebug(COMPONENT_FSAL,
-				     "fsal_fd %p (release path race)", fsal_fd);
+		}
 	}
 
 	fsal_complete_fd_work(fsal_fd);
