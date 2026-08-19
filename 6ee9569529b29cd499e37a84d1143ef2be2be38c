@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85274ce6_1a6735e6",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3857,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-19T15:03:10Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\tnfs4_fs_locations_get_ref(op_ctx-\u003ectx_export-\u003eexport_fs_location);",
+      "revId": "6ee9569529b29cd499e37a84d1143ef2be2be38c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5dcf130_1e35e075",
+        "filename": "src/include/export_mgr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-19T15:03:10Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t/* fs_locations for trunking - ref-counted via nfs4_fs_locations_get_ref */",
+      "revId": "6ee9569529b29cd499e37a84d1143ef2be2be38c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25f752ff_72124ed0",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2603,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-19T15:03:10Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\t\tstruct fs_locations_config *fs_locations \u003d self_struct;\n+\t\tfor (i \u003d 0; i \u003c fs_locations-\u003enservers; i++)",
+      "revId": "6ee9569529b29cd499e37a84d1143ef2be2be38c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f054446_cedfecd0",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2665,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-19T15:03:10Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t/* Use the ref-counted allocator so fsal_release_attrs works correctly */",
+      "revId": "6ee9569529b29cd499e37a84d1143ef2be2be38c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
