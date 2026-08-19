@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97a5287c_ab748231",
+        "filename": "src/doc/man/ganesha-export-config.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T18:58:55Z",
+      "side": 1,
+      "message": "Need to also document in src/config_samples/config.txt\n\nAlso, do you want to exclude other forms of address as allowed by client lists?\n\nDo you really want to allow CIDR subnets?",
+      "revId": "2cb69d4d6a18f7dca041ae388b6c7a03b1574e42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffc14163_2ea280c5",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T18:58:55Z",
+      "side": 1,
+      "message": "Look at this patch, you need to add this handling for DBUS and gRPC also.\n\nhttps://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1245443?usp\u003dsearch",
+      "revId": "2cb69d4d6a18f7dca041ae388b6c7a03b1574e42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "575e38b7_4e0cf9b5",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3990,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-19T18:58:55Z",
+      "side": 1,
+      "message": "We need to be careful with logging this. Maybe use rate limited logging.",
+      "revId": "2cb69d4d6a18f7dca041ae388b6c7a03b1574e42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
