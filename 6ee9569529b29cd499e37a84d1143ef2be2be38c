@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ecad6358_9369fde3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2026-08-19T15:11:00Z",
+      "side": 1,
+      "message": "Now I\u0027m seeing groups of fs_locations per export :) [Just skimmed, not a review]",
+      "revId": "6ee9569529b29cd499e37a84d1143ef2be2be38c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85274ce6_1a6735e6",
         "filename": "src/Protocols/NFS/nfs_proto_tools.c",
         "patchSetId": 2
@@ -31,6 +48,23 @@
       "writtenOn": "2026-08-19T15:03:10Z",
       "side": 1,
       "message": "WARNING: line length of 83 exceeds 80 columns\n+\t/* fs_locations for trunking - ref-counted via nfs4_fs_locations_get_ref */",
+      "revId": "6ee9569529b29cd499e37a84d1143ef2be2be38c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4791ac80_579541d8",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2588,
+      "author": {
+        "id": 1004075
+      },
+      "writtenOn": "2026-08-19T15:11:00Z",
+      "side": 1,
+      "message": "there we go! that\u0027s more like it",
       "revId": "6ee9569529b29cd499e37a84d1143ef2be2be38c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
