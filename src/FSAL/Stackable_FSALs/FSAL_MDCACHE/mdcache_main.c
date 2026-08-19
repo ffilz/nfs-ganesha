@@ -415,8 +415,8 @@ void mdcache_utilization(DBusMessageIter *iter)
 
 	dbus_message_iter_open_container(iter, DBUS_TYPE_STRUCT, NULL,
 					 &struct_iter);
-	/* Gather the data */
-	open_fds = atomic_fetch_int32_t(&fsal_fd_global_counter);
+	/* Gather the data - use total counter */
+	open_fds = atomic_fetch_int32_t(&fsal_fd_total_counter);
 	entries_used = atomic_fetch_uint64_t(&lru_state.entries_used);
 	chunks_used = atomic_fetch_uint64_t(&lru_state.chunks_used);
 	fd_state = atomic_fetch_uint32_t(&fd_lru_state.fd_state);
