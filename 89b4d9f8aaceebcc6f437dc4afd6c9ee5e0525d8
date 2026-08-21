@@ -68,6 +68,23 @@
       "message": "WARNING: line length of 87 exceeds 80 columns\n+\t\t\t\"Change of Cluster_Members from empty to non-empty is invalid\";",
       "revId": "89b4d9f8aaceebcc6f437dc4afd6c9ee5e0525d8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a453a76b_9fe59940",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2026-08-21T07:00:12Z",
+      "side": 1,
+      "message": "Display IPs of the all protocol nodes including the self IP so that when user runs show_cluster_members, it will display all members of the cluster.",
+      "revId": "89b4d9f8aaceebcc6f437dc4afd6c9ee5e0525d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
