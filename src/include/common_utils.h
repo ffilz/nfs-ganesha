@@ -132,11 +132,11 @@ extern size_t gsh_strnlen(const char *s, size_t max);
 #define CONCAT(A, B) CONCAT_(A, B)
 #endif
 
-#define CT_ASSERT_CONCAT(a, b) a##b
-#define CT_ASSERT_CONCAT2(a, b) CT_ASSERT_CONCAT(a, b)
-#define CT_ASSERT(cond, msg) \
-	typedef char CT_ASSERT_CONCAT2(static_assert_failed_, __LINE__) \
-		[(cond) ? 1 : -1] __attribute__((unused))
+#ifndef CT_ASSERT
+#define CT_ASSERT(pred, ...) \
+	CT_ASSERT_INTERNAL(pred, ##__VA_ARGS__, "Compile time assertion failed")
+#define CT_ASSERT_INTERNAL(pred, msg, ...) static_assert(pred, msg)
+#endif
 
 extern unsigned long PTHREAD_stack_size;
 
