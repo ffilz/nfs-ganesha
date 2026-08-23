@@ -1587,6 +1587,11 @@ static struct gsh_dbus_method export_details = {
 /**
  * @brief Reset stat counters for all exports
  */
+#endif /* USE_DBUS */
+
+/*
+ * Outside USE_DBUS: the gRPC stats API calls this, and it takes no DBus type.
+ */
 void reset_export_stats(void)
 {
 	struct glist_head *glist;
@@ -1601,6 +1606,8 @@ void reset_export_stats(void)
 	}
 	PTHREAD_RWLOCK_unlock(&export_by_id.eid_lock);
 }
+
+#ifdef USE_DBUS
 
 /**
  * @brief Update an export
@@ -2202,6 +2209,14 @@ static struct gsh_dbus_method export_show_v42_layouts = {
 };
 
 /* Reset FSAL stats */
+#endif /* USE_DBUS */
+
+/*
+ * Outside USE_DBUS: nothing here takes a DBus type, and the gRPC stats API
+ * (grpc_reset_stats, grpc_get_auth_stats, grpc_get_v4_full_stats,
+ * server_grpc_fill_nfsmon_iostats) calls these unconditionally. Closing and
+ * reopening the guard keeps the diff small.
+ */
 static void reset_fsal_stats(void)
 {
 	/* Module iterator */
@@ -2217,6 +2232,8 @@ static void reset_fsal_stats(void)
 			m->m_ops.fsal_reset_stats(m);
 	}
 }
+
+#ifdef USE_DBUS
 
 /**
  * DBUS method to reset all ops statistics

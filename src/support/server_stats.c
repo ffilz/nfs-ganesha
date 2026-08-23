@@ -73,7 +73,10 @@
 /* Memory Usage Statistics */
 struct gsh_mem_stats gshMC[MEM_COMP_MAX];
 
-#ifdef USE_DBUS
+/* The op-name tables below carry no DBus types, and grpc_get_fast_ops()
+ * reads optnlm/optmnt/optqta, so a USE_DBUS=off build needs them. Their inner
+ * _USE_NLM / _USE_NFS3 / _USE_RQUOTA guards are unchanged.
+ */
 
 struct op_name {
 	char *name;
@@ -125,7 +128,6 @@ static const struct op_name optnlm[] = {
 };
 #endif
 
-#endif
 
 /* Classify protocol ops for stats purposes
  */
@@ -733,7 +735,10 @@ static void record_clnt_ops(struct op_count *op, bool success, bool dup)
 		(void)atomic_inc_uint64_t(&op->dups);
 }
 
-#ifdef USE_DBUS
+/* Counter-zeroing helpers. None touches a DBus type, and the gRPC stats API
+ * reaches them through reset_server_stats(). Their inner protocol guards are
+ * unchanged.
+ */
 /**
  *  @brief reset the counts for protocol operation
  *  Use atomic ops to avoid locks.
@@ -923,7 +928,6 @@ static void reset__9P_stats(struct _9p_stats *_9p)
 	}
 }
 #endif
-#endif /* USE_DBUS */
 
 /**
  * @brief record V4.1 layout op stats
@@ -2678,6 +2682,14 @@ void server_dbus_v42_iostats(struct nfsv41_stats *v42p, DBusMessageIter *iter)
 	server_dbus_iostats(&v42p->write, iter);
 }
 
+#endif /* USE_DBUS */
+
+/*
+ * Outside USE_DBUS: nothing here takes a DBus type, and the gRPC stats API
+ * (grpc_reset_stats, grpc_get_auth_stats, grpc_get_v4_full_stats,
+ * server_grpc_fill_nfsmon_iostats) calls these unconditionally. Closing and
+ * reopening the guard keeps the diff small.
+ */
 void server_nfsmon_export_iostats(struct export_stats *export_st,
 				  struct xfer_op *opread,
 				  struct xfer_op *opwrite)
@@ -2762,6 +2774,8 @@ void server_ret_nfsmon_iostats(struct xfer_op *op_read,
 	(void)atomic_sub_uint64_t(&op_write->transferred,
 				  op_prewrite->transferred);
 }
+
+#ifdef USE_DBUS
 
 void server_dbus_nfsmon_iostats(struct export_stats *export_st,
 				DBusMessageIter *iter)
@@ -2871,6 +2885,12 @@ void server_dbus_all_iostats(struct export_stats *export_statistics,
 	}
 }
 
+#endif /* USE_DBUS */
+
+/*
+ * Outside USE_DBUS: the gRPC stats API calls these, and none takes a DBus
+ * type.
+ */
 void reset_gsh_stats(struct gsh_stats *st)
 {
 #ifdef _USE_NFS3
@@ -2968,6 +2988,7 @@ void reset_global_stats(void)
 #endif
 }
 
+#ifdef USE_DBUS
 void server_dbus_total_ops(struct export_stats *export_st,
 			   DBusMessageIter *iter)
 {
@@ -2986,6 +3007,7 @@ void global_dbus_total_ops(DBusMessageIter *iter)
 	gsh_dbus_append_timestamp(iter, &nfs_stats_time);
 	global_dbus_total(iter);
 }
+#endif /* USE_DBUS */
 
 void reset_server_stats(void)
 {
@@ -2997,6 +3019,8 @@ void reset_server_stats(void)
 #endif
 	reset_v4_full_stats();
 }
+
+#ifdef USE_DBUS
 
 #ifdef _USE_9P
 void server_dbus_9p_iostats(struct _9p_stats *_9pp, DBusMessageIter *iter)

@@ -518,6 +518,36 @@ extern struct glist_head fsal_list;
 
 #endif /* USE_DBUS */
 
+#ifndef USE_DBUS
+/*
+ * None of these takes a DBus type, but they are declared only inside the
+ * USE_DBUS block above, while the gRPC stats API calls them unconditionally.
+ * Declare them here so the gRPC sources build with USE_DBUS off.
+ */
+extern struct timespec auth_stats_time;
+#ifdef _USE_NFS3
+extern struct timespec v3_full_stats_time;
+#endif
+extern struct timespec v4_full_stats_time;
+
+void reset_server_stats(void);
+void reset_export_stats(void);
+void reset_client_stats(void);
+void reset_gsh_stats(struct gsh_stats *st);
+void reset_gsh_allops_stats(struct gsh_clnt_allops_stats *st);
+#ifdef _USE_NFS3
+void reset_v3_full_stats(void);
+#endif
+void reset_v4_full_stats(void);
+void reset_auth_stats(void);
+void reset_clnt_allops_stats(void);
+
+/* server_nfsmon_export_iostats() and server_ret_nfsmon_iostats() need no
+ * declaration here: their definitions in server_stats.c sit outside the
+ * USE_DBUS guard and precede the only callers, in the same file.
+ */
+#endif /* !USE_DBUS */
+
 void server_stats_free(struct gsh_stats *statsp);
 void server_stats_allops_free(struct gsh_clnt_allops_stats *statsp);
 
