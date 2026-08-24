@@ -33,6 +33,24 @@
       "message": "Produced compile errors when I tried to build V15.2 merge candidate",
       "revId": "6f5fa13ef5563ae173726ae553495fb823e3b2dd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "680b74be_2a59ae1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-08-24T12:46:07Z",
+      "side": 1,
+      "message": "Sorry for this inconvenience. \n\nGrpc helpers in nfs_qosmgr.c were not wrapped by USE_GRPC, so I think ENABLE_QOS\u003dON + USE_GRPC\u003dOFF failed when you tried building. I was also not able to build with this combination. Wrapped them in #ifdef USE_GRPC, rebased on V15.2, and verified the QoS/gRPC cmake combos.",
+      "parentUuid": "25aff26f_8ed02c19",
+      "revId": "6f5fa13ef5563ae173726ae553495fb823e3b2dd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
