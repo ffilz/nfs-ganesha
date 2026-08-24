@@ -139,6 +139,24 @@
       "parentUuid": "ba17564c_4d8b0087",
       "revId": "c9e0edd82752e5951d3622c3e625a6fc3d23c030",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2136d9ed_d0090efb",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2267,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-08-24T09:17:55Z",
+      "side": 1,
+      "message": "As the permission checks aren\u0027t atomic, checking before / after has pros and cons\n\nWhen checking before we guarantee not to do redundant work if the user doesn\u0027t have permissions, though while checking after we guarantee that there was no race of the user losing permissions just after checking the permissions, while returning the result of the operation with WCC that mention that the user don\u0027t have permission\n\nBasically, in most cases checking after has zero cost assuming that the attributes were returned with the operation\u0027s result, so there\u0027s no downside to checking after\n\nSo I do think that there\u0027s a benefit for leaving the before + after as an option",
+      "parentUuid": "f7762423_f6616421",
+      "revId": "c9e0edd82752e5951d3622c3e625a6fc3d23c030",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
