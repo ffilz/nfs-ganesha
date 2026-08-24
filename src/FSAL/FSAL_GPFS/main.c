@@ -62,7 +62,6 @@ struct gpfs_fsal_module
 				 .cansettime = true,
 				 .homogenous = true,
 				 .supported_attrs = GPFS_SUPPORTED_ATTRIBUTES,
-				 .xattr_support = false,
 				 .maxread = FSAL_MAXIOSIZE,
 				 .maxwrite = FSAL_MAXIOSIZE,
 				 .umask = 0,
