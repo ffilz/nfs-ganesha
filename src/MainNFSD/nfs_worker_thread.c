@@ -872,6 +872,7 @@ static enum xprt_stat nfs_rpc_process_request(nfs_request_t *reqdata,
 	int exportid = -1;
 #endif /* _USE_NFS3 */
 	bool no_dispatch = false;
+	uintptr_t nfs_xdr_start = 0;
 
 	if (retry)
 		goto retry_after_drc_suspend;
@@ -1039,6 +1040,9 @@ static enum xprt_stat nfs_rpc_process_request(nfs_request_t *reqdata,
 	reqdata->svc.rq_msg.rm_xdr.proc = reqdesc->xdr_decode_func;
 	xdrs->x_public = &reqdata->lookahead;
 
+	/* Save the XDR data position before decoding */
+	nfs_xdr_start = (uintptr_t)xdrs->x_data;
+
 	if (!SVCAUTH_CHECKSUM(&reqdata->svc)) {
 		LogInfo(COMPONENT_DISPATCH,
 			"SVCAUTH_CHECKSUM failed for Program %" PRIu32
@@ -1056,6 +1060,10 @@ static enum xprt_stat nfs_rpc_process_request(nfs_request_t *reqdata,
 		}
 		return svcerr_decode(&reqdata->svc);
 	}
+
+	/* Calculate the request size after decoding */
+	reqdata->nfs_req_size =
+		(size_t)((uintptr_t)xdrs->x_data - nfs_xdr_start);
 
 	/* set up the request context */
 	init_op_context(&reqdata->op_context, NULL, NULL, reqdata,

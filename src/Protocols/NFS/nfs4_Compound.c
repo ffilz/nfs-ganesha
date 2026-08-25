@@ -1252,6 +1252,7 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	data->argarray = arg->arg_compound4.argarray.argarray_val;
 	data->res = res;
 	reqdata->proc_data = data;
+	data->req_size = reqdata->nfs_req_size;
 
 	/* Minor version related stuff */
 	op_ctx->nfs_minorvers = compound4_minor;

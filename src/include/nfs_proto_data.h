@@ -247,6 +247,7 @@ typedef struct nfs_request {
 	nfs_res_t *res_nfs;
 	const nfs_function_desc_t *funcdesc;
 	void *proc_data;
+	size_t nfs_req_size;
 	/** This request may be queued up pending completion of the request
 	 *  this is a dupreq of.
 	 */
@@ -395,6 +396,7 @@ struct compound_data {
 				   (if applicable) */
 	uint32_t resp_size; /*< Running total response size. */
 	uint32_t op_resp_size; /*< Current op's response size. */
+	size_t req_size;
 };
 
 #define VARIABLE_RESP_SIZE (0)

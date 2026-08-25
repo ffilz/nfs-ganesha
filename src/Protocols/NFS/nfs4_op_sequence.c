@@ -144,6 +144,8 @@ enum nfs_req_result nfs4_op_sequence(struct nfs_argop4 *op,
 	nfs41_session_t *session;
 	nfs41_session_slot_t *slot;
 
+	uint32_t max_req_size = 0;
+
 	GSH_AUTO_TRACEPOINT(
 		nfs4, op_sequence_start, TRACE_INFO,
 		"SEQUENCE arg: session={} seq={} slotid={} highest_slotid={} cachethis={}",
@@ -281,6 +283,26 @@ enum nfs_req_result nfs4_op_sequence(struct nfs_argop4 *op,
 
 	/* Keep memory of the session in the COMPOUND's data */
 	data->session = session;
+
+	/* Request-size check. If the request size is greater than
+	 * negotiated maxrequestsize, return NFS4ERR_REQ_TOO_BIG.
+	 */
+	if (data->session != NULL && data->minorversion > 0) {
+		max_req_size =
+			data->session->fore_channel_attrs.ca_maxrequestsize;
+
+		if (data->req_size > max_req_size) {
+			LogDebug(COMPONENT_NFS_V4,
+				 "Request_size=%zu max=%" PRIu32,
+				 data->req_size, max_req_size);
+			res_SEQUENCE4->sr_status = NFS4ERR_REQ_TOO_BIG;
+
+			PTHREAD_MUTEX_unlock(&slot->slot_lock);
+			dec_session_ref(session);
+			data->session = NULL;
+			return NFS_REQ_ERROR;
+		}
+	}
 
 	/* Record the sequenceid and slotid in the COMPOUND's data */
 	data->sequence = arg_SEQUENCE4->sa_sequenceid;
