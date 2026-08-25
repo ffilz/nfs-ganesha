@@ -33,6 +33,24 @@
       "message": "Why are we taking the approach of disabling it instead of fixing the actual issue?",
       "revId": "5f5489dd9ad7c00403970b9ac793d3fa5d9dbe1c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cd333a4_0fdc5d84",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-08-25T15:12:07Z",
+      "side": 1,
+      "message": "xattr support will be enabled once we fix the issue in the GPFS FSAL. Currently, the feature is not working as expected and requires additional testing.",
+      "parentUuid": "6eba8600_51f814f2",
+      "revId": "5f5489dd9ad7c00403970b9ac793d3fa5d9dbe1c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
