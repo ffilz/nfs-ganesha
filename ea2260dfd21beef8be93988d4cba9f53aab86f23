@@ -18,6 +18,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f8e41eb_9e5f7228",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-25T15:24:41Z",
+      "side": 1,
+      "message": "Review comments incorporated in Patchset#3",
+      "revId": "ea2260dfd21beef8be93988d4cba9f53aab86f23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e5feaf8_b1432664",
@@ -31,6 +48,24 @@
       "writtenOn": "2026-08-19T22:08:48Z",
       "side": 1,
       "message": "Let\u0027s keep this a LogEvent, no need to trigger anything that monitors the log file when the sysadmin intentionally disabled.",
+      "revId": "ea2260dfd21beef8be93988d4cba9f53aab86f23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fee53183_4ac26583",
+        "filename": "src/MainNFSD/nfs_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1142,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-25T15:24:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8e5feaf8_b1432664",
       "revId": "ea2260dfd21beef8be93988d4cba9f53aab86f23",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -54,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "43955b74_1d0a554f",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-25T15:24:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "923c2dcd_fde734c2",
+      "revId": "ea2260dfd21beef8be93988d4cba9f53aab86f23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d128aa51_9df8a51e",
         "filename": "src/support/server_stats.c",
         "patchSetId": 2
@@ -65,6 +118,24 @@
       "writtenOn": "2026-08-19T22:08:48Z",
       "side": 1,
       "message": "Let\u0027s add gRPC for this also.",
+      "revId": "ea2260dfd21beef8be93988d4cba9f53aab86f23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f89b52ec_31058ab4",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4826,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-25T15:24:41Z",
+      "side": 1,
+      "message": "Avani is taking care of this in her upcoming patch.",
+      "parentUuid": "d128aa51_9df8a51e",
       "revId": "ea2260dfd21beef8be93988d4cba9f53aab86f23",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
