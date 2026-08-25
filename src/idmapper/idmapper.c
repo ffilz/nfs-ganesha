@@ -1663,6 +1663,7 @@ struct gsh_dbus_method auth_statistics = {
 #endif
 #endif
 
+#ifdef USE_GRPC
 static void fill_auth_stats(struct auth_stats *src, pthread_rwlock_t *lock,
 			    struct grpc_auth_stats *dst)
 {
@@ -1710,4 +1711,5 @@ bool grpc_get_auth_stats(struct grpc_all_auth_stats *stats_out,
 
 	return true;
 }
+#endif /* USE_GRPC */
 /** @} */

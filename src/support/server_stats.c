@@ -3524,6 +3524,7 @@ bool server_grpc_fill_v42_iostats(struct gsh_stats *st,
 	return true;
 }
 
+#ifdef USE_GRPC
 /**
  * @brief Copy transfer counters into a gRPC-safe I/O statistics snapshot
  *
@@ -3675,6 +3676,7 @@ bool server_grpc_fill_all_iostats(struct export_stats *export_st,
 
 	return true;
 }
+#endif /* USE_GRPC */
 
 /**
  * @brief Copy one layout counter bucket into gRPC-safe form
@@ -4231,6 +4233,7 @@ void server_grpc_fill_stats_summary(struct gsh_stats *st,
 	*total_ops_out = tot_ops;
 }
 
+#ifdef USE_GRPC
 /**
  * @brief Fill per-export protocol-activity flags for ShowExports
  */
@@ -4465,6 +4468,7 @@ bool grpc_get_v4_full_stats(struct grpc_full_stats *stats_out,
 
 	return true;
 }
+#endif /* USE_GRPC */
 
 struct mem_component_info MemComponents[] = {
 	[MEM_COMP_UNSET] = {

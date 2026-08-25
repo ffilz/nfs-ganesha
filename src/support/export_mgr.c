@@ -3155,6 +3155,7 @@ int async_deleg_transition_handler(struct fridgethr *fr,
 	return rc;
 }
 
+#ifdef USE_GRPC
 /**
  * @brief Shared implementation for per-version export I/O stats lookup
  */
@@ -3952,4 +3953,5 @@ out:
 	snprintf(errmsg, errmsg_len, "%s", errormsg);
 	return true;
 }
+#endif /* USE_GRPC */
 /** @} */
