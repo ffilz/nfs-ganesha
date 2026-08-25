@@ -16,6 +16,24 @@
       "message": "Does the admin get any indication of the status of CLNTALLSTATS enable/disable? I understand the desire to turn it off, then collect the data, but we need to know if it\u0027s enabled or disabled.",
       "revId": "93a1668545227aca41f54bd10e776d850088653b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf360959_903ab5ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-08-25T15:04:29Z",
+      "side": 1,
+      "message": "The enable_CLNTALLSTATS configuration parameter is for all client operations. We do not currently have a configuration parameter for client I/O operations; client I/O statistics are enabled by default. We may need to introduce a separate configuration parameter to control client IOPs statistics. This patch only corrects the incorrect flag check in clients_io_ops.",
+      "parentUuid": "69b44bea_074a7d88",
+      "revId": "93a1668545227aca41f54bd10e776d850088653b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
