@@ -76,6 +76,7 @@ enum nfs_req_result nfs4_op_lookup(struct nfs_argop4 *op, compound_data_t *data,
 	struct fsal_obj_handle *file_obj = NULL;
 	/* Status code from fsal */
 	fsal_status_t status = { 0, 0 };
+	uint32_t max_req_size = 0;
 
 	GSH_AUTO_TRACEPOINT(nfs4, op_lookup_start, TRACE_INFO,
 			    "LOOKUP arg: name[{}]={}",
@@ -95,6 +96,23 @@ enum nfs_req_result nfs4_op_lookup(struct nfs_argop4 *op, compound_data_t *data,
 		    data->current_filetype == SYMBOLIC_LINK)
 			res_LOOKUP4->status = NFS4ERR_SYMLINK;
 		goto out;
+	}
+
+	/* Request-size check. If the request size is greater than
+	 * negotiated maxrequestsize, return NFS4ERR_REQ_TOO_BIG.
+	 */
+	if (data->session != NULL && data->minorversion > 0) {
+		max_req_size =
+			data->session->fore_channel_attrs.ca_maxrequestsize;
+
+		if (data->req_size > max_req_size) {
+			LogDebug(COMPONENT_NFS_V4,
+				 "Request_size=%zu max=%" PRIu32,
+				 data->req_size, max_req_size);
+
+			res_LOOKUP4->status = NFS4ERR_REQ_TOO_BIG;
+			goto out;
+		}
 	}
 
 	/* Validate and convert the UFT8 objname to a regular string */
