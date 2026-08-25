@@ -16,6 +16,41 @@
       "message": "it should be info-\u003esupported_attrs \u0026\u003d ~ATTR4_XATTR;",
       "revId": "a3c8aaecbb19d6accfb325097ca2f4ec234e9ba3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d510d0ae_11b9ca21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T21:00:20Z",
+      "side": 1,
+      "message": "This looks like a complete solution.",
+      "revId": "a3c8aaecbb19d6accfb325097ca2f4ec234e9ba3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c602c766_5e785ac8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T21:00:20Z",
+      "side": 1,
+      "message": "No, this is good. No one looks at supported_attrs directly, only through this function.",
+      "parentUuid": "aea329eb_3d3b03bf",
+      "revId": "a3c8aaecbb19d6accfb325097ca2f4ec234e9ba3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
