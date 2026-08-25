@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bff1ca10_22e9efb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T21:53:56Z",
+      "side": 1,
+      "message": "Functionality looks good, just odd description of the metric.",
+      "revId": "49e45149fc69293cdfdca65320f0136d4a7467f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75c4b729_0b89d6fc",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T21:53:56Z",
+      "side": 1,
+      "message": "This seems a bit confusing since the metric includes build version labels, but the gauge is uptime.",
+      "revId": "49e45149fc69293cdfdca65320f0136d4a7467f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

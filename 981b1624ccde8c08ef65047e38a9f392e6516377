@@ -71,6 +71,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18baa476_1b137ebf",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T21:53:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6ea2b37_2483dd36",
+      "revId": "981b1624ccde8c08ef65047e38a9f392e6516377",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8f14ec8_0eaeea71",
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Removed the function update_g_info().",
       "parentUuid": "a8f14ec8_0eaeea71",
+      "revId": "981b1624ccde8c08ef65047e38a9f392e6516377",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7658afa_e3cea7f7",
+        "filename": "src/monitoring/include/prometheus_exposer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T21:53:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94a48092_24d7ec0a",
       "revId": "981b1624ccde8c08ef65047e38a9f392e6516377",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -261,6 +297,24 @@
       "side": 1,
       "message": "In the latest patch used monitoring__gauge_set() instead of creating API(update_g_info()) and calling API.",
       "parentUuid": "e6d8d7b3_1c40d8fe",
+      "revId": "981b1624ccde8c08ef65047e38a9f392e6516377",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3136d905_1c78a5b4",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T21:53:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2199c63a_d607083b",
       "revId": "981b1624ccde8c08ef65047e38a9f392e6516377",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
