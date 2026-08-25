@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "075d147e_fd9029ea",
+        "filename": "src/FSAL/FSAL_VFS/subfsal_helpers.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-25T16:49:04Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\tcopy_into_utf8string(\u0026attrs_out-\u003efs_locations-\u003eserver[0],",
+      "revId": "4dada1697f3d4bba2a649bccf0ed37dc4f08181b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c147234_f238e2b2",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1287,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-25T16:49:04Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t\tcopy_into_utf8string(\u0026pathname4-\u003epathname4_val[i],",
+      "revId": "4dada1697f3d4bba2a649bccf0ed37dc4f08181b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f33ec6e4_ba344686",
+        "filename": "src/support/nfs4_fs_locations.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-25T16:49:04Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\tgsh_calloc(count, sizeof(utf8string), MEM_COMP_PROTOCOL);",
+      "revId": "4dada1697f3d4bba2a649bccf0ed37dc4f08181b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
