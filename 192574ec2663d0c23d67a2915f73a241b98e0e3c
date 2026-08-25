@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "35b72ff0_19897eda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T22:08:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4ed5337f_42563ec1",
+      "revId": "192574ec2663d0c23d67a2915f73a241b98e0e3c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bb7a132a_8adb3994",
         "filename": "src/support/export_mgr.c",
         "patchSetId": 3
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Hmm, OK, so this isn\u0027t quite so simple...\n\nFirst off, apparently there is no destructor for Prometheus metrics?\n\nSecond, METRIC_LABEL doesn\u0027t seem to duplicate the string, so the string pointer could go bad, on the other hand you created a duplicate refstr. But since you duped it, putting the reference at the end will immediately free the string, rendering your pointer invalid...\n\nWe need to examine how we want to actually handle shutting down Prometheus, and what we want to do if we remove an export or change an export in such a way as to create a new metric such that we should destroy the old metric.",
       "parentUuid": "8585da18_8e39ec26",
+      "revId": "192574ec2663d0c23d67a2915f73a241b98e0e3c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "052cfe22_1b4cb3ad",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T22:08:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7c32a758_a856fef2",
       "revId": "192574ec2663d0c23d67a2915f73a241b98e0e3c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

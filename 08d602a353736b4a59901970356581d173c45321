@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd89f9fc_64f6d5d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T22:08:41Z",
+      "side": 1,
+      "message": "I think this is almost there. Just need to fixup the redundant metric update, move where the update happens, and possibly remove the cleanup.",
+      "revId": "08d602a353736b4a59901970356581d173c45321",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eded9316_e2828e00",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T22:08:41Z",
+      "side": 1,
+      "message": "I think this is redundant, it\u0027s called right after insert_gsh_export.",
+      "revId": "08d602a353736b4a59901970356581d173c45321",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f44f482_202b83fc",
+        "filename": "src/support/exports.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1602,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T22:08:41Z",
+      "side": 1,
+      "message": "Please restore this blank line",
+      "revId": "08d602a353736b4a59901970356581d173c45321",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d7a9f55_87748e13",
+        "filename": "src/support/exports.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1759,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T22:08:41Z",
+      "side": 1,
+      "message": "Shouldn\u0027t update_export_metadata_metric be called here? An update will skip it.",
+      "revId": "08d602a353736b4a59901970356581d173c45321",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26f652c8_e0460108",
+        "filename": "src/support/exports.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3068,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-25T22:08:41Z",
+      "side": 1,
+      "message": "Is this going to do the right thing on an update, where there was a temporary gsh_export for config, that was copied to the \"live\" gsh_export (as probe_exp above)? free_export_resources is used to clean up that temp gsh_export.",
+      "revId": "08d602a353736b4a59901970356581d173c45321",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
