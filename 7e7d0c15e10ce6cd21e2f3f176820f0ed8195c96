@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3dd77d0_1c8c47d8",
+        "filename": "src/support/nfs_ip_name.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-26T14:37:44Z",
+      "side": 1,
+      "message": "This really isn\u0027t necessary, we just above tested and returned if maxsize is too small.\n\nThat said, the above test should be (maxsize \u003c sizeof(ipstring))",
+      "revId": "7e7d0c15e10ce6cd21e2f3f176820f0ed8195c96",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
