@@ -67,6 +67,7 @@ struct ceph_fsal_module {
 	bool client_oc;
 	uint64_t client_oc_size;
 	uint64_t client_oc_max_dirty;
+	uint16_t max_ceph_clients;
 	bool async;
 	bool zerocopy;
 	bool use_old_uuid;
