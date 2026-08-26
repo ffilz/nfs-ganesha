@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35ab966f_6218daf1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-26T15:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "139e75b0_53a7d739",
+      "revId": "49e45149fc69293cdfdca65320f0136d4a7467f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75c4b729_0b89d6fc",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Ok, Got it. Updated in latest patch with adding new metric(ganesha_uptime_info) leaving older metrics as it is.",
       "parentUuid": "75c4b729_0b89d6fc",
+      "revId": "49e45149fc69293cdfdca65320f0136d4a7467f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa7f6f24_6190b866",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-26T15:25:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d8260fc0_6aed579f",
       "revId": "49e45149fc69293cdfdca65320f0136d4a7467f5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
