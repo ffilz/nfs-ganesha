@@ -16,6 +16,24 @@
       "message": "@prabhu.murugesan1@ibm.com @ffilzlnx@mindspring.com :\nFirst of all, we should never enter close_fsal_fd() with FSAL_FD_OLD_STYLE. If we are seeing close_fsal_fd() being called with FSAL_FD_OLD_STYLE, it indicates that a use-after-free condition may already be occurring.\nAdding this check appears to mask the underlying issue rather than address it, which could make the use-after-free harder to detect and debug. This code path requires a proper analysis to identify why an FSAL_FD_OLD_STYLE descriptor is reaching close_fsal_fd() in the first place.\nIf you are observing close_fsal_fd() being called with FSAL_FD_OLD_STYLE, please trace the relevant code path, identify how this state is being reached, and share the analysis and findings.\nUntil we understand and address the root cause, I do not agree with introducing:\nif (fsal_fd-\u003efd_type !\u003d FSAL_FD_OLD_STYLE)\nin this code path, as it would potentially hide the underlying use-after-free issue rather than fix it.\n\nAnd we already know, there is still 1(one) use-after-free hiding somewhere for fsal_fd.",
       "revId": "97fe4d1f58f0626dd215cacf52c45d35c58c6ab5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "525a4089_17149ec6",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2112,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-08-26T08:49:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bbfcf05_19351c13",
+      "revId": "97fe4d1f58f0626dd215cacf52c45d35c58c6ab5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
