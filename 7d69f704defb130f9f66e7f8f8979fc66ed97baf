@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e8c3876_b3dd6a05",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1723,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-08-26T21:10:03Z",
+      "side": 1,
+      "message": "I understand the concern. However, normal reaping still occurs; only aggressive reaping is disabled when `state_fds \u003e\u003d hiwat`. In an NFSv4-centric workload, `hiwat` is not typically reached suddenly, so aggressive reclaim would already have occurred before this condition. Most FDs remaining in the LRU are therefore relatively recent.\n\nSince state FDs cannot be reclaimed, continuing aggressive reclaim at this point provides limited benefit. If additional FDs are required for NFSv4 workload, the customer can increase the open FD limit.\n\nThat said, if you prefer to keep aggressive reclaim enabled when state_fds \u003e\u003d hiwat, I can change the implementation accordingly. Please let me know your view.",
+      "parentUuid": "24adec55_3bcf1f9d",
+      "revId": "7d69f704defb130f9f66e7f8f8979fc66ed97baf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9766ba59_e30c6378",
