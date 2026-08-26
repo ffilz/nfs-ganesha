@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5bc6932_0e3b251b",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-26T14:52:40Z",
+      "side": 1,
+      "message": "This default of 4 may break current uses that have a cephfs client for each export. I think default should be 0 which then implies \"no limit\" (so also a new range includes 0, and new meaning for 0).",
+      "revId": "c6a95ea0b32871d3eafe41839267b32a5233f3dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
