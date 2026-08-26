@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd0c98af_4279a1e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-26T20:48:54Z",
+      "side": 1,
+      "message": "With all the work you have done, can you revisit this one to make fsinfo calls on Prometheus scrape instead of something pushing to Prometheus.",
+      "revId": "030abbf847977cabde397ad06f019d6d9ba3878e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1036e56_9e99f987",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-26T20:48:54Z",
+      "side": 1,
+      "message": "Need to wrap this line",
+      "revId": "030abbf847977cabde397ad06f019d6d9ba3878e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f9dfb18_741ae8ac",
