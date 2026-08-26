@@ -22,6 +22,30 @@
       },
       "revId": "39bf534b905ff12f53546af14a1e1475085a92bf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "269ec08e_ec5744e4",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-08-26T18:17:06Z",
+      "side": 1,
+      "message": "The scope of fsal_fd_total_counter is not just for reporting. The current LRU logic uses fsal_fd_global_counter for FD pressure detection, which does not account for STATE and TEMP FDs.\n\nPlease refer to the following patch for the LRU issue and rationale:\n\nhttps://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1247084\n\nAlso, the additional atomic increment/decrement is only performed during FD lifecycle operations such as insert_fd_lru() / remove_fd_lru(). It is not added to the normal NFS operation paths such as read, write, lookup, getattr, setattr, or lock. Therefore, this is not really a hot path.",
+      "parentUuid": "350f1a0c_197f795c",
+      "range": {
+        "startLine": 1476,
+        "startChar": 8,
+        "endLine": 1476,
+        "endChar": 29
+      },
+      "revId": "39bf534b905ff12f53546af14a1e1475085a92bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
