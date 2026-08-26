@@ -51,6 +51,24 @@
       "message": "This seems a bit confusing since the metric includes build version labels, but the gauge is uptime.",
       "revId": "49e45149fc69293cdfdca65320f0136d4a7467f5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8260fc0_6aed579f",
+        "filename": "src/MainNFSD/nfs_metrics.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-08-26T12:58:13Z",
+      "side": 1,
+      "message": "Ok, Got it. Updated in latest patch with adding new metric(ganesha_uptime_info) leaving older metrics as it is.",
+      "parentUuid": "75c4b729_0b89d6fc",
+      "revId": "49e45149fc69293cdfdca65320f0136d4a7467f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
