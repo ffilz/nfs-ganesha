@@ -645,14 +645,17 @@ static fsal_status_t getxattrs(struct fsal_obj_handle *obj_hdl,
 		errsv = errno;
 		LogDebug(COMPONENT_FSAL, "GETXATTRS returned rc %d errsv %d",
 			 rc, errsv);
-
-		if (errsv == ERANGE)
-			return fsalstat(ERR_FSAL_TOOSMALL, 0);
-		if (errsv == ENODATA)
-			return fsalstat(ERR_FSAL_NOENT, 0);
-		return fsalstat(posix2fsal_error(errsv), errsv);
+                if (errsv == ERANGE) {
+                        status = fsalstat(ERR_FSAL_TOOSMALL, ERANGE);
+                        goto out;
+                }
+                if (errsv == ENODATA) {
+                        status = fsalstat(ERR_FSAL_NOXATTR, 0);
+                        goto out;
+                }
+                status = posix2fsal_status(errsv);
+                goto out;
 	}
-
 	/* Make sure utf8string is NUL terminated */
 	xa_value->utf8string_val[gxarg.value_len] = '\0';
 
@@ -680,6 +683,7 @@ static fsal_status_t setxattrs(struct fsal_obj_handle *obj_hdl,
 
 	sxarg.mountdirfd = export_fd;
 	sxarg.handle = myself->handle;
+	sxarg.type = option;
 	sxarg.name_len = xa_name->utf8string_len;
 	sxarg.name = xa_name->utf8string_val;
 	sxarg.value_len = xa_value->utf8string_len;
@@ -688,11 +692,16 @@ static fsal_status_t setxattrs(struct fsal_obj_handle *obj_hdl,
 	if (op_ctx && op_ctx->client)
 		sxarg.cli_ip = op_ctx->client->hostaddr_str;
 
+        LogDebug(COMPONENT_FSAL, "SETXATTRS type %d name_len %d value_len %d name %s value %s",
+                  option, sxarg.name_len, sxarg.value_len, sxarg.name, (char *)sxarg.value);
+
 	rc = gpfs_ganesha(OPENHANDLE_SETXATTRS, &sxarg);
 	if (rc < 0) {
 		errsv = errno;
 		LogDebug(COMPONENT_FSAL, "SETXATTRS returned rc %d errsv %d",
 			 rc, errsv);
+		if (errsv == ENODATA)
+			return fsalstat(ERR_FSAL_NOXATTR, 0);
 		return fsalstat(posix2fsal_error(errsv), errsv);
 	}
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
@@ -725,6 +734,8 @@ static fsal_status_t removexattrs(struct fsal_obj_handle *obj_hdl,
 		errsv = errno;
 		LogDebug(COMPONENT_FSAL, "REMOVEXATTRS returned rc %d errsv %d",
 			 rc, errsv);
+                if (errsv == ENODATA)
+                        return fsalstat(ERR_FSAL_NOXATTR, 0);
 		return fsalstat(posix2fsal_error(errsv), errsv);
 	}
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
@@ -776,8 +787,10 @@ static fsal_status_t listxattrs(struct fsal_obj_handle *obj_hdl,
 		errsv = errno;
 		LogDebug(COMPONENT_FSAL, "LISTXATTRS returned rc %d errsv %d",
 			 rc, errsv);
-		if (errsv == ERANGE) {
+		if (errsv == ERANGE)
 			status = fsalstat(ERR_FSAL_TOOSMALL, ERANGE);
+                if (errsv == ENODATA)
+                        status = fsalstat(ERR_FSAL_NOXATTR, 0);
 		} else {
 			status = posix2fsal_status(errsv);
 		}
