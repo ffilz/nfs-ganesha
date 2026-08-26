@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68ccca75_bb99f8a8",
+        "filename": "src/include/client_mgr.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-08-26T10:13:23Z",
+      "side": 1,
+      "message": "The claim made here seems to be not true when FASTSTATS is on since last_update will be skipped. \n\ntimespec_update(\u0026client-\u003elast_update, …) sits after the enable_FASTSTATS early return in server_stats. Defaults (NFSSTATS on, FASTSTATS off) work but with FASTSTATS enabled, is_connected collapses back to refcnt-only — the original NFSv3 problem. \n\nWould updating last_update on the fast path, or documenting the dependency help?",
+      "revId": "c7f7000f9a80c533dc10574b1bd0e63437a79da0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "138abe72_f7e76c08",
+        "filename": "src/scripts/ganeshactl/Ganesha/glib_dbus_stats.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-08-26T10:13:23Z",
+      "side": 1,
+      "message": "self.is_connected is stored here but is unused. Do we need to add this new field in Client.__str__ and ClientStats.fill_report ?",
+      "revId": "c7f7000f9a80c533dc10574b1bd0e63437a79da0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
