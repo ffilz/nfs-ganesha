@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e0f1684_56b7d536",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1038297
+      },
+      "writtenOn": "2026-08-26T11:54:08Z",
+      "side": 1,
+      "message": "I used the before/after XDR position approach in my patch: https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1246883/2 \n\nThe proposed xdr_getpos() approach measures the position from the beginning of the stream, whereas my implementation measures only the NFS request data consumed during decoding.\n\nFor the same request of about 500 bytes from lookup, the request sizes would be:\nMy implementation: ~592 bytes (500 + 92 bytes padding)\nxdr_getpos(): 724 bytes\nDifference: ~132 bytes (RPC/XDR overhead)\n\nSo with ca_maxrequestsize \u003d 600:\nMy implementation: 592 \u003c\u003d 600 -\u003e accepted\nxdr_getpos(): 724 \u003e 600 -\u003e NFS4ERR_REQ_TOO_BIG\n\nTherefore, the two approaches are measuring different portions of the request. \n@ffilzlnx@mindspring.com Please confirm which size ca_maxrequestsize is intended to be checked against.\n\nThanks!",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 47
+      },
+      "revId": "a3161ae7eb8b6e1555e8528e34c976c4bb75951e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
