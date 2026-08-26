@@ -59,6 +59,8 @@
 #include "gsh_lttng/generated_traces/fsal_ceph.h"
 #endif /* LTTNG_PARSING */
 
+extern uint16_t ceph_clnt_count;
+
 /**
  * @brief Clean up an export
  *
@@ -100,6 +102,8 @@ static void release(struct fsal_export *export_pub)
 		gsh_free(cm->cm_secret_key, MEM_COMP_FSAL);
 
 		gsh_free(cm, MEM_COMP_FSAL);
+		/* decrement ceph client count */
+		ceph_clnt_count--;
 	} else if (cm->cm_export == export) {
 		/* Need to attach a different export for upcalls */
 		cm->cm_export = glist_first_entry(&cm->cm_exports,
