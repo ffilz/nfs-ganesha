@@ -362,8 +362,7 @@ static struct gssd_k5_kt_princ *new_ple(krb5_context context,
 	char *default_realm;
 	int is_default_realm = 0;
 
-	ple = gsh_calloc(1, sizeof(struct gssd_k5_kt_princ),
-			 MEM_COMP_PROTOCOL);
+	ple = gsh_calloc(1, sizeof(struct gssd_k5_kt_princ), MEM_COMP_PROTOCOL);
 
 #ifdef HAVE_KRB5
 	ple->realm = gsh_malloc(princ->realm.length + 1, MEM_COMP_PROTOCOL);
@@ -668,13 +667,15 @@ static int find_keytab_entry(krb5_context context, krb5_keytab kt,
 		gsh_free(k5err, MEM_COMP_PROTOCOL);
 		goto out;
 	}
+	/* Ensure NUL-termination in case gsh_gethostname() truncates */
+	myhostname[sizeof(myhostname) - 1] = '\0';
 
 	/* Compute the active directory machine name HOST$ */
-	strcpy(myhostad, myhostname);
+	strlcpy(myhostad, myhostname, sizeof(myhostad) - 1);
 	for (i = 0; myhostad[i] != 0; ++i)
-		myhostad[i] = toupper(myhostad[i]);
+		myhostad[i] = toupper((unsigned char)myhostad[i]);
 	myhostad[i] = '$';
-	myhostad[i + 1] = 0;
+	myhostad[i + 1] = '\0';
 
 	retval = get_full_hostname(myhostname, myhostname, sizeof(myhostname));
 	if (retval)
