@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "390d02c3_0110ce09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-26T20:19:35Z",
+      "side": 1,
+      "message": "In general I think this looks good, have one question about the reaping.\n\nAlso, this really adds urgency to solving how to set fd limits for FSAL_CEPH and other library FSALs that don\u0027t (directly) consume fds for open files.",
+      "revId": "7d69f704defb130f9f66e7f8f8979fc66ed97baf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24adec55_3bcf1f9d",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1723,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-26T20:19:35Z",
+      "side": 1,
+      "message": "Don\u0027t you still want to try and reap global FD aggressively if there are any to reap? Just change expectations. Also factor temp_fd into the expectations. They can\u0027t be reaped, but also should go away soon.",
+      "revId": "7d69f704defb130f9f66e7f8f8979fc66ed97baf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9766ba59_e30c6378",
