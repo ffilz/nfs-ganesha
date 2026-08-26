@@ -46,6 +46,30 @@
       },
       "revId": "39bf534b905ff12f53546af14a1e1475085a92bf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f693eda2_1f19bcb9",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-26T20:27:35Z",
+      "side": 1,
+      "message": "Do see the use in subsequent patch, I think it does make sense to have an atomic total counter.\n\nAlso,\nskmprabhu\n- please don\u0027t mark a comment resolved when responding to a review comment, leaving it unresolved allows the original commenter to decide if they agree (mark as resolved) or not (further discussion or changes necessary, not resolved).",
+      "parentUuid": "269ec08e_ec5744e4",
+      "range": {
+        "startLine": 1476,
+        "startChar": 8,
+        "endLine": 1476,
+        "endChar": 29
+      },
+      "revId": "39bf534b905ff12f53546af14a1e1475085a92bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

@@ -34,6 +34,24 @@
       "parentUuid": "5db796fa_da1064cf",
       "revId": "5a416e7aed8f3f6998c6aadaf2ca960b5fce4b91",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c950957_c4693039",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1880,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-26T20:27:35Z",
+      "side": 1,
+      "message": "This does represent a code bug and there is a subsequent patch where the LRU is making decisions based on at least the state_fd counter as well. Any of these counters getting mismatched inc and dec will cause problems.\n\nAlso, @prabhu.murugesan1@ibm.com - please don\u0027t mark a comment resolved when responding to a review comment, leaving it unresolved allows the original commenter to decide if they agree (mark as resolved) or not (further discussion or changes necessary, not resolved).",
+      "parentUuid": "7d4847db_345897ab",
+      "revId": "5a416e7aed8f3f6998c6aadaf2ca960b5fce4b91",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
