@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e7f0c47_5f994b95",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1726,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-26T21:02:03Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\"FD pressure is from state FDs (%\" PRIi32",
+      "revId": "f4b88d63ab9394685c3b4155ae4f736d3b8b97c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceab8c51_8eb90b76",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1772,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-26T21:02:03Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t * - Baseline: global_fds_before (global FDs at start of reaping)",
+      "revId": "f4b88d63ab9394685c3b4155ae4f736d3b8b97c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7572acb1_3145ab26",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1784,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-26T21:02:03Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t * When futility reaches futility_count, FD caching is temporarily",
+      "revId": "f4b88d63ab9394685c3b4155ae4f736d3b8b97c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b36973f_670b05a8",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1785,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-08-26T21:02:03Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t * disabled to prevent the LRU from consuming CPU on futile work.",
+      "revId": "f4b88d63ab9394685c3b4155ae4f736d3b8b97c1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
