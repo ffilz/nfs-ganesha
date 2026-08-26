@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "350f1a0c_197f795c",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-08-26T09:42:02Z",
+      "side": 1,
+      "message": "We don\u0027t need a fourth atomic for this.\n\nglobal / state / temp already give the same information. A dedicated total only adds a hot-path inc/dec on every insert_fd_lru/remove_fd_lru and a new invariant (total \u003d\u003d global + state + temp) that can fail on its own.\nD-Bus/gRPC reporting is not a hot path. If a total is needed, sum the three counters at report time:\n  open \u003d global + state + temp;",
+      "range": {
+        "startLine": 1476,
+        "startChar": 8,
+        "endLine": 1476,
+        "endChar": 29
+      },
+      "revId": "39bf534b905ff12f53546af14a1e1475085a92bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
