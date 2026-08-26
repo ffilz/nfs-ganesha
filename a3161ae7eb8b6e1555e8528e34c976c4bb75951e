@@ -22,6 +22,30 @@
       },
       "revId": "a3161ae7eb8b6e1555e8528e34c976c4bb75951e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8c0f2a_5c1fa507",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-26T15:20:03Z",
+      "side": 1,
+      "message": "I just looked at the knfsd code, it looks at the entire length of the rpc request including all headers.",
+      "parentUuid": "1e0f1684_56b7d536",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 47
+      },
+      "revId": "a3161ae7eb8b6e1555e8528e34c976c4bb75951e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
