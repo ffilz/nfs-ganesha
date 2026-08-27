@@ -82,6 +82,13 @@ bool grpc_show_cluster_members(char ***ips_out, size_t *count_out,
 			       bool *success, char *errmsg, size_t errmsg_len);
 #endif
 
+#ifdef ENABLE_CLUSTER_QOS
+void populate_cqos_hosts(void)
+
+	extern void cqos_hosts_release(struct glist_head *list,
+				       mem_components_t comp);
+#endif
+
 #ifdef __cplusplus
 }
 #endif
