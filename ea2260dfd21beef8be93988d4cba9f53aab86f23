@@ -143,6 +143,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac5f3631_c11d2a32",
+        "filename": "src/scripts/ganeshactl/ganesha_stats.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-08-27T17:01:31Z",
+      "side": 1,
+      "message": "One minor observation: command_arg \u003d\u003d \"show\" is checked twice. Not a blocker, just something we could consider simplifying in the future.",
+      "revId": "ea2260dfd21beef8be93988d4cba9f53aab86f23",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d128aa51_9df8a51e",
         "filename": "src/support/server_stats.c",
         "patchSetId": 2
