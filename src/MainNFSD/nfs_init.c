@@ -750,10 +750,9 @@ int nfs_set_param_from_conf(config_file_t parse_tree,
 	/*
 	 * Cluster qos should be initialized only if QoS is enabled, and
 	 * user should provide one Ip address of each available ceph node
-	 * in the cluster.
+	 * in the cluster. That was validated in config pass.
 	 */
-	if (qos_block_config.enable_qos &&
-	    qos_block_config.enable_cluster_qos && !glist_empty(&cqos_hosts)) {
+	if (qos_block_config.enable_cluster_qos) {
 		cluster_qos_init();
 	}
 #endif
