@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f37176d_b2822812",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-27T02:43:09Z",
+      "side": 1,
+      "message": "Oh, and you need to decrement the count when a client is shut down because the export is shut down.",
+      "revId": "c917fe53c80cabbba810f9a24d75545bc19313f0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6411155_828d61af",
+        "filename": "src/FSAL/FSAL_CEPH/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-27T02:43:09Z",
+      "side": 1,
+      "message": "I would still increment. We should have a way eventually of seeing the count.",
+      "revId": "c917fe53c80cabbba810f9a24d75545bc19313f0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
