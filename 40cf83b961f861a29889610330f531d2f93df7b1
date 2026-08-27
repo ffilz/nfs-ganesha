@@ -16,6 +16,24 @@
       "message": "How fsal_fd_total_counter value is going to help incase of any fd leak and how have we verified the correctness of its value?",
       "revId": "40cf83b961f861a29889610330f531d2f93df7b1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "344f9ab8_7f5f4ba2",
+        "filename": "src/FSAL/commonlib.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-08-27T23:00:54Z",
+      "side": 1,
+      "message": "fsal_fd_total_counter gives the overall FSAL FD usage, whereas the current Ganesha stats expose only fsal_global_counter (NFSv3/LRU-related FDs) and do not account for NFSv4 state FDs or temporary FDs. With the LRU improvements, we can further break this down by FD type (global, state, and temporary), and log the usage when pressure occurs. This provides much better visibility when investigating FD leaks/pressure, and comparing it with /proc/\u003cpid\u003e/fd can further help identify where the additional FDs are coming from.",
+      "parentUuid": "d65f37ce_c010b1ec",
+      "revId": "40cf83b961f861a29889610330f531d2f93df7b1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
