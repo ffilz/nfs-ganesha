@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7b17401_f78743f1",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-27T18:40:22Z",
+      "side": 1,
+      "message": "There\u0027s actually no out label in this function...\n\nBut yea, code could be a bit simpler by having a single return status; after the if-then-else-if-then-else, and no need for all the braces then.",
+      "parentUuid": "bac6598e_8be4be4a",
+      "revId": "1883afec0207650e5ba64e193a37ee7f21102c85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8f2fa4b_ee7a7c83",
         "filename": "src/FSAL/FSAL_GPFS/handle.c",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-27T15:51:18Z",
       "side": 1,
       "message": "Could you reformat this, put the string on the next line, and the additional lines with \"COMPONENT\". Also the additional parameters need to be split.",
+      "revId": "1883afec0207650e5ba64e193a37ee7f21102c85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c08a6fa_675b26d0",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-27T18:40:22Z",
+      "side": 1,
+      "message": "clang-format will want sxarg.name on line 697.",
+      "parentUuid": "e8f2fa4b_ee7a7c83",
       "revId": "1883afec0207650e5ba64e193a37ee7f21102c85",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a068c6f8_b8b64555",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-27T18:40:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2109c27a_29af66ce",
+      "revId": "1883afec0207650e5ba64e193a37ee7f21102c85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e778a0a1_f374666c",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-08-27T16:19:05Z",
       "side": 1,
       "message": "This should be else if.",
+      "revId": "1883afec0207650e5ba64e193a37ee7f21102c85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b84ead75_2f97de4e",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-27T18:40:22Z",
+      "side": 1,
+      "message": "Yea, I was initially going to let that slide since it was the only thing I saw.",
+      "parentUuid": "e778a0a1_f374666c",
       "revId": "1883afec0207650e5ba64e193a37ee7f21102c85",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
