@@ -22,6 +22,30 @@
       },
       "revId": "30c392cd9a01f1c6036083679bea7522812fc000",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "644ad1e1_8bc72d47",
+        "filename": "src/monitoring/dynamic_metrics.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-08-27T06:41:05Z",
+      "side": 0,
+      "message": "Already the same metrics has been declared, registered and updating in nfs_metrics.c file:\nFor ref:\nhttps://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/MainNFSD/nfs_metrics.c#L158-L160\nhttps://github.com/nfs-ganesha/nfs-ganesha/blob/next/src/MainNFSD/nfs_metrics.c#L299-L333\n\nSo as dynamic metrics declaration increases memory footprint and as they are reduntant removing the RPC metrics in dynamic_metrics.cc file\n\nI tested the change and working as before.",
+      "parentUuid": "104ecd61_b999bfa1",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 40
+      },
+      "revId": "30c392cd9a01f1c6036083679bea7522812fc000",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
