@@ -224,31 +224,6 @@ static int cluster_members_adder(const char *token, enum term_type type_hint,
 	return rc;
 }
 
-#ifdef ENABLE_CLUSTER_QOS
-void populate_cqos_hosts(void)
-{
-	struct glist_head *glist;
-	struct base_client_entry *client;
-	struct cqos_ceph_nodes *cli;
-
-	if (glist_empty(&nfs_param.core_param.cluster_members))
-		return;
-
-	glist_for_each(glist, &nfs_param.core_param.cluster_members) {
-		client = glist_entry(glist, struct base_client_entry, cle_list);
-
-		cli = gsh_calloc(1, sizeof(struct cqos_ceph_nodes),
-				 MEM_COMP_QOS);
-		glist_init(&cli->node_list);
-		cli->fd = -1;
-		cli->clnt = NULL;
-
-		cli->node_addr = client->cidr->ip_addr;
-
-		glist_add_tail(&cqos_hosts, &cli->node_list);
-	}
-}
-#endif
 /**
  * @brief Initialize a core_param block
  *
