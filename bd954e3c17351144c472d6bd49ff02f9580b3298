@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d73f080c_184d6cc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-27T19:26:37Z",
+      "side": 1,
+      "message": "Sorry, I think there\u0027s a CI problem so it isn\u0027t making clang-format requests, I\u0027ve pointed out the things it will eventually complain about.",
+      "revId": "bd954e3c17351144c472d6bd49ff02f9580b3298",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f5ca733_a44207fc",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-27T19:26:37Z",
+      "side": 1,
+      "message": "Indent needs to be fixed here.",
+      "revId": "bd954e3c17351144c472d6bd49ff02f9580b3298",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cd16743_580c577b",
+        "filename": "src/FSAL/FSAL_GPFS/handle.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-08-27T19:26:37Z",
+      "side": 1,
+      "message": "Indent needs to be fixed here (rc needs to line up with COMPONENT)",
+      "revId": "bd954e3c17351144c472d6bd49ff02f9580b3298",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
