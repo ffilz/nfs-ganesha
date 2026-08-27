@@ -46,6 +46,30 @@
       },
       "revId": "a3161ae7eb8b6e1555e8528e34c976c4bb75951e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c38618_df9e0b60",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1039016
+      },
+      "writtenOn": "2026-08-27T07:44:57Z",
+      "side": 1,
+      "message": "Sorry for the duplicate -- I had not seen 1246883 when I pushed this.\n\nI was going by RFC 5661 section 18.36.3, which defines ca_maxrequestsize\nas:\n\n\"This size represents the XDR encoded size of the request, including\n the RPC headers (including security flavor credentials and verifiers)\n but excludes any RPC transport framing headers.  Imagine a request\n coming over a non-RDMA TCP/IP connection, and that it has a single\n Record Marking header preceding it.  The maximum allowable count\n encoded in the header will be ca_maxrequestsize.\"\n\n That is why I used xdr_getpos(req-\u003erq_xdrs): by the time SEQUENCE runs\n the whole COMPOUND has been decoded, so the position covers the RPC\n header plus all the operation arguments -- with no extra plumbing.",
+      "parentUuid": "df8c0f2a_5c1fa507",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 47
+      },
+      "revId": "a3161ae7eb8b6e1555e8528e34c976c4bb75951e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
