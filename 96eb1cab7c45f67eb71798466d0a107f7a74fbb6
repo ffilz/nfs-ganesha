@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcf63e15_b2cab21f",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1017959
+      },
+      "writtenOn": "2026-09-01T13:38:46Z",
+      "side": 1,
+      "message": "In this file, I see some of the log statements are using COMPONENT_EXPORT. So should we use COMPONENT_DISPATCH or COMPONENT_EXPORT?",
+      "revId": "96eb1cab7c45f67eb71798466d0a107f7a74fbb6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
