@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d2fcdec_4202e475",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1020258
+      },
+      "writtenOn": "2026-09-01T08:28:02Z",
+      "side": 1,
+      "message": "Instead of revert, I\u0027d suggest to support both options\n\n```\n%if 0%{?rhel} \u0026\u0026 0%{?rhel} \u003c\u003d 7\nBuildRequires:\tcmake3\n%global cmake_cmd cmake3\n%else\nBuildRequires:\tcmake \u003e\u003d 3.0\n%global cmake_cmd cmake\n%endif\n```\n\n---\n\n```\n%build\n# 2. Swap out \u0027cmake\u0027 for \u0027%{cmake_cmd}\u0027\n%{cmake_cmd} .\t-DCMAKE_BUILD_TYPE\u003dDebug\t\t\t\\\n\t-DBUILD_CONFIG\u003drpmbuild\t\t\t\t\\\n\t-DWITH_PYTHON3\u003d%{python3_version}\t\t\\\n```\n\nLMK if this suggestion (exactly or with minor tweaks) solves the issue and allows us create RPMs for all versions",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 20
+      },
+      "revId": "538734d094e36c1cffcb414d907ec11137a457b7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
