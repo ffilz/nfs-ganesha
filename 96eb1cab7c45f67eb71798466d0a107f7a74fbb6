@@ -16,6 +16,24 @@
       "message": "In this file, I see some of the log statements are using COMPONENT_EXPORT. So should we use COMPONENT_DISPATCH or COMPONENT_EXPORT?",
       "revId": "96eb1cab7c45f67eb71798466d0a107f7a74fbb6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8541a85c_dfa99dd5",
+        "filename": "src/support/ip_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-01T14:47:57Z",
+      "side": 1,
+      "message": "Good point, actually this file should not have any log components called out explicitly, if needed, it should be a parameter. I will check into how each is used. Also see a LogFatal that should be an assert (so won\u0027t directly crash production if hit).",
+      "parentUuid": "dcf63e15_b2cab21f",
+      "revId": "96eb1cab7c45f67eb71798466d0a107f7a74fbb6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
