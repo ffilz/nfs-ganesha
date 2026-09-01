@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ded85394_351de703",
+        "filename": "src/include/gsh_reflist.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-09-01T09:08:50Z",
+      "side": 1,
+      "message": "gr_ref should be grl_ref\nstruct urcu_ref grl_ref; /* refcount */",
+      "revId": "25efbbe680cccca11fc6856e55a3e81d9727f9fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5cc7a86_dbd0f8e6",
+        "filename": "src/include/gsh_reflist.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-09-01T09:08:50Z",
+      "side": 1,
+      "message": "grl or glr ?",
+      "revId": "25efbbe680cccca11fc6856e55a3e81d9727f9fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cbb170e_c37b2b01",
+        "filename": "src/include/gsh_reflist.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-09-01T09:08:50Z",
+      "side": 1,
+      "message": "do we really need this line, as in the above line itself : \" long new_val, old_val \u003d cur;\" flow is doing the same logical thing.",
+      "revId": "25efbbe680cccca11fc6856e55a3e81d9727f9fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e43d821_15f98467",
+        "filename": "src/include/gsh_reflist.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-09-01T09:08:50Z",
+      "side": 1,
+      "message": "function return type is void",
+      "revId": "25efbbe680cccca11fc6856e55a3e81d9727f9fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
