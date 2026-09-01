@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1a6c4c2_5ef28cd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-01T14:51:52Z",
+      "side": 1,
+      "message": "Cluster QoS Cluster_Members update will be a separate patch.",
+      "parentUuid": "580b4c82_e444cd4c",
+      "revId": "89b4d9f8aaceebcc6f437dc4afd6c9ee5e0525d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "162458db_069ac418",
@@ -53,6 +71,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90491808_b8310229",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-01T14:51:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "162458db_069ac418",
+      "revId": "89b4d9f8aaceebcc6f437dc4afd6c9ee5e0525d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a275953b_7010969e",
@@ -66,6 +102,24 @@
       "writtenOn": "2026-08-10T22:48:28Z",
       "side": 1,
       "message": "WARNING: line length of 87 exceeds 80 columns\n+\t\t\t\"Change of Cluster_Members from empty to non-empty is invalid\";",
+      "revId": "89b4d9f8aaceebcc6f437dc4afd6c9ee5e0525d8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bb2634d_cbb2c432",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-01T14:51:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a275953b_7010969e",
       "revId": "89b4d9f8aaceebcc6f437dc4afd6c9ee5e0525d8",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
