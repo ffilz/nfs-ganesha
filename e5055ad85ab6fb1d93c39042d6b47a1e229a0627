@@ -51,6 +51,24 @@
       "parentUuid": "c5b22c8f_7391fcd2",
       "revId": "e5055ad85ab6fb1d93c39042d6b47a1e229a0627",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe65ff33_7152d38e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-09-02T15:14:47Z",
+      "side": 1,
+      "message": "Thanks @deeraj.patil@ibm.com\n\nYes, your concerns are valid, and I had thought about this as well. I’m writing an FD stress test case to verify whether there are any other issues with the LRU logic or state FD handling, including the possibility of multiple `close_fsal_fd()` calls on the same FD. I’ll update the results once I have them. Please let me know if you have any testcase/scenerio to cover.\n\nOne of the problems with the current code is that negative counters can go unnoticed, making counter/refcount-related issues very difficult to identify and debug.",
+      "parentUuid": "a2bd4f56_b847b929",
+      "revId": "e5055ad85ab6fb1d93c39042d6b47a1e229a0627",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
