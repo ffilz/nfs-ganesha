@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca5c582e_dd7f32c8",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1717,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-09-02T07:07:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "880a87de_c38762e9",
+      "revId": "a007f355f5f3d24058640d8b93499b7010022279",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fced99a6_f4a2ccde",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-09-01T11:16:21Z",
       "side": 1,
       "message": "default is 2 \n\nCONF_ITEM_UI32(\"RPC_Ioq_ThrdMin\", 2, 1024 * 128, 2, nfs_core_param,\n                       rpc.ioq_thrd_min),",
+      "revId": "a007f355f5f3d24058640d8b93499b7010022279",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dec99c4f_1f258271",
+        "filename": "src/doc/man/ganesha-core-config.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-09-02T07:07:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fced99a6_f4a2ccde",
       "revId": "a007f355f5f3d24058640d8b93499b7010022279",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f8b097d_3fcfe149",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-09-02T07:07:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e40aa21_ef6c4e6f",
+      "revId": "a007f355f5f3d24058640d8b93499b7010022279",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8eb8a992_f0d94263",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-09-01T11:16:21Z",
       "side": 1,
       "message": "In case of max_send_buffer_size err from above if condition, why we are copying the new values to NFS_pcp.rpc \u003d updates-\u003erpc ? and passing it to rpc_init_or_update().\nand on error we have to revert the core_params to the initial state which is also seems to be not happening. \n\nAm I missing some code flow here?\nplease help me in understanding this.",
+      "revId": "a007f355f5f3d24058640d8b93499b7010022279",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb5c342f_54b802c2",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-09-02T07:07:39Z",
+      "side": 1,
+      "message": "Now it seems to be fine.\nDone",
+      "parentUuid": "8eb8a992_f0d94263",
       "revId": "a007f355f5f3d24058640d8b93499b7010022279",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -99,6 +171,24 @@
       "writtenOn": "2026-09-01T11:16:21Z",
       "side": 1,
       "message": "freeing interface_name twice",
+      "revId": "a007f355f5f3d24058640d8b93499b7010022279",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b3f1453_32bcc614",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-09-02T07:07:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14da8f15_e3687935",
       "revId": "a007f355f5f3d24058640d8b93499b7010022279",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
