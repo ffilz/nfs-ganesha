@@ -16,6 +16,23 @@
       "message": "Could you actually squash these two FD accounting patches. It would make discussion easier. I think this also needs more baking before being ready for merge.",
       "revId": "e5055ad85ab6fb1d93c39042d6b47a1e229a0627",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5b22c8f_7391fcd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-09-02T07:59:56Z",
+      "side": 1,
+      "message": "Changes are really good but,\n\nI can understand till the counters were added (as part of different PR), but we should also note that there can be situations in which multiple close_fsal_fd gets called for the same FD (for global fd it happens, and have seen):\nproof : below check is for same purpose in close_fsal_fd() \n  /* Check makes sure that alreday removed entry\n   * is not getting removed causing ref count issue */\n   if (!glist_null(\u0026fsal_fd-\u003efd_lru))\n       remove_fd_lru(fsal_fd);\n   else\n       LogFullDebug(COMPONENT_FSAL, \"fsal_fd %p (release path race)\", fsal_fd);\n\nso for state FD also it might(not sure) possible for multiple close on same FD, which will reduce the FSAL_FD_STATE counters multiple times. that will cause all the new logic to behave badly.\n\n\nuntil we get a solid validation of total counters (temp+state+global) and counters proper working, better to park these changes aside, and can be revisited later.",
+      "revId": "e5055ad85ab6fb1d93c39042d6b47a1e229a0627",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
