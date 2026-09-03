@@ -26,6 +26,6 @@
 #include <sstream>
 
 // Read Key files
-std::string read_cert_file(std::string_view filepath);
+std::string read_cert_file(const char *filepath);
 
 #endif //NFSSERVICEUTIL_H

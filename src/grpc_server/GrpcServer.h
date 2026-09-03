@@ -30,6 +30,7 @@
 #include <memory>
 #include <thread>
 #include <mutex>
+#include "nfsMetricsService.h"
 #include "nfsService.h"
 
 /* gRPC Server */
@@ -72,6 +73,7 @@ class GrpcServer {
 	ExportStatsService exportStatsService;
 	ExportService exportService;
 	CacheMgrService cachemgr;
+	NfsMetricsService nfsMetricsService;
 };
 
 extern GrpcServer ganesha_grpc_server;

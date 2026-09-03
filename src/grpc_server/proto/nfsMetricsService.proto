@@ -1,0 +1,58 @@
+/* SPDX-License-Identifier: LGPL-3.0-or-later */
+
+syntax = "proto3";
+
+package ganesha.metrics;
+
+service NfsMetricsService
+{
+	rpc CollectMetrics(CollectMetricsRequest)
+		returns (CollectMetricsResponse);
+}
+
+message CollectMetricsRequest
+{
+	bool include_empty_metrics = 1;
+}
+
+message ExplicitBuckets
+{
+	repeated double bounds = 1;
+}
+
+message Distribution
+{
+	int64 count = 1;
+	double mean = 2;
+	double minimum = 3;
+	double maximum = 4;
+	double sum_of_squared_deviation = 5;
+	repeated int64 bucket_counts = 6;
+	ExplicitBuckets explicit_buckets = 7;
+}
+
+message MetricValue
+{
+	map<string, string> labels = 1;
+	int64 start_time_unix_nanos = 2;
+	int64 end_time_unix_nanos = 3;
+	oneof value
+	{
+		bool bool_value = 4;
+		int64 int64_value = 5;
+		double double_value = 6;
+		string string_value = 7;
+		Distribution distribution_value = 8;
+	}
+}
+
+message MetricValueSet
+{
+	string metric_name = 1;
+	repeated MetricValue metric_values = 2;
+}
+
+message CollectMetricsResponse
+{
+	repeated MetricValueSet metric_value_sets = 1;
+}

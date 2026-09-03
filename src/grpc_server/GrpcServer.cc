@@ -95,20 +95,34 @@ void GrpcServer::gRPCServerStart(uint16_t port, std::string server_crt,
 			server_address_ = ip_addr + ":" + std::to_string(port);
 		}
 
-		grpc::SslServerCredentialsOptions::PemKeyCertPair
-			key_cert_pair = { std::move(server_key),
-					  std::move(server_crt) };
+		std::shared_ptr<grpc::ServerCredentials> server_creds;
+		if (server_key.empty() || server_crt.empty() ||
+		    ca_crt.empty()) {
+			LogInfo(COMPONENT_GRPC,
+				"Certificates not provided; starting gRPC server with LocalServerCredentials on %s",
+				server_address_.c_str());
+			server_creds =
+				grpc::experimental::LocalServerCredentials(
+					LOCAL_TCP);
+		} else {
+			LogInfo(COMPONENT_GRPC,
+				"Starting gRPC server with SSL/mTLS credentials on %s",
+				server_address_.c_str());
+			grpc::SslServerCredentialsOptions::PemKeyCertPair
+				key_cert_pair = { std::move(server_key),
+						  std::move(server_crt) };
 
-		grpc::SslServerCredentialsOptions ssl_opts;
-		ssl_opts.pem_key_cert_pairs.push_back(std::move(key_cert_pair));
+			grpc::SslServerCredentialsOptions ssl_opts;
+			ssl_opts.pem_key_cert_pairs.push_back(
+				std::move(key_cert_pair));
 
-		/* To validate client certificates */
-		ssl_opts.pem_root_certs = std::move(ca_crt);
-		ssl_opts.client_certificate_request =
-			GRPC_SSL_REQUEST_AND_REQUIRE_CLIENT_CERTIFICATE_AND_VERIFY;
+			/* To validate client certificates */
+			ssl_opts.pem_root_certs = std::move(ca_crt);
+			ssl_opts.client_certificate_request =
+				GRPC_SSL_REQUEST_AND_REQUIRE_CLIENT_CERTIFICATE_AND_VERIFY;
 
-		std::shared_ptr<grpc::ServerCredentials> server_creds =
-			grpc::SslServerCredentials(ssl_opts);
+			server_creds = grpc::SslServerCredentials(ssl_opts);
+		}
 
 		grpc::ServerBuilder builder;
 		/* Adding the listening port */
@@ -136,6 +150,8 @@ void GrpcServer::gRPCServerStart(uint16_t port, std::string server_crt,
 		builder.RegisterService(&exportService);
 
 		builder.RegisterService(&cachemgr);
+
+		builder.RegisterService(&nfsMetricsService);
 
 		/* Reflection Service to enable grpc CLI */
 		grpc::reflection::InitProtoReflectionServerBuilderPlugin();
@@ -191,24 +207,14 @@ void grpc__init(uint16_t port, char *server_crt, char *server_key, char *ca_crt,
 		 "Path to server certificate: %s "
 		 "Path to server key : %s"
 		 "Path to ca certificate : %s",
-		 server_crt, server_key, ca_crt);
+		 server_crt ? server_crt : "none",
+		 server_key ? server_key : "none", ca_crt ? ca_crt : "none");
 
 	std::string key = read_cert_file(server_key);
 	std::string cert = read_cert_file(server_crt);
 	std::string ca = read_cert_file(ca_crt);
 
-	/* If the key or certificated files are not found
-    ** than gRPC cannot run securely, hence exiting.
-    */
-	if (key.empty() || cert.empty() || ca.empty()) {
-		LogWarn(COMPONENT_GRPC,
-			"Failed to get server key or server certificate or CA certificate."
-			"gRPC server failed to start");
-
-		return;
-	}
-
-	/* Start gRPC server */
+	/* Start gRPC server (uses LocalServerCredentials if certs are empty) */
 	ganesha_grpc_server.start(port, cert, key, ca, ipstring,
 				  addr->ss_family);
 

@@ -25,15 +25,17 @@
 #include <nfsServiceUtil.h>
 
 // Utility function for reading key files
-std::string read_cert_file(std::string_view filepath)
+std::string read_cert_file(const char *filepath)
 {
-	std::ifstream file_stream(std::string(filepath),
-				  std::ios::in | std::ios::binary);
+	if (filepath == nullptr || filepath[0] == '\0') {
+		return "";
+	}
+
+	std::ifstream file_stream(filepath, std::ios::in | std::ios::binary);
 	std::ostringstream buffer;
 
 	if (!file_stream.is_open()) {
-		LogWarn(COMPONENT_GRPC, "Failed to open file: %.*s",
-			(int)filepath.size(), filepath.data());
+		LogWarn(COMPONENT_GRPC, "Failed to open file: %s", filepath);
 
 		return "";
 	}

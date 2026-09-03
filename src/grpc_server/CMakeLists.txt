@@ -32,7 +32,8 @@ set(SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/GrpcServer.cc
     ${PROTO_HDRS}
     ${CMAKE_CURRENT_SOURCE_DIR}/nfsServiceUtil.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/nfsServiceClient.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/nfsServiceServer.cc)
+    ${CMAKE_CURRENT_SOURCE_DIR}/nfsServiceServer.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/nfsMetricsService.cc)
 
 add_library(gRPCLibrary OBJECT ${SOURCE_FILES})
 
@@ -48,6 +49,13 @@ target_link_libraries(gRPCLibrary
             target_include_directories(gRPCLibrary PRIVATE
                       ${PROTOBUF_INCLUDE_DIR}
                        ${CMAKE_SOURCE_DIR}/grpc_server/proto)
+
+if(USE_MONITORING)
+    target_include_directories(gRPCLibrary PRIVATE
+        ${PROJECT_SOURCE_DIR}/libntirpc/src/monitoring/prometheus-cpp-lite/core/include
+        ${PROJECT_SOURCE_DIR}/libntirpc/src/monitoring/include)
+    target_link_libraries(gRPCLibrary PRIVATE ntirpcmonitoring)
+endif(USE_MONITORING)
 
 set_target_properties(gRPCLibrary PROPERTIES COMPILE_FLAGS "-fPIC")
 
