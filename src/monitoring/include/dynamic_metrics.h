@@ -145,11 +145,10 @@ static inline void dynamic_metrics__mdcache_cache_miss(
 {
 }
 
-static inline void dynamic_export_info(const char *UNSED(path),
-				       const uint64_t UNUSED(total_size),
-				       const uint64_t UNUSED(avail_size),
-				       const uint64_t UNUSED(total_files),
-				       const uint64_t UNUSED(avail_files))
+static inline void dynamic_metrics_export_info(
+	const char *UNUSED(path), const uint64_t UNUSED(total_size),
+	const uint64_t UNUSED(avail_size), const uint64_t UNUSED(total_files),
+	const uint64_t UNUSED(avail_files))
 {
 }
 
