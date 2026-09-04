@@ -315,6 +315,40 @@ int foreach_gsh_client(bool (*cb)(struct gsh_client *cl, void *state),
 	return cnt;
 }
 
+/**
+ * @brief Check if a client is actively connected
+ *
+ * A client is considered connected if:
+ * 1. It has active operations or NFSv4 state (refcnt > 0), OR
+ * 2. It has had recent activity within the configured timeout period
+ *
+ * @param[in] cl_node  The client to check
+ *
+ * @return true if connected, false otherwise
+ */
+static inline bool client_is_connected(struct gsh_client *cl_node)
+{
+        int64_t refcnt;
+        struct timespec now;
+        time_t last_sec, elapsed;
+
+        /* Check if client has active operations or NFSv4 state */
+        refcnt = atomic_fetch_int64_t(&cl_node->refcnt);
+        if (refcnt > 0)
+                return true;
+
+        /* Check recent activity */
+        clock_gettime(CLOCK_REALTIME, &now);
+
+        /* Atomic read of last_update timestamp */
+        last_sec = (time_t)atomic_fetch_uint64_t(
+                (uint64_t *)&cl_node->last_update.tv_sec);
+
+        elapsed = now.tv_sec - last_sec;
+
+        return (elapsed < nfs_param.core_param.client_activity_timeout_sec);
+}
+
 #ifdef USE_DBUS
 
 /* DBUS helpers
@@ -485,40 +519,6 @@ void client_state_stats(DBusMessageIter *iter, struct gsh_client *cl_node)
 				       &cl_node->state_stats[STATE_TYPE_DELEG]);
 
 	dbus_message_iter_close_container(iter, &ss_iter);
-}
-
-/**
- * @brief Check if a client is actively connected
- *
- * A client is considered connected if:
- * 1. It has active operations or NFSv4 state (refcnt > 0), OR
- * 2. It has had recent activity within the configured timeout period
- *
- * @param[in] cl_node  The client to check
- *
- * @return true if connected, false otherwise
- */
-static inline bool client_is_connected(struct gsh_client *cl_node)
-{
-	int64_t refcnt;
-	struct timespec now;
-	time_t last_sec, elapsed;
-
-	/* Check if client has active operations or NFSv4 state */
-	refcnt = atomic_fetch_int64_t(&cl_node->refcnt);
-	if (refcnt > 0)
-		return true;
-
-	/* Check recent activity */
-	clock_gettime(CLOCK_REALTIME, &now);
-
-	/* Atomic read of last_update timestamp */
-	last_sec = (time_t)atomic_fetch_uint64_t(
-		(uint64_t *)&cl_node->last_update.tv_sec);
-
-	elapsed = now.tv_sec - last_sec;
-
-	return (elapsed < nfs_param.core_param.client_activity_timeout_sec);
 }
 
 static bool client_to_dbus(struct gsh_client *cl_node, void *state)
