@@ -4677,11 +4677,6 @@ static inline bool is_mem_stats_disabled(void)
 	return nfs_param.core_param.mem_stats_disable;
 }
 
-static char *mem_stats_status_message(void)
-{
-	return is_mem_stats_disabled() ? "inactive" : "active";
-}
-
 void gsh_mem_stats_update_alloc(void *p, mem_components_t comp,
 				const char *file, int line,
 				const char *function)
@@ -4858,6 +4853,11 @@ void gsh_log_mem_stats(void)
 }
 
 #ifdef USE_DBUS
+static char *mem_stats_status_message(void)
+{
+	return is_mem_stats_disabled() ? "inactive" : "active";
+}
+
 void get_comp_memory_statistics(DBusMessageIter *iter)
 {
 	uint32_t index;
