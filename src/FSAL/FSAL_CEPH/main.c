@@ -111,6 +111,157 @@ struct ceph_fsal_module
 				    .readdir_mode = FSAL_RDDIR_CHUNK_NEVER,
 			    } } };
 
+/* -------------------------------------------------------------------------
+ * USERS sub-block parsing
+ *
+ * Each USERS block inside CEPH {} describes the credentials for one CephFS
+ * filesystem.  The three items are:
+ *   FileSystem = <name> ;
+ *   Userids    = user1, user2, ... ;   (comma-separated list)
+ *   Keys       = key1,  key2,  ... ;   (comma-separated list)
+ * -------------------------------------------------------------------------
+ */
+
+/**
+ * @brief CONFIG_PROC handler – append one token to cp_userids[]
+ */
+static int cp_userid_adder(const char *token, enum term_type type_hint,
+			   struct config_item *item, void *param_addr,
+			   void *cnode, struct config_error_type *err_type)
+{
+	struct ceph_client_pool_users *cpu =
+		container_of(param_addr, struct ceph_client_pool_users,
+			     cp_userids);
+	if (cpu->cp_uid_count >= CEPH_MAX_CLIENTS_PER_POOL) {
+		LogWarn(COMPONENT_FSAL,
+			"USERS block: too many Userids (max %d)",
+			CEPH_MAX_CLIENTS_PER_POOL);
+		err_type->invalid = true;
+		return 1;
+	}
+	cpu->cp_userids[cpu->cp_uid_count] = gsh_strdup(token, MEM_COMP_CONFIG);
+	cpu->cp_uid_count++;
+	return 0;
+}
+
+/**
+ * @brief CONFIG_PROC handler – append one token to cp_keys[]
+ */
+static int cp_key_adder(const char *token, enum term_type type_hint,
+			struct config_item *item, void *param_addr, void *cnode,
+			struct config_error_type *err_type)
+{
+	struct ceph_client_pool_users *cpu =
+		container_of(param_addr, struct ceph_client_pool_users,
+			     cp_keys);
+	if (cpu->cp_key_count >= CEPH_MAX_CLIENTS_PER_POOL) {
+		LogWarn(COMPONENT_FSAL, "USERS block: too many Keys (max %d)",
+			CEPH_MAX_CLIENTS_PER_POOL);
+		err_type->invalid = true;
+		return 1;
+	}
+	cpu->cp_keys[cpu->cp_key_count] = gsh_strdup(token, MEM_COMP_CONFIG);
+	cpu->cp_key_count++;
+	return 0;
+}
+
+/* items inside a USERS { } sub-block */
+static struct config_item users_block_params[] = {
+	CONF_ITEM_STR("FileSystem", 1, NAME_MAX, NULL, ceph_client_pool_users,
+		      cp_filesystem),
+	CONF_ITEM_PROC_MULT("Userids", noop_conf_init, cp_userid_adder,
+			    ceph_client_pool_users, cp_userids),
+	CONF_ITEM_PROC_MULT("Keys", noop_conf_init, cp_key_adder,
+			    ceph_client_pool_users, cp_keys),
+	CONFIG_EOL
+};
+
+/**
+ * @brief init callback for a USERS sub-block
+ */
+static void *users_block_init(void *link_mem, void *self_struct)
+{
+	struct ceph_client_pool_users *cpu;
+
+	if (link_mem == NULL) {
+		/* defaults pass – nothing to do, return existing struct */
+		return self_struct;
+	}
+	if (self_struct == NULL) {
+		/* allocation pass */
+		cpu = gsh_calloc(1, sizeof(*cpu), MEM_COMP_CONFIG);
+		glist_init(&cpu->cp_node);
+		return cpu;
+	}
+
+	/* free-resources pass (error path) */
+	cpu = self_struct;
+	uint32_t i;
+
+	gsh_free(cpu->cp_filesystem, MEM_COMP_CONFIG);
+	for (i = 0; i < cpu->cp_uid_count; i++)
+		gsh_free(cpu->cp_userids[i], MEM_COMP_CONFIG);
+	for (i = 0; i < cpu->cp_key_count; i++)
+		gsh_free(cpu->cp_keys[i], MEM_COMP_CONFIG);
+	gsh_free(cpu, MEM_COMP_CONFIG);
+	return NULL;
+}
+
+/**
+ * @brief commit callback for a USERS sub-block
+ *
+ * Validates that:
+ *   1. FileSystem is specified.
+ *   2. The number of userids AND keys both equal CephFSM.clnts_per_pool.
+ * On success, links the cpu entry into CephFSM.cp_users_list.
+ */
+static int users_block_commit(void *node, void *link_mem, void *self_struct,
+			      struct config_error_type *err_type)
+{
+	struct ceph_client_pool_users *cpu = self_struct;
+	struct ceph_fsal_module *module =
+		container_of(link_mem, struct ceph_fsal_module, cp_users_list);
+	uint16_t pool = module->clnts_per_pool;
+	int errcnt = 0;
+
+	if (cpu->cp_filesystem == NULL) {
+		LogWarn(COMPONENT_FSAL, "USERS block: FileSystem is mandatory");
+		err_type->missing = true;
+		errcnt++;
+	}
+	if (cpu->cp_uid_count != pool) {
+		LogWarn(COMPONENT_FSAL,
+			"USERS block (fs=%s): Userids count %u != clients_per_pool %u",
+			cpu->cp_filesystem ? cpu->cp_filesystem : "<unset>",
+			cpu->cp_uid_count, pool);
+		err_type->invalid = true;
+		errcnt++;
+	}
+	if (cpu->cp_key_count != pool) {
+		LogWarn(COMPONENT_FSAL,
+			"USERS block (fs=%s): Keys count %u != clients_per_pool %u",
+			cpu->cp_filesystem ? cpu->cp_filesystem : "<unset>",
+			cpu->cp_key_count, pool);
+		err_type->invalid = true;
+		errcnt++;
+	}
+	if (errcnt != 0) {
+		users_block_init(link_mem, self_struct); /* free resources */
+		return errcnt;
+	}
+
+	glist_add_tail(&module->cp_users_list, &cpu->cp_node);
+
+	LogDebug(COMPONENT_FSAL,
+		 "USERS block committed: fs=%s, clients_per_pool=%u",
+		 cpu->cp_filesystem, pool);
+	for (int i = 0; i < pool; i++) {
+		LogDebug(COMPONENT_FSAL, "User: %s, Key: %s",
+			 cpu->cp_userids[i], cpu->cp_keys[i]);
+	}
+	return 0;
+}
+
 static int ceph_conf_commit(void *node, void *link_mem, void *self_struct,
 			    struct config_error_type *err_type)
 {
@@ -121,6 +272,11 @@ static int ceph_conf_commit(void *node, void *link_mem, void *self_struct,
 			"client_oc and zerocopy are incompatible");
 		err_type->invalid = true;
 		return 1;
+	}
+	if (CephFSM->clnts_per_pool == 0) {
+		LogWarn(COMPONENT_FSAL,
+			"clients_per_pool must be >= 1, resetting to 1");
+		CephFSM->clnts_per_pool = 1;
 	}
 
 	return 0;
@@ -143,6 +299,8 @@ static struct config_item ceph_items[] = {
 	CONF_ITEM_STR("nodeid", 1, MAXPATHLEN, NULL, ceph_fsal_module, nodeid),
 	CONF_ITEM_UI16("max_ceph_clients", 0, UINT16_MAX, 0, ceph_fsal_module,
 		       max_ceph_clients),
+	CONF_ITEM_UI32("clients_per_pool", 1, CEPH_MAX_CLIENTS_PER_POOL, 1,
+		       ceph_fsal_module, clnts_per_pool),
 	CONFIG_EOL
 };
 
@@ -154,6 +312,42 @@ static struct config_block ceph_block = {
 	.blk_desc.u.blk.init = noop_conf_init,
 	.blk_desc.u.blk.params = ceph_items,
 	.blk_desc.u.blk.commit = ceph_conf_commit,
+	.mem_comp = MEM_COMP_CONFIG
+};
+
+/* -------------------------------------------------------------------------
+ * CEPH_USERS top-level block
+ *
+ * This is a separate top-level block so it can be re-read on SIGHUP without
+ * restarting Ganesha.  It holds:
+ *
+ *   CEPH_USERS {
+ *       USERS {
+ *           FileSystem = <name>;
+ *           Userids    = u1, u2, ...;
+ *           Keys       = k1, k2, ...;
+ *       }
+ *       USERS { ... }               # one per filesystem
+ *   }
+ * On reload (SIGHUP) the old cp_users_list is torn down under cp_users_lock
+ * then rebuilt from the new parse tree.
+ */
+
+static struct config_item ceph_users_items[] = {
+	CONF_ITEM_BLOCK_MULT("USERS", users_block_params, users_block_init,
+			     users_block_commit, ceph_fsal_module,
+			     cp_users_list),
+	CONFIG_EOL
+};
+
+static struct config_block ceph_users_block = {
+	.dbus_interface_name = "org.ganesha.nfsd.config.fsal.ceph.users",
+	.blk_desc.name = "CEPH_USERS",
+	.blk_desc.type = CONFIG_BLOCK,
+	.blk_desc.flags = CONFIG_UNIQUE,
+	.blk_desc.u.blk.init = noop_conf_init,
+	.blk_desc.u.blk.params = ceph_users_items,
+	.blk_desc.u.blk.commit = noop_conf_commit,
 	.mem_comp = MEM_COMP_CONFIG
 };
 
@@ -173,13 +367,149 @@ static fsal_status_t init_config(struct fsal_module *module_in,
 
 	LogDebug(COMPONENT_FSAL, "Ceph module setup.");
 
+	/* ceph client pool related initialization */
+	PTHREAD_RWLOCK_init(&myself->cp_users_lock, NULL);
+	glist_init(&myself->cp_users_list);
+	myself->clnts_per_pool = 1;
+
+	/* Parse the main CEPH { } block */
 	(void)load_config_from_parse(config_struct, &ceph_block, myself, true,
 				     err_type);
 	if (!config_error_is_harmless(err_type))
 		return fsalstat(ERR_FSAL_INVAL, 0);
 
+	/* Parse the CEPH_USERS { } block (optional — no error if absent) */
+	(void)load_config_from_parse(config_struct, &ceph_users_block, myself,
+				     true, err_type);
+	if (!config_error_is_harmless(err_type))
+		return fsalstat(ERR_FSAL_INVAL, 0);
+
 	display_fsinfo(&myself->fsal);
 	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+void ceph_free_users_list(void)
+{
+	struct glist_head *gl, *gln;
+	struct ceph_client_pool_users *cpu;
+	uint32_t i;
+
+	glist_for_each_safe(gl, gln, &CephFSM.cp_users_list) {
+		cpu = container_of(gl, struct ceph_client_pool_users, cp_node);
+		glist_del(&cpu->cp_node);
+
+		gsh_free(cpu->cp_filesystem, MEM_COMP_CONFIG);
+		for (i = 0; i < cpu->cp_uid_count; i++) {
+			gsh_free(cpu->cp_userids[i], MEM_COMP_CONFIG);
+			gsh_free(cpu->cp_keys[i], MEM_COMP_CONFIG);
+		}
+		gsh_free(cpu, MEM_COMP_CONFIG);
+	}
+}
+
+/**
+ * @brief Re-read the CEPH_USERS block on SIGHUP.
+ *
+ * Called by the FSAL framework's update_config op (triggered by SIGHUP)
+ */
+static fsal_status_t ceph_update_config(struct fsal_module *module_in,
+					config_file_t config_struct,
+					struct config_error_type *err_type)
+{
+	struct ceph_fsal_module *myself =
+		container_of(module_in, struct ceph_fsal_module, fsal);
+	struct ceph_fsal_module staging;
+
+	memset(&staging, 0, sizeof(staging));
+	glist_init(&staging.cp_users_list);
+	staging.clnts_per_pool = myself->clnts_per_pool;
+
+	LogEvent(COMPONENT_FSAL,
+		 "CEPH_USERS: reloading CEPH_USERS on config update");
+
+	/* Parse into the staging area — no lock held during parsing */
+	(void)load_config_from_parse(config_struct, &ceph_users_block, &staging,
+				     true, err_type);
+	if (!config_error_is_harmless(err_type)) {
+		LogCrit(COMPONENT_FSAL,
+			"CEPH_USERS: error reloading credentials");
+		/* Free any entries the partial parse may have committed. */
+		struct glist_head *gl, *gln;
+		struct ceph_client_pool_users *cpu;
+		uint32_t i;
+
+		glist_for_each_safe(gl, gln, &staging.cp_users_list) {
+			cpu = container_of(gl, struct ceph_client_pool_users,
+					   cp_node);
+			glist_del(&cpu->cp_node);
+			gsh_free(cpu->cp_filesystem, MEM_COMP_CONFIG);
+			for (i = 0; i < cpu->cp_uid_count; i++) {
+				gsh_free(cpu->cp_userids[i], MEM_COMP_CONFIG);
+				gsh_free(cpu->cp_keys[i], MEM_COMP_CONFIG);
+			}
+			gsh_free(cpu, MEM_COMP_CONFIG);
+		}
+		return fsalstat(ERR_FSAL_INVAL, 0);
+	}
+
+	/* Swap the lists */
+	PTHREAD_RWLOCK_wrlock(&myself->cp_users_lock);
+
+	/* Free the old live list */
+	ceph_free_users_list();
+
+	/* Move staged entries into the live list */
+	glist_splice_tail(&myself->cp_users_list, &staging.cp_users_list);
+
+	PTHREAD_RWLOCK_unlock(&myself->cp_users_lock);
+
+	LogEvent(COMPONENT_FSAL, "CEPH_USERS reloaded");
+	return fsalstat(ERR_FSAL_NO_ERROR, 0);
+}
+
+/**
+ * @brief Look up client-pool credentials for a filesystem by slot index.
+ */
+bool ceph_client_pool_lookup(const char *fs_name, uint16_t idx, char **user_id,
+			     char **key)
+{
+	struct glist_head *gl;
+	struct ceph_client_pool_users *cpu;
+	bool found = false;
+
+	if (user_id)
+		*user_id = NULL;
+	if (key)
+		*key = NULL;
+
+	PTHREAD_RWLOCK_rdlock(&CephFSM.cp_users_lock);
+
+	glist_for_each(gl, &CephFSM.cp_users_list) {
+		cpu = container_of(gl, struct ceph_client_pool_users, cp_node);
+
+		/* Match by filesystem name.  Both NULL means default fs. */
+		if (fs_name == NULL) {
+			if (cpu->cp_filesystem != NULL)
+				continue;
+		} else {
+			if (cpu->cp_filesystem == NULL ||
+			    strcmp(fs_name, cpu->cp_filesystem) != 0)
+				continue;
+		}
+
+		/* Found the matching filesystem entry */
+		if (idx < cpu->cp_key_count) {
+			if (user_id)
+				*user_id = cpu->cp_userids[idx];
+			if (key)
+				*key = cpu->cp_keys[idx];
+			found = true;
+		}
+		break;
+	}
+
+	PTHREAD_RWLOCK_unlock(&CephFSM.cp_users_lock);
+	return found;
 }
 
 static fsal_status_t find_cephfs_root(struct ceph_export *export, Inode **pi,
@@ -1207,6 +1537,7 @@ MODULE_INIT void init(void)
 #endif /* CEPH_PNFS */
 	myself->m_ops.create_export = create_export;
 	myself->m_ops.init_config = init_config;
+	myself->m_ops.update_config = ceph_update_config;
 	myself->m_ops.fsal_reclaim_client = node_takeover_reclaim;
 	myself->m_ops.handle_deleg_transition = handle_deleg_transition;
 	myself->m_ops.fsal_register_nfs_service = ceph_register_nfs_service;

@@ -56,6 +56,31 @@
 /* Max length of a secret key for this user */
 #define MAXSECRETLEN (88)
 
+/* Upper bound on clients_per_pool number (safety cap) */
+#define CEPH_MAX_CLIENTS_PER_POOL (64)
+
+/**
+ * @brief USERS sub-block entry.
+ *
+ * Holds the filesystem name and parallel arrays of user-ids and secret keys
+ * whose element count equals ceph_fsal_module::clients_per_pool.
+ * The entry is linked into ceph_fsal_module::cp_users_list via cp_node.
+ */
+struct ceph_client_pool_users {
+	/** Link in ceph_fsal_module::cp_users_list */
+	struct glist_head cp_node;
+	/** CephFS filesystem name this entry applies to */
+	char *cp_filesystem;
+	/** Number of user-ids appended so far (filled by Userids handler) */
+	uint32_t cp_uid_count;
+	/** Number of secret-keys appended so far (filled by Keys handler) */
+	uint32_t cp_key_count;
+	/** Parsed user-id strings (cp_uid_count entries) */
+	char *cp_userids[CEPH_MAX_CLIENTS_PER_POOL];
+	/** Parsed secret-key strings (cp_key_count entries) */
+	char *cp_keys[CEPH_MAX_CLIENTS_PER_POOL];
+};
+
 /**
  * Ceph Main (global) module object
  */
@@ -64,15 +89,20 @@ struct ceph_fsal_module {
 	struct fsal_module fsal;
 	struct fsal_obj_ops handle_ops;
 	char *conf_path;
-	bool client_oc;
-	uint64_t client_oc_size;
-	uint64_t client_oc_max_dirty;
 	uint16_t max_ceph_clients;
 	bool async;
 	bool zerocopy;
 	bool use_old_uuid;
 	bool register_service;
 	char *nodeid;
+	/* client_oc related */
+	bool client_oc;
+	uint64_t client_oc_size;
+	uint64_t client_oc_max_dirty;
+	/* ceph client pool related */
+	uint16_t clnts_per_pool;
+	struct glist_head cp_users_list;
+	pthread_rwlock_t cp_users_lock;
 };
 extern struct ceph_fsal_module CephFSM;
 
@@ -289,4 +319,10 @@ extern void enable_delegations(struct ceph_mount *cm,
 			       struct gsh_export *export);
 void ceph_join_deleg(struct fridgethr_context *ctx);
 void ceph_deleg_cb(Fh *fh, void *vhdl);
+
+/* ceph client pool related */
+bool ceph_client_pool_lookup(const char *fs_name, uint16_t idx, char **user_id,
+			     char **key);
+void ceph_free_users_list(void);
+
 #endif /* !FSAL_CEPH_INTERNAL_INTERNAL__ */

@@ -107,6 +107,43 @@ max_ceph_clients(uint16, range 0 to UINT16_MAX, default 0)
     When number of ceph clients attached to Ganesha exceeds the limit, Ganesha
     will stop exporting new exports which need dedicated new ceph client.
 
+clients_per_pool(uint16, range 0 to 64, default 1)
+    Sets the number of ceph clients in the pool. This is part of "ceph client
+    pool" feature. In this feature, the administrator defines number of ceph
+    clients which can be used to serve all exports having cmount_path as "/".
+    By default for a given ceph filesystem, all exports with cmount_path "/",
+    will be served by a single ceph client. For improved performance, one can
+    make use of ceph client pool, and define how many ceph clients will be part
+    of this pool.
+
+CEPH_USERS {}
+--------------------------------------------------------------------------------
+CEPH_USERS includes one or more USERS{} blocks.
+
+CEPH_USERS {
+    USERS {
+        Filesystem = <name> ;
+        Userids    = user1, user2, ... ;   (comma-separated list)
+        Keys       = key1,  key2,  ... ;   (comma-separated list)
+    }
+    USERS {..}
+}
+
+USERS {}
+--------------------------------------------------------------------------------
+FileSystem
+    Indicates that provided users and keys in this blocks are related to this
+    ceph filesystem.
+
+Userids
+    A comma separated list of ceph auth users. These users have permissions to
+    work on the file system mentioned in the filed "FileSystem".
+
+Keys
+    A comma separated list of secret keys associated with above mentioned list
+    of ceph auth users.
+
+
 See also
 ==============================
 :doc:`ganesha-config <ganesha-config>`\(8)

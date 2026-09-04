@@ -36,6 +36,7 @@ QOS_DEFAULT_CONFIG {}
 (*) KMIP { HOST {} }
 TLS_CONFIG {}
 GRPC {}
+CEPH_USERS { USERS {} }
 
 Notably the following FSALs do not have a global config block:
 
@@ -1204,6 +1205,9 @@ CEPH {}
 
 	max_ceph_clients(uint16, range 0 to UINT16_MAX, default 0)
 
+	clients_per_pool(uint16, range 0 to 64, default 0)
+
+
 GPFS {}
 -------
 
@@ -1528,3 +1532,20 @@ GRPC {}
     Grpc_Addr (IPv4 or IPv6 addr, default 0.0.0.0)
 
     Grpc_Enable (bool, default true)
+
+
+CEPH_USERS { USERS {} }
+-----------------------
+	FileSystem(string, no default)
+	   Name of the file system for which the ceph auth users and keys are
+	   being provided.
+
+	Userids(list of strings, no default)
+	   List of ceph auth users created for the file system mentioned via
+	   FileSystem. The total numbers of users should match
+	   "clients_per_pool"
+
+	Keys(list of strings, no default))
+	   List of secret keys for ceph auth users listed in "Userids".
+	   The total numbers of keys should match "clients_per_pool"
+
