@@ -1718,6 +1718,12 @@ bool rpc_init_or_update(void)
 		nfs_param.core_param.rpc.rdma_credits);
 #endif
 
+	/* TCP MSG_ZEROCOPY parameters (Linux only) */
+	svc_params.tcp_zerocopy_enabled =
+		nfs_param.core_param.rpc.tcp_zerocopy.tcp_zerocopy_enabled;
+	svc_params.tcp_zerocopy_min_bytes =
+		nfs_param.core_param.rpc.tcp_zerocopy.tcp_zerocopy_min_bytes;
+
 	/* Only after TI-RPC allocators, log channel are setup */
 	return svc_init(&svc_params);
 }
