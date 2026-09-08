@@ -23,6 +23,7 @@
 #include "config_parsing.h"
 #include "conf_url.h"
 #include "conf_url_rados.h"
+#include "abstract_atomic.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <regex.h>
@@ -41,6 +42,8 @@ static uint64_t rados_watch_cookie;
 static char *rados_watch_oid;
 static pthread_t service_update;
 static bool service_update_started;
+/* Accessed atomically because the heartbeat does not take url_rwlock. */
+static uint8_t service_update_stop;
 
 static struct rados_url_parameter {
 	/** Path to ceph.conf */
@@ -133,8 +136,8 @@ extern struct config_error_type err_type;
  * continuously updates the daemon's heartbeat entry so that
  * the monitor (MON) keeps the service marked as "alive".
  *
- * The function runs as long as the global 'initialized'
- * flag remains true. Every 5 seconds it calls
+ * The function runs until shutdown sets the atomic stop flag.
+ * Every 5 seconds it calls
  * rados_service_update_status(cluster, ""), which refreshes
  * the daemon's status in the Ceph service map.
  *
@@ -142,7 +145,7 @@ extern struct config_error_type err_type;
  */
 static void *rados_service_update(void *)
 {
-	while (initialized) {
+	while (!atomic_fetch_uint8_t(&service_update_stop)) {
 		rados_service_update_status(cluster, "");
 		sleep(5);
 	}
@@ -190,6 +193,8 @@ void register_service_to_ceph(char *nodeid)
 		return;
 	}
 	gsh_free(daemon_instance, MEM_COMP_CONFIG);
+
+	atomic_store_uint8_t(&service_update_stop, 0);
 
 	if (pthread_create(&service_update, NULL, rados_service_update, NULL) !=
 	    0) {
@@ -260,12 +265,15 @@ static void cu_rados_url_shutdown(void)
 {
 	if (initialized) {
 		if (service_update_started) {
+			/* Stop before joining, even during sleep(5). */
+			atomic_store_uint8_t(&service_update_stop, 1);
 			int rc = pthread_join(service_update, NULL);
 
 			if (rc != 0)
 				LogWarn(COMPONENT_CONFIG,
 					"Failed to join service_update thread:%d",
 					rc);
+			service_update_started = false;
 		}
 
 		rados_shutdown(cluster);
