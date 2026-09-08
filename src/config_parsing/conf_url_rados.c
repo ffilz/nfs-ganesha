@@ -30,6 +30,7 @@
 #include <pthread.h>
 #include "log.h"
 #include "sal_functions.h"
+#include "gsh_rados_watch.h"
 #include <string.h>
 
 #define safe_sizeof(v) (size##of v)
@@ -38,8 +39,8 @@ static regex_t url_regex;
 static rados_t cluster;
 static bool initialized;
 static rados_ioctx_t rados_watch_io_ctx;
-static uint64_t rados_watch_cookie;
 static char *rados_watch_oid;
+static struct gsh_rados_watch url_watch;
 static pthread_t service_update;
 static bool service_update_started;
 /* Accessed atomically because the heartbeat does not take url_rwlock. */
@@ -261,9 +262,26 @@ static void cu_rados_url_init(void)
 	rados_url_client_setup();
 }
 
+void rados_url_shutdown_watch(void)
+{
+	if (rados_watch_oid) {
+		/* Must complete before the ioctx goes away */
+		gsh_rados_watch_unregister(&url_watch);
+
+		rados_ioctx_destroy(rados_watch_io_ctx);
+		rados_watch_io_ctx = NULL;
+		gsh_free(rados_watch_oid, MEM_COMP_CONFIG);
+		rados_watch_oid = NULL;
+		/* Leave teardown of client to the %url parser shutdown */
+	}
+}
+
 static void cu_rados_url_shutdown(void)
 {
 	if (initialized) {
+		/* Stop the watch monitor before destroying its client. */
+		rados_url_shutdown_watch();
+
 		if (service_update_started) {
 			/* Stop before joining, even during sleep(5). */
 			atomic_store_uint8_t(&service_update_stop, 1);
@@ -410,9 +428,9 @@ static int cu_rados_url_fetch(const char *url, FILE **f,
 
 	ret = rados_ioctx_create(cluster, pool_name, &io_ctx);
 	if (ret < 0) {
+		/* Keep the shared client alive for other URLs and the watch. */
 		LogEvent(COMPONENT_CONFIG, "%s: Failed to create ioctx",
 			 __func__);
-		cu_rados_url_shutdown();
 		goto out;
 	}
 	rados_ioctx_set_namespace(io_ctx, rados_ns);
@@ -489,13 +507,19 @@ static void rados_url_watchcb(void *arg, uint64_t notify_id, uint64_t handle,
 {
 	int ret;
 
-	/* ACK it to keep things moving */
+	/* ACK the notified handle, even if the watch is being replaced. */
 	ret = rados_notify_ack(rados_watch_io_ctx, rados_watch_oid, notify_id,
-			       rados_watch_cookie, NULL, 0);
+			       handle, NULL, 0);
 	if (ret < 0)
 		LogEvent(COMPONENT_CONFIG, "rados_notify_ack failed: %d", ret);
 
 	/* Send myself a SIGHUP */
+	kill(getpid(), SIGHUP);
+}
+
+/* Reload changes missed while the watch was down; no other path polls them. */
+static void rados_url_watch_reconcile(void)
+{
 	kill(getpid(), SIGHUP);
 }
 
@@ -505,6 +529,10 @@ int rados_url_setup_watch(void)
 	void *node;
 	char *pool = NULL, *ns = NULL, *obj = NULL;
 	char *url;
+
+	/* Re-running this would leak the ioctx and the object name */
+	if (rados_watch_oid)
+		return 0;
 
 	/* No RADOS_URLs block? Just return */
 	node = config_GetBlockNode("RADOS_URLS");
@@ -548,15 +576,22 @@ int rados_url_setup_watch(void)
 	}
 	rados_ioctx_set_namespace(rados_watch_io_ctx, ns);
 
-	ret = rados_watch3(rados_watch_io_ctx, obj, &rados_watch_cookie,
-			   rados_url_watchcb, NULL, 30, NULL);
+	/* The notify callback needs the oid, and the watch is live at once */
+	rados_watch_oid = obj;
+	obj = NULL;
+
+	ret = gsh_rados_watch_register(&url_watch, rados_watch_io_ctx,
+				       rados_watch_oid, rados_url_watchcb, NULL,
+				       30, rados_url_watch_reconcile,
+				       COMPONENT_CONFIG, MEM_COMP_CONFIG,
+				       "url_watch");
 	if (ret) {
 		rados_ioctx_destroy(rados_watch_io_ctx);
+		rados_watch_io_ctx = NULL;
+		gsh_free(rados_watch_oid, MEM_COMP_CONFIG);
+		rados_watch_oid = NULL;
 		LogEvent(COMPONENT_CONFIG,
 			 "Failed to set watch on RADOS_URLS object: %d", ret);
-	} else {
-		rados_watch_oid = obj;
-		obj = NULL;
 	}
 out:
 	gsh_free(pool, MEM_COMP_CONFIG);
@@ -564,23 +599,4 @@ out:
 	gsh_free(obj, MEM_COMP_CONFIG);
 
 	return ret;
-}
-
-void rados_url_shutdown_watch(void)
-{
-	int ret;
-
-	if (rados_watch_oid) {
-		ret = rados_unwatch2(rados_watch_io_ctx, rados_watch_cookie);
-		if (ret)
-			LogEvent(COMPONENT_CONFIG,
-				 "Failed to unwatch RADOS_URLS object: %d",
-				 ret);
-
-		rados_ioctx_destroy(rados_watch_io_ctx);
-		rados_watch_io_ctx = NULL;
-		gsh_free(rados_watch_oid, MEM_COMP_CONFIG);
-		rados_watch_oid = NULL;
-		/* Leave teardown of client to the %url parser shutdown */
-	}
 }

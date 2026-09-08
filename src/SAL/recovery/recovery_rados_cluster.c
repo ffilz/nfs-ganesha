@@ -34,6 +34,7 @@
 #include "nfs_core.h"
 #include "sal_functions.h"
 #include "recovery_rados.h"
+#include "gsh_rados_watch.h"
 
 static bool takeover;
 /* recovery rados object names for takeover */
@@ -41,7 +42,7 @@ static char object_takeover[NI_MAXHOST];
 static char object_takeover_old[NI_MAXHOST];
 /* recovery rados object name for IP based backend */
 static char object_ipbased[NI_MAXHOST];
-static uint64_t rados_watch_cookie;
+static struct gsh_rados_watch grace_watch;
 static int addr_int; /* IP address in int format */
 uint64_t cur, rec;
 
@@ -51,14 +52,21 @@ static void rados_grace_watchcb(void *arg, uint64_t notify_id, uint64_t handle,
 {
 	int ret;
 
-	/* ACK it first, so we keep things moving along */
+	/* ACK the notified handle, even if the watch is being replaced. */
 	ret = rados_notify_ack(rados_recov_io_ctx, rados_kv_param.grace_oid,
-			       notify_id, rados_watch_cookie, NULL, 0);
+			       notify_id, handle, NULL, 0);
 	if (ret < 0)
 		LogEvent(COMPONENT_RECOVERY, "rados_notify_ack failed: %d",
 			 ret);
 
 	/* Now kick the reaper to check things out */
+	nfs_notify_grace_waiters();
+	reaper_wake();
+}
+
+/* Re-read grace epochs after notifications were missed. */
+static void rados_cluster_watch_reconcile(void)
+{
 	nfs_notify_grace_waiters();
 	reaper_wake();
 }
@@ -134,9 +142,10 @@ static int rados_cluster_init(void)
 	}
 
 	/* FIXME: not sure about the 30s timeout value here */
-	ret = rados_watch3(rados_recov_io_ctx, rados_kv_param.grace_oid,
-			   &rados_watch_cookie, rados_grace_watchcb, NULL, 30,
-			   NULL);
+	ret = gsh_rados_watch_register(
+		&grace_watch, rados_recov_io_ctx, rados_kv_param.grace_oid,
+		rados_grace_watchcb, NULL, 30, rados_cluster_watch_reconcile,
+		COMPONENT_RECOVERY, MEM_COMP_RECOVERY, "grace_watch");
 	if (ret < 0) {
 		LogCrit(COMPONENT_RECOVERY,
 			"Failed to set watch on grace db: %d", ret);
@@ -581,10 +590,8 @@ static void rados_cluster_shutdown(void)
 		LogEvent(COMPONENT_RECOVERY,
 			 "Failed to start grace period on shutdown: %d", ret);
 
-	ret = rados_unwatch2(rados_recov_io_ctx, rados_watch_cookie);
-	if (ret)
-		LogEvent(COMPONENT_RECOVERY, "Failed to unwatch grace db: %d",
-			 ret);
+	/* Must complete before rados_kv_shutdown() destroys the ioctx */
+	gsh_rados_watch_unregister(&grace_watch);
 
 	rados_kv_shutdown();
 	gsh_free(nodeid, MEM_COMP_RECOVERY);
