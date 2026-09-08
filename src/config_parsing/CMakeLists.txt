@@ -71,6 +71,7 @@ if(RADOS_URLS)
   set(config_parsing_RADOS_SRCS
     ${config_parsing_RADOS_SRCS}
     conf_url_rados.c
+    ../support/gsh_rados_watch.c
     )
   add_library(ganesha_rados_urls MODULE ${config_parsing_RADOS_SRCS})
   add_sanitizers(ganesha_rados_urls)

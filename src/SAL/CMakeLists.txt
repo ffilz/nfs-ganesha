@@ -70,6 +70,7 @@ if(USE_RADOS_RECOV)
     recovery/recovery_rados_ng.c
     recovery/recovery_rados_cluster.c
     ../support/rados_grace.c
+    ../support/gsh_rados_watch.c
     )
   add_library(ganesha_rados_recov MODULE ${sal_RADOS_SRCS})
   add_sanitizers(ganesha_rados_recov)
