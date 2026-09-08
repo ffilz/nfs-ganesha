@@ -3079,7 +3079,8 @@ struct LAYOUTERROR4args {
 	offset4 lea_offset;
 	length4 lea_length;
 	stateid4 lea_stateid;
-	device_error4 lea_errors;
+	u_int lea_errors_len;
+	device_error4 *lea_errors_val;
 };
 typedef struct LAYOUTERROR4args LAYOUTERROR4args;
 
@@ -8149,6 +8150,8 @@ static inline bool xdr_IO_ADVISE4res(XDR *xdrs, IO_ADVISE4res *objp)
 	return true;
 }
 
+static inline bool xdr_device_error4(XDR *xdrs, device_error4 *objp);
+
 static inline bool xdr_LAYOUTERROR4args(XDR *xdrs, LAYOUTERROR4args *objp)
 {
 	if (!xdr_offset4(xdrs, &objp->lea_offset))
@@ -8157,11 +8160,9 @@ static inline bool xdr_LAYOUTERROR4args(XDR *xdrs, LAYOUTERROR4args *objp)
 		return false;
 	if (!xdr_stateid4(xdrs, &objp->lea_stateid))
 		return false;
-	if (!xdr_deviceid4(xdrs, objp->lea_errors.de_deviceid))
-		return false;
-	if (!xdr_nfsstat4(xdrs, &objp->lea_errors.de_status))
-		return false;
-	if (!inline_xdr_enum(xdrs, (enum_t *)&objp->lea_errors.de_opnum))
+	if (!xdr_array(xdrs, (char **)&objp->lea_errors_val,
+		       &objp->lea_errors_len, XDR_ARRAY_MAXLEN,
+		       sizeof(device_error4), (xdrproc_t)xdr_device_error4))
 		return false;
 	return true;
 }
