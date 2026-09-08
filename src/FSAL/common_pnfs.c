@@ -367,7 +367,8 @@ nfsstat4 FSAL_encode_v4_multipath(XDR *xdrs, const uint32_t num_hosts,
  * @return NFS status codes.
  */
 static nfsstat4 FSAL_encode_data_server(
-	XDR *xdrs, const struct pnfs_deviceid *deviceid, const uint32_t num_fhs,
+	XDR *xdrs, bool is_external_ds, const stateid4 *ffds_stateid,
+	const struct pnfs_deviceid *deviceid, const uint32_t num_fhs,
 	const uint16_t *ds_ids, const struct gsh_buffdesc *fhs,
 	const uint32_t ffds_efficiency, const fattr4_owner ffds_user,
 	const fattr4_owner_group ffds_group)
@@ -387,16 +388,19 @@ static nfsstat4 FSAL_encode_data_server(
 		return NFS4ERR_SERVERFAULT;
 	}
 
-	/* Encode ffds_stateid
-	 * For now, we assume only loosely coupled setup.
-	 * Hence set stateid to anonymous.
-	*/
-	stateid4 ffds_stateid;
+	stateid4 tmp_stateid;
 
-	ffds_stateid.seqid = 0;
-	memset(&ffds_stateid.other, '\0', sizeof(ffds_stateid.other));
+	if (!ffds_stateid) {
+		/* Encode the default stateid if ffds_stateid is NULL.
+		 * For now, we assume only loosely coupled setup.
+		 * Hence set stateid to anonymous.
+		 */
+		tmp_stateid.seqid = 0;
+		memset(&tmp_stateid.other, '\0', sizeof(tmp_stateid.other));
+		ffds_stateid = &tmp_stateid;
+	}
 
-	if (!xdr_stateid4(xdrs, &ffds_stateid)) {
+	if (!xdr_stateid4(xdrs, (stateid4 *)ffds_stateid)) {
 		LogMajor(COMPONENT_PNFS, "Failed encoding ffds_stateid.");
 		return NFS4ERR_SERVERFAULT;
 	}
@@ -411,15 +415,24 @@ static nfsstat4 FSAL_encode_data_server(
 		nfs_fh4 handle;
 		char buffer[NFS4_FHSIZE];
 
-		handle.nfs_fh4_val = buffer;
-		handle.nfs_fh4_len = sizeof(buffer);
-		memset(buffer, 0, sizeof(buffer));
-		nfs_status =
-			make_file_handle_ds(fhs + i, *(ds_ids + i), &handle);
-		if (nfs_status != NFS4_OK) {
-			LogMajor(COMPONENT_PNFS, "Failed converting FH %zu.",
-				 i);
-			return nfs_status;
+		if (is_external_ds) {
+			/* For external DS, we don't need to convert the
+			 * file handle. Just encode the opaque handle
+			 * received from the DS.
+			 */
+			handle.nfs_fh4_val = fhs[i].addr;
+			handle.nfs_fh4_len = fhs[i].len;
+		} else {
+			handle.nfs_fh4_val = buffer;
+			handle.nfs_fh4_len = sizeof(buffer);
+			memset(buffer, 0, sizeof(buffer));
+			nfs_status = make_file_handle_ds(fhs + i, *(ds_ids + i),
+							 &handle);
+			if (nfs_status != NFS4_OK) {
+				LogMajor(COMPONENT_PNFS,
+					 "Failed converting FH %zu.", i);
+				return nfs_status;
+			}
 		}
 		if (!xdr_bytes(xdrs, (char **)&handle.nfs_fh4_val,
 			       &handle.nfs_fh4_len, handle.nfs_fh4_len)) {
@@ -452,6 +465,8 @@ static nfsstat4 FSAL_encode_data_server(
  * xdr_ff_layout4.
  *
  * @param[out] xdrs      XDR stream
+ * @param[in]  is_external_ds  Indicate if the DS is external or not
+ * @param[in]  ffds_stateid  Stateid for the layout
  * @param[in]  deviceid  The deviceid for the layout
  * @param[in]  ffl_stripe_unit Stripe unit for current layout segment
  * @param[in]  ffl_mirrors_len Number of mirrored storage servers.
@@ -470,12 +485,13 @@ static nfsstat4 FSAL_encode_data_server(
  * @return NFS status codes.
  */
 nfsstat4 FSAL_encode_flex_file_layout(
-	XDR *xdrs, const struct pnfs_deviceid *deviceid,
-	const uint64_t ffl_stripe_unit, const uint32_t ffl_mirrors_len,
-	u_int stripes, const uint32_t num_fhs, const uint16_t *ds_ids,
-	const struct gsh_buffdesc *fhs, const uint32_t ffds_efficiency,
-	const fattr4_owner ffds_user, const fattr4_owner_group ffds_group,
-	const ff_flags4 ffl_flags, const uint32_t ffl_stats_collect_hint)
+	XDR *xdrs, bool is_external_ds, const stateid4 *ffds_stateid,
+	const struct pnfs_deviceid *deviceid, const uint64_t ffl_stripe_unit,
+	const uint32_t ffl_mirrors_len, u_int stripes, const uint32_t num_fhs,
+	const uint16_t *ds_ids, const struct gsh_buffdesc *fhs,
+	const uint32_t ffds_efficiency, const fattr4_owner ffds_user,
+	const fattr4_owner_group ffds_group, const ff_flags4 ffl_flags,
+	const uint32_t ffl_stats_collect_hint)
 {
 	nfsstat4 nfs_status = NFS4_OK;
 	size_t i = 0;
@@ -506,8 +522,9 @@ nfsstat4 FSAL_encode_flex_file_layout(
 		/* Encode ff_data_server4 elements */
 		for (j = 0; j < stripes; j++) {
 			nfs_status = FSAL_encode_data_server(
-				xdrs, deviceid, num_fhs, ds_ids, fhs,
-				ffds_efficiency, ffds_user, ffds_group);
+				xdrs, is_external_ds, ffds_stateid, deviceid,
+				num_fhs, ds_ids, fhs, ffds_efficiency,
+				ffds_user, ffds_group);
 		}
 	}
 

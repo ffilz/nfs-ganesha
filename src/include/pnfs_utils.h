@@ -223,7 +223,8 @@ nfsstat4 FSAL_encode_v4_multipath(XDR *xdrs, const uint32_t num_hosts,
 				  const fsal_multipath_member_t *hosts);
 
 nfsstat4 FSAL_encode_flex_file_layout(
-	XDR *xdrs, const struct pnfs_deviceid *deviceid,
+	XDR *xdrs, bool is_external_ds, const stateid4 *ffds_stateid,
+	const struct pnfs_deviceid *deviceid,
 	const uint64_t ffl_stripe_unit, const uint32_t ffl_mirrors_len,
 	u_int stripes, const uint32_t num_fhs, const uint16_t *ds_ids,
 	const struct gsh_buffdesc *fhs, const uint32_t ffds_efficiency,
