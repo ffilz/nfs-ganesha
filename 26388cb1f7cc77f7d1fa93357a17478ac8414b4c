@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c939f65_969da1af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-08T18:38:10Z",
+      "side": 1,
+      "message": "Logic is all sensible, just some suggestions on cleanup.",
+      "revId": "26388cb1f7cc77f7d1fa93357a17478ac8414b4c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d567a0f0_78e02d7d",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2695,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-08T18:38:10Z",
+      "side": 1,
+      "message": "Note to self - come back and make all these exit paths more common... Unless you want to tackle it.",
+      "revId": "26388cb1f7cc77f7d1fa93357a17478ac8414b4c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "839374ca_a4d7e3ba",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1742,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-08T18:38:10Z",
+      "side": 1,
+      "message": "No need for this, calloc zeros memory",
+      "revId": "26388cb1f7cc77f7d1fa93357a17478ac8414b4c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a23ff2cd_0b77220d",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1791,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-08T18:38:10Z",
+      "side": 1,
+      "message": "Hmm, should these be pushed into mdcache_lru_clean or mdc_clean_entry? alloc_cache_entry will return a new entry with them already zero.",
+      "revId": "26388cb1f7cc77f7d1fa93357a17478ac8414b4c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
