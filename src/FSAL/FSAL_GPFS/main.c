@@ -34,6 +34,7 @@
 #include "FSAL/fsal_init.h"
 #include "gpfs_methods.h"
 #include "gsh_config.h"
+#include "os/subr.h"
 
 static const char myname[] = "GPFS";
 
@@ -200,6 +201,55 @@ static fsal_status_t init_config(struct fsal_module *gpfs_fsal_module,
 	return fsalstat(ERR_FSAL_INVAL, 0);
 }
 
+static void gpfs_save_ganesha_credentials(void)
+{
+	int i, b_left;
+	char buffer[1024];
+	struct display_buffer dspbuf = { sizeof(buffer), buffer, buffer };
+
+	if (ganesha_uid_set)
+		return;
+
+	ganesha_uid = setuser_effective(0);
+	setuser_effective(ganesha_uid);
+	ganesha_gid = setgroup_effective(0);
+	setgroup_effective(ganesha_gid);
+
+	ganesha_ngroups = getgroups(0, NULL);
+	if (ganesha_ngroups > 0) {
+		ganesha_groups = gsh_malloc(ganesha_ngroups * sizeof(gid_t),
+					    MEM_COMP_FSAL);
+
+		if (getgroups(ganesha_ngroups, ganesha_groups) !=
+		    ganesha_ngroups) {
+			LogFatal(COMPONENT_FSAL,
+				 "Could not get list of ganesha groups");
+		}
+	}
+
+	ganesha_uid_set = true;
+
+	if (!isInfo(COMPONENT_FSAL))
+		return;
+
+	b_left = display_printf(&dspbuf, "Ganesha uid=%d gid=%d ngroups=%d",
+				(int)ganesha_uid, (int)ganesha_gid,
+				ganesha_ngroups);
+
+	if (b_left > 0 && ganesha_ngroups != 0)
+		b_left = display_cat(&dspbuf, " (");
+
+	for (i = 0; b_left > 0 && i < ganesha_ngroups; i++) {
+		b_left = display_printf(&dspbuf, "%s%d", i == 0 ? "" : " ",
+					(int)ganesha_groups[i]);
+	}
+
+	if (b_left > 0 && ganesha_ngroups != 0)
+		(void)display_cat(&dspbuf, ")");
+
+	LogInfo(COMPONENT_FSAL, "%s", buffer);
+}
+
 /** @fn MODULE_INIT void gpfs_init(void)
  *  @brief  Module initialization.
  *
@@ -215,6 +265,8 @@ MODULE_INIT void gpfs_init(void)
 		fprintf(stderr, "GPFS module failed to register");
 		return;
 	}
+
+	gpfs_save_ganesha_credentials();
 
 	/** Set up module operations */
 	myself->m_ops.fsal_pnfs_ds_ops = pnfs_ds_ops_init;

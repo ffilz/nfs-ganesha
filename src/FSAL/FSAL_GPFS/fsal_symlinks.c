@@ -125,12 +125,12 @@ fsal_status_t GPFSFSAL_symlink(struct fsal_obj_handle *dir_hdl,
 	 * for proper ownership assignment.
 	 */
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 
 	rc = symlinkat(linkcontent, fd, linkname);
 	errsv = errno;
 
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (rc) {
 		fsal_internal_close(fd, NULL, 0);

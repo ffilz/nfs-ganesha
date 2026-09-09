@@ -873,79 +873,10 @@ out:
 	return status;
 }
 
+bool ganesha_uid_set;
 uid_t ganesha_uid;
 gid_t ganesha_gid;
 int ganesha_ngroups;
 gid_t *ganesha_groups;
-
-#if GSH_CAN_HOST_LOCAL_FS
-void fsal_set_credentials(const struct user_cred *creds)
-{
-	if (set_threadgroups(creds->caller_glen, creds->caller_garray) != 0)
-		LogFatal(COMPONENT_FSAL, "set_threadgroups() returned %s (%d)",
-			 strerror(errno), errno);
-	setgroup(creds->caller_gid);
-	setuser(creds->caller_uid);
-}
-
-void fsal_restore_ganesha_credentials(void)
-{
-	setuser(ganesha_uid);
-	setgroup(ganesha_gid);
-	if (set_threadgroups(ganesha_ngroups, ganesha_groups) != 0)
-		LogFatal(COMPONENT_FSAL, "Could not set Ganesha credentials");
-}
-#endif /* GSH_CAN_HOST_LOCAL_FS */
-
-bool fsal_set_credentials_only_one_user(const struct user_cred *creds)
-{
-	if (creds->caller_uid == ganesha_uid &&
-	    creds->caller_gid == ganesha_gid)
-		return true;
-	else
-		return false;
-}
-
-void fsal_save_ganesha_credentials(void)
-{
-	int i, b_left;
-	char buffer[1024];
-	struct display_buffer dspbuf = { sizeof(buffer), buffer, buffer };
-
-	ganesha_uid = getuser();
-	ganesha_gid = getgroup();
-
-	ganesha_ngroups = getgroups(0, NULL);
-	if (ganesha_ngroups > 0) {
-		ganesha_groups = gsh_malloc(ganesha_ngroups * sizeof(gid_t),
-					    MEM_COMP_FSAL);
-
-		if (getgroups(ganesha_ngroups, ganesha_groups) !=
-		    ganesha_ngroups) {
-			LogFatal(COMPONENT_FSAL,
-				 "Could not get list of ganesha groups");
-		}
-	}
-
-	if (!isInfo(COMPONENT_FSAL))
-		return;
-
-	b_left = display_printf(&dspbuf, "Ganesha uid=%d gid=%d ngroups=%d",
-				(int)ganesha_uid, (int)ganesha_gid,
-				ganesha_ngroups);
-
-	if (b_left > 0 && ganesha_ngroups != 0)
-		b_left = display_cat(&dspbuf, " (");
-
-	for (i = 0; b_left > 0 && i < ganesha_ngroups; i++) {
-		b_left = display_printf(&dspbuf, "%s%d", i == 0 ? "" : " ",
-					(int)ganesha_groups[i]);
-	}
-
-	if (b_left > 0 && ganesha_ngroups != 0)
-		(void)display_cat(&dspbuf, ")");
-
-	LogInfo(COMPONENT_FSAL, "%s", buffer);
-}
 
 /** @} */
