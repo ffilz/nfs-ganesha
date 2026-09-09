@@ -53,8 +53,10 @@ struct vfs_dirent {
 
 int vfs_readents(int fd, char *buf, unsigned int bcount, off_t *basepp);
 bool to_vfs_dirent(char *buf, int bpos, struct vfs_dirent *vd, off_t base);
-void setuser(uid_t uid);
-void setgroup(gid_t gid);
+void setuser_thread(uid_t uid);
+void setgroup_thread(gid_t gid);
+uid_t setuser_effective(uid_t uid);
+gid_t setgroup_effective(gid_t gid);
 int set_threadgroups(size_t size, const gid_t *list);
 
 /* Define these aliases for all OSs for consistency with setuser/setgroup */

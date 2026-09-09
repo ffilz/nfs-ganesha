@@ -68,10 +68,10 @@ fsal_status_t GPFSFSAL_create(struct fsal_obj_handle *dir_hdl,
 
 	/* call to filesystem */
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 	status = fsal_internal_create(dir_hdl, filename, unix_mode | S_IFREG, 0,
 				      gpfs_fh, NULL);
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 	if (FSAL_IS_ERROR(status))
 		return status;
 
@@ -95,10 +95,10 @@ fsal_status_t GPFSFSAL_create2(struct fsal_obj_handle *dir_hdl,
 
 	/* call to filesystem */
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 	status = fsal_internal_create(dir_hdl, filename, unix_mode | S_IFREG,
 				      posix_flags, gpfs_fh, NULL);
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (!FSAL_IS_ERROR(status) && fsal_attr != NULL) {
 		/* retrieve file attributes */
@@ -144,10 +144,10 @@ fsal_status_t GPFSFSAL_mkdir(struct fsal_obj_handle *dir_hdl,
 
 	/* creates the directory and get its handle */
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 	status = fsal_internal_create(dir_hdl, dir_name, unix_mode | S_IFDIR, 0,
 				      gpfs_fh, NULL);
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (FSAL_IS_ERROR(status))
 		return status;
@@ -188,11 +188,11 @@ fsal_status_t GPFSFSAL_link(struct fsal_obj_handle *dir_hdl,
 
 	/* Create the link on the filesystem */
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 	status = fsal_internal_link_fh(export_fd, gpfs_fh, dest_dir->handle,
 				       linkname);
 
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	return status;
 }
@@ -259,11 +259,11 @@ fsal_status_t GPFSFSAL_mknode(struct fsal_obj_handle *dir_hdl,
 		return fsalstat(ERR_FSAL_INVAL, 0);
 	}
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 	status = fsal_internal_mknode(dir_hdl, node_name, unix_mode, unix_dev,
 				      gpfs_fh, NULL);
 
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (FSAL_IS_ERROR(status))
 		return status;

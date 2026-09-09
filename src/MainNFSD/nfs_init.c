@@ -1282,9 +1282,6 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 	LogInfo(COMPONENT_INIT,
 		"NFSv4 pseudo file system successfully initialized");
 
-	/* Save Ganesha thread credentials with Frank's routine for later use */
-	fsal_save_ganesha_credentials();
-
 	/* RPC Initialisation - exits on failure */
 	nfs_Init_svc();
 	LogInfo(COMPONENT_INIT, "RPC resources successfully initialized");

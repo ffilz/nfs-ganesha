@@ -218,6 +218,9 @@ MODULE_INIT void vfs_init(void)
 		fprintf(stderr, "VFS module failed to register");
 		return;
 	}
+
+	vfs_save_ganesha_credentials();
+
 	myself->m_ops.create_export = vfs_create_export;
 	myself->m_ops.update_export = vfs_update_export;
 	myself->m_ops.init_config = init_config;

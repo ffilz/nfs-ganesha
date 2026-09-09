@@ -73,10 +73,10 @@ fsal_status_t GPFSFSAL_open(struct fsal_obj_handle *obj_hdl, int posix_flags,
 	LogFullDebug(COMPONENT_FSAL, "posix_flags 0x%X export_fd %d",
 		     posix_flags, export_fd);
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 	status = fsal_internal_handle2fd(export_fd, myself->handle, file_desc,
 					 posix_flags);
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (FSAL_IS_ERROR(status)) {
 		/** Try open as root access if the above call fails,
@@ -126,10 +126,10 @@ fsal_status_t GPFSFSAL_read(int fd, uint64_t offset, size_t buf_size, void *buf,
 	if (op_ctx && op_ctx->client)
 		rarg.cli_ip = op_ctx->client->hostaddr_str;
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 	nb_read = gpfs_ganesha(OPENHANDLE_READ_BY_FD, &rarg);
 	errsv = errno;
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	/* negative values mean error */
 	if (nb_read < 0) {
@@ -192,10 +192,10 @@ fsal_status_t GPFSFSAL_write(int fd, uint64_t offset, size_t buf_size,
 	if (op_ctx && op_ctx->client)
 		warg.cli_ip = op_ctx->client->hostaddr_str;
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 	nb_write = gpfs_ganesha(OPENHANDLE_WRITE_BY_FD, &warg);
 	errsv = errno;
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (nb_write == -1) {
 		if (errsv == EUNATCH)
@@ -231,10 +231,10 @@ fsal_status_t GPFSFSAL_alloc(int fd, uint64_t offset, uint64_t length,
 	aarg.length = length;
 	aarg.options = (allocate) ? IO_ALLOCATE : IO_DEALLOCATE;
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 	rc = gpfs_ganesha(OPENHANDLE_ALLOCATE_BY_FD, &aarg);
 	errsv = errno;
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (rc == -1) {
 		if (errsv == EUNATCH)
