@@ -113,10 +113,7 @@
   fsal_remove;
   fsal_rename;
   fsal_reopen2;
-  fsal_restore_ganesha_credentials;
   fsal_setattr;
-  fsal_set_credentials;
-  fsal_set_credentials_only_one_user;
   fsal_start_fd_work;
   fsal_start_global_io;
   fsal_start_io;
@@ -146,6 +143,11 @@
   g_max_files_delegatable;
   g_nodeid;
   g_node_vip;
+  ganesha_uid_set;
+  ganesha_uid;
+  ganesha_gid;
+  ganesha_ngroups;
+  ganesha_groups;
   hash_sockaddr;
   hashtable_deletelatched;
   hashtable_for_each;
@@ -279,6 +281,11 @@
   set_const_log_str;
   set_op_context_export_fsal;
   set_saved_entry;
+  setuser_thread;
+  setgroup_thread;
+  setuser_effective;
+  setgroup_effective;
+  set_threadgroups;
   SetNameFunction;
   sprint_sockip;
   start_fsals;
@@ -306,6 +313,7 @@
   vfs_readents;
   vfs_utimes;
   vfs_utimesat;
+  vfs_save_ganesha_credentials;
   xattr_2_posix_acl;
   xdr_io_data;
   xdr_notify;

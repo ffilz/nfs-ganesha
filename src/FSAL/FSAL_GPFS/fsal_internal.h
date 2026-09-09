@@ -318,4 +318,7 @@ void fsal_gpfs_reset_stats(struct fsal_module *fsal_hdl);
 void prepare_for_stats(struct fsal_module *fsal_hdl);
 
 int gpfs_op2index(int op);
+
+void gpfs_set_credentials(const struct user_cred *creds);
+void gpfs_restore_ganesha_credentials(void);
 #endif
