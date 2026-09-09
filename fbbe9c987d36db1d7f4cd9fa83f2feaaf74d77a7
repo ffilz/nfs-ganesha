@@ -33,6 +33,23 @@
       "message": "recheck",
       "revId": "fbbe9c987d36db1d7f4cd9fa83f2feaaf74d77a7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "287666f6_3ea12a09",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2026-09-09T14:56:23Z",
+      "side": 1,
+      "message": "1) Can we make this behavior conditional, so that it is triggered only if the user opts in?\n\n2) How does the client determine which grpc server to connect to when two ganesha are running on the same machine? What is the expected behavior in this case?",
+      "revId": "fbbe9c987d36db1d7f4cd9fa83f2feaaf74d77a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
