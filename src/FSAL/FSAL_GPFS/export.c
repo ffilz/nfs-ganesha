@@ -166,10 +166,10 @@ static fsal_status_t get_quota(struct fsal_export *exp_hdl,
 	if (op_ctx && op_ctx->client)
 		args.cli_ip = op_ctx->client->hostaddr_str;
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 	if (gpfs_ganesha(OPENHANDLE_QUOTA, &args) < 0)
 		retval = errno;
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (retval)
 		return fsalstat(posix2fsal_error(retval), retval);
@@ -235,10 +235,10 @@ static fsal_status_t set_quota(struct fsal_export *exp_hdl,
 	if (op_ctx && op_ctx->client)
 		args.cli_ip = op_ctx->client->hostaddr_str;
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 	if (gpfs_ganesha(OPENHANDLE_QUOTA, &args) < 0)
 		retval = errno;
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (retval)
 		return fsalstat(posix2fsal_error(retval), retval);

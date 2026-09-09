@@ -40,12 +40,12 @@ fsal_status_t fsal_test_access(struct fsal_obj_handle *obj_hdl,
 int display_fsal_v4mask(struct display_buffer *dspbuf, fsal_aceperm_t v4mask,
 			bool is_dir);
 
-#if GSH_CAN_HOST_LOCAL_FS
-void fsal_set_credentials(const struct user_cred *creds);
-void fsal_restore_ganesha_credentials(void);
-#endif
+extern bool ganesha_uid_set;
+extern uid_t ganesha_uid;
+extern gid_t ganesha_gid;
+extern int ganesha_ngroups;
+extern gid_t *ganesha_groups;
 
-bool fsal_set_credentials_only_one_user(const struct user_cred *creds);
 void fsal_save_ganesha_credentials(void);
 
 void fsal_print_ace_int(log_components_t component, log_levels_t debug,

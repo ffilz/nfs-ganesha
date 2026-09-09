@@ -202,7 +202,7 @@ static int setthreadgroups(size_t size, const gid_t *list)
 	return syscall(syscall_num, size, list);
 }
 
-void setuser(uid_t uid)
+void setuser_thread(uid_t uid)
 {
 	int rc = setthreaduid(uid);
 
@@ -211,13 +211,35 @@ void setuser(uid_t uid)
 			strerror(errno), errno);
 }
 
-void setgroup(gid_t gid)
+void setgroup_thread(gid_t gid)
 {
 	int rc = setthreadgid(gid);
 
 	if (rc != 0)
 		LogCrit(COMPONENT_FSAL, "Could not set group identity %s (%d)",
 			strerror(errno), errno);
+}
+
+id_t setuser_effective(uid_t uid)
+{
+	int rc = 0;
+	uid_t orig_uid = syscall(SYS_getuid);
+
+	rc = syscall(SYS_seteuid, uid);
+	if (rc != 0)
+		LogCrit(COMPONENT_FSAL, "Could not set user identity");
+	return orig_uid;
+}
+
+gid_t setgroup_effective(gid_t gid)
+{
+	int rc = 0;
+	gid_t orig_gid = syscall(SYS_getgid);
+
+	rc = syscall(SYS_setegid, gid);
+	if (rc != 0)
+		LogCrit(COMPONENT_FSAL, "Could not set group identity");
+	return orig_gid;
 }
 
 int set_threadgroups(size_t size, const gid_t *list)

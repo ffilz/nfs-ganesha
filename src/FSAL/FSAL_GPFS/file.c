@@ -1120,11 +1120,11 @@ fsal_status_t gpfs_commit2(struct fsal_obj_handle *obj_hdl, off_t offset,
 
 	my_fd = container_of(out_fd, struct gpfs_fd, fsal_fd);
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 
 	status = gpfs_commit_fd(my_fd->fd, myself, offset, len);
 
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (FSAL_IS_ERROR(status)) {
 		LogDebug(COMPONENT_FSAL,

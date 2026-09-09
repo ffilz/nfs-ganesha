@@ -45,6 +45,88 @@
 #include "sal_data.h"
 #include "../fsal_private.h"
 
+void vfs_save_ganesha_credentials(void)
+{
+	int i, b_left;
+	char buffer[1024];
+	struct display_buffer dspbuf = { sizeof(buffer), buffer, buffer };
+
+	if (ganesha_uid_set)
+		return;
+
+	ganesha_uid = getuser();
+	ganesha_gid = getgroup();
+
+	ganesha_ngroups = getgroups(0, NULL);
+	if (ganesha_ngroups > 0) {
+		ganesha_groups = gsh_malloc(ganesha_ngroups * sizeof(gid_t),
+					    MEM_COMP_FSAL);
+
+		if (getgroups(ganesha_ngroups, ganesha_groups) !=
+		    ganesha_ngroups) {
+			LogFatal(COMPONENT_FSAL,
+				 "Could not get list of ganesha groups");
+		}
+	}
+
+	if (!isInfo(COMPONENT_FSAL))
+		return;
+
+	b_left = display_printf(&dspbuf, "Ganesha uid=%d gid=%d ngroups=%d",
+				(int)ganesha_uid, (int)ganesha_gid,
+				ganesha_ngroups);
+
+	if (b_left > 0 && ganesha_ngroups != 0)
+		b_left = display_cat(&dspbuf, " (");
+
+	for (i = 0; b_left > 0 && i < ganesha_ngroups; i++) {
+		b_left = display_printf(&dspbuf, "%s%d", i == 0 ? "" : " ",
+					(int)ganesha_groups[i]);
+	}
+
+	if (b_left > 0 && ganesha_ngroups != 0)
+		(void)display_cat(&dspbuf, ")");
+
+	LogInfo(COMPONENT_FSAL, "%s", buffer);
+}
+
+bool vfs_set_credentials(const struct user_cred *creds,
+			 const struct fsal_module *fsal_module)
+{
+	struct vfs_fsal_module *my_fsal;
+
+	my_fsal = container_of(fsal_module, struct vfs_fsal_module, module);
+
+	if (my_fsal->only_one_user) {
+		return (creds->caller_uid == ganesha_uid &&
+			creds->caller_gid == ganesha_gid);
+	}
+
+	if (set_threadgroups(creds->caller_glen, creds->caller_garray) != 0)
+		LogFatal(COMPONENT_FSAL, "set_threadgroups() returned %s (%d)",
+			 strerror(errno), errno);
+
+	setgroup_thread(creds->caller_gid);
+	setuser_thread(creds->caller_uid);
+	return true;
+}
+
+void vfs_restore_ganesha_credentials(const struct fsal_module *fsal_module)
+{
+	struct vfs_fsal_module *my_fsal;
+
+	my_fsal = container_of(fsal_module, struct vfs_fsal_module, module);
+
+	if (my_fsal->only_one_user)
+		return;
+
+	setuser_thread(ganesha_uid);
+	setgroup_thread(ganesha_gid);
+
+	if (set_threadgroups(ganesha_ngroups, ganesha_groups) != 0)
+		LogFatal(COMPONENT_FSAL, "Could not set Ganesha credentials");
+}
+
 fsal_status_t vfs_open_my_fd(struct vfs_fsal_obj_handle *myself,
 			     fsal_openflags_t openflags, int posix_flags,
 			     struct vfs_fd *my_fd)

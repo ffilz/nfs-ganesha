@@ -209,6 +209,8 @@ fsal_status_t vfs_check_handle(struct fsal_export *exp_hdl,
 
 bool vfs_valid_handle(struct gsh_buffdesc *desc);
 
+void vfs_save_ganesha_credentials(void);
+
 int vfs_readlink(struct vfs_fsal_obj_handle *myself, fsal_errors_t *fsal_error);
 
 int vfs_extract_fsid(vfs_file_handle_t *fh, enum fsid_type *fsid_type,
@@ -378,31 +380,10 @@ fsal_status_t check_hsm_by_fd(int fd);
 fsal_status_t vfs_get_fs_locations(struct vfs_fsal_obj_handle *hdl, int fd,
 				   struct fsal_attrlist *attrs_out);
 
-static inline bool vfs_set_credentials(const struct user_cred *creds,
-				       const struct fsal_module *fsal_module)
-{
-	bool only_one_user =
-		container_of(fsal_module, struct vfs_fsal_module, module)
-			->only_one_user;
+bool vfs_set_credentials(const struct user_cred *creds,
+			 const struct fsal_module *fsal_module);
 
-	if (only_one_user)
-		return fsal_set_credentials_only_one_user(creds);
-	else {
-		fsal_set_credentials(creds);
-		return true;
-	}
-}
-
-static inline void
-vfs_restore_ganesha_credentials(const struct fsal_module *fsal_module)
-{
-	bool only_one_user =
-		container_of(fsal_module, struct vfs_fsal_module, module)
-			->only_one_user;
-
-	if (!only_one_user)
-		fsal_restore_ganesha_credentials();
-}
+void vfs_restore_ganesha_credentials(const struct fsal_module *fsal_module);
 
 fsal_status_t find_fd(struct fsal_fd **out_fd, struct fsal_obj_handle *obj_hdl,
 		      struct fsal_fd *tmp_fd, struct state_t *state,

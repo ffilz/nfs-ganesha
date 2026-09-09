@@ -42,6 +42,7 @@
 #include <pthread.h>
 #include <string.h>
 #include <sys/fsuid.h>
+#include "os/subr.h"
 
 #include "include/gpfs.h"
 
@@ -333,12 +334,12 @@ fsal_status_t fsal_internal_unlink(int dirfd, struct gpfs_file_handle *gpfs_fh,
 	if (op_ctx && op_ctx->client)
 		statarg.cli_ip = op_ctx->client->hostaddr_str;
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 
 	rc = gpfs_ganesha(OPENHANDLE_UNLINK_BY_NAME, &statarg);
 	errsv = errno;
 
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (unlikely(rc < 0))
 		return FSAL_INTERNAL_ERROR(errsv, "OPENHANDLE_UNLINK_BY_NAME");
@@ -466,12 +467,12 @@ fsal_status_t fsal_internal_rename_fh(int dirfd,
 	if (op_ctx && op_ctx->client)
 		renamearg.cli_ip = op_ctx->client->hostaddr_str;
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 
 	rc = gpfs_ganesha(OPENHANDLE_RENAME_BY_FH, &renamearg);
 	errsv = errno;
 
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (unlikely(rc < 0))
 		return FSAL_INTERNAL_ERROR(errsv, "OPENHANDLE_RENAME_BY_FH");
@@ -695,12 +696,12 @@ fsal_status_t fsal_set_xstat_by_handle(int dirfd,
 	   implements sparse files, so blocks of all 0 will not actually
 	   be allocated.
 	 */
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 
 	rc = gpfs_ganesha(OPENHANDLE_SET_XSTAT, &xstatarg);
 	errsv = errno;
 
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	LogDebug(COMPONENT_FSAL, "gpfs_ganesha: SET_XSTAT returned, rc = %d",
 		 rc);
@@ -788,4 +789,23 @@ bool fsal_error_is_info(fsal_status_t status)
 	default:
 		return false;
 	}
+}
+
+void gpfs_set_credentials(const struct user_cred *creds)
+{
+	if (set_threadgroups(creds->caller_glen, creds->caller_garray) != 0)
+		LogFatal(COMPONENT_FSAL, "set_threadgroups() returned %s (%d)",
+			 strerror(errno), errno);
+
+	setgroup_effective(creds->caller_gid);
+	setuser_effective(creds->caller_uid);
+}
+
+void gpfs_restore_ganesha_credentials(void)
+{
+	setgroup_effective(ganesha_uid);
+	setuser_effective(ganesha_gid);
+
+	if (set_threadgroups(ganesha_ngroups, ganesha_groups) != 0)
+		LogFatal(COMPONENT_FSAL, "Could not set Ganesha credentials");
 }
