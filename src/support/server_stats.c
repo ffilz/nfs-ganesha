@@ -128,7 +128,6 @@ static const struct op_name optnlm[] = {
 };
 #endif
 
-
 /* Classify protocol ops for stats purposes
  */
 
@@ -3470,7 +3469,8 @@ void update_ops_metrics(void)
 {
 	int op;
 
-	foreach_gsh_export(update_export, false, NULL);
+	foreach_gsh_export(update_export, false, NULL)
+		;
 
 	for (op = 1; op < NFS4_OP_LAST_ONE; op++) {
 		if (metric_total_v4_full_stats[op].total != 0)
@@ -4353,24 +4353,20 @@ void server_grpc_fill_stats_summary(struct gsh_stats *st,
  * @brief Fill per-export protocol-activity flags for ShowExports
  */
 bool server_grpc_fill_export_stats_summary(
-        struct gsh_export *export_obj,
-        struct grpc_protocol_activity *protos,
-        uint32_t *proto_count,
-        uint64_t *total_ops_out)
+	struct gsh_export *export_obj, struct grpc_protocol_activity *protos,
+	uint32_t *proto_count, uint64_t *total_ops_out)
 {
-        struct export_stats *exp;
+	struct export_stats *exp;
 
-        if (export_obj == NULL)
-                return false;
+	if (export_obj == NULL)
+		return false;
 
-        exp = container_of(export_obj, struct export_stats, export);
+	exp = container_of(export_obj, struct export_stats, export);
 
-        server_grpc_fill_stats_summary(&exp->st,
-                                       protos,
-                                       proto_count,
-                                       total_ops_out);
+	server_grpc_fill_stats_summary(&exp->st, protos, proto_count,
+				       total_ops_out);
 
-        return true;
+	return true;
 }
 
 /*
@@ -4667,9 +4663,8 @@ const char *gsh_mem_stats_get_mem_comp_str(mem_components_t comp)
 }
 
 const char *mem_stat_names[] = {
-	"Lifetime_Alloc_Calls", "Lifetime_Free_Calls",
-	"Lifetime_Alloc_Bytes", "Lifetime_Freed_Bytes",
-	"Current_Active_Bytes", "Peak_Active_Bytes",
+	"Lifetime_Alloc_Calls", "Lifetime_Free_Calls",	"Lifetime_Alloc_Bytes",
+	"Lifetime_Freed_Bytes", "Current_Active_Bytes", "Peak_Active_Bytes",
 };
 
 static inline bool is_mem_stats_disabled(void)
@@ -4677,7 +4672,7 @@ static inline bool is_mem_stats_disabled(void)
 	return nfs_param.core_param.mem_stats_disable;
 }
 
-static char *mem_stats_status_message(void)
+char *mem_stats_status_message(void)
 {
 	return is_mem_stats_disabled() ? "inactive" : "active";
 }
@@ -4711,22 +4706,20 @@ void gsh_mem_stats_update_alloc(void *p, mem_components_t comp,
 
 	current_bytes =
 		atomic_add_int64_t(&mc->current_active_bytes, (int64_t)size);
-	peak_bytes = atomic_max_int64_t(&mc->peak_active_bytes,
-					current_bytes);
+	peak_bytes = atomic_max_int64_t(&mc->peak_active_bytes, current_bytes);
 
 	if (isFullDebug(COMPONENT_MEM_ALLOC)) {
 		l_fc = atomic_fetch_uint64_t(&mc->lifetime_free_calls);
 		l_fb = atomic_fetch_uint64_t(&mc->lifetime_freed_bytes);
 
-		LogFullDebug(
-			COMPONENT_MEM_ALLOC,
-			"Component: %s, L_ac/L_fc/L_ab/L_fb: %" PRIu64
-			" %" PRIu64 " %" PRIu64 " %" PRIu64
-			" current: %" PRId64 " peak: %" PRId64
-			" this_alloc: %zu at %s:%d (%s)",
-			gsh_mem_stats_get_mem_comp_str(comp), l_ac, l_fc,
-			l_ab, l_fb, current_bytes, peak_bytes, size, file,
-			line, function);
+		LogFullDebug(COMPONENT_MEM_ALLOC,
+			     "Component: %s, L_ac/L_fc/L_ab/L_fb: %" PRIu64
+			     " %" PRIu64 " %" PRIu64 " %" PRIu64
+			     " current: %" PRId64 " peak: %" PRId64
+			     " this_alloc: %zu at %s:%d (%s)",
+			     gsh_mem_stats_get_mem_comp_str(comp), l_ac, l_fc,
+			     l_ab, l_fb, current_bytes, peak_bytes, size, file,
+			     line, function);
 	}
 }
 
@@ -4756,12 +4749,13 @@ void gsh_mem_stats_update_free(void *p, mem_components_t comp, const char *file,
 		atomic_sub_int64_t(&mc->current_active_bytes, (int64_t)size);
 
 	if (current_bytes < 0) {
-		LogWarnLimited(COMPONENT_MEM_ALLOC,
-			       "mem_comp underflow on %s: freed %zu bytes, current_active_bytes is now %"
-			       PRId64
-			       " - possible alloc/free mem_comp mismatch at %s:%d(%s)",
-			       gsh_mem_stats_get_mem_comp_str(comp), size,
-			       current_bytes, file, line, function);
+		LogWarnLimited(
+			COMPONENT_MEM_ALLOC,
+			"mem_comp underflow on %s: freed %zu bytes,"
+			"current_active_bytes is now %" PRId64
+			" - possible alloc/free mem_comp mismatch at %s:%d(%s)",
+			gsh_mem_stats_get_mem_comp_str(comp), size,
+			current_bytes, file, line, function);
 	}
 
 	if (isFullDebug(COMPONENT_MEM_ALLOC)) {
@@ -4769,15 +4763,14 @@ void gsh_mem_stats_update_free(void *p, mem_components_t comp, const char *file,
 		l_ab = atomic_fetch_uint64_t(&mc->lifetime_alloc_bytes);
 		peak_bytes = atomic_fetch_int64_t(&mc->peak_active_bytes);
 
-		LogFullDebug(
-			COMPONENT_MEM_ALLOC,
-			"Component: %s, L_ac/L_fc/L_ab/L_fb: %" PRIu64
-			" %" PRIu64 " %" PRIu64 " %" PRIu64
-			" current: %" PRId64 " peak: %" PRId64
-			" this_free: %zu at %s:%d (%s)",
-			gsh_mem_stats_get_mem_comp_str(comp), l_ac, l_fc,
-			l_ab, l_fb, current_bytes, peak_bytes, size, file,
-			line, function);
+		LogFullDebug(COMPONENT_MEM_ALLOC,
+			     "Component: %s, L_ac/L_fc/L_ab/L_fb: %" PRIu64
+			     " %" PRIu64 " %" PRIu64 " %" PRIu64
+			     " current: %" PRId64 " peak: %" PRId64
+			     " this_free: %zu at %s:%d (%s)",
+			     gsh_mem_stats_get_mem_comp_str(comp), l_ac, l_fc,
+			     l_ab, l_fb, current_bytes, peak_bytes, size, file,
+			     line, function);
 	}
 }
 
@@ -4843,17 +4836,17 @@ void gsh_log_mem_stats(void)
 			continue;
 		}
 		mc = &gshMC[comp];
-		LogEvent(
-			COMPONENT_MEM_ALLOC,
-			"Component: %s, L_Alloc/Free/Bytes/F: %" PRIu64
-			" %" PRIu64 " %" PRIu64 " %" PRIu64
-			" Cur/Peak: %" PRId64 " %" PRId64,
-			cname, atomic_fetch_uint64_t(&mc->lifetime_alloc_calls),
-			atomic_fetch_uint64_t(&mc->lifetime_free_calls),
-			atomic_fetch_uint64_t(&mc->lifetime_alloc_bytes),
-			atomic_fetch_uint64_t(&mc->lifetime_freed_bytes),
-			atomic_fetch_int64_t(&mc->current_active_bytes),
-			atomic_fetch_int64_t(&mc->peak_active_bytes));
+		LogEvent(COMPONENT_MEM_ALLOC,
+			 "Component: %s, L_Alloc/Free/Bytes/F: %" PRIu64
+			 " %" PRIu64 " %" PRIu64 " %" PRIu64
+			 " Cur/Peak: %" PRId64 " %" PRId64,
+			 cname,
+			 atomic_fetch_uint64_t(&mc->lifetime_alloc_calls),
+			 atomic_fetch_uint64_t(&mc->lifetime_free_calls),
+			 atomic_fetch_uint64_t(&mc->lifetime_alloc_bytes),
+			 atomic_fetch_uint64_t(&mc->lifetime_freed_bytes),
+			 atomic_fetch_int64_t(&mc->current_active_bytes),
+			 atomic_fetch_int64_t(&mc->peak_active_bytes));
 	}
 }
 
@@ -4971,9 +4964,9 @@ static struct gsh_dbus_method get_mem_stats_status = {
 	.args = { STATUS_REPLY, END_ARG_LIST }
 };
 
-static struct gsh_dbus_method *mem_stats_methods[] = {
-	&get_mem_statistics, &get_mem_stats_status, NULL
-};
+static struct gsh_dbus_method *mem_stats_methods[] = { &get_mem_statistics,
+						       &get_mem_stats_status,
+						       NULL };
 
 static struct gsh_dbus_interface mem_stats_table = {
 	.name = "org.ganesha.nfsd.memstats",

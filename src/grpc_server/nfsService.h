@@ -89,10 +89,11 @@ class GetSessionIdService final : public nfsService::GetSessionId::Service {
  */
 class FakeRecallService final : public nfsService::FakeRecall::Service {
     public:
-	grpc::Status
-	FakeRecall(grpc::ServerContext *context,
-		const nfsService::FakeRecallRequest *request,
-		nfsProtoUtil::StatusResponse *response) override;
+	grpc::Status FakeRecall(grpc::ServerContext *context,
+				const nfsService::FakeRecallRequest *request,
+				nfsProtoUtil::StatusResponse *response)
+
+		override;
 };
 
 /**
@@ -264,6 +265,10 @@ class nfsAdminService final : public nfsService::nfsAdmin::Service {
 	ReReadConfig(grpc::ServerContext *context,
 		     const nfsProtoUtil::EmptyRequest *request,
 		     nfsProtoUtil::ActionResponse *response) override;
+
+	grpc::Status GetDrcInfo(grpc::ServerContext *context,
+				const nfsProtoUtil::EmptyRequest *request,
+				nfsService::DrcInfoResponse *response) override;
 };
 
 class ExportStatsService final : public exportService::ExportStats::Service {

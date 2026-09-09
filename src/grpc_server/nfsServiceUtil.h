@@ -24,8 +24,11 @@
 #define NFSSERVICEUTIL_H
 
 #include <sstream>
+#include "nfs_dupreq.h"
 
 // Read Key files
 std::string read_cert_file(std::string_view filepath);
 
+// Read drc info to grpc struct
+void drc_to_grpc(drc_t *drc, void *state);
 #endif //NFSSERVICEUTIL_H

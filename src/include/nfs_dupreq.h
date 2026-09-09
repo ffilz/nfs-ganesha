@@ -152,7 +152,7 @@ typedef struct dupreq_entry dupreq_entry_t;
 
 static inline enum nfs_req_result nfs_dupreq_reply_rc(nfs_request_t *reqnfs)
 {
-	dupreq_entry_t *dv = reqnfs->svc.rq_u1;
+	dupreq_entry_t *dv = (dupreq_entry_t *)reqnfs->svc.rq_u1;
 
 	return dv->rc;
 }
@@ -163,6 +163,10 @@ typedef enum dupreq_status {
 	DUPREQ_EXISTS,
 	DUPREQ_DROP,
 } dupreq_status_t;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void dupreq2_pkginit(void);
 
@@ -176,5 +180,9 @@ void nfs_dupreq_delete(nfs_request_t *, enum nfs_req_result);
 void nfs_dupreq_rele(nfs_request_t *);
 int for_each_tcp_drc(void (*cb)(drc_t *drc, void *state), void *state);
 uint32_t get_tcp_drc_recycle_qlen(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* NFS_DUPREQ_H */

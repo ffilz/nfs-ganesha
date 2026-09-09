@@ -111,6 +111,30 @@ message ShowClusterMembersResponse
 	nfsProtoUtil.StatusResponse status = 2;
 }
 
+message DrcInfo
+{
+	string client_addr_label = 1;
+	string client_addr = 2;
+	string client_port_label = 3;
+	uint32 client_port = 4;
+	string drc_entry_label = 5;
+	uint32 num_of_drc_entries = 6;
+}
+
+message DrcMessage
+{
+	string info = 1;
+	uint32 count = 2;
+}
+
+message DrcInfoResponse
+{
+	repeated DrcInfo drc_info = 1;
+	DrcMessage num_of_drcs = 2;
+	DrcMessage num_of_inactive_drcs = 3;
+	bool success = 4;
+}
+
 /* NFS Admin Services */
 service nfsAdmin
 {
@@ -149,6 +173,8 @@ service nfsAdmin
 	/* Re-Read Config */
 	rpc ReReadConfig(nfsProtoUtil.EmptyRequest)
 		returns (nfsProtoUtil.ActionResponse);
+	/* Get drc info */
+	rpc GetDrcInfo(nfsProtoUtil.EmptyRequest) returns (DrcInfoResponse);
 }
 
 message MallocTraceRequest

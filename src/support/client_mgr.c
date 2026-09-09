@@ -222,8 +222,8 @@ out:
 
 void put_gsh_client(struct gsh_client *client)
 {
-	int64_t __attribute__((unused))
-	new_refcnt = atomic_dec_int64_t(&client->refcnt);
+	int64_t __attribute__((unused)) new_refcnt =
+		atomic_dec_int64_t(&client->refcnt);
 	assert(new_refcnt >= 0);
 }
 
@@ -487,6 +487,8 @@ void client_state_stats(DBusMessageIter *iter, struct gsh_client *cl_node)
 	dbus_message_iter_close_container(iter, &ss_iter);
 }
 
+#endif /* USE_DBUS */
+
 /**
  * @brief Check if a client is actively connected
  *
@@ -520,6 +522,8 @@ static inline bool client_is_connected(struct gsh_client *cl_node)
 
 	return (elapsed < nfs_param.core_param.client_activity_timeout_sec);
 }
+
+#ifdef USE_DBUS
 
 static bool client_to_dbus(struct gsh_client *cl_node, void *state)
 {
@@ -1466,7 +1470,8 @@ static bool grpc_cltmgr_get_version_io(const char *ipaddr,
 		goto out;
 	}
 
-	if (ip_str_to_sockaddr(COMPONENT_GRPC, (char *)ipaddr, &sockaddr) != 0) {
+	if (ip_str_to_sockaddr(COMPONENT_GRPC, (char *)ipaddr, &sockaddr) !=
+	    0) {
 		*success = false;
 		errormsg = "can't decode client address";
 		goto out;
