@@ -43,6 +43,8 @@
 #include "cacheMgrService.grpc.pb.h"
 #include "qosService.pb.h"
 #include "qosService.grpc.pb.h"
+#include "memStats.pb.h"
+#include "memStats.grpc.pb.h"
 #include "nfsServiceUtil.h"
 #include "nfs_core.h"
 #include "sal_functions.h"
@@ -89,10 +91,11 @@ class GetSessionIdService final : public nfsService::GetSessionId::Service {
  */
 class FakeRecallService final : public nfsService::FakeRecall::Service {
     public:
-	grpc::Status
-	FakeRecall(grpc::ServerContext *context,
-		const nfsService::FakeRecallRequest *request,
-		nfsProtoUtil::StatusResponse *response) override;
+	grpc::Status FakeRecall(grpc::ServerContext *context,
+				const nfsService::FakeRecallRequest *request,
+				nfsProtoUtil::StatusResponse *response)
+
+		override;
 };
 
 /**
@@ -546,4 +549,16 @@ class QosMgrService final : public qosService::QosMgr::Service {
 		nfsProtoUtil::StatusResponse *response) override;
 };
 
+class MemStatsService final : public memStats::MemStats::Service {
+    public:
+	grpc::Status
+	GetMemStats(grpc::ServerContext *context,
+		    const nfsProtoUtil::EmptyRequest *request,
+		    memStats::GetMemStatsResponse *response) override;
+
+	grpc::Status
+	GetMemStatus(grpc::ServerContext *context,
+		     const nfsProtoUtil::EmptyRequest *request,
+		     nfsProtoUtil::StatusResponse *response) override;
+};
 #endif //NFSSERVICE_H

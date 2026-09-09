@@ -74,6 +74,10 @@ struct mem_stats_info {
 	const char *mem_stat_name; /* stat name */
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * If adding any new value to gsh_mem_stats, increment
  * MAX_MEMORY_STATS_FIELD_COUNT.
@@ -115,17 +119,32 @@ void inc_revokes(struct gsh_client *client);
 void inc_recalls(struct gsh_client *client);
 void inc_failed_recalls(struct gsh_client *client);
 
+#ifdef __cplusplus
+}
+#endif
+
 void gsh_mem_stats_update_alloc(void *p, mem_components_t comp,
 				const char *file, int line,
 				const char *function);
-void gsh_mem_stats_update_free(void *p, mem_components_t comp,
-			       const char *file, int line,
-			       const char *function);
+void gsh_mem_stats_update_free(void *p, mem_components_t comp, const char *file,
+			       int line, const char *function);
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 int64_t gsh_mem_stats_get_stat_by_index_and_comp(uint32_t index,
 						 mem_components_t comp);
+
 /** comp is gshMC[] index: 0 = libntirpc, 1+ = Ganesha mem_components_t. */
 const char *gsh_mem_stats_get_mem_comp_str(mem_components_t comp);
 void gsh_log_mem_stats(void);
+
+/** get memory stats is disable or enable **/
+char *mem_stats_status_message(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* !SERVER_STATS_H */
 /** @} */
