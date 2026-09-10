@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f12e70e_5b0e3836",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-10T18:40:54Z",
+      "side": 1,
+      "message": "Oops",
+      "parentUuid": "e16acf25_edb09e8a",
+      "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c18eecfe_aeb4d86e",
         "filename": "src/FSAL/FSAL_GPFS/main.c",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2026-09-10T17:32:20Z",
       "side": 1,
       "message": "I don\u0027t see ganesha_uid_set being set to true.",
+      "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21ffb5be_ca05e24a",
+        "filename": "src/FSAL/FSAL_GPFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-10T18:40:54Z",
+      "side": 1,
+      "message": "Oh, crud I was worried I messed that up...",
+      "parentUuid": "c18eecfe_aeb4d86e",
       "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79d72ad6_003851c1",
+        "filename": "src/FSAL/FSAL_GPFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-10T18:40:54Z",
+      "side": 1,
+      "message": "This code was copied directly from Amit\u0027s patch: https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1242753?usp\u003dsearch",
+      "parentUuid": "34c2a86d_c6d5d4ab",
+      "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f15af83_391e2af2",
         "filename": "src/include/FSAL/access_check.h",
         "patchSetId": 1
@@ -82,6 +136,24 @@
       "writtenOn": "2026-09-10T17:32:20Z",
       "side": 1,
       "message": "fsal_save_ganesha_credentials() appears to remain declared but its implementation is removed",
+      "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1e89bef_8dcd8743",
+        "filename": "src/include/FSAL/access_check.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-10T18:40:54Z",
+      "side": 1,
+      "message": "OK, clearly this needs another go round...",
+      "parentUuid": "1f15af83_391e2af2",
       "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -105,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ed512c8_3236c124",
+        "filename": "src/os/linux/subr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-10T18:40:54Z",
+      "side": 1,
+      "message": "Again this is just copied from Amit\u0027s patch.",
+      "parentUuid": "4cfe3d4f_a30f93a3",
+      "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac196d8e_f84c582d",
         "filename": "src/os/linux/subr.c",
         "patchSetId": 1
@@ -116,6 +206,24 @@
       "writtenOn": "2026-09-10T17:32:20Z",
       "side": 1,
       "message": "I think “thread” actually refers to the effective credential change, while “effective” refers to the filesystem credential change. `SYS_setresgid` sets the real, effective, and saved GID. Could this instead be `setfsuid_ganesha`?",
+      "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "667a101e_69869130",
+        "filename": "src/os/linux/subr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-10T18:40:54Z",
+      "side": 1,
+      "message": "Hmm, now I\u0027m getting confused...",
+      "parentUuid": "ac196d8e_f84c582d",
       "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
