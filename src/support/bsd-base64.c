@@ -216,7 +216,7 @@ int base64url_encode(u_char const *src, size_t srclength, char *target,
 int b64_pton(char const *src, u_char *target, size_t targsize)
 {
 	int tarindex, state, ch;
-	char *pos;
+	const char *pos;
 
 	state = 0;
 	tarindex = 0;
