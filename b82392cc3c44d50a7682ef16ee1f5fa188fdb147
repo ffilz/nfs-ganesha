@@ -16,6 +16,108 @@
       "message": "Recheck gatecheck",
       "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e16acf25_edb09e8a",
+        "filename": "src/FSAL/FSAL_GPFS/fsal_internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-09-10T17:32:20Z",
+      "side": 1,
+      "message": "UID and GID appear to be swapped here. Should this be setuser_effective(ganesha_uid) and setgroup_effective(ganesha_gid)?",
+      "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c18eecfe_aeb4d86e",
+        "filename": "src/FSAL/FSAL_GPFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-09-10T17:32:20Z",
+      "side": 1,
+      "message": "I don\u0027t see ganesha_uid_set being set to true.",
+      "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34c2a86d_c6d5d4ab",
+        "filename": "src/FSAL/FSAL_GPFS/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-09-10T17:32:20Z",
+      "side": 1,
+      "message": "This is a little confusing. I believe the intent is to get the value in `ganesha_uid` using `setuser_effective(0)` and then use it in the next step.\n\nIt would be cleaner to have an abstract function such as `get_fsuid()`, with the underlying implementation calling `setuser_effective()`.",
+      "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f15af83_391e2af2",
+        "filename": "src/include/FSAL/access_check.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-09-10T17:32:20Z",
+      "side": 1,
+      "message": "fsal_save_ganesha_credentials() appears to remain declared but its implementation is removed",
+      "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cfe3d4f_a30f93a3",
+        "filename": "src/os/linux/subr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-09-10T17:32:20Z",
+      "side": 1,
+      "message": "We are setting fsuid here, while FreeBSD sets egid. Is this intentional?",
+      "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac196d8e_f84c582d",
+        "filename": "src/os/linux/subr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-09-10T17:32:20Z",
+      "side": 1,
+      "message": "I think “thread” actually refers to the effective credential change, while “effective” refers to the filesystem credential change. `SYS_setresgid` sets the real, effective, and saved GID. Could this instead be `setfsuid_ganesha`?",
+      "revId": "b82392cc3c44d50a7682ef16ee1f5fa188fdb147",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
