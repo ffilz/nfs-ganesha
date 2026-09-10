@@ -16,6 +16,431 @@
       "message": "Recheck gatecheck",
       "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e38f8832_e4942e76",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        int64_t refcnt;$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2af43d20_25313754",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        int64_t refcnt;$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99df0094_cb74e7ac",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        struct timespec now;$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6072ed3d_8c30cc8a",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        struct timespec now;$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d697250c_9cca1a2e",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        time_t last_sec, elapsed;$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5b7743e_1d38813c",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        time_t last_sec, elapsed;$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21921179_f03ad81b",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        /* Check if client has active operations or NFSv4 state */$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c59af3a_95946f09",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        refcnt \u003d atomic_fetch_int64_t(\u0026cl_node-\u003erefcnt);$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fabec4db_17f88ae5",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        refcnt \u003d atomic_fetch_int64_t(\u0026cl_node-\u003erefcnt);$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d35a8d76_cd2dec43",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        if (refcnt \u003e 0)$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a18df84_9ed523f8",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        if (refcnt \u003e 0)$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4050db88_365d0eb3",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                return true;$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84406bb6_5abea21c",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                return true;$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bb7d836_c220d555",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        /* Check recent activity */$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f22b9894_ba8ebec5",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        clock_gettime(CLOCK_REALTIME, \u0026now);$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04fa263c_e2a52e21",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        clock_gettime(CLOCK_REALTIME, \u0026now);$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cac6e2e9_484da201",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        /* Atomic read of last_update timestamp */$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb44dd9c_c599337b",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        last_sec \u003d (time_t)atomic_fetch_uint64_t($",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61a9b6ae_4820144d",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        last_sec \u003d (time_t)atomic_fetch_uint64_t($",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "721b28bd_a75d9e98",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                (uint64_t *)\u0026cl_node-\u003elast_update.tv_sec);$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4dbf4f3_54139881",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+                (uint64_t *)\u0026cl_node-\u003elast_update.tv_sec);$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "868feb0a_10b38c9d",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        elapsed \u003d now.tv_sec - last_sec;$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "553c5693_31e0e9c1",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        elapsed \u003d now.tv_sec - last_sec;$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "391a7477_61b48d5e",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+        return (elapsed \u003c nfs_param.core_param.client_activity_timeout_sec);$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82549401_1213d896",
+        "filename": "src/support/client_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T18:26:56Z",
+      "side": 1,
+      "message": "WARNING: please, no spaces at the start of a line\n+        return (elapsed \u003c nfs_param.core_param.client_activity_timeout_sec);$",
+      "revId": "4e703806d6bc69e07277e533dccf9bafb388113f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
