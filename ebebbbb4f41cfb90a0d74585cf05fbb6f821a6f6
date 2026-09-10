@@ -33,6 +33,23 @@
       "message": "Recheck gatecheck",
       "revId": "ebebbbb4f41cfb90a0d74585cf05fbb6f821a6f6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cdc8126_1dfbf40e",
+        "filename": "src/support/exports.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2686,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-09-10T09:28:08Z",
+      "side": 1,
+      "message": "WARNING: Missing a blank line after declarations\n+\tuint32_t i;\n+\tif (fs_locations \u003d\u003d NULL)",
+      "revId": "ebebbbb4f41cfb90a0d74585cf05fbb6f821a6f6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
