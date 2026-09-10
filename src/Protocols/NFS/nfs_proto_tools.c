@@ -859,7 +859,13 @@ static fattr_xdr_result decode_acl(XDR *xdr, struct xdr_attrs_args *args)
 		utf8buffer.utf8string_val = buffer;
 		utf8buffer.utf8string_len = 0;
 
-		if (!inline_xdr_utf8string(xdr, &utf8buffer, MAXNAMLEN))
+		/* decode_acl() uses a stack buffer to decode the ACL owner
+		 * string. Use xdr_utf8string_decode() directly instead of
+		 * inline_xdr_utf8string(), which has XDR_FREE handling that
+		 * can try to free the stack buffer.
+		 * This fixes the free-nonheap-object build error.
+		 */
+		if (!xdr_utf8string_decode(xdr, &utf8buffer, MAXNAMLEN))
 			goto baderr;
 		for (i = 0; i < FSAL_ACE_SPECIAL_EVERYONE; i++) {
 			if (strcmp(buffer, whostr_2_type_map[i].string) == 0) {
