@@ -258,6 +258,7 @@ struct state_t *vfs_alloc_state(struct fsal_export *exp_hdl,
 
 	init_fsal_fd(&my_fd->fsal_fd, FSAL_FD_STATE, op_ctx->fsal_export);
 	my_fd->fd = -1;
+	my_fd->fsal_fd.openflags = FSAL_O_CLOSED;
 
 	return state;
 }
