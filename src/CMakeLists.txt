@@ -409,12 +409,13 @@ option(USE_9P_RDMA "enable 9P_RDMA support" OFF)
 # Enable NFSv3 Support
 option(USE_NFS3 "enable NFSv3 support" ON)
 
+# Enable NFSACL3 protocol extension support
+option(USE_NFSACL3 "enable NFSACLv3 support" ON)
+
 if(USE_NFS3)
     # Enable NLM Support
     option(USE_NLM "enable NLM support" ON)
     option(INTERNAL_STATD "Provide internal rpc.statd if ON" OFF)
-    # Enable NFSACL3 protocol extension support
-    option(USE_NFSACL3 "enable NFSACLv3 support" ON)
 else(USE_NFS3)
     # Disable NLM Support
     set(USE_NLM OFF)
