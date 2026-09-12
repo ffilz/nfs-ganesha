@@ -66,6 +66,9 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 	struct req_op_context op_context;
 	struct gsh_export *gsh_export;
 	struct fsal_export *fsal_export;
+	/* Rate limiting for ioctl failures */
+	unsigned int ioctl_failure_count = 0;
+	time_t last_ioctl_log = 0;
 
 	rcu_register_thread();
 
@@ -151,10 +154,21 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 				continue;
 			}
 
-			LogCrit(COMPONENT_FSAL_UP,
-				"OPENHANDLE_INODE_UPDATE failed for %d. rc %d, errno %d (%s) reason %d",
-				gpfs_fs->root_fd, rc, errsv, strerror(errsv),
-				reason);
+			/* Rate-limited logging for ioctl failures */
+			ioctl_failure_count++;
+			time_t now = time(NULL);
+
+			/* Log 1st failure, or 1000th, or every 60 seconds */
+			if (ioctl_failure_count == 1 ||
+			    ioctl_failure_count % 1000 == 0 ||
+			    (now - last_ioctl_log) >= 60) {
+				LogWarn(COMPONENT_FSAL_UP,
+					"OPENHANDLE_INODE_UPDATE failed for %d "
+					"(count: %u). rc %d, errno %d (%s) reason %d",
+					gpfs_fs->root_fd, ioctl_failure_count,
+					rc, errsv, strerror(errsv), reason);
+				last_ioctl_log = now;
+			}
 
 			/* @todo 1000 retry logic will go away once the
 			 * OPENHANDLE_INODE_UPDATE ioctl separates EINTR
@@ -167,6 +181,9 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 
 			continue;
 		}
+
+		/* Reset failure counter on success */
+		ioctl_failure_count = 0;
 
 		/* We wanted to terminate this thread in case of THREAD_STOP */
 		if (reason == THREAD_STOP) {
