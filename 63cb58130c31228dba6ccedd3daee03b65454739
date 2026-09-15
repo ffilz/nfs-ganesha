@@ -16,6 +16,24 @@
       "message": "What does this accomplish?\n\nWe should fail the cmake if it USE_NFSACL3 is ON but USE_NFS3 is OFF",
       "revId": "63cb58130c31228dba6ccedd3daee03b65454739",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fc531f7_3e4cb641",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-09-15T05:42:08Z",
+      "side": 1,
+      "message": "In GPFS, we build NFSv3 without USE_NFSACL3 support. This change allows us to build with USE_NFS3\u003dON and USE_NFSACL3\u003dOFF.",
+      "parentUuid": "b4892a8d_95219b80",
+      "revId": "63cb58130c31228dba6ccedd3daee03b65454739",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
