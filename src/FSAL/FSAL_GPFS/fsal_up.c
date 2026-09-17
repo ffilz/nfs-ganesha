@@ -108,6 +108,15 @@ void *GPFSFSAL_UP_Thread(void *Arg)
 
 	/* Start querying for events and processing. */
 	while (1) {
+		/* Check if thread should stop before processing next event */
+		if (gpfs_fs->stop_thread) {
+			LogEvent(
+				COMPONENT_FSAL_UP,
+				"Stop requested, terminating GPFS upcall thread for %d",
+				gpfs_fs->root_fd);
+			goto out;
+		}
+
 		LogFullDebug(
 			COMPONENT_FSAL_UP,
 			"Requesting event from FSAL Callback interface for %d.",
