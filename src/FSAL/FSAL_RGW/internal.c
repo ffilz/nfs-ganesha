@@ -203,8 +203,6 @@ int construct_handle(struct rgw_export *export, struct rgw_file_handle *rgw_fh,
 	constructing->handle.fsid = posix2fsal_fsid(st->st_dev);
 	constructing->handle.fileid = st->st_ino;
 
-	constructing->export = export;
-
 	*obj = constructing;
 
 	return 0;

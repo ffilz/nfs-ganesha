@@ -49,7 +49,8 @@ static void release(struct fsal_obj_handle *obj_hdl)
 {
 	struct rgw_handle *obj =
 		container_of(obj_hdl, struct rgw_handle, handle);
-	struct rgw_export *export = obj->export;
+	struct rgw_export *export =
+	    container_of(op_ctx->fsal_export, struct rgw_export, export);
 
 	if (obj->rgw_fh != export->rgw_fs->root_fh) {
 		/* release RGW ref */

@@ -92,8 +92,7 @@ struct rgw_handle {
 	struct rgw_file_handle *rgw_fh; /*< RGW-internal file handle */
 	/* XXXX remove ptr to up-ops--we can always follow export! */
 	const struct fsal_up_vector *up_ops; /*< Upcall operations */
-	struct rgw_export *export; /*< The first export this handle
-					 *< belongs to */
+
 	struct fsal_share share;
 	fsal_openflags_t openflags;
 };
