@@ -69,6 +69,23 @@
       "parentUuid": "2de5605d_d37da192",
       "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f5d9eae_dfb60625",
+        "filename": "src/os/freebsd/subr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-09-18T19:25:02Z",
+      "side": 1,
+      "message": "Typo error - Should this be uid_t?",
+      "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
