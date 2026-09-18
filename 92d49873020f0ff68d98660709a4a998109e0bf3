@@ -33,6 +33,24 @@
       "message": "should there be a log message before returning ?",
       "revId": "92d49873020f0ff68d98660709a4a998109e0bf3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7da17669_e58d1905",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-09-18T08:18:33Z",
+      "side": 1,
+      "message": "The caller prints the log message.",
+      "parentUuid": "41df7a47_b010e27d",
+      "revId": "92d49873020f0ff68d98660709a4a998109e0bf3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
