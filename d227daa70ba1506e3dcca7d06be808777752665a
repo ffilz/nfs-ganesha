@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f5f1e4f_f00990b7",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-09-18T16:28:18Z",
+      "side": 1,
+      "message": "Do we need to add a similar check in `listxattrs()`, `removexattrs()`, `setxattrs()`, `getxattrs()`, and `log_to_gpfs()` etc? \n\nAlso, what about calling `gpfs_set_credentials()` and `gpfs_restore_ganesha_credentials()` inside `gpfs_ganesha()` so that the credential handling is done in one place and applies to all `ioctl()` calls?",
+      "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2de5605d_d37da192",
+        "filename": "src/FSAL/access_check.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1021499
+      },
+      "writtenOn": "2026-09-18T16:28:18Z",
+      "side": 1,
+      "message": "Thanks Frank for this patch.\n\nWe are calling `gpfs_save_ganesha_credentials()` and setting `ganesha_uid_set` during FSAL initialization, and we never reset it. Do we really need `ganesha_uid_set`? Are we unloading the FSAL when the last path is unexported?",
+      "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
