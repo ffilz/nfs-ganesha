@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea6fe8f3_4d85b9f8",
+        "filename": "src/FSAL/FSAL_GPFS/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-18T17:52:27Z",
+      "side": 1,
+      "message": "I don\u0027t know if xattrs needs credentials. I\u0027m not an expert on the xattrs code.\n\nI don\u0027t know if that\u0027s something that works for GPFS.\n\nConsider though that we need to make some filesystem calls with Ganesha\u0027s credentials (usually root).",
+      "parentUuid": "4f5f1e4f_f00990b7",
+      "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2de5605d_d37da192",
         "filename": "src/FSAL/access_check.c",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-09-18T16:28:18Z",
       "side": 1,
       "message": "Thanks Frank for this patch.\n\nWe are calling `gpfs_save_ganesha_credentials()` and setting `ganesha_uid_set` during FSAL initialization, and we never reset it. Do we really need `ganesha_uid_set`? Are we unloading the FSAL when the last path is unexported?",
+      "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bff4e51_488a3932",
+        "filename": "src/FSAL/access_check.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-18T17:52:27Z",
+      "side": 1,
+      "message": "There\u0027s nothing necessary for this on shutdown. ganesha_uid_set is just so we only save Ganesha credentials once on first load of FSAL_VFS or FSAL_GPFS. We always return to those credentials, so on shutdown, those should be the credentials in force.",
+      "parentUuid": "2de5605d_d37da192",
       "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
