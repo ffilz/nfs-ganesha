@@ -1078,7 +1078,7 @@ static void do_shutdown(void)
 #ifdef USE_GRPC
 	/* GRPC shutdown  */
 	if (nfs_param.grpc_param.grpc_enable)
-		grpc_shutdown();
+		grpc__shutdown();
 #endif
 	LogEvent(COMPONENT_MAIN, "Stopping delayed executor.");
 	delayed_shutdown();
