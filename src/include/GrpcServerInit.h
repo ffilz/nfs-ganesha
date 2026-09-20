@@ -15,11 +15,17 @@
 extern "C" {
 #endif
 
-/* Inits grpc module. */
-void grpc__init(uint16_t port, char *server_cert, char *server_key,
-		char *ca_cert, sockaddr_t *addr);
+typedef enum grpc_credentials_type {
+	GRPC_CRED_LOCAL = 0,
+	GRPC_CRED_SSL = 1,
+} grpc_credentials_type_t;
 
-void grpc_shutdown(void);
+/* Inits grpc module. */
+void grpc__init(uint16_t port, grpc_credentials_type_t cred_type,
+		char *server_cert, char *server_key, char *ca_cert,
+		sockaddr_t *addr);
+
+void grpc__shutdown(void);
 #ifdef __cplusplus
 }
 #endif

@@ -50,6 +50,7 @@
 #include "nfs4.h"
 #include "gsh_recovery.h"
 #include "pwnam_wrappers.h"
+#include "GrpcServerInit.h"
 
 /**
  * @brief An enumeration of protocols in the NFS family
@@ -230,6 +231,7 @@ typedef enum protos {
  */
 #define GRPC_ENABLE true
 #define GRPC_PORT 50051
+#define GRPC_CRED_TYPE_DEFAULT GRPC_CRED_LOCAL
 #define GRPC_SERVER_CERTIFICATE "/etc/ganesha/certs/server.crt"
 #define GRPC_SERVER_KEY "/etc/ganesha/certs/server.key"
 #define GRPC_CLIENT_CERTIFICATE "/etc/ganesha/certs/client.crt"
@@ -828,6 +830,8 @@ typedef struct directory_services_param {
 typedef struct grpc_parameter {
 	/** If gRPC is enabled or not*/
 	bool grpc_enable;
+	/** Credentials type to use (LOCAL vs SSL) */
+	grpc_credentials_type_t grpc_cred_type;
 	/** The IP address in which gRPC will be listening. */
 	sockaddr_t grpc_addr;
 	/** gRPC port number. */

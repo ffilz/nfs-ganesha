@@ -30,15 +30,17 @@
 #include <memory>
 #include <thread>
 #include <mutex>
+#include "GrpcServerInit.h"
+#include "nfsMetricsService.h"
 #include "nfsService.h"
 
 /* gRPC Server */
 class GrpcServer {
     public:
 	GrpcServer() = default;
-	void start(uint16_t port, std::string server_crt,
-		   std::string server_key, std::string ca_crt,
-		   std::string ip_addr, uint16_t ip_family);
+	void start(uint16_t port, grpc_credentials_type_t cred_type,
+		   std::string server_crt, std::string server_key,
+		   std::string ca_crt, std::string ip_addr, uint16_t ip_family);
 
 	void stop(void);
 	~GrpcServer();
@@ -56,9 +58,10 @@ class GrpcServer {
 	std::once_flag start_once_;
 	std::string server_address_;
 
-	void gRPCServerStart(uint16_t port, std::string server_crt,
-			     std::string server_key, std::string ca_crt,
-			     std::string ip_addr, uint16_t ip_family);
+	void gRPCServerStart(uint16_t port, grpc_credentials_type_t cred_type,
+			     std::string server_crt, std::string server_key,
+			     std::string ca_crt, std::string ip_addr,
+			     uint16_t ip_family);
 
 	/* TODO: Add a separate class for the services*/
 	GetClientIdService showClientService;
@@ -74,6 +77,7 @@ class GrpcServer {
 	ExportService exportService;
 	CacheMgrService cachemgr;
 	QosMgrService qosMgrService;
+	NfsMetricsService nfsMetricsService;
 };
 
 extern GrpcServer ganesha_grpc_server;
