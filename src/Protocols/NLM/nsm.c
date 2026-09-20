@@ -1000,7 +1000,7 @@ void send_sm_notify(struct local_nlm_info *info)
 	 * All we need to send SM_NOTIFY is actually the IP address.
 	 * We need our "my_name" and state number.
 	 */
-	if (is_loopback(&info->client_address)) {
+	if (is_loopback(&info->client_address, /*strict=*/false)) {
 		/* Local NLM entry - ignore */
 		glist_del(&info->infolist);
 		local_nlm_info_free(info);

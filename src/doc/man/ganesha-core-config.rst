@@ -755,6 +755,19 @@ GRPC {}
 Grpc_Port (uint16, range 0 to UINT16_MAX, default 50051)
     Port number used to communicate via gRPC.
 
+Grpc_Credentials (enum, values [ssl, local], default ssl)
+    Credentials used by the gRPC server and by Ganesha's gRPC clients.
+
+    ssl
+        Mutual TLS with Grpc_Server_Certificate, Grpc_Server_Key and
+        Grpc_Ca_Certificate (clients use Grpc_Client_Certificate and
+        Grpc_Client_Key).
+
+    local
+        gRPC local credentials, no certificates are needed. Any local user
+        that can connect to the port can call every gRPC service. The server
+        only listens on 127.0.0.1 or ::1
+
 Grpc_Server_Certificate (path default /etc/ganesha/ganesha_grpc_tls_cert/server.crt)
     Path for Server Certificate.
 

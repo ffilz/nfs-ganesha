@@ -425,19 +425,34 @@ sockaddr_t *ipv4_to_ipv4_mapped_ipv6(log_components_t component,
  * @brief Test if addr is loopback
  *
  * @param[in] addr      Address
+ * @param[in] strict    If true, only 127.0.0.1, ::ffff:127.0.0.1 and ::1 are
+ *                      loopback. If false, any 127.x.x.x address also counts.
  *
  * @return Comparator true/false,
  */
-bool is_loopback(sockaddr_t *addr)
+bool is_loopback(sockaddr_t *addr, bool strict)
 {
 	struct sockaddr_in6 *ip6addr = (struct sockaddr_in6 *)addr;
 
 	if (addr->ss_family == AF_INET) {
 		struct sockaddr_in *inaddr = (struct sockaddr_in *)addr;
 
+		if (strict)
+			return ntohl(inaddr->sin_addr.s_addr) ==
+			       INADDR_LOOPBACK;
+
 		return (((char *)&(inaddr->sin_addr.s_addr))[0] == 0x7F);
 	} else if (addr->ss_family != AF_INET6) {
 		return false;
+	}
+
+	if (strict) {
+		if (IN6_IS_ADDR_LOOPBACK(&ip6addr->sin6_addr))
+			return true;
+
+		return IN6_IS_ADDR_V4MAPPED(&ip6addr->sin6_addr) &&
+		       ntohl(ip6addr->sin6_addr.s6_addr32[3]) ==
+			       INADDR_LOOPBACK;
 	}
 
 	/* If the client socket is IPv4, then it is wrapped into a

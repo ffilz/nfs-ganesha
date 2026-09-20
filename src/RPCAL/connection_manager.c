@@ -553,7 +553,7 @@ xprt_to_connection(const SVCXPRT *xprt)
 static inline bool should_manage_connection(sockaddr_t *client_address)
 {
 	return nfs_param.core_param.enable_connection_manager &&
-	       !is_loopback(client_address);
+	       !is_loopback(client_address, /*strict=*/false);
 }
 
 bool connection_manager__is_drain_success(
