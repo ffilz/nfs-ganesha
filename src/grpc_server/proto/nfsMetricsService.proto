@@ -1,0 +1,68 @@
+/* SPDX-License-Identifier: LGPL-3.0-or-later */
+
+syntax = "proto3";
+
+package ganesha.metrics;
+
+// NfsMetricsService exports the metrics in Ganesha's Prometheus registry.
+//
+// MetricValueSet, MetricValue and Distribution follow the shape of the
+// messages with the same names in google.api.servicecontrol.v1:
+// https://github.com/googleapis/googleapis/blob/master/google/api/servicecontrol/v1/metric_value.proto
+// so collection agents can forward them to Service Control time-series
+// backends with little translation. They are defined here instead of
+// imported so that Ganesha's build does not depend on googleapis. Times
+// are in nanoseconds since the Unix epoch.
+service NfsMetricsService
+{
+	rpc CollectMetrics(CollectMetricsRequest)
+		returns (CollectMetricsResponse);
+}
+
+message CollectMetricsRequest
+{
+	// By default, series that were never updated (counters at zero,
+	// histograms without samples) are left out, but one series of each
+	// metric is always kept. Set this to return every registered series,
+	// including metrics without any series.
+	bool include_empty_metrics = 1;
+}
+
+message ExplicitBuckets
+{
+	repeated double bounds = 1;
+}
+
+message Distribution
+{
+	int64 count = 1;
+	double mean = 2;
+	repeated int64 bucket_counts = 3;
+	ExplicitBuckets explicit_buckets = 4;
+}
+
+message MetricValue
+{
+	map<string, string> labels = 1;
+	int64 start_time_unix_nanos = 2;
+	int64 end_time_unix_nanos = 3;
+	oneof value
+	{
+		bool bool_value = 4;
+		int64 int64_value = 5;
+		double double_value = 6;
+		string string_value = 7;
+		Distribution distribution_value = 8;
+	}
+}
+
+message MetricValueSet
+{
+	string metric_name = 1;
+	repeated MetricValue metric_values = 2;
+}
+
+message CollectMetricsResponse
+{
+	repeated MetricValueSet metric_value_sets = 1;
+}

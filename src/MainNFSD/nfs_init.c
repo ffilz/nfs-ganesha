@@ -1164,6 +1164,7 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 			nfs_param.grpc_param.grpc_port);
 
 		grpc__init(nfs_param.grpc_param.grpc_port,
+			   nfs_param.grpc_param.grpc_cred_type,
 			   nfs_param.grpc_param.grpc_server_cert,
 			   nfs_param.grpc_param.grpc_server_key,
 			   nfs_param.grpc_param.grpc_ca_cert,

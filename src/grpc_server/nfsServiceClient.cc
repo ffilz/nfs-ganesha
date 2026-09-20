@@ -31,6 +31,12 @@ using std::string_view;
 
 std::shared_ptr<grpc::Channel> getCreds(string_view server_address)
 {
+	/* Local credentials only work with a server on the same host. */
+	if (nfs_param.grpc_param.grpc_cred_type == GRPC_CRED_LOCAL)
+		return grpc::CreateChannel(std::string(server_address),
+					   grpc::experimental::LocalCredentials(
+						   LOCAL_TCP));
+
 	// For storing Client credentials
 	grpc::SslCredentialsOptions ssl_opts;
 
