@@ -1069,9 +1069,16 @@ struct config_block tls_core = {
 #endif
 
 #ifdef USE_GRPC
+static struct config_item_list grpc_cred_types[] = {
+	CONFIG_LIST_TOK("local", GRPC_CRED_LOCAL),
+	CONFIG_LIST_TOK("ssl", GRPC_CRED_SSL), CONFIG_LIST_EOL
+};
+
 static struct config_item grpc_params[] = {
 
 	CONF_ITEM_BOOL("Grpc_Enable", GRPC_ENABLE, grpc_parameter, grpc_enable),
+	CONF_ITEM_TOKEN("Grpc_Credentials", GRPC_CRED_TYPE_DEFAULT,
+			grpc_cred_types, grpc_parameter, grpc_cred_type),
 	CONF_ITEM_IP_ADDR("Grpc_Addr", "0.0.0.0", grpc_parameter, grpc_addr),
 	CONF_ITEM_UI16("Grpc_Port", 0, UINT16_MAX, GRPC_PORT, grpc_parameter,
 		       grpc_port),

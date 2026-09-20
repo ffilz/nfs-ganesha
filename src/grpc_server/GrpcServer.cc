@@ -44,23 +44,55 @@ GrpcServer::~GrpcServer()
 	stop();
 }
 
-/* start gRPC server */
-void GrpcServer::start(uint16_t port, std::string server_crt,
-		       std::string server_key, std::string ca_crt,
-		       std::string ip_addr, uint16_t ip_family)
+static std::shared_ptr<grpc::ServerCredentials> make_server_credentials(
+	grpc_credentials_type_t cred_type, const std::string &server_address,
+	std::string server_crt, std::string server_key, std::string ca_crt)
 {
-	std::call_once(start_once_, [this, port,
+	if (cred_type == GRPC_CRED_LOCAL) {
+		LogInfo(COMPONENT_GRPC,
+			"Starting gRPC server with LocalServerCredentials on %s",
+			server_address.c_str());
+		return grpc::experimental::LocalServerCredentials(LOCAL_TCP);
+	}
+
+	LogInfo(COMPONENT_GRPC,
+		"Starting gRPC server with SSL/mTLS credentials on %s",
+		server_address.c_str());
+	grpc::SslServerCredentialsOptions::PemKeyCertPair key_cert_pair = {
+		std::move(server_key), std::move(server_crt)
+	};
+
+	grpc::SslServerCredentialsOptions ssl_opts;
+	ssl_opts.pem_key_cert_pairs.push_back(std::move(key_cert_pair));
+
+	/* To validate client certificates */
+	ssl_opts.pem_root_certs = std::move(ca_crt);
+	ssl_opts.client_certificate_request =
+		GRPC_SSL_REQUEST_AND_REQUIRE_CLIENT_CERTIFICATE_AND_VERIFY;
+
+	return grpc::SslServerCredentials(ssl_opts);
+}
+
+/* start gRPC server */
+void GrpcServer::start(uint16_t port, grpc_credentials_type_t cred_type,
+		       std::string server_crt, std::string server_key,
+		       std::string ca_crt, std::string ip_addr,
+		       uint16_t ip_family)
+{
+	std::call_once(start_once_, [this, port, cred_type,
 				     server_crt = std::move(server_crt),
 				     server_key = std::move(server_key),
 				     ca_crt = std::move(ca_crt),
 				     ip_addr = std::move(ip_addr),
 				     ip_family]() {
 		server_thread_ = std::thread(
-			[this, port, server_crt = std::move(server_crt),
+			[this, port, cred_type,
+			 server_crt = std::move(server_crt),
 			 server_key = std::move(server_key),
 			 ca_crt = std::move(ca_crt),
 			 ip_addr = std::move(ip_addr), ip_family]() {
-				gRPCServerStart(port, std::move(server_crt),
+				gRPCServerStart(port, cred_type,
+						std::move(server_crt),
 						std::move(server_key),
 						std::move(ca_crt),
 						std::move(ip_addr), ip_family);
@@ -69,9 +101,11 @@ void GrpcServer::start(uint16_t port, std::string server_crt,
 }
 
 /* gRPC Server thread function */
-void GrpcServer::gRPCServerStart(uint16_t port, std::string server_crt,
-				 std::string server_key, std::string ca_crt,
-				 std::string ip_addr, uint16_t ip_family)
+void GrpcServer::gRPCServerStart(uint16_t port,
+				 grpc_credentials_type_t cred_type,
+				 std::string server_crt, std::string server_key,
+				 std::string ca_crt, std::string ip_addr,
+				 uint16_t ip_family)
 {
 	{ /* Taking a lock */
 		const std::lock_guard<std::mutex> lock(mutex_);
@@ -95,20 +129,11 @@ void GrpcServer::gRPCServerStart(uint16_t port, std::string server_crt,
 			server_address_ = ip_addr + ":" + std::to_string(port);
 		}
 
-		grpc::SslServerCredentialsOptions::PemKeyCertPair
-			key_cert_pair = { std::move(server_key),
-					  std::move(server_crt) };
-
-		grpc::SslServerCredentialsOptions ssl_opts;
-		ssl_opts.pem_key_cert_pairs.push_back(std::move(key_cert_pair));
-
-		/* To validate client certificates */
-		ssl_opts.pem_root_certs = std::move(ca_crt);
-		ssl_opts.client_certificate_request =
-			GRPC_SSL_REQUEST_AND_REQUIRE_CLIENT_CERTIFICATE_AND_VERIFY;
-
 		std::shared_ptr<grpc::ServerCredentials> server_creds =
-			grpc::SslServerCredentials(ssl_opts);
+			make_server_credentials(cred_type, server_address_,
+						std::move(server_crt),
+						std::move(server_key),
+						std::move(ca_crt));
 
 		grpc::ServerBuilder builder;
 		/* Adding the listening port */
@@ -140,6 +165,8 @@ void GrpcServer::gRPCServerStart(uint16_t port, std::string server_crt,
 		builder.RegisterService(&cachemgr);
 
 		builder.RegisterService(&qosMgrService);
+
+		builder.RegisterService(&nfsMetricsService);
 
 		/* Reflection Service to enable grpc CLI */
 		grpc::reflection::InitProtoReflectionServerBuilderPlugin();
@@ -176,51 +203,107 @@ void GrpcServer::stop()
 	}
 }
 
+/* Check whether addr is 127.0.0.1, ::1 or ::ffff:127.0.0.1.
+ */
+static bool grpc_addr_is_loopback(const sockaddr_t *addr)
+{
+	if (addr->ss_family == AF_INET) {
+		const struct sockaddr_in *sin =
+			reinterpret_cast<const struct sockaddr_in *>(addr);
+
+		return ntohl(sin->sin_addr.s_addr) == INADDR_LOOPBACK;
+	}
+
+	if (addr->ss_family == AF_INET6) {
+		const struct sockaddr_in6 *sin6 =
+			reinterpret_cast<const struct sockaddr_in6 *>(addr);
+
+		if (IN6_IS_ADDR_LOOPBACK(&sin6->sin6_addr))
+			return true;
+
+		return IN6_IS_ADDR_V4MAPPED(&sin6->sin6_addr) &&
+		       ntohl(sin6->sin6_addr.s6_addr32[3]) == INADDR_LOOPBACK;
+	}
+
+	return false;
+}
+
+static std::string format_listen_ip(grpc_credentials_type_t cred_type,
+				    sockaddr_t *addr)
+{
+	char ipstring[SOCK_NAME_MAX] = "\0";
+	struct display_buffer dspbuf = { sizeof(ipstring), ipstring, ipstring };
+
+	display_sockip(&dspbuf, addr);
+	if (cred_type != GRPC_CRED_LOCAL || grpc_addr_is_loopback(addr))
+		return ipstring;
+
+	/* Local credentials only accept connections to 127.0.0.1 or ::1, so
+	 * replace a wildcard Grpc_Addr with loopback and reject anything else.
+	 */
+	if (is_inaddrany(addr)) {
+		const char *const loopback =
+			addr->ss_family == AF_INET6 ? "::1" : "127.0.0.1";
+		LogInfo(COMPONENT_GRPC,
+			"Grpc_Credentials = local, listening on %s instead of the wildcard address",
+			loopback);
+		return loopback;
+	}
+
+	LogFatal(
+		COMPONENT_GRPC,
+		"Grpc_Credentials = local requires Grpc_Addr 127.0.0.1 or ::1, got %s",
+		ipstring);
+}
+
 extern "C" {
 
 /* The event is triggered when NFS is initialized */
-void grpc__init(uint16_t port, char *server_crt, char *server_key, char *ca_crt,
+void grpc__init(uint16_t port, grpc_credentials_type_t cred_type,
+		char *server_crt, char *server_key, char *ca_crt,
 		sockaddr_t *addr)
 {
 	static bool initialized = false;
-	char ipstring[SOCK_NAME_MAX] = "\0";
-
 	if (initialized)
 		return;
 
-	struct display_buffer dspbuf = { sizeof(ipstring), ipstring, ipstring };
-	display_sockip(&dspbuf, addr);
-
-	LogDebug(COMPONENT_GRPC,
-		 "Path to server certificate: %s "
-		 "Path to server key : %s"
-		 "Path to ca certificate : %s",
-		 server_crt, server_key, ca_crt);
-
-	std::string key = read_cert_file(server_key);
-	std::string cert = read_cert_file(server_crt);
-	std::string ca = read_cert_file(ca_crt);
-
-	/* If the key or certificated files are not found
-    ** than gRPC cannot run securely, hence exiting.
-    */
-	if (key.empty() || cert.empty() || ca.empty()) {
-		LogWarn(COMPONENT_GRPC,
-			"Failed to get server key or server certificate or CA certificate."
-			"gRPC server failed to start");
-
+	std::string ip_addr = format_listen_ip(cred_type, addr);
+	if (cred_type == GRPC_CRED_LOCAL) {
+		ganesha_grpc_server.start(port, cred_type, "", "", "",
+					  std::move(ip_addr), addr->ss_family);
+		initialized = true;
 		return;
 	}
 
-	/* Start gRPC server */
-	ganesha_grpc_server.start(port, cert, key, ca, ipstring,
-				  addr->ss_family);
+	const char *const crt_path = server_crt ? server_crt : "none";
+	const char *const key_path = server_key ? server_key : "none";
+	const char *const ca_path = ca_crt ? ca_crt : "none";
+	LogDebug(
+		COMPONENT_GRPC,
+		"Path to server certificate: %s Path to server key : %s Path to ca certificate : %s",
+		crt_path, key_path, ca_path);
 
+	std::string key = read_cert_file(server_key ? server_key : "");
+	std::string cert = read_cert_file(server_crt ? server_crt : "");
+	std::string ca = read_cert_file(ca_crt ? ca_crt : "");
+	/* gRPC cannot run securely without the server key, the server
+	 * certificate and the CA certificate, so do not start it.
+	 */
+	if (key.empty() || cert.empty() || ca.empty()) {
+		LogWarn(COMPONENT_GRPC,
+			"Failed to read gRPC server key (%s), server certificate (%s) or CA certificate (%s), gRPC server not started",
+			key_path, crt_path, ca_path);
+		return;
+	}
+
+	ganesha_grpc_server.start(port, cred_type, std::move(cert),
+				  std::move(key), std::move(ca),
+				  std::move(ip_addr), addr->ss_family);
 	initialized = true;
 }
 
 /* Shutdown gRPC */
-void grpc_shutdown()
+void grpc__shutdown()
 {
 	ganesha_grpc_server.stop();
 }
