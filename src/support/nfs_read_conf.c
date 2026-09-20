@@ -1069,9 +1069,85 @@ struct config_block tls_core = {
 #endif
 
 #ifdef USE_GRPC
+static struct config_item_list grpc_cred_types[] = {
+	CONFIG_LIST_TOK("local", GRPC_CRED_LOCAL),
+	CONFIG_LIST_TOK("ssl", GRPC_CRED_SSL), CONFIG_LIST_EOL
+};
+
+/**
+ * @brief Check whether addr is 127.0.0.1, ::1 or ::ffff:127.0.0.1
+ */
+static bool grpc_addr_is_loopback(const sockaddr_t *addr)
+{
+	if (addr->ss_family == AF_INET) {
+		const struct sockaddr_in *sin =
+			(const struct sockaddr_in *)addr;
+
+		return ntohl(sin->sin_addr.s_addr) == INADDR_LOOPBACK;
+	}
+
+	if (addr->ss_family == AF_INET6) {
+		const struct sockaddr_in6 *sin6 =
+			(const struct sockaddr_in6 *)addr;
+
+		if (IN6_IS_ADDR_LOOPBACK(&sin6->sin6_addr))
+			return true;
+
+		return IN6_IS_ADDR_V4MAPPED(&sin6->sin6_addr) &&
+		       ntohl(sin6->sin6_addr.s6_addr32[3]) == INADDR_LOOPBACK;
+	}
+
+	return false;
+}
+
+/**
+ * @brief Validate the GRPC block
+ *
+ * gRPC local credentials only accept connections to 127.0.0.1 or ::1. With
+ * Grpc_Credentials = local, listen there instead of on the default wildcard
+ * Grpc_Addr, and reject any other Grpc_Addr.
+ */
+static int grpc_conf_commit(void *node, void *link_mem, void *self_struct,
+			    struct config_error_type *err_type)
+{
+	struct grpc_parameter *params = self_struct;
+	sockaddr_t *addr = &params->grpc_addr;
+	char ipstring[SOCK_NAME_MAX] = "\0";
+	struct display_buffer dspbuf = { sizeof(ipstring), ipstring, ipstring };
+
+	if (params->grpc_cred_type != GRPC_CRED_LOCAL ||
+	    grpc_addr_is_loopback(addr))
+		return 0;
+
+	if (is_inaddrany(addr)) {
+		struct sockaddr_in *sin = (struct sockaddr_in *)addr;
+		struct sockaddr_in6 *sin6 = (struct sockaddr_in6 *)addr;
+
+		if (addr->ss_family == AF_INET6)
+			sin6->sin6_addr = in6addr_loopback;
+		else
+			sin->sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+
+		display_sockip(&dspbuf, addr);
+		LogInfo(COMPONENT_CONFIG,
+			"Grpc_Credentials = local, listening on %s instead of the wildcard address",
+			ipstring);
+		return 0;
+	}
+
+	display_sockip(&dspbuf, addr);
+	LogCrit(COMPONENT_CONFIG,
+		"Grpc_Credentials = local requires Grpc_Addr 127.0.0.1 or ::1, got %s",
+		ipstring);
+	err_type->invalid = true;
+	return 1;
+}
+
 static struct config_item grpc_params[] = {
 
 	CONF_ITEM_BOOL("Grpc_Enable", GRPC_ENABLE, grpc_parameter, grpc_enable),
+	CONF_ITEM_TOKEN("Grpc_Credentials", GRPC_CRED_TYPE_DEFAULT,
+			grpc_cred_types, grpc_parameter, grpc_cred_type),
 	CONF_ITEM_IP_ADDR("Grpc_Addr", "0.0.0.0", grpc_parameter, grpc_addr),
 	CONF_ITEM_UI16("Grpc_Port", 0, UINT16_MAX, GRPC_PORT, grpc_parameter,
 		       grpc_port),
@@ -1097,7 +1173,7 @@ struct config_block grpc_param = {
 	.blk_desc.flags = CONFIG_UNIQUE, /* too risky to have more */
 	.blk_desc.u.blk.init = noop_conf_init,
 	.blk_desc.u.blk.params = grpc_params,
-	.blk_desc.u.blk.commit = noop_conf_commit,
+	.blk_desc.u.blk.commit = grpc_conf_commit,
 	.mem_comp = MEM_COMP_CONFIG
 };
 #endif
