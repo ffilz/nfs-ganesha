@@ -53,7 +53,7 @@ int nlm4_Sm_Notify(nfs_arg_t *args, struct svc_req *req, nfs_res_t *res)
 	sockaddr_t *original_caller_addr = op_ctx->caller_addr;
 	struct gsh_client *original_client = op_ctx->client;
 
-	if (!is_loopback(op_ctx->caller_addr)) {
+	if (!is_loopback(op_ctx->caller_addr, /*strict=*/false)) {
 		LogEvent(COMPONENT_NLM, "Client %s sent an SM_NOTIFY, ignoring",
 			 op_ctx->client->hostaddr_str);
 		return NFS_REQ_OK;
