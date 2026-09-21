@@ -16,6 +16,24 @@
       "message": "is this correct?  maybe not used, but, why?",
       "revId": "fd1d99caf71878c0ab139178ae6d2f473ad1622b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac354740_33f6c540",
+        "filename": "src/FSAL/FSAL_RGW/internal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1019837
+      },
+      "writtenOn": "2026-09-21T11:29:57Z",
+      "side": 0,
+      "message": "Perhaps I haven\u0027t fully fixed this issue. The check at handle.c:55 identifies the mount-root fh (owned by rgw_fs, reclaimed by rgw_umount(), and must not receive a per-handle rgw_fh_rele). The pointer comparison only works when obj-\u003ergw_fh and export-\u003ergw_fs belong to the same mount session. With two exports over one bucket, that invariant breaks:\n\nThe mdcache key is content-addressable (rgw_fh_hk { bucket; object; }) with no mount identity, so the same object merges into one mdcache entry under both exports.\n\nThat entry has one sub_handle — the fh allocated by the first export, E1 — while each export has its own mount and its own distinct root_fh.\n\nRemoving E1 keeps the entry for E2 but runs rgw_umount(E1), freeing E1\u0027s fh; removing E2 then runs release() in E2\u0027s context.\n\nThe LHS is E1\u0027s (freed) root fh, and the RHS is E2\u0027s root_fh — different mounts, never equal. The root is misclassified, and rgw_fh_rele(E2-\u003ergw_fs, E1\u0027s_fh) becomes a cross-mount unref / UAF inside librgw.",
+      "parentUuid": "d1e1e76d_d0e0ec40",
+      "revId": "fd1d99caf71878c0ab139178ae6d2f473ad1622b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
