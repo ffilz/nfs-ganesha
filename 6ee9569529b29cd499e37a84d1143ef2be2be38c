@@ -514,6 +514,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed653891_c224858e",
+        "filename": "src/support/exports.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2659,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-09-22T14:43:48Z",
+      "side": 1,
+      "message": "In previous added the code in copy_gsh_export() and forgot to clean the code here.\nSorry,\n\nIn latest patch i cleaned the if condition",
+      "parentUuid": "7f4773c1_9ff546b2",
+      "revId": "6ee9569529b29cd499e37a84d1143ef2be2be38c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f054446_cedfecd0",
         "filename": "src/support/exports.c",
         "patchSetId": 2
