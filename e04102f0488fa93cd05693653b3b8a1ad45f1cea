@@ -33,6 +33,58 @@
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t/** TCP MSG_ZEROCOPY parameters (Linux). Defaults to enabled with",
       "revId": "e04102f0488fa93cd05693653b3b8a1ad45f1cea",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66414a7b_abf07e2c",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-23T17:45:51Z",
+      "side": 1,
+      "message": "Please re-wrap this.",
+      "parentUuid": "e0d27e5a_e7b5611e",
+      "revId": "e04102f0488fa93cd05693653b3b8a1ad45f1cea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ef13f28_919d8d8d",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-23T17:45:51Z",
+      "side": 1,
+      "message": "If the new parameters can not be dynamically updated, that needs to be handled here.",
+      "revId": "e04102f0488fa93cd05693653b3b8a1ad45f1cea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98e9d861_a118f9a7",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-23T17:45:51Z",
+      "side": 1,
+      "message": "Can these new parameters be dynamically updated?\n\nIf not, they need to be handled above.",
+      "revId": "e04102f0488fa93cd05693653b3b8a1ad45f1cea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
