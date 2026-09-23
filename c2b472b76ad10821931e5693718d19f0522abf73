@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f89a3429_e43593a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-23T16:16:46Z",
+      "side": 1,
+      "message": "This is sensible, just a suggested simplification",
+      "revId": "c2b472b76ad10821931e5693718d19f0522abf73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8bd2fe7_c79bdf37",
+        "filename": "src/Protocols/NFS/mnt_Mnt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-23T16:16:46Z",
+      "side": 1,
+      "message": "If you set r \u003d arg-\u003earg_mnt + 1, you won\u0027t need to test for r \u003e arg-\u003earg_mnt and w \u003e arg-\u003earg_mnt below.\n\nThe above if assures that *arg-\u003earg_mnt \u003d\u003d \u0027/\u0027 so we can just consider that character already \"copied\".",
+      "revId": "c2b472b76ad10821931e5693718d19f0522abf73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
