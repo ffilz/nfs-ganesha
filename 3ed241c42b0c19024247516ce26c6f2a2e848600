@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9716120a_e356afa6",
+        "filename": "src/Protocols/NFS/nfs_proto_tools.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3857,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-24T02:35:35Z",
+      "side": 1,
+      "message": "An update changes the op_ctx-\u003ectx_export-\u003eexport_fs_location so you need some lock that protects that pointer, and you need to take it before if test and release after then block.",
+      "revId": "3ed241c42b0c19024247516ce26c6f2a2e848600",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3edf98b_7d96bfe2",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-24T02:35:35Z",
+      "side": 1,
+      "message": "This might be a bit generic a name, maybe fsloc_trunking?",
+      "revId": "3ed241c42b0c19024247516ce26c6f2a2e848600",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
