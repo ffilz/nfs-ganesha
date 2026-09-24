@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fdca4c5_df99fb3f",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-24T18:13:21Z",
+      "side": 1,
+      "message": "Hmm, if we\u0027re expecting a cert and it\u0027s missing or invalid, LogFatal is appropriate.",
+      "parentUuid": "9b760fb1_15967052",
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b8e4945_282efc39",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 2
@@ -200,6 +218,24 @@
       "side": 1,
       "message": "We should make this default to SSL",
       "parentUuid": "78ddc5a9_864c73c7",
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae761d60_8c796aa0",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-24T18:13:21Z",
+      "side": 1,
+      "message": "I agree, I don\u0027t want the default to be unsecured. I get that makes sense in certain installations, but I would rather that be a configurable option.",
+      "parentUuid": "dcf3d3e9_9b0705b5",
       "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
