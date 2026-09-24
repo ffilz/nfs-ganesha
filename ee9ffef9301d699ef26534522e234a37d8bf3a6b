@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50c36aba_6e603fff",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-09-24T09:37:09Z",
+      "side": 1,
+      "message": "LogFatal aborts the process. The previous path logged a warning and kept NFS running without gRPC. \n\n@ffilzlnx@mindspring.com\nShould a missing or invalid certificate stay non-fatal?",
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5089b8a_76a30f9d",
+        "filename": "src/grpc_server/nfsMetricsService.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-09-24T09:37:09Z",
+      "side": 1,
+      "message": "Ganesha fails to build with GRPC enabled and MONITORING disabled. Please check.",
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a716106_b360569d",
+        "filename": "src/grpc_server/nfsMetricsService.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-09-24T09:37:09Z",
+      "side": 1,
+      "message": "format_metric_family() always returns true. It seems failure path is not reachable.",
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b92c5c3_75b589cf",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-09-24T09:37:09Z",
+      "side": 1,
+      "message": "Grpc_Enable defaults to true and Grpc_Addr to 0.0.0.0, and this credential type covers every service on the server, not only metrics. LocalServerCredentials(LOCAL_TCP) only checks that the peer is on loopback, so any local user who can open 127.0.0.1:50051 can call shutdown, export add/remove, grace, and QoS. Should ssl stay the default, with local opt-in and bound to loopback? Callers in nfsServiceClient.cc still use SslCredentials, so would those still connect?\n\n@ffilzlnx@mindspring.com\nWhat would be a better way?",
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
