@@ -166,6 +166,24 @@
       "parentUuid": "7b92c5c3_75b589cf",
       "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78ddc5a9_864c73c7",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1038312
+      },
+      "writtenOn": "2026-09-24T12:59:48Z",
+      "side": 1,
+      "message": "\u003e Callers in nfsServiceClient.cc will not be able to connect in case we opt for local_tcp.\n\u003e \n\u003e we can define a common configuration block or some flag to suggest that gRPC is running on local_tcp/ssl and accordingly create channels on the client side.\n\nThis will only be useful in case of local communication",
+      "parentUuid": "80126b13_92370d1d",
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
