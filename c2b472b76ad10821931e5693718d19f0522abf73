@@ -33,6 +33,24 @@
       "message": "If you set r \u003d arg-\u003earg_mnt + 1, you won\u0027t need to test for r \u003e arg-\u003earg_mnt and w \u003e arg-\u003earg_mnt below.\n\nThe above if assures that *arg-\u003earg_mnt \u003d\u003d \u0027/\u0027 so we can just consider that character already \"copied\".",
       "revId": "c2b472b76ad10821931e5693718d19f0522abf73",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4087d5d9_e5f3f3bb",
+        "filename": "src/Protocols/NFS/mnt_Mnt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1019837
+      },
+      "writtenOn": "2026-09-24T13:07:07Z",
+      "side": 1,
+      "message": "Done，the check `if (arg-\u003earg_mnt[0] \u003d\u003d \u0027/\u0027)` is added since arg_mnt can be an empty string.",
+      "parentUuid": "b8bd2fe7_c79bdf37",
+      "revId": "c2b472b76ad10821931e5693718d19f0522abf73",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
