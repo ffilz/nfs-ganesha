@@ -16,6 +16,24 @@
       "message": "I do worry a bit about fetching the ACL for every directory create, but I suppose cephfs will cache it.\n\n(note won\u0027t block merge, but a response would be nice)",
       "revId": "a387d2075d59a33ed7dc775f72497e3a61cc1b80",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32a77d76_720c60b4",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1008938
+      },
+      "writtenOn": "2026-09-25T06:45:34Z",
+      "side": 1,
+      "message": "I agree with your concern. I will create another issue/bug to track this. Need check if this can be avoided.",
+      "parentUuid": "f88268bb_b6623896",
+      "revId": "a387d2075d59a33ed7dc775f72497e3a61cc1b80",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
