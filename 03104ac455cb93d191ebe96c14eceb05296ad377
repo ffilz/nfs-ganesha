@@ -16,6 +16,40 @@
       "message": "Thanks for all the efforts. This looks very clean and understandable.",
       "revId": "03104ac455cb93d191ebe96c14eceb05296ad377",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3c22ccf_a0b437ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-28T14:50:15Z",
+      "side": 1,
+      "message": "I\u0027m good with this, but we can make one more streamline...",
+      "revId": "03104ac455cb93d191ebe96c14eceb05296ad377",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec18f6cf_537ea760",
+        "filename": "src/Protocols/NFS/mnt_Mnt.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-09-28T14:50:15Z",
+      "side": 1,
+      "message": "All that said, I just realized, we don\u0027t need a while loop here, there is at most one trailing \u0027/\u0027 because we already collapsed consecutive \u0027/\u0027:\n\nJust replace while with if...\n\nI\u0027m also happy to merge as is.",
+      "revId": "03104ac455cb93d191ebe96c14eceb05296ad377",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
