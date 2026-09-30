@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6447681e_d87e2140",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-09-30T12:35:27Z",
+      "side": 1,
+      "message": "pynfs has tests (LOOK3, OPEN10, CR9, CR9a, RNM6, RNM7, RM4, LINK6, SEC5) that expect NFS4ERR_INVAL for zero-length names, as the RFC requires. So file names (component4) and symlink text (linktext4) are allowed to be empty during decode, and the operations still return NFS4ERR_INVAL. The other utf8strings are rejected when empty.",
+      "revId": "fd60001aae20e58496f17c733f7036b7531748b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
