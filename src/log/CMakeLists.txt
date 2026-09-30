@@ -32,6 +32,7 @@ endif(USE_DBUS)
 if(USE_LTTNG)
   include_directories(
     ${LTTNG_INCLUDE_DIR}
+    ${LTTNG_CTL_INCLUDE_DIR}
   )
 endif(USE_LTTNG)
 
@@ -41,6 +42,10 @@ SET(log_STAT_SRCS
    display.c
    log_functions.c
 )
+
+if(USE_LTTNG)
+  list(APPEND log_STAT_SRCS log_lttng.c)
+endif(USE_LTTNG)
 
 add_library(log OBJECT ${log_STAT_SRCS})
 add_sanitizers(log)
