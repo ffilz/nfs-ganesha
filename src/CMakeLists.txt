@@ -311,6 +311,10 @@ goption(USE_FSAL_RGW "build RGW FSAL shared library" ON)
 goption(USE_FSAL_MEM "build Memory FSAL shared library" ON)
 goption(USE_FSAL_SAUNAFS "build SAUNAFS FSAL shared library" ON)
 
+# Shared io_uring async I/O engine, usable by any FSAL that sits on top of
+# ordinary file descriptors (VFS today, others as they are ported).
+goption(USE_FSAL_URING "build the shared io_uring engine for FSALs" OFF)
+
 # Internal capability required by some FSALs
 option(GSH_CAN_HOST_LOCAL_FS "Ganesha supports hosting local filesystems" ON)
 
@@ -698,6 +702,62 @@ if (USE_FSAL_PROXY_V4)
     endif(NOT HAVE_SQLITE3 OR NOT HAVE_SQLITE3_H)
   endif(PROXYV4_HANDLE_MAPPING)
 endif (USE_FSAL_PROXY_V4)
+
+# Shared io_uring engine (src/FSAL/fsal_uring.c). It is linked into
+# ganesha_nfsd, so every FSAL can use it once it is on. Needs liburing >= 2.0
+# and a Linux kernel with io_uring enabled.
+gopt_test(USE_FSAL_URING)
+if(USE_FSAL_URING)
+  find_package(PkgConfig REQUIRED)
+  pkg_check_modules(LIBURING liburing>=2.0)
+  if(NOT LIBURING_FOUND)
+    if(USE_FSAL_URING_REQUIRED)
+      message(FATAL_ERROR "Cannot find liburing >= 2.0 but USE_FSAL_URING requested")
+    else(USE_FSAL_URING_REQUIRED)
+      message(WARNING "Cannot find liburing >= 2.0; disabling USE_FSAL_URING")
+      set(USE_FSAL_URING OFF)
+    endif(USE_FSAL_URING_REQUIRED)
+  else(NOT LIBURING_FOUND)
+    message(STATUS "Found liburing: ${LIBURING_LIBRARIES} (${LIBURING_VERSION})")
+    include_directories(${LIBURING_INCLUDE_DIRS})
+    link_directories(${LIBURING_LIBRARY_DIRS})
+    set(SYSTEM_LIBRARIES ${LIBURING_LIBRARIES} ${SYSTEM_LIBRARIES})
+    # io_uring_register_iowq_max_workers() arrived in liburing 2.1, but 2.0
+    # is still enough to build the engine, so capping io-wq workers is
+    # optional rather than a bumped floor.
+    include(CheckSymbolExists)
+    set(CMAKE_REQUIRED_INCLUDES ${LIBURING_INCLUDE_DIRS})
+    check_symbol_exists(io_uring_register_iowq_max_workers "liburing.h"
+                        HAVE_IO_URING_REGISTER_IOWQ_MAX_WORKERS)
+    # Per-opcode availability must be tested on the liburing helper, NOT with
+    # #if defined(IORING_OP_STATX): the IORING_OP_* names are enumerators of
+    # enum io_uring_op, not macros, so a preprocessor test for them is always
+    # false and would silently compile the operation out.
+    #
+    # This only answers "can we build the SQE". Whether the running kernel
+    # implements the opcode is a separate, runtime question answered by
+    # uring_engine_op_supported().
+    check_symbol_exists(io_uring_prep_statx "liburing.h"
+                        HAVE_IO_URING_PREP_STATX)
+    check_symbol_exists(io_uring_prep_close "liburing.h"
+                        HAVE_IO_URING_PREP_CLOSE)
+    check_symbol_exists(io_uring_prep_fallocate "liburing.h"
+                        HAVE_IO_URING_PREP_FALLOCATE)
+    check_symbol_exists(io_uring_prep_sync_file_range "liburing.h"
+                        HAVE_IO_URING_PREP_SYNC_FILE_RANGE)
+    check_symbol_exists(io_uring_prep_renameat "liburing.h"
+                        HAVE_IO_URING_PREP_RENAMEAT)
+    check_symbol_exists(io_uring_prep_unlinkat "liburing.h"
+                        HAVE_IO_URING_PREP_UNLINKAT)
+    check_symbol_exists(io_uring_prep_mkdirat "liburing.h"
+                        HAVE_IO_URING_PREP_MKDIRAT)
+    check_symbol_exists(io_uring_prep_symlinkat "liburing.h"
+                        HAVE_IO_URING_PREP_SYMLINKAT)
+    check_symbol_exists(io_uring_prep_linkat "liburing.h"
+                        HAVE_IO_URING_PREP_LINKAT)
+    unset(CMAKE_REQUIRED_INCLUDES)
+  endif(NOT LIBURING_FOUND)
+endif(USE_FSAL_URING)
 
 gopt_test(USE_FSAL_VFS)
 if(USE_FSAL_VFS)
@@ -1160,6 +1220,14 @@ endif( "${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" VERSION_LESS "2.8" )
 include_directories(
   "${PROJECT_BINARY_DIR}/include"
   "${PROJECT_SOURCE_DIR}/include"
+  # The io_uring engine is included as "io_uring/core/uring_engine.h", which
+  # is relative to src/ rather than src/include/, so src/ itself has to be on
+  # the search path.
+  "${PROJECT_SOURCE_DIR}"
+  # Likewise the personality registry is included as
+  # "FSAL_URING/uring_pers.h" from support/ and Protocols/, neither of which
+  # can reach it relative to their own directory.
+  "${PROJECT_SOURCE_DIR}/FSAL"
   "${PROJECT_BINARY_DIR}/libntirpc/src/monitoring/include"
   "${PROJECT_SOURCE_DIR}/libntirpc/src/monitoring/include"
   "${PROJECT_BINARY_DIR}/monitoring/include"
@@ -1364,6 +1432,15 @@ endif (USE_SYSTEM_NTIRPC)
 message(${NTIRPC_INCLUDE_DIR})
 include_directories(${NTIRPC_INCLUDE_DIR})
 
+# Detect batch svc_resume API (added in libntirpc ZeroCopy_TX / >= 15.5).
+# When absent, the io_uring path falls back to individual svc_resume() calls.
+check_symbol_exists(svc_resume_defer_begin "rpc/svc.h" HAVE_SVC_RESUME_BATCH)
+if(HAVE_SVC_RESUME_BATCH)
+  message(STATUS "libntirpc has batch svc_resume API (svc_resume_defer_begin found)")
+else()
+  message(STATUS "libntirpc lacks batch svc_resume API -- io_uring path uses single-submit fallback")
+endif()
+
 # Validate TLS support
 if(USE_TLS)
   # Enforce mutual exclusion of TLS backends early
@@ -1502,6 +1579,7 @@ if (USE_MONITORING)
 endif (USE_MONITORING)
 
 add_subdirectory(FSAL)
+add_subdirectory(io_uring)
 add_subdirectory(idmapper)
 
 add_subdirectory(MainNFSD)

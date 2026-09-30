@@ -1702,6 +1702,7 @@ static log_levels_t default_log_levels[] = {
 	[COMPONENT_RECOVERY] = NIV_EVENT,
 	[COMPONENT_RDMA] = NIV_EVENT,
 	[COMPONENT_GRPC] = NIV_EVENT,
+	[COMPONENT_URING] = NIV_EVENT,
 };
 
 CT_ASSERT(sizeof(default_log_levels) / sizeof(default_log_levels[0]) ==
@@ -1762,7 +1763,8 @@ static log_levels_t default_conditional_log_levels[] = {
 	[COMPONENT_QOS] = NIV_FULL_DEBUG,
 	[COMPONENT_RECOVERY] = NIV_FULL_DEBUG,
 	[COMPONENT_RDMA] = NIV_FULL_DEBUG,
-	[COMPONENT_GRPC] = NIV_FULL_DEBUG
+	[COMPONENT_GRPC] = NIV_FULL_DEBUG,
+	[COMPONENT_URING] = NIV_FULL_DEBUG
 };
 
 CT_ASSERT(sizeof(default_conditional_log_levels) /
@@ -1906,6 +1908,9 @@ struct log_component_info LogComponents[] = {
 	[COMPONENT_GRPC] = {
 		.comp_name = "COMPONENT_GRPC",
 		.comp_str = "GRPC",},
+	[COMPONENT_URING] = {
+		.comp_name = "COMPONENT_URING",
+		.comp_str = "URING",},
 };
 
 CT_ASSERT(sizeof(LogComponents) / sizeof(LogComponents[0]) == COMPONENT_COUNT,
@@ -2077,6 +2082,7 @@ HANDLE_PROP(QOS);
 HANDLE_PROP(RECOVERY);
 HANDLE_PROP(RDMA);
 HANDLE_PROP(GRPC);
+HANDLE_PROP(URING);
 
 /* clang-format off */
 static struct gsh_dbus_prop *log_props[] = { LOG_PROPERTY_ITEM(ALL),
@@ -2120,6 +2126,7 @@ static struct gsh_dbus_prop *log_props[] = { LOG_PROPERTY_ITEM(ALL),
 					     LOG_PROPERTY_ITEM(RECOVERY),
 					     LOG_PROPERTY_ITEM(RDMA),
 					     LOG_PROPERTY_ITEM(GRPC),
+					     LOG_PROPERTY_ITEM(URING),
 					     NULL };
 /* clang-format on */
 
@@ -2417,6 +2424,8 @@ static struct config_item component_levels[] = {
 			 COMPONENT_RECOVERY, int),
 	CONF_INDEX_TOKEN("RDMA", NB_LOG_LEVEL, log_levels, COMPONENT_RDMA, int),
 	CONF_INDEX_TOKEN("GRPC", NB_LOG_LEVEL, log_levels, COMPONENT_GRPC, int),
+	CONF_INDEX_TOKEN("URING", NB_LOG_LEVEL, log_levels, COMPONENT_URING,
+			 int),
 	CONFIG_EOL
 };
 
@@ -2766,6 +2775,8 @@ static struct config_item conditional_params[] = {
 			 COMPONENT_RECOVERY, int),
 	CONF_INDEX_TOKEN("RDMA", NB_LOG_LEVEL, log_levels, COMPONENT_RDMA, int),
 	CONF_INDEX_TOKEN("GRPC", NB_LOG_LEVEL, log_levels, COMPONENT_GRPC, int),
+	CONF_INDEX_TOKEN("URING", NB_LOG_LEVEL, log_levels, COMPONENT_URING,
+			 int),
 	CONF_ITEM_PROC_MULT("Exports", noop_conf_init, export_id_list_adder,
 			    export_id_list, export_id_glist),
 	CONF_ITEM_PROC_MULT("Clients", noop_conf_init, client_ip_list_adder,
@@ -3808,6 +3819,7 @@ HANDLE_COND_LOG_PROP(QOS);
 HANDLE_COND_LOG_PROP(RECOVERY);
 HANDLE_COND_LOG_PROP(RDMA);
 HANDLE_COND_LOG_PROP(GRPC);
+HANDLE_COND_LOG_PROP(URING);
 
 static struct gsh_dbus_prop *cond_log_props[] = {
 	COND_LOG_PROPERTY_ITEM(ALL),
@@ -3851,6 +3863,7 @@ static struct gsh_dbus_prop *cond_log_props[] = {
 	COND_LOG_PROPERTY_ITEM(RECOVERY),
 	COND_LOG_PROPERTY_ITEM(RDMA),
 	COND_LOG_PROPERTY_ITEM(GRPC),
+	COND_LOG_PROPERTY_ITEM(URING),
 	NULL
 };
 

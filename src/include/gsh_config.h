@@ -620,6 +620,24 @@ typedef struct nfs_core_param {
 #ifdef _INTERNAL_STATD
 	bool internal_statd;
 #endif
+#ifdef USE_FSAL_URING
+	/** Batch the batchable operations of an NFSv4 COMPOUND into a single
+	 * linked io_uring submission instead of running them one at a time.
+	 * Only takes effect when the export's FSAL also reports
+	 * fso_uring_batch; otherwise the legacy sequential path is used.
+	 * Settable with Enable_Uring_Compound. */
+	bool enable_uring_compound;
+	/** Minimum threads in the dedicated pool that runs io_uring
+	 * COMPOUND resumes. Settable with Uring_Resume_ThrdMin. */
+	uint32_t uring_resume_thrd_min;
+	/** Maximum threads in that pool, 0 to disable it and send resumes
+	 * back through svc_work_pool. Settable with Uring_Resume_ThrdMax. */
+	uint32_t uring_resume_thrd_max;
+	/** Rounds a submitting worker polls the ring for its own io_uring
+	 * completion before suspending the request. 0 always suspends.
+	 * Settable with Uring_Inline_Poll. */
+	uint32_t uring_inline_poll;
+#endif
 } nfs_core_parameter_t;
 
 /** @} */

@@ -1201,4 +1201,35 @@ static inline int avl_dmap_ck_cmpf(const struct avltree_node *lhs,
 	return 1;
 }
 
+#ifdef USE_FSAL_URING
+/* ------------------------------------------------------------------------
+ * io_uring cache-coherence helpers (mdcache_uring.c)
+ *
+ * The io_uring fast paths bypass the stacked FSAL call chain, so MDCACHE
+ * never sees those reads, writes or getattrs. These helpers let the io_uring
+ * paths probe and maintain the attribute cache explicitly. Every one of them
+ * is a safe no-op when handed a handle that is not an MDCACHE handle.
+ * ------------------------------------------------------------------------
+ */
+
+/* struct statx comes from <linux/stat.h> (or glibc <sys/stat.h>); only the
+ * implementation needs the full definition.
+ */
+struct statx;
+
+mdcache_entry_t *mdcache_uring_entry(struct fsal_obj_handle *obj_hdl);
+struct fsal_obj_handle *
+mdcache_uring_sub_handle(struct fsal_obj_handle *obj_hdl);
+void mdcache_uring_statx_to_attrs(const struct statx *stx,
+				  struct fsal_attrlist *attrs);
+bool mdcache_uring_attrs_valid(struct fsal_obj_handle *obj_hdl, attrmask_t mask,
+			       struct fsal_attrlist *attrs_out);
+uint32_t mdcache_uring_attr_generation(struct fsal_obj_handle *obj_hdl);
+void mdcache_uring_update_attrs_from_statx(struct fsal_obj_handle *obj_hdl,
+					   const struct statx *stx,
+					   uint32_t original_generation);
+void mdcache_uring_invalidate_attrs(struct fsal_obj_handle *obj_hdl);
+void mdcache_uring_touch_atime(struct fsal_obj_handle *obj_hdl);
+#endif /* USE_FSAL_URING */
+
 #endif /* MDCACHE_INT_H */

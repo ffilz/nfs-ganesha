@@ -43,6 +43,7 @@
 #endif
 
 #include "nfs_core.h"
+#include "nfs_proto_functions.h"
 #include "log.h"
 #include "sal_functions.h"
 #include "sal_data.h"
@@ -1188,6 +1189,15 @@ static void do_shutdown(void)
 		destroy_fsals();
 		LogEvent(COMPONENT_MAIN, "FSAL system destroyed.");
 	}
+
+#ifdef USE_FSAL_URING
+	/* Only now: destroying the FSALs stops the io_uring reaper threads,
+	 * and a reaper is the one thing that can still call svc_resume().
+	 * work_pool_submit() silently drops work once the pool is draining,
+	 * so tearing this down any earlier would strand a request.
+	 */
+	nfs4_uring_resume_pool_shutdown();
+#endif
 
 	unlink(nfs_pidfile_path);
 	PTHREAD_MUTEX_destroy(&admin_control_mtx);

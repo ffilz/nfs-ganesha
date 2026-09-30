@@ -742,22 +742,32 @@ out:
 	return result;
 }
 
-enum nfs_req_result process_one_op(compound_data_t *data, nfsstat4 *status)
+/**
+ * @brief Validate one operation's position, export permissions and response
+ *        room, before it is dispatched.
+ *
+ * Split out of process_one_op() so that the io_uring compound engine can
+ * apply exactly the same rules when it plans an operation into an SQE chain
+ * instead of calling it directly. Keeping one copy is the point: these are
+ * the checks that enforce read-only exports and bound the reply size, and a
+ * second, drifting copy in the batching path would be a security problem.
+ *
+ * Sets data->opcode, data->opname, data->op_resp_size and data->op_start_time
+ * for the operation at data->oppos.
+ *
+ * @retval NFS_REQ_OK     operation may proceed
+ * @retval NFS_REQ_ERROR  *status set, response already filled and the
+ *                        compound truncated at this operation
+ */
+enum nfs_req_result nfs4_op_precheck(compound_data_t *data, nfsstat4 *status)
 {
 	const char *bad_op_state_reason = "";
 	int perm_flags;
 	log_components_t alt_component = COMPONENT_NFS_V4;
 	nfs_argop4 *thisarg = &data->argarray[data->oppos];
 	nfs_resop4 *thisres = &data->resarray[data->oppos];
-	enum nfs_req_result result;
 	COMPOUND4res *res_compound4;
 
-#ifdef ENABLE_QOS
-	if ((data->qos_flags & IS_QOS_IOPS_ACCOUNTED) == false) {
-		if (qos_process_iops(data) == QOS_TASK_SUSPENDED)
-			return NFS_REQ_ASYNC_WAIT;
-	}
-#endif
 	res_compound4 = &data->res->res_compound4_extended->res_compound4;
 
 	/* Used to check if OP_SEQUENCE is the first operation */
@@ -901,6 +911,27 @@ bad_op_state:
 		res_compound4->resarray.resarray_len = data->oppos + 1;
 		return NFS_REQ_ERROR;
 	}
+
+	return NFS_REQ_OK;
+}
+
+enum nfs_req_result process_one_op(compound_data_t *data, nfsstat4 *status)
+{
+	nfs_argop4 *thisarg = &data->argarray[data->oppos];
+	nfs_resop4 *thisres = &data->resarray[data->oppos];
+	enum nfs_req_result result;
+
+#ifdef ENABLE_QOS
+	if ((data->qos_flags & IS_QOS_IOPS_ACCOUNTED) == false) {
+		if (qos_process_iops(data) == QOS_TASK_SUSPENDED)
+			return NFS_REQ_ASYNC_WAIT;
+	}
+#endif
+
+	result = nfs4_op_precheck(data, status);
+
+	if (result != NFS_REQ_OK)
+		return result;
 
 	/***************************************************************
 	 * Make the actual op call                                     *
@@ -1066,7 +1097,7 @@ void complete_nfs4_compound(compound_data_t *data, int status,
 			 nfsstat4_to_str(status), data->oppos);
 }
 
-static enum xprt_stat nfs4_compound_resume(struct svc_req *req)
+enum xprt_stat nfs4_compound_resume(struct svc_req *req)
 {
 	nfs_request_t *reqdata = container_of(req, nfs_request_t, svc);
 	nfsstat4 status = NFS4_OK;
@@ -1414,6 +1445,30 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 	/**********************************************************************
 	 * Now start processing the compound ops.
 	 **********************************************************************/
+#ifdef USE_FSAL_URING
+	if (nfs4_uring_compound_enabled()) {
+		/* Segmented engine: runs of batchable ops are submitted to
+		 * the ring as one linked chain, everything else still goes
+		 * through process_one_op(). It advances data->oppos itself.
+		 *
+		 * Whether an op can actually be batched depends on the
+		 * export's FSAL, which is not known until PUTFH has run, so
+		 * that decision is made per sub-batch rather than here.
+		 */
+		data->oppos = 0;
+		result = nfs4_Compound_uring(data, &status);
+
+		if (result == NFS_REQ_ASYNC_WAIT) {
+			/* A chain is in flight; the resume may already be
+			 * running on another thread, so touch nothing.
+			 */
+			return result;
+		}
+
+		goto compound_done;
+	}
+#endif
+
 	for (data->oppos = 0;
 	     result == NFS_REQ_OK && data->oppos < data->argarray_len;
 	     data->oppos++) {
@@ -1429,6 +1484,10 @@ int nfs4_Compound(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 			return result;
 		}
 	}
+
+#ifdef USE_FSAL_URING
+compound_done:
+#endif
 
 	complete_nfs4_compound(data, status, result);
 
@@ -1538,6 +1597,14 @@ void compound_data_Free(compound_data_t *data)
 	 */
 	set_current_entry(data, NULL);
 	set_saved_entry(data, NULL);
+
+#ifdef USE_FSAL_URING
+	/* No-op unless this compound ever planned a sub-batch. Safe here
+	 * because a chain is never in flight at this point: the compound
+	 * only reaches completion once every chain has been reaped.
+	 */
+	nfs4_uring_batch_free(data);
+#endif
 
 	gsh_free(data->tagname, MEM_COMP_PROTOCOL);
 

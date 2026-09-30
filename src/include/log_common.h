@@ -94,6 +94,7 @@ typedef enum log_components {
 	COMPONENT_RECOVERY,
 	COMPONENT_RDMA, /*< RPC/RDMA transport */
 	COMPONENT_GRPC,
+	COMPONENT_URING, /*< shared io_uring async I/O engine */
 	COMPONENT_COUNT,
 } log_components_t;
 

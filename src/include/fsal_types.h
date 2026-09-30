@@ -663,6 +663,7 @@ typedef enum enum_fsal_fsinfo_options {
 	fso_xattr_support,
 	fso_allocate_own_read_buffer,
 	fso_preserve_unlinked,
+	fso_uring_batch,
 } fsal_fsinfo_options_t;
 
 /* The largest maxread and maxwrite value */
@@ -723,6 +724,9 @@ typedef struct fsal_staticfsinfo_t {
 	bool xattr_support; /*< fsal can support xattrs */
 	bool allocate_own_read_buffer; /*< fsal will allocate its own read
 					 *  buffers. */
+	bool uring_batch; /*< fsal can batch operations into a linked
+			    *  io_uring SQE chain; see
+			    *  FSAL/fsal_uring_fops.h. */
 	int32_t expire_time_parent; /*< Expiration time interval in
 				       seconds for parent handle.
 				       If FS gives information about parent

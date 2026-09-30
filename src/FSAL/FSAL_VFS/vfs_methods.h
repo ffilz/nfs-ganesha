@@ -43,6 +43,14 @@ struct vfs_fsal_export;
 /*
  * VFS internal module
  */
+/*
+ * Shared by FSAL_VFS and by FSAL_VFS_URING, which embeds this struct as its
+ * first member so that the sources common to both (handle.c, export.c,
+ * file.c, ...) can keep doing
+ *     container_of(fsal_module, struct vfs_fsal_module, module)
+ * regardless of which module is loaded. All io_uring state lives in the
+ * FSAL_VFS_URING module struct, not here, so plain VFS stays synchronous.
+ */
 struct vfs_fsal_module {
 	struct fsal_module module;
 	struct fsal_obj_ops handle_ops;
