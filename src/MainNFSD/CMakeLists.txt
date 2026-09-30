@@ -153,6 +153,20 @@ if (USE_ACL_MAPPING)
   )
 endif(USE_ACL_MAPPING)
 
+# Shared io_uring engine. It lives in the core rather than in one FSAL so
+# that any FSAL can submit through it.
+#
+# uring_pers.c is the credential (personality) registry. fsal_uring.c and
+# support/nfs_creds.c both call into it, so it has to be compiled into
+# ganesha_nfsd alongside the engine facade rather than left to a FSAL.
+if (USE_FSAL_URING)
+  set(fsal_CORE_SRCS
+      ${fsal_CORE_SRCS}
+      ../FSAL/fsal_uring.c
+      ../FSAL/FSAL_URING/uring_pers.c
+  )
+endif(USE_FSAL_URING)
+
 set(ganesha_nfsd_OBJS
     $<TARGET_OBJECTS:MainServices>
     $<TARGET_OBJECTS:avltree>
@@ -174,6 +188,13 @@ set(ganesha_nfsd_OBJS
     $<TARGET_OBJECTS:fsalpseudo>
     $<TARGET_OBJECTS:fsalmdcache>
 )
+
+if(USE_FSAL_URING)
+  set(ganesha_nfsd_OBJS
+    ${ganesha_nfsd_OBJS}
+    $<TARGET_OBJECTS:nfsuring>
+  )
+endif(USE_FSAL_URING)
 
 if(USE_DBUS)
   set(ganesha_nfsd_OBJS
@@ -239,6 +260,13 @@ target_link_libraries(ganesha_nfsd
   ${MOOSHIKA_LIBRARIES}
 )
 
+# fsal_uring.c and uring_pers.c (folded in above via fsal_CORE_SRCS) call
+# uring_engine_*(), so the core engine has to be linked in here. FSAL modules
+# reach it indirectly through the exported fsal_uring_* facade.
+if (USE_FSAL_URING)
+  target_link_libraries(ganesha_nfsd uring_core)
+endif (USE_FSAL_URING)
+
 if (USE_MONITORING)
   target_link_libraries(ganesha_nfsd ganesha_monitoring)
 endif (USE_MONITORING)
@@ -266,6 +294,13 @@ if(LINUX OR FREEBSD)
 endif(LINUX OR FREEBSD)
 
 set_target_properties(ganesha_nfsd PROPERTIES LINK_FLAGS "${undef_flags} ${ver_script_flags}")
+
+if(LINUX OR FREEBSD)
+  # Editing the export list must force a relink, otherwise FSAL modules keep
+  # failing against a stale libganesha_nfsd.so that still hides the symbol.
+  set_target_properties(ganesha_nfsd PROPERTIES
+    LINK_DEPENDS "${GANESHA_TOP_CMAKE_DIR}/MainNFSD/libganesha_nfsd.ver")
+endif(LINUX OR FREEBSD)
 
 set_target_properties(ganesha_nfsd PROPERTIES
   VERSION "${GANESHA_MAJOR_VERSION}${GANESHA_MINOR_VERSION}"

@@ -50,6 +50,7 @@ SET(fsalmdcache_LIB_SRCS
 	mdcache_avl.c
 	mdcache_read_conf.c
 	mdcache_up.c
+	mdcache_uring.c
 	)
 
 add_library(fsalmdcache OBJECT ${fsalmdcache_LIB_SRCS})

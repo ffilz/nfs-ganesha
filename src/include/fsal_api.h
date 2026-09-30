@@ -55,6 +55,9 @@
 */
 struct gsh_client;
 struct gsh_export;
+/* Forward declaration for the io_uring personality; full definition in
+ * FSAL_URING/uring_pers.h.  Only used by the uring_pers field below. */
+struct uring_pers;
 struct fsal_up_vector; /* From fsal_up.h */
 struct state_t;
 extern struct gsh_refstr *no_export;
@@ -507,6 +510,22 @@ struct req_op_context {
 	struct export_perms export_perms; /*< Effective export perms */
 	struct timespec start_time; /*< start time of this op/request */
 	void *fsal_private; /*< private for FSAL use */
+#ifdef USE_FSAL_URING
+	/**
+	 * Cached io_uring personality for this request.  NULL until the
+	 * first fsal_uring_io_start() call on this request; reused for
+	 * subsequent sub-I/Os (e.g. multi-segment reads, stable writes with
+	 * linked fsync).
+	 *
+	 * Dropped and re-derived by nfs_req_creds() when credentials change
+	 * mid-compound (NFSv4 PUTFH crossing an export boundary), and
+	 * released by clean_credentials() at request teardown.
+	 *
+	 * Only uring_pers.c and the uring_pers_for_req() fast-path in
+	 * fsal_uring_io_start() touch this field.
+	 */
+	struct uring_pers *uring_pers;
+#endif
 	void *proto_private; /*< private for protocol layer use */
 	bool is_rdma_buff_used; /*< Whether RDMA buffer is being used */
 	bool is_unlink_with_states; /* Indicate unlink with file states */
@@ -3171,6 +3190,13 @@ static inline void fsal_put(struct fsal_module *fsal_hdl)
  * filesystem, and create individual file handle objects.
  */
 
+#ifdef USE_FSAL_URING
+/* Defined in FSAL/fsal_uring_fops.h, which is not pulled in here to keep
+ * fsal_api.h free of liburing.
+ */
+struct fsal_uring_fops;
+#endif
+
 struct fsal_export {
 	struct glist_head exports; /*< Link in list of exports from
 					   the same FSAL. */
@@ -3184,6 +3210,13 @@ struct fsal_export {
 	struct glist_head filesystems;
 	uint16_t export_id; /*< Export ID copied from gsh_export, initialized
 				by  fsal_export_init */
+#ifdef USE_FSAL_URING
+	/*< Per-operation io_uring vector, or NULL when this FSAL cannot
+	 *  batch anything into a ring. Published by the FSAL at export
+	 *  creation; see FSAL/fsal_uring_fops.h.
+	 */
+	const struct fsal_uring_fops *uring_fops;
+#endif
 };
 
 /**

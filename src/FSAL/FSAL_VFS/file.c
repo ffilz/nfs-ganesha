@@ -1245,6 +1245,7 @@ void vfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	fsal_status_t status = { 0, 0 }, status2;
 	struct vfs_fd *my_fd;
 	struct vfs_fd temp_fd = { FSAL_FD_INIT, -1 };
+	struct fsal_fd *tmp_fsal_fd = &temp_fd.fsal_fd;
 	struct fsal_fd *out_fd;
 	struct vfs_fsal_obj_handle *myself;
 
@@ -1270,8 +1271,8 @@ void vfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 
 	/* Indicate a desire to start io and get a usable file descritor */
 	status = fsal_start_io(&out_fd, obj_hdl, &myself->u.file.fd.fsal_fd,
-			       &temp_fd.fsal_fd, read_arg->state, FSAL_O_READ,
-			       false, NULL, bypass, &myself->u.file.share);
+			       tmp_fsal_fd, read_arg->state, FSAL_O_READ, false,
+			       NULL, bypass, &myself->u.file.share);
 
 	if (FSAL_IS_ERROR(status)) {
 		LogFullDebug(COMPONENT_FSAL,
@@ -1349,6 +1350,7 @@ void vfs_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	int retval = 0;
 	struct vfs_fd *my_fd;
 	struct vfs_fd temp_fd = { FSAL_FD_INIT, -1 };
+	struct fsal_fd *tmp_fsal_fd = &temp_fd.fsal_fd;
 	struct fsal_fd *out_fd;
 	struct vfs_fsal_obj_handle *myself;
 
@@ -1365,7 +1367,7 @@ void vfs_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 
 	/* Indicate a desire to start io and get a usable file descritor */
 	status = fsal_start_io(&out_fd, obj_hdl, &myself->u.file.fd.fsal_fd,
-			       &temp_fd.fsal_fd, write_arg->state, FSAL_O_WRITE,
+			       tmp_fsal_fd, write_arg->state, FSAL_O_WRITE,
 			       false, NULL, bypass, &myself->u.file.share);
 
 	if (FSAL_IS_ERROR(status)) {
@@ -1377,6 +1379,7 @@ void vfs_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 
 	my_fd = container_of(out_fd, struct vfs_fd, fsal_fd);
 
+	/* Impersonate the client for the duration of the pwritev call. */
 	if (!vfs_set_credentials(&op_ctx->creds, obj_hdl->fsal)) {
 		status = posix2fsal_status(EPERM);
 		LogFullDebug(COMPONENT_FSAL,

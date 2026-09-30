@@ -499,6 +499,34 @@ static struct config_item core_params[] = {
 	CONF_ITEM_DEPRECATED(
 		"Nb_Worker",
 		"This parameter has been replaced with _9P { Nb_Worker}"),
+#ifdef USE_FSAL_URING
+	/* Batch an NFSv4 COMPOUND's batchable operations into one linked
+	 * io_uring submission. Also requires the export's FSAL to report
+	 * fso_uring_batch; off means the legacy sequential path.
+	 */
+	CONF_ITEM_BOOL("Enable_Uring_Compound", false, nfs_core_param,
+		       enable_uring_compound),
+	/* Dedicated work pool for io_uring COMPOUND resumes. Resumes are
+	 * submitted by the ring's reaper thread on every single request,
+	 * and svc_work_pool's one mutex already carries epoll events,
+	 * dispatch and reply output. Giving resumes their own pool splits
+	 * that lock. Max 0 disables the pool and restores the old
+	 * behaviour.
+	 */
+	CONF_ITEM_UI32("Uring_Resume_ThrdMin", 0, 1024, 2, nfs_core_param,
+		       uring_resume_thrd_min),
+	CONF_ITEM_UI32("Uring_Resume_ThrdMax", 0, 1024 * 128, 64,
+		       nfs_core_param, uring_resume_thrd_max),
+	/* The kernel satisfies most of what the COMPOUND engine submits
+	 * inline, during io_uring_enter() itself, so the completion is
+	 * usually already in the ring when submit returns. Polling for it
+	 * on the submitting thread finishes the request with no hand-off;
+	 * suspending instead costs two context switches. One round is
+	 * enough for the inline case. 0 disables it and always suspends.
+	 */
+	CONF_ITEM_UI32("Uring_Inline_Poll", 0, 1024, 1, nfs_core_param,
+		       uring_inline_poll),
+#endif
 	CONF_ITEM_BOOL("Drop_IO_Errors", false, nfs_core_param, drop_io_errors),
 	CONF_ITEM_BOOL("Drop_Inval_Errors", false, nfs_core_param,
 		       drop_inval_errors),

@@ -189,6 +189,7 @@ static fsal_status_t init_config(struct fsal_module *vfs_fsal_module,
 	    !config_error_is_harmless(err_type))
 		return fsalstat(ERR_FSAL_INVAL, 0);
 
+
 	display_fsinfo(&vfs_module->module);
 	LogFullDebug(COMPONENT_FSAL,
 		     "Supported attributes constant = 0x%" PRIx64,
@@ -235,4 +236,5 @@ MODULE_FINI void vfs_unload(void)
 		fprintf(stderr, "VFS module failed to unregister");
 		return;
 	}
+
 }
