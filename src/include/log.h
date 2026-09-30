@@ -160,6 +160,7 @@ int create_log_facility(const char *name, lf_function_t *log_func,
 void release_log_facility(const char *name);
 int enable_log_facility(const char *name);
 int disable_log_facility(const char *name);
+int set_default_log_facility(const char *name);
 int set_log_destination(const char *name, char *dest);
 int set_log_level(const char *name, log_levels_t max_level);
 void set_const_log_str(void);

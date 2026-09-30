@@ -54,6 +54,11 @@
 #endif
 
 #include "log.h"
+
+#ifdef USE_LTTNG
+#include "log_lttng.h"
+#endif
+
 #include "gsh_list.h"
 #include "common_utils.h"
 #include "abstract_mem.h"
@@ -412,6 +417,10 @@ void Cleanup(void)
 		c->clean();
 		c = c->next;
 	}
+
+#ifdef USE_LTTNG
+	lttng_log_facility_shutdown();
+#endif
 
 	PTHREAD_RWLOCK_destroy(&log_rwlock);
 	PTHREAD_RWLOCK_destroy(&cond_log_rwlock);
@@ -944,7 +953,7 @@ int disable_log_facility(const char *name)
  * @return 0 on success, -errno on errors.
  */
 
-static int set_default_log_facility(const char *name)
+int set_default_log_facility(const char *name)
 {
 	struct log_facility *facility;
 
@@ -1213,6 +1222,10 @@ void init_logging(const char *log_path, const int debug_level)
 					 "Enable error (%s) for %s logging!",
 					 strerror(-rc), log_path);
 		} else {
+			/* Let the FILE system be created at first
+			* So that, If LTTNG setup fails code fallbacks
+			* to FILE facility
+			*/
 			rc = create_log_facility("FILE", log_to_file,
 						 NIV_FULL_DEBUG, LH_ALL,
 						 (void *)log_path);
@@ -1246,6 +1259,14 @@ void init_logging(const char *log_path, const int debug_level)
 
 #ifdef USE_UNWIND_ENRICHED_BT
 	crash_handler_monitor_init();
+#endif
+
+#ifdef USE_LTTNG
+	/* Try LTTng. On success it promotes LTTNG to
+			 * default and disables FILE. On failure FILE
+			 * remains the active default.
+			 */
+	(void)lttng_log_facility_init(log_path, NULL);
 #endif
 }
 
@@ -3053,6 +3074,16 @@ static int log_conf_commit(void *node, void *link_mem, void *self_struct,
 			}
 		}
 		if (conf->state == FAC_ACTIVE) {
+#ifdef USE_LTTNG
+			if (lttng_log_is_active() &&
+			    conf->func == log_to_file) {
+				LogEvent(COMPONENT_CONFIG,
+					 "LTTng active, skipping enable "
+					 "of file facility (%s)",
+					 conf->facility_name);
+				goto done;
+			}
+#endif
 			rc = enable_log_facility(conf->facility_name);
 			if (rc != 0) {
 				LogCrit(COMPONENT_CONFIG,
@@ -3062,6 +3093,16 @@ static int log_conf_commit(void *node, void *link_mem, void *self_struct,
 				errcnt++;
 			}
 		} else if (conf->state == FAC_DEFAULT) {
+#ifdef USE_LTTNG
+			if (lttng_log_is_active() &&
+			    conf->func == log_to_file) {
+				LogEvent(COMPONENT_CONFIG,
+					 "LTTng active, refusing to make "
+					 "file facility (%s) the default",
+					 conf->facility_name);
+				goto done;
+			}
+#endif
 			struct log_facility *old_def = default_facility;
 
 			rc = set_default_log_facility(conf->facility_name);
@@ -3668,7 +3709,7 @@ static void reset_conditional_logging_state(void)
 	conditional_logging_configured = false;
 
 	LogEvent(COMPONENT_LOG,
-			"Conditional logging configuration reset to defaults");
+		 "Conditional logging configuration reset to defaults");
 
 	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
 }
@@ -4209,9 +4250,14 @@ static bool dbus_conditional_log_match_policy_change(DBusMessageIter *args,
 			if (glist_empty(&global_client_ip_list) ||
 			    glist_empty(&global_export_id_list)) {
 				PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
-				LogEvent(COMPONENT_LOG,
-					 "Conditional logging Match Policy changed: Rejected due to either client list or export list is empty");
-				errormsg = "MATCH_ALL requires both a non-empty client list and a non-empty export list";
+				LogEvent(
+					COMPONENT_LOG,
+					"Conditional logging Match Policy changed: Rejected due to "
+					"either client list or export list is empty");
+
+				errormsg =
+					"MATCH_ALL requires both a non-empty client list and a "
+					"non-empty export list";
 				gsh_dbus_status_reply(&iter, false, errormsg);
 				goto error;
 			}
@@ -4275,8 +4321,7 @@ arg_error:
  * @return true if reset was successful, false otherwise.
  */
 static bool dbus_conditional_log_reset(DBusMessageIter *args,
-				       DBusMessage *reply,
-				       DBusError *error)
+				       DBusMessage *reply, DBusError *error)
 {
 	char errormsg[LOG_BUFF_LEN];
 	bool success = true;
