@@ -29,6 +29,12 @@ if(USE_FSAL_VFS OR USE_FSAL_LUSTRE OR USE_FSAL_XFS)
   add_subdirectory(FSAL_VFS)
 endif(USE_FSAL_VFS OR USE_FSAL_LUSTRE OR USE_FSAL_XFS)
 
+# FSAL_VFS_URING reuses the FSAL_VFS sources and the fsal_os object library,
+# so it must be descended into after FSAL_VFS.
+if(USE_FSAL_VFS AND USE_FSAL_URING)
+  add_subdirectory(FSAL_VFS_URING)
+endif(USE_FSAL_VFS AND USE_FSAL_URING)
+
 # All we need to do here is control the
 # build of chosen fsals
 if(USE_FSAL_PROXY_V4)

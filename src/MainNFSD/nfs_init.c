@@ -1307,6 +1307,15 @@ static void nfs_Init(const nfs_start_info_t *p_start_info)
 	nfs_rpc_cbsim_pkginit();
 #endif /*  _USE_CB_SIMULATOR */
 
+#ifdef USE_FSAL_URING
+	/* Dedicated pool for io_uring COMPOUND resumes. Started here, after
+	 * svc_init() has built svc_work_pool and before nfs_Start_threads()
+	 * lets any request in, so the pool is live for the first resume.
+	 * A failure is not fatal: resumes simply keep using svc_work_pool.
+	 */
+	(void)nfs4_uring_resume_pool_init();
+#endif
+
 } /* nfs_Init */
 
 #ifdef USE_CAPS

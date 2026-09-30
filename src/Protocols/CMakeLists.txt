@@ -20,6 +20,9 @@
 #
 #-------------------------------------------------------------------------------
 add_subdirectory(NFS)
+if(USE_FSAL_URING)
+	add_subdirectory(NFS_URING)
+endif(USE_FSAL_URING)
 add_subdirectory(XDR)
 if(USE_NLM)
 	add_subdirectory(NLM)

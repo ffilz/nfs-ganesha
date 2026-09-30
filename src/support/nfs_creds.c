@@ -58,6 +58,9 @@
 #include "uid2grp.h"
 #include "client_mgr.h"
 #include "idmapper_monitoring.h"
+#ifdef USE_FSAL_URING
+#include "FSAL_URING/uring_pers.h"
+#endif
 
 #include "gsh_lttng/gsh_lttng.h"
 #if defined(USE_LTTNG) && !defined(LTTNG_PARSING)
@@ -479,6 +482,16 @@ nfsstat4 nfs_req_creds(struct svc_req *req)
 	 */
 	op_ctx->cred_flags &= CREDS_LOADED | CREDS_ANON;
 
+#ifdef USE_FSAL_URING
+	/* Credentials are about to change (new PUTFH / export crossing):
+	 * drop the cached personality so fsal_uring_io_start() re-derives
+	 * it from the new op_ctx->creds on the next I/O. */
+	if (op_ctx->uring_pers != NULL) {
+		uring_pers_put(op_ctx->uring_pers);
+		op_ctx->uring_pers = NULL;
+	}
+#endif
+
 	switch (req->rq_msg.cb_cred.oa_flavor) {
 	case AUTH_NONE:
 		/* Nothing to be done here... */
@@ -670,6 +683,14 @@ void clean_credentials(void)
 	/* Have we made a local copy of the AUTH_SYS garray? */
 	if (op_ctx->caller_garray_copy != NULL)
 		gsh_free(op_ctx->caller_garray_copy, MEM_COMP_CLIENTID);
+
+#ifdef USE_FSAL_URING
+	/* Release the per-request personality reference at teardown. */
+	if (op_ctx->uring_pers != NULL) {
+		uring_pers_put(op_ctx->uring_pers);
+		op_ctx->uring_pers = NULL;
+	}
+#endif
 
 	/* Prepare the request context and creds for re-use */
 	init_credentials();

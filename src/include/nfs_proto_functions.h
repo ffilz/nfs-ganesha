@@ -640,6 +640,45 @@ void nfs4_op_reclaim_complete_Free(nfs_resop4 *);
 void compound_data_Free(compound_data_t *);
 uint32_t get_nfs4_opcodes(compound_data_t *data, nfs_opnum4 *opcodes,
 			  uint32_t opcodes_array_len);
+
+/* Shared between the compound engines (Protocols/NFS/nfs4_Compound.c). These
+ * have no header of their own; they are declared here so the io_uring engine
+ * in Protocols/NFS_URING/ can reuse them instead of duplicating the logic.
+ */
+enum nfs_req_result process_one_op(compound_data_t *data, nfsstat4 *status);
+enum nfs_req_result complete_op(compound_data_t *data, nfsstat4 *status,
+				enum nfs_req_result result);
+enum nfs_req_result nfs4_op_precheck(compound_data_t *data, nfsstat4 *status);
+void complete_nfs4_compound(compound_data_t *data, int status,
+			    enum nfs_req_result result);
+/* Legacy sequential resume callback. The io_uring engine reinstalls this
+ * whenever control returns to synchronous operation, so an op that suspends
+ * on its own still finishes the compound the old way.
+ */
+enum xprt_stat nfs4_compound_resume(struct svc_req *req);
+extern nfs_opnum4 LastOpcode[];
+
+#ifdef USE_FSAL_URING
+/* Segmented io_uring compound engine (Protocols/NFS_URING/). */
+bool nfs4_uring_compound_enabled(void);
+enum nfs_req_result nfs4_Compound_uring(compound_data_t *data,
+					nfsstat4 *status);
+void nfs4_uring_batch_free(compound_data_t *data);
+
+/* Dedicated work pool for io_uring COMPOUND resumes, so that the reaper's
+ * svc_resume() does not contend with dispatch and reply output on
+ * svc_work_pool's single queue mutex. See
+ * FSAL_URING/URING_RESUME_POOL.md.
+ *
+ * init() must run before any transport is accepting, shutdown() only after
+ * destroy_fsals() has stopped every io_uring reaper. Both are no-ops when
+ * the COMPOUND engine is off or Uring_Resume_ThrdMax is 0, in which case
+ * resumes keep using svc_work_pool.
+ */
+int nfs4_uring_resume_pool_init(void);
+void nfs4_uring_resume_pool_shutdown(void);
+struct work_pool *nfs4_uring_resume_pool(void);
+#endif
 bool xdr_COMPOUND4res_extended(XDR *xdrs, struct COMPOUND4res_extended **objp);
 
 /* Pseudo FS functions */

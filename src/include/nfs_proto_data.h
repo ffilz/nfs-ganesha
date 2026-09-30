@@ -221,6 +221,13 @@ typedef int (*nfs_protocol_function_t)(nfs_arg_t *, struct svc_req *,
 
 typedef struct compound_data compound_data_t;
 
+#ifdef USE_FSAL_URING
+/* Defined in Protocols/NFS_URING/nfs4_uring_internal.h, which is not pulled
+ * in here so that this header stays free of liburing.
+ */
+struct nfs4_uring_batch;
+#endif
+
 typedef enum nfs_req_result (*nfs4_function_t)(struct nfs_argop4 *,
 					       compound_data_t *,
 					       struct nfs_resop4 *);
@@ -395,6 +402,19 @@ struct compound_data {
 				   (if applicable) */
 	uint32_t resp_size; /*< Running total response size. */
 	uint32_t op_resp_size; /*< Current op's response size. */
+#ifdef USE_FSAL_URING
+	/** In-flight io_uring sub-batch, or NULL on the legacy sequential
+	 *  path. Allocated lazily on the first batchable span and reused for
+	 *  each later sub-batch; freed by compound_data_Free().
+	 */
+	struct nfs4_uring_batch *uring_batch;
+	/** Whether an op already planned into the current sub-batch changes
+	 *  file data or metadata (WRITE, SETATTR, ALLOCATE, DEALLOCATE).
+	 *  While true, GETATTR must not be served from the MDCACHE and has
+	 *  to emit a STATX linked behind the mutating SQE.
+	 */
+	bool has_mutating_op;
+#endif
 };
 
 #define VARIABLE_RESP_SIZE (0)
