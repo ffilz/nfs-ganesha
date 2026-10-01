@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3dd1815_9e304610",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-10-01T13:16:03Z",
+      "side": 1,
+      "message": "Note: a COMPOUND carrying an empty file handle (for example PUTFH), an empty client id/owner or an empty open/lock owner now fails XDR decode (GARBAGE_ARGS) instead of returning an error for that operation (e.g. NFS4ERR_BADHANDLE for PUTFH).",
+      "revId": "ced36bb2242f3d94dbec703206e323b54b1ba05d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
