@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82799fb9_e8184a80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-09T14:17:10Z",
+      "side": 1,
+      "message": "Idea here is to batch the possible operations in compounds as single submit to the ring.\nIf FSAL like GPFS converts the IOCTl interface to URING, then possibility of batching is much more.\n\nThe base code contains:\n1. switching to sq_poll or not.\n2. Completion CQE entries handling inline or by later thread via svc_resume.\n3. Per core CPU ring or user configurable limit.\n4. In case of SQPOLL enabled, svc_resume will be used and can decide on when to call submit based on outstanding number of IO/Compound sqes.\n5. Read buffer reusing for read workload, reason: page pinning cost is high and it will come handy with Tx_Zero_Copy patch which is already in review, which increases the performance further on network as well as backed read in current scenario (because pages are already kernel pinned).\n6. sqe entries for a compound are linked and submitted together, which allows serialization within compound at kernel level.\n7. FSAL will have more flexibility to fallback exiting NFSv4_OP* per operation, so what every can be batched will continue as batch submission -\u003e inline operation -\u003e if any continue batch operation.\n\n\nFSAL operation specific preps, creds etc can be manipulated as needed, no need of touch anything in the current FSAL code avoiding complex Ifdefs, branching etc.",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc1465a9_0a3ade41",
         "filename": "src/FSAL/FSAL_URING/fsal_uring_init.c",
         "patchSetId": 1
