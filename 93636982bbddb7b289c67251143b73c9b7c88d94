@@ -16,6 +16,1485 @@
       "message": "WIP",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1465a9_0a3ade41",
+        "filename": "src/FSAL/FSAL_URING/fsal_uring_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5762307_2ab29f12",
+        "filename": "src/FSAL/FSAL_URING/fsal_uring_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/FSAL/FSAL_URING/fsal_uring_init.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd272158_3abdb222",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/FSAL/FSAL_URING/uring_pers.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da0b4226_86cfef44",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f9cc33c_0d9e76a4",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: It\u0027s generally not useful to have the filename in the file\n+ * @file  src/FSAL/FSAL_URING/uring_pers.c",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15e6d9d2_b8b989a8",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 92 exceeds 80 columns\n+#include \"FSAL/access_check.h\"\t/* fsal_set_credentials, fsal_restore_ganesha_credentials */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "059c1abf_69e0dfc8",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 111 exceeds 80 columns\n+#include \"io_uring/core/uring_engine.h\"\t/* struct uring_engine, uring_engine_raw_ring, uring_engine_nr_rings */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "643d2a83_0bbc9a3a",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Prefer \u0027fallthrough;\u0027 over fallthrough comment\n+ * (max 8192 entries); collisions fall through to the memcmp comparator.",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48ae8428_12b5454c",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t \"uring_pers: destroying entry with refcnt\u003d%\" PRId64",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a21eee9_dd1c2d79",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 126 exceeds 80 columns\n+\t/* ── Phase 1: optimistic read-locked lookup ────────────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "625612be_1aa1de5c",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Prefer \u0027fallthrough;\u0027 over fallthrough comment\n+\t\t/* REGISTERING or INVALID — fall through to write-lock path",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56cbcfc8_c5e7a9f4",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 128 exceeds 80 columns\n+\t/* ── Phase 2: write-locked lookup + insert ─────────────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f824b22_8c366afd",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t/* Race loser: let the winner finish, then look again. */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16b68e2f_614f3a34",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Prefer \u0027fallthrough;\u0027 over fallthrough comment\n+\t\t/* INVALID (invalidated while we waited): fall through and",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b646dc8e_8d063b80",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 116 exceeds 80 columns\n+\t/* ── Phase 3: capacity check + optional eviction ───────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0d8626c_d4e72488",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 122 exceeds 80 columns\n+\t/* ── Phase 4: allocate placeholder and insert ──────────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1182dc4_996da64a",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\tp \u003d uring_pers_alloc(creds, uring_engine_nr_rings(core), hash, cred_idx);",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90ef4922_82fc8daf",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 136 exceeds 80 columns\n+\t/* ── Phase 5: impersonate and register ─────────────────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b3614df_bfad772b",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\trc \u003d io_uring_register_personality(uring_engine_raw_ring(core, r));",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d555e75d_b18bfbcb",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t\t\turing_engine_raw_ring(core, r), p-\u003eids[r]);",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59b1a0f5_016f0b79",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 170 exceeds 80 columns\n+\t/* ── Phase 6: publish ──────────────────────────────────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be0a81d3_94cbdd39",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: It\u0027s generally not useful to have the filename in the file\n+ * @file  src/FSAL/FSAL_URING/uring_pers.h",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c6eca2b_3b8f7135",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "ERROR: trailing whitespace\n+ *   - carries a 64-bit refcount: incremented at fsal_uring_io_start(), $",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bdf84c2_fbe8cbe4",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "ERROR: code indent should use tabs where possible\n+                 * the function-like version from common_utils.h */$",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f71ef427_5f84275f",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 111 exceeds 80 columns\n+#include \"io_uring/core/uring_engine.h\"\t/* struct uring_engine, uring_engine_raw_ring, uring_engine_nr_rings */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "687ec0d0_b9ca362b",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\tgid_t               *garray;\t/* OWNED deep copy — see header note */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f827c4f_7bc2104e",
+        "filename": "src/FSAL/FSAL_VFS_URING/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\t-\u003euring_coalesce_outstanding_max,",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e29fff7_61a969f5",
+        "filename": "src/FSAL/FSAL_VFS_URING/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 115 exceeds 80 columns\n+\t\t\t\t \"%s: io_uring enabled, queue_depth\u003d%u rings\u003d%u per_cpu\u003d%s buffer classes %\" PRIu64",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4da04dd_7d8845d8",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_uring.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eadafe99_de138723",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64ec39e0_4f1bf19a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+struct fsal_obj_handle *mdcache_uring_sub_handle(struct fsal_obj_handle *obj_hdl)",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "514657e8_85492477",
+        "filename": "src/FSAL/fsal_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f1e8acd_775ebe50",
+        "filename": "src/FSAL/fsal_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/FSAL/fsal_uring.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13b6dbf0_c4b22be5",
+        "filename": "src/FSAL/fsal_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+ * @param res     Primary CQE result (negative errno on failure, \u003e\u003d 0 on success).",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8eac9d8_11f4eb65",
+        "filename": "src/FSAL/fsal_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t * casting to void* is pointer-equivalent to the outer struct pointer. */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbb72305_2c80a4bf",
+        "filename": "src/FSAL/fsal_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t *   op_ctx-\u003euring_pers \u003d\u003d NULL  → lookup / register + cache the result",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b6b183b_02411419",
+        "filename": "src/Protocols/NFS_URING/nfs4_Compound_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44db948b_2043c73e",
+        "filename": "src/Protocols/NFS_URING/nfs4_Compound_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/Protocols/NFS_URING/nfs4_Compound_uring.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a9921e8_1fe9ea73",
+        "filename": "src/Protocols/NFS_URING/nfs4_Compound_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 98 exceeds 80 columns\n+\t\t\t\t \"compound: batchable run of %u op(s) at position %u of %\" PRIu32,",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c94e70c_43056863",
+        "filename": "src/Protocols/NFS_URING/nfs4_Compound_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 92 exceeds 80 columns\n+\t\t\t \"compound: finishing %s at position %u, slot %u, cqe res\u003d%\" PRId32,",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "322b6a0f_ee094903",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_access_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/Protocols/NFS_URING/nfs4_op_access_uring.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b091f4_c9cc953a",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_access_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "567b9d2f_9cbbd5d7",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_allocate_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/Protocols/NFS_URING/nfs4_op_allocate_uring.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46a45f1c_fb912a90",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_allocate_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a437bc99_9d43714a",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_allocate_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t\t \"A client tried to violate max file size %\" PRIu64",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20ad9c4e_4f58988a",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_commit_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "527259ac_fb1e0f69",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_commit_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/Protocols/NFS_URING/nfs4_op_commit_uring.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0adad326_b6380bf5",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_getattr_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48d7e7af_5cb12a49",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_getattr_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/Protocols/NFS_URING/nfs4_op_getattr_uring.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7959ede9_7477f71a",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_read_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/Protocols/NFS_URING/nfs4_op_read_uring.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b77ff2d_bec1d601",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_read_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de056a94_8196e445",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_read_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t * for a pooled buffer, nfs4_uring_read_io_data_release()",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1f77814_c41ac8f8",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_write_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "defe14a3_a901b6f5",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_write_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/Protocols/NFS_URING/nfs4_op_write_uring.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b36d092b_a92e6f98",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_write_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t\t \"A client tried to violate max file size %\" PRIu64",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33685ff2_d3d84a68",
+        "filename": "src/Protocols/NFS_URING/nfs4_uring_optab.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d485649c_55a13a8f",
+        "filename": "src/Protocols/NFS_URING/nfs4_uring_optab.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/Protocols/NFS_URING/nfs4_uring_optab.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e320e35_239e98bb",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 87 exceeds 80 columns\n+ *   per-op context structs       — stack-allocated, live only for duration of submit",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "432765a6_8f5c5af5",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 90 exceeds 80 columns\n+ * ─────────────────────────────",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdde7a4d_7e0b770a",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+ *   4. Implement a `done_cb` that receives `(obj_hdl, status, NULL, caller_arg)`",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e1488e0_bdf1b86d",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+ * ───────────────────────────",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7ca296a_a7dd180a",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+ * @done_cb     Called on completion.  Receives (obj_hdl, status, NULL, caller_arg).",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3251f9e0_60027943",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\tunsigned int flags;   /**\u003c SYNC_FILE_RANGE_WAIT_BEFORE|WRITE|WAIT_AFTER */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c37bfa63_19326811",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\tint      mode;     /**\u003c 0\u003dallocate, FALLOC_FL_KEEP_SIZE|PUNCH_HOLE\u003dpunch */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af31200a_b98ec8c3",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\tconst char *name;   /**\u003c Must be live until fsal_uring_meta_start returns */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe746013_ed070272",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+ * SQE submission).  The done_cb is responsible for mapping statx → fsal_attrlist",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b4f42ad_1ccac764",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\tint               flags;    /**\u003c AT_EMPTY_PATH | AT_SYMLINK_NOFOLLOW etc. */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ff5bad_90384745",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\tconst char *target;   /**\u003c Link content — what the symlink points to */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f420f44a_51d0f309",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Prefer \u0027fallthrough;\u0027 over fallthrough comment\n+ *   // fall through to the synchronous syscall",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e55f553c_1022f343",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12eaab24_0d3b92f4",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/io_uring/core/uring_engine.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d116f4c_9b9d144a",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 88 exceeds 80 columns\n+\tstruct uring_engine_params params; /* copy of init-time config (incl. log_fn) */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d032466_2dca2187",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\tgsh_free(engine-\u003eclasses[i].free_stack, engine-\u003eparams.mem_comp);",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "129ca121_f32ec2b6",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 113 exceeds 80 columns\n+\t\t\t\t  \"coalesce: submit\u003d%s reason\u003d%s io_count\u003d%u outstanding\u003d%u elapsed_us\u003d%\" PRIu64,",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4f98f3c_909015eb",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\treturn \u0026engine-\u003erings[(unsigned int)cpu % engine-\u003enr_rings];",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b937c1ed_308ada64",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 117 exceeds 80 columns\n+\t/* ── PHASE 1: SQE placement — brief submit_lock ───────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5526ad80_a87d8fa8",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1070,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 149 exceeds 80 columns\n+\t/* ── PHASE 2: Decision — lock-free ──────────────────────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9339c6d9_b983676d",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 160 exceeds 80 columns\n+\t/* ── PHASE 3: Spin — lock-free ───────────────────────────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d207c785_d2aaa44c",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 127 exceeds 80 columns\n+\t/* ── PHASE 4: Claim flush role — CAS + submit ───────────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2be50f01_e90de192",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1489,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\tout-\u003esqe_submitted      \u003d atomic_fetch_uint64_t(\u0026engine-\u003estat_submitted);",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6716785d_fe2caad6",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\tout-\u003ecqe_completed      \u003d atomic_fetch_uint64_t(\u0026engine-\u003estat_completed);",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d52f959d_31bf483f",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1505,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\tout-\u003ecoalesce_peak_batch \u003d engine-\u003erings[i].stat_peak_batch;",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e83f0c6_56ce6c85",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t\t\t\t(unsigned int)(params-\u003esqpoll_cpu +",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25d536a9_5c61462f",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1791,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 98 exceeds 80 columns\n+\t\t\t  \"%s: submission coalescing on: bucket\u003d%u max_bucket\u003d%u timeout\u003d%\" PRIu64",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "333087c5_3bb5f915",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1810,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 95 exceeds 80 columns\n+\t\t\t  \"%s: coalescing bucket_io_count\u003d%u max_bucket\u003d%u timeout_us\u003d%\" PRIu64",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ea9b70f_7d07c316",
+        "filename": "src/io_uring/core/uring_engine.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+ * alive — and not relocate it — until done_cb() fires, because the in-flight",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53609499_27f0bbbf",
+        "filename": "src/io_uring/core/uring_engine.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-09T13:57:25Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t/** Number of valid entries in ops[] / cqes[]; \u003c\u003d URING_CHAIN_MAX_OPS. */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
