@@ -334,7 +334,7 @@ void update_export_metadata_metric(struct gsh_export *export)
 		METRIC_LABEL("sectype", labels_info.sectype),
 		METRIC_LABEL("transport", labels_info.transport),
 		METRIC_LABEL("access", labels_info.access),
-		METRIC_LABEL("export_path", gsh_refstr_get(path_label)->gr_val)
+		METRIC_LABEL("export_path", path_label->gr_val)
 	};
 
 	export->metadata_metric = monitoring__register_gauge(
