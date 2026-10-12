@@ -344,7 +344,8 @@ void update_export_metadata_metric(struct gsh_export *export)
 
 	monitoring__gauge_set(export->metadata_metric, 1);
 
-	/* Release the reference since a copy of path_label was made when registering the metric */
+	/* Release the reference since a copy of path_label was made when
+	 * registering the metric */
 	gsh_refstr_put(path_label);
 }
 
