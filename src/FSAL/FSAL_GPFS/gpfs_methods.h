@@ -137,6 +137,9 @@ fsal_status_t gpfs_lock_op2(struct fsal_obj_handle *obj_hdl,
 			    fsal_lock_op_t lock_op,
 			    fsal_lock_param_t *request_lock,
 			    fsal_lock_param_t *conflicting_lock);
+fsal_status_t gpfs_lease_op2(struct fsal_obj_handle *obj_hdl,
+			     struct state_t *state, void *owner,
+			     fsal_deleg_t deleg);
 fsal_status_t gpfs_close2(struct fsal_obj_handle *obj_hdl,
 			  struct state_t *state);
 fsal_status_t gpfs_reopen_func(struct fsal_obj_handle *obj_hdl,

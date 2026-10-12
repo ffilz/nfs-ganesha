@@ -982,6 +982,7 @@ void gpfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->close_func = gpfs_close_func;
 	ops->reopen_func = gpfs_reopen_func;
 	ops->lock_op2 = gpfs_lock_op2;
+	ops->lease_op2 = gpfs_lease_op2;
 	ops->merge = gpfs_merge;
 	ops->is_referral = fsal_common_is_referral;
 	ops->fallocate = gpfs_fallocate;
