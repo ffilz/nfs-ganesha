@@ -67,6 +67,24 @@
       "message": "Please consider the below comment since the gatecheck is failing\n\nObserving the same issue even after enabling rdma.. Received below comment from cursor. Could you please review if that makes sense?\n\nRoot cause\n\nIn src/CMakeLists.txt, the change removed the only place that set BCOND_RDMA (it was tied to 9P / USE_9P_RDMA):\n\n# deleted by the patch\nif(USE_9P)\n    ...\n    set(BCOND_RDMA \"%bcond_with\")  # or without\n...\nendif(USE_9P)\n\nBut src/nfs-ganesha.spec-in.cmake still has:\n\n@BCOND_RDMA@ rdma\n%global use_rdma %{on_off_switch rdma}\n\nWith @BCOND_RDMA@ empty, rpmbuild sees a bare rdma tag → Unknown tag: rdma.\n\nSo this is a packaging bug in that Gerrit change, not a new FSAL/NFS regression from the gate run.\n\nWhat to fix in the patch\n\n\nRemove the leftover 9P-RDMA RPM bits from the spec (@BCOND_RDMA@ / use_rdma and any remaining %{with rdma} / -DUSE_9P_RDMA\u003d%{use_rdma}), or rebind RDMA bconds to USE_NFS_RDMA if that is still required.",
       "revId": "5b69828e8428fb00047bf775836c69a47c28d457",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1af1c820_6e279388",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-12T18:22:21Z",
+      "side": 1,
+      "message": "I\u0027m confused by this comment. Can you point to a specific change?\n\n@raprasad@redhat.com Can you comment specifically on the RDMA stuff?",
+      "parentUuid": "f3225a60_48454b2d",
+      "revId": "5b69828e8428fb00047bf775836c69a47c28d457",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
