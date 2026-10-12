@@ -1336,6 +1336,119 @@ exit:
 	return status;
 }
 
+fsal_status_t gpfs_lease_op2(struct fsal_obj_handle *obj_hdl,
+			     struct state_t *state, void *owner,
+			     fsal_deleg_t deleg)
+{
+	struct fsal_export *export = op_ctx->fsal_export;
+	struct glock glock_args;
+	struct set_get_lock_arg gpfs_sg_arg;
+	fsal_openflags_t openflags;
+	fsal_status_t status, status2;
+	struct gpfs_fd *my_fd;
+	struct gpfs_fd temp_fd = { FSAL_FD_INIT, -1 };
+	struct fsal_fd *out_fd;
+	bool bypass = false;
+	struct gpfs_fsal_export *exp = container_of(op_ctx->fsal_export,
+						    struct gpfs_fsal_export,
+						    export);
+	int export_fd = exp->export_fd;
+	struct gpfs_fsal_obj_handle *myself;
+
+	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
+
+	if (obj_hdl == NULL) {
+		LogCrit(COMPONENT_FSAL, "obj_hdl arg is NULL.");
+		return fsalstat(ERR_FSAL_FAULT, 0);
+	}
+	if (owner == NULL) {
+		LogCrit(COMPONENT_FSAL, "owner arg is NULL.");
+		return fsalstat(ERR_FSAL_FAULT, 0);
+	}
+	switch (deleg) {
+	case FSAL_DELEG_RD:
+		glock_args.flock.l_type = F_RDLCK;
+		openflags = FSAL_O_READ;
+		break;
+#if 0 /* No wrire delegation for now */
+	case FSAL_DELEG_WR:
+		glock_args.flock.l_type = F_WRLCK;
+		openflags = FSAL_O_WRITE;
+		break;
+#endif
+	case FSAL_DELEG_NONE:
+		glock_args.flock.l_type = F_UNLCK;
+		openflags = FSAL_O_ANY;
+		break;
+	default:
+		LogDebug(
+			COMPONENT_FSAL,
+			"ERROR: The requested deleg type was not read or write.");
+		return fsalstat(ERR_FSAL_NOTSUPP, 0);
+	}
+	if (gpfs_version < 5) {
+		LogDebug(COMPONENT_FSAL,
+			 "ERROR: Deleg supported in GPFS version < 5.");
+		return fsalstat(ERR_FSAL_NOTSUPP, 0);
+	}
+	/* Indicate a desire to start io and get a usable file descritor */
+	status = fsal_start_io(&out_fd, obj_hdl, &myself->u.file.fd.fsal_fd,
+			       &temp_fd.fsal_fd, state, openflags, true, NULL,
+			       bypass, &myself->u.file.share);
+
+	if (FSAL_IS_ERROR(status)) {
+		LogCrit(COMPONENT_FSAL, "fsal_start_io failed returning %s",
+			fsal_err_txt(status));
+		goto exit;
+	}
+	my_fd = container_of(out_fd, struct gpfs_fd, fsal_fd);
+
+	glock_args.cmd = F_SETLEASE;
+	glock_args.lfd = my_fd->fd;
+	glock_args.flock.l_len = LONG_MAX;
+	glock_args.flock.l_start = 0;
+	glock_args.flock.l_whence = SEEK_SET;
+	glock_args.lock_owner = owner;
+
+	gpfs_sg_arg.lock = &glock_args;
+	gpfs_sg_arg.reclaim = false;
+	gpfs_sg_arg.mountdirfd = export_fd;
+	gpfs_sg_arg.cli_ip = NULL;
+	if (op_ctx && op_ctx->client)
+		gpfs_sg_arg.cli_ip = op_ctx->client->hostaddr_str;
+
+	LogFullDebug(COMPONENT_FSAL, "Lease: op:%d  type:%d  owner:%p",
+		     glock_args.cmd, glock_args.flock.l_type, owner);
+
+	status = GPFSFSAL_lock_op(export, 0, NULL, NULL, &gpfs_sg_arg);
+
+	if (FSAL_IS_ERROR(status)) {
+		LogDebug(COMPONENT_FSAL,
+			 "Inode involved: %" PRIu64 ", error: %s",
+			 get_handle2inode(myself->handle),
+			 fsal_err_txt(status));
+	}
+	status2 = fsal_complete_io(obj_hdl, out_fd);
+
+	LogFullDebug(COMPONENT_FSAL, "fsal_complete_io returned %s",
+		     fsal_err_txt(status2));
+
+	if (state == NULL) {
+		/* We did I/O without a state so we need to release the temp
+		 * share reservation acquired.
+		*/
+
+		/* Release the share reservation now by updating the counters.
+		*/
+		update_share_counters_locked(obj_hdl, &myself->u.file.share,
+					     openflags, FSAL_O_CLOSED);
+	}
+
+exit:
+
+	return status;
+}
+
 /**
  * @brief Seek to data or hole
  *
