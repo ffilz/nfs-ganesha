@@ -47,7 +47,7 @@ fsal_status_t GPFSFSAL_lock_op(struct fsal_export *export,
 	int retval;
 	int errsv;
 
-	if (req_lock->lock_sle_type == FSAL_LEASE_LOCK)
+	if (req_lock == NULL)
 		retval = gpfs_ganesha(OPENHANDLE_SET_DELEGATION, sg_lock_arg);
 	else if (lock_op == FSAL_OP_LOCKT)
 		retval = gpfs_ganesha(OPENHANDLE_GET_LOCK, sg_lock_arg);
