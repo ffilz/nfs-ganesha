@@ -67,11 +67,7 @@ struct gpfs_fsal_module
 				 .maxwrite = FSAL_MAXIOSIZE,
 				 .umask = 0,
 				 .auth_exportpath_xdev = true,
-/* @todo Update lease handling to use new interfaces */
-#if 0
-			/** not working with pNFS */
-			.delegations = FSAL_OPTION_FILE_READ_DELEG,
-#endif
+				 .delegations = FSAL_OPTION_FILE_READ_DELEG,
 				 .pnfs_mds = true,
 				 .pnfs_ds = true,
 				 .fsal_trace = true,
