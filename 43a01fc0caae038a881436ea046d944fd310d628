@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccf59f42_892f1247",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040057
+      },
+      "writtenOn": "2026-10-13T16:59:28Z",
+      "side": 1,
+      "message": "This is just going from a watch-per-export to a shared watch, and then giving that shared watch a watchdog timer, right? The sort of key new thing is invoking static ```void rados_cluster_watch_reconcile(void)``` (that then calls ```nfs_notify_grace_waiters()``` if the watch happens to break.\n\nThis seems fine from a Ceph perspective; my bigger question is if we rely on that watch for anything else being consistent and need better error handling in general.",
+      "revId": "43a01fc0caae038a881436ea046d944fd310d628",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7b2545e_92c4da91",
+        "filename": "src/support/gsh_rados_watch.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1040057
+      },
+      "writtenOn": "2026-10-13T16:59:28Z",
+      "side": 1,
+      "message": "@50203418+LiShengG@users.noreply.github.com How would the error callback get missed? A rados watch-notify is a reliable delivery system, right?",
+      "revId": "43a01fc0caae038a881436ea046d944fd310d628",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
