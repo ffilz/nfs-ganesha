@@ -16,6 +16,24 @@
       "message": "But METRIC_LABEL just copies the pointer. If you release all refstr references, then the pointer could possibly be a dangling pointer. The metric needs to hold a reference.",
       "revId": "ad21e2452df089c1dc975358de1d5ed344b01c75",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e67a447_ef3cce1d",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1020671
+      },
+      "writtenOn": "2026-10-13T14:20:00Z",
+      "side": 1,
+      "message": "METRIC_LABEL does copy the pointer. But this is sent to `monitoring__register_gauge`, which copies the labels. \n\n`labels` struct itself cannot be used outside the function.",
+      "parentUuid": "e79dd33b_01cbe731",
+      "revId": "ad21e2452df089c1dc975358de1d5ed344b01c75",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
