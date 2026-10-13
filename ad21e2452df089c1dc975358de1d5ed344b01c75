@@ -34,6 +34,24 @@
       "parentUuid": "e79dd33b_01cbe731",
       "revId": "ad21e2452df089c1dc975358de1d5ed344b01c75",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56d3bbf3_eecf4614",
+        "filename": "src/support/export_mgr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-13T20:58:41Z",
+      "side": 1,
+      "message": "OK, I think I would like to see a comment, just so others looking over will understand clearly we don\u0027t need to hold a reference past the call to monitoring_register_gauge.\n\nYou could just amend the comment before the gsh_refstr_put to:\n\n\"Release the reference since a copy of path_label was made when registering the metric.\"",
+      "parentUuid": "2e67a447_ef3cce1d",
+      "revId": "ad21e2452df089c1dc975358de1d5ed344b01c75",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
