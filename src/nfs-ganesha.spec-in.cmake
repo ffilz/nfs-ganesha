@@ -753,6 +753,32 @@ rm -f %{buildroot}/%{python3_sitelib}/Ganesha/__init__.*
 rm -f %{buildroot}/%{python3_sitelib}/Ganesha/QtUI/__init__.*
 %endif
 
+# Start Replace python shebang for python scripts in gpfs.nfs-ganesha-utils
+%global __python %{__python3}
+%if ( 0%{?rhel} )
+    # RHEL 8, 9, 10 require system administration utilities to use platform-python
+    %global python_shebang_target /usr/libexec/platform-python
+%else
+    %global python_shebang_target /usr/bin/python3
+%endif
+
+for dir in %{buildroot}%{_bindir} %{buildroot}%{_libexecdir}/ganesha %{buildroot}%{python3_sitelib}; do
+    if [ -d "$dir" ]; then
+        find "$dir" -type f > %{_tmppath}/ganesha_file_scan.list 2>/dev/null
+
+        if [ -s %{_tmppath}/ganesha_file_scan.list ]; then
+            while IFS= read -r script; do
+                # Verify file is not empty and check for python shebang signature
+                if [ -s "$script" ] && head -n 1 "$script" | grep -q '^#!.*python'; then
+                    sed -i "1s|^#!.*python.*|#!%{python_shebang_target}|" "$script"
+                    chmod 0755 "$script"
+                fi
+            done < %{_tmppath}/ganesha_file_scan.list
+        fi
+        rm -f %{_tmppath}/ganesha_file_scan.list
+    fi
+done
+
 %post
 %if ( 0%{?suse_version} )
 %service_add_post nfs-ganesha.service nfs-ganesha-lock.service nfs-ganesha-config.service
