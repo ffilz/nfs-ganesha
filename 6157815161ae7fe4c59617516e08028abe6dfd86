@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c5581c0_d7c66bd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004389
+      },
+      "writtenOn": "2026-10-14T17:31:16Z",
+      "side": 1,
+      "message": "Fedora, and by extension, RHEL, CentOS, Rocky, has/have a policy that all python scripts with a shebang use\n  #! /usr/bin/python3 ...\nsee [1]\n\nrpm builds in Fedora Koji, and CentOS and Rocky build systems do post-processing on the shebangs.\n\nThere are incompatible differences, e.g. between python-3.9 and python-3.14, and we only guarantee — to the extent we guarantee anything — that the scripts work with the default python.",
+      "revId": "6157815161ae7fe4c59617516e08028abe6dfd86",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
