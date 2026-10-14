@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78d30d49_091d7b43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039709
+      },
+      "writtenOn": "2026-10-14T06:08:03Z",
+      "side": 1,
+      "message": "To clarify, this patch preserves the two existing watch registration sites. Before this change, both registered without an errcb, so an expired watch was neither re-established nor reported through an error callback:\n\n- RADOS_URLS watches the common config object (conf-nfs.\u003ccluster\u003e with mgr/nfs) to trigger online export reloads. Restoring automatic configuration updates after watch expiry is the main purpose of this change. Once a disconnect lasts long enough for the OSD to expire the watch, reconnecting alone does not restore it. Subsequent mgr/nfs notifications can no longer trigger configuration reloads, even after connectivity returns. Ganesha has no periodic configuration reload, so export changes remain unapplied until a manual reload or restart.\n- rados_cluster grace uses its watch for wakeups. The RADOS grace object is authoritative, the reaper polls periodically—normally every 10s—and startup waits for cluster-wide grace enforcement. With grace-DB operations working, missed notifications add latency without bypassing that enforcement barrier.\n\nPS3 clarifies the commit message and removes healthy-watch polling. Error callbacks initiate recovery, with backoff for failed re-registration attempts. After re-registration, the URL reconcile hook requests a configuration reload to pick up changes missed while the watch was down.\n\nTested on vstart (Ceph main), pausing Ganesha for 42s so the OSD expires both watches. Without this change, a subsequent ceph nfs export create is not applied until a manual SIGHUP. With PS3, both errcbs fire after resuming, both watches are re-established, and exports are reloaded.\n\nBroader error handling is still needed for recovery-client blocklisting, RADOS operation timeouts, and notifications missed without a watch error. These issues require separate follow-up work; this patch focuses on re-establishing expired watches and reconciling state afterward",
+      "parentUuid": "ccf59f42_892f1247",
+      "revId": "43a01fc0caae038a881436ea046d944fd310d628",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7b2545e_92c4da91",
         "filename": "src/support/gsh_rados_watch.c",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-13T16:59:28Z",
       "side": 1,
       "message": "@50203418+LiShengG@users.noreply.github.com How would the error callback get missed? A rados watch-notify is a reliable delivery system, right?",
+      "revId": "43a01fc0caae038a881436ea046d944fd310d628",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcca671f_34ae014c",
+        "filename": "src/support/gsh_rados_watch.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1039709
+      },
+      "writtenOn": "2026-10-14T06:08:03Z",
+      "side": 1,
+      "message": "Agreed. The probe and the errcb observe the same underlying watch-error state. PS3 handles error callbacks throughout initial registration, including before the cookie is published, so the periodic probe is no longer necessary and has been removed. Recovery is initiated by the errcb, with backoff for failed re-registration.\n\nOne separate caveat, reproduced on vstart: a stalled watcher whose session is reset can miss a notification if the notification times out but the watch registration survives until reconnect. The OSD removes the expired notification from the pending list, then successfully reconnects the existing watch without an errcb. That notification is not replayed.\n\nFor RADOS_URLS, the export change is then missed until another reload. Keeping the old probe would not address this either, since the watch remains valid. A periodic reload would provide a fallback, which I\u0027d propose separately.",
+      "parentUuid": "d7b2545e_92c4da91",
       "revId": "43a01fc0caae038a881436ea046d944fd310d628",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
