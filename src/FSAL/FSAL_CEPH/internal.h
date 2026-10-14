@@ -86,6 +86,9 @@ struct ceph_client_pool_users {
  * Ceph Main (global) module object
  */
 
+/* Most directory streams kept between READDIR calls on a mount */
+#define CEPH_DIR_STREAMS_MAX 128
+
 struct ceph_fsal_module {
 	struct fsal_module fsal;
 	struct fsal_obj_ops handle_ops;
@@ -102,6 +105,10 @@ struct ceph_fsal_module {
 	uint64_t client_oc_max_dirty;
 	/* ceph client pool related */
 	uint16_t clnts_per_pool;
+	/* most directory streams kept per mount, 0 for none, -1 to size it on
+	 * the Ceph cache
+	 */
+	int32_t dir_streams_max;
 	struct glist_head cp_users_list;
 	pthread_rwlock_t cp_users_lock;
 };
@@ -140,6 +147,8 @@ struct ceph_mount {
 	 *  at the ceph mount level
 	 */
 	bool cm_disallow_delegations;
+	/** Most directory streams kept between READDIR calls on this mount */
+	uint32_t cm_dir_streams_max;
 };
 
 /**
@@ -215,6 +224,10 @@ struct ceph_handle {
 	uint64_t rw_max_len;
 #endif /* CEPH_PNFS */
 	bool is_encrypted;
+	/* Directories only: streams kept open between READDIR calls, see
+	 * ceph_fsal_readdir()
+	 */
+	struct glist_head dir_streams;
 };
 
 #ifdef CEPH_PNFS
@@ -264,6 +277,9 @@ struct ds {
 void construct_handle(const struct ceph_statx *stx, struct Inode *i,
 		      struct ceph_export *export, struct ceph_handle **obj);
 void deconstruct_handle(struct ceph_handle *obj);
+void ceph_dir_streams_release(struct ceph_handle *dir);
+int ceph_dir_streams_release_mount(struct ceph_mount_info *cmount);
+void ceph_dir_streams_shutdown(void);
 
 /**
  * @brief FSAL status from Ceph error

@@ -79,6 +79,23 @@ async(bool, default false)
 zerocopy(bool, default false)
     Enable ceph zero copy I/O. Zero copy and client_oc are incompatible.
 
+dir_streams_max(int32, range -1 to 128, default -1)
+    Sets how many directory streams are kept open between READDIR calls on
+    each ceph client, so that a READDIR continues where the previous one
+    stopped instead of fetching the directory from the MDS again. A kept
+    stream holds the entries of one MDS reply, about 1500 at most, in the
+    ceph client cache until it is used again, the MDS recalls caps (usually),
+    or it has been idle for over 5 seconds, which is checked every 5 seconds.
+    0 keeps none. The default of -1 sizes it so that the streams hold at most
+    half of client_cache_size: 5 with the default of 16384. The limit is per
+    ceph client; there is no separate per-directory or global limit.
+
+    Reuse requires matching credentials and unchanged directory change
+    attribute, mtime and ctime. Older MDS versions can miss change attribute
+    updates in fragmented directories. Comparing timestamps is a fallback,
+    not a replacement for the MDS fixes to change attribute accounting,
+    including across directory fragment splits and merges.
+
 use_old_uuid(bool, default false)
     Use old uuid logic for ceph client. Useful when upgrading from pre 7.0
     version to latest. If this flag is set, then continue using it. As per old
