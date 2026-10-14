@@ -51,6 +51,7 @@
 #include "sal_data.h"
 #include "statx_compat.h"
 #include "nfs_core.h"
+#include "fridgethr.h"
 #include "linux/falloc.h"
 
 /* anti-bug pattern: does not take typename (considered unsafe) */
@@ -201,6 +202,606 @@ out_err:
 	return rc;
 }
 
+/* An entry in the window of a kept stream, see struct ceph_dir_stream */
+struct ceph_dir_stream_entry {
+	uint64_t cookie; /*< Cookie after the entry */
+	vinodeno_t vino; /*< Its inode */
+	char *name;
+};
+
+/**
+ * @brief What tells whether a directory changed
+ *
+ * Older MDS versions may leave the inode change attribute unchanged when a
+ * directory fragment changes without advancing the highest fragment counter,
+ * or on the first change after a split or merge.  Also compare mtime and ctime
+ * for those servers.  This is only a fallback: a change stamped earlier than
+ * the recorded times, e.g. by a client whose clock is behind, can still be
+ * missed.  Reliable change detection requires the MDS fixes for fragment
+ * change accounting and for preserving it across splits and merges.
+ */
+struct ceph_dir_stamp {
+	uint64_t version;
+	struct timespec mtime;
+	struct timespec ctime;
+};
+
+static bool ceph_dir_stamp_same(const struct ceph_dir_stamp *a,
+				const struct ceph_dir_stamp *b)
+{
+	return a->version == b->version && a->mtime.tv_sec == b->mtime.tv_sec &&
+	       a->mtime.tv_nsec == b->mtime.tv_nsec &&
+	       a->ctime.tv_sec == b->ctime.tv_sec &&
+	       a->ctime.tv_nsec == b->ctime.tv_nsec;
+}
+
+/**
+ * @brief A directory stream kept open between READDIR calls
+ *
+ * NFS READDIR is stateless, each request carries the cookie to resume from.
+ * Opening a new libcephfs stream per request makes libcephfs fetch the
+ * directory from the MDS again for every request.  So a stream that did not
+ * reach the end of the directory is kept for a while, and a READDIR with the
+ * same credentials resuming where the previous one stopped continues on it.
+ *
+ * Each READDIR fetches the state of the directory (struct ceph_dir_stamp)
+ * before reading it, and only continues on a stream kept with the same one,
+ * so a change made after a stream fetched its entries makes the READDIR open
+ * a new stream.
+ *
+ * A READDIR usually stops because its reply is full, and the client may keep
+ * only part of it: older Linux clients, e.g. 5.10, keep the entries that fit
+ * in their page of cached entries and ask again after the last one they kept.
+ * So the next READDIR mostly resumes before where the stream is, and always
+ * before the entry the callback refused.  Seeking back in a hash
+ * ordered directory makes libcephfs drop its buffer and fetch the directory
+ * from the MDS again, and keeps it from marking the directory complete and
+ * ordered in its cache at the end of the listing.
+ *
+ * So a kept stream is only read forward.  It keeps a window with the name,
+ * inode number and cookie of each entry it read since the cookie the last
+ * READDIR on it started at, the entries the callback took and the one it
+ * refused.  A READDIR resuming at one of these cookies takes the entries after
+ * it from the libcephfs inode cache, hands them to its callback, and reads on.
+ * The inodes are not referenced, as that needs ceph_ll_get(), missing from
+ * older libcephfs.  They mostly stay cached all the same, held by the handles
+ * made for the callback, while libcephfs may already have trimmed their
+ * dentries: a directory larger than its dentry cache is listed in bursts
+ * between trims.  If the inode of an entry is gone, the stream seeks back to
+ * it and reads it and the rest again.
+ */
+struct ceph_dir_stream {
+	struct glist_head dir_list; /*< On ceph_handle.dir_streams, MRU first */
+	struct glist_head lru; /*< On ceph_dir_streams_lru, MRU first */
+	struct ceph_mount_info *cmount; /*< Mount dirp was opened on */
+	struct ceph_dir_result *dirp;
+	uint64_t base_ck; /*< Cookie the window starts after */
+	struct ceph_dir_stream_entry *win; /*< Window, in dirp order */
+	uint32_t win_len;
+	uint32_t win_size; /*< Entries allocated in win */
+	size_t names_len; /*< Bytes of the names in the window */
+	struct ceph_dir_stamp dir_stamp; /*< State of the directory */
+	bool keep; /*< May be kept after the READDIR, so it keeps a window */
+	time_t last_used; /*< Monotonic seconds */
+	struct user_cred creds; /*< Opener, owns caller_garray */
+};
+
+#define CEPH_DIR_STREAM_IDLE 5 /* seconds */
+/* Limits of a window, beyond them it forgets its oldest entries */
+#define CEPH_DIR_STREAM_WINDOW 4096 /* entries */
+#define CEPH_DIR_STREAM_WINDOW_NAMES (256 * 1024) /* bytes */
+
+/* Protects every ceph_handle.dir_streams list, ceph_dir_streams_lru and the
+ * reaper thread variables.  Kept streams are released with it held: once
+ * ceph_dir_streams_release_mount() has taken the streams of a mount off under
+ * it, nothing else can still be releasing one of them on that mount when it
+ * is unmounted.
+ */
+static pthread_mutex_t ceph_dir_streams_lock = PTHREAD_MUTEX_INITIALIZER;
+/* Kept streams over all directories and exports, most recently used first */
+static GLIST_HEAD(ceph_dir_streams_lru);
+/* Releases idle streams when no READDIR comes to do it, started when the
+ * first stream is kept
+ */
+static struct fridgethr *ceph_dir_streams_fridge;
+static bool ceph_dir_streams_fridge_tried;
+
+static time_t ceph_dir_stream_now(void)
+{
+	struct timespec ts;
+
+	now_mono(&ts);
+	return ts.tv_sec;
+}
+
+static struct ceph_dir_stream *ceph_dir_stream_new(
+	struct ceph_mount_info *cmount, struct ceph_dir_result *dirp, bool keep)
+{
+	struct ceph_dir_stream *stream =
+		gsh_calloc(1, sizeof(*stream), MEM_COMP_FSAL);
+
+	stream->cmount = cmount;
+	stream->dirp = dirp;
+	stream->keep = keep;
+	if (!keep)
+		return stream;
+	stream->creds = op_ctx->creds;
+	stream->creds.caller_garray = NULL;
+	if (op_ctx->creds.caller_glen != 0)
+		stream->creds.caller_garray =
+			gsh_memdup(op_ctx->creds.caller_garray,
+				   op_ctx->creds.caller_glen * sizeof(gid_t),
+				   MEM_COMP_FSAL);
+	return stream;
+}
+
+/**
+ * @brief Forget a window entry, without taking it out of the window
+ */
+static void ceph_dir_stream_forget(struct ceph_dir_stream *stream,
+				   struct ceph_dir_stream_entry *e)
+{
+	stream->names_len -= strlen(e->name) + 1;
+	gsh_free(e->name, MEM_COMP_FSAL);
+}
+
+static void ceph_dir_stream_free(struct ceph_dir_stream *stream)
+{
+	if (stream->dirp != NULL)
+		ceph_ll_releasedir(stream->cmount, stream->dirp);
+	if (stream->creds.caller_garray != NULL)
+		gsh_free(stream->creds.caller_garray, MEM_COMP_FSAL);
+	while (stream->win_len > 0)
+		ceph_dir_stream_forget(stream, &stream->win[--stream->win_len]);
+	gsh_free(stream->win, MEM_COMP_FSAL);
+	gsh_free(stream, MEM_COMP_FSAL);
+}
+
+/**
+ * @brief Forget the first @a n entries of the window
+ */
+static void ceph_dir_stream_trim(struct ceph_dir_stream *stream, uint32_t n)
+{
+	uint32_t k;
+
+	if (n == 0)
+		return;
+
+	stream->base_ck = stream->win[n - 1].cookie;
+	for (k = 0; k < n; k++)
+		ceph_dir_stream_forget(stream, &stream->win[k]);
+	stream->win_len -= n;
+	memmove(stream->win, stream->win + n,
+		stream->win_len * sizeof(*stream->win));
+}
+
+/**
+ * @brief Add the entry just read from dirp to the window
+ *
+ * Forgets the oldest half of the window while it is full.
+ */
+static void ceph_dir_stream_add(struct ceph_dir_stream *stream,
+				const char *name, const struct ceph_statx *stx,
+				uint64_t cookie)
+{
+	struct ceph_dir_stream_entry *e;
+
+	while (stream->win_len == CEPH_DIR_STREAM_WINDOW ||
+	       stream->names_len > CEPH_DIR_STREAM_WINDOW_NAMES)
+		ceph_dir_stream_trim(stream, (stream->win_len + 1) / 2);
+
+	if (stream->win_len == stream->win_size) {
+		stream->win_size = stream->win_size == 0 ? 256
+							 : stream->win_size * 2;
+		stream->win =
+			gsh_realloc(stream->win,
+				    stream->win_size * sizeof(*stream->win),
+				    MEM_COMP_FSAL);
+	}
+
+	e = &stream->win[stream->win_len++];
+	e->cookie = cookie;
+	e->vino.ino.val = stx->stx_ino;
+	e->vino.snapid.val = stx->stx_dev;
+	e->name = gsh_strdup(name, MEM_COMP_FSAL);
+	stream->names_len += strlen(name) + 1;
+}
+
+/**
+ * @brief Get the next entry for a READDIR on a stream
+ *
+ * Hands back the window entries from @a k on, then reads on from dirp and adds
+ * what it reads to the window.  If the inode of a window entry is gone, it
+ * seeks back to the entry and reads it and the rest again.
+ *
+ * @param[in,out] k      Next window entry to hand back
+ * @param[out]    i      Inode of the entry, referenced
+ * @param[out]    de     Buffer for an entry read from dirp
+ * @param[out]    name   Name of the entry, valid until the next call
+ * @param[out]    cookie Where the client resumes after the entry
+ *
+ * @return 1 with an entry, 0 at the end of the directory, or a negative error.
+ */
+static int ceph_dir_stream_next(struct ceph_export *export,
+				struct ceph_handle *dir,
+				struct ceph_dir_stream *stream, uint32_t *k,
+				unsigned int want, struct Inode **i,
+				struct ceph_statx *stx, struct dirent *de,
+				const char **name, uint64_t *cookie)
+{
+	struct ceph_dir_stream_entry *e;
+	int rc;
+
+	if (*k < stream->win_len) {
+		e = &stream->win[*k];
+		*i = ceph_ll_get_inode(export->cmount, e->vino);
+		if (*i != NULL) {
+			rc = fsal_ceph_ll_getattr(export->cmount, *i, stx, want,
+						  &op_ctx->creds);
+			if (rc == 0) {
+				(*k)++;
+				*name = e->name;
+				*cookie = e->cookie;
+				return 1;
+			}
+			ceph_ll_put(export->cmount, *i);
+		}
+		ceph_seekdir(export->cmount, stream->dirp,
+			     *k == 0 ? stream->base_ck
+				     : stream->win[*k - 1].cookie);
+		while (stream->win_len > *k)
+			ceph_dir_stream_forget(stream,
+					       &stream->win[--stream->win_len]);
+	}
+
+	do {
+		*i = NULL;
+		rc = fsal_ceph_readdirplus(export->cmount, stream->dirp, dir->i,
+					   de, stx, want, 0, i, &op_ctx->creds);
+		if (rc != 1)
+			return rc;
+
+		/* skip . and .. */
+		if ((strcmp(de->d_name, ".") != 0) &&
+		    (strcmp(de->d_name, "..") != 0))
+			break;
+
+		/* Deref inode here as we reference inode in libcephfs
+		 * readdir_r_cb. The other inodes gets deref in
+		 * deconstruct_handle.
+		 */
+		if (*i != NULL)
+			ceph_ll_put(export->cmount, *i);
+	} while (true);
+
+	if (stream->keep) {
+		ceph_dir_stream_add(stream, de->d_name, stx, de->d_off);
+		*k = stream->win_len;
+	}
+	*name = de->d_name;
+	*cookie = de->d_off;
+	return 1;
+}
+
+/**
+ * @brief Release a kept stream, called with ceph_dir_streams_lock held
+ */
+static void ceph_dir_stream_drop(struct ceph_dir_stream *stream)
+{
+	glist_del(&stream->dir_list);
+	glist_del(&stream->lru);
+	ceph_dir_stream_free(stream);
+}
+
+/**
+ * @brief Release the streams idle for too long, called with
+ *        ceph_dir_streams_lock held
+ *
+ * Streams abandoned part way through a directory would otherwise stay until
+ * their directory is read again or its handle is released, holding the
+ * directory inode and the inodes of its buffered entries in libcephfs.  They
+ * are usually released when the MDS recalls caps, see ino_release_cb(), but
+ * not always, and releasing them once idle also lets the MDS purge the ones
+ * that get unlinked.
+ */
+static void ceph_dir_streams_expire(time_t now)
+{
+	struct ceph_dir_stream *stream;
+
+	while ((stream = glist_last_entry(&ceph_dir_streams_lru,
+					  struct ceph_dir_stream, lru)) !=
+		       NULL &&
+	       now - stream->last_used > CEPH_DIR_STREAM_IDLE)
+		ceph_dir_stream_drop(stream);
+}
+
+static void ceph_dir_streams_reap(struct fridgethr_context *ctx)
+{
+	PTHREAD_MUTEX_lock(&ceph_dir_streams_lock);
+	ceph_dir_streams_expire(ceph_dir_stream_now());
+	PTHREAD_MUTEX_unlock(&ceph_dir_streams_lock);
+}
+
+/**
+ * @brief Start the thread releasing idle streams, called with
+ *        ceph_dir_streams_lock held
+ *
+ * Without it, idle streams are still released by the next READDIR.
+ */
+static void ceph_dir_streams_start_reaper(void)
+{
+	struct fridgethr_params frp;
+	int rc;
+
+	if (ceph_dir_streams_fridge_tried)
+		return;
+	ceph_dir_streams_fridge_tried = true;
+
+	memset(&frp, 0, sizeof(frp));
+	frp.thr_max = 1;
+	frp.thr_min = 1;
+	frp.thread_delay = CEPH_DIR_STREAM_IDLE;
+	frp.flavor = fridgethr_flavor_looper;
+
+	rc = fridgethr_init(&ceph_dir_streams_fridge, "ceph_dir_streams", &frp);
+	if (rc != 0) {
+		LogMajor(COMPONENT_FSAL,
+			 "Unable to initialize Ceph dir streams fridge: %d",
+			 rc);
+		ceph_dir_streams_fridge = NULL;
+		return;
+	}
+
+	rc = fridgethr_submit(ceph_dir_streams_fridge, ceph_dir_streams_reap,
+			      NULL);
+	if (rc != 0) {
+		LogMajor(COMPONENT_FSAL,
+			 "Unable to start Ceph dir streams thread: %d", rc);
+		fridgethr_destroy(ceph_dir_streams_fridge);
+		ceph_dir_streams_fridge = NULL;
+	}
+}
+
+/**
+ * @brief Stop the thread releasing idle streams
+ */
+void ceph_dir_streams_shutdown(void)
+{
+	struct fridgethr *fridge;
+	int rc;
+
+	PTHREAD_MUTEX_lock(&ceph_dir_streams_lock);
+	fridge = ceph_dir_streams_fridge;
+	ceph_dir_streams_fridge = NULL;
+	PTHREAD_MUTEX_unlock(&ceph_dir_streams_lock);
+
+	if (fridge == NULL)
+		return;
+
+	rc = fridgethr_sync_command(fridge, fridgethr_comm_stop, 120);
+	if (rc == ETIMEDOUT) {
+		LogMajor(COMPONENT_FSAL,
+			 "Shutdown timed out, cancelling threads.");
+		fridgethr_cancel(fridge);
+	} else if (rc != 0) {
+		LogMajor(COMPONENT_FSAL,
+			 "Failed shutting down Ceph dir streams thread: %d",
+			 rc);
+	}
+	fridgethr_destroy(fridge);
+}
+
+static bool ceph_same_creds(const struct user_cred *a,
+			    const struct user_cred *b)
+{
+	return a->caller_uid == b->caller_uid &&
+	       a->caller_gid == b->caller_gid &&
+	       a->caller_glen == b->caller_glen &&
+	       (a->caller_glen == 0 ||
+		memcmp(a->caller_garray, b->caller_garray,
+		       a->caller_glen * sizeof(gid_t)) == 0);
+}
+
+/**
+ * @brief Find where a READDIR at @a start resumes on a stream
+ *
+ * @param[out] first Number of window entries up to @a start, the client has
+ *                   them
+ *
+ * @return false if the stream would have to seek.
+ */
+static bool ceph_dir_stream_find(const struct ceph_dir_stream *stream,
+				 uint64_t start, uint32_t *first)
+{
+	uint32_t k;
+
+	if (!ceph_same_creds(&stream->creds, &op_ctx->creds))
+		return false;
+
+	if (start == stream->base_ck) {
+		*first = 0;
+		return true;
+	}
+	/* Searched from the end: the client mostly resumes in the last part
+	 * of what the previous READDIR returned.
+	 */
+	for (k = stream->win_len; k > 0; k--) {
+		if (stream->win[k - 1].cookie == start) {
+			*first = k;
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
+ * @brief Take the kept stream a READDIR at @a start can continue on
+ *
+ * Streams kept before the directory changed are released on the way.
+ *
+ * @param[out] first See ceph_dir_stream_find()
+ */
+static struct ceph_dir_stream *
+ceph_dir_stream_get(struct ceph_handle *dir, uint64_t start,
+		    const struct ceph_dir_stamp *stamp, uint32_t *first)
+{
+	struct ceph_dir_stream *found = NULL;
+	struct glist_head *node, *noden;
+
+	PTHREAD_MUTEX_lock(&ceph_dir_streams_lock);
+	ceph_dir_streams_expire(ceph_dir_stream_now());
+	glist_for_each_safe(node, noden, &dir->dir_streams) {
+		struct ceph_dir_stream *stream =
+			glist_entry(node, struct ceph_dir_stream, dir_list);
+
+		if (!ceph_dir_stamp_same(&stream->dir_stamp, stamp)) {
+			ceph_dir_stream_drop(stream);
+		} else if (found == NULL &&
+			   ceph_dir_stream_find(stream, start, first)) {
+			glist_del(&stream->dir_list);
+			glist_del(&stream->lru);
+			found = stream;
+		}
+	}
+	PTHREAD_MUTEX_unlock(&ceph_dir_streams_lock);
+
+	return found;
+}
+
+/**
+ * @brief Keep a stream for a READDIR resuming where it stopped
+ *
+ * Makes room by releasing the least recently used streams of its mount.
+ *
+ * @param[in] max Streams to keep on the mount of this one, see
+ *                ceph_mount.cm_dir_streams_max
+ */
+static void ceph_dir_stream_put(struct ceph_handle *dir,
+				struct ceph_dir_stream *stream, uint32_t max)
+{
+	struct glist_head *node, *noden;
+	struct ceph_dir_stream *oldest;
+	uint32_t kept = 0;
+
+	stream->last_used = ceph_dir_stream_now();
+
+	PTHREAD_MUTEX_lock(&ceph_dir_streams_lock);
+	ceph_dir_streams_expire(stream->last_used);
+	glist_for_each_safe(node, noden, &ceph_dir_streams_lru) {
+		oldest = glist_entry(node, struct ceph_dir_stream, lru);
+		if (oldest->cmount == stream->cmount && ++kept >= max)
+			ceph_dir_stream_drop(oldest);
+	}
+	glist_add(&dir->dir_streams, &stream->dir_list);
+	glist_add(&ceph_dir_streams_lru, &stream->lru);
+	ceph_dir_streams_start_reaper();
+	PTHREAD_MUTEX_unlock(&ceph_dir_streams_lock);
+}
+
+/**
+ * @brief Release the streams kept for a directory
+ */
+void ceph_dir_streams_release(struct ceph_handle *dir)
+{
+	struct glist_head *node, *noden;
+
+	PTHREAD_MUTEX_lock(&ceph_dir_streams_lock);
+	glist_for_each_safe(node, noden, &dir->dir_streams) {
+		ceph_dir_stream_drop(
+			glist_entry(node, struct ceph_dir_stream, dir_list));
+	}
+	PTHREAD_MUTEX_unlock(&ceph_dir_streams_lock);
+}
+
+/**
+ * @brief Release the streams kept on a mount
+ *
+ * Called before the mount is unmounted, as the handles of the directories they
+ * were kept for are not always released before their export, e.g. at
+ * shutdown.  Also called when the MDS recalls caps from the mount: the
+ * entries buffered by a kept stream hold their inodes, which libcephfs then
+ * cannot trim to give the caps back.
+ *
+ * @return The number of streams released.
+ */
+int ceph_dir_streams_release_mount(struct ceph_mount_info *cmount)
+{
+	struct glist_head *node, *noden;
+	struct ceph_dir_stream *stream;
+	int released = 0;
+
+	PTHREAD_MUTEX_lock(&ceph_dir_streams_lock);
+	glist_for_each_safe(node, noden, &ceph_dir_streams_lru) {
+		stream = glist_entry(node, struct ceph_dir_stream, lru);
+		if (stream->cmount == cmount) {
+			ceph_dir_stream_drop(stream);
+			released++;
+		}
+	}
+	PTHREAD_MUTEX_unlock(&ceph_dir_streams_lock);
+
+	return released;
+}
+
+/**
+ * @brief Fetch what tells whether a directory changed
+ */
+static bool ceph_dir_stamp_get(struct ceph_export *export,
+			       struct ceph_handle *dir,
+			       struct ceph_dir_stamp *stamp)
+{
+	const unsigned int want = CEPH_STATX_VERSION | CEPH_STATX_MTIME |
+				  CEPH_STATX_CTIME;
+	struct ceph_statx stx;
+
+	if (fsal_ceph_ll_getattr(export->cmount, dir->i, &stx, want,
+				 &op_ctx->creds) != 0 ||
+	    (stx.stx_mask & want) != want)
+		return false;
+
+	stamp->version = stx.stx_version;
+	stamp->mtime = stx.stx_mtime;
+	stamp->ctime = stx.stx_ctime;
+	return true;
+}
+
+/**
+ * @brief Hand a directory entry to the READDIR callback
+ *
+ * Consumes the reference on @a i.
+ *
+ * @return 0 with the result of the callback in @a cb_rc, or a negative error.
+ */
+static int ceph_readdir_entry(struct ceph_export *export, struct Inode *i,
+			      struct ceph_statx *stx, const char *name,
+			      uint64_t cookie, attrmask_t attrmask,
+			      fsal_readdir_cb cb, void *dir_state,
+			      enum fsal_dir_result *cb_rc)
+{
+	struct ceph_handle *obj;
+	struct fsal_attrlist attrs;
+	int rc;
+
+	construct_handle(stx, i, export, &obj);
+
+	fsal_prepare_attrs(&attrs, attrmask);
+	ceph2fsal_attributes(stx, &attrs);
+
+	rc = ceph_fsal_get_sec_label(obj, &attrs);
+	if (rc < 0) {
+		/* release the prepared attrs */
+		fsal_release_attrs(&attrs);
+		/* release the handle, which will release the inode ref */
+		obj->handle.obj_ops->release(&obj->handle);
+		return rc;
+	}
+
+	*cb_rc = cb(name, &obj->handle, &attrs, dir_state, cookie);
+
+	fsal_release_attrs(&attrs);
+	return 0;
+}
+
 /**
  * @brief Read a directory
  *
@@ -231,10 +832,21 @@ static fsal_status_t ceph_fsal_readdir(struct fsal_obj_handle *dir_pub,
 	/* The private 'full' directory handle */
 	struct ceph_handle *dir =
 		container_of(dir_pub, struct ceph_handle, handle);
+	/* The stream, kept for later READDIRs if this one stops part way */
+	struct ceph_dir_stream *stream = NULL;
+	/* Window entries the client has, and the next one to hand back */
+	uint32_t first = 0, k = 0;
+	enum fsal_dir_result cb_rc;
 	/* The director descriptor */
 	struct ceph_dir_result *dir_desc = NULL;
 	/* Cookie marking the start of the readdir */
 	uint64_t start = 0;
+	/* Cookie after the last entry the callback took */
+	uint64_t last_ck;
+	/* Whether the stream may be kept, and the state of the directory */
+	bool keep = export->cm->cm_dir_streams_max > 0;
+	struct ceph_dir_stamp dir_stamp;
+	bool have_stamp;
 	/* ceph_statx want mask */
 	unsigned int want = attrmask2ceph_want(attrmask);
 	/* Return status */
@@ -242,65 +854,62 @@ static fsal_status_t ceph_fsal_readdir(struct fsal_obj_handle *dir_pub,
 	/* local rfiles in target dir */
 	uint64_t rfiles = 0;
 
-	rc = fsal_ceph_ll_opendir(export->cmount, dir->i, &dir_desc,
-				  &op_ctx->creds);
-	if (rc < 0)
-		return ceph2fsal_error(rc);
-
 	if (whence != NULL)
 		start = *whence;
+	last_ck = start;
 
-	ceph_seekdir(export->cmount, dir_desc, start);
+	/* Continue on a stream kept by a previous READDIR if the directory
+	 * did not change since then.  Its state is fetched before reading, so
+	 * that a stream kept by this READDIR is not used again after a change
+	 * made while it fetched its entries.
+	 */
+	have_stamp = keep && ceph_dir_stamp_get(export, dir, &dir_stamp);
+	if (have_stamp)
+		stream = ceph_dir_stream_get(dir, start, &dir_stamp, &first);
 
+	if (stream != NULL) {
+		dir_desc = stream->dirp;
+		/* The client has the entries up to start */
+		ceph_dir_stream_trim(stream, first);
+	} else {
+		rc = fsal_ceph_ll_opendir(export->cmount, dir->i, &dir_desc,
+					  &op_ctx->creds);
+		if (rc < 0)
+			return ceph2fsal_error(rc);
+		stream = ceph_dir_stream_new(export->cmount, dir_desc,
+					     have_stamp);
+		ceph_seekdir(export->cmount, dir_desc, start);
+		stream->base_ck = start;
+	}
+
+	/* Hand back the entries the stream read past start, then read on */
 	while (!(*eof)) {
 		struct ceph_statx stx;
 		struct dirent de;
 		struct Inode *i = NULL;
+		const char *name;
+		uint64_t cookie;
 
-		rc = fsal_ceph_readdirplus(export->cmount, dir_desc, dir->i,
-					   &de, &stx, want, 0, &i,
-					   &op_ctx->creds);
+		rc = ceph_dir_stream_next(export, dir, stream, &k, want, &i,
+					  &stx, &de, &name, &cookie);
 		if (rc < 0) {
 			fsal_status = ceph2fsal_error(rc);
 			goto closedir;
 		} else if (rc == 1) {
-			struct ceph_handle *obj;
-			struct fsal_attrlist attrs;
-			enum fsal_dir_result cb_rc;
-
-			/* skip . and .. */
-			if ((strcmp(de.d_name, ".") == 0) ||
-			    (strcmp(de.d_name, "..") == 0)) {
-				/* Deref inode here as we reference inode in
-				 * libcephfs readdir_r_cb. The other inodes
-				 * gets deref in deconstruct_handle.
-				 */
-				if (i != NULL)
-					ceph_ll_put(export->cmount, i);
-
-				continue;
-			}
-
-			construct_handle(&stx, i, export, &obj);
-
-			fsal_prepare_attrs(&attrs, attrmask);
-			ceph2fsal_attributes(&stx, &attrs);
-
-			rc = ceph_fsal_get_sec_label(obj, &attrs);
+			rc = ceph_readdir_entry(export, i, &stx, name, cookie,
+						attrmask, cb, dir_state,
+						&cb_rc);
 			if (rc < 0) {
 				fsal_status = ceph2fsal_error(rc);
-				/* release the prepared attrs */
-				fsal_release_attrs(&attrs);
-				/* release the handle, which will release the
-				 * inode ref */
-				obj->handle.obj_ops->release(&obj->handle);
 				goto closedir;
 			}
 
-			cb_rc = cb(de.d_name, &obj->handle, &attrs, dir_state,
-				   de.d_off);
-
-			fsal_release_attrs(&attrs);
+			/* DIR_TERMINATE leaves this entry to a later READDIR,
+			 * the window hands it back to the one resuming here.
+			 */
+			if (cb_rc == DIR_TERMINATE)
+				goto closedir;
+			last_ck = cookie;
 
 			/* Read ahead not supported by this FSAL. */
 			if (cb_rc >= DIR_READAHEAD)
@@ -320,6 +929,25 @@ static fsal_status_t ceph_fsal_readdir(struct fsal_obj_handle *dir_pub,
 			    rfiles);
 
 closedir:
+
+	/* Keep the stream for the READDIR resuming where this one stopped.
+	 * Not if no entry was taken: the callback refused the first one, e.g.
+	 * because an access check failed or it does not fit in the reply, and
+	 * nothing will resume from here.  At the end of the directory, the
+	 * client may still resume within the last reply, unless it was the
+	 * only one: a directory read whole by one READDIR is mostly small
+	 * enough for the client to keep all of it.
+	 */
+	if (!FSAL_IS_ERROR(fsal_status) && (!*eof || start != 0) &&
+	    last_ck != start && have_stamp) {
+		stream->dir_stamp = dir_stamp;
+		ceph_dir_stream_put(dir, stream,
+				    export->cm->cm_dir_streams_max);
+		return fsal_status;
+	}
+	/* dir_desc is released below */
+	stream->dirp = NULL;
+	ceph_dir_stream_free(stream);
 
 	rc = ceph_ll_releasedir(export->cmount, dir_desc);
 

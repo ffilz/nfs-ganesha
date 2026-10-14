@@ -301,6 +301,8 @@ static struct config_item ceph_items[] = {
 		       max_ceph_clients),
 	CONF_ITEM_UI32("clients_per_pool", 1, CEPH_MAX_CLIENTS_PER_POOL, 1,
 		       ceph_fsal_module, clnts_per_pool),
+	CONF_ITEM_I32("dir_streams_max", -1, CEPH_DIR_STREAMS_MAX, -1,
+		      ceph_fsal_module, dir_streams_max),
 	CONFIG_EOL
 };
 
@@ -949,16 +951,57 @@ static int select_filesystem(struct ceph_mount *cm)
 }
 #endif /* USE_FSAL_CEPH_GET_FS_CID */
 
+/* Entries a kept directory stream may hold in the Ceph cache: libcephfs lets
+ * the MDS size its readdir replies, which then hold up to 512 KiB of entries.
+ */
+#define CEPH_DIR_STREAM_CACHE_ENTRIES 1536
+
+/**
+ * @brief Number of directory streams to keep on a mount
+ *
+ * The entries buffered by a kept stream hold their inodes in the Ceph cache,
+ * whatever its size.  Unless dir_streams_max sets their number, the streams
+ * may hold half of client_cache_size, and none are kept if it is too small
+ * for one.
+ */
+static uint32_t ceph_dir_streams_limit(struct ceph_mount_info *cmount)
+{
+	char buf[32];
+	unsigned long long cache_size;
+
+	if (CephFSM.dir_streams_max >= 0)
+		return CephFSM.dir_streams_max;
+
+	if (ceph_conf_get(cmount, "client_cache_size", buf, sizeof(buf)) != 0)
+		return 0;
+
+	cache_size = strtoull(buf, NULL, 10);
+	return MIN(cache_size / 2 / CEPH_DIR_STREAM_CACHE_ENTRIES,
+		   CEPH_DIR_STREAMS_MAX);
+}
+
 #ifdef USE_FSAL_CEPH_REGISTER_CALLBACKS
 static void ino_release_cb(void *handle, vinodeno_t vino)
 {
 	struct ceph_mount *cm = handle;
 	struct ceph_handle_key key;
 	struct gsh_buffdesc fh_desc;
+	int released;
 
 	LogDebug(COMPONENT_FSAL,
 		 "libcephfs asking to release 0x%lx:0x%lx:0x%lx", cm->cm_fscid,
 		 vino.snapid.val, vino.ino.val);
+
+	/* libcephfs only asks this when the MDS recalls caps, which the
+	 * inodes held by kept directory streams keep it from giving back.  It
+	 * only asks it for inodes ganesha holds, so a recall may still leave
+	 * them kept, until they are idle.
+	 */
+	released = ceph_dir_streams_release_mount(cm->cmount);
+	if (released > 0)
+		LogDebug(COMPONENT_FSAL,
+			 "Released %d directory streams on cap recall",
+			 released);
 	key.hhdl.chk_ino = vino.ino.val;
 	key.hhdl.chk_snap = vino.snapid.val;
 	key.hhdl.chk_fscid = cm->cm_fscid;
@@ -1384,6 +1427,8 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 		goto ceph_error;
 	}
 
+	cm->cm_dir_streams_max = ceph_dir_streams_limit(cm->cmount);
+
 #ifdef USE_FSAL_CEPH_GET_FS_CID
 	/* Fetch fscid for use in filehandles */
 	ceph_status = cm->cm_fscid = ceph_get_fs_cid(cm->cmount);
@@ -1588,14 +1633,15 @@ MODULE_INIT void init(void)
 /**
  * @brief Release FSAL resources
  *
- * This function unregisters the FSAL and frees its module handle.
- * The Ceph FSAL has no other resources to release on the per-FSAL
- * level.
+ * This function stops the thread releasing idle directory streams,
+ * unregisters the FSAL and frees its module handle.
  */
 
 MODULE_FINI void finish(void)
 {
 	LogDebug(COMPONENT_FSAL, "Ceph module finishing.");
+
+	ceph_dir_streams_shutdown();
 
 	if (unregister_fsal(&CephFSM.fsal) != 0) {
 		LogCrit(COMPONENT_FSAL,
