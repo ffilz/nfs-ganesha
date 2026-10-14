@@ -215,6 +215,10 @@ struct ceph_handle {
 	uint64_t rw_max_len;
 #endif /* CEPH_PNFS */
 	bool is_encrypted;
+	/* Directories only: streams kept open between READDIR calls, see
+	 * ceph_fsal_readdir()
+	 */
+	struct glist_head dir_streams;
 };
 
 #ifdef CEPH_PNFS
@@ -264,6 +268,9 @@ struct ds {
 void construct_handle(const struct ceph_statx *stx, struct Inode *i,
 		      struct ceph_export *export, struct ceph_handle **obj);
 void deconstruct_handle(struct ceph_handle *obj);
+void ceph_dir_streams_release(struct ceph_handle *dir);
+void ceph_dir_streams_release_mount(struct ceph_mount_info *cmount);
+void ceph_dir_streams_shutdown(void);
 
 /**
  * @brief FSAL status from Ceph error

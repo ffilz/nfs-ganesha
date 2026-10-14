@@ -90,6 +90,8 @@ static void release(struct fsal_export *export_pub)
 	if (--cm->cm_refcnt == 0) {
 		/* This was the final reference */
 
+		/* Kept by READDIRs that completed after prepare_unexport */
+		ceph_dir_streams_release_mount(cm->cmount);
 		ceph_shutdown(cm->cmount);
 
 		ceph_mount_remove(&cm->cm_avl_mount);
@@ -450,6 +452,11 @@ void ceph_prepare_unexport(struct fsal_export *export_pub)
 {
 	struct ceph_export *export =
 		container_of(export_pub, struct ceph_export, export);
+
+	/* Before the connection may be aborted below, which would close the
+	 * directory streams kept on it
+	 */
+	ceph_dir_streams_release_mount(export->cmount);
 
 	/* Flush all buffers */
 	ceph_sync_fs(export->cmount);

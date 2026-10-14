@@ -1573,14 +1573,15 @@ MODULE_INIT void init(void)
 /**
  * @brief Release FSAL resources
  *
- * This function unregisters the FSAL and frees its module handle.
- * The Ceph FSAL has no other resources to release on the per-FSAL
- * level.
+ * This function stops the thread releasing idle directory streams,
+ * unregisters the FSAL and frees its module handle.
  */
 
 MODULE_FINI void finish(void)
 {
 	LogDebug(COMPONENT_FSAL, "Ceph module finishing.");
+
+	ceph_dir_streams_shutdown();
 
 	if (unregister_fsal(&CephFSM.fsal) != 0) {
 		LogCrit(COMPONENT_FSAL,

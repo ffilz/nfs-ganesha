@@ -103,6 +103,8 @@ void construct_handle(const struct ceph_statx *stx, struct Inode *i,
 	if (constructing->handle.type == REGULAR_FILE) {
 		init_fsal_fd(&constructing->fd.fsal_fd, FSAL_FD_GLOBAL,
 			     op_ctx->fsal_export);
+	} else if (constructing->handle.type == DIRECTORY) {
+		glist_init(&constructing->dir_streams);
 	}
 
 	*obj = constructing;
@@ -120,6 +122,10 @@ void deconstruct_handle(struct ceph_handle *obj)
 		container_of(op_ctx->fsal_export, struct ceph_export, export);
 
 	assert(op_ctx->fsal_export->export_id == obj->key.export_id);
+
+	/* Kept streams hold references on the directory inode */
+	if (obj->handle.type == DIRECTORY)
+		ceph_dir_streams_release(obj);
 
 	ceph_ll_put(export->cmount, obj->i);
 
