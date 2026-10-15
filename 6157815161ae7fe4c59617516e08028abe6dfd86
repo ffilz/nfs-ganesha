@@ -16,6 +16,24 @@
       "message": "Fedora, and by extension, RHEL, CentOS, Rocky, has/have a policy that all python scripts with a shebang use\n  #! /usr/bin/python3 ...\nsee [1]\n\nrpm builds in Fedora Koji, and CentOS and Rocky build systems do post-processing on the shebangs.\n\nThere are incompatible differences, e.g. between python-3.9 and python-3.14, and we only guarantee — to the extent we guarantee anything — that the scripts work with the default python.",
       "revId": "6157815161ae7fe4c59617516e08028abe6dfd86",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d815a5a5_ed83bfb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010265
+      },
+      "writtenOn": "2026-10-15T09:41:37Z",
+      "side": 1,
+      "message": "well, we do use site packages, and they only have one version. The patch solves this problem. A user may switch the default python to a different version (usually a newer version) - that is supported by the distros?",
+      "parentUuid": "8c5581c0_d7c66bd3",
+      "revId": "6157815161ae7fe4c59617516e08028abe6dfd86",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
