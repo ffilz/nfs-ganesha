@@ -51,6 +51,24 @@
       "message": "It\u0027s also my understanding that /usr/libexec/platform-python is not for general use; it\u0027s for admin utilities provided by RHEL, e.g. dnf or yum, so that they will work even if no other version of python is installed.\n\nEven though our admin utils might be considered system-level tools, they are supposed to use #! /usr/bin/python3.\n\nWhen ganesha is built in rpms, Fedora and RHEL and RHEL clones have a script to \"mangle\" the shebangs. (Unless it\u0027s intentionally disabled.) Look for __brp_mangle_shebangs in the /usr/lib/rpm/macros.d/macros.python* files.\n\nAdding third party software to Red Hat and IBM downstream products is not supported in production environments. People are, of course, entitled to do whatever they want on their upstream-based deployments.\n\nIMO, if an admin is knowledgable enough to install a non-standard python,I guess they ought to know enough to move or copy the /usr/lib*/site-python/3.x/* bits too.\n\nFor the sample nfs-ganesha.spec(.cmake.in) I would like to leave (nfs-ganesha.spec(.cmake.in), and all the shebangs) as they are. Downstream, people can add whatever they want to their dist-git nfs-ganesha.spec. IMO that\u0027s where this kind of change should be.",
       "revId": "6157815161ae7fe4c59617516e08028abe6dfd86",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba63daf9_260b0b7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-15T22:49:21Z",
+      "side": 1,
+      "message": "I want to second this. The in tree spec really should just be an example. At most, it could be used by the CI in which case it should reflect what the CI needs to properly build test packages.",
+      "parentUuid": "09fc9734_eb8f20a2",
+      "revId": "6157815161ae7fe4c59617516e08028abe6dfd86",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
