@@ -54,6 +54,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17daf174_6a7d78f3",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-15T14:11:35Z",
+      "side": 1,
+      "message": "Moved the check back to grpc__init() and kept LogWarn (skipping gRPC startup), because Grpc_Enable defaults to true and Grpc_Credentials defaults to ssl — LogFatal would abort startup on any USE_GRPC build that doesn\u0027t have TLS certs installed.",
+      "parentUuid": "2fdca4c5_df99fb3f",
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b8e4945_282efc39",
@@ -67,6 +85,30 @@
       "writtenOn": "2026-09-24T12:45:25Z",
       "side": 1,
       "message": "We do not need the return statement here as LogFatal aborts the execution.",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 10
+      },
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dafeacf_919aef4e",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-15T14:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b8e4945_282efc39",
       "range": {
         "startLine": 118,
         "startChar": 4,
@@ -94,6 +136,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "329e8707_3a19300e",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-15T14:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0a50241_2033f345",
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5089b8a_76a30f9d",
@@ -107,6 +167,24 @@
       "writtenOn": "2026-09-24T09:37:09Z",
       "side": 1,
       "message": "Ganesha fails to build with GRPC enabled and MONITORING disabled. Please check.",
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d42606e4_0d1773b4",
+        "filename": "src/grpc_server/nfsMetricsService.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-15T14:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5089b8a_76a30f9d",
       "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -128,6 +206,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "397628c9_c5493e6c",
+        "filename": "src/grpc_server/nfsMetricsService.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-15T14:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a716106_b360569d",
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4baf018_e70bfcf3",
@@ -141,6 +237,30 @@
       "writtenOn": "2026-09-24T12:45:25Z",
       "side": 1,
       "message": "can we move this file inside a new folder, something like src/grpc_server/test",
+      "range": {
+        "startLine": 1,
+        "startChar": 3,
+        "endLine": 1,
+        "endChar": 7
+      },
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1400fc8_952637a5",
+        "filename": "src/grpc_server/nfsMetricsService_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-15T14:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4baf018_e70bfcf3",
       "range": {
         "startLine": 1,
         "startChar": 3,
@@ -236,6 +356,24 @@
       "side": 1,
       "message": "I agree, I don\u0027t want the default to be unsecured. I get that makes sense in certain installations, but I would rather that be a configurable option.",
       "parentUuid": "dcf3d3e9_9b0705b5",
+      "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dce6fb6_f1e68106",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-15T14:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae761d60_8c796aa0",
       "revId": "ee9ffef9301d699ef26534522e234a37d8bf3a6b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
