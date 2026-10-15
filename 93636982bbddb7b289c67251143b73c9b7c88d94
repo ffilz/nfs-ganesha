@@ -69,6 +69,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cec7b451_9d0de88e",
+        "filename": "src/FSAL/FSAL_URING/fsal_uring_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc1465a9_0a3ade41",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5bc6744_9136cd67",
+        "filename": "src/FSAL/FSAL_URING/fsal_uring_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5762307_2ab29f12",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd272158_3abdb222",
@@ -103,6 +139,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ca40402_6e67a534",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd272158_3abdb222",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36fb961f_e6485cc2",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da0b4226_86cfef44",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f9cc33c_0d9e76a4",
@@ -116,6 +188,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: It\u0027s generally not useful to have the filename in the file\n+ * @file  src/FSAL/FSAL_URING/uring_pers.c",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebca7d32_5c572611",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f9cc33c_0d9e76a4",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -137,6 +227,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d91ee0ec_174c4c1f",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15e6d9d2_b8b989a8",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "059c1abf_69e0dfc8",
@@ -150,6 +258,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 111 exceeds 80 columns\n+#include \"io_uring/core/uring_engine.h\"\t/* struct uring_engine, uring_engine_raw_ring, uring_engine_nr_rings */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "160b8b2c_6f378d0b",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "059c1abf_69e0dfc8",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -171,6 +297,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3211d70f_67ba6f36",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "643d2a83_0bbc9a3a",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48ae8428_12b5454c",
@@ -184,6 +328,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\t\t \"uring_pers: destroying entry with refcnt\u003d%\" PRId64",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85c417bf_91e0a78b",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48ae8428_12b5454c",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -205,6 +367,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6c1a99c_b805d73f",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a21eee9_dd1c2d79",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "625612be_1aa1de5c",
@@ -218,6 +398,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: Prefer \u0027fallthrough;\u0027 over fallthrough comment\n+\t\t/* REGISTERING or INVALID — fall through to write-lock path",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e4a4982_f1b133e4",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "625612be_1aa1de5c",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -239,6 +437,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57854840_bb7a905a",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56cbcfc8_c5e7a9f4",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f824b22_8c366afd",
@@ -252,6 +468,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t/* Race loser: let the winner finish, then look again. */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42599433_8de6d197",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f824b22_8c366afd",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -273,6 +507,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d911654_2d52c47d",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16b68e2f_614f3a34",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b646dc8e_8d063b80",
@@ -286,6 +538,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 116 exceeds 80 columns\n+\t/* ── Phase 3: capacity check + optional eviction ───────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf0ba30a_f4ff409e",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b646dc8e_8d063b80",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -307,6 +577,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1a2efcd_8164b209",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0d8626c_d4e72488",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1182dc4_996da64a",
@@ -320,6 +608,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\tp \u003d uring_pers_alloc(creds, uring_engine_nr_rings(core), hash, cred_idx);",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ec8741f_ec7dd289",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1182dc4_996da64a",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -341,6 +647,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9592b10_e366d2e6",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90ef4922_82fc8daf",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b3614df_bfad772b",
@@ -354,6 +678,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\trc \u003d io_uring_register_personality(uring_engine_raw_ring(core, r));",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "337921ba_045292ef",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b3614df_bfad772b",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -375,6 +717,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc5562a3_a4c629d4",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d555e75d_b18bfbcb",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59b1a0f5_016f0b79",
@@ -388,6 +748,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 170 exceeds 80 columns\n+\t/* ── Phase 6: publish ──────────────────────────────────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "624deedd_8dc0d398",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59b1a0f5_016f0b79",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -409,6 +787,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "627de35d_adf1d4bc",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be0a81d3_94cbdd39",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c6eca2b_3b8f7135",
@@ -422,6 +818,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "ERROR: trailing whitespace\n+ *   - carries a 64-bit refcount: incremented at fsal_uring_io_start(), $",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53861b12_bf057510",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c6eca2b_3b8f7135",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -443,6 +857,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f249694_d19958a8",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bdf84c2_fbe8cbe4",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f71ef427_5f84275f",
@@ -456,6 +888,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 111 exceeds 80 columns\n+#include \"io_uring/core/uring_engine.h\"\t/* struct uring_engine, uring_engine_raw_ring, uring_engine_nr_rings */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79e77f04_2b678da8",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f71ef427_5f84275f",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -477,6 +927,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "925c7343_d5bfc978",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "687ec0d0_b9ca362b",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f827c4f_7bc2104e",
@@ -494,6 +962,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26300327_50b9c4cf",
+        "filename": "src/FSAL/FSAL_VFS_URING/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f827c4f_7bc2104e",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e29fff7_61a969f5",
@@ -507,6 +993,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 115 exceeds 80 columns\n+\t\t\t\t \"%s: io_uring enabled, queue_depth\u003d%u rings\u003d%u per_cpu\u003d%s buffer classes %\" PRIu64",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51dc3591_0c7983f4",
+        "filename": "src/FSAL/FSAL_VFS_URING/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e29fff7_61a969f5",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -545,6 +1049,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a8f751b_5a428ee9",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4da04dd_7d8845d8",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8f6bf16_c641fb71",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eadafe99_de138723",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64ec39e0_4f1bf19a",
@@ -558,6 +1098,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+struct fsal_obj_handle *mdcache_uring_sub_handle(struct fsal_obj_handle *obj_hdl)",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b950f10e_b4de17d2",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64ec39e0_4f1bf19a",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -596,6 +1154,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b6996d9_b4d23690",
+        "filename": "src/FSAL/fsal_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f1e8acd_775ebe50",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ffd4fe1_678d3501",
+        "filename": "src/FSAL/fsal_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "514657e8_85492477",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13b6dbf0_c4b22be5",
@@ -609,6 +1203,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 82 exceeds 80 columns\n+ * @param res     Primary CQE result (negative errno on failure, \u003e\u003d 0 on success).",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "540e7e69_1b0d6942",
+        "filename": "src/FSAL/fsal_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13b6dbf0_c4b22be5",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -630,6 +1242,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "974f1967_eacf3ecb",
+        "filename": "src/FSAL/fsal_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8eac9d8_11f4eb65",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbb72305_2c80a4bf",
@@ -643,6 +1273,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t *   op_ctx-\u003euring_pers \u003d\u003d NULL  → lookup / register + cache the result",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb44f048_9d0ce90a",
+        "filename": "src/FSAL/fsal_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbb72305_2c80a4bf",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -681,6 +1329,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c44d0766_f065e257",
+        "filename": "src/Protocols/NFS_URING/nfs4_Compound_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b6b183b_02411419",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e7fa63_eb1d3b59",
+        "filename": "src/Protocols/NFS_URING/nfs4_Compound_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44db948b_2043c73e",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a9921e8_1fe9ea73",
@@ -698,6 +1382,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc72812b_b3384444",
+        "filename": "src/Protocols/NFS_URING/nfs4_Compound_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a9921e8_1fe9ea73",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c94e70c_43056863",
@@ -711,6 +1413,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 92 exceeds 80 columns\n+\t\t\t \"compound: finishing %s at position %u, slot %u, cqe res\u003d%\" PRId32,",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "711fc475_749951e9",
+        "filename": "src/Protocols/NFS_URING/nfs4_Compound_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c94e70c_43056863",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -749,6 +1469,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37219096_63f0a725",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_access_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46b091f4_c9cc953a",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69bdb00f_c6e20616",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_access_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "322b6a0f_ee094903",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "567b9d2f_9cbbd5d7",
@@ -783,6 +1539,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be7aaf67_f884ea50",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_allocate_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "567b9d2f_9cbbd5d7",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "252e38eb_941c7a97",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_allocate_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46a45f1c_fb912a90",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a437bc99_9d43714a",
@@ -796,6 +1588,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t\t \"A client tried to violate max file size %\" PRIu64",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4231fd6_9264eb7d",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_allocate_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a437bc99_9d43714a",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -834,6 +1644,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d451ce71_3e10d3ce",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_commit_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20ad9c4e_4f58988a",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "411d237a_111ed043",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_commit_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "527259ac_fb1e0f69",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0adad326_b6380bf5",
@@ -864,6 +1710,42 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: Improper SPDX comment style for \u0027src/Protocols/NFS_URING/nfs4_op_getattr_uring.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "116fc810_7d572742",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_getattr_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48d7e7af_5cb12a49",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ab25c28_053a2dcd",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_getattr_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0adad326_b6380bf5",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -902,6 +1784,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14de53d5_8466644d",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_read_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b77ff2d_bec1d601",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da837e7e_59c201d2",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_read_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7959ede9_7477f71a",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de056a94_8196e445",
@@ -915,6 +1833,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t * for a pooled buffer, nfs4_uring_read_io_data_release()",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43dfbcf0_c6383384",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_read_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de056a94_8196e445",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -953,6 +1889,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39f0520d_38f2c968",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_write_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1f77814_c41ac8f8",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff8bbc1_9624f593",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_write_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "defe14a3_a901b6f5",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b36d092b_a92e6f98",
@@ -966,6 +1938,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t\t \"A client tried to violate max file size %\" PRIu64",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db3be4c9_44a82ad0",
+        "filename": "src/Protocols/NFS_URING/nfs4_op_write_uring.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b36d092b_a92e6f98",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1004,6 +1994,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c55336a8_241d4bf2",
+        "filename": "src/Protocols/NFS_URING/nfs4_uring_optab.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d485649c_55a13a8f",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65e2624f_79391561",
+        "filename": "src/Protocols/NFS_URING/nfs4_uring_optab.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33685ff2_d3d84a68",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e320e35_239e98bb",
@@ -1017,6 +2043,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 87 exceeds 80 columns\n+ *   per-op context structs       — stack-allocated, live only for duration of submit",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c221ace2_4c737354",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e320e35_239e98bb",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1038,6 +2082,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56404952_0de3cc54",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "432765a6_8f5c5af5",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdde7a4d_7e0b770a",
@@ -1051,6 +2113,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+ *   4. Implement a `done_cb` that receives `(obj_hdl, status, NULL, caller_arg)`",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1725ba71_313ecb24",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdde7a4d_7e0b770a",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1072,6 +2152,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33135052_991785b4",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e1488e0_bdf1b86d",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7ca296a_a7dd180a",
@@ -1085,6 +2183,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 84 exceeds 80 columns\n+ * @done_cb     Called on completion.  Receives (obj_hdl, status, NULL, caller_arg).",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f968be2_9a520e6e",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7ca296a_a7dd180a",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1106,6 +2222,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3aa23d2_06954d81",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3251f9e0_60027943",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c37bfa63_19326811",
@@ -1119,6 +2253,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 83 exceeds 80 columns\n+\tint      mode;     /**\u003c 0\u003dallocate, FALLOC_FL_KEEP_SIZE|PUNCH_HOLE\u003dpunch */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77b7e04e_29e10d5d",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c37bfa63_19326811",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1140,6 +2292,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eb4fd8a_23c2bcd2",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af31200a_b98ec8c3",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe746013_ed070272",
@@ -1153,6 +2323,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 83 exceeds 80 columns\n+ * SQE submission).  The done_cb is responsible for mapping statx → fsal_attrlist",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86ef6693_8666ade7",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe746013_ed070272",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1174,6 +2362,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67c42c62_2a9e3b6a",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b4f42ad_1ccac764",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28ff5bad_90384745",
@@ -1191,6 +2397,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1424c6dd_d1fa52a9",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28ff5bad_90384745",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f420f44a_51d0f309",
@@ -1204,6 +2428,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: Prefer \u0027fallthrough;\u0027 over fallthrough comment\n+ *   // fall through to the synchronous syscall",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d7a2ae3_01a544b3",
+        "filename": "src/include/FSAL/fsal_uring_meta.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f420f44a_51d0f309",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1242,6 +2484,42 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7d08486_a3e4723c",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12eaab24_0d3b92f4",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3443dbf_b3202278",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e55f553c_1022f343",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d116f4c_9b9d144a",
@@ -1255,6 +2533,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 88 exceeds 80 columns\n+\tstruct uring_engine_params params; /* copy of init-time config (incl. log_fn) */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "612ae32f_f440da72",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d116f4c_9b9d144a",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1276,6 +2572,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e3b1539_e46e2544",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d032466_2dca2187",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "129ca121_f32ec2b6",
@@ -1289,6 +2603,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 113 exceeds 80 columns\n+\t\t\t\t  \"coalesce: submit\u003d%s reason\u003d%s io_count\u003d%u outstanding\u003d%u elapsed_us\u003d%\" PRIu64,",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c32519ff_7ba36c0d",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "129ca121_f32ec2b6",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1310,6 +2642,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc3fa0d1_e00f4a7f",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4f98f3c_909015eb",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b937c1ed_308ada64",
@@ -1323,6 +2673,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 117 exceeds 80 columns\n+\t/* ── PHASE 1: SQE placement — brief submit_lock ───────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16d7a9bb_5fa249b0",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b937c1ed_308ada64",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1344,6 +2712,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c98a65_f25bcf6c",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1070,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5526ad80_a87d8fa8",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9339c6d9_b983676d",
@@ -1357,6 +2743,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 160 exceeds 80 columns\n+\t/* ── PHASE 3: Spin — lock-free ───────────────────────────────────── */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2c09832_6480ec07",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9339c6d9_b983676d",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1378,6 +2782,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cf7be1d_888690bd",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d207c785_d2aaa44c",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2be50f01_e90de192",
@@ -1391,6 +2813,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\tout-\u003esqe_submitted      \u003d atomic_fetch_uint64_t(\u0026engine-\u003estat_submitted);",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d320c839_6134c279",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1489,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2be50f01_e90de192",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1412,6 +2852,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ed55322_6808400a",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6716785d_fe2caad6",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d52f959d_31bf483f",
@@ -1425,6 +2883,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 84 exceeds 80 columns\n+\t\t\tout-\u003ecoalesce_peak_batch \u003d engine-\u003erings[i].stat_peak_batch;",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d09a2555_ebaf9ee8",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1505,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d52f959d_31bf483f",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1446,6 +2922,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aea7a963_830c574e",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e83f0c6_56ce6c85",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25d536a9_5c61462f",
@@ -1459,6 +2953,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 98 exceeds 80 columns\n+\t\t\t  \"%s: submission coalescing on: bucket\u003d%u max_bucket\u003d%u timeout\u003d%\" PRIu64",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2a1a3c9_90dd26b9",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1791,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25d536a9_5c61462f",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -1480,6 +2992,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ba85eec_967aa46f",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1810,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "333087c5_3bb5f915",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ea9b70f_7d07c316",
@@ -1497,6 +3027,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "526873f8_2b5659d6",
+        "filename": "src/io_uring/core/uring_engine.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ea9b70f_7d07c316",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53609499_27f0bbbf",
@@ -1510,6 +3058,24 @@
       "writtenOn": "2026-10-09T13:57:25Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t/** Number of valid entries in ops[] / cqes[]; \u003c\u003d URING_CHAIN_MAX_OPS. */",
+      "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2e833d1_b96b480d",
+        "filename": "src/io_uring/core/uring_engine.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-15T14:16:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53609499_27f0bbbf",
       "revId": "93636982bbddb7b289c67251143b73c9b7c88d94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
