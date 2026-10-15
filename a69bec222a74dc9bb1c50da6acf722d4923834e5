@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "079d4c5d_e4447daf",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-15T14:56:07Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "a69bec222a74dc9bb1c50da6acf722d4923834e5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45177d0f_5534baa6",
+        "filename": "src/FSAL/FSAL_URING/uring_pers.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-15T14:56:07Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/FSAL/FSAL_URING/uring_pers.h\u0027, please use \u0027/*\u0027 instead\n+// SPDX-License-Identifier: LGPL-3.0-or-later",
+      "revId": "a69bec222a74dc9bb1c50da6acf722d4923834e5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b04243_17f8e423",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1892,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-15T14:56:07Z",
+      "side": 1,
+      "message": "WARNING: line length of 98 exceeds 80 columns\n+\t\t\t  \"%s: submission coalescing on: bucket\u003d%u max_bucket\u003d%u timeout\u003d%\" PRIu64",
+      "revId": "a69bec222a74dc9bb1c50da6acf722d4923834e5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f583c4f1_b44b7e95",
+        "filename": "src/io_uring/core/uring_engine.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1912,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-15T14:56:07Z",
+      "side": 1,
+      "message": "WARNING: line length of 95 exceeds 80 columns\n+\t\t\t  \"%s: coalescing bucket_io_count\u003d%u max_bucket\u003d%u timeout_us\u003d%\" PRIu64",
+      "revId": "a69bec222a74dc9bb1c50da6acf722d4923834e5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
