@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5df7edf_587b0983",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-15T22:36:48Z",
+      "side": 1,
+      "message": "This formatting looks confusing, creating an appearance of a code block rather than a class/struct initializer.\n\nAlso a blank line above to separate out the LogInfo better please.",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f467ba5_4c6bb826",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-15T22:36:48Z",
+      "side": 1,
+      "message": "Blank line after declaration please.",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bac44e46_a2bd8caf",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-15T22:36:48Z",
+      "side": 1,
+      "message": "Please fix this formatting oopsie.",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b3d8bd0_6c91544d",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-15T22:36:48Z",
+      "side": 1,
+      "message": "Can we do this check in a config commit function? Then the config error will be consistently reported instead of partially starting and then failing.",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd82e1c0_c0f5cd09",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-15T22:36:48Z",
+      "side": 1,
+      "message": "Blank line after declaration please.",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bed51489_5c8593f7",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-15T22:36:48Z",
+      "side": 1,
+      "message": "Blank line here please.",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "583de6be_d1b28905",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-15T22:36:48Z",
+      "side": 1,
+      "message": "Blank line after declarations please.",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72f1d97a_cc8e52a9",
+        "filename": "src/grpc_server/nfsMetricsService.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-15T22:36:48Z",
+      "side": 1,
+      "message": "Blank line please.",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b25180b8_68c1e9ad",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-15T22:36:48Z",
+      "side": 1,
+      "message": "Could we add a commit method here that rejects illegal address settings?",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
