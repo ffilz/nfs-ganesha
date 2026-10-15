@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8758c7ea_39c59d38",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1819,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-15T20:59:20Z",
+      "side": 0,
+      "message": "OK, I\u0027ve added that line back in. I don\u0027t think this is right, but it isn\u0027t changing behavior. I think we need another go at fixing the RDMA conditionals. I would really like to see it collapsed to a single conditional.",
+      "parentUuid": "dd0421f0_624a65ee",
+      "revId": "98eb4beb642674d4188361008495bb6d585d393d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d2f6e85_6557084e",
         "filename": "src/nfs-ganesha.spec-in.cmake",
         "patchSetId": 1
