@@ -406,6 +406,7 @@ void fs_reclaim_complete(nfs_client_id_t *clientid)
 	/* Append the reclaim complete marker */
 	path[dstpos] = '/';
 	memcpy(path + dstpos + 1, reclaim_complete_marker, marker_len);
+	path[dstpos + 1 + marker_len] = '\0';
 
 	LogDebugAlt(COMPONENT_CLIENTID, COMPONENT_RECOVERY, "Create marker %s",
 		    path);
