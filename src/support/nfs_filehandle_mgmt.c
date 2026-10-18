@@ -161,8 +161,14 @@ bool nfs4_FSALToFhandle(bool allocate, nfs_fh4 *fh4,
 	/* keep track of the export id network byte order for nfs_fh4*/
 	file_handle->id.exports = htons(exp->export_id);
 
-	/* Set the len */
-	fh4->nfs_fh4_len = nfs4_sizeof_handle(file_handle);
+	/* Works around a macOS bug; see macOS_quirk_pad_handles.
+	 *
+	 * @todo Remove once macOS is fixed.
+	 */
+	if (nfs_param.nfsv4_param.macos_quirk_pad_handles)
+		fh4->nfs_fh4_len = nfs4_sizeof_handle_padding(file_handle);
+	else
+		fh4->nfs_fh4_len = nfs4_sizeof_handle(file_handle);
 
 	LogFullDebugOpaque(COMPONENT_FILEHANDLE, "NFS4 Handle %s", LEN_FH_STR,
 			   fh4->nfs_fh4_val, fh4->nfs_fh4_len);
