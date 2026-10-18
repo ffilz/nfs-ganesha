@@ -459,6 +459,8 @@ static fsal_status_t lookup_with_fd(struct vfs_fsal_obj_handle *parent_hdl,
 		 */
 		attrs_out->fsid = hdl->obj_handle.fs->fsid;
 		fsal_fs_set_mounted_on_fileid(hdl->obj_handle.fs, attrs_out);
+
+		vfs_get_named_attr(dirfd, path, attrs_out);
 	}
 
 	hdl->obj_handle.fsid = hdl->obj_handle.fs->fsid;
@@ -713,6 +715,8 @@ static fsal_status_t makedir(struct fsal_obj_handle *dir_hdl, const char *name,
 			attrs_out->fsid = hdl->obj_handle.fs->fsid;
 			fsal_fs_set_mounted_on_fileid(hdl->obj_handle.fs,
 						      attrs_out);
+
+			vfs_get_named_attr(dir_fd, name, attrs_out);
 		}
 	}
 
@@ -931,6 +935,8 @@ static fsal_status_t makenode(struct fsal_obj_handle *dir_hdl, const char *name,
 			attrs_out->fsid = hdl->obj_handle.fs->fsid;
 			fsal_fs_set_mounted_on_fileid(hdl->obj_handle.fs,
 						      attrs_out);
+
+			vfs_get_named_attr(dir_fd, name, attrs_out);
 		}
 	}
 
@@ -1130,6 +1136,8 @@ static fsal_status_t makesymlink(struct fsal_obj_handle *dir_hdl,
 			attrs_out->fsid = hdl->obj_handle.fs->fsid;
 			fsal_fs_set_mounted_on_fileid(hdl->obj_handle.fs,
 						      attrs_out);
+
+			vfs_get_named_attr(dir_fd, name, attrs_out);
 		}
 	}
 
@@ -1210,6 +1218,12 @@ static fsal_status_t linkfile(struct fsal_obj_handle *obj_hdl,
 	struct fsal_fd *out_fd;
 
 	LogFullDebug(COMPONENT_FSAL, "link to %s", name);
+
+	/* Links into a named attribute directory are not allowed: RFC 8881
+	 * 18.9.3 requires NFS4ERR_XDEV.
+	 */
+	if (vfs_is_attr_obj(destdir_hdl))
+		return fsalstat(ERR_FSAL_XDEV, 0);
 
 	if (!op_ctx->fsal_export->exp_ops.fs_supports(op_ctx->fsal_export,
 						      fso_link_support)) {
@@ -1544,6 +1558,12 @@ static fsal_status_t renamefile(struct fsal_obj_handle *obj_hdl,
 	int oldfd = -1, newfd = -1;
 	fsal_errors_t fsal_error = ERR_FSAL_NO_ERROR;
 	int retval = 0;
+
+	/* Renames into a named attribute directory are not allowed (RFC 8881
+	 * 5.3), which is NFS4ERR_XDEV.
+	 */
+	if (vfs_is_attr_obj(newdir_hdl))
+		return fsalstat(ERR_FSAL_XDEV, 0);
 
 	olddir = container_of(olddir_hdl, struct vfs_fsal_obj_handle,
 			      obj_handle);
@@ -1993,6 +2013,7 @@ void vfs_handle_ops_init(struct fsal_obj_ops *ops)
 	ops->remove_extattr_by_name = vfs_remove_extattr_by_name;
 
 	ops->is_referral = fsal_common_is_referral;
+	ops->openattr = vfs_openattr;
 
 	ops->getxattrs = vfs_getxattrs;
 	ops->setxattrs = vfs_setxattrs;
@@ -2094,6 +2115,8 @@ fsal_status_t vfs_lookup_path(struct fsal_export *exp_hdl, const char *path,
 		*/
 		attrs_out->fsid = hdl->obj_handle.fs->fsid;
 		fsal_fs_set_mounted_on_fileid(hdl->obj_handle.fs, attrs_out);
+
+		vfs_get_named_attr(AT_FDCWD, path, attrs_out);
 	}
 
 	/* if it is a directory and the sticky bit is set
@@ -2262,6 +2285,10 @@ fsal_status_t vfs_create_handle(struct fsal_export *exp_hdl,
 	if (FSAL_IS_ERROR(status))
 		return status;
 
+	if (vfs_is_attr_handle(fh))
+		return vfs_attr_create_handle(exp_hdl, fs, fh, handle,
+					      attrs_out);
+
 	if (dummy) {
 		/* We don't need fd here, just stat the fs->path */
 		fd = -1;
@@ -2307,10 +2334,9 @@ fsal_status_t vfs_create_handle(struct fsal_export *exp_hdl,
 
 	hdl = alloc_handle(fd, fh, fs, &obj_stat, NULL, "", exp_hdl);
 
-	if (fd >= 0)
-		close(fd);
-
 	if (hdl == NULL) {
+		if (fd >= 0)
+			close(fd);
 		LogDebug(COMPONENT_FSAL, "Could not allocate handle");
 		fsal_error = ERR_FSAL_NOMEM;
 		goto errout;
@@ -2324,7 +2350,15 @@ fsal_status_t vfs_create_handle(struct fsal_export *exp_hdl,
 		*/
 		attrs_out->fsid = hdl->obj_handle.fs->fsid;
 		fsal_fs_set_mounted_on_fileid(hdl->obj_handle.fs, attrs_out);
+
+		if (fd >= 0)
+			vfs_get_named_attr(fd, NULL, attrs_out);
+		else
+			vfs_get_named_attr(AT_FDCWD, fs->path, attrs_out);
 	}
+
+	if (fd >= 0)
+		close(fd);
 
 	*handle = &hdl->obj_handle;
 
