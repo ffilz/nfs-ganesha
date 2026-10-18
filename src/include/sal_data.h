@@ -785,6 +785,9 @@ struct nfs_client_id_t {
 					   this clientid from the reaper */
 	uint32_t cid_minorversion;
 	uint32_t cid_stateid_counter;
+	/* @todo Remove with the last macOS quirk. */
+	bool cid_macos; /*< The client gave apple.com as its implementation
+			    domain in EXCHANGE_ID */
 
 	uint32_t curr_deleg_grants; /* current num of delegations owned by
 				       this client */
