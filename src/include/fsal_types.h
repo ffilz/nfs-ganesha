@@ -97,6 +97,8 @@ struct user_cred {
 struct macos_quirks {
 	/* @todo Remove once macOS is fixed. */
 	bool named_attr_nverify; /*< Refuse NVERIFY of a named attribute */
+	/* @todo Remove once macOS is fixed. */
+	bool named_attr_truncate; /*< Truncate a named attribute on open */
 };
 
 struct export_perms {

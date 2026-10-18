@@ -747,6 +747,9 @@ static fsal_status_t named_attr_update(struct vfs_attr_handle *hdl,
 				       uint64_t offset, struct iovec *iov,
 				       int iov_count, bool stable,
 				       size_t *written);
+/* @todo Remove once macOS is fixed. */
+static fsal_status_t named_attr_truncate_on_open(struct vfs_attr_handle *hdl,
+						 fsal_openflags_t openflags);
 
 /**
  * @brief Open or create a named attribute by name
@@ -836,6 +839,10 @@ attr_dir_open2(struct fsal_obj_handle *dir_hdl, struct state_t *state,
 	status = named_attr_open_by_handle(&hdl->obj_handle, state,
 					   created ? openflags & ~FSAL_O_TRUNC
 						   : openflags);
+
+	/* @todo Remove once macOS is fixed. */
+	if (!FSAL_IS_ERROR(status) && exists)
+		status = named_attr_truncate_on_open(hdl, openflags);
 
 	if (!FSAL_IS_ERROR(status) && attrs_out != NULL)
 		status = attr_getattrs_fd(hdl, fd, attrs_out);
@@ -962,7 +969,10 @@ named_attr_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 	if (FSAL_IS_ERROR(status))
 		return status;
 
-	if (attrs_out != NULL)
+	/* @todo Remove once macOS is fixed. */
+	status = named_attr_truncate_on_open(hdl, openflags);
+
+	if (!FSAL_IS_ERROR(status) && attrs_out != NULL)
 		status = attr_getattrs(obj_hdl, attrs_out);
 
 	if (FSAL_IS_ERROR(status))
@@ -1200,6 +1210,36 @@ out:
 	gsh_free(value, MEM_COMP_FSAL);
 	close(fd);
 	return status;
+}
+
+/**
+ * @brief Truncate a named attribute opened for writing, if configured
+ *
+ * The macOS client replaces the whole value of every extended attribute
+ * except the resource fork, but it asks for truncation only in an OPEN that
+ * may create the attribute: when it has the attribute cached, or the caller
+ * passes XATTR_REPLACE, it opens it without truncating, so a shorter value
+ * keeps the end of the old one. macOS_quirk_named_attr_truncate in a CLIENT
+ * block makes up for that. It is off by default because it isn't standard: a
+ * WRITE should only change the bytes it covers.
+ *
+ * The truncation runs with the caller's credentials, so it needs the same
+ * permission as a write.
+ *
+ * @todo Remove once macOS is fixed.
+ */
+static fsal_status_t named_attr_truncate_on_open(struct vfs_attr_handle *hdl,
+						 fsal_openflags_t openflags)
+{
+	size_t written;
+
+	if (!macos_quirk_applies(
+		    op_ctx->export_perms.macos_quirks.named_attr_truncate) ||
+	    !(openflags & FSAL_O_WRITE) ||
+	    strcmp(hdl->name, "com.apple.ResourceFork") == 0)
+		return fsalstat(ERR_FSAL_NO_ERROR, 0);
+
+	return named_attr_update(hdl, 0, NULL, 0, false, &written);
 }
 
 static void named_attr_write2(struct fsal_obj_handle *obj_hdl, bool bypass,

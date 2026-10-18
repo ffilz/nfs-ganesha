@@ -58,7 +58,8 @@ VFS {}
     attribute "user.foo". A value can be at most the file system's
     extended attribute size (64 KiB on Linux).
 
-macOS clients also need macOS_quirk_named_attr_NVERIFY in CLIENT blocks: see
+macOS clients also need macOS_quirk_named_attr_NVERIFY and
+macOS_quirk_named_attr_truncate in CLIENT blocks: see
 :doc:`ganesha-export-config <ganesha-export-config>`\(8).
 
 See also
