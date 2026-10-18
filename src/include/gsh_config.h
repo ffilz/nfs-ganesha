@@ -710,6 +710,11 @@ typedef struct nfs_version4_parameter {
 	    Only_Numeric_Owners. NB., this is permissible for a server
 	    implementation (RFC 5661). */
 	bool only_numeric_owners;
+	/** Whether the macOS quirks set in CLIENT blocks apply only to
+	    clients that identify themselves as macOS. Defaults to true and
+	    is settable with macOS_quirks_only_for_macOS_clients.
+	    @todo Remove with the last macOS quirk. */
+	bool macos_quirks_only_for_macos_clients;
 	/** Whether to allow delegations. Defaults to false and settable
 	    with Delegations */
 	bool allow_delegations;
