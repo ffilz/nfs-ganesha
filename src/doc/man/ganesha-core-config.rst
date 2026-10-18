@@ -577,6 +577,13 @@ macOS_quirks_only_for_macOS_clients(bool, default true)
     send apple.com in EXCHANGE_ID. Set it to false if all clients are Macs
     and some use NFS versions prior to NFSv4.1.
 
+macOS_quirk_pad_handles(bool, default false)
+    Works around a macOS bug: macOS cannot mount a file system nested inside
+    a mirror mount unless the parent's file handle length is a multiple of
+    4. When set, NFSv4 file handles are padded to a multiple of 4 bytes.
+    This ignores macOS_quirks_only_for_macOS_clients and applies to every
+    client, because callbacks send handles without knowing the client.
+
 Delegations(bool, default false)
     Whether to allow delegations.
 

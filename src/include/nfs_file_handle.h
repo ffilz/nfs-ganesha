@@ -138,7 +138,13 @@ static inline size_t nfs4_sizeof_handle_padding(struct file_handle_v4 *hdl)
 
 static inline bool valid_Fh4_Len(nfs_fh4 *fh, file_handle_v4_t *pfile_handle)
 {
-	if (!nfs_param.core_param.enable_v3_fh_for_v4) {
+	/* Handles padded by macOS_quirk_pad_handles are accepted as with
+	 * Enable_V3fh_Validation_For_V4.
+	 *
+	 * @todo Remove once macOS is fixed.
+	 */
+	if (!nfs_param.core_param.enable_v3_fh_for_v4 &&
+	    !nfs_param.nfsv4_param.macos_quirk_pad_handles) {
 		return fh->nfs_fh4_len == nfs4_sizeof_handle(pfile_handle);
 	} else {
 		return ((fh->nfs_fh4_len == nfs4_sizeof_handle(pfile_handle)) ||
