@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c87d2be4_bb18be4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-19T20:44:12Z",
+      "side": 1,
+      "message": "One minor change request. I still need to plod through review of the ntirpc PR.",
+      "revId": "b522ad8e795de5b3dbe520956203ec5c8b31faa1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61c739f4_2d25b653",
+        "filename": "src/include/gsh_config.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-19T20:44:12Z",
+      "side": 1,
+      "message": "Do we really need a struct here? It just makes the identifier to reach a particular parameter longer, and especially repeating the string \"tcp_zerocopy\" twice.",
+      "revId": "b522ad8e795de5b3dbe520956203ec5c8b31faa1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
