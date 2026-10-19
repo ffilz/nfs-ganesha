@@ -2195,11 +2195,25 @@ nfs_client_record_t *get_client_record(const char *const value,
 	return record;
 }
 
-struct client_callback_arg {
+struct client_callback_shared {
+	int32_t refcnt;
 	void *state;
-	nfs_client_id_t *pclientid;
 	bool (*cb)(nfs_client_id_t *, void *);
 };
+
+struct client_callback_arg {
+	struct client_callback_shared *shared;
+	nfs_client_id_t *pclientid;
+};
+
+static void client_callback_shared_put(struct client_callback_shared *shared)
+{
+	if (atomic_dec_int32_t(&shared->refcnt) != 0)
+		return;
+
+	gsh_free(shared->state, MEM_COMP_STATE);
+	gsh_free(shared, MEM_COMP_CLIENTID);
+}
 
 /**
  * @brief client callback
@@ -2209,9 +2223,9 @@ static void client_cb(struct fridgethr_context *ctx)
 	struct client_callback_arg *cb_arg;
 
 	cb_arg = ctx->arg;
-	cb_arg->cb(cb_arg->pclientid, cb_arg->state);
+	cb_arg->shared->cb(cb_arg->pclientid, cb_arg->shared->state);
 	dec_client_id_ref(cb_arg->pclientid);
-	gsh_free(cb_arg->state, MEM_COMP_STATE);
+	client_callback_shared_put(cb_arg->shared);
 	gsh_free(cb_arg, MEM_COMP_CLIENTID);
 }
 
@@ -2232,6 +2246,7 @@ void nfs41_foreach_client_callback(bool (*cb)(nfs_client_id_t *cl, void *state),
 	struct rbt_node *pn;
 	nfs_client_id_t *pclientid;
 	struct client_callback_arg *cb_arg;
+	struct client_callback_shared *shared = NULL;
 	int rc;
 
 	/* For each bucket of the hashtable */
@@ -2249,26 +2264,46 @@ void nfs41_foreach_client_callback(bool (*cb)(nfs_client_id_t *cl, void *state),
 			RBT_INCREMENT(pn);
 
 			if (pclientid->cid_minorversion > 0) {
+				/*
+				 * Allocate on the first client. The walk
+				 * holds one reference until queueing ends.
+				 */
+				if (shared == NULL) {
+					shared = gsh_malloc(sizeof(*shared),
+							    MEM_COMP_CLIENTID);
+					shared->refcnt = 1;
+					shared->state = state;
+					shared->cb = cb;
+				}
+
 				cb_arg = gsh_malloc(
 					sizeof(struct client_callback_arg),
 					MEM_COMP_CLIENTID);
 
-				cb_arg->cb = cb;
-				cb_arg->state = state;
+				cb_arg->shared = shared;
 				cb_arg->pclientid = pclientid;
 				inc_client_id_ref(pclientid);
+				atomic_inc_int32_t(&shared->refcnt);
 				rc = fridgethr_submit(state_async_fridge,
 						      client_cb, cb_arg);
 				if (rc != 0) {
 					LogCrit(COMPONENT_CLIENTID,
 						"unable to start client cb thread %d",
 						rc);
+					(void)atomic_dec_int32_t(
+						&shared->refcnt);
 					gsh_free(cb_arg, MEM_COMP_CLIENTID);
 					dec_client_id_ref(pclientid);
 				}
 			}
 		}
 		PTHREAD_RWLOCK_unlock(&(ht->partitions[i].ht_lock));
+	}
+
+	if (shared != NULL) {
+		client_callback_shared_put(shared);
+	} else {
+		gsh_free(state, MEM_COMP_STATE);
 	}
 }
 
