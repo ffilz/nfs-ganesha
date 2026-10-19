@@ -118,6 +118,9 @@ static attrmask_t fs_supported_attrs(struct fsal_export *exp_hdl)
 	else
 		supported_mask &= ~ATTR_ACL;
 
+	if (gpfs_version < 5)
+		supported_mask &= ~ATTR4_XATTR;
+
 	return supported_mask;
 }
 
