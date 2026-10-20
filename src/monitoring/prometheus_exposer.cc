@@ -60,6 +60,48 @@ extern "C" {
 #include "nfs_core.h"
 #include "nfs_metrics.h"
 
+#ifdef DARWIN
+/*
+ * Darwin compatibility. Neither of these exists on macOS:
+ *
+ *  - TEMP_FAILURE_RETRY is a glibc convenience macro. The statement-expression
+ *    form is a GNU extension that clang implements.
+ *  - accept4(2) is Linux-only. Emulate the one flag this file passes,
+ *    SOCK_CLOEXEC, with an explicit FD_CLOEXEC after accept(2). This is
+ *    marginally less safe than the atomic Linux version -- a fork(2) racing
+ *    between the two calls could leak the descriptor -- but ganesha does not
+ *    fork after startup, and the alternative is not available.
+ */
+#include <errno.h>
+#include <fcntl.h>
+
+#ifndef TEMP_FAILURE_RETRY
+#define TEMP_FAILURE_RETRY(expr)                           \
+	({                                                 \
+		decltype(expr) _gsh_rc;                    \
+		do {                                       \
+			_gsh_rc = (expr);                  \
+		} while (_gsh_rc == -1 && errno == EINTR); \
+		_gsh_rc;                                   \
+	})
+#endif
+
+#ifndef SOCK_CLOEXEC
+#define SOCK_CLOEXEC 0x10000000 /* local sentinel; not a Darwin socket flag */
+#endif
+
+static int gsh_accept4(int fd, struct sockaddr *addr, socklen_t *addrlen,
+		       int flags)
+{
+	const int client = accept(fd, addr, addrlen);
+
+	if (client >= 0 && (flags & SOCK_CLOEXEC))
+		(void)fcntl(client, F_SETFD, FD_CLOEXEC);
+	return client;
+}
+#define accept4 gsh_accept4
+#endif /* DARWIN */
+
 #ifdef USE_MONITORING
 
 #define PERROR(MESSAGE)                                                    \
