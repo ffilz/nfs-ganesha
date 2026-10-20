@@ -832,13 +832,14 @@ out:
  * @param[in] need_acl		Indicates if the ACL needs updating.
  * @param[in] need_fslocations	Indicates if the fslocations are needed.
  * @param[in] need_seclabel	Indicates if security label is needed.
+ * @param[in] force		Force refresh even if the file is delegated.
  * @param[in/out] invalidate	Caller wants to know if it should Invalidate the
  *				dirent cache.
  */
 
 fsal_status_t mdcache_refresh_attrs(mdcache_entry_t *entry, bool need_acl,
 				    bool need_fslocations, bool need_seclabel,
-				    bool *invalidate)
+				    bool force, bool *invalidate)
 {
 	struct fsal_attrlist attrs;
 	fsal_status_t status = { 0, 0 };
@@ -882,7 +883,7 @@ fsal_status_t mdcache_refresh_attrs(mdcache_entry_t *entry, bool need_acl,
 		attrs.request_mask &= ~ATTR4_SEC_LABEL;
 	}
 
-	if (file_deleg && entry->attrs.expire_time_attr) {
+	if (!force && file_deleg && entry->attrs.expire_time_attr) {
 		/* If the file is delegated, then we can trust
 		 * the attributes already fetched (i.e, which
 		 * are in entry->attrs.valid_mask). Hence mask
@@ -1032,7 +1033,8 @@ static fsal_status_t mdcache_getattrs(struct fsal_obj_handle *obj_hdl,
 	status = mdcache_refresh_attrs(
 		entry, (attrs_out->request_mask & ATTR_ACL) != 0,
 		(attrs_out->request_mask & ATTR4_FS_LOCATIONS) != 0,
-		(attrs_out->request_mask & ATTR4_SEC_LABEL) != 0, &invalidate);
+		(attrs_out->request_mask & ATTR4_SEC_LABEL) != 0, false,
+		&invalidate);
 
 	if (FSAL_IS_ERROR(status)) {
 		/* We failed to fetch any attributes. Pass that fact back to
@@ -1113,7 +1115,8 @@ static fsal_status_t mdcache_setattr2(struct fsal_obj_handle *obj_hdl,
 	}
 
 	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
-	status2 = mdcache_refresh_attrs(entry, need_acl, false, false, NULL);
+	status2 = mdcache_refresh_attrs(entry, need_acl, false, false, true,
+					NULL);
 	if (FSAL_IS_ERROR(status2)) {
 		/* Assume that the cache is bogus now */
 		atomic_clear_uint32_t_bits(&entry->mde_flags,

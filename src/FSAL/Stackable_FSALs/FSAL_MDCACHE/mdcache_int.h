@@ -490,7 +490,7 @@ fsal_status_t mdcache_alloc_and_check_handle(
 
 fsal_status_t mdcache_refresh_attrs(mdcache_entry_t *entry, bool need_acl,
 				    bool need_fslocations, bool need_seclabel,
-				    bool *invalidate);
+				    bool force, bool *invalidate);
 
 /**
  * @brief Callback to check whether an LRU candidate should be skipped
@@ -1170,7 +1170,8 @@ mdcache_refresh_attrs_no_invalidate(mdcache_entry_t *entry)
 
 	PTHREAD_RWLOCK_wrlock(&entry->attr_lock);
 
-	status = mdcache_refresh_attrs(entry, false, false, false, NULL);
+	status = mdcache_refresh_attrs(entry, false, false, false, false,
+				       NULL);
 
 	PTHREAD_RWLOCK_unlock(&entry->attr_lock);
 
