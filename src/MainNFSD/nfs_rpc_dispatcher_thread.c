@@ -699,6 +699,17 @@ void Create_RDMA(protos prot)
 {
 	/* Override the RDMA service port as per the port configured */
 	char str[20];
+	static char node[SOCK_NAME_MAX];
+	sockaddr_t ipv4;
+	sockaddr_t *bind_addr =
+		convert_ipv6_to_ipv4(COMPONENT_DISPATCH,
+				     &nfs_param.core_param.bind_addr, &ipv4);
+
+	/* Use Bind_Addr for RDMA as well as the TCP/UDP listeners. */
+	if (!sprint_sockip(bind_addr, node, sizeof(node)))
+		LogFatal(COMPONENT_DISPATCH,
+			 "Cannot format NFS/RDMA Bind_Addr");
+	rpc_rdma_xa.node = node;
 
 	snprintf(str, 20, "%d", nfs_param.core_param.port[P_NFS_RDMA]);
 	rpc_rdma_xa.port = strdup(str);
