@@ -889,8 +889,10 @@ static fattr_xdr_result decode_acl(XDR *xdr, struct xdr_attrs_args *args)
 					.len = utf8buffer.utf8string_len
 				};
 				if (!name2gid(&gname, &ace->who.gid,
-					      get_anonymous_gid()))
+					      get_anonymous_gid())) {
+					args->nfs_status = NFS4ERR_BADOWNER;
 					goto baderr;
+				}
 
 				LogFullDebug(COMPONENT_NFS_V4,
 					     "ACE who.gid = 0x%x",
@@ -901,8 +903,10 @@ static fattr_xdr_result decode_acl(XDR *xdr, struct xdr_attrs_args *args)
 					.len = utf8buffer.utf8string_len
 				};
 				if (!name2uid(&uname, &ace->who.uid,
-					      get_anonymous_uid()))
+					      get_anonymous_uid())) {
+					args->nfs_status = NFS4ERR_BADOWNER;
 					goto baderr;
+				}
 
 				LogFullDebug(COMPONENT_NFS_V4,
 					     "ACE who.uid = 0x%x",
