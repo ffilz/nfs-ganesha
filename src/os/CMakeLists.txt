@@ -34,6 +34,7 @@ endif(FREEBSD)
 if(DARWIN)
   SET(gos_STAT_SRCS
       darwin/sys_resource.c
+      darwin/subr.c
   )
 endif(DARWIN)
 

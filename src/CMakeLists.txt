@@ -311,8 +311,13 @@ goption(USE_FSAL_RGW "build RGW FSAL shared library" ON)
 goption(USE_FSAL_MEM "build Memory FSAL shared library" ON)
 goption(USE_FSAL_SAUNAFS "build SAUNAFS FSAL shared library" ON)
 
-# Internal capability required by some FSALs
-option(GSH_CAN_HOST_LOCAL_FS "Ganesha supports hosting local filesystems" ON)
+# Internal capability required by some FSALs. Darwin has no per-thread
+# setuser/setgroup (see os/darwin/subr.c), so it defaults to OFF there.
+if(DARWIN)
+  option(GSH_CAN_HOST_LOCAL_FS "Ganesha supports hosting local filesystems" OFF)
+else(DARWIN)
+  option(GSH_CAN_HOST_LOCAL_FS "Ganesha supports hosting local filesystems" ON)
+endif(DARWIN)
 
 # Monitoring stack.
 goption(USE_MONITORING "Enable monitoring stack" ON)
