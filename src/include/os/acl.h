@@ -26,6 +26,8 @@
 
 #ifdef LINUX
 #include <os/linux/acl.h>
+#elif DARWIN
+#include <os/darwin/acl.h>
 #endif
 
 #endif /* _ACL_OS_H */

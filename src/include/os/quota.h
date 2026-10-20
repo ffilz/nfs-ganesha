@@ -30,6 +30,8 @@
 #include <os/linux/quota.h>
 #elif FREEBSD
 #include <os/freebsd/quota.h>
+#elif DARWIN
+#include <os/darwin/quota.h>
 #endif
 
 #endif /* _QUOTA_OS_H */

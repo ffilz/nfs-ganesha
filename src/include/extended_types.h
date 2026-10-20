@@ -41,6 +41,8 @@
 #include <os/linux/extended_types.h>
 #elif FREEBSD
 #include <os/freebsd/extended_types.h>
+#elif DARWIN
+#include <os/darwin/extended_types.h>
 #endif
 
 /* Added extended types, often missing */

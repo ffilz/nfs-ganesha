@@ -33,6 +33,8 @@
 #include <sys/xattr.h>
 #elif FREEBSD
 #include <os/freebsd/xattr.h>
+#elif DARWIN
+#include <sys/xattr.h>
 #endif
 
 #endif /* _XATTR_OS_H */
