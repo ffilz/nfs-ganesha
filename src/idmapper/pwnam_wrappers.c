@@ -35,10 +35,25 @@
 #include "sss_nss_idmap.h"
 #include "log.h"
 
+#ifdef DARWIN
+/*
+ * Darwin declares int getgrouplist(const char *, int, int *, int *) where
+ * glibc uses gid_t. Both are 32 bits on Darwin, and this is the same cast
+ * Apple's own headers use internally.
+ */
+static int gsh_getgrouplist(const char *user, gid_t group, gid_t *groups,
+			    int *ngroups)
+{
+	return getgrouplist(user, (int)group, (int *)groups, ngroups);
+}
+#else
+#define gsh_getgrouplist getgrouplist
+#endif
+
 static int getgrouplist_wrapper(const char *user, gid_t group, gid_t *groups,
 				int *ngroups)
 {
-	int res = getgrouplist(user, group, groups, ngroups);
+	int res = gsh_getgrouplist(user, group, groups, ngroups);
 	/* getgrouplist returns -1 for buffer too small */
 	if (res == -1)
 		errno = ERANGE;
