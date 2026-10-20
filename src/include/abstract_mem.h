@@ -43,7 +43,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#ifndef DARWIN
+/* glibc declares valloc() here; Darwin declares it in <stdlib.h> and has no
+ * <malloc.h> at all. Everything else this header needs -- posix_memalign(),
+ * malloc(), free() -- is in <stdlib.h> on both.
+ */
 #include <malloc.h>
+#endif
 #include "abstract_atomic.h"
 #include "mem_components.h"
 #include "log.h"
