@@ -55,7 +55,7 @@ static int getgrouplist_wrapper(const char *user, gid_t group, gid_t *groups,
  * - ENOENT:    no user with the given name found
  * - ETIMEDOUT: request timed out
  */
-int (*getgrouplist_func)(const char *, __gid_t, __gid_t *,
+int (*getgrouplist_func)(const char *, gid_t, gid_t *,
 			 int *) = getgrouplist_wrapper;
 
 int (*getpwnam_r_func)(const char *, struct passwd *, char *, size_t,
