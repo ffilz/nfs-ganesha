@@ -67,6 +67,14 @@
 #include "server_stats_grpc.h"
 #include "server_stats_private.h"
 
+#ifdef DARWIN
+/* glibc's malloc_usable_size() is malloc_size() on Darwin, declared in
+ * <malloc/malloc.h>. Both report the usable size of an allocation.
+ */
+#include <malloc/malloc.h>
+#define malloc_usable_size(p) malloc_size(p)
+#endif
+
 /* Memory Usage Statistics */
 struct gsh_mem_stats gshMC[MEM_COMP_MAX];
 
