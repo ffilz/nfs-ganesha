@@ -1128,6 +1128,31 @@ static int alloc_socket_setopts(int p)
 	int one = 1;
 	const struct nfs_core_param *nfs_cp = &nfs_param.core_param;
 
+	/* Ensure dual-stack: accept IPv4 clients on our AF_INET6 listener
+	 * regardless of the kernel's net.ipv6.bindv6only default. Without
+	 * this, environments where bindv6only=1 (some container runtimes)
+	 * leave NFS reachable over IPv6 only. */
+	if (!v6disabled) {
+		int zero = 0;
+
+		if (udp_socket[p] != -1 &&
+		    setsockopt(udp_socket[p], IPPROTO_IPV6, IPV6_V6ONLY, &zero,
+			       sizeof(zero))) {
+			LogWarn(COMPONENT_DISPATCH,
+				"Cannot clear IPV6_V6ONLY on udp socket for %s, error %d(%s)",
+				tags[p], errno, strerror(errno));
+			return -1;
+		}
+
+		if (setsockopt(tcp_socket[p], IPPROTO_IPV6, IPV6_V6ONLY, &zero,
+			       sizeof(zero))) {
+			LogWarn(COMPONENT_DISPATCH,
+				"Cannot clear IPV6_V6ONLY on tcp socket for %s, error %d(%s)",
+				tags[p], errno, strerror(errno));
+			return -1;
+		}
+	}
+
 	/* Use SO_REUSEADDR in order to avoid wait
 	 * the 2MSL timeout */
 	if (udp_socket[p] != -1) {
