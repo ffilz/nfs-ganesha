@@ -34,6 +34,24 @@
       "parentUuid": "cf207dcf_a9adb706",
       "revId": "80c70d5070b4307a3913edf9f0f11ccb229b5efb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0db8b45b_feed218c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-20T18:42:45Z",
+      "side": 1,
+      "message": "OK, that helps a lot. That code is rather a mess, and the memory components probably are not ideal. In part, really the caller should pass a free callback. But yes, I see now what is happening and the refcount is necessary.\n\nI\u0027m going to leave this unresolved because I want to come back and do some cleanup to make this all more understandable, but I want to preserve your efforts as a patch, and do more work separately.",
+      "parentUuid": "7f7f4267_e6e12312",
+      "revId": "80c70d5070b4307a3913edf9f0f11ccb229b5efb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
