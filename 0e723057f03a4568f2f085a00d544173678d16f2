@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "775fe34c_226fa04d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040057
+      },
+      "writtenOn": "2026-10-20T18:43:26Z",
+      "side": 1,
+      "message": "Can you set explain a bit more about the scope of issue this is working on?\n\nThe performance report says it greatly reduces the number of MDS readdirs in large directories, but why is that? Are the directories themselves exceeding the configured libcephfs cache size, or is there an active workload pushing inodes out of cache?\n\nAs you note, the readdir handles are holding libcephfs inode references, so bugs around this could be really unpleasant in terms of reference leaks. And the cache itself should be resolving any readdirs unless the cache exceeds its size. How does this patch change other statistics like memory use, and how does it behave if the directory is being updated by other CephFS clients? I\u0027m concerned this may just increase the coordination traffic a lot and enter a performance death spiral in that case, not to mention force Ganesha/libcephfs to exceed cache configuration and slow down other traffic or even trigger warnings in the central cluster log.",
+      "revId": "0e723057f03a4568f2f085a00d544173678d16f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
