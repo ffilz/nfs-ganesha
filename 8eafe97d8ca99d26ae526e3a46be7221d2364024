@@ -33,6 +33,40 @@
       "message": "Waiting for review from @npuri@redhat.com",
       "revId": "8eafe97d8ca99d26ae526e3a46be7221d2364024",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4365c93_c7270035",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2967,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-10-21T14:58:26Z",
+      "side": 1,
+      "message": "Please start the comp value from (MEM_COMP_UNSET + 1). Check gsh_log_mem_stats routine.",
+      "revId": "8eafe97d8ca99d26ae526e3a46be7221d2364024",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "916b7a8d_a8834962",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2976,
+      "author": {
+        "id": 1038859
+      },
+      "writtenOn": "2026-10-21T14:58:26Z",
+      "side": 1,
+      "message": "gsh_mem_stats_get_stat_by_index_and_comp can return a signed value as well so correct the type of value to int64_t. In case of DBUS we converted the int64_t to unit64_t due to limitation but in glib_dbus_stats.py we converted the high value to there respective negative value.",
+      "revId": "8eafe97d8ca99d26ae526e3a46be7221d2364024",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
