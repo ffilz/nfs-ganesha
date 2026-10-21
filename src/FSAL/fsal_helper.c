@@ -2476,10 +2476,6 @@ next_name1:
 		if (strncmp(name, XATTR_USER_PREFIX, XATTR_USER_PREFIX_LEN))
 			goto next_name2;
 
-		/* advance past "user." prefix */
-		name += XATTR_USER_PREFIX_LEN;
-		len -= XATTR_USER_PREFIX_LEN;
-
 		copy_into_utf8string(&names[i], name, (int)len);
 		++i;
 next_name2:
