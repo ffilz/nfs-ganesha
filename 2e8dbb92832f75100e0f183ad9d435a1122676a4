@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a33ec7a_658e1ef0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-21T11:18:44Z",
+      "side": 1,
+      "message": "Hi Frank,\n\nThis is the last one for today but is a large stack of changes, and extra apologies if this is not correct, it is how Claude advised to submit.\n\nThe changes in the stack are related to:\n\n- setting mounted_on_fileid correctly where there are mirror mounts, for example on a ZFS server where an export contains child datasets.\n- enabling named attributes to store extended attributes for macOS clients.  This is amazing for macOS as otherwise macOS writes a separate AppleDouble ._ file for each file to contain macOS\u0027s extended attributes.  macOS does not support NFS 4.2 extended attributes, and the Linux kernel NFSD does not support named attributes, making Ganesha the only open source NFS server that I\u0027m aware of that (with this PR) can properly support Mac clients.\n- a series of fixes for macOS bugs (quirks), each of which details the problem and includes the Apple feedback number.  If you know anyone at Apple, their NFS code needs some attention for straightforward but critical issues.  The macOS quirks are based on macOS 27 and are disabled by default, and when enabled by default only apply for Macs based on the NFSv4.1 EXCHANGE_ID, otherwise need to be enabled manually.  I verified the behaviours with both Mac and Linux clients using the Mac client auto-detection.\n\nBest wishes,\n\nEvan",
+      "revId": "2e8dbb92832f75100e0f183ad9d435a1122676a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
