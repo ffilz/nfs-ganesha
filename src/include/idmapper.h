@@ -139,22 +139,20 @@ extern pthread_rwlock_t idmapper_negative_cache_group_lock;
 
 void idmapper_cache_init(void);
 void idmapper_cache_reap(void);
-bool idmapper_add_user(const struct gsh_buffdesc *, uid_t, const gid_t *, bool);
-bool idmapper_add_group(const struct gsh_buffdesc *, gid_t);
-bool idmapper_lookup_by_uname(const struct gsh_buffdesc *, uid_t *,
-			      const gid_t **, bool);
-bool idmapper_lookup_by_uid(const uid_t, const struct gsh_buffdesc **,
-			    const gid_t **);
-bool idmapper_lookup_by_gname(const struct gsh_buffdesc *, uid_t *);
-bool idmapper_lookup_by_gid(const gid_t, const struct gsh_buffdesc **);
+bool idmapper_add_user(const char *, uid_t, const gid_t *, bool);
+bool idmapper_add_group(const char *, gid_t);
+bool idmapper_lookup_by_uname(const char *, uid_t *, const gid_t **, bool);
+bool idmapper_lookup_by_uid(const uid_t, const char **, const gid_t **);
+bool idmapper_lookup_by_gname(const char *, uid_t *);
+bool idmapper_lookup_by_gid(const gid_t, const char **);
 
 void idmapper_negative_cache_init(void);
 void idmapper_negative_cache_add_user_by_uid(uid_t);
-void idmapper_negative_cache_add_user_by_name(const struct gsh_buffdesc *);
-void idmapper_negative_cache_add_group_by_name(const struct gsh_buffdesc *);
+void idmapper_negative_cache_add_user_by_name(const char *);
+void idmapper_negative_cache_add_group_by_name(const char *);
 bool idmapper_negative_cache_lookup_user_by_uid(uid_t);
-bool idmapper_negative_cache_lookup_user_by_name(const struct gsh_buffdesc *);
-bool idmapper_negative_cache_lookup_group_by_name(const struct gsh_buffdesc *);
+bool idmapper_negative_cache_lookup_user_by_name(const char *);
+bool idmapper_negative_cache_lookup_group_by_name(const char *);
 void idmapper_negative_cache_clear(void);
 void idmapper_negative_cache_destroy(void);
 void idmapper_negative_cache_reap(void);
@@ -170,8 +168,8 @@ bool set_idmapping_status(bool status_enabled);
 bool xdr_encode_nfs4_owner(XDR *, uid_t);
 bool xdr_encode_nfs4_group(XDR *, gid_t);
 
-bool name2uid(const struct gsh_buffdesc *, uid_t *, const uid_t);
-bool name2gid(const struct gsh_buffdesc *, gid_t *, const gid_t);
+bool name2uid(const char *, uid_t *, const uid_t);
+bool name2gid(const char *, gid_t *, const gid_t);
 
 void winbind_stats_update(struct timespec *, struct timespec *);
 void gc_stats_update(struct timespec *, struct timespec *);

@@ -899,11 +899,8 @@ static fattr_xdr_result decode_acl(XDR *xdr, struct xdr_attrs_args *args)
 		} else {
 			if (IS_FSAL_ACE_GROUP_ID(*ace)) {
 				/* Decode group. */
-				struct gsh_buffdesc gname = {
-					.addr = utf8buffer.utf8string_val,
-					.len = utf8buffer.utf8string_len
-				};
-				if (!name2gid(&gname, &ace->who.gid,
+				if (!name2gid(utf8buffer.utf8string_val,
+					      &ace->who.gid,
 					      get_anonymous_gid())) {
 					args->nfs_status = NFS4ERR_BADOWNER;
 					goto baderr;
@@ -913,11 +910,8 @@ static fattr_xdr_result decode_acl(XDR *xdr, struct xdr_attrs_args *args)
 					     "ACE who.gid = 0x%x",
 					     ace->who.gid);
 			} else { /* Decode user. */
-				struct gsh_buffdesc uname = {
-					.addr = utf8buffer.utf8string_val,
-					.len = utf8buffer.utf8string_len
-				};
-				if (!name2uid(&uname, &ace->who.uid,
+				if (!name2uid(utf8buffer.utf8string_val,
+					      &ace->who.uid,
 					      get_anonymous_uid())) {
 					args->nfs_status = NFS4ERR_BADOWNER;
 					goto baderr;
@@ -1687,7 +1681,6 @@ static fattr_xdr_result decode_owner(XDR *xdr, struct xdr_attrs_args *args)
 {
 	uid_t uid;
 	uint32_t len = 0;
-	struct gsh_buffdesc ownerdesc;
 	void *src_owner;
 	char *owner_buff;
 	unsigned int pos, newpos;
@@ -1717,10 +1710,8 @@ static fattr_xdr_result decode_owner(XDR *xdr, struct xdr_attrs_args *args)
 	owner_buff = alloca(len + 1);
 	memcpy(owner_buff, src_owner, len);
 	owner_buff[len] = '\0';
-	ownerdesc.len = len;
-	ownerdesc.addr = owner_buff;
 
-	if (!name2uid(&ownerdesc, &uid, get_anonymous_uid())) {
+	if (!name2uid(owner_buff, &uid, get_anonymous_uid())) {
 		args->nfs_status = NFS4ERR_BADOWNER;
 		return FATTR_BADOWNER;
 	}
@@ -1745,7 +1736,6 @@ static fattr_xdr_result decode_group(XDR *xdr, struct xdr_attrs_args *args)
 {
 	gid_t gid;
 	uint32_t len = 0;
-	struct gsh_buffdesc groupdesc;
 	void *src_group;
 	char *group_buff;
 	unsigned int pos, newpos;
@@ -1775,10 +1765,8 @@ static fattr_xdr_result decode_group(XDR *xdr, struct xdr_attrs_args *args)
 	group_buff = alloca(len + 1);
 	memcpy(group_buff, src_group, len);
 	group_buff[len] = '\0';
-	groupdesc.len = len;
-	groupdesc.addr = src_group;
 
-	if (!name2gid(&groupdesc, &gid, get_anonymous_gid())) {
+	if (!name2gid(group_buff, &gid, get_anonymous_gid())) {
 		args->nfs_status = NFS4ERR_BADOWNER;
 		return FATTR_BADOWNER;
 	}

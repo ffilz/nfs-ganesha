@@ -329,8 +329,8 @@ bool idmapper_init(void)
  * @param[in] gid       user GID
  * @param[in] gss_princ true if the name is a gss principal
  */
-static void add_user_to_cache(const struct gsh_buffdesc *name, uid_t uid,
-			      const gid_t *gid, bool gss_princ)
+static void add_user_to_cache(const char *name, uid_t uid, const gid_t *gid,
+			      bool gss_princ)
 {
 	bool success;
 
@@ -364,7 +364,7 @@ static void add_user_to_cache(const struct gsh_buffdesc *name, uid_t uid,
  *
  * @param[in] name      user name
  */
-static void add_user_to_negative_cache(const struct gsh_buffdesc *name)
+static void add_user_to_negative_cache(const char *name)
 {
 	if (!idmapping_enabled) {
 		LogWarn(COMPONENT_IDMAPPER,
@@ -390,7 +390,7 @@ static void add_user_to_negative_cache(const struct gsh_buffdesc *name)
  * @param[in] name      group name
  * @param[in] gid       group ID
  */
-static void add_group_to_cache(const struct gsh_buffdesc *name, gid_t gid)
+static void add_group_to_cache(const char *name, gid_t gid)
 {
 	bool success;
 
@@ -424,7 +424,7 @@ static void add_group_to_cache(const struct gsh_buffdesc *name, gid_t gid)
  *
  * @param[in] name      group name
  */
-static void add_group_to_negative_cache(const struct gsh_buffdesc *name)
+static void add_group_to_negative_cache(const char *name)
 {
 	if (!idmapping_enabled) {
 		LogWarn(COMPONENT_IDMAPPER,
@@ -457,20 +457,17 @@ static void add_group_to_negative_cache(const struct gsh_buffdesc *name)
 
 static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 {
-	const struct gsh_buffdesc *found;
+	const char *found;
 	uint32_t not_a_size_t;
 	bool success = false;
 
 	if (!idmapping_enabled || nfs_param.nfsv4_param.only_numeric_owners) {
 		/* 2**32 is 10 digits long in decimal */
-		struct gsh_buffdesc name;
 		char namebuf[11];
+		char *name = namebuf;
 
-		name.addr = namebuf;
-		name.len = sprintf(namebuf, "%" PRIu32, id);
-		not_a_size_t = name.len;
-		return inline_xdr_bytes(xdrs, (char **)&name.addr,
-					&not_a_size_t, UINT32_MAX);
+		not_a_size_t = sprintf(namebuf, "%" PRIu32, id);
+		return inline_xdr_bytes(xdrs, &name, &not_a_size_t, UINT32_MAX);
 	}
 
 	PTHREAD_RWLOCK_rdlock(group ? &idmapper_group_lock
@@ -481,11 +478,11 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 		success = idmapper_lookup_by_uid(id, &found, NULL);
 
 	if (likely(success)) {
-		not_a_size_t = found->len;
+		not_a_size_t = strlen(found);
 
 		/* Fully qualified owners are always stored in the
 		   hash table, no matter what our lookup method. */
-		success = inline_xdr_bytes(xdrs, (char **)&found->addr,
+		success = inline_xdr_bytes(xdrs, (char **)&found,
 					   &not_a_size_t, UINT32_MAX);
 		PTHREAD_RWLOCK_unlock(group ? &idmapper_group_lock
 					    : &idmapper_user_lock);
@@ -497,7 +494,7 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 		size_t size;
 		bool looked_up = false;
 		char *namebuff = NULL;
-		struct gsh_buffdesc new_name;
+		size_t name_len;
 		struct timespec s_time, e_time;
 
 		/* We copy owner_domain to a static buffer to:
@@ -515,7 +512,7 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 		owner_domain_addr[owner_domain_len] = '\0';
 		PTHREAD_RWLOCK_unlock(&owner_domain.lock);
 
-		new_name.len = 0;
+		name_len = 0;
 
 		if (nfs_param.nfsv4_param.use_getpwnam) {
 			if (group)
@@ -528,11 +525,11 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 			if (nfs_param.directory_services_param
 				    .pwutils_use_fully_qualified_names) {
 				size += NFS4_MAX_DOMAIN_LEN + 1;
-				/* new_name should include domain length */
-				new_name.len = size;
+				/* name_len should include domain length */
+				name_len = size;
 			} else {
-				/* new_name should not include domain length */
-				new_name.len = size;
+				/* name_len should not include domain length */
+				name_len = size;
 
 				if (owner_domain_len == 0) {
 					LogInfo(COMPONENT_IDMAPPER,
@@ -547,8 +544,6 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 
 		namebuff = alloca(size);
 
-		new_name.addr = namebuff;
-
 		if (nfs_param.nfsv4_param.use_getpwnam) {
 			bool nulled;
 
@@ -558,7 +553,7 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 
 				now_mono(&s_time);
 				rc = pwnam_wrappers__getgrgid_r(
-					id, &g, namebuff, new_name.len, &gres);
+					id, &g, namebuff, name_len, &gres);
 				now_mono(&e_time);
 				idmapper_monitoring__external_request(
 					IDMAPPING_GID_TO_GROUP,
@@ -572,7 +567,7 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 
 				now_mono(&s_time);
 				rc = pwnam_wrappers__getpwuid_r(
-					id, &p, namebuff, new_name.len, &pres);
+					id, &p, namebuff, name_len, &pres);
 				now_mono(&e_time);
 				idmapper_monitoring__external_request(
 					IDMAPPING_UID_TO_UNAME,
@@ -583,13 +578,13 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 			}
 
 			if ((rc == 0) && !nulled) {
-				new_name.len = strlen(namebuff);
+				name_len = strlen(namebuff);
 
 				if (!nfs_param.directory_services_param
 					     .pwutils_use_fully_qualified_names) {
-					char *cursor = namebuff + new_name.len;
+					char *cursor = namebuff + name_len;
 					*(cursor++) = '@';
-					++new_name.len;
+					++name_len;
 
 					if (owner_domain_len == 0) {
 						LogInfo(COMPONENT_IDMAPPER,
@@ -598,7 +593,7 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 					}
 					memcpy(cursor, owner_domain_addr,
 					       owner_domain_len);
-					new_name.len += owner_domain_len;
+					name_len += owner_domain_len;
 					*(cursor + owner_domain_len) = '\0';
 				}
 				looked_up = true;
@@ -626,7 +621,7 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 				      : IDMAPPING_UID_TO_UNAME,
 				IDMAPPING_NFSIDMAP, rc == 0, &s_time, &e_time);
 			if (rc == 0) {
-				new_name.len = strlen(namebuff);
+				name_len = strlen(namebuff);
 				looked_up = true;
 			} else {
 				LogInfo(COMPONENT_IDMAPPER,
@@ -646,26 +641,25 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 					"Lookup for %d failed, using numeric %s",
 					id, (group ? "group" : "owner"));
 				/* 2**32 is 10 digits long in decimal */
-				new_name.len =
-					sprintf(namebuff, "%" PRIu32, id);
+				name_len = sprintf(namebuff, "%" PRIu32, id);
 			} else {
 				LogInfo(COMPONENT_IDMAPPER,
 					"Lookup for %d failed, using nobody.",
 					id);
-				memcpy(new_name.addr, "nobody", 6);
-				new_name.len = 6;
+				memcpy(namebuff, "nobody", sizeof("nobody"));
+				name_len = sizeof("nobody") - 1;
 			}
 		}
 
 		/* Add to the cache and encode the result. */
 		if (group)
-			add_group_to_cache(&new_name, id);
+			add_group_to_cache(namebuff, id);
 		else
-			add_user_to_cache(&new_name, id, NULL, false);
+			add_user_to_cache(namebuff, id, NULL, false);
 
-		not_a_size_t = new_name.len;
-		return inline_xdr_bytes(xdrs, (char **)&new_name.addr,
-					&not_a_size_t, UINT32_MAX);
+		not_a_size_t = name_len;
+		return inline_xdr_bytes(xdrs, &namebuff, &not_a_size_t,
+					UINT32_MAX);
 	}
 }
 
@@ -759,7 +753,8 @@ static bool string_to_numeric_uid_gid(const char *s, uint32_t *out_number)
  *
  * @return true on success, false on just phoning it in.
  */
-static bool atless2id(char *name, size_t len, uint32_t *id, const uint32_t anon)
+static bool atless2id(const char *name, size_t len, uint32_t *id,
+		      const uint32_t anon)
 {
 	if ((len == 6) && (!memcmp(name, "nobody", 6))) {
 		*id = anon;
@@ -1098,7 +1093,7 @@ static bool idmapname2id(char *name, size_t len, uint32_t *id,
  * @return true if successful, false otherwise
  */
 
-static bool name2id(const struct gsh_buffdesc *name, uint32_t *id, bool group,
+static bool name2id(const char *name, uint32_t *id, bool group,
 		    const uint32_t anon)
 {
 	bool success;
@@ -1107,10 +1102,11 @@ static bool name2id(const struct gsh_buffdesc *name, uint32_t *id, bool group,
 	char *at;
 	bool got_gid = false;
 	bool looked_up = false;
+	size_t name_len = strlen(name);
 
 	if (!idmapping_enabled) {
 		/* If idmapping isn't enabled we accept numeric ids only */
-		return atless2id(name->addr, name->len, id, anon);
+		return atless2id(name, name_len, id, anon);
 	}
 
 	PTHREAD_RWLOCK_rdlock(group ? &idmapper_group_lock
@@ -1140,15 +1136,14 @@ static bool name2id(const struct gsh_buffdesc *name, uint32_t *id, bool group,
 		return true;
 	}
 
-	/* Something we can mutate and count on as terminated */
-	namebuff = alloca(name->len + 1);
-	memcpy(namebuff, name->addr, name->len);
-	*(namebuff + name->len) = '\0';
-	at = memchr(namebuff, '@', name->len);
+	/* pwentname2id() overwrites the '@', so work on a copy */
+	namebuff = alloca(name_len + 1);
+	memcpy(namebuff, name, name_len + 1);
+	at = strchr(namebuff, '@');
 
 	if (at == NULL) {
 		/* we dont have at, we may have a numeric id*/
-		if (atless2id(namebuff, name->len, id, anon))
+		if (atless2id(namebuff, name_len, id, anon))
 			looked_up = true;
 		else if (nfs_param.nfsv4_param.use_getpwnam)
 			looked_up = pwentname2id(namebuff, id, group, &gid,
@@ -1159,7 +1154,7 @@ static bool name2id(const struct gsh_buffdesc *name, uint32_t *id, bool group,
 		looked_up =
 			pwentname2id(namebuff, id, group, &gid, &got_gid, at);
 	} else {
-		looked_up = idmapname2id(namebuff, name->len, id, anon, group,
+		looked_up = idmapname2id(namebuff, name_len, id, anon, group,
 					 &gid, &got_gid, at);
 	}
 
@@ -1196,7 +1191,7 @@ static bool name2id(const struct gsh_buffdesc *name, uint32_t *id, bool group,
  * @return true if successful, false otherwise
  *
  */
-bool name2uid(const struct gsh_buffdesc *name, uid_t *uid, const uid_t anon)
+bool name2uid(const char *name, uid_t *uid, const uid_t anon)
 {
 	return name2id(name, uid, false, anon);
 }
@@ -1210,7 +1205,7 @@ bool name2uid(const struct gsh_buffdesc *name, uid_t *uid, const uid_t anon)
  *
  * @return true  if successful, false otherwise
  */
-bool name2gid(const struct gsh_buffdesc *name, gid_t *gid, const gid_t anon)
+bool name2gid(const char *name, gid_t *gid, const gid_t anon)
 {
 	return name2id(name, gid, true, anon);
 }
@@ -1294,7 +1289,7 @@ void reset_auth_stats(void)
 		 * root/<host>
 		 * host/<host>
 		 * choice is made to map them to root based on config setting */
-bool is_root_principal(struct gsh_buffdesc *princbuff)
+bool is_root_principal(const char *principal)
 {
 	static const char *KERBEROS_PRINCIPAL_NFS = "nfs/";
 	static const char *KERBEROS_PRINCIPAL_ROOT = "root/";
@@ -1305,24 +1300,18 @@ bool is_root_principal(struct gsh_buffdesc *princbuff)
 	if (root_kerberos_principal & ROOT_KERBEROS_PRINCIPAL_NONE)
 		return false;
 
-	if (princbuff->len < 4)
-		return false;
-
 	if (root_kerberos_principal & ROOT_KERBEROS_PRINCIPAL_NFS &&
-	    !memcmp(princbuff->addr, KERBEROS_PRINCIPAL_NFS, 4)) {
+	    !strncmp(principal, KERBEROS_PRINCIPAL_NFS, 4)) {
 		return true;
 	}
 
-	if (princbuff->len < 5)
-		return false;
-
 	if (root_kerberos_principal & ROOT_KERBEROS_PRINCIPAL_ROOT &&
-	    !memcmp(princbuff->addr, KERBEROS_PRINCIPAL_ROOT, 5)) {
+	    !strncmp(principal, KERBEROS_PRINCIPAL_ROOT, 5)) {
 		return true;
 	}
 
 	if (root_kerberos_principal & ROOT_KERBEROS_PRINCIPAL_HOST &&
-	    !memcmp(princbuff->addr, KERBEROS_PRINCIPAL_HOST, 5)) {
+	    !strncmp(principal, KERBEROS_PRINCIPAL_HOST, 5)) {
 		return true;
 	}
 
@@ -1359,8 +1348,6 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 	const gid_t *gss_gidres = NULL;
 	bool success;
 	uint principal_len = strlen(principal);
-	struct gsh_buffdesc princbuff = { .addr = principal,
-					  .len = principal_len };
 
 	if (!idmapping_enabled) {
 		LogWarn(COMPONENT_IDMAPPER,
@@ -1369,7 +1356,7 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 	}
 
 	PTHREAD_RWLOCK_rdlock(&idmapper_user_lock);
-	success = idmapper_lookup_by_uname(&princbuff, &gss_uid, &gss_gidres,
+	success = idmapper_lookup_by_uname(principal, &gss_uid, &gss_gidres,
 					   true);
 
 	/* We do need uid and gid. If gid is not in the cache, treat it as a
@@ -1384,13 +1371,13 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 
 	/* Lookup negative cache */
 	PTHREAD_RWLOCK_rdlock(&idmapper_negative_cache_user_lock);
-	success = idmapper_negative_cache_lookup_user_by_name(&princbuff);
+	success = idmapper_negative_cache_lookup_user_by_name(principal);
 	PTHREAD_RWLOCK_unlock(&idmapper_negative_cache_user_lock);
 
 	if (success)
 		return false;
 
-	if (is_root_principal(&princbuff)) {
+	if (is_root_principal(principal)) {
 		/* This is a "root" request made from the
 		 * host based NFS principal, use root */
 		*uid = 0;
@@ -1552,7 +1539,7 @@ bool principal2uid(char *principal, uid_t *uid, gid_t *gid)
 	}
 
 principal_found:
-	add_user_to_cache(&princbuff, gss_uid, &gss_gid, true);
+	add_user_to_cache(principal, gss_uid, &gss_gid, true);
 
 out:
 	*uid = gss_uid;
@@ -1560,7 +1547,7 @@ out:
 	return true;
 
 principal_not_found:
-	add_user_to_negative_cache(&princbuff);
+	add_user_to_negative_cache(principal);
 
 	return false;
 }

@@ -56,7 +56,7 @@
  * @brief User entry in the IDMapper cache
  */
 struct cache_user {
-	struct gsh_buffdesc uname; /*< Username */
+	const char *uname; /*< Username */
 	uid_t uid; /*< Corresponding UID */
 	gid_t gid; /*< Corresponding GID */
 	bool gid_set; /*< if the GID has been set */
@@ -77,7 +77,7 @@ struct cache_user {
  */
 
 struct cache_group {
-	struct gsh_buffdesc gname; /*< Group name */
+	const char *gname; /*< Group name */
 	gid_t gid; /*< Group ID */
 	struct avltree_node gname_node; /*< Node in the name tree */
 	struct avltree_node gid_node; /*< Node in the GID tree */
@@ -185,7 +185,7 @@ static int uname_comparator(const struct avltree_node *node1,
 	struct cache_user *usera =
 		avltree_container_of(nodea, struct cache_user, uname_node);
 
-	return gsh_buffdesc_comparator(&user1->uname, &usera->uname);
+	return strcmp(user1->uname, usera->uname);
 }
 
 /**
@@ -234,7 +234,7 @@ static inline int gname_comparator(const struct avltree_node *node1,
 	struct cache_group *groupa =
 		avltree_container_of(nodea, struct cache_group, gname_node);
 
-	return gsh_buffdesc_comparator(&group1->gname, &groupa->gname);
+	return strcmp(group1->gname, groupa->gname);
 }
 
 /**
@@ -403,22 +403,24 @@ void idmapper_cache_init(void)
  * @retval false if our reach exceeds our grasp.
  */
 
-bool idmapper_add_user(const struct gsh_buffdesc *name, uid_t uid,
-		       const gid_t *gid, bool gss_princ)
+bool idmapper_add_user(const char *name, uid_t uid, const gid_t *gid,
+		       bool gss_princ)
 {
 	struct avltree_node *found_name;
 	struct avltree_node *found_id;
 	struct cache_user *old;
 	struct cache_user *new;
 	struct cache_user *user_fifo_queue_head_node;
+	size_t name_len = strlen(name);
+	char *uname;
 
-	new = gsh_malloc(sizeof(struct cache_user) + name->len,
+	new = gsh_malloc(sizeof(struct cache_user) + name_len + 1,
 			 MEM_COMP_IDMAPPER);
 	new->epoch = time(NULL);
-	new->uname.addr = (char *)new + sizeof(struct cache_user);
-	new->uname.len = name->len;
+	uname = (char *)new + sizeof(struct cache_user);
+	memcpy(uname, name, name_len + 1);
+	new->uname = uname;
 	new->uid = uid;
-	memcpy(new->uname.addr, name->addr, name->len);
 	if (gid) {
 		new->gid = *gid;
 		new->gid_set = true;
@@ -525,21 +527,23 @@ add_to_queue:
  * @retval false if our reach exceeds our grasp.
  */
 
-bool idmapper_add_group(const struct gsh_buffdesc *name, const gid_t gid)
+bool idmapper_add_group(const char *name, const gid_t gid)
 {
 	struct avltree_node *found_name;
 	struct avltree_node *found_id;
 	struct cache_group *tmp;
 	struct cache_group *new;
 	struct cache_group *group_fifo_queue_head_node;
+	size_t name_len = strlen(name);
+	char *gname;
 
-	new = gsh_malloc(sizeof(struct cache_group) + name->len,
+	new = gsh_malloc(sizeof(struct cache_group) + name_len + 1,
 			 MEM_COMP_IDMAPPER);
 	new->epoch = time(NULL);
-	new->gname.addr = (char *)new + sizeof(struct cache_group);
-	new->gname.len = name->len;
+	gname = (char *)new + sizeof(struct cache_group);
+	memcpy(gname, name, name_len + 1);
+	new->gname = gname;
 	new->gid = gid;
-	memcpy(new->gname.addr, name->addr, name->len);
 
 	/*
 	 * The threads that lookup by-name or by-id use the read lock. If
@@ -612,10 +616,10 @@ bool idmapper_add_group(const struct gsh_buffdesc *name, const gid_t gid)
  * @retval false if we need to try, try again.
  */
 
-bool idmapper_lookup_by_uname(const struct gsh_buffdesc *name, uid_t *uid,
-			      const gid_t **gid, bool gss_princ)
+bool idmapper_lookup_by_uname(const char *name, uid_t *uid, const gid_t **gid,
+			      bool gss_princ)
 {
-	struct cache_user prototype = { .uname = *name };
+	struct cache_user prototype = { .uname = name };
 	struct avltree_node *found_node =
 		avltree_lookup(&prototype.uname_node, &uname_tree);
 	struct cache_user *found_user;
@@ -667,7 +671,7 @@ bool idmapper_lookup_by_uname(const struct gsh_buffdesc *name, uid_t *uid,
  * @retval false if we weren't so successful.
  */
 
-bool idmapper_lookup_by_uid(const uid_t uid, const struct gsh_buffdesc **name,
+bool idmapper_lookup_by_uid(const uid_t uid, const char **name,
 			    const gid_t **gid)
 {
 	struct cache_user prototype = { .uid = uid };
@@ -694,7 +698,7 @@ bool idmapper_lookup_by_uid(const uid_t uid, const struct gsh_buffdesc **name,
 	}
 
 	if (likely(name))
-		*name = &found_user->uname;
+		*name = found_user->uname;
 
 	if (gid)
 		*gid = (found_user->gid_set ? &found_user->gid : NULL);
@@ -720,9 +724,9 @@ bool idmapper_lookup_by_uid(const uid_t uid, const struct gsh_buffdesc **name,
  * @retval false if we need to try, try again.
  */
 
-bool idmapper_lookup_by_gname(const struct gsh_buffdesc *name, uid_t *gid)
+bool idmapper_lookup_by_gname(const char *name, uid_t *gid)
 {
-	struct cache_group prototype = { .gname = *name };
+	struct cache_group prototype = { .gname = name };
 	struct avltree_node *found_node =
 		avltree_lookup(&prototype.gname_node, &gname_tree);
 	struct cache_group *found_group;
@@ -765,7 +769,7 @@ bool idmapper_lookup_by_gname(const struct gsh_buffdesc *name, uid_t *gid)
  * @retval false if we're most unfortunate.
  */
 
-bool idmapper_lookup_by_gid(const gid_t gid, const struct gsh_buffdesc **name)
+bool idmapper_lookup_by_gid(const gid_t gid, const char **name)
 {
 	struct cache_group prototype = { .gid = gid };
 	void **cache_slot = (void **)&gid_cache[gid % id_cache_size];
@@ -793,7 +797,7 @@ bool idmapper_lookup_by_gid(const gid_t gid, const struct gsh_buffdesc **name)
 	}
 
 	if (likely(name))
-		*name = &found_group->gname;
+		*name = found_group->gname;
 	else
 		LogDebug(COMPONENT_IDMAPPER, "Caller is being weird.");
 
@@ -899,8 +903,7 @@ static bool show_idmapper_users(DBusMessageIter *args, DBusMessage *reply,
 					    uname_node);
 		dbus_message_iter_open_container(&sub_iter, DBUS_TYPE_STRUCT,
 						 NULL, &id_iter);
-		snprintf(namebuff, MIN(user->uname.len + 1, 256), "%s",
-			 (char *)user->uname.addr);
+		snprintf(namebuff, 256, "%s", user->uname);
 		dbus_message_iter_append_basic(&id_iter, DBUS_TYPE_STRING,
 					       &namebuff);
 		val = user->uid;
@@ -956,8 +959,7 @@ static bool show_idmapper_groups(DBusMessageIter *args, DBusMessage *reply,
 					     gname_node);
 		dbus_message_iter_open_container(&sub_iter, DBUS_TYPE_STRUCT,
 						 NULL, &id_iter);
-		snprintf(namebuff, MIN(group->gname.len + 1, 256), "%s",
-			 (char *)group->gname.addr);
+		snprintf(namebuff, 256, "%s", group->gname);
 		dbus_message_iter_append_basic(&id_iter, DBUS_TYPE_STRING,
 					       &namebuff);
 		val = group->gid;
@@ -1009,10 +1011,10 @@ void grpc_fill_idmapper_users(struct grpc_idmapper_user_list *list)
 		user = avltree_container_of(node, struct cache_user,
 					    uname_node);
 
-		size_t len = MIN(user->uname.len,
+		size_t len = MIN(strlen(user->uname),
 				 sizeof(list->entries[index].name) - 1);
 
-		memcpy(list->entries[index].name, user->uname.addr, len);
+		memcpy(list->entries[index].name, user->uname, len);
 
 		list->entries[index].name[len] = '\0';
 
@@ -1052,10 +1054,10 @@ void grpc_fill_idmapper_groups(struct grpc_idmapper_group_list *list)
 		group = avltree_container_of(node, struct cache_group,
 					     gname_node);
 
-		size_t len = MIN(group->gname.len,
+		size_t len = MIN(strlen(group->gname),
 				 sizeof(list->entries[index].name) - 1);
 
-		memcpy(list->entries[index].name, group->gname.addr, len);
+		memcpy(list->entries[index].name, group->gname, len);
 
 		list->entries[index].name[len] = '\0';
 		list->entries[index].gid = group->gid;
