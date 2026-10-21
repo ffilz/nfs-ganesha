@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e46a7b_efa21c88",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1038387
+      },
+      "writtenOn": "2026-10-21T19:54:24Z",
+      "side": 1,
+      "message": "What value is expected for Bind_Addr in RDMA deployments? Should users configure a specific IP address or a wildcard address (for example, the default wildcard bind)?\n\nOne concern is that a Ganesha server may have multiple RDMA-capable interfaces, potentially backed by different vendors (for example, RoCE and iWARP). If Bind_Addr is configured with a specific interface address, the RDMA listener may become restricted to that interface, which could prevent clients on the other RDMA network from connecting.\n\nI have not tested this scenario, so I\u0027m not sure whether the underlying RDMA stack still exposes all devices in this configuration. If this use case is supported, it may be worth documenting that administrators should use a wildcard bind address rather than a specific IP address when they want NFS/RDMA to be reachable through multiple RDMA interfaces.",
+      "range": {
+        "startLine": 706,
+        "startChar": 47,
+        "endLine": 706,
+        "endChar": 49
+      },
+      "revId": "b15abbca48869971d64f973d9175ecae5926d9e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
