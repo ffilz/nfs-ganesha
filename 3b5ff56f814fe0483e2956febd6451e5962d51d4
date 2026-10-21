@@ -88,6 +88,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a1932fa_56c28e9d",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-10-21T07:09:54Z",
+      "side": 1,
+      "message": "A wildcard Grpc_Addr is replaced only in the listen string. nfs_param.grpc_param.grpc_addr stays 0.0.0.0, and nfs_init logs that address before grpc__init(). Should the configured address be updated as well, or should local require an explicit 127.0.0.1 or ::1?",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd82e1c0_c0f5cd09",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 4
