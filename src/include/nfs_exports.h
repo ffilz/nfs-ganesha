@@ -206,8 +206,8 @@ struct exportlist_client_entry {
 #define EXPORT_OPTION_UDP 0x01000000 /*< UDP protocol is supported */
 #define EXPORT_OPTION_TCP 0x02000000 /*< TCP protocol is supported */
 #define EXPORT_OPTION_RDMA 0x04000000 /*< RDMA protocol is supported */
-#define EXPORT_OPTION_PROTOCOLS \
-	(EXPORT_OPTION_NFSV3 | EXPORT_OPTION_NFSV4)
+#define EXPORT_OPTION_XATTR 0x08000000 /*< xattr is supported */
+#define EXPORT_OPTION_PROTOCOLS (EXPORT_OPTION_NFSV3 | EXPORT_OPTION_NFSV4)
 #define EXPORT_OPTION_PROTO_DEFAULTS (EXPORT_OPTION_NFSV3 | EXPORT_OPTION_NFSV4)
 #define EXPORT_OPTION_TRANSPORTS \
 	(EXPORT_OPTION_UDP | EXPORT_OPTION_TCP | EXPORT_OPTION_RDMA)
@@ -225,7 +225,7 @@ struct exportlist_client_entry {
 						    altgrp in AUTH_SYS creds */
 #define EXPORT_OPTION_NO_READDIR_PLUS 0x80000000 /*< Disallow readdir plus */
 
-#define EXPORT_OPTION_PERM_UNUSED 0x08800000
+#define EXPORT_OPTION_PERM_UNUSED 0x00800000
 
 #define ACCESS_CHECK_POLICY_PRE (1 << 0)
 #define ACCESS_CHECK_POLICY_POST (1 << 1)
