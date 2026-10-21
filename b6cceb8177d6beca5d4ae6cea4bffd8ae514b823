@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf97ed9_ddaaac4d",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-21T19:04:42Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\"Deferring reap of dir entry %p (fileid %\" PRIu64",
+      "revId": "b6cceb8177d6beca5d4ae6cea4bffd8ae514b823",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a86f7d0c_98270b38",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-21T19:04:42Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t/* Caller may veto this candidate (e.g. skip_populate_dir",
+      "revId": "b6cceb8177d6beca5d4ae6cea4bffd8ae514b823",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18430fef_2d62ec3e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-21T19:04:42Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t * prevents reclaiming entries that belong to a directory",
+      "revId": "b6cceb8177d6beca5d4ae6cea4bffd8ae514b823",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1abd6ff_cf95f4c6",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-21T19:04:42Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t * chunks with live caller references.  Those chunks hold",
+      "revId": "b6cceb8177d6beca5d4ae6cea4bffd8ae514b823",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "681ec3c3_0707ad9e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-21T19:04:42Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\t\t * mdcache_clean_dirent_chunk() dereferences chunk-\u003eparent.",
+      "revId": "b6cceb8177d6beca5d4ae6cea4bffd8ae514b823",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eee52a4_056ce175",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-21T19:04:42Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t\t\t * This manifests as glist_del(\u0026chunk-\u003echunks) writing the",
+      "revId": "b6cceb8177d6beca5d4ae6cea4bffd8ae514b823",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
