@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59d0d6f8_43541fa8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-21T23:58:15Z",
+      "side": 1,
+      "message": "In general, maybe a bit more comments, or maybe an implementation note comment at the top of namedattr.c would help. The logic can be followed and looks good, just make it a bit easier for future readers.",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e11084ed_84fbbdb0",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1224,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-21T23:58:15Z",
+      "side": 1,
+      "message": "What about a link out of a named attribute directory?",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c8a7fc9_300b002b",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1564,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-21T23:58:15Z",
+      "side": 1,
+      "message": "What about rename out of a named attribute directory?",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8b2be33_30c0f452",
+        "filename": "src/FSAL/FSAL_VFS/namedattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-21T23:58:15Z",
+      "side": 1,
+      "message": "Need a copyright statement not just license",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff98b75e_ab6771cc",
+        "filename": "src/FSAL/FSAL_VFS/namedattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-21T23:58:15Z",
+      "side": 1,
+      "message": "This implementation needs to have something that keys it as Linux specific. In theory we also support FreeBSD.",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e42b5e2_88d58eea",
+        "filename": "src/FSAL/FSAL_VFS/namedattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-21T23:58:15Z",
+      "side": 1,
+      "message": "There is some trickiness as to how you accomplish a setattr(size). Please add some comments to make it clear to the reader.",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f1de969_bac5f0be",
+        "filename": "src/FSAL/FSAL_VFS/namedattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-21T23:58:15Z",
+      "side": 1,
+      "message": "Is this per RFC that any setattr other than size is ignored and doesn\u0027t cause an error?",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8548cab9_1a60e0ca",
+        "filename": "src/FSAL/FSAL_VFS/namedattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1305,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-21T23:58:15Z",
+      "side": 1,
+      "message": "Is this non-support a problem? We COULD make a copy of the named attribute on link.",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
