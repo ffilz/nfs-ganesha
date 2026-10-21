@@ -424,13 +424,14 @@ out:
  * @param[in]  export        Export on which the object lives
  * @param[in]  objhandle     Object
  * @param[in]  is_dir        True when object type is directory
+ * @param[in]  mode          Mode bits of the object
  * @param[out] attrs         Attributes
  *
  * @return 0 on success, negative error codes on failure.
  */
 
 int ceph_get_acl(struct ceph_export *export, struct ceph_handle *objhandle,
-		 bool is_dir, struct fsal_attrlist *attrs)
+		 bool is_dir, mode_t mode, struct fsal_attrlist *attrs)
 {
 	acl_t e_acl = NULL, i_acl = NULL;
 	fsal_acl_data_t acldata;
@@ -445,7 +446,6 @@ int ceph_get_acl(struct ceph_export *export, struct ceph_handle *objhandle,
 			 ACL_EA_ACCESS);
 		goto out;
 	}
-	e_count = ace_count(e_acl);
 
 	if (is_dir) {
 		rc = ceph_get_posix_acl(export, objhandle, ACL_EA_DEFAULT,
@@ -457,6 +457,21 @@ int ceph_get_acl(struct ceph_export *export, struct ceph_handle *objhandle,
 			i_count = ace_count(i_acl);
 		}
 	}
+
+	/* CephFS does not store the access ACL xattr when it is equivalent to
+	 * the mode bits (trivial ACL). Synthesize it from the mode so that the
+	 * OWNER@, GROUP@ and EVERYONE@ ACEs are not lost.
+	 */
+	if (i_count && e_acl == NULL) {
+		e_acl = acl_from_mode(mode);
+		if (e_acl == NULL) {
+			LogWarn(COMPONENT_FSAL,
+				"failed to build posix acl from mode %o: %d",
+				(unsigned int)mode, errno);
+		}
+	}
+
+	e_count = ace_count(e_acl);
 
 	acldata.naces = 2 * (e_count + i_count);
 	LogDebug(COMPONENT_FSAL, "No of aces present in fsal_acl_t = %d",
