@@ -305,6 +305,12 @@ Disable_ACL(bool, default false)
     Disable_ACL is processed at create_export time currently
     which makes it effectively a static option.
 
+Xattr_Support(bool, default true)
+    Currently only used by FSAL_GPFS. Xattr is enabled for the export only
+    if the FSAL level xattr_support is also true, setting this to false
+    disables xattr for this export. It is processed at create_export time
+    currently which makes it effectively a static option.
+
 Security_Label(bool, default false)
 
 Attr_Expiration_Time(int32, range -1 to INT32_MAX, default 60)

@@ -105,6 +105,7 @@ struct exportlist_client_entry {
 #define EXPORT_OPTION_SECLABEL_SET \
 	0x00000100 /* Set if export supports v4.2
 						 security labels */
+#define EXPORT_OPTION_XATTR 0x00000200 /* xattr is enabled for the export */
 
 /* Constants for export permissions masks */
 #define EXPORT_OPTION_ROOT 0 /*< Allow root access as root uid */
@@ -206,8 +207,7 @@ struct exportlist_client_entry {
 #define EXPORT_OPTION_UDP 0x01000000 /*< UDP protocol is supported */
 #define EXPORT_OPTION_TCP 0x02000000 /*< TCP protocol is supported */
 #define EXPORT_OPTION_RDMA 0x04000000 /*< RDMA protocol is supported */
-#define EXPORT_OPTION_PROTOCOLS \
-	(EXPORT_OPTION_NFSV3 | EXPORT_OPTION_NFSV4)
+#define EXPORT_OPTION_PROTOCOLS (EXPORT_OPTION_NFSV3 | EXPORT_OPTION_NFSV4)
 #define EXPORT_OPTION_PROTO_DEFAULTS (EXPORT_OPTION_NFSV3 | EXPORT_OPTION_NFSV4)
 #define EXPORT_OPTION_TRANSPORTS \
 	(EXPORT_OPTION_UDP | EXPORT_OPTION_TCP | EXPORT_OPTION_RDMA)
