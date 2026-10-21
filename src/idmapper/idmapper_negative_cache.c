@@ -56,7 +56,7 @@ typedef enum negative_cache_entity_type {
 /* Struct representing a user or group entry in the negative cache */
 typedef struct negative_cache_entity {
 	union {
-		struct gsh_buffdesc name; /*< Entity name */
+		const char *name; /*< Entity name */
 		uid_t uid;
 	};
 	struct avltree_node name_node; /*< Entity tree node */
@@ -233,7 +233,7 @@ static int node_name_comparator(const struct avltree_node *node1,
 	negative_cache_entity_t *entity2 =
 		avltree_container_of(node2, negative_cache_entity_t, name_node);
 
-	return gsh_buffdesc_comparator(&entity1->name, &entity2->name);
+	return strcmp(entity1->name, entity2->name);
 }
 
 /*
@@ -337,8 +337,7 @@ void idmapper_negative_cache_add_user_by_uid(uid_t uid)
  * @param[in] entity_type The entity's type for insertion
  */
 static void idmapper_negative_cache_add_entity_by_name(
-	const struct gsh_buffdesc *name,
-	negative_cache_entity_type_t entity_type)
+	const char *name, negative_cache_entity_type_t entity_type)
 {
 	struct avltree *cache_tree;
 	struct avltree_node *old_node;
@@ -347,12 +346,12 @@ static void idmapper_negative_cache_add_entity_by_name(
 	uint32_t max_cache_entities;
 	char *entity_type_string;
 	idmapping_cache_entity_t idmapping_cache_entity;
+	size_t name_len = strlen(name);
 
-	new_entity = gsh_malloc(sizeof(negative_cache_entity_t) + name->len,
+	new_entity = gsh_malloc(sizeof(negative_cache_entity_t) + name_len + 1,
 				MEM_COMP_IDMAPPER);
-	new_entity->name.addr = new_entity->name_buffer;
-	new_entity->name.len = name->len;
-	memcpy(new_entity->name.addr, name->addr, name->len);
+	memcpy(new_entity->name_buffer, name, name_len + 1);
+	new_entity->name = new_entity->name_buffer;
 	new_entity->epoch = time(NULL);
 
 	switch (entity_type) {
@@ -421,7 +420,7 @@ static void idmapper_negative_cache_add_entity_by_name(
  *
  * @param[in] name The user's name for insertion
  */
-void idmapper_negative_cache_add_user_by_name(const struct gsh_buffdesc *name)
+void idmapper_negative_cache_add_user_by_name(const char *name)
 {
 	idmapper_negative_cache_add_entity_by_name(name, USERNAME);
 }
@@ -433,7 +432,7 @@ void idmapper_negative_cache_add_user_by_name(const struct gsh_buffdesc *name)
  *
  * @param[in] name The group name
  */
-void idmapper_negative_cache_add_group_by_name(const struct gsh_buffdesc *name)
+void idmapper_negative_cache_add_group_by_name(const char *name)
 {
 	idmapper_negative_cache_add_entity_by_name(name, GROUP);
 }
@@ -480,13 +479,12 @@ bool idmapper_negative_cache_lookup_user_by_uid(uid_t uid)
  * @return true on success, false otherwise.
  */
 static bool idmapper_negative_cache_lookup_entity_by_name(
-	const struct gsh_buffdesc *name,
-	negative_cache_entity_type_t entity_type)
+	const char *name, negative_cache_entity_type_t entity_type)
 {
 	struct avltree *cache_tree;
 	struct avltree_node *cache_node;
 	negative_cache_entity_t *cache_entity;
-	negative_cache_entity_t prototype = { .name = *name };
+	negative_cache_entity_t prototype = { .name = name };
 	bool is_cache_hit;
 
 	switch (entity_type) {
@@ -543,7 +541,7 @@ static bool idmapper_negative_cache_lookup_entity_by_name(
  *
  * @return true on success, false otherwise.
  */
-bool idmapper_negative_cache_lookup_user_by_name(const struct gsh_buffdesc *name)
+bool idmapper_negative_cache_lookup_user_by_name(const char *name)
 {
 	return idmapper_negative_cache_lookup_entity_by_name(name, USERNAME);
 }
@@ -557,8 +555,7 @@ bool idmapper_negative_cache_lookup_user_by_name(const struct gsh_buffdesc *name
  *
  * @return true on success, false otherwise.
  */
-bool idmapper_negative_cache_lookup_group_by_name(
-	const struct gsh_buffdesc *name)
+bool idmapper_negative_cache_lookup_group_by_name(const char *name)
 {
 	return idmapper_negative_cache_lookup_entity_by_name(name, GROUP);
 }
@@ -680,8 +677,7 @@ static bool show_idmapper_negative_cache_entity(
 		switch (entity_type) {
 		case USERNAME: // fall-through
 		case GROUP: // fall-through
-			snprintf(namebuff, MIN(entry->name.len + 1, 256), "%s",
-				 (char *)entry->name.addr);
+			snprintf(namebuff, 256, "%s", entry->name);
 			break;
 		case UID:
 			snprintf(namebuff, 256, "%d", entry->uid);
@@ -815,11 +811,10 @@ static void grpc_fill_negative_cache(negative_cache_entity_type_t entity_type,
 				 sizeof(list->entries[index].name), "%u",
 				 entry->uid);
 		} else {
-			size_t len = MIN(entry->name.len,
+			size_t len = MIN(strlen(entry->name),
 					 sizeof(list->entries[index].name) - 1);
 
-			memcpy(list->entries[index].name, entry->name.addr,
-			       len);
+			memcpy(list->entries[index].name, entry->name, len);
 
 			list->entries[index].name[len] = '\0';
 		}

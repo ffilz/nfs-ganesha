@@ -240,20 +240,16 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 
 /* Allocate and fill in group_data structure */
 static struct group_data *
-uid2grp_allocate_by_name(const struct gsh_buffdesc *name)
+uid2grp_allocate_by_name(const char *name)
 {
 	struct passwd p;
 	struct passwd *pp;
-	char *namebuff = alloca(name->len + 1);
 	struct group_data *gdata = NULL;
 	char *buff;
 	size_t buff_size;
 	int retval;
 	struct timespec s_time, e_time;
 	size_t uname_len;
-
-	memcpy(namebuff, name->addr, name->len);
-	*(namebuff + name->len) = '\0';
 
 	buff_size = sysconf(_SC_GETPW_R_SIZE_MAX);
 	if (buff_size == -1) {
@@ -264,7 +260,7 @@ uid2grp_allocate_by_name(const struct gsh_buffdesc *name)
 	while (buff_size <= PWENT_MAX_SIZE) {
 		buff = gsh_malloc(buff_size, MEM_COMP_IDMAPPER);
 		now_mono(&s_time);
-		retval = pwnam_wrappers__getpwnam_r(namebuff, &p, buff,
+		retval = pwnam_wrappers__getpwnam_r(name, &p, buff,
 						    buff_size, &pp);
 		now_mono(&e_time);
 		idmapper_monitoring__external_request(
@@ -273,7 +269,7 @@ uid2grp_allocate_by_name(const struct gsh_buffdesc *name)
 		GSH_AUTO_TRACEPOINT(
 			uid2grp, getpwnam_r_call, TRACE_INFO,
 			"getpwnam_r returned: {} for uname: {}", retval,
-			TP_BYTE_ARR_TRUNCATED(name->addr, name->len));
+			TP_BYTE_ARR_TRUNCATED(name, strlen(name)));
 
 		if (retval != ERANGE)
 			break;
@@ -284,48 +280,47 @@ uid2grp_allocate_by_name(const struct gsh_buffdesc *name)
 	if (retval == ERANGE) {
 		LogWarn(COMPONENT_IDMAPPER,
 			"Received ERANGE when fetching pw-entry from name: %s",
-			namebuff);
+			name);
 		GSH_AUTO_TRACEPOINT(
 			uid2grp, getpwnam_r_failed, TRACE_INFO,
 			"getpwnam_r for uname={} failed with ERANGE",
-			TP_BYTE_ARR_TRUNCATED(name->addr, name->len));
+			TP_BYTE_ARR_TRUNCATED(name, strlen(name)));
 		return NULL;
 	}
 
 	if (retval != 0) {
 		LogEvent(COMPONENT_IDMAPPER,
-			 "getpwnam_r for %s failed, error %d", namebuff,
+			 "getpwnam_r for %s failed, error %d", name,
 			 retval);
 		GSH_AUTO_TRACEPOINT(
 			uid2grp, getpwnam_r_failed1, TRACE_INFO,
 			"getpwnam_r for uname={} failed, retval={}",
-			TP_BYTE_ARR_TRUNCATED(name->addr, name->len), retval);
+			TP_BYTE_ARR_TRUNCATED(name, strlen(name)), retval);
 		goto out;
 	}
 	if (pp == NULL) {
 		LogEvent(COMPONENT_IDMAPPER,
 			 "No matching password record found for name %s",
-			 namebuff);
+			 name);
 		GSH_AUTO_TRACEPOINT(
 			uid2grp, no_passwd_record, TRACE_INFO,
 			"No matching password record found for uname {}",
-			TP_BYTE_ARR_TRUNCATED(name->addr, name->len));
+			TP_BYTE_ARR_TRUNCATED(name, strlen(name)));
 		goto out;
 	}
 
 	uname_len = strlen(p.pw_name);
 	LogInfo(COMPONENT_IDMAPPER, "getpwnam_r for uname: %s, uid: %d gid: %d",
-		namebuff, p.pw_uid, p.pw_gid);
+		name, p.pw_uid, p.pw_gid);
 	GSH_AUTO_TRACEPOINT(uid2grp, getpwnam_r_call1, TRACE_INFO,
 			    "getpwnam_r for uid: {}, gid: {}, uname: {}",
 			    p.pw_uid, p.pw_gid,
 			    TP_BYTE_ARR_TRUNCATED(p.pw_name, uname_len));
 
-	gdata = gsh_malloc(sizeof(struct group_data) + uname_len,
+	gdata = gsh_malloc(sizeof(struct group_data) + uname_len + 1,
 			   MEM_COMP_IDMAPPER);
-	gdata->uname.len = uname_len;
-	gdata->uname.addr = (char *)gdata + sizeof(struct group_data);
-	memcpy(gdata->uname.addr, p.pw_name, gdata->uname.len);
+	gdata->uname = (char *)gdata + sizeof(struct group_data);
+	memcpy(gdata->uname, p.pw_name, uname_len + 1);
 	gdata->uid = p.pw_uid;
 	gdata->gid = p.pw_gid;
 
@@ -428,11 +423,10 @@ static struct group_data *uid2grp_allocate_by_uid(uid_t uid)
 			    p.pw_gid,
 			    TP_BYTE_ARR_TRUNCATED(p.pw_name, uname_len));
 
-	gdata = gsh_malloc(sizeof(struct group_data) + uname_len,
+	gdata = gsh_malloc(sizeof(struct group_data) + uname_len + 1,
 			   MEM_COMP_IDMAPPER);
-	gdata->uname.len = uname_len;
-	gdata->uname.addr = (char *)gdata + sizeof(struct group_data);
-	memcpy(gdata->uname.addr, p.pw_name, gdata->uname.len);
+	gdata->uname = (char *)gdata + sizeof(struct group_data);
+	memcpy(gdata->uname, p.pw_name, uname_len + 1);
 	gdata->uid = p.pw_uid;
 	gdata->gid = p.pw_gid;
 
@@ -564,11 +558,8 @@ static struct group_data *uid2grp_allocate_by_principal(char *principal,
 	grpdata = gsh_malloc(sizeof(struct group_data) + principal_len + 1,
 			     MEM_COMP_IDMAPPER);
 	/* We populate principal as the uname here */
-	grpdata->uname.len = principal_len;
-	grpdata->uname.addr = (char *)grpdata + sizeof(struct group_data);
-	memcpy(grpdata->uname.addr, principal, grpdata->uname.len);
-	/* Null-terminate the uname string */
-	((char *)grpdata->uname.addr)[grpdata->uname.len] = 0;
+	grpdata->uname = (char *)grpdata + sizeof(struct group_data);
+	memcpy(grpdata->uname, principal, principal_len + 1);
 	grpdata->uid = uid;
 	grpdata->gid = gid;
 	grpdata->groups = groups;
@@ -625,7 +616,7 @@ static void add_user_groups_to_cache(struct group_data **gdata)
  *
  * @return true if successful, false otherwise
  */
-bool uname2grp(const struct gsh_buffdesc *name, struct group_data **gdata)
+bool uname2grp(const char *name, struct group_data **gdata)
 {
 	bool success = false;
 	bool is_cache_hit = false;
@@ -782,8 +773,7 @@ bool principal2grp(char *principal, struct group_data **gdata, const uid_t uid,
 	bool success = false;
 	bool is_cache_hit = false;
 	uid_t unused_cached_uid = -1;
-	struct gsh_buffdesc princbuff = { .addr = principal,
-					  .len = strlen(principal) };
+
 	LogDebug(COMPONENT_IDMAPPER, "Resolve principal %s to groups",
 		 principal);
 
@@ -794,8 +784,7 @@ bool principal2grp(char *principal, struct group_data **gdata, const uid_t uid,
 	}
 
 	PTHREAD_RWLOCK_rdlock(&uid2grp_user_lock);
-	success =
-		uid2grp_lookup_by_uname(&princbuff, &unused_cached_uid, gdata);
+	success = uid2grp_lookup_by_uname(principal, &unused_cached_uid, gdata);
 	is_cache_hit = success && !uid2grp_is_group_data_expired(*gdata);
 	idmapper_monitoring__cache_usage(IDMAPPING_USER_GROUPS_CACHE,
 					 is_cache_hit);
@@ -834,7 +823,7 @@ bool principal2grp(char *principal, struct group_data **gdata, const uid_t uid,
 	if (success) {
 		/* Remove expired cache entry */
 		PTHREAD_RWLOCK_wrlock(&uid2grp_user_lock);
-		uid2grp_remove_expired_by_uname(&princbuff);
+		uid2grp_remove_expired_by_uname(principal);
 		PTHREAD_RWLOCK_unlock(&uid2grp_user_lock);
 	}
 	return false;

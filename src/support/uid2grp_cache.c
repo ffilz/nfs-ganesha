@@ -59,7 +59,7 @@
 
 struct cache_info {
 	uid_t uid; /*< Corresponding UID */
-	struct gsh_buffdesc uname;
+	const char *uname;
 	struct group_data *gdata;
 	struct avltree_node uname_node; /*< Node in the name tree */
 	struct avltree_node uid_node; /*< Node in the UID tree */
@@ -133,7 +133,7 @@ static int uname_comparator(const struct avltree_node *node1,
 	struct cache_info *usera =
 		avltree_container_of(nodea, struct cache_info, uname_node);
 
-	return gsh_buffdesc_comparator(&user1->uname, &usera->uname);
+	return strcmp(user1->uname, usera->uname);
 }
 
 /**
@@ -259,8 +259,7 @@ void uid2grp_add_user(struct group_data *gdata)
 	info = gsh_malloc(sizeof(struct cache_info), MEM_COMP_IDMAPPER);
 
 	info->uid = gdata->uid;
-	info->uname.addr = gdata->uname.addr;
-	info->uname.len = gdata->uname.len;
+	info->uname = gdata->uname;
 	info->gdata = gdata;
 
 	/* The refcount on group_data should be 1 when we put it in
@@ -316,10 +315,9 @@ void uid2grp_add_user(struct group_data *gdata)
 		LogWarn(COMPONENT_IDMAPPER, "shouldn't happen, internal error");
 }
 
-static bool lookup_by_uname(const struct gsh_buffdesc *name,
-			    struct cache_info **info)
+static bool lookup_by_uname(const char *name, struct cache_info **info)
 {
-	struct cache_info prototype = { .uname = *name };
+	struct cache_info prototype = { .uname = name };
 	struct avltree_node *found_node =
 		avltree_lookup(&prototype.uname_node, &uname_tree);
 	struct cache_info *found_info;
@@ -393,7 +391,7 @@ static bool lookup_by_uid(const uid_t uid, struct cache_info **info)
  * @retval false if we need to try, try again.
  */
 
-bool uid2grp_lookup_by_uname(const struct gsh_buffdesc *name, uid_t *uid,
+bool uid2grp_lookup_by_uname(const char *name, uid_t *uid,
 			     struct group_data **gdata)
 {
 	struct cache_info *info;
@@ -484,7 +482,7 @@ void uid2grp_remove_expired_by_uid(const uid_t uid)
  * @param[in]  name  The user name to remove.
  */
 
-void uid2grp_remove_by_uname(const struct gsh_buffdesc *name)
+void uid2grp_remove_by_uname(const char *name)
 {
 	struct cache_info *info;
 	bool success;
@@ -502,7 +500,7 @@ void uid2grp_remove_by_uname(const struct gsh_buffdesc *name)
  * @param[in]  name  The user name to remove.
  */
 
-void uid2grp_remove_expired_by_uname(const struct gsh_buffdesc *name)
+void uid2grp_remove_expired_by_uname(const char *name)
 {
 	struct cache_info *info;
 	bool success;
@@ -571,8 +569,7 @@ static bool show_uid2grp(DBusMessageIter *args, DBusMessage *reply,
 					    uname_node);
 		dbus_message_iter_open_container(&sub_iter, DBUS_TYPE_STRUCT,
 						 NULL, &id_iter);
-		snprintf(namebuff, MIN(info->uname.len + 1, 256), "%s",
-			 (char *)info->uname.addr);
+		snprintf(namebuff, 256, "%s", info->uname);
 		dbus_message_iter_append_basic(&id_iter, DBUS_TYPE_STRING,
 					       &namebuff);
 		val = info->uid;
@@ -617,10 +614,10 @@ void grpc_fill_uid2grp(struct grpc_uid2grp_list *list)
 		info = avltree_container_of(node, struct cache_info,
 					    uname_node);
 
-		size_t len = MIN(info->uname.len,
+		size_t len = MIN(strlen(info->uname),
 				 sizeof(list->entries[index].name) - 1);
 
-		memcpy(list->entries[index].name, info->uname.addr, len);
+		memcpy(list->entries[index].name, info->uname, len);
 
 		list->entries[index].name[len] = '\0';
 
