@@ -766,7 +766,7 @@ static fsal_status_t ceph_fsal_getattrs(struct fsal_obj_handle *handle_pub,
 #ifdef CEPHFS_POSIX_ACL
 	if (attrs->request_mask & ATTR_ACL) {
 		is_dir = (bool)(handle_pub->type == DIRECTORY);
-		rc = ceph_get_acl(export, handle, is_dir, attrs);
+		rc = ceph_get_acl(export, handle, is_dir, stx.stx_mode, attrs);
 		if (rc < 0) {
 			LogDebug(COMPONENT_FSAL, "failed to get acl: %d", rc);
 			goto out_err;

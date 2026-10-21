@@ -303,7 +303,7 @@ fsal_status_t ceph_set_acl(struct ceph_export *export,
 			   struct fsal_attrlist *attrs);
 
 int ceph_get_acl(struct ceph_export *export, struct ceph_handle *objhandle,
-		 bool is_dir, struct fsal_attrlist *attrs);
+		 bool is_dir, mode_t mode, struct fsal_attrlist *attrs);
 int ceph_get_posix_acl(struct ceph_export *export,
 		       struct ceph_handle *objhandle, const char *name,
 		       acl_t *p_acl);
