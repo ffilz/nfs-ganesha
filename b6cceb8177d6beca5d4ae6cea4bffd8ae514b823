@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38e494dc_345d564e",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-21T20:28:11Z",
+      "side": 1,
+      "message": "Please fix this.",
+      "parentUuid": "aaf97ed9_ddaaac4d",
+      "revId": "b6cceb8177d6beca5d4ae6cea4bffd8ae514b823",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a86f7d0c_98270b38",
         "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-21T19:04:42Z",
       "side": 1,
       "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t/* Caller may veto this candidate (e.g. skip_populate_dir",
+      "revId": "b6cceb8177d6beca5d4ae6cea4bffd8ae514b823",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68e41b6c_9352f312",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_lru.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-21T20:28:11Z",
+      "side": 1,
+      "message": "Please re-wrap this comment",
+      "parentUuid": "a86f7d0c_98270b38",
       "revId": "b6cceb8177d6beca5d4ae6cea4bffd8ae514b823",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
