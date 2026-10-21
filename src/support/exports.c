@@ -2649,6 +2649,9 @@ static struct config_item fsal_params[] = {
 		CONF_ITEM_BOOLBIT_SET("Disable_ACL", false,                    \
 				      EXPORT_OPTION_DISABLE_ACL, _struct_,     \
 				      options, options_set),                   \
+		CONF_ITEM_BOOLBIT_SET("xattr_support", true,                   \
+				      EXPORT_OPTION_XATTR, _struct_, options,  \
+				      options_set),                            \
 		CONF_ITEM_BOOLBIT_SET("Security_Label", false,                 \
 				      EXPORT_OPTION_SECLABEL_SET, _struct_,    \
 				      options, options_set),                   \
@@ -3164,11 +3167,10 @@ int ReadExports(config_file_t in_config, struct config_error_type *err_type)
 {
 	int rc, num_exp;
 
-	LogMidDebug(
-		COMPONENT_EXPORT,
-		"CORE_OPTION_NFSV3 %d CORE_OPTION_NFSV4 %d",
-		(NFS_options & CORE_OPTION_NFSV3) != 0,
-		(NFS_options & CORE_OPTION_NFSV4) != 0);
+	LogMidDebug(COMPONENT_EXPORT,
+		    "CORE_OPTION_NFSV3 %d CORE_OPTION_NFSV4 %d",
+		    (NFS_options & CORE_OPTION_NFSV3) != 0,
+		    (NFS_options & CORE_OPTION_NFSV4) != 0);
 
 	/* Set Protocols in export_opt.def.options from nfs_core_param. */
 	if (NFS_options & CORE_OPTION_NFSV3)
