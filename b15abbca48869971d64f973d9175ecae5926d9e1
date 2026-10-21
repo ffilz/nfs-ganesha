@@ -22,6 +22,30 @@
       },
       "revId": "b15abbca48869971d64f973d9175ecae5926d9e1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "143eacfc_f362a7de",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1040079
+      },
+      "writtenOn": "2026-10-21T21:40:11Z",
+      "side": 1,
+      "message": "My main use case is running multiple NFS-Ganesha instances on the same storage node, each bound to its own VIP, while sharing the same physical RoCE-capable NIC.\n\nI want each instance to listen on its assigned VIP instead of 0.0.0.0, allowing multiple instances to use the same NFS/RDMA port without wildcard listener conflicts.\n\nI understand your concern about restricting a listener to a single RDMA device. In my use case, that restriction is intentional.\n\nTo preserve the existing behavior for multi-interface deployments, I can introduce a separate RDMA bind address parameter that defaults to 0.0.0.0.",
+      "parentUuid": "31e46a7b_efa21c88",
+      "range": {
+        "startLine": 706,
+        "startChar": 47,
+        "endLine": 706,
+        "endChar": 49
+      },
+      "revId": "b15abbca48869971d64f973d9175ecae5926d9e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
