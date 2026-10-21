@@ -118,7 +118,9 @@ static attrmask_t fs_supported_attrs(struct fsal_export *exp_hdl)
 	else
 		supported_mask &= ~ATTR_ACL;
 
-	if (gpfs_version < 5)
+	if (gpfs_export->xattr_support && gpfs_version >= 5)
+		supported_mask |= ATTR4_XATTR;
+	else
 		supported_mask &= ~ATTR4_XATTR;
 
 	return supported_mask;
@@ -785,6 +787,10 @@ fsal_status_t gpfs_create_export(struct fsal_module *fsal_hdl, void *parse_node,
 	}
 	gpfs_exp->use_acl =
 		!op_ctx_export_has_option(EXPORT_OPTION_DISABLE_ACL);
+	gpfs_exp->xattr_support = op_ctx_export_has_option(EXPORT_OPTION_XATTR);
+
+	LogDebug(COMPONENT_FSAL, "is export xattr_support on %d",
+		 gpfs_exp->xattr_support);
 
 	return status;
 
