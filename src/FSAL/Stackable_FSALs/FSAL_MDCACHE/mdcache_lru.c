@@ -671,6 +671,59 @@ static inline void mdcache_lru_clean(mdcache_entry_t *entry)
 }
 
 /**
+ * @brief Return true if a DIRECTORY entry has any chunk with a live reference.
+ *
+ * A "live" chunk has chunk_lru.refcnt > LRU_SENTINEL_REFCOUNT, meaning at
+ * least one thread beyond the sentinel holds a reference to the chunk (e.g.
+ * a readdir thread is actively iterating the chunk's dirent list).
+ *
+ * Called from inside lru_reap_impl() after LRU_ENTRY_RECLAIMABLE passes,
+ * while holding the CIH latch and the QLANE lock.  At that point:
+ *
+ *   - No new active references can be taken on the entry (CIH latch blocks
+ *     new lookups), so no new chunks can be added.
+ *   - Chunks with refcnt > sentinel are held by active readdir threads and
+ *     cannot be removed during this check.
+ *   - Only sentinel-only chunks could be concurrently removed by the chunk
+ *     LRU reaper; glist_for_each_safe tolerates that safely.
+ *
+ * If we return true, the caller skips this victim and tries the next lane.
+ * The entry stays in the LRU; on the next reap pass (after the readdir
+ * threads have released their chunk references) the entry will be reclaimable.
+ *
+ * @param[in] entry  Entry to inspect.
+ * @return true if at least one chunk has a live reference, false otherwise.
+ */
+static inline bool mdcache_has_active_chunks(mdcache_entry_t *entry)
+{
+	struct glist_head *glist, *glistn;
+	struct dir_chunk *chunk;
+
+	if (entry->obj_handle.type != DIRECTORY)
+		return false;
+
+	if (glist_empty(&entry->fsobj.fsdir.chunks))
+		return false;
+
+	glist_for_each_safe(glist, glistn, &entry->fsobj.fsdir.chunks) {
+		chunk = glist_entry(glist, struct dir_chunk, chunks);
+		if (atomic_fetch_int32_t(&chunk->chunk_lru.refcnt) >
+		    LRU_SENTINEL_REFCOUNT) {
+			LogDebug(
+				COMPONENT_MDCACHE_LRU,
+				"Defer reap of dir entry %p (fileid %" PRIu64
+				"): chunk %p has live refcnt %" PRIi32
+				" - skipping to prevent UAF in state_hdl_cleanup ",
+				entry, entry->obj_handle.fileid, chunk,
+				atomic_fetch_int32_t(&chunk->chunk_lru.refcnt));
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
  * @brief Try to pull an entry off the queue
  *
  * This function examines the end of the specified queue and if the
@@ -749,8 +802,26 @@ static inline mdcache_lru_t *lru_reap_impl(enum lru_q_id qid,
 		 *  for safety, take only the former
 		 */
 		if (LRU_ENTRY_RECLAIMABLE(entry, refcnt)) {
-			/* caller may veto this candidate */
-			if (reap_check && reap_check(entry, reap_check_arg)) {
+			/* Caller may veto this candidate
+			 * (e.g. skip_populate_dir prevents reclaiming entries
+			 * that belong to a directory currently being populated
+			 * by another thread).
+			 *
+			 * Additionally, skip DIRECTORY entries that have dir
+			 * chunks with live caller references. Those chunks
+			 * hold a back-pointer (chunk->parent) to this entry;
+			 * reaping the entry while those chunks are alive
+			 * leads to a use-after-free when the last chunk ref
+			 * drops and mdcache_clean_dirent_chunk() dereferences
+			 * chunk->parent. This manifests as
+			 * glist_del(&chunk->chunks) writing the empty-list
+			 * self-pointer into the recycled entry's st_lock,
+			 * corrupting st_lock.__nusers and causing
+			 * pthread_mutex_destroy (state_hdl_cleanup) to crash.
+			 * Defer this entry until all chunk refs are released.
+			 */
+			if ((reap_check && reap_check(entry, reap_check_arg)) ||
+			    mdcache_has_active_chunks(entry)) {
 				cih_hash_release(&latch);
 				QUNLOCK(qlane);
 				mdcache_lru_unref(entry, LRU_TEMP_REF);
