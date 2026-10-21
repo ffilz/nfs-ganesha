@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caa99811_d383307c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-21T11:03:53Z",
+      "side": 1,
+      "message": "Hi Frank -- This one adds Samba-style create and directory masks and forced modes, which is a lot easier to maintain on a server than disparate umasks.  Additionally clients like macOS Finder fchmod() after e.g. copying resulting in file modes from the client being copied to the server rather than the intended server mode.\n\nBest wishes,\n\nEvan",
+      "revId": "eb42cf6ee61156da5dab6e357f5f9e07652655a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
