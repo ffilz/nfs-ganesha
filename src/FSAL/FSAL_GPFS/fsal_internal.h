@@ -47,6 +47,9 @@
 
 struct gpfs_filesystem;
 
+void gpfs_set_credentials(const struct user_cred *creds);
+void gpfs_restore_ganesha_credentials(void);
+
 /*
  * GPFS internal module
  */

@@ -763,7 +763,7 @@ fsal_openflags_t gpfs_status2(struct fsal_obj_handle *obj_hdl,
  * thus should only be called with a share state. The st_lock must be held.
  *
  * This MAY be used to open a file the first time if there is no need for
- * open by name or create semantics. One example would be 9P lopen.
+ * open by name or create semantics.
  *
  * @param[in] obj_hdl     File on which to operate
  * @param[in] state       state_t to use for this operation
@@ -1126,11 +1126,11 @@ fsal_status_t gpfs_commit2(struct fsal_obj_handle *obj_hdl, off_t offset,
 
 	my_fd = container_of(out_fd, struct gpfs_fd, fsal_fd);
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 
 	status = gpfs_commit_fd(my_fd->fd, myself, offset, len);
 
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (FSAL_IS_ERROR(status)) {
 		LogDebug(COMPONENT_FSAL,
@@ -1535,8 +1535,7 @@ fsal_status_t gpfs_close2(struct fsal_obj_handle *obj_hdl,
 	myself = container_of(obj_hdl, struct gpfs_fsal_obj_handle, obj_handle);
 
 	if (state->state_type == STATE_TYPE_SHARE ||
-	    state->state_type == STATE_TYPE_NLM_SHARE ||
-	    state->state_type == STATE_TYPE_9P_FID) {
+	    state->state_type == STATE_TYPE_NLM_SHARE) {
 		/* This is a share state, we must update the share counters */
 		update_share_counters_locked(obj_hdl, &myself->u.file.share,
 					     my_fd->fsal_fd.openflags,

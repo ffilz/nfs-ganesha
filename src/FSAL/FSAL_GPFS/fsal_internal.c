@@ -42,8 +42,67 @@
 #include <pthread.h>
 #include <string.h>
 #include <sys/fsuid.h>
+#include <sys/syscall.h>
 
 #include "include/gpfs.h"
+
+static bool gpfs_creds_saved;
+static uid_t gpfs_saved_uid;
+static gid_t gpfs_saved_gid;
+static int gpfs_saved_ngroups;
+static gid_t *gpfs_saved_groups;
+
+static void gpfs_save_ganesha_credentials(void)
+{
+	if (gpfs_creds_saved)
+		return;
+
+	gpfs_saved_uid = syscall(SYS_setfsuid, -1);
+	gpfs_saved_gid = syscall(SYS_setfsgid, -1);
+
+	gpfs_saved_ngroups = getgroups(0, NULL);
+	if (gpfs_saved_ngroups > 0) {
+		gpfs_saved_groups =
+			gsh_malloc(gpfs_saved_ngroups * sizeof(gid_t),
+				   MEM_COMP_FSAL);
+		if (getgroups(gpfs_saved_ngroups, gpfs_saved_groups) !=
+		    gpfs_saved_ngroups) {
+			LogFatal(COMPONENT_FSAL,
+				 "Could not get list of ganesha groups");
+		}
+	}
+	gpfs_creds_saved = true;
+}
+
+/**
+ * @brief Set thread credentials for GPFS ioctl operations.
+ *
+ * Uses setfsuid/setfsgid instead of setresuid/setresgid to avoid clearing
+ * the effective capability set when transitioning from root to non-root.
+ * The GPFS kernel module's ioctl handler requires capabilities (e.g.
+ * CAP_SYS_ADMIN) which are lost when euid changes from 0 to non-0 via
+ * setresuid. Using setfsuid/setfsgid changes only the filesystem UID/GID
+ * leaving the effective UID/GID and capabilities intact.
+ */
+void gpfs_set_credentials(const struct user_cred *creds)
+{
+	gpfs_save_ganesha_credentials();
+
+	if (syscall(__NR_setgroups, creds->caller_glen, creds->caller_garray) !=
+	    0)
+		LogFatal(COMPONENT_FSAL, "setgroups() returned %s (%d)",
+			 strerror(errno), errno);
+	syscall(SYS_setfsgid, creds->caller_gid);
+	syscall(SYS_setfsuid, creds->caller_uid);
+}
+
+void gpfs_restore_ganesha_credentials(void)
+{
+	syscall(SYS_setfsuid, gpfs_saved_uid);
+	syscall(SYS_setfsgid, gpfs_saved_gid);
+	if (syscall(__NR_setgroups, gpfs_saved_ngroups, gpfs_saved_groups) != 0)
+		LogFatal(COMPONENT_FSAL, "Could not set Ganesha credentials");
+}
 
 /* clang-format off */
 #define FSAL_INTERNAL_ERROR(__error, __msg)                                 \
@@ -333,12 +392,12 @@ fsal_status_t fsal_internal_unlink(int dirfd, struct gpfs_file_handle *gpfs_fh,
 	if (op_ctx && op_ctx->client)
 		statarg.cli_ip = op_ctx->client->hostaddr_str;
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 
 	rc = gpfs_ganesha(OPENHANDLE_UNLINK_BY_NAME, &statarg);
 	errsv = errno;
 
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (unlikely(rc < 0))
 		return FSAL_INTERNAL_ERROR(errsv, "OPENHANDLE_UNLINK_BY_NAME");
@@ -466,12 +525,12 @@ fsal_status_t fsal_internal_rename_fh(int dirfd,
 	if (op_ctx && op_ctx->client)
 		renamearg.cli_ip = op_ctx->client->hostaddr_str;
 
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 
 	rc = gpfs_ganesha(OPENHANDLE_RENAME_BY_FH, &renamearg);
 	errsv = errno;
 
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	if (unlikely(rc < 0))
 		return FSAL_INTERNAL_ERROR(errsv, "OPENHANDLE_RENAME_BY_FH");
@@ -704,17 +763,12 @@ fsal_status_t fsal_set_xstat_by_handle(int dirfd,
 	if (op_ctx && op_ctx->client)
 		xstatarg.cli_ip = op_ctx->client->hostaddr_str;
 
-	/* We explicitly do NOT do setfsuid/setfsgid here because truncate,
-	   even to enlarge a file, doesn't actually allocate blocks. GPFS
-	   implements sparse files, so blocks of all 0 will not actually
-	   be allocated.
-	 */
-	fsal_set_credentials(&op_ctx->creds);
+	gpfs_set_credentials(&op_ctx->creds);
 
 	rc = gpfs_ganesha(OPENHANDLE_SET_XSTAT, &xstatarg);
 	errsv = errno;
 
-	fsal_restore_ganesha_credentials();
+	gpfs_restore_ganesha_credentials();
 
 	LogDebug(COMPONENT_FSAL, "gpfs_ganesha: SET_XSTAT returned, rc = %d",
 		 rc);
