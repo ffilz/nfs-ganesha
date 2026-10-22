@@ -547,11 +547,10 @@ nfsstat4 Process_nfs4_conflict(LOCK4denied *denied, state_owner_t *holder,
 {
 	nfsstat4 status;
 	size_t owner_len;
+	bool known = holder != NULL && holder != &unknown_owner &&
+		     holder->so_owner_len != 0;
 
-	if (holder != NULL && holder->so_owner_len != 0)
-		owner_len = holder->so_owner_len;
-	else
-		owner_len = unknown_owner.so_owner_len;
+	owner_len = known ? holder->so_owner_len : 0;
 
 	/* First check if the response will fit, this is a response to a
 	 * LOCK or LOCKT operation.
@@ -575,7 +574,7 @@ nfsstat4 Process_nfs4_conflict(LOCK4denied *denied, state_owner_t *holder,
 	else
 		denied->locktype = WRITE_LT;
 
-	if (holder != NULL && holder->so_owner_len != 0) {
+	if (known) {
 		denied->owner.owner.owner_val =
 			gsh_malloc(holder->so_owner_len,
 				   MEM_COMP_STATE);
@@ -585,7 +584,7 @@ nfsstat4 Process_nfs4_conflict(LOCK4denied *denied, state_owner_t *holder,
 		memcpy(denied->owner.owner.owner_val, holder->so_owner_val,
 		       holder->so_owner_len);
 	} else {
-		denied->owner.owner.owner_len = unknown_owner.so_owner_len;
+		denied->owner.owner.owner_len = 0;
 		denied->owner.owner.owner_val = unknown_owner.so_owner_val;
 	}
 
@@ -646,7 +645,7 @@ void Copy_nfs4_denied(LOCK4denied *denied_dst, LOCK4denied *denied_src)
 	}
 
 	if (denied_dst->owner.owner.owner_val == NULL) {
-		denied_dst->owner.owner.owner_len = unknown_owner.so_owner_len;
+		denied_dst->owner.owner.owner_len = 0;
 		denied_dst->owner.owner.owner_val = unknown_owner.so_owner_val;
 	}
 }
