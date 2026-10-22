@@ -524,7 +524,7 @@ nfsstat4 nfs4_return_one_state(struct fsal_obj_handle *obj,
 	}
 
 	arg = alloca(sizeof(struct fsal_layoutreturn_arg) +
-		     sizeof(void *) * (recalls - 1));
+		     sizeof(void *) * (recalls > 1 ? recalls - 1 : 0));
 
 	memset(arg, 0, sizeof(struct fsal_layoutreturn_arg));
 
