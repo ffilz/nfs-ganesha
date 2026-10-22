@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c1baa9_dfbe2baa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-22T00:00:41Z",
+      "side": 1,
+      "message": "Could you surround all these macos bits with a conditional compile. That will allow vendors to decide to support macos quirks or not, and make it easier to strip them later if they are determined to no longer be needed.",
+      "revId": "23837f43ca50b252530354d30adb275f67c43758",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
