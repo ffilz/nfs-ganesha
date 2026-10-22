@@ -755,6 +755,7 @@ check_seqid:
 		pblock_data->sbd_prot.sbd_v4.snbd_last_poll_time = time(NULL);
 		pblock_data->sbd_prot.sbd_v4.snbd_notified_eligible_time = 0;
 	}
+	conflict_desc = lock_desc;
 	/* Now we have a lock owner and a stateid.  Go ahead and push
 	 * lock into SAL (and FSAL). */
 	state_status = state_lock(obj, lock_owner, lock_state, blocking,
