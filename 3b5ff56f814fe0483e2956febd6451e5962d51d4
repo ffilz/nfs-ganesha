@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bda96df2_c50e8ab0",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-22T18:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5df7edf_587b0983",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f467ba5_4c6bb826",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 4
@@ -48,6 +66,24 @@
       "writtenOn": "2026-10-15T22:36:48Z",
       "side": 1,
       "message": "Blank line after declaration please.",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03f18ba9_89433d23",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-22T18:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f467ba5_4c6bb826",
       "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b2f1651_67c7062d",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-22T18:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bac44e46_a2bd8caf",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b3d8bd0_6c91544d",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 4
@@ -82,6 +136,24 @@
       "writtenOn": "2026-10-15T22:36:48Z",
       "side": 1,
       "message": "Can we do this check in a config commit function? Then the config error will be consistently reported instead of partially starting and then failing.",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6cca3ae_dd52cd9b",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-22T18:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b3d8bd0_6c91544d",
       "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -105,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4a5ae56_26c9f9c6",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-22T18:44:19Z",
+      "side": 1,
+      "message": "Done — grpc_conf_commit() in nfs_read_conf.c now updates grpc_addr in place to 127.0.0.1 (or ::1) when it is a wildcard, and rejects any other non-loopback address.",
+      "parentUuid": "1a1932fa_56c28e9d",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd82e1c0_c0f5cd09",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 4
@@ -116,6 +206,24 @@
       "writtenOn": "2026-10-15T22:36:48Z",
       "side": 1,
       "message": "Blank line after declaration please.",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a5cf68_86e53e0e",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-22T18:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd82e1c0_c0f5cd09",
       "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -139,6 +247,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16dfff3d_9e006d9b",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-22T18:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bed51489_5c8593f7",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "583de6be_d1b28905",
         "filename": "src/grpc_server/GrpcServer.cc",
         "patchSetId": 4
@@ -150,6 +276,24 @@
       "writtenOn": "2026-10-15T22:36:48Z",
       "side": 1,
       "message": "Blank line after declarations please.",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d7b12f8_ab6a7668",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-22T18:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "583de6be_d1b28905",
       "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -173,6 +317,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab9132f6_95745852",
+        "filename": "src/grpc_server/nfsMetricsService.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-22T18:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72f1d97a_cc8e52a9",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b25180b8_68c1e9ad",
         "filename": "src/support/nfs_read_conf.c",
         "patchSetId": 4
@@ -184,6 +346,24 @@
       "writtenOn": "2026-10-15T22:36:48Z",
       "side": 1,
       "message": "Could we add a commit method here that rejects illegal address settings?",
+      "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9207eafe_90cc506e",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-10-22T18:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b25180b8_68c1e9ad",
       "revId": "3b5ff56f814fe0483e2956febd6451e5962d51d4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
