@@ -102,10 +102,10 @@ pthread_mutex_t blocked_locks_mutex;
  * @brief Owner of state with no defined owner
  */
 state_owner_t unknown_owner = {
-	.so_owner_val = "ganesha_unknown_owner",
+	.so_owner_val = "ganesha_unknown",
 	.so_type = STATE_LOCK_OWNER_UNKNOWN,
 	.so_refcount = 1,
-	.so_owner_len = 21,
+	.so_owner_len = 15,
 	.so_lock_list = GLIST_HEAD_INIT(unknown_owner.so_lock_list),
 };
 
