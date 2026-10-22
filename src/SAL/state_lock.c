@@ -2481,6 +2481,10 @@ state_status_t do_lock_op(struct fsal_obj_handle *obj, state_t *state,
 		 * STATE_LOCK_BLOCKED.
 		 */
 		status = STATE_LOCK_BLOCKED;
+
+		/* An NFSv4 reply to a blocked lock describes the conflict */
+		if (conflict != NULL)
+			*conflict = conflicting_lock;
 	}
 
 	if (status == STATE_LOCK_CONFLICT) {
@@ -2934,6 +2938,9 @@ recheck_for_conflicting_entries:
 				if (blocking != STATE_BLOCKING) {
 					copy_conflict(found_entry, holder,
 						      conflict);
+				} else if (conflict != NULL) {
+					/* For the NFSv4 blocked lock reply */
+					*conflict = found_entry->sle_lock;
 				}
 				allow = false;
 				overlap = true;
