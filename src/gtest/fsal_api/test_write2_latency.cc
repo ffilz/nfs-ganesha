@@ -113,24 +113,24 @@ class Write2EmptyLatencyTest : public gtest::GaneshaFSALBaseTest {
 TEST_F(Write2EmptyLatencyTest, SIMPLE)
 {
 	char *databuffer;
-	struct fsal_io_arg *write_arg;
+	struct fsal_io_arg write_arg;
+	struct iovec iov;
 	struct async_process_data io_data;
 	int bytes = 64;
 	databuffer = (char *)malloc(bytes);
 
 	memset(databuffer, 'a', bytes);
 
-	write_arg = (struct fsal_io_arg *)alloca(sizeof(struct fsal_io_arg) +
-						 sizeof(struct iovec));
-	write_arg->info = NULL;
-	write_arg->state = NULL;
-	write_arg->offset = OFFSET;
-	write_arg->io_request = bytes;
-	write_arg->iov_count = 1;
-	write_arg->iov[0].iov_len = bytes;
-	write_arg->iov[0].iov_base = databuffer;
-	write_arg->io_amount = 0;
-	write_arg->fsal_stable = false;
+	memset(&write_arg, 0, sizeof(write_arg));
+	memset(&iov, 0, sizeof(iov));
+	iov.iov_base = databuffer;
+	iov.iov_len = bytes;
+	write_arg.iov = &iov;
+	write_arg.iov_count = 1;
+	write_arg.io_request = bytes;
+	write_arg.offset = OFFSET;
+	write_arg.fsal_resume = FSAL_NORESUME;
+	write_arg.fsal_stable = false;
 
 	io_data.ret.major = ERR_FSAL_NO_ERROR;
 	io_data.ret.minor = 0;
@@ -138,7 +138,7 @@ TEST_F(Write2EmptyLatencyTest, SIMPLE)
 	io_data.fsa_cond = &cond;
 	io_data.fsa_mutex = &mutex;
 
-	fsal_write(test_file, true, write_arg, &io_data);
+	fsal_write(test_file, true, &write_arg, &io_data);
 
 	EXPECT_EQ(io_data.ret.major, 0);
 
@@ -149,24 +149,24 @@ TEST_F(Write2EmptyLatencyTest, SIMPLE_BYPASS)
 {
 	struct fsal_obj_handle *sub_hdl;
 	char *databuffer;
-	struct fsal_io_arg *write_arg;
+	struct fsal_io_arg write_arg;
+	struct iovec iov;
 	struct async_process_data io_data;
 	int bytes = 64;
 	databuffer = (char *)malloc(bytes);
 
 	memset(databuffer, 'a', bytes);
 
-	write_arg = (struct fsal_io_arg *)alloca(sizeof(struct fsal_io_arg) +
-						 sizeof(struct iovec));
-	write_arg->info = NULL;
-	write_arg->state = NULL;
-	write_arg->offset = OFFSET;
-	write_arg->io_request = bytes;
-	write_arg->iov_count = 1;
-	write_arg->iov[0].iov_len = bytes;
-	write_arg->iov[0].iov_base = databuffer;
-	write_arg->io_amount = 0;
-	write_arg->fsal_stable = false;
+	memset(&write_arg, 0, sizeof(write_arg));
+	memset(&iov, 0, sizeof(iov));
+	iov.iov_base = databuffer;
+	iov.iov_len = bytes;
+	write_arg.iov = &iov;
+	write_arg.iov_count = 1;
+	write_arg.io_request = bytes;
+	write_arg.offset = OFFSET;
+	write_arg.fsal_resume = FSAL_NORESUME;
+	write_arg.fsal_stable = false;
 
 	sub_hdl = mdcdb_get_sub_handle(test_file);
 	ASSERT_NE(sub_hdl, nullptr);
@@ -177,7 +177,7 @@ TEST_F(Write2EmptyLatencyTest, SIMPLE_BYPASS)
 	io_data.fsa_cond = &cond;
 	io_data.fsa_mutex = &mutex;
 
-	fsal_write(sub_hdl, true, write_arg, &io_data);
+	fsal_write(sub_hdl, true, &write_arg, &io_data);
 
 	EXPECT_EQ(io_data.ret.major, 0);
 
@@ -187,24 +187,24 @@ TEST_F(Write2EmptyLatencyTest, SIMPLE_BYPASS)
 TEST_F(Write2EmptyLatencyTest, SMALL_STABLE_WRITE)
 {
 	char *databuffer;
-	struct fsal_io_arg *write_arg;
+	struct fsal_io_arg write_arg;
+	struct iovec iov;
 	struct async_process_data io_data;
 	int bytes = 64;
 	databuffer = (char *)malloc(bytes);
 
 	memset(databuffer, 'a', bytes);
 
-	write_arg = (struct fsal_io_arg *)alloca(sizeof(struct fsal_io_arg) +
-						 sizeof(struct iovec));
-	write_arg->info = NULL;
-	write_arg->state = NULL;
-	write_arg->offset = OFFSET;
-	write_arg->io_request = bytes;
-	write_arg->iov_count = 1;
-	write_arg->iov[0].iov_len = bytes;
-	write_arg->iov[0].iov_base = databuffer;
-	write_arg->io_amount = 0;
-	write_arg->fsal_stable = true;
+	memset(&write_arg, 0, sizeof(write_arg));
+	memset(&iov, 0, sizeof(iov));
+	iov.iov_base = databuffer;
+	iov.iov_len = bytes;
+	write_arg.iov = &iov;
+	write_arg.iov_count = 1;
+	write_arg.io_request = bytes;
+	write_arg.offset = OFFSET;
+	write_arg.fsal_resume = FSAL_NORESUME;
+	write_arg.fsal_stable = true;
 
 	io_data.ret.major = ERR_FSAL_NO_ERROR;
 	io_data.ret.minor = 0;
@@ -212,7 +212,7 @@ TEST_F(Write2EmptyLatencyTest, SMALL_STABLE_WRITE)
 	io_data.fsa_cond = &cond;
 	io_data.fsa_mutex = &mutex;
 
-	fsal_write(test_file, true, write_arg, &io_data);
+	fsal_write(test_file, true, &write_arg, &io_data);
 
 	EXPECT_EQ(io_data.ret.major, 0);
 
@@ -222,24 +222,24 @@ TEST_F(Write2EmptyLatencyTest, SMALL_STABLE_WRITE)
 TEST_F(Write2EmptyLatencyTest, LARGE_UNSTABLE_WRITE)
 {
 	char *databuffer;
-	struct fsal_io_arg *write_arg;
+	struct fsal_io_arg write_arg;
+	struct iovec iov;
 	struct async_process_data io_data;
 	int bytes = (2 * 1024 * 1024);
 	databuffer = (char *)malloc(bytes);
 
 	memset(databuffer, 'a', bytes);
 
-	write_arg = (struct fsal_io_arg *)alloca(sizeof(struct fsal_io_arg) +
-						 sizeof(struct iovec));
-	write_arg->info = NULL;
-	write_arg->state = NULL;
-	write_arg->offset = OFFSET;
-	write_arg->io_request = bytes;
-	write_arg->iov_count = 1;
-	write_arg->iov[0].iov_len = bytes;
-	write_arg->iov[0].iov_base = databuffer;
-	write_arg->io_amount = 0;
-	write_arg->fsal_stable = false;
+	memset(&write_arg, 0, sizeof(write_arg));
+	memset(&iov, 0, sizeof(iov));
+	iov.iov_base = databuffer;
+	iov.iov_len = bytes;
+	write_arg.iov = &iov;
+	write_arg.iov_count = 1;
+	write_arg.io_request = bytes;
+	write_arg.offset = OFFSET;
+	write_arg.fsal_resume = FSAL_NORESUME;
+	write_arg.fsal_stable = false;
 
 	io_data.ret.major = ERR_FSAL_NO_ERROR;
 	io_data.ret.minor = 0;
@@ -247,7 +247,7 @@ TEST_F(Write2EmptyLatencyTest, LARGE_UNSTABLE_WRITE)
 	io_data.fsa_cond = &cond;
 	io_data.fsa_mutex = &mutex;
 
-	fsal_write(test_file, true, write_arg, &io_data);
+	fsal_write(test_file, true, &write_arg, &io_data);
 
 	EXPECT_EQ(io_data.ret.major, 0);
 
@@ -257,24 +257,24 @@ TEST_F(Write2EmptyLatencyTest, LARGE_UNSTABLE_WRITE)
 TEST_F(Write2EmptyLatencyTest, LARGE_STABLE_WRITE)
 {
 	char *databuffer;
-	struct fsal_io_arg *write_arg;
+	struct fsal_io_arg write_arg;
+	struct iovec iov;
 	struct async_process_data io_data;
 	int bytes = (2 * 1024 * 1024);
 	databuffer = (char *)malloc(bytes);
 
 	memset(databuffer, 'a', bytes);
 
-	write_arg = (struct fsal_io_arg *)alloca(sizeof(struct fsal_io_arg) +
-						 sizeof(struct iovec));
-	write_arg->info = NULL;
-	write_arg->state = NULL;
-	write_arg->offset = OFFSET;
-	write_arg->io_request = bytes;
-	write_arg->iov_count = 1;
-	write_arg->iov[0].iov_len = bytes;
-	write_arg->iov[0].iov_base = databuffer;
-	write_arg->io_amount = 0;
-	write_arg->fsal_stable = true;
+	memset(&write_arg, 0, sizeof(write_arg));
+	memset(&iov, 0, sizeof(iov));
+	iov.iov_base = databuffer;
+	iov.iov_len = bytes;
+	write_arg.iov = &iov;
+	write_arg.iov_count = 1;
+	write_arg.io_request = bytes;
+	write_arg.offset = OFFSET;
+	write_arg.fsal_resume = FSAL_NORESUME;
+	write_arg.fsal_stable = true;
 
 	io_data.ret.major = ERR_FSAL_NO_ERROR;
 	io_data.ret.minor = 0;
@@ -282,7 +282,7 @@ TEST_F(Write2EmptyLatencyTest, LARGE_STABLE_WRITE)
 	io_data.fsa_cond = &cond;
 	io_data.fsa_mutex = &mutex;
 
-	fsal_write(test_file, true, write_arg, &io_data);
+	fsal_write(test_file, true, &write_arg, &io_data);
 
 	EXPECT_EQ(io_data.ret.major, 0);
 
@@ -292,7 +292,8 @@ TEST_F(Write2EmptyLatencyTest, LARGE_STABLE_WRITE)
 TEST_F(Write2EmptyLatencyTest, LOOP)
 {
 	char *databuffer;
-	struct fsal_io_arg *write_arg;
+	struct fsal_io_arg write_arg;
+	struct iovec iov;
 	struct async_process_data io_data;
 	struct timespec s_time, e_time;
 	int bytes = 64;
@@ -300,28 +301,28 @@ TEST_F(Write2EmptyLatencyTest, LOOP)
 
 	memset(databuffer, 'a', bytes);
 
-	write_arg = (struct fsal_io_arg *)alloca(sizeof(struct fsal_io_arg) +
-						 sizeof(struct iovec));
-	write_arg->info = NULL;
-	write_arg->state = NULL;
-	write_arg->offset = OFFSET;
-	write_arg->io_request = bytes;
-	write_arg->iov_count = 1;
-	write_arg->iov[0].iov_len = bytes;
-	write_arg->iov[0].iov_base = databuffer;
-	write_arg->io_amount = 0;
-	write_arg->fsal_stable = false;
+	memset(&write_arg, 0, sizeof(write_arg));
+	memset(&iov, 0, sizeof(iov));
+	iov.iov_base = databuffer;
+	iov.iov_len = bytes;
+	write_arg.iov = &iov;
+	write_arg.iov_count = 1;
+	write_arg.io_request = bytes;
+	write_arg.offset = OFFSET;
+	write_arg.fsal_resume = FSAL_NORESUME;
+	write_arg.fsal_stable = false;
 
 	now(&s_time);
 
-	for (int i = 0; i < LOOP_COUNT; ++i, write_arg->offset += 64) {
+	for (int i = 0; i < LOOP_COUNT; ++i, write_arg.offset += 64) {
+		write_arg.fsal_resume = FSAL_NORESUME;
 		io_data.ret.major = ERR_FSAL_NO_ERROR;
 		io_data.ret.minor = 0;
 		io_data.done = false;
 		io_data.fsa_cond = &cond;
 		io_data.fsa_mutex = &mutex;
 
-		fsal_write(test_file, true, write_arg, &io_data);
+		fsal_write(test_file, true, &write_arg, &io_data);
 
 		EXPECT_EQ(io_data.ret.major, 0);
 	}
@@ -338,7 +339,8 @@ TEST_F(Write2EmptyLatencyTest, LOOP_BYPASS)
 {
 	struct fsal_obj_handle *sub_hdl;
 	char *databuffer;
-	struct fsal_io_arg *write_arg;
+	struct fsal_io_arg write_arg;
+	struct iovec iov;
 	struct async_process_data io_data;
 	struct timespec s_time, e_time;
 	int bytes = 64;
@@ -346,31 +348,31 @@ TEST_F(Write2EmptyLatencyTest, LOOP_BYPASS)
 
 	memset(databuffer, 'a', bytes);
 
-	write_arg = (struct fsal_io_arg *)alloca(sizeof(struct fsal_io_arg) +
-						 sizeof(struct iovec));
-	write_arg->info = NULL;
-	write_arg->state = NULL;
-	write_arg->offset = OFFSET;
-	write_arg->io_request = bytes;
-	write_arg->iov_count = 1;
-	write_arg->iov[0].iov_len = bytes;
-	write_arg->iov[0].iov_base = databuffer;
-	write_arg->io_amount = 0;
-	write_arg->fsal_stable = false;
+	memset(&write_arg, 0, sizeof(write_arg));
+	memset(&iov, 0, sizeof(iov));
+	iov.iov_base = databuffer;
+	iov.iov_len = bytes;
+	write_arg.iov = &iov;
+	write_arg.iov_count = 1;
+	write_arg.io_request = bytes;
+	write_arg.offset = OFFSET;
+	write_arg.fsal_resume = FSAL_NORESUME;
+	write_arg.fsal_stable = false;
 
 	sub_hdl = mdcdb_get_sub_handle(test_file);
 	ASSERT_NE(sub_hdl, nullptr);
 
 	now(&s_time);
 
-	for (int i = 0; i < LOOP_COUNT; ++i, write_arg->offset += 64) {
+	for (int i = 0; i < LOOP_COUNT; ++i, write_arg.offset += 64) {
+		write_arg.fsal_resume = FSAL_NORESUME;
 		io_data.ret.major = ERR_FSAL_NO_ERROR;
 		io_data.ret.minor = 0;
 		io_data.done = false;
 		io_data.fsa_cond = &cond;
 		io_data.fsa_mutex = &mutex;
 
-		fsal_write(sub_hdl, true, write_arg, &io_data);
+		fsal_write(sub_hdl, true, &write_arg, &io_data);
 
 		EXPECT_EQ(io_data.ret.major, 0);
 	}
