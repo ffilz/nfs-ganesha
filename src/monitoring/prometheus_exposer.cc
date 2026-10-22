@@ -230,7 +230,7 @@ static MetricFamilies rename_metric_names(MetricFamilies Families)
 
 // Removes empty metrics from family
 // Most metrics are empty or rarly used (for example consider
-// nfsv4__op_latency_bucket{op="REMOVEXATTR",status="NFS4ERR_REPLAY"})
+// nfsv4__op_latencies_bucket{op="REMOVEXATTR",status="NFS4ERR_REPLAY"})
 // Significantly reduces the amount of data transferred to the Prometheus
 // server from MBs to KBs
 static void compact_family(prometheus::MetricFamily &family)

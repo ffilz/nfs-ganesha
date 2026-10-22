@@ -100,7 +100,7 @@ static void register_num_sessions_per_xprt_metric(void)
 	};
 
 	num_xprt_sessions = monitoring__register_histogram(
-		"xprt__sessions_count",
+		"xprt__sessions",
 		METRIC_METADATA("Distribution of number of sessions "
 				"associated with each xprt",
 				METRIC_UNIT_NONE),
@@ -147,7 +147,7 @@ static void register_client_metrics(void)
 	};
 
 	confirmed_clients = monitoring__register_gauge(
-		"clients__confirmed_count",
+		"clients__confirmed_clients",
 		METRIC_METADATA("Total Number of Confirmed Clients",
 				METRIC_UNIT_NONE),
 		empty_labels, ARRAY_SIZE(empty_labels));
@@ -164,7 +164,7 @@ static void register_client_metrics(void)
 			METRIC_LABEL("lock_type", lock_type_string[lock_type])
 		};
 		num_locks_metric[lock_type] = monitoring__register_gauge(
-			"locks__count",
+			"state__locks",
 			METRIC_METADATA("Total Number of Locks Record Count",
 					METRIC_UNIT_NONE),
 			lock_count_labels, ARRAY_SIZE(lock_count_labels));
@@ -182,7 +182,7 @@ static void register_num_session_connections_metric(void)
 	};
 
 	num_session_connections = monitoring__register_histogram(
-		"session__connections_count",
+		"session__connections",
 		METRIC_METADATA("Distribution of number of "
 				"session-connections across sessions",
 				METRIC_UNIT_NONE),

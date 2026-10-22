@@ -182,7 +182,7 @@ static void register_user_groups_metric(void)
 	const metric_label_t empty_labels[] = {};
 
 	idmapping_user_groups_total = monitoring__register_histogram(
-		"idmapping__user_groups_total",
+		"idmapping__user_groups",
 		METRIC_METADATA("Total groups per user", METRIC_UNIT_NONE),
 		empty_labels, ARRAY_SIZE(empty_labels), histogram_buckets);
 }
@@ -198,7 +198,7 @@ static void register_external_request_latency_metric(idmapping_op_t op,
 	};
 	idmapping_external_request_latency[op][utility][status] =
 		monitoring__register_histogram(
-			"idmapping__external_request_latency",
+			"idmapping__external_request_latencies",
 			METRIC_METADATA("Idmapping external request latency",
 					METRIC_UNIT_MILLISECOND),
 			labels, ARRAY_SIZE(labels),
@@ -227,7 +227,7 @@ static void register_cache_uses_total_metrics(void)
 			};
 			idmapping_cache_uses_total[i][j] =
 				monitoring__register_counter(
-					"idmapping__cache_uses_total",
+					"idmapping__cache_uses_count",
 					METRIC_METADATA(
 						"Total idmapping-cache uses",
 						METRIC_UNIT_NONE),
@@ -250,7 +250,7 @@ static void register_idmapping_total_metrics(void)
 				};
 				idmapping_resolutions_total[i][j][k] =
 					monitoring__register_counter(
-						"idmapping__resolutions_total",
+						"idmapping__resolutions_count",
 						METRIC_METADATA(
 							"Total idmapping resolutions",
 							METRIC_UNIT_NONE),
@@ -268,7 +268,7 @@ static void register_evicted_entries_cache_duration_metrics(void)
 		};
 		evicted_entries_cached_duration[i] =
 			monitoring__register_histogram(
-				"idmapping__evicted_entries_cached_duration",
+				"idmapping__evicted_entries_cached_durations",
 				METRIC_METADATA(
 					"Distribution of the time duration "
 					"that evicted entries were stored in "
@@ -286,7 +286,7 @@ static void register_cache_entries_reaped_metrics(void)
 			METRIC_LABEL("cache_entity", get_cache_entity_name(i))
 		};
 		cache_entries_reaped_total[i] = monitoring__register_counter(
-			"idmapping__cache_entries_reaped_total",
+			"idmapping__cache_entries_reaped_count",
 			METRIC_METADATA("Total cache entries that were reaped",
 					METRIC_UNIT_NONE),
 			labels, ARRAY_SIZE(labels));
@@ -300,7 +300,7 @@ static void register_cache_entries_total_metrics(void)
 			METRIC_LABEL("cache_entity", get_cache_entity_name(i))
 		};
 		cache_entries_total[i] = monitoring__register_gauge(
-			"idmapping__cache_entries_total",
+			"idmapping__cache_entries",
 			METRIC_METADATA("Total cache entries",
 					METRIC_UNIT_NONE),
 			labels, ARRAY_SIZE(labels));
@@ -311,7 +311,7 @@ static void register_max_groups_exceeded_metric(void)
 {
 	const metric_label_t empty_labels[] = {};
 	max_groups_exceeded = monitoring__register_counter(
-		"idmapping__max_groups_exceeded",
+		"idmapping__max_groups_exceeded_count",
 		METRIC_METADATA(
 			"Total number of times a user had more than max groups",
 			METRIC_UNIT_NONE),

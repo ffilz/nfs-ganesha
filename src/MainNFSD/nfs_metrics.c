@@ -223,7 +223,7 @@ static void register_nfsv4_operation_metrics(nfs_opnum4 opcode,
 
 	nfsv4_op_latency[opcode][statcode_index] =
 		monitoring__register_histogram(
-			"nfsv4__op_latency",
+			"nfsv4__op_latencies",
 			METRIC_METADATA("NFSv4 Operations Latency",
 					METRIC_UNIT_MILLISECOND),
 			labels, ARRAY_SIZE(labels), monitoring__buckets_exp2());
@@ -261,7 +261,7 @@ static void register_compound_operation_metrics(void)
 	const metric_label_t empty_labels[] = {};
 
 	compound_ops_count_metric = monitoring__register_histogram(
-		"compound__ops_count",
+		"compound__ops",
 		METRIC_METADATA("Number of Operations in a Compound",
 				METRIC_UNIT_NONE),
 		empty_labels, ARRAY_SIZE(empty_labels),
@@ -274,7 +274,7 @@ static void register_compound_operation_metrics(void)
 			nfsstat4_to_str(index_to_nfsstat4[statcode_index])) };
 		compound_latency_metric[statcode_index] =
 			monitoring__register_histogram(
-				"compound__latency",
+				"compound__latencies",
 				METRIC_METADATA("Compound Latency Histogram",
 						METRIC_UNIT_MILLISECOND),
 				labels, ARRAY_SIZE(labels),
