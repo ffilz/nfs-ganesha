@@ -1514,6 +1514,27 @@ ceph_fsal_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 			    ~op_ctx->fsal_export->exp_ops.fs_umask(
 				    op_ctx->fsal_export);
 
+#ifdef CEPHFS_POSIX_ACL
+		/* If the parent directory has a default POSIX ACL, CephFS
+		 * intersects the inherited permissions (and mask) with the
+		 * group/other bits of the create mode.  A restrictive mode
+		 * (e.g. 0644 from umask 022) would therefore strip write
+		 * permission from the inherited ACL entries.  Use 0666 and
+		 * let the default ACL determine the final permissions.
+		 */
+		{
+			acl_t def_acl = NULL;
+			int acl_rc;
+
+			acl_rc = ceph_get_posix_acl(export, myself,
+						    ACL_EA_DEFAULT, &def_acl);
+			if (acl_rc >= 0 && def_acl != NULL) {
+				unix_mode = 0666;
+				acl_free((void *)def_acl);
+			}
+		}
+#endif /* CEPHFS_POSIX_ACL */
+
 		/* Don't set the mode if we later set the attributes */
 		FSAL_UNSET_MASK(attrib_set->valid_mask, ATTR_MODE);
 	}
