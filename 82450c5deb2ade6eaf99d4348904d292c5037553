@@ -16,6 +16,24 @@
       "message": "I think this needs consideration for other FSALs.",
       "revId": "82450c5deb2ade6eaf99d4348904d292c5037553",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "984b8bba_0fce0409",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-23T22:00:31Z",
+      "side": 1,
+      "message": "Hi Frank -- I went through the other FSALs:\n\n- GPFS crosses into nested GPFS file systems the same way VFS does, so it now\n  uses the mount point inodes Ganesha records when it reads the mount table.\n  I can\u0027t run GPFS here, so that part is only build-tested.\n- PROXY_V4 now asks the backend server for mounted_on_fileid and passes it\n  through, and uses fileid if the backend doesn\u0027t return it. Decoding\n  mounted_on_fileid used to fail with NFS4ERR_ATTRNOTSUPP, so nothing could\n  ask for it before. I tested it with a Ganesha VFS backend that has a file\n  system mounted inside the export: through the old PROXY_V4 a Linux client\n  saw the nested root with the same inode as the export root, and now it sees\n  the mount point\u0027s inode, as on the backend.\n- Ceph, Gluster, RGW, KVSFS, SAUNAFS, LizardFS and MEM don\u0027t cross into other\n  file systems within an export, so fileid is already right for them.\n  PROXY_V3 has nothing to pass on, as NFSv3 has no mounted_on_fileid.\n\nmounted_on_fileid stays advertised for every FSAL because Ganesha can always\nanswer it correctly: RFC 8881 5.8.2.23 says it equals fileid except at the\nroot of a mounted file system, Ganesha handles the export root itself, and\nonly FSALs that have file systems mounted inside an export need to supply\nit, which VFS, XFS, GPFS and PROXY_V4 now do.\n\nBest wishes,\n\nEvan",
+      "parentUuid": "13f2a77e_bb3c030b",
+      "revId": "82450c5deb2ade6eaf99d4348904d292c5037553",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
