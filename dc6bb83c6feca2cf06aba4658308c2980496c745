@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "966c033d_e4123b4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-23T23:01:47Z",
+      "side": 1,
+      "message": "Thanks Frank -- I\u0027ve added implementation notes at the top of namedattr.c\ncovering the objects, handles, how values are read and written, attributes,\nand where LINK and RENAME are refused, and expanded the comments elsewhere.",
+      "parentUuid": "59d0d6f8_43541fa8",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e11084ed_84fbbdb0",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-21T23:58:15Z",
       "side": 1,
       "message": "What about a link out of a named attribute directory?",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f7ca8e1_6edfba00",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1224,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-23T23:01:47Z",
+      "side": 1,
+      "message": "linkfile() only sees links into a named attribute directory. LINK calls the\nobj_ops of the source object, so a link of a named attribute goes to\nnamed_attr_link() in namedattr.c, which returns NFS4ERR_XDEV. I\u0027ve added a\ncomment in linkfile() explaining this.",
+      "parentUuid": "e11084ed_84fbbdb0",
       "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "233df89d_8d1ed73e",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1564,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-23T23:01:47Z",
+      "side": 1,
+      "message": "RENAME calls the obj_ops of the source directory, so a rename out\nof a named attribute directory goes to attr_dir_rename() in namedattr.c,\nwhich returns NFS4ERR_XDEV. Comment added.",
+      "parentUuid": "0c8a7fc9_300b002b",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8b2be33_30c0f452",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-10-21T23:58:15Z",
       "side": 1,
       "message": "Need a copyright statement not just license",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5608b58c_5c54edab",
+        "filename": "src/FSAL/FSAL_VFS/namedattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-23T23:01:47Z",
+      "side": 1,
+      "message": "Added.",
+      "parentUuid": "b8b2be33_30c0f452",
       "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -86,6 +158,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02940bea_69a55c6a",
+        "filename": "src/FSAL/FSAL_VFS/namedattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-23T23:01:47Z",
+      "side": 1,
+      "message": "namedattr.c is now Linux only, with stubs for other platforms under #else,\nwhere OPENATTR returns NFS4ERR_NOTSUPP. The stubs also cover\nvfs_is_attr_handle(), which only the Linux handle code defined, so FreeBSD\nwould otherwise not have linked. I can\u0027t build on FreeBSD here, so I checked\nthe stubs by compiling namedattr.c with LINUX undefined.",
+      "parentUuid": "ff98b75e_ab6771cc",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e42b5e2_88d58eea",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-10-21T23:58:15Z",
       "side": 1,
       "message": "There is some trickiness as to how you accomplish a setattr(size). Please add some comments to make it clear to the reader.",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1deb2b33_076aae9b",
+        "filename": "src/FSAL/FSAL_VFS/namedattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-23T23:01:47Z",
+      "side": 1,
+      "message": "Added comments in named_attr_update() on how a size change goes through the\nsame read-modify-write as a WRITE.",
+      "parentUuid": "3e42b5e2_88d58eea",
       "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -120,6 +228,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dbaada5_9f04f8de",
+        "filename": "src/FSAL/FSAL_VFS/namedattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-23T23:01:47Z",
+      "side": 1,
+      "message": "No, it isn\u0027t per RFC. RFC 8881 5.3 only says named attributes needn\u0027t\nsupport as many attributes as other objects, and nfs4_op_setattr() tells the\nclient every requested attribute was set, so ignoring them claimed changes\nthat didn\u0027t happen. It now returns NFS4ERR_ATTRNOTSUPP for anything but\nsize. Before changing it I checked that macOS 27 never sets other attributes\non a named attribute: setting, overwriting, listing and removing xattrs,\ncp -p, ditto, touch, chmod and mv.",
+      "parentUuid": "7f1de969_bac5f0be",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8548cab9_1a60e0ca",
@@ -133,6 +259,24 @@
       "writtenOn": "2026-10-21T23:58:15Z",
       "side": 1,
       "message": "Is this non-support a problem? We COULD make a copy of the named attribute on link.",
+      "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbcca874_12a05143",
+        "filename": "src/FSAL/FSAL_VFS/namedattr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1305,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-23T23:01:47Z",
+      "side": 1,
+      "message": "I\u0027d rather leave it as NOTSUPP. This is to support macOS, whose xattr API\nhas no way to link or rename an attribute, so it never sends either. The RFC\ndoesn\u0027t forbid LINK or RENAME within the same named attribute directory, but\nLinux xattrs can\u0027t do either properly: a link would need two names sharing\none value (a copy would give two independent values), and a rename would be\na setxattr then a removexattr, which isn\u0027t atomic. I also checked FreeBSD,\nwhich added named attributes in 15: its linkat() refuses to link a named attribute, but it does allow renaming a named attribute within its directory, so that will fail against Ganesha. I\u0027ve put this in a comment in namedattr.c.",
+      "parentUuid": "8548cab9_1a60e0ca",
       "revId": "dc6bb83c6feca2cf06aba4658308c2980496c745",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
