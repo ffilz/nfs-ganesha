@@ -16,6 +16,24 @@
       "message": "Could you surround all these macos bits with a conditional compile. That will allow vendors to decide to support macos quirks or not, and make it easier to strip them later if they are determined to no longer be needed.",
       "revId": "23837f43ca50b252530354d30adb275f67c43758",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7946fc03_6e2cda5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-23T23:06:38Z",
+      "side": 1,
+      "message": "Done -- all of the macOS code is now inside #ifdef USE_MACOS_QUIRKS, a new\nCMake option that\u0027s off by default, and the docs say the quirk options only\nexist in builds with it.\n\nIf anyone has a contact at Apple that they can point at these quirks I would very much appreciate. It would be very easy for Apple to correct so these quirks are not required. There is also an issue with how Finder handles mirror mounts that causes occasional panics that unfortunately cannot be worked around by a server quirk.",
+      "parentUuid": "15c1baa9_dfbe2baa",
+      "revId": "23837f43ca50b252530354d30adb275f67c43758",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
