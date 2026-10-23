@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa6f6c61_06329ca6",
+        "filename": "src/include/nfs_exports.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T13:13:37Z",
+      "side": 1,
+      "message": "Please move EXPORT_OPTION_XATTR under \"Constants for export options masks \"\nbelow : EXPORT_OPTION_SECLABEL_SET",
+      "revId": "31fa9f4540aae06292481e5998e9d1b3e1fbfd61",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b270e1a3_3e400565",
+        "filename": "src/support/exports.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2652,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T13:13:37Z",
+      "side": 1,
+      "message": "Man page changes missing for the same",
+      "revId": "31fa9f4540aae06292481e5998e9d1b3e1fbfd61",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
