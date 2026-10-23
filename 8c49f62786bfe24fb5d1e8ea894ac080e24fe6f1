@@ -16,6 +16,24 @@
       "message": "Wondering where this change would be needed as we do have upcalls which does the invalidation of mdcache entries. \nUpcalls are meant for handling changes outside of Ganesha",
       "revId": "8c49f62786bfe24fb5d1e8ea894ac080e24fe6f1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4816df6_9b754e70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-23T22:51:15Z",
+      "side": 1,
+      "message": "Hi Sachin -- thanks for looking at this. FSAL_VFS doesn\u0027t generate any upcalls today, so on a VFS export nothing tells MDCACHE when a file is changed directly on the server. That\u0027s the case this change fixes.\n\nI looked at adding upcalls to VFS and XFS. fanotify is the right interface (not inotify). With FAN_REPORT_FID, each event carries a file handle, which is what MDCACHE needs to find the entry. One FAN_MARK_FILESYSTEM mark covers a whole filesystem, and the event\u0027s pid lets us skip changes Ganesha made itself. inotify needs a watch on every directory and only reports names, so we\u0027d have to turn names back into handles ourselves. Plain FID events are enough for the existing invalidate upcall: create, delete and rename report the directory\u0027s handle, and we would invalidate that directory\u0027s cached entries.\n\nIt wouldn\u0027t be a drop-in change:\n- The fsid in fanotify events comes from statfs. FSAL_VFS normally builds its handles from the blkid UUID, device number or configured fsid, so we\u0027d need a lookup table from the statfs fsid to each fsal_filesystem, and then rebuild the handle -- or change how FSAL_VFS builds its handles.\n- FSAL_XFS uses libhandle handles, not kernel handles. Its fsid comes from the superblock UUID and its file ID layout is different, so each event\u0027s handle would need translating. FSAL_VFS already serves XFS with kernel handles, so supporting VFS alone would avoid that.\n- fanotify won\u0027t put a filesystem-wide mark on a btrfs subvolume, and ZFS needs one mark per dataset.\n- It needs Linux 5.1 or later. I\u0027m not sure of Ganesha\u0027s minimum targeted version of Linux, but it also supports FreeBSD and macOS.\n\nEven with upcalls, I think this change is still needed. Events arrive asynchronously, so a READDIR can still hit a stale entry before the invalidate lands. fanotify also doesn\u0027t report writes made through a memory mapping, and after a queue overflow we would have to invalidate everything. Without this change, any of those leaves READDIR failing with NFS4ERR_NOENT and the directory cache trusted forever. Upcalls would make the cache update sooner; this change makes it recover when it misses updates.\n\nIf you would like to add fanotify upcalls I can look at implementing as a separate change. Please advise if you have any preferences, including whether to implement for VFS only or also for XFS, and how to handle the file handle translation. If VFS is now the preferred way to export XFS, and XFS is deprecated, that would simplify the work. I noted XFS is missing other features e.g. NFSv4.2 extended attributes, and could not identify features that XFS offers over and above VFS.\n\nBest wishes,\n\nEvan",
+      "parentUuid": "4621251b_561e9ac7",
+      "revId": "8c49f62786bfe24fb5d1e8ea894ac080e24fe6f1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
