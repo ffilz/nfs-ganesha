@@ -16,6 +16,24 @@
       "message": "Also needs to be in config_samples/config.txt",
       "revId": "e441a0a987e7ce16cde8792d167241b33e27eb19",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "481d8d99_ed392a98",
+        "filename": "src/config_samples/export.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-23T22:56:22Z",
+      "side": 1,
+      "message": "Done -- added Create_Mask, Directory_Mask, Force_Create_Mode and Force_Directory_Mode to the EXPORT {} section of config.txt. I also fixed the umask ranges in config.txt and the FSAL man pages, since this change widens them from 0777 to 07777.",
+      "parentUuid": "db07aea8_f304af19",
+      "revId": "e441a0a987e7ce16cde8792d167241b33e27eb19",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
