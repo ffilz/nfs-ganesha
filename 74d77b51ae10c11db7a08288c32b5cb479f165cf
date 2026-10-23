@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee517f2e_ce39cd2e",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1024,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T11:30:25Z",
+      "side": 1,
+      "message": "on returning from here, don\u0027t we need to call gsh_reflist_put() ?",
+      "revId": "74d77b51ae10c11db7a08288c32b5cb479f165cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e678dba1_2620357c",
+        "filename": "src/MainNFSD/nfs_cluster_qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T11:30:25Z",
+      "side": 1,
+      "message": "seems to be shutdown handling is not there for CQOS thread, that means this rcu_unregister_thread() will never be called. \nI am not sure, is it by design we didn\u0027t added shutdown handling ?",
+      "revId": "74d77b51ae10c11db7a08288c32b5cb479f165cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcf4d8be_1c4c6663",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T11:30:25Z",
+      "side": 1,
+      "message": "void populate_cqos_hosts(void); , but here I see true passed to the function.\nam I missing something here?",
+      "revId": "74d77b51ae10c11db7a08288c32b5cb479f165cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08af4044_bb3b73bb",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T11:30:25Z",
+      "side": 1,
+      "message": "this should be qos_block_config.enable_cluster_qos and not enable_qos",
+      "revId": "74d77b51ae10c11db7a08288c32b5cb479f165cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d82e1fdb_06154010",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T11:30:25Z",
+      "side": 1,
+      "message": "I am not sure, but need to check why populate_cqos_hosts() is required in core_commit and qos_core_commit.",
+      "revId": "74d77b51ae10c11db7a08288c32b5cb479f165cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9abd84b_1de3999f",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T11:30:25Z",
+      "side": 1,
+      "message": "nfs_core_lock is not released.",
+      "revId": "74d77b51ae10c11db7a08288c32b5cb479f165cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "827b3cc7_444b3dbe",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T11:30:25Z",
+      "side": 1,
+      "message": "nfs_core_lock is not released.",
+      "revId": "74d77b51ae10c11db7a08288c32b5cb479f165cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
