@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b973e184_d8a4bfe8",
+        "filename": "src/include/nfs_exports.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T17:02:43Z",
+      "side": 1,
+      "message": "Sorry for not making my point correctly, \nEXPORT_OPTION_XATTR should be part of \"Constants for export options masks\" and \nshould be 0x00000200 because EXPORT_OPTION_SECLABEL_SET already occupies 0x00000100",
+      "parentUuid": "aa6f6c61_06329ca6",
+      "revId": "31fa9f4540aae06292481e5998e9d1b3e1fbfd61",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b270e1a3_3e400565",
         "filename": "src/support/exports.c",
         "patchSetId": 1
