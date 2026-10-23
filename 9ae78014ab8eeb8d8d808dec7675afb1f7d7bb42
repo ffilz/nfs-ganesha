@@ -16,6 +16,29 @@
       "message": "OK,",
       "revId": "9ae78014ab8eeb8d8d808dec7675afb1f7d7bb42",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6807b7ad_f9057ffb",
+        "filename": "src/SAL/nfs4_clientid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2284,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T09:28:44Z",
+      "side": 1,
+      "message": "consider this scenario: after the submission, if the current thread gets scheduled out, and the submitted task gets completed first. then there can be case of double free and a use after free.\n\natomic_inc_int32_t(\u0026shared-\u003erefcnt); should be done before fridgethr_submit(), if rc !\u003d0 decrement_it.",
+      "range": {
+        "startLine": 2284,
+        "startChar": 0,
+        "endLine": 2284,
+        "endChar": 33
+      },
+      "revId": "9ae78014ab8eeb8d8d808dec7675afb1f7d7bb42",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
