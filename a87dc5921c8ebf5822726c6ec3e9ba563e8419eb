@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8a116d6_4448e1c2",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1359,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T09:06:16Z",
+      "side": 1,
+      "message": "below defensive check, if (obj_hdl \u003d\u003d NULL) check  should be above the container_of()",
+      "revId": "a87dc5921c8ebf5822726c6ec3e9ba563e8419eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c04ae11b_b49ba299",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1375,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T09:06:16Z",
+      "side": 1,
+      "message": "in case of FSAL_DELEG_WR request, flow falls into default and ends up printing : \"The requested deleg type was not read or write\" which is bit misleading.",
+      "revId": "a87dc5921c8ebf5822726c6ec3e9ba563e8419eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efe85ba6_fe9af3ff",
         "filename": "src/FSAL/FSAL_GPFS/file.c",
         "patchSetId": 1
@@ -32,6 +66,23 @@
       "side": 1,
       "message": "Talking with Marc, I don\u0027t see any issues here.",
       "parentUuid": "efe85ba6_fe9af3ff",
+      "revId": "a87dc5921c8ebf5822726c6ec3e9ba563e8419eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fa41a38_0a243933",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-10-23T09:06:16Z",
+      "side": 1,
+      "message": "Suggestion :  instead of passing a literal 0 use FSAL_OP_LOCKT to make the argument\u0027s intended meaning.",
       "revId": "a87dc5921c8ebf5822726c6ec3e9ba563e8419eb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
