@@ -2195,11 +2195,25 @@ nfs_client_record_t *get_client_record(const char *const value,
 	return record;
 }
 
-struct client_callback_arg {
+struct client_callback_state {
 	void *state;
+	int32_t refcnt;
+};
+
+struct client_callback_arg {
+	struct client_callback_state *cb_state;
 	nfs_client_id_t *pclientid;
 	bool (*cb)(nfs_client_id_t *, void *);
 };
+
+static inline void
+put_client_callback_state(struct client_callback_state *cb_state)
+{
+	if (atomic_dec_int32_t(&cb_state->refcnt) == 0) {
+		gsh_free(cb_state->state, MEM_COMP_STATE);
+		gsh_free(cb_state, MEM_COMP_CLIENTID);
+	}
+}
 
 /**
  * @brief client callback
@@ -2209,9 +2223,9 @@ static void client_cb(struct fridgethr_context *ctx)
 	struct client_callback_arg *cb_arg;
 
 	cb_arg = ctx->arg;
-	cb_arg->cb(cb_arg->pclientid, cb_arg->state);
+	cb_arg->cb(cb_arg->pclientid, cb_arg->cb_state->state);
 	dec_client_id_ref(cb_arg->pclientid);
-	gsh_free(cb_arg->state, MEM_COMP_STATE);
+	put_client_callback_state(cb_arg->cb_state);
 	gsh_free(cb_arg, MEM_COMP_CLIENTID);
 }
 
@@ -2232,7 +2246,13 @@ void nfs41_foreach_client_callback(bool (*cb)(nfs_client_id_t *cl, void *state),
 	struct rbt_node *pn;
 	nfs_client_id_t *pclientid;
 	struct client_callback_arg *cb_arg;
+	struct client_callback_state *cb_state;
 	int rc;
+
+	cb_state = gsh_malloc(sizeof(struct client_callback_state),
+			      MEM_COMP_CLIENTID);
+	cb_state->state = state;
+	cb_state->refcnt = 1;
 
 	/* For each bucket of the hashtable */
 	for (i = 0; i < ht->parameter.index_size; i++) {
@@ -2254,8 +2274,9 @@ void nfs41_foreach_client_callback(bool (*cb)(nfs_client_id_t *cl, void *state),
 					MEM_COMP_CLIENTID);
 
 				cb_arg->cb = cb;
-				cb_arg->state = state;
+				cb_arg->cb_state = cb_state;
 				cb_arg->pclientid = pclientid;
+				atomic_inc_int32_t(&cb_state->refcnt);
 				inc_client_id_ref(pclientid);
 				rc = fridgethr_submit(state_async_fridge,
 						      client_cb, cb_arg);
@@ -2265,11 +2286,14 @@ void nfs41_foreach_client_callback(bool (*cb)(nfs_client_id_t *cl, void *state),
 						rc);
 					gsh_free(cb_arg, MEM_COMP_CLIENTID);
 					dec_client_id_ref(pclientid);
+					put_client_callback_state(cb_state);
 				}
 			}
 		}
 		PTHREAD_RWLOCK_unlock(&(ht->partitions[i].ht_lock));
 	}
+
+	put_client_callback_state(cb_state);
 }
 
 /**
