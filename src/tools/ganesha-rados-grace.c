@@ -39,9 +39,9 @@
 #include <getopt.h>
 #include <rados_grace.h>
 
-static int cluster_connect(rados_ioctx_t *io_ctx, const char *id,
-			   const char *cephconf, const char *pool,
-			   const char *ns, bool create)
+static int cluster_connect(rados_t *cluster, rados_ioctx_t *io_ctx,
+			   const char *id, const char *cephconf,
+			   const char *pool, const char *ns, bool create)
 {
 	int ret;
 	rados_t clnt;
@@ -51,6 +51,7 @@ static int cluster_connect(rados_ioctx_t *io_ctx, const char *id,
 		fprintf(stderr, "rados_create: %d\n", ret);
 		return ret;
 	}
+	*cluster = clnt;
 
 	ret = rados_conf_read_file(clnt, cephconf);
 	if (ret < 0) {
@@ -98,7 +99,8 @@ static void usage(char *const *argv)
 int main(int argc, char *const *argv)
 {
 	int ret, nodes = 0;
-	rados_ioctx_t io_ctx;
+	rados_t cluster = NULL;
+	rados_ioctx_t io_ctx = NULL;
 	const char *cmd = "dump";
 	uint64_t cur, rec;
 	char *userid = NULL;
@@ -185,10 +187,11 @@ int main(int argc, char *const *argv)
 	}
 
 	do_add = !strcmp(cmd, "add");
-	ret = cluster_connect(&io_ctx, userid, cephconf, pool, ns, do_add);
+	ret = cluster_connect(&cluster, &io_ctx, userid, cephconf, pool, ns,
+			      do_add);
 	if (ret) {
 		fprintf(stderr, "Can't connect to cluster: %d\n", ret);
-		return 1;
+		goto out;
 	}
 
 	if (!strcmp(cmd, "dump")) {
@@ -206,7 +209,7 @@ int main(int argc, char *const *argv)
 		ret = rados_grace_create(io_ctx, oid);
 		if (ret < 0 && ret != -EEXIST) {
 			fprintf(stderr, "Can't create grace db: %d\n", ret);
-			return 1;
+			goto out;
 		}
 		ret = rados_grace_add(io_ctx, oid, nodes,
 				      (const char *const *)node_names);
@@ -244,6 +247,10 @@ int main(int argc, char *const *argv)
 		ret = -EINVAL;
 	}
 out:
+	if (io_ctx)
+		rados_ioctx_destroy(io_ctx);
+	if (cluster)
+		rados_shutdown(cluster);
 	if (ret) {
 		fprintf(stderr, "Failure: %d\n", ret);
 		return 1;
