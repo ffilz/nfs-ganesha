@@ -66,6 +66,29 @@ int vfs_fsal_open(struct vfs_fsal_obj_handle *hdl, int openflags,
 }
 
 /**
+ * @brief Flush a directory change to disk before replying.
+ *
+ * NFS clients treat create, remove and rename as synchronous, so a server
+ * crash must not undo one that was acknowledged. knfsd commits the parent
+ * directory at the same points through commit_metadata().
+ *
+ * @return 0 or an errno value.
+ */
+int vfs_sync_dir(struct vfs_fsal_obj_handle *dir)
+{
+	fsal_errors_t fsal_error = ERR_FSAL_NO_ERROR;
+	int fd = vfs_fsal_open(dir, O_RDONLY | O_DIRECTORY, &fsal_error);
+	int retval = 0;
+
+	if (fd < 0)
+		return -fd;
+	if (fsync(fd) < 0)
+		retval = errno;
+	close(fd);
+	return retval;
+}
+
+/**
  * handle_to_key
  * return a handle descriptor into the handle in this object handle
  * @TODO reminder.  make sure things like hash keys don't point here
@@ -645,6 +668,11 @@ static fsal_status_t makedir(struct fsal_obj_handle *dir_hdl, const char *name,
 		goto direrr;
 	}
 	vfs_restore_ganesha_credentials(dir_hdl->fsal);
+	retval = vfs_sync_dir(myself);
+	if (retval != 0) {
+		status = posix2fsal_status(retval);
+		goto fileerr;
+	}
 	retval = vfs_name_to_handle(dir_fd, dir_hdl->fs, name, fh);
 	if (retval < 0) {
 		retval = errno;
@@ -865,6 +893,12 @@ static fsal_status_t makenode(struct fsal_obj_handle *dir_hdl, const char *name,
 
 	vfs_restore_ganesha_credentials(dir_hdl->fsal);
 
+	retval = vfs_sync_dir(myself);
+	if (retval != 0) {
+		status = posix2fsal_status(retval);
+		goto fileerr;
+	}
+
 	vfs_alloc_handle(fh);
 
 	retval = vfs_name_to_handle(dir_fd, myself->obj_handle.fs, name, fh);
@@ -1065,6 +1099,12 @@ static fsal_status_t makesymlink(struct fsal_obj_handle *dir_hdl,
 	}
 
 	vfs_restore_ganesha_credentials(dir_hdl->fsal);
+
+	retval = vfs_sync_dir(myself);
+	if (retval != 0) {
+		status = posix2fsal_status(retval);
+		goto linkerr;
+	}
 
 	retval = vfs_name_to_handle(dir_fd, dir_hdl->fs, name, fh);
 
@@ -1337,6 +1377,10 @@ static fsal_status_t linkfile(struct fsal_obj_handle *obj_hdl,
 		LogFullDebug(COMPONENT_FSAL, "link returned %d", retval);
 
 		status = posix2fsal_status(retval);
+	} else {
+		retval = vfs_sync_dir(destdir);
+		if (retval != 0)
+			status = posix2fsal_status(retval);
 	}
 
 	close(destdirfd);
@@ -1647,6 +1691,12 @@ static fsal_status_t renamefile(struct fsal_obj_handle *obj_hdl,
 		}
 
 		vfs_restore_ganesha_credentials(obj_hdl->fsal);
+
+		retval = vfs_sync_dir(newdir);
+		if (retval == 0 && olddir != newdir)
+			retval = vfs_sync_dir(olddir);
+		if (retval != 0)
+			fsal_error = posix2fsal_error(retval);
 	}
 
 out:
@@ -1717,6 +1767,12 @@ static fsal_status_t file_unlink(struct fsal_obj_handle *dir_hdl,
 			fsal_error = posix2fsal_error(retval);
 	}
 	vfs_restore_ganesha_credentials(dir_hdl->fsal);
+
+	if (retval == 0) {
+		retval = vfs_sync_dir(myself);
+		if (retval != 0)
+			fsal_error = posix2fsal_error(retval);
+	}
 
 errout:
 	close(fd);

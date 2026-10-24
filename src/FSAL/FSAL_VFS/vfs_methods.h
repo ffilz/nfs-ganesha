@@ -248,6 +248,8 @@ struct closefd {
 int vfs_fsal_open(struct vfs_fsal_obj_handle *hdl, int openflags,
 		  fsal_errors_t *fsal_error);
 
+int vfs_sync_dir(struct vfs_fsal_obj_handle *dir);
+
 fsal_status_t vfs_close_func(struct fsal_obj_handle *obj_hdl,
 			     struct fsal_fd *fd);
 #ifdef HAVE_COPY_FILE_RANGE
