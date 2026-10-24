@@ -829,6 +829,15 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 		goto direrr;
 	}
 
+	if ((posix_flags & O_CREAT) != 0) {
+		retval = vfs_sync_dir(myself);
+		if (retval != 0) {
+			close(fd);
+			status = posix2fsal_status(retval);
+			goto direrr;
+		}
+	}
+
 	LogFullDebug(COMPONENT_FSAL, "Opened fd=%d for file %s", fd, name);
 
 	/* Check HSM status */
