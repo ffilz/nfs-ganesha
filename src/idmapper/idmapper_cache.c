@@ -626,7 +626,7 @@ bool idmapper_lookup_by_uname(const struct gsh_buffdesc *name, uid_t *uid,
 
 	found_user =
 		avltree_container_of(found_node, struct cache_user, uname_node);
-	if (!gss_princ) {
+	if (!gss_princ && found_user->in_uidtree) {
 		/* I assume that if someone likes this user enough to look it
 		   up by name, they'll like it enough to look it up by ID
 		   later.
