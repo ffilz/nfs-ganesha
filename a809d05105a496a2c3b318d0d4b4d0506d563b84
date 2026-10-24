@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "244fd5c1_da91e7b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-24T03:47:31Z",
+      "side": 1,
+      "message": "Hi -- the PyNFS-GPFS failure on this one is a CI setup problem, not the patch. Ganesha never got built on the GPFS VM.\n\nIn build 2127 the VM\u0027s DHCP lease was 192.168.122.254. detect_usable_ips() in ci-tests only looks for a CES IP above the VM\u0027s own address, so with .254 it found no candidates and raised \"Not enough usable IPs detected for CES nodes\". The test\u0027s except writes Failed without logging the exception, which is why the Failure Logs link is empty.\n\nI\u0027ve sent a fix to ci-tests: https://github.com/nfs-ganesha/ci-tests/pull/144. Could someone retrigger the tests?\n\nBest wishes,\n\nEvan",
+      "revId": "a809d05105a496a2c3b318d0d4b4d0506d563b84",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
