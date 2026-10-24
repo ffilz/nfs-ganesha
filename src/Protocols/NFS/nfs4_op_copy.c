@@ -352,6 +352,7 @@ static nfsstat4 check_copy_stateid(stateid4 *sid, struct fsal_obj_handle *obj,
 				if (sd->sd_type != OPEN_DELEGATE_WRITE &&
 				    sd->sd_type !=
 					    OPEN_DELEGATE_WRITE_ATTRS_DELEG) {
+					dec_state_t_ref(state);
 					return NFS4ERR_BAD_STATEID;
 				}
 			}
@@ -1465,6 +1466,8 @@ static enum copy_dispatch_result copy_submit_job(
 		job->job_res = sync_res;
 		job->job_cdata = data;
 		data->op_data = job;
+	} else {
+		fill_copy_response(sync_res, data, true, cos, 0);
 	}
 
 	submit_rc = fridgethr_submit(copy_fridge, copy_worker, job);
@@ -1569,12 +1572,9 @@ enum nfs_req_result nfs4_op_copy(struct nfs_argop4 *op, compound_data_t *data,
 	copy_log_dispatch(args, ctx.to_copy, do_async);
 
 	mode = do_async ? COPY_MODE_ASYNC : COPY_MODE_SYNC;
-	if (copy_submit_job(data, &ctx, mode, do_async ? NULL : res, &cos) ==
-	    COPY_DISPATCHED) {
-		if (do_async) {
-			fill_copy_response(res, data, true, cos, 0);
+	if (copy_submit_job(data, &ctx, mode, res, &cos) == COPY_DISPATCHED) {
+		if (do_async)
 			goto out;
-		}
 		goto out_async_wait;
 	}
 
