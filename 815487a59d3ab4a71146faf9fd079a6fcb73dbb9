@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "815487a59d3ab4a71146faf9fd079a6fcb73dbb9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bd41e10_ae7fb526",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-26T19:14:06Z",
+      "side": 1,
+      "message": "I wonder if it would have been better to convert to use utf8string across the board which would save repeated strlen. The assumption for utf8string is that they are NUL terminated so when convenient, one can use the pointer as a NUL terminated char *.",
+      "revId": "815487a59d3ab4a71146faf9fd079a6fcb73dbb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
