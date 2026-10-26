@@ -46,6 +46,30 @@
       },
       "revId": "b15abbca48869971d64f973d9175ecae5926d9e1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4df8766_37bda1c2",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-26T18:51:14Z",
+      "side": 1,
+      "message": "Bind_Addr already defaults to 0.0.0.0 or :: so not sure if there\u0027s any issue here if a specific Bind_Addr is not set.",
+      "parentUuid": "143eacfc_f362a7de",
+      "range": {
+        "startLine": 706,
+        "startChar": 47,
+        "endLine": 706,
+        "endChar": 49
+      },
+      "revId": "b15abbca48869971d64f973d9175ecae5926d9e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
