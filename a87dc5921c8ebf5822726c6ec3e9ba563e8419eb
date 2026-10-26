@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab22309a_5ee80907",
+        "filename": "src/FSAL/FSAL_GPFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1375,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-26T22:44:00Z",
+      "side": 1,
+      "message": "One disadvantage of this code structure is whenever write delegation support is added, we need to remember to change the message.\n\nMaybe pull the condition inside the case, and in a #else, LogDebug that write delegations are not supported, and return non supported.",
+      "parentUuid": "ff37aed5_16095864",
+      "revId": "a87dc5921c8ebf5822726c6ec3e9ba563e8419eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efe85ba6_fe9af3ff",
         "filename": "src/FSAL/FSAL_GPFS/file.c",
         "patchSetId": 1
