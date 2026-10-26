@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17835795_c79a31b3",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-26T18:59:21Z",
+      "side": 1,
+      "message": "I think this is still not correct, we should still do something with the supplied mode based on this AI response from Google:\n\nNo, the default ACL does not completely replace the mode argument provided to open(O_CREAT). Instead, they are combined.\nAccording to the POSIX ACL specification, when a new file is created inside a directory that has a default ACL, the system evaluates both the default ACL and the mode parameter to calculate the file\u0027s final permissions:\n1. Inheritance: The new file initially inherits the default ACL of the parent directory as its own access ACL.\n2. Filtering (Intersection): The inherited ACL entries corresponding to the standard file permission bits (owner, group, and others) are modified so that they do not contain any permissions that were omitted from the mode argument.\n\nHow the Interaction Works\n\nThe mode argument acts as a maximum permission filter (similar to how a umask behaves when ACLs are absent). The default ACL cannot grant more standard permissions than what the calling application explicitly requested in open().\n• Umask is Ignored: If a default ACL exists on the parent directory, the process\u0027s standard umask is completely ignored during file creation. The mode parameter replaces the role of filtering permissions.\n• The \"Execute\" Bit Example: Applications typically create files using 0666 (read/write only). Even if the parent directory\u0027s default ACL specifies rwx for a user or group, the final file will only receive rw- because the open() call\u0027s mode did not include the execute (x) bit.\n\nSummary Table\n\n\nScenario\tHow Final Permissions are Calculated\nNo Default ACL present\tmode \u0026 ~umask\nDefault ACL present\tDefault ACL filtered/intersected with mode\n\n\nPractical Rule for Developers\n\nAlways pass the full intended permissions (usually 0666 for regular files or 0777 for executable binaries/directories) to the mode argument of open(..., O_CREAT, mode). Relying on the default ACL to \"add\" permissions your application restricted in the mode argument will fail.\nIf you are currently debugging a specific permission outcome, let me know:\n• What exact mode bitmask (e.g., 0666, 0644) you are passing to open()?\n• What the default ACL (getfacl) on the parent directory looks like?\nI can calculate the exact resulting permissions for your configuration.",
+      "revId": "95d4d7a3a1916065026f19a99ec3d50e781d182a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
