@@ -1270,6 +1270,15 @@ void process_local_nlm_info(void)
 	int rc;
 	pthread_attr_t attr_thr;
 
+	/* Do not start internal NSM recovery when it is disabled and no
+	 * cluster notification forwarding is configured.  Backends such as
+	 * rados_cluster do not implement the internal NSM recovery hooks.
+	 */
+	if (!NFS_pcp.internal_statd &&
+	    glist_empty(&nfs_param.core_param.cluster_members) &&
+	    glist_empty(&nfs_param.core_param.cluster_self))
+		return;
+
 	/* Keep the nsm_notify_thread running if we have cluster members
 	 * identified to forward SM_NOTIFY to.
 	 */
