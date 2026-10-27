@@ -73,6 +73,9 @@ client_oc_size(uint64, range 0 to UINT64_MAX, default 209715200)
 client_oc_max_dirty(uint64, range 0 to UINT64_MAX, default 104857600)
     Sets the maximum number of dirty bytes in object cache. Default is 100Mi.
 
+objecter_dispatch_to_session_strand(bool, default false)
+    Enable or disable objecter_dispatch_to_session_strand (object cache).
+
 async(bool, default false)
     Enable ceph async operations (read and write).
 

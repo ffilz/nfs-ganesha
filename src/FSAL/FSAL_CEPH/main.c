@@ -296,6 +296,8 @@ static struct config_item ceph_items[] = {
 	CONF_ITEM_BOOL("use_old_uuid", false, ceph_fsal_module, use_old_uuid),
 	CONF_ITEM_BOOL("register_service", false, ceph_fsal_module,
 		       register_service),
+	CONF_ITEM_BOOL("objecter_dispatch_to_session_strand", false,
+		       ceph_fsal_module, mds_session_strand),
 	CONF_ITEM_STR("nodeid", 1, MAXPATHLEN, NULL, ceph_fsal_module, nodeid),
 	CONF_ITEM_UI16("max_ceph_clients", 0, UINT16_MAX, 0, ceph_fsal_module,
 		       max_ceph_clients),
@@ -1344,6 +1346,18 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 			additional = str_val;
 			goto ceph_error;
 		}
+	}
+
+	ceph_status =
+		ceph_conf_set(cm->cmount, "objecter_dispatch_to_session_strand",
+			      my_module->mds_session_strand ? "true" : "false");
+	if (ceph_status) {
+		/* Do not error out, as old ceph code may not support this
+		 * config option
+		 */
+		LogWarn(COMPONENT_FSAL,
+			"Failed to set - objecter_dispatch_to_session_strand");
+		LogEvent(COMPONENT_FSAL, "Ignoring the failure");
 	}
 
 	ceph_status = ceph_init(cm->cmount);

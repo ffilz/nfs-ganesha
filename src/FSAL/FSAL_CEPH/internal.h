@@ -100,6 +100,8 @@ struct ceph_fsal_module {
 	bool client_oc;
 	uint64_t client_oc_size;
 	uint64_t client_oc_max_dirty;
+	/* MDS session related */
+	bool mds_session_strand;
 	/* ceph client pool related */
 	uint16_t clnts_per_pool;
 	struct glist_head cp_users_list;
