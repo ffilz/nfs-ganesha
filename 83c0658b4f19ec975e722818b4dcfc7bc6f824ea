@@ -16,6 +16,57 @@
       "message": "recheck test",
       "revId": "83c0658b4f19ec975e722818b4dcfc7bc6f824ea",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e5739fe_2e58eabe",
+        "filename": "src/include/nfs_exports.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-27T07:14:45Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - #define EXPORT_OPTION_PROTOCOLS \\\n    - \t(EXPORT_OPTION_NFSV3 | EXPORT_OPTION_NFSV4)\n→ to be replaced with:\n    + #define EXPORT_OPTION_PROTOCOLS (EXPORT_OPTION_NFSV3 | EXPORT_OPTION_NFSV4)",
+      "revId": "83c0658b4f19ec975e722818b4dcfc7bc6f824ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dbc20fe_7b7e0106",
+        "filename": "src/include/server_stats_private.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-27T07:14:45Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tSTAT_TYPE_NFSV40 STAT_TYPE_NFSV41 STAT_TYPE_NFSV42       \\\n    - \t\")\"\n→ to be replaced with:\n    + \t\tSTAT_TYPE_NFSV40 STAT_TYPE_NFSV41 STAT_TYPE_NFSV42 \")\"",
+      "revId": "83c0658b4f19ec975e722818b4dcfc7bc6f824ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "241d78ed_99afe1f9",
+        "filename": "src/support/exports.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3167,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-27T07:14:45Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tLogMidDebug(\n    - \t\tCOMPONENT_EXPORT,\n    - \t\t\"CORE_OPTION_NFSV3 %d CORE_OPTION_NFSV4 %d\",\n    - \t\t(NFS_options \u0026 CORE_OPTION_NFSV3) !\u003d 0,\n    - \t\t(NFS_options \u0026 CORE_OPTION_NFSV4) !\u003d 0);\n→ to be replaced with:\n    + \tLogMidDebug(COMPONENT_EXPORT,\n    + \t\t    \"CORE_OPTION_NFSV3 %d CORE_OPTION_NFSV4 %d\",\n    + \t\t    (NFS_options \u0026 CORE_OPTION_NFSV3) !\u003d 0,\n    + \t\t    (NFS_options \u0026 CORE_OPTION_NFSV4) !\u003d 0);",
+      "revId": "83c0658b4f19ec975e722818b4dcfc7bc6f824ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
