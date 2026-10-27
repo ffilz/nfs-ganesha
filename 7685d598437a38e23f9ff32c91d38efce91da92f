@@ -34,6 +34,23 @@
       "parentUuid": "0e6403c5_9d801e27",
       "revId": "7685d598437a38e23f9ff32c91d38efce91da92f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6eec7fb_cfac795c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038610
+      },
+      "writtenOn": "2026-10-27T06:35:49Z",
+      "side": 1,
+      "message": "Thanks for the cleanup, Inna. Few fixes (dropping _count/_total from histogram/guage, renaming locks__count → state__locks) look good. A few points before this merges:\n\n1. clients__confirmed_count → clients__confirmed_clients\n\n\"clients\" appears twice here — after rename_metric_names() the scraped name becomes nfs_clients_confirmed_clients. I\u0027d suggest clients__confirmed instead, which is cleaner and consistent with the other metrics in this subsystem.\n\n2. Histogram pluralization (_latency → _latencies)\n\nPrometheus conventions use singular nouns for histogram base names (e.g., http_request_duration_seconds in the official docs). Each observation is a single measurement; the histogram type itself implies a distribution. Also, 6 out of 9 existing latency/duration histograms in this codebase already use singular — this change would make the minority convention dominant. I\u0027d prefer keeping the singular form, and if possible, renaming the few existing plural outliers to singular as well (e.g., monitoring__scraping_latencies → monitoring__scraping_latency) so we have a consistent convention across the board.\n\n3. Counter suffix: _total → _count\n\nThe commit message states \"In Prometheus, _total is for counters\" — but then the patch removes _total from counters and replaces it with _count. _total is the canonical Prometheus counter suffix (OpenMetrics mandates it), while _count is what Prometheus auto-appends to histograms/summaries — so using _count on counters creates ambiguity. The existing _total on these idmapping counters is correct. For idmapping__max_groups_exceeded, adding a suffix makes sense, but it should be _total not _count.",
+      "revId": "7685d598437a38e23f9ff32c91d38efce91da92f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
