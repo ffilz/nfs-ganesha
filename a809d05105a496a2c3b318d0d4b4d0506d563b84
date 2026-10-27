@@ -33,6 +33,24 @@
       "message": "Ah, I see, the specific quirks are CLIENT permissions, never mind my comment on the previous patch.",
       "revId": "a809d05105a496a2c3b318d0d4b4d0506d563b84",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "485029bb_37e6828c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-27T20:14:28Z",
+      "side": 1,
+      "message": "Yes, but just a note: the real benefit for Macs is namedattr support, which requires NFSv4.1.  NFSv4.1 provides for auto detection of macOS clients through EXCHANGE_ID, so explicit CLIENT permissions would not be required.  The CLIENT permissions do enable support for older protocol and macOS versions, noting all development and testing was done on macOS 27 and NFSv4.1 is available from macOS 26.",
+      "parentUuid": "34fee76f_db4e5409",
+      "revId": "a809d05105a496a2c3b318d0d4b4d0506d563b84",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
