@@ -1270,6 +1270,10 @@ void process_local_nlm_info(void)
 	int rc;
 	pthread_attr_t attr_thr;
 
+	/* No internal NSM notification work when internal statd is disabled. */
+	if (!NFS_pcp.internal_statd)
+		return;
+
 	/* Keep the nsm_notify_thread running if we have cluster members
 	 * identified to forward SM_NOTIFY to.
 	 */
