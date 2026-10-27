@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08f14b22_af366f19",
+        "filename": "src/Protocols/NLM/nsm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-27T17:54:38Z",
+      "side": 1,
+      "message": "If internal_statd is disabled, we don\u0027t need the thread at all even with a cluster. We won\u0027t be receiving SM_NOTIFY that need forwarding, and we won\u0027t be sending any SM_NOTIFY.",
+      "revId": "17a097d1ec77288a389198b4b47d44290051b7ec",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
