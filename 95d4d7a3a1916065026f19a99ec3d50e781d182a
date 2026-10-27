@@ -34,6 +34,24 @@
       "parentUuid": "17835795_c79a31b3",
       "revId": "95d4d7a3a1916065026f19a99ec3d50e781d182a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e1abac4_41b1e7e6",
+        "filename": "src/FSAL/FSAL_CEPH/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-27T18:31:23Z",
+      "side": 1,
+      "message": "I think it would help to see some examples of how this works out with various modes set on open (O_CREAT) and compare them to the same open done on a local filesystem.",
+      "parentUuid": "98eb36e8_bce69fd0",
+      "revId": "95d4d7a3a1916065026f19a99ec3d50e781d182a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
