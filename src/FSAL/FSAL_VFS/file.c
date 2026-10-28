@@ -1033,9 +1033,13 @@ retry_attr:
 fileerr:
 
 	/* hdl->u.file.fd will be close in obj_ops->release */
-	if (my_fd == &hdl->u.file.fd) {
+	if (hdl == NULL || my_fd != &hdl->u.file.fd) {
 		LogFullDebug(COMPONENT_FSAL, "Closing Opened fd %d", fd);
 		close(fd);
+		if (my_fd != NULL) {
+			my_fd->fd = -1;
+			my_fd->fsal_fd.openflags = FSAL_O_CLOSED;
+		}
 	}
 
 	if (*new_obj) {
