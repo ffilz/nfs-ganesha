@@ -207,11 +207,8 @@ int main(int argc, char *argv[])
 	sigaddset(&signals_to_block, SIGPIPE);
 	if (pthread_sigmask(SIG_BLOCK, &signals_to_block, NULL) != 0) {
 		/* Note that the logging library has not yet been
-		 * initialized, so we can't use it here. Also note that we
-		 * can't initialize logging before setting the signal mask,
-		 * since the logging library starts a new thread if the
-		 * binary is compiled with USE_UNWIND_ENRICHED_BT.
-		 * Therefore, we directly write to stderr. */
+		 * initialized, so we can't use it here. Therefore, we
+		 * directly write to stderr. */
 		fprintf(stderr,
 			"Could not start nfs daemon, pthread_sigmask failed\n");
 		return 1;
@@ -452,6 +449,9 @@ int main(int argc, char *argv[])
 		}
 #endif
 	}
+
+	/* Only start threads once we are done forking */
+	start_crash_handler_monitor();
 
 	/* Make sure Linux file i/o will return with error
 	 * if file size is exceeded. */

@@ -86,6 +86,7 @@ void SetNameFunction(const char *nom); /* thread safe */
 void SetClientIP(char *ip_str);
 
 void init_logging(const char *log_path, const int debug_level);
+void start_crash_handler_monitor(void);
 
 int ReturnLevelAscii(const char *LevelInAscii);
 char *ReturnLevelInt(int level);

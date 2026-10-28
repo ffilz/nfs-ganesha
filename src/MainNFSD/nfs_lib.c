@@ -109,6 +109,7 @@ int nfs_libmain(const char *ganesha_conf, const char *lpath,
 	/* initialize memory and logging */
 	nfs_prereq_init(exec_name, nfs_host_name, debug_level, log_path, false,
 			8192 * 1024);
+	start_crash_handler_monitor();
 #if GANESHA_BUILD_RELEASE
 	LogEvent(COMPONENT_MAIN, "%s Starting: Ganesha Version %s", exec_name,
 		 GANESHA_VERSION);

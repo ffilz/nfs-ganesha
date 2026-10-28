@@ -1141,6 +1141,18 @@ static int crash_handler_monitor_init(void)
 #endif
 
 /**
+ * @brief Start the crash handler monitor thread
+ *
+ * This creates a thread. Do not call it before the process forks.
+ */
+void start_crash_handler_monitor(void)
+{
+#ifdef USE_UNWIND_ENRICHED_BT
+	crash_handler_monitor_init();
+#endif
+}
+
+/**
  * @brief Initialize Logging
  *
  * Called very early in server init to make logging available as
@@ -1243,10 +1255,6 @@ void init_logging(const char *log_path, const int debug_level)
 		SetLevelDebug(debug_level);
 		original_log_level = debug_level;
 	}
-
-#ifdef USE_UNWIND_ENRICHED_BT
-	crash_handler_monitor_init();
-#endif
 }
 
 /*
