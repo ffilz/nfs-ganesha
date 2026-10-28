@@ -87,6 +87,24 @@
       "parentUuid": "9ec54daa_fdf59791",
       "revId": "815487a59d3ab4a71146faf9fd079a6fcb73dbb9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43330b1a_bb272a5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-28T14:44:59Z",
+      "side": 1,
+      "message": "OK, let\u0027s go with this then. Many of the places we use utf8string are for values allocated by FSAL and passed back to client, whereas this is all inbound.",
+      "parentUuid": "5f8eecf4_e5ca6210",
+      "revId": "815487a59d3ab4a71146faf9fd079a6fcb73dbb9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
