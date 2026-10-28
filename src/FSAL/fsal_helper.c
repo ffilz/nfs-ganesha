@@ -2599,6 +2599,7 @@ fsal_status_t fsal_buffered_copy_fsal(struct fsal_obj_handle *src_obj,
 		.fsa_cond = &cond,
 	};
 
+	max_chunk = (size_t)MIN(count, max_chunk);
 	buffer = gsh_malloc(max_chunk, MEM_COMP_XCOPY);
 
 	while (remaining > 0) {
