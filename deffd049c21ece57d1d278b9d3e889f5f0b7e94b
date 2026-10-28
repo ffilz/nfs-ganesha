@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f2b2cab_2f5817e5",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-28T14:59:51Z",
+      "side": 1,
+      "message": "Wow, this if condition was put in 9 years ago to fix a double close bug. But it didn\u0027t actually fix the double close...",
+      "revId": "deffd049c21ece57d1d278b9d3e889f5f0b7e94b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
