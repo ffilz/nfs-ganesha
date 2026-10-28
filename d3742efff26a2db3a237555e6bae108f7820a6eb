@@ -16,6 +16,24 @@
       "message": "@vamsimulpuri@google.com\n\nIs there any specific reason for not doing fsync after SETATTR?\n\nLet\u0027s consider a situation where we change access mode before the reboot and it is not flushed on the disk by the filesystem, after failover the access mode will be reverted to previous value.",
       "revId": "d3742efff26a2db3a237555e6bae108f7820a6eb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35968bee_4092dbd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040096
+      },
+      "writtenOn": "2026-10-28T16:52:01Z",
+      "side": 1,
+      "message": "@mihir.shah@rakuten.com We intentionally scoped this patch to parent-directory namespace operations because NFS clients have no wire operation to fsync a directory, whereas file state can be flushed by the client via fsync()/COMMIT. Also, vfs_open2() calls vfs_setattr2() internally during file creation, so adding fsync() inside vfs_setattr2() would add a second flush to file creates and slow down timestamp updates. If standalone SETATTR durability is needed, we can evaluate that in a separate follow-up patch.",
+      "parentUuid": "aeaa40d0_6ccf398b",
+      "revId": "d3742efff26a2db3a237555e6bae108f7820a6eb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
