@@ -70,6 +70,30 @@
       },
       "revId": "b15abbca48869971d64f973d9175ecae5926d9e1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4dd6e8f_a773b179",
+        "filename": "src/MainNFSD/nfs_rpc_dispatcher_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1040079
+      },
+      "writtenOn": "2026-10-29T16:36:32Z",
+      "side": 1,
+      "message": "Agreed, there\u0027s no need for a separate RDMA-specific bind parameter since Bind_Addr already defaults to a wildcard address.\n\nI\u0027ve also tested the proposed change with multiple NFS-Ganesha instances running on the same host, each bound to a different VIP and using the same NFS/RDMA port (20049). This works as expected.\n\nThe patch simply extends the existing Bind_Addr behavior to the RDMA listener, preserving wildcard binding by default while allowing explicit per-IP binding when needed.\n\nI believe this addresses the concern without introducing additional configuration options. Please let me know if there\u0027s anything else you\u0027d like me to change before merging.",
+      "parentUuid": "b4df8766_37bda1c2",
+      "range": {
+        "startLine": 706,
+        "startChar": 47,
+        "endLine": 706,
+        "endChar": 49
+      },
+      "revId": "b15abbca48869971d64f973d9175ecae5926d9e1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
