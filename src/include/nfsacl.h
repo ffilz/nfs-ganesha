@@ -19,6 +19,8 @@
 
 #define NFS_ACL_MASK 0x00FF
 #define NFS_DFACL_MASK 0x1000
+/* Per-field limit for POSIX ACL entry arrays (Coverity / issue #867). */
+#define POSIX_ACL_MAX_ENTRIES 4096
 
 #ifdef __cplusplus
 extern "C" {

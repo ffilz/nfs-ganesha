@@ -839,7 +839,8 @@ static fattr_xdr_result decode_acl(XDR *xdr, struct xdr_attrs_args *args)
 
 	acldata.naces = 0;
 
-	if (!inline_xdr_u_int32_t(xdr, &acldata.naces) || acldata.naces > 4096)
+	if (!inline_xdr_u_int32_t(xdr, &acldata.naces) ||
+	    acldata.naces > NFS4_ACL_MAX_ACES)
 		return FATTR_XDR_FAILED;
 
 	if (acldata.naces == 0)
@@ -1130,6 +1131,8 @@ static fattr_xdr_result decode_filehandle(XDR *xdr, struct xdr_attrs_args *args)
 
 	if (args->hdl4 == NULL || args->hdl4->nfs_fh4_val == NULL) {
 		if (!inline_xdr_u_int32_t(xdr, &fhlen))
+			return FATTR_XDR_FAILED;
+		if (fhlen > NFS4_FHSIZE)
 			return FATTR_XDR_FAILED;
 		pos = xdr_getpos(xdr);
 		if (!xdr_setpos(xdr, pos + fhlen))
