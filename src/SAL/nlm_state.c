@@ -388,7 +388,8 @@ int get_nlm_state(enum state_type state_type, struct fsal_obj_handle *state_obj,
 	switch (rc) {
 	case HASHTABLE_SUCCESS:
 		state = buffval.addr;
-		if (care == CARE_MONITOR && state->state_seqid != nsm_state) {
+		if (care == CARE_MONITOR && nsm_state != 0 &&
+		    state->state_seqid != nsm_state) {
 			/* We are getting new locks before the old ones
 			 * are gone. We need to unhash this state_t and
 			 * create a new one.
