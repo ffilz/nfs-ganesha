@@ -849,6 +849,10 @@ int nfs_rpc_create_chan_v41(SVCXPRT *xprt, nfs41_session_t *session,
 
 	for (i = 0; i < num_sec_parms; ++i) {
 		if (sec_parms[i].cb_secflavor == AUTH_NONE) {
+			/* authnone_ncreate() returns one shared object.
+			 * Record the flavor so destroy skips AUTH_DESTROY.
+			 */
+			chan->auth_flavor = AUTH_NONE;
 			chan->auth = authnone_ncreate();
 			authed = true;
 			break;
@@ -857,6 +861,11 @@ int nfs_rpc_create_chan_v41(SVCXPRT *xprt, nfs41_session_t *session,
 				&sec_parms[i]
 					 .callback_sec_parms4_u.cbsp_sys_cred;
 
+			/* nfs_rpc_destroy_chan_no_lock() frees chan->auth
+			 * only when auth_flavor is not AUTH_NONE. The v4.0
+			 * path sets this; the v4.1 path was leaving it 0.
+			 */
+			chan->auth_flavor = AUTH_SYS;
 			chan->auth = authunix_ncreate(sys_parms->aup_machname,
 						      sys_parms->aup_uid,
 						      sys_parms->aup_gid,
@@ -1012,6 +1021,11 @@ struct _rpc_call *alloc_rpc_call(void)
 void free_rpc_call(rpc_call_t *call)
 {
 	free_argop(call->cbt.v_u.v4.args.argarray.argarray_val);
+	/* The request tag is a static string. The reply tag is a copy
+	 * allocated while decoding CB_COMPOUND4res and is not part of
+	 * the resarray freed below.
+	 */
+	free_utf8string(&call->cbt.v_u.v4.res.tag);
 	free_resop(call->cbt.v_u.v4.res.resarray.resarray_val);
 
 	clnt_req_release(&call->call_req);

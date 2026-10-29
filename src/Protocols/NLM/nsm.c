@@ -70,6 +70,10 @@ bool nsm_connect(void)
 		return false;
 	}
 
+	/* nsm_notify_thread may already have stored this. SM_NOTIFY
+	 * keeps its own copy, so the previous string can be released.
+	 */
+	gsh_free(nodename, MEM_COMP_PROTOCOL);
 	nodename = gsh_strdup(utsname.nodename, MEM_COMP_PROTOCOL);
 
 	nsm_clnt = clnt_ncreate("localhost", SM_PROG, SM_VERS, "tcp");
@@ -1085,7 +1089,12 @@ void send_sm_notify(struct local_nlm_info *info)
 		info->xres = (xdrproc_t)xdr_void;
 
 		if (info->recovery_type == NLM_CLIENT_ENTRY) {
-			info->args.notify_args.my_name = nodename;
+			/* The call outlives nodename. Keep a private copy;
+			 * local_nlm_info_free() releases my_id->my_name.
+			 */
+			if (my_id->my_name == NULL && nodename != NULL)
+				my_id->my_name = gsh_strdup(nodename, info->mem_comp);
+			info->args.notify_args.my_name = my_id->my_name;
 			info->args.notify_args.state = recov_nsm_state;
 		} else if (info->recovery_type == NSM_FORWARD_NOTIFY) {
 			/* Now send SM_NOTIFY */
@@ -1256,6 +1265,14 @@ void *nsm_notify_thread(void *unused)
 		 * loop is safe from that.
 		 */
 		send_local_nlm_info(info);
+	}
+
+	/* nsm_disconnect() frees nodename when it drops nsm_clnt. This
+	 * thread allocated the name itself when statd was never connected.
+	 */
+	if (nsm_clnt == NULL && nodename != NULL) {
+		gsh_free(nodename, MEM_COMP_PROTOCOL);
+		nodename = NULL;
 	}
 
 	/* All done, drop the mutex and exit. */
