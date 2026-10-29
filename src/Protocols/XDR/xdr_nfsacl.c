@@ -41,7 +41,7 @@ bool_t xdr_posix_acl(XDR *xdrs, posix_acl *objp)
 {
 	if (!xdr_nfs3_uint32(xdrs, &objp->count))
 		return FALSE;
-	if (objp->count > 4096)
+	if (objp->count > POSIX_ACL_MAX_ENTRIES)
 		return FALSE;
 	if (!xdr_vector(xdrs, (char *)objp->entries, objp->count,
 			sizeof(posix_acl_entry),
