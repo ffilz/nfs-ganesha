@@ -82,6 +82,13 @@ typedef struct authsys_parms authsys_parms;
 #define NFS4_MAXFILEOFF 0xfffffffffffffffe
 
 #define BITMAP4_MAPLEN 3
+/* Max bitmap words accepted on the wire; excess above BITMAP4_MAPLEN
+ * is skipped for forward compatibility, but the count itself must be
+ * bounded.
+ */
+#define BITMAP4_XDR_MAXLEN 64
+/* Per-field limit for fattr4 ACL ACE arrays (Coverity / issue #867). */
+#define NFS4_ACL_MAX_ACES 4096
 
 enum nfs_ftype4 {
 	NF4REG = 1,
@@ -3916,6 +3923,15 @@ static inline bool xdr_bitmap4(XDR *xdrs, struct bitmap4 *objp)
  */
 	if (!inline_xdr_u_int(xdrs, &objp->bitmap4_len))
 		return false;
+	/* Reject unbounded bitmaps; still allow modest excess for unknown
+	 * future attributes and discard words beyond BITMAP4_MAPLEN.
+	 */
+	if (objp->bitmap4_len > BITMAP4_XDR_MAXLEN) {
+		LogDebug(COMPONENT_TIRPC,
+			 "%s:%u ERROR bitmap4_len %u > max %u", __func__,
+			 __LINE__, objp->bitmap4_len, BITMAP4_XDR_MAXLEN);
+		return false;
+	}
 	mapsize = MIN(objp->bitmap4_len, BITMAP4_MAPLEN);
 	for (i = 0; i < mapsize; i++)
 		if (!inline_xdr_u_int32_t(xdrs, &map[i]))
@@ -4710,8 +4726,8 @@ static inline bool xdr_fattr4_rdattr_error(XDR *xdrs, fattr4_rdattr_error *objp)
 static inline bool xdr_fattr4_acl(XDR *xdrs, fattr4_acl *objp)
 {
 	if (!xdr_array(xdrs, (char **)&objp->fattr4_acl_val,
-		       &objp->fattr4_acl_len, XDR_ARRAY_MAXLEN, sizeof(nfsace4),
-		       (xdrproc_t)xdr_nfsace4))
+		       &objp->fattr4_acl_len, NFS4_ACL_MAX_ACES,
+		       sizeof(nfsace4), (xdrproc_t)xdr_nfsace4))
 		return false;
 	return true;
 }

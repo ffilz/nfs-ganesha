@@ -301,6 +301,14 @@ static inline bool xdr_io_data_decode(XDR *xdrs, io_data *objp)
 	if (!inline_xdr_u_int32_t(xdrs, &objp->data_len))
 		return false;
 
+	/* WRITE/READ opaque: use the I/O-sized limit, not XDR_BYTES_MAXLEN. */
+	if (objp->data_len > XDR_BYTES_MAXLEN_IO) {
+		LogDebug(COMPONENT_DISPATCH,
+			 "io_data data_len %u exceeds max %u", objp->data_len,
+			 XDR_BYTES_MAXLEN_IO);
+		return false;
+	}
+
 	LogFullDebug(COMPONENT_DISPATCH, "data_len = %u", objp->data_len);
 
 	if (objp->data_len == 0) {
