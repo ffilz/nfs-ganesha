@@ -16,6 +16,24 @@
       "message": "clang-format expects formatting for these lines:\n    - \t\tLogDebug(COMPONENT_TIRPC,\n    - \t\t\t \"%s:%u ERROR bitmap4_len %u \u003e max %u\", __func__,\n    - \t\t\t __LINE__, objp-\u003ebitmap4_len, BITMAP4_XDR_MAXLEN);\n→ to be replaced with:\n    + \t\tLogDebug(COMPONENT_TIRPC, \"%s:%u ERROR bitmap4_len %u \u003e max %u\",\n    + \t\t\t __func__, __LINE__, objp-\u003ebitmap4_len,\n    + \t\t\t BITMAP4_XDR_MAXLEN);",
       "revId": "dae3b35dd87685a78df4bad71f24c064c36a2d3e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed3dd153_c50da42e",
+        "filename": "src/include/nfsv41.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3930,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-10-29T10:53:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "798302c6_4ac009fe",
+      "revId": "dae3b35dd87685a78df4bad71f24c064c36a2d3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
