@@ -262,6 +262,7 @@ int nfs_ip_name_get(sockaddr_t *ipaddr, char *hostname, size_t size)
 {
 	struct gsh_buffdesc buffkey;
 	struct gsh_buffdesc buffval;
+	struct gsh_buffdesc old_key;
 	nfs_ip_name_t *nfs_ip_name;
 	char ipstring[SOCK_NAME_MAX];
 
@@ -281,7 +282,7 @@ int nfs_ip_name_get(sockaddr_t *ipaddr, char *hostname, size_t size)
 			LogFullDebug(COMPONENT_DISPATCH,
 				     "Found an expired host %s entry, removing",
 				     nfs_ip_name->hostname);
-			if (HashTable_Del(ht_ip_name, &buffkey, NULL,
+			if (HashTable_Del(ht_ip_name, &buffkey, &old_key,
 					  &buffval) == HASHTABLE_SUCCESS) {
 				nfs_ip_name = (nfs_ip_name_t *)buffval.addr;
 
@@ -289,6 +290,11 @@ int nfs_ip_name_get(sockaddr_t *ipaddr, char *hostname, size_t size)
 					     "Removing cache entry %s->%s",
 					     ipstring, nfs_ip_name->hostname);
 
+				/* The stored key is the sockaddr copy from
+				 * nfs_ip_name_add. HashTable_Del only returns
+				 * it when the caller asks for it.
+				 */
+				gsh_free(old_key.addr, MEM_COMP_CLIENTID);
 				gsh_free(nfs_ip_name, MEM_COMP_CLIENTID);
 			}
 			return IP_NAME_NOT_FOUND;
@@ -325,7 +331,7 @@ int nfs_ip_name_get(sockaddr_t *ipaddr, char *hostname, size_t size)
  */
 int nfs_ip_name_remove(sockaddr_t *ipaddr)
 {
-	struct gsh_buffdesc buffkey, old_value;
+	struct gsh_buffdesc buffkey, old_key, old_value;
 	nfs_ip_name_t *nfs_ip_name = NULL;
 	char ipstring[SOCK_NAME_MAX];
 
@@ -337,13 +343,17 @@ int nfs_ip_name_remove(sockaddr_t *ipaddr)
 	buffkey.addr = ipaddr;
 	buffkey.len = sizeof(sockaddr_t);
 
-	if (HashTable_Del(ht_ip_name, &buffkey, NULL, &old_value) ==
+	if (HashTable_Del(ht_ip_name, &buffkey, &old_key, &old_value) ==
 	    HASHTABLE_SUCCESS) {
 		nfs_ip_name = (nfs_ip_name_t *)old_value.addr;
 
 		LogFullDebug(COMPONENT_DISPATCH, "Cache remove hit for %s->%s",
 			     ipstring, nfs_ip_name->hostname);
 
+		/* Same ownership as the expiry path: the stored key is the
+		 * sockaddr allocated by nfs_ip_name_add.
+		 */
+		gsh_free(old_key.addr, MEM_COMP_CLIENTID);
 		gsh_free(nfs_ip_name, MEM_COMP_CLIENTID);
 		return IP_NAME_SUCCESS;
 	}
