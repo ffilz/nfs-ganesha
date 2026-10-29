@@ -546,6 +546,12 @@ struct gsh_export *get_gsh_export_by_path_locked(char *path, bool exact_match)
 				break;
 			}
 		}
+
+		/* Prefix match and non-match both continue the scan.
+		 * Drop the ref first. The exact-match break above already
+		 * dropped it.
+		 */
+		gsh_refstr_put(ref_fullpath);
 	}
 
 	if (ret_exp != NULL)
