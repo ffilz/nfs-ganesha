@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17e3cdbe_8f8f7a8c",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_handle.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-29T10:08:54Z",
+      "side": 1,
+      "message": "Thank you -- fixed.\n\nWhen createdir is set, mdcache_openattr now clears MDCACHE_TRUST_ATTRS on the object, so the next GETATTR refreshes it. Creating the directory can change the object\u0027s named_attr and ctime.\n\nWith FSAL_VFS nothing changes on disk when the directory is created. The directory exists exactly when the file has user xattrs. Changes to the named attributes themselves already invalidate the object through an upcall in the VFS backend. But MDCACHE shouldn\u0027t depend on how one FSAL does it.\n\nI cleared the flag instead of calling mdcache_refresh_attrs_no_invalidate(), so a create doesn\u0027t cost an extra getattr. mdcache_link does the same for the linked object. Cached dirents aren\u0027t affected, because MDCACHE only invalidates them when mtime changes.",
+      "parentUuid": "1971547e_42299403",
+      "revId": "bfd1601685d309922c4a494a837a5dd81767e53a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75f04d43_1c379bc7",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-28T19:23:51Z",
       "side": 1,
       "message": "don\u0027t we need to check the EXPORT_OPTION_MD_WRITE_ACCESS\n\nsimilar to what\u0027s there in the nfs4_op_open():\n/* Check export permissions if OPEN4_CREATE */\n        if ((arg_OPEN4-\u003eopenhow.opentype \u003d\u003d OPEN4_CREATE) \u0026\u0026\n            ((op_ctx-\u003eexport_perms.options \u0026 EXPORT_OPTION_MD_WRITE_ACCESS) \u003d\u003d\n             0)) {\n                res_OPEN4-\u003estatus \u003d NFS4ERR_ROFS;\n\nCC: @ffilzlnx@mindspring.com",
+      "revId": "bfd1601685d309922c4a494a837a5dd81767e53a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31132f81_fa542ebc",
+        "filename": "src/Protocols/NFS/nfs4_op_openattr.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-10-29T10:08:54Z",
+      "side": 1,
+      "message": "Thank you -- fixed.\n\nIf the directory has to be created and the export doesn\u0027t have EXPORT_OPTION_MD_WRITE_ACCESS, OPENATTR now returns NFS4ERR_ROFS. The check only applies when creation is needed. OPENATTR with createdir set still opens an existing attribute directory on a read-only export.\n\nCreating a named attribute inside the directory is OPEN with OPEN4_CREATE, so the existing check in nfs4_op_open() already covers it.\n\n I tested it with a small script on pynfs\u0027s client library that sends OPENATTR directly, since pynfs has no OPENATTR tests. It covered a read-only and a read-write VFS export, with createdir set and cleared, on files with and without xattrs. The only change from the previous patch set is on the read-only export, for a file without xattrs with createdir set. That now returns NFS4ERR_ROFS instead of NFS4_OK.",
+      "parentUuid": "75f04d43_1c379bc7",
       "revId": "bfd1601685d309922c4a494a837a5dd81767e53a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
