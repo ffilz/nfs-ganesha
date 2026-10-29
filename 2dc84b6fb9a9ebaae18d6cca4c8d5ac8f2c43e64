@@ -33,6 +33,24 @@
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tmy_id-\u003emy_name \u003d gsh_strdup(nodename, info-\u003emem_comp);\n→ to be replaced with:\n    + \t\t\t\tmy_id-\u003emy_name \u003d\n    + \t\t\t\t\tgsh_strdup(nodename, info-\u003emem_comp);",
       "revId": "2dc84b6fb9a9ebaae18d6cca4c8d5ac8f2c43e64",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e89eba18_0698476f",
+        "filename": "src/Protocols/NLM/nsm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-29T17:55:30Z",
+      "side": 1,
+      "message": "Please fix",
+      "parentUuid": "36b9f1be_bbe9c1cb",
+      "revId": "2dc84b6fb9a9ebaae18d6cca4c8d5ac8f2c43e64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
