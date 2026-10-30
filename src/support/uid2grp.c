@@ -239,8 +239,7 @@ static bool my_getgrouplist_alloc(char *user, gid_t gid,
 }
 
 /* Allocate and fill in group_data structure */
-static struct group_data *
-uid2grp_allocate_by_name(const char *name)
+static struct group_data *uid2grp_allocate_by_name(const char *name)
 {
 	struct passwd p;
 	struct passwd *pp;
@@ -260,16 +259,16 @@ uid2grp_allocate_by_name(const char *name)
 	while (buff_size <= PWENT_MAX_SIZE) {
 		buff = gsh_malloc(buff_size, MEM_COMP_IDMAPPER);
 		now_mono(&s_time);
-		retval = pwnam_wrappers__getpwnam_r(name, &p, buff,
-						    buff_size, &pp);
+		retval = pwnam_wrappers__getpwnam_r(name, &p, buff, buff_size,
+						    &pp);
 		now_mono(&e_time);
 		idmapper_monitoring__external_request(
 			IDMAPPING_USERNAME_TO_UIDGID, IDMAPPING_PWUTILS,
 			retval == 0, &s_time, &e_time);
-		GSH_AUTO_TRACEPOINT(
-			uid2grp, getpwnam_r_call, TRACE_INFO,
-			"getpwnam_r returned: {} for uname: {}", retval,
-			TP_BYTE_ARR_TRUNCATED(name, strlen(name)));
+		GSH_AUTO_TRACEPOINT(uid2grp, getpwnam_r_call, TRACE_INFO,
+				    "getpwnam_r returned: {} for uname: {}",
+				    retval,
+				    TP_BYTE_ARR_TRUNCATED(name, strlen(name)));
 
 		if (retval != ERANGE)
 			break;
@@ -281,27 +280,24 @@ uid2grp_allocate_by_name(const char *name)
 		LogWarn(COMPONENT_IDMAPPER,
 			"Received ERANGE when fetching pw-entry from name: %s",
 			name);
-		GSH_AUTO_TRACEPOINT(
-			uid2grp, getpwnam_r_failed, TRACE_INFO,
-			"getpwnam_r for uname={} failed with ERANGE",
-			TP_BYTE_ARR_TRUNCATED(name, strlen(name)));
+		GSH_AUTO_TRACEPOINT(uid2grp, getpwnam_r_failed, TRACE_INFO,
+				    "getpwnam_r for uname={} failed with ERANGE",
+				    TP_BYTE_ARR_TRUNCATED(name, strlen(name)));
 		return NULL;
 	}
 
 	if (retval != 0) {
 		LogEvent(COMPONENT_IDMAPPER,
-			 "getpwnam_r for %s failed, error %d", name,
-			 retval);
-		GSH_AUTO_TRACEPOINT(
-			uid2grp, getpwnam_r_failed1, TRACE_INFO,
-			"getpwnam_r for uname={} failed, retval={}",
-			TP_BYTE_ARR_TRUNCATED(name, strlen(name)), retval);
+			 "getpwnam_r for %s failed, error %d", name, retval);
+		GSH_AUTO_TRACEPOINT(uid2grp, getpwnam_r_failed1, TRACE_INFO,
+				    "getpwnam_r for uname={} failed, retval={}",
+				    TP_BYTE_ARR_TRUNCATED(name, strlen(name)),
+				    retval);
 		goto out;
 	}
 	if (pp == NULL) {
 		LogEvent(COMPONENT_IDMAPPER,
-			 "No matching password record found for name %s",
-			 name);
+			 "No matching password record found for name %s", name);
 		GSH_AUTO_TRACEPOINT(
 			uid2grp, no_passwd_record, TRACE_INFO,
 			"No matching password record found for uname {}",
@@ -810,9 +806,10 @@ bool principal2grp(char *principal, struct group_data **gdata, const uid_t uid,
 	 * not nfsidmap. Skip uid2grp_allocate_by_principal() and return false
 	 * so caller falls back to set_extended_groups() which uses the groups
 	 * already resolved by principal2uid(). */
-	LogDebug(COMPONENT_IDMAPPER,
-		 "MSPAC: uid2grp_allocate_by_principal not supported for principal '%s'",
-		 principal);
+	LogDebug(
+		COMPONENT_IDMAPPER,
+		"MSPAC: uid2grp_allocate_by_principal not supported for principal '%s'",
+		principal);
 #endif
 
 	/*

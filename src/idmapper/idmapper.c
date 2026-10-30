@@ -482,8 +482,8 @@ static bool xdr_encode_nfs4_princ(XDR *xdrs, uint32_t id, bool group)
 
 		/* Fully qualified owners are always stored in the
 		   hash table, no matter what our lookup method. */
-		success = inline_xdr_bytes(xdrs, (char **)&found,
-					   &not_a_size_t, UINT32_MAX);
+		success = inline_xdr_bytes(xdrs, (char **)&found, &not_a_size_t,
+					   UINT32_MAX);
 		PTHREAD_RWLOCK_unlock(group ? &idmapper_group_lock
 					    : &idmapper_user_lock);
 		return success;
