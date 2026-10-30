@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "387f62d6_6e79850f",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-30T04:00:27Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\tif (item-\u003eflags \u0026 CONFIG_MARK_SET) {\n    - \t\t\t\t\t\tvoid *mask_addr;\n    - \t\t\t\t\t\tmask_addr \u003d\n    - \t\t\t\t\t\t\t((char *)param_struct +\n    - \t\t\t\t\t\t\t item-\u003eu.b.set_off);\n    - \t\t\t\t\t\t*(uint32_t *)mask_addr |\u003d\n    - \t\t\t\t\t\t\titem-\u003eu.b.bit;\n    - \t\t\t\t\t}\n→ to be replaced with:\n    + \t\t\t\tif (item-\u003eflags \u0026 CONFIG_MARK_SET) {\n    + \t\t\t\t\tvoid *mask_addr;\n    + \t\t\t\t\tmask_addr \u003d ((char *)param_struct +\n    + \t\t\t\t\t\t     item-\u003eu.b.set_off);\n    + \t\t\t\t\t*(uint32_t *)mask_addr |\u003d item-\u003eu.b.bit;\n    + \t\t\t\t}",
+      "revId": "9e70de690fc33b22913a09963184e1bece6f0a4c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
