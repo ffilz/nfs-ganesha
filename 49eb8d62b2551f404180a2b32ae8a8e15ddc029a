@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76e6938c_f718488b",
+        "filename": "src/Protocols/NLM/nlm_Sm_Notify.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-30T16:07:35Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tstate_status \u003d state_nlm_notify(nsm_client, true, arg-\u003estate,\n    - \t\t\t\t\t\tNULL);\n→ to be replaced with:\n    + \t\tstate_status \u003d\n    + \t\t\tstate_nlm_notify(nsm_client, true, arg-\u003estate, NULL);",
+      "revId": "49eb8d62b2551f404180a2b32ae8a8e15ddc029a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a67ebc6_b3c8dc55",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3392,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-30T16:07:35Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - static bool nlm_owner_server_addr(state_owner_t *owner,\n    - \t\t\t\t  sockaddr_t *server_addr)\n→ to be replaced with:\n    + static bool nlm_owner_server_addr(state_owner_t *owner, sockaddr_t *server_addr)",
+      "revId": "49eb8d62b2551f404180a2b32ae8a8e15ddc029a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f93cab5_002ec44d",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3606,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-30T16:07:35Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\tglist_move_tail(\n    - \t\t\t\t\u0026keepshares,\n    - \t\t\t\t\u0026found_share-\u003estate_data.nlm_share\n    - \t\t\t\t\t .share_perclient);\n→ to be replaced with:\n    + \t\t\tglist_move_tail(\u0026keepshares,\n    + \t\t\t\t\t\u0026found_share-\u003estate_data.nlm_share\n    + \t\t\t\t\t\t .share_perclient);",
+      "revId": "49eb8d62b2551f404180a2b32ae8a8e15ddc029a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
