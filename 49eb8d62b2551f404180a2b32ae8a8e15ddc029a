@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb9e56e8_7e0eb7c4",
+        "filename": "src/Protocols/NLM/nlm_Sm_Notify.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-30T20:22:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76e6938c_f718488b",
+      "revId": "49eb8d62b2551f404180a2b32ae8a8e15ddc029a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a67ebc6_b3c8dc55",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-30T16:07:35Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - static bool nlm_owner_server_addr(state_owner_t *owner,\n    - \t\t\t\t  sockaddr_t *server_addr)\n→ to be replaced with:\n    + static bool nlm_owner_server_addr(state_owner_t *owner, sockaddr_t *server_addr)",
+      "revId": "49eb8d62b2551f404180a2b32ae8a8e15ddc029a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b54b2bd4_2546093f",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3392,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-30T20:22:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a67ebc6_b3c8dc55",
       "revId": "49eb8d62b2551f404180a2b32ae8a8e15ddc029a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },

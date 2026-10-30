@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6665b302_6b14d22f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-30T20:22:31Z",
+      "side": 1,
+      "message": "Hmm SM_NOTIFY makes sense to still release all locks despite it being sent to a specific server address because it represents a client restart, nit NLM_FREE_ALL maybe should only release for the server address that was sent to?",
+      "revId": "237290731141377ba3f6e29af57c3c8c3fb342aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a4bc512_cc37f8ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-30T20:22:31Z",
+      "side": 1,
+      "message": "Please also fix the clang-format issue",
+      "revId": "237290731141377ba3f6e29af57c3c8c3fb342aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
