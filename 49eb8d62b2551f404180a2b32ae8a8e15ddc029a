@@ -86,6 +86,24 @@
       "message": "clang-format expects formatting for these lines:\n    - \t\t\tglist_move_tail(\n    - \t\t\t\t\u0026keepshares,\n    - \t\t\t\t\u0026found_share-\u003estate_data.nlm_share\n    - \t\t\t\t\t .share_perclient);\n→ to be replaced with:\n    + \t\t\tglist_move_tail(\u0026keepshares,\n    + \t\t\t\t\t\u0026found_share-\u003estate_data.nlm_share\n    + \t\t\t\t\t\t .share_perclient);",
       "revId": "49eb8d62b2551f404180a2b32ae8a8e15ddc029a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "598e5fff_359f302f",
+        "filename": "src/SAL/state_lock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3606,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-31T01:03:41Z",
+      "side": 1,
+      "message": "Sorry, the way this showed up in the review, it looked like it was new to patch set 3",
+      "parentUuid": "9f93cab5_002ec44d",
+      "revId": "49eb8d62b2551f404180a2b32ae8a8e15ddc029a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
