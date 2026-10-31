@@ -1739,13 +1739,19 @@ static bool grpc_show_count_cb(struct gsh_client *cl, void *state)
 struct grpc_show_fill_state {
 	struct grpc_client_info *clients;
 	uint32_t index;
+	uint32_t max_count;
 };
 
 static bool grpc_show_fill_cb(struct gsh_client *cl_node, void *state)
 {
 	struct grpc_show_fill_state *st = (struct grpc_show_fill_state *)state;
-	struct grpc_client_info *info = &st->clients[st->index++];
+	struct grpc_client_info *info;
 	struct server_stats *cl;
+
+	if (st->index >= st->max_count)
+		return false;
+
+	info = &st->clients[st->index++];
 
 	cl = container_of(cl_node, struct server_stats, client);
 
@@ -1817,7 +1823,9 @@ bool grpc_cltmgr_show_clients(struct grpc_show_clients **out, bool *success,
 					   MEM_COMP_MANAGE);
 		fill_st.clients = show->clients;
 		fill_st.index = 0;
+		fill_st.max_count = show->client_count;
 		(void)foreach_gsh_client(grpc_show_fill_cb, &fill_st);
+		show->client_count = fill_st.index;
 	}
 
 	*out = show;
