@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d67e7ba_772cf4ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-10-31T00:55:53Z",
+      "side": 1,
+      "message": "In the end, I left this one out of the merge.\n\nWe need to reconcile xattr names.\n\nThis patch caused pynfs test XATT11 to fail.\n\nKernel NFS seems to add user. to all xattr names, and removes it on listxattr.\n\npynfs includes user. in all its xattr names.\n\nSome FSALs seem to add user. to xattr names.\n\nI\u0027d like more discussion, and reconciliation with kernel NFS and pynfs before merging any patches modifying the xattr naming.",
+      "revId": "57803190130272a2267a48df8062e0ff444d0985",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
