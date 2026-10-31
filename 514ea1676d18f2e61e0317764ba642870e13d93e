@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a44773b6_0b356d5a",
+        "filename": "src/FSAL/Stackable_FSALs/FSAL_MDCACHE/mdcache_int.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-10-31T13:17:58Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tstatus \u003d mdcache_refresh_attrs(entry, false, false, false, false,\n    - \t\t\t\t       NULL);\n→ to be replaced with:\n    + \tstatus \u003d mdcache_refresh_attrs(entry, false, false, false, false, NULL);",
+      "revId": "514ea1676d18f2e61e0317764ba642870e13d93e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
