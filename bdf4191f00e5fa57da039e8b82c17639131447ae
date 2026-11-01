@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae153c92_ad8936e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040080
+      },
+      "writtenOn": "2026-11-01T01:56:22Z",
+      "side": 1,
+      "message": "The Jenkins failure is a pipeline issue not related to the code:\n\nwget https://kojihub.stream.centos.org/kojifiles/packages/kernel/5.14.0/630.el9/x86_64/kernel-headers-5.14.0-630.el9.x86_64.rpm\nHTTP request sent, awaiting response... 503 Service Unavailable\nERROR 503: Service Unavailable.",
+      "revId": "bdf4191f00e5fa57da039e8b82c17639131447ae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
