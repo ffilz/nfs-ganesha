@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c31436d_8b840de3",
+        "filename": "src/idmapper/idmapper.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-01T04:13:03Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tsuccess \u003d inline_xdr_bytes(xdrs, (char **)\u0026found,\n    - \t\t\t\t\t   \u0026not_a_size_t, UINT32_MAX);\n→ to be replaced with:\n    + \t\tsuccess \u003d inline_xdr_bytes(xdrs, (char **)\u0026found, \u0026not_a_size_t,\n    + \t\t\t\t\t   UINT32_MAX);",
+      "revId": "4eeed97f2ba16199d86f8fe41efb8bad7703e803",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e9b5016_93978b06",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-01T04:13:03Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - static struct group_data *\n    - uid2grp_allocate_by_name(const char *name)\n→ to be replaced with:\n    + static struct group_data *uid2grp_allocate_by_name(const char *name)",
+      "revId": "4eeed97f2ba16199d86f8fe41efb8bad7703e803",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27742ab9_da5a3a8b",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-01T04:13:03Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tretval \u003d pwnam_wrappers__getpwnam_r(name, \u0026p, buff,\n    - \t\t\t\t\t\t    buff_size, \u0026pp);\n    - \t\tGSH_AUTO_TRACEPOINT(\n    - \t\t\tuid2grp, getpwnam_r_call, TRACE_INFO,\n    - \t\t\t\"getpwnam_r returned: {} for uname: {}\", retval,\n    - \t\t\tTP_BYTE_ARR_TRUNCATED(name, strlen(name)));\n→ to be replaced with:\n    + \t\tretval \u003d pwnam_wrappers__getpwnam_r(name, \u0026p, buff, buff_size,\n    + \t\t\t\t\t\t    \u0026pp);\n    + \t\tGSH_AUTO_TRACEPOINT(uid2grp, getpwnam_r_call, TRACE_INFO,\n    + \t\t\t\t    \"getpwnam_r returned: {} for uname: {}\",\n    + \t\t\t\t    retval,\n    + \t\t\t\t    TP_BYTE_ARR_TRUNCATED(name, strlen(name)));",
+      "revId": "4eeed97f2ba16199d86f8fe41efb8bad7703e803",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "332306f1_1db2cdce",
+        "filename": "src/support/uid2grp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-01T04:13:03Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tGSH_AUTO_TRACEPOINT(\n    - \t\t\tuid2grp, getpwnam_r_failed, TRACE_INFO,\n    - \t\t\t\"getpwnam_r for uname\u003d{} failed with ERANGE\",\n    - \t\t\tTP_BYTE_ARR_TRUNCATED(name, strlen(name)));\n    - \t\t\t \"getpwnam_r for %s failed, error %d\", name,\n    - \t\t\t retval);\n    - \t\tGSH_AUTO_TRACEPOINT(\n    - \t\t\tuid2grp, getpwnam_r_failed1, TRACE_INFO,\n    - \t\t\t\"getpwnam_r for uname\u003d{} failed, retval\u003d{}\",\n    - \t\t\tTP_BYTE_ARR_TRUNCATED(name, strlen(name)), retval);\n    - \t\t\t \"No matching password record found for name %s\",\n    - \t\t\t name);\n→ to be replaced with:\n    + \t\tGSH_AUTO_TRACEPOINT(uid2grp, getpwnam_r_failed, TRACE_INFO,\n    + \t\t\t\t    \"getpwnam_r for uname\u003d{} failed with ERANGE\",\n    + \t\t\t\t    TP_BYTE_ARR_TRUNCATED(name, strlen(name)));\n    + \t\t\t \"getpwnam_r for %s failed, error %d\", name, retval);\n    + \t\tGSH_AUTO_TRACEPOINT(uid2grp, getpwnam_r_failed1, TRACE_INFO,\n    + \t\t\t\t    \"getpwnam_r for uname\u003d{} failed, retval\u003d{}\",\n    + \t\t\t\t    TP_BYTE_ARR_TRUNCATED(name, strlen(name)),\n    + \t\t\t\t    retval);\n    + \t\t\t \"No matching password record found for name %s\", name);",
+      "revId": "4eeed97f2ba16199d86f8fe41efb8bad7703e803",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
