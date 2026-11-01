@@ -16,6 +16,24 @@
       "message": "Why can\u0027t you use is_loopback from ip_utils.h",
       "revId": "90945c069bf65d2065d401533ce7d466af10aafa",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab7f4111_4534af1c",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-11-01T15:30:15Z",
+      "side": 1,
+      "message": "is_loopback() accepts all of 127.0.0.0/8 (e.g. 127.0.0.2), whereas gRPC\u0027s LocalServerCredentials(LOCAL_TCP) checks INADDR_LOOPBACK and only accepts 127.0.0.1 (plus ::1 and ::ffff:127.0.0.1), failing the handshake on any other 127.x.y.z address. grpc_addr_is_loopback() matches gRPC\u0027s check so addresses like 127.0.0.2 are rejected at config commit time rather than failing RPCs at runtime.",
+      "parentUuid": "593f5505_7b06f984",
+      "revId": "90945c069bf65d2065d401533ce7d466af10aafa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
