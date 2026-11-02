@@ -932,17 +932,20 @@ fsal_status_t mdcache_copy_file_range(struct fsal_obj_handle *src_hdl,
 	mdcache_entry_t *dst_entry =
 		container_of(dst_hdl, mdcache_entry_t, obj_handle);
 	fsal_status_t status;
+	struct fsal_export *src_fsal_exp =
+		(src_state != NULL) ? src_state->state_export->fsal_export
+				    : op_ctx->fsal_export;
+	struct mdcache_fsal_export *src_mdc_exp = mdc_export(src_fsal_exp);
+	/* dst MDCache export — op_ctx->fsal_export on entry */
+	struct mdcache_fsal_export *dst_mdc_exp = mdc_cur_export();
 
-	if (src_entry->sub_handle->fsal == dst_entry->sub_handle->fsal) {
+	if (src_entry->sub_handle->fsal == dst_entry->sub_handle->fsal &&
+	    src_mdc_exp->mfe_exp.sub_export ==
+		    dst_mdc_exp->mfe_exp.sub_export) {
 		/*
-		 * Same sub-FSAL: zero-copy via obj_ops->copy_file_range.
+		 * Same sub-FSAL, and Same export :
+		 * zero-copy via obj_ops->copy_file_range.
 		 * op_ctx->fsal_export is currently the dst MDCache export.
-		 * We must switch to the src's sub-FSAL export before calling
-		 * into the sub-FSAL so that FSALs that resolve their private
-		 * context from op_ctx->fsal_export (e.g. Ceph picks its
-		 * cmount via container_of(op_ctx->fsal_export, ...)) get the
-		 * correct object for the source even when src and dst are on
-		 * different exports of the same FSAL (e.g. two Ceph mounts).
 		 *
 		 * Use the src state's export when available; fall back to the
 		 * current op_ctx export (same export, intra-export copy).
@@ -951,22 +954,14 @@ fsal_status_t mdcache_copy_file_range(struct fsal_obj_handle *src_hdl,
 		 * export after the call, but our caller expects the dst MDCache
 		 * export to remain in op_ctx.  Save and restore it explicitly.
 		 */
-		struct fsal_export *src_fsal_exp =
-			(src_state != NULL)
-				? src_state->state_export->fsal_export
-				: op_ctx->fsal_export;
-		struct mdcache_fsal_export *src_mdc_exp =
-			mdc_export(src_fsal_exp);
-		/* dst MDCache export — op_ctx->fsal_export on entry */
-		struct mdcache_fsal_export *dst_mdc_exp = mdc_cur_export();
 
 		LogFullDebug(COMPONENT_NFS_V4,
 			     "COPY mdcache: same sub-FSAL (%s) src_off=%" PRIu64
 			     " dst_off=%" PRIu64 " count=%" PRIu64
 			     "src_exp=%s dst_exp=%s ",
 			     src_entry->sub_handle->fsal->name, src_offset,
-			     dst_offset, count,
-			     src_mdc_exp->name, dst_mdc_exp->name);
+			     dst_offset, count, src_mdc_exp->name,
+			     dst_mdc_exp->name);
 
 		op_ctx->fsal_export = &src_mdc_exp->mfe_exp;
 		subcall(status =
@@ -977,8 +972,9 @@ fsal_status_t mdcache_copy_file_range(struct fsal_obj_handle *src_hdl,
 		op_ctx->fsal_export = &dst_mdc_exp->mfe_exp;
 	} else {
 		/*
-		 * Different sub-FSALs (FS1->FS2): buffered fallback since no
-		 * zero-copy is available across FSAL boundaries.
+		 * Different sub-FSALs, same sub-FSAL but different sub_exports
+		 * also (FS1<->FS2) : buffered fallback since no zero-copy is
+		 * available across FSAL boundaries or mount boundaries.
 		 */
 		LogFullDebug(
 			COMPONENT_NFS_V4,
