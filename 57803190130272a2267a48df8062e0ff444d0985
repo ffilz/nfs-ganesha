@@ -16,6 +16,23 @@
       "message": "In the end, I left this one out of the merge.\n\nWe need to reconcile xattr names.\n\nThis patch caused pynfs test XATT11 to fail.\n\nKernel NFS seems to add user. to all xattr names, and removes it on listxattr.\n\npynfs includes user. in all its xattr names.\n\nSome FSALs seem to add user. to xattr names.\n\nI\u0027d like more discussion, and reconciliation with kernel NFS and pynfs before merging any patches modifying the xattr naming.",
       "revId": "57803190130272a2267a48df8062e0ff444d0985",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dea1901_e8072c2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-02T20:08:00Z",
+      "side": 1,
+      "message": "OK, so I\u0027ve looked at everything more carefully...\n\nThe \"user.\" prefix is not supposed to be on the wire despite pynfs using it.\n\nFSAL_VFS, FSAL_GLUSTER, and FSAL_CEPH all add \"user.\" prefix on set/get/remove and use the helper function to filter on \"user.\" and remove it for listxattr.\n\nSo FSAL_GPFS has to be modified to add \"user.\" prefix in set/get/remove.\n\nNote that with this, the actual xattr set by pynfs will be user.user.xattr1 for example. This is odd but should be OK, and pynfs is the only code that ever looks at the xattrs it sets.",
+      "revId": "57803190130272a2267a48df8062e0ff444d0985",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
