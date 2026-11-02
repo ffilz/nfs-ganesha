@@ -2044,13 +2044,13 @@ ExportService::RemoveExport(grpc::ServerContext *context,
 	// Variable declarations
 	struct gsh_export *export_obj = NULL;
 	char *errormsg = NULL;
+	struct req_op_context op_context;
 
 	// Lock for admin operation
 	if (EXPORT_ADMIN_TRYLOCK() != 0) {
 		response->set_success(false);
 		response->set_message(
 			"another export admin operation is in progress");
-		put_gsh_export(export_obj);
 		return grpc::Status::OK;
 	}
 
@@ -2060,16 +2060,19 @@ ExportService::RemoveExport(grpc::ServerContext *context,
 		response->set_success(false);
 		response->set_message("lookup_export failed: " +
 				      std::string(errormsg));
+		EXPORT_ADMIN_UNLOCK();
 		return grpc::Status::OK;
 	}
 
 	// Check for invalid ID 0 or pseudo root
 	if (export_obj->export_id == 0 ||
-	    strcmp(export_obj->pseudopath->gr_val, "/") == 0) {
+	    (export_obj->pseudopath != NULL &&
+	     strcmp(export_obj->pseudopath->gr_val, "/") == 0)) {
 		put_gsh_export(export_obj);
 		response->set_success(false);
 		response->set_message(
 			"Cannot remove the pseudo root export or export with id 0");
+		EXPORT_ADMIN_UNLOCK();
 		return grpc::Status::OK;
 	}
 
@@ -2086,22 +2089,13 @@ ExportService::RemoveExport(grpc::ServerContext *context,
 		return grpc::Status::OK;
 	}
 
-	// Prepare operation context and release
-	struct req_op_context op_context;
+	/* Prepare operation context and clean up export directly, matching
+	 * canonical release semantics in gsh_export_removeexport.
+	 */
 	init_op_context_simple(&op_context, export_obj,
 			       export_obj->fsal_export);
 
-	uint64_t generation = export_obj->config_gen;
-
-	/* Mark this export as older than the current configuration by
-	 * setting config_gen to 0. During synchronization, the prune
-	 * logic treats it as no longer present in the latest config,
-	 * therefore export is removed.
-	 */
-	export_obj->config_gen = 0;
-	export_obj->update_prune_unmount = true;
-
-	synchronize_exports(generation);
+	release_export(export_obj, false);
 
 	release_op_context();
 
