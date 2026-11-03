@@ -34,6 +34,24 @@
       "parentUuid": "593f5505_7b06f984",
       "revId": "90945c069bf65d2065d401533ce7d466af10aafa",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1df1a23_36ef0a8e",
+        "filename": "src/support/nfs_read_conf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-03T00:42:10Z",
+      "side": 1,
+      "message": "Ahh, let\u0027s add a boolean parameter \"strict\" to is_loopback, if true, only 127.0.0.1 is considered loopback. That way we preserve common code, and somewhere else might want to also limit loopback to 127.0.0.1.",
+      "parentUuid": "ab7f4111_4534af1c",
+      "revId": "90945c069bf65d2065d401533ce7d466af10aafa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
