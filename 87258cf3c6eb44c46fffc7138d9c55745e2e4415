@@ -33,6 +33,24 @@
       "message": "I believe this will cause issues when changes to this value don\u0027t override the cached versions.  I think a better solution is to change the GANESHA_EXTRA_VERSION (below) into a CACHED STRING, as that\u0027s unused in the upstream versioning.",
       "revId": "87258cf3c6eb44c46fffc7138d9c55745e2e4415",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f32b7cae_5fff94fb",
+        "filename": "src/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-03T19:46:44Z",
+      "side": 1,
+      "message": "I like that idea better.",
+      "parentUuid": "af560e31_66180c0a",
+      "revId": "87258cf3c6eb44c46fffc7138d9c55745e2e4415",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
