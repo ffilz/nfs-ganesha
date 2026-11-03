@@ -16,6 +16,24 @@
       "message": "NO. release_export also releases any nested exports. We explicitly DON\u0027T want to do that.\n\nWhy are we getting an export with generation 0? We need to fix that.",
       "revId": "f86f677f9d112a25dabb9cdc6bf699ec6ffd493b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26391637_d417edff",
+        "filename": "src/grpc_server/nfsServiceServer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2097,
+      "author": {
+        "id": 1040083
+      },
+      "writtenOn": "2026-11-03T23:57:39Z",
+      "side": 1,
+      "message": "Good catch — I misread how config_gen is initialized and shouldn\u0027t have replaced synchronize_exports(generation) with release_export(). In Patch Set 2 I reverted that change so synchronize_exports(generation) is preserved, keeping only the NULL checks and EXPORT_ADMIN_UNLOCK() fixes on the early error returns.",
+      "parentUuid": "66dc41c8_a9e07305",
+      "revId": "f86f677f9d112a25dabb9cdc6bf699ec6ffd493b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
