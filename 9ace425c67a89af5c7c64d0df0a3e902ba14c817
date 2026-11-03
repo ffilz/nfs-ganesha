@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4668b412_1a1c8728",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2026-11-03T20:04:53Z",
+      "side": 1,
+      "message": "I\u0027m not sure about this.  It seems like a violation of the spec for Tags, especially the well-known tag Name.  (Note,",
+      "revId": "9ace425c67a89af5c7c64d0df0a3e902ba14c817",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a4152a1_6885b6c0",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2026-11-03T20:04:53Z",
+      "side": 1,
+      "message": "I\u0027m not sure about this.  It seems a violation of the well-defined tag Name.  It may work, but I\u0027d expect it to unexpectedly break in the future.  Are there other examples of large projects using this?",
+      "revId": "9ace425c67a89af5c7c64d0df0a3e902ba14c817",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05278e97_8d417736",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1004087
+      },
+      "writtenOn": "2026-11-03T20:04:53Z",
+      "side": 1,
+      "message": "These are all fine, and should definitely be used.",
+      "revId": "9ace425c67a89af5c7c64d0df0a3e902ba14c817",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
