@@ -33,6 +33,24 @@
       "message": "If a lock reclaim comes in with NSM state 0, if the client subsequently restarts and sends SM_NOTIFY, how do we distinguish those reclaimed locks?",
       "revId": "01d3fe99ddfcf7f20cbfcf70364e42658fb222cb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea4e8ef5_18a88003",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040071
+      },
+      "writtenOn": "2026-11-03T02:33:53Z",
+      "side": 1,
+      "message": "Hi Frank, \n\nThe idea here is that the reclaim reuses the existing `state_t`, so the lock still has the NSM state the client sent when it first acquired it. After the client restarts, its `SM_NOTIFY` carries a new NSM state.\n\nThat won\u0027t match the state on the lock, so `state_nlm_notify()` releases it just like any other lock left over from before the restart.\n\nI can generate some evidence if needed, because I\u0027ve tested that on \u0027next\u0027.",
+      "parentUuid": "b5f7b4c3_28ed8259",
+      "revId": "01d3fe99ddfcf7f20cbfcf70364e42658fb222cb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
