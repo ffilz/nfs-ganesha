@@ -109,6 +109,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a737620_5ce3bdf9",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1038588
+      },
+      "writtenOn": "2026-11-04T20:55:23Z",
+      "side": 1,
+      "message": "This comparison leads to compilation error, NULL is void pointer and cqos is different pointer type.\n 364 |         if (cqos_hosts !\u003d NULL)\n      |                        ^~",
+      "revId": "74d77b51ae10c11db7a08288c32b5cb479f165cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7b1ffe0_7034d300",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1038588
+      },
+      "writtenOn": "2026-11-04T20:55:23Z",
+      "side": 1,
+      "message": "One more compilation error,  error: incompatible types when assigning to type ‘struct gsh_reflist *’ from type ‘struct glist_head’\n  old_hosts \u003d rcu_dereference(cqos_hosts);\n      |                             ^~~~~~~~~~~~~~~",
+      "revId": "74d77b51ae10c11db7a08288c32b5cb479f165cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24e4bd03_be56a31c",
+        "filename": "src/support/cluster_members.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1038588
+      },
+      "writtenOn": "2026-11-04T20:55:23Z",
+      "side": 1,
+      "message": "compilation error\n\nerror: invalid initializer\n  385 |         rcu_set_pointer(\u0026cqos_hosts, hosts);\n      |         ^~~~~~~~~~~~~~~",
+      "revId": "74d77b51ae10c11db7a08288c32b5cb479f165cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcf4d8be_1c4c6663",
         "filename": "src/support/nfs_read_conf.c",
         "patchSetId": 2
