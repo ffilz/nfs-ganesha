@@ -16,6 +16,24 @@
       "message": "This at least needs more description in the commit message.\n\nBut I\u0027m also not clear this really is the fix.",
       "revId": "444c69d9d567bd3b3cbdfb77a17b71ca4ff655f5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb5039eb_f77b5087",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038286
+      },
+      "writtenOn": "2026-11-05T04:33:53Z",
+      "side": 1,
+      "message": "Expected was USE_PRIO_INHERIT to be disabled by default, these missing changes are required.\n\ngithub 1437 issue : Error 1 indicates :  POSIX Threads (pthread): EPERM (Error 1) signifies that the calling thread does not own the specified mutex.\n\n\u003c\u003cnfs4_op_sequence\u003e\u003e PTHREAD_MUTEX_lock(\u0026slot-\u003eslot_lock);\n\u003c\u003ccompound_data_Free\u003e\u003e PTHREAD_MUTEX_unlock(\u0026slot-\u003eslot_lock);\n\nso any operations which has async handling between nfs4_op_sequence and compound_data_free can have lock taken by operation submitting thread and release by resume thread, which is expected, due to which Error 1 was not expected.\n\nplease correct me if I\u0027m am getting something wrong here.",
+      "parentUuid": "201e8604_ceb71ae9",
+      "revId": "444c69d9d567bd3b3cbdfb77a17b71ca4ff655f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
