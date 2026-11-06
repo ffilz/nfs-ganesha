@@ -51,6 +51,24 @@
       "message": "I don\u0027t think this helps for 1437. I am working on another fix.\n\nCan we abandon this?",
       "revId": "444c69d9d567bd3b3cbdfb77a17b71ca4ff655f5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fa40045_3ab0c872",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038297
+      },
+      "writtenOn": "2026-11-06T06:08:06Z",
+      "side": 1,
+      "message": "I think we need this patch to disable PRIORITY inheritance by default for RPM builds. I will change the commit message and make this a separate patch?",
+      "parentUuid": "c04054d8_c34c7a1c",
+      "revId": "444c69d9d567bd3b3cbdfb77a17b71ca4ff655f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
