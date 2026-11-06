@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "065dde87_45bb0542",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1040120
+      },
+      "writtenOn": "2026-11-06T09:37:37Z",
+      "side": 1,
+      "message": "We modified this to replace the hardcoded Name: nfs-ganesha with the native %{name} macro evaluation.\nBy adding the conditional fallback %{!?name: %global name nfs-ganesha}, it safely defaults back to the original name if nothing is passed, so standard builds won\u0027t break.\nThis change is necessary because it allows us to dynamically pass a custom package name prefix during compilation, such as:\n--define \"name \u003cfsal\u003e-nfs-ganesha\"",
+      "parentUuid": "9a4152a1_6885b6c0",
+      "revId": "9ace425c67a89af5c7c64d0df0a3e902ba14c817",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05278e97_8d417736",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-11-03T20:04:53Z",
       "side": 1,
       "message": "These are all fine, and should definitely be used.",
+      "revId": "9ace425c67a89af5c7c64d0df0a3e902ba14c817",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0c33cf4_d1a98e71",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1040120
+      },
+      "writtenOn": "2026-11-06T09:37:37Z",
+      "side": 1,
+      "message": "Thanks! This approach looks good and works well \nAcknowledged",
+      "parentUuid": "05278e97_8d417736",
       "revId": "9ace425c67a89af5c7c64d0df0a3e902ba14c817",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
