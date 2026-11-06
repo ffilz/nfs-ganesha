@@ -123,6 +123,42 @@
       "parentUuid": "adaeaffa_1fccade7",
       "revId": "444c69d9d567bd3b3cbdfb77a17b71ca4ff655f5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f3220f1_f99978dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-06T21:41:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4589f2c6_76200b14",
+      "revId": "444c69d9d567bd3b3cbdfb77a17b71ca4ff655f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7730bca5_cb700e15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-06T21:41:53Z",
+      "side": 1,
+      "message": "OK, this patch I think is unrelated to issue #1437, but seems useful in any case.\n\nEven without USE_PRIO_INHERIT it is still invalid to release a mutex from a different thread than acquired it.\n\nI am working on a separate change to address that issue.",
+      "parentUuid": "cb5039eb_f77b5087",
+      "revId": "444c69d9d567bd3b3cbdfb77a17b71ca4ff655f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
