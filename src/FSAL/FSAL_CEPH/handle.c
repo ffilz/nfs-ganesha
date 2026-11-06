@@ -37,11 +37,15 @@
 #include <sys/sysmacros.h> /* for makedev(3) */
 #endif
 #include <fcntl.h>
+#include <limits.h>
 #include <sys/xattr.h>
 #ifdef HAVE_LINUX_FSCRYPT_H
 #include <linux/fscrypt.h>
 #endif
 #include <cephfs/libcephfs.h>
+#ifdef USE_FSAL_CEPH_FS_ZEROCOPY_IO
+#include <cephfs/ceph_buffer.h>
+#endif
 #include "fsal.h"
 #include "fsal_types.h"
 #include "fsal_convert.h"
@@ -321,7 +325,8 @@ static fsal_status_t ceph_fsal_readdir(struct fsal_obj_handle *dir_pub,
 
 closedir:
 
-	rc = ceph_ll_releasedir(export->cmount, dir_desc);
+	CEPH_FSAL_TIME_CALL(CEPH_STAT_RELEASEDIR,
+			    rc = ceph_ll_releasedir(export->cmount, dir_desc));
 
 	if (rc < 0)
 		fsal_status = ceph2fsal_error(rc);
@@ -946,7 +951,11 @@ static fsal_status_t ceph_close_my_fd(struct ceph_fd *my_fd)
 		container_of(op_ctx->fsal_export, struct ceph_export, export);
 
 	if (my_fd->fd != NULL && my_fd->fsal_fd.openflags != FSAL_O_CLOSED) {
-		int rc = ceph_ll_close(export->cmount, my_fd->fd);
+		int rc;
+
+		CEPH_FSAL_TIME_CALL(CEPH_STAT_CLOSE,
+				    rc = ceph_ll_close(export->cmount,
+						       my_fd->fd));
 
 		if (rc < 0) {
 			/*
@@ -1012,7 +1021,9 @@ static fsal_status_t ceph_reopen_func(struct fsal_obj_handle *obj_hdl,
 			/* File was previously open, close old fd */
 			LogFullDebug(COMPONENT_FSAL, "close failed with %s",
 				     strerror(-rc));
-			rc = ceph_ll_close(export->cmount, my_fd->fd);
+			CEPH_FSAL_TIME_CALL(CEPH_STAT_CLOSE,
+					    rc = ceph_ll_close(export->cmount,
+							       my_fd->fd));
 
 			if (rc < 0) {
 				LogFullDebug(COMPONENT_FSAL,
@@ -1773,6 +1784,12 @@ static fsal_status_t ceph_fsal_reopen2(struct fsal_obj_handle *obj_hdl,
 	return status;
 }
 
+/** Release a Ganesha-allocated staging buffer (copy path). */
+static void ceph_staging_iov_release(void *release_data)
+{
+	gsh_free(release_data, MEM_COMP_IO_BUFFER);
+}
+
 #if USE_FSAL_CEPH_FS_NONBLOCKING_IO
 struct ceph_fsal_cb_info {
 	struct fsal_io_arg *arg;
@@ -1785,8 +1802,235 @@ struct ceph_fsal_cb_info {
 	void *caller_arg;
 	struct ceph_fd temp_fd;
 	bool async;
+#ifdef USE_FSAL_CEPH_FS_ZEROCOPY_IO
 	bool zerocopy;
+	struct ceph_io_completion zc_comp;
+	fsal_status_t zc_status;
+	int64_t zc_result;
+#endif
+	/* FSALSTATS: e2e latency from nonblocking submit to first callback */
+	struct timespec stat_start;
+	bool stat_timing;
 };
+
+#ifdef USE_FSAL_CEPH_FS_ZEROCOPY_IO
+/** Holds ceph_bufferlist + iovec until ntirpc finishes send. */
+struct ceph_zc_release {
+	ceph_bufferlist *bl;
+	struct iovec *iov;
+};
+
+static void ceph_zc_iov_release(void *release_data)
+{
+	struct ceph_zc_release *rel = release_data;
+
+	if (rel == NULL)
+		return;
+	if (rel->bl != NULL)
+		ceph_bufferlist_put(rel->bl);
+	gsh_free(rel->iov, MEM_COMP_IO_BUFFER);
+	gsh_free(rel, MEM_COMP_FSAL);
+}
+
+/**
+ * @brief Complete a zero-copy read after Ceph callback or CLOSEFD resume
+ *
+ * @param[in] cbi     Callback info (freed before return except CLOSEFD hold)
+ * @param[in] status  FSAL status already computed for this completion
+ * @param[in] result  Byte count or negative errno from Ceph
+ * @param[in] resume  True when re-entering after FSAL_CLOSEFD
+ */
+static void ceph_zc_read_complete(struct ceph_fsal_cb_info *cbi,
+				  fsal_status_t status, int64_t result,
+				  bool resume)
+{
+	struct fsal_io_arg *read_arg = cbi->arg;
+	fsal_status_t status2;
+	struct fsal_obj_handle *obj_hdl = cbi->obj_hdl;
+	struct ceph_handle *myself =
+		container_of(cbi->obj_hdl, struct ceph_handle, handle);
+	struct req_op_context ctx;
+
+	get_gsh_export_ref(cbi->exp);
+	init_op_context_simple(&ctx, cbi->exp, cbi->fsal_export);
+
+	if (resume) {
+		assert(read_arg->fsal_resume == FSAL_CLOSEFD);
+		read_arg->fsal_resume = FSAL_NORESUME;
+		goto do_resume;
+	}
+
+	if (cbi->async && cbi->my_fd->fsal_fd.close_on_complete) {
+		/* Ask to resume so close runs off the Ceph callback thread. */
+		read_arg->fsal_resume = FSAL_CLOSEFD;
+		cbi->zc_status = status;
+		cbi->zc_result = result;
+		cbi->done_cb(obj_hdl, status, read_arg, cbi->caller_arg);
+		release_op_context();
+		return;
+	}
+
+do_resume:
+	status2 = fsal_complete_io(obj_hdl, &cbi->my_fd->fsal_fd);
+
+	LogFullDebug(COMPONENT_FSAL, "fsal_complete_io returned %s",
+		     fsal_err_txt(status2));
+
+	if (read_arg->state == NULL) {
+		update_share_counters_locked(obj_hdl, &myself->share,
+					     FSAL_O_READ, FSAL_O_CLOSED);
+	}
+
+	GSH_UNIQUE_AUTO_TRACEPOINT(fsal_ceph, ceph_read, TRACE_DEBUG,
+				   "Read. fileid: {}, result: {}",
+				   obj_hdl->fileid, result);
+
+	cbi->done_cb(obj_hdl, status, read_arg, cbi->caller_arg);
+
+	release_op_context();
+
+	gsh_free(cbi, MEM_COMP_FSAL);
+}
+
+static void ceph_zc_read_cb(int64_t result, ceph_bufferlist *data, void *priv)
+{
+	struct ceph_fsal_cb_info *cbi = priv;
+	struct fsal_io_arg *read_arg = cbi->arg;
+	fsal_status_t status = { 0, 0 };
+
+	/* Record e2e FSAL READ latency once. */
+	if (cbi->stat_timing) {
+		ceph_fsal_stat_finish(CEPH_STAT_READ, &cbi->stat_start, true);
+		cbi->stat_timing = false;
+	}
+
+	if (result < 0) {
+		status = ceph2fsal_error(result);
+		LogFullDebug(COMPONENT_FSAL, "ZC Read returned %s",
+			     msg_fsal_err(status.major));
+		if (data != NULL)
+			ceph_bufferlist_put(data);
+	} else {
+		read_arg->io_amount = result;
+		if (result == 0)
+			read_arg->end_of_file = true;
+
+		LogFullDebug(COMPONENT_FSAL, "ZC Read returned %" PRIu64,
+			     result);
+
+		if (data != NULL) {
+			struct iovec *iov;
+			struct ceph_zc_release *rel;
+			int niov;
+			int max_iov = IOV_MAX;
+
+			iov = gsh_calloc(max_iov, sizeof(*iov),
+					 MEM_COMP_IO_BUFFER);
+			niov = ceph_bufferlist_to_iovec(data, iov, max_iov);
+			if (niov < 0) {
+				status = ceph2fsal_error(niov);
+				ceph_bufferlist_put(data);
+				gsh_free(iov, MEM_COMP_IO_BUFFER);
+			} else if (niov == 0) {
+				ceph_bufferlist_put(data);
+				gsh_free(iov, MEM_COMP_IO_BUFFER);
+			} else {
+				rel = gsh_calloc(1, sizeof(*rel),
+						 MEM_COMP_FSAL);
+				rel->bl = data;
+				rel->iov = iov;
+				read_arg->iov = iov;
+				read_arg->iov_count = niov;
+				read_arg->iov_release = ceph_zc_iov_release;
+				read_arg->release_data = rel;
+			}
+		}
+	}
+
+	ceph_zc_read_complete(cbi, status, result, false);
+}
+
+/**
+ * @brief Complete a zero-copy write after Ceph callback or CLOSEFD resume
+ */
+static void ceph_zc_write_complete(struct ceph_fsal_cb_info *cbi,
+				   fsal_status_t status, int64_t result,
+				   bool resume)
+{
+	struct fsal_io_arg *write_arg = cbi->arg;
+	fsal_status_t status2;
+	struct fsal_obj_handle *obj_hdl = cbi->obj_hdl;
+	struct ceph_handle *myself =
+		container_of(cbi->obj_hdl, struct ceph_handle, handle);
+	struct req_op_context ctx;
+
+	get_gsh_export_ref(cbi->exp);
+	init_op_context_simple(&ctx, cbi->exp, cbi->fsal_export);
+
+	if (resume) {
+		assert(write_arg->fsal_resume == FSAL_CLOSEFD);
+		write_arg->fsal_resume = FSAL_NORESUME;
+		goto do_resume;
+	}
+
+	if (cbi->my_fd->fsal_fd.close_on_complete) {
+		write_arg->fsal_resume = FSAL_CLOSEFD;
+		cbi->zc_status = status;
+		cbi->zc_result = result;
+		cbi->done_cb(obj_hdl, status, write_arg, cbi->caller_arg);
+		release_op_context();
+		return;
+	}
+
+do_resume:
+	status2 = fsal_complete_io(obj_hdl, &cbi->my_fd->fsal_fd);
+
+	LogFullDebug(COMPONENT_FSAL, "fsal_complete_io returned %s",
+		     fsal_err_txt(status2));
+
+	if (write_arg->state == NULL) {
+		update_share_counters_locked(obj_hdl, &myself->share,
+					     FSAL_O_WRITE, FSAL_O_CLOSED);
+	}
+
+	GSH_UNIQUE_AUTO_TRACEPOINT(fsal_ceph, ceph_write, TRACE_DEBUG,
+				   "Write. fileid: {}, result: {}",
+				   obj_hdl->fileid, result);
+
+	cbi->done_cb(obj_hdl, status, write_arg, cbi->caller_arg);
+
+	release_op_context();
+
+	gsh_free(cbi, MEM_COMP_FSAL);
+}
+
+static void ceph_zc_write_cb(int64_t result, ceph_bufferlist *data, void *priv)
+{
+	struct ceph_fsal_cb_info *cbi = priv;
+	struct fsal_io_arg *write_arg = cbi->arg;
+	fsal_status_t status = { 0, 0 };
+
+	/* data is always NULL: write consumes the bufferlist at submit. */
+	(void)data;
+
+	if (cbi->stat_timing) {
+		ceph_fsal_stat_finish(CEPH_STAT_WRITE, &cbi->stat_start, true);
+		cbi->stat_timing = false;
+	}
+
+	if (result < 0) {
+		status = ceph2fsal_error(result);
+		LogFullDebug(COMPONENT_FSAL, "ZC Write returned %s",
+			     msg_fsal_err(status.major));
+	} else {
+		write_arg->io_amount = result;
+		LogFullDebug(COMPONENT_FSAL, "ZC Write returned %" PRIu64,
+			     result);
+	}
+
+	ceph_zc_write_complete(cbi, status, result, false);
+}
+#endif /* USE_FSAL_CEPH_FS_ZEROCOPY_IO */
 
 void ceph_read2_cb(struct ceph_ll_io_info *cb_info)
 {
@@ -1827,36 +2071,14 @@ void ceph_read2_cb(struct ceph_ll_io_info *cb_info)
 	} else {
 		/* I/O completed. */
 		read_arg->io_amount = cb_info->result;
-#ifdef USE_FSAL_CEPH_FS_ZEROCOPY_IO
-		if (cb_info->zerocopy) {
-			read_arg->iov_count = cb_info->iovcnt;
-			read_arg->iov = cb_info->iov;
-			read_arg->iov_release = cb_info->release;
-			read_arg->release_data = cb_info->release_data;
-			LogFullDebug(
-				COMPONENT_FSAL,
-				"cb_info->release %p cb_info->release_data %p cb_info->iov %p",
-				cb_info->release, cb_info->release_data,
-				cb_info->iov);
-			if (isFullDebug(COMPONENT_FSAL)) {
-				int i;
-				size_t totlen = 0;
-
-				for (i = 0; i < cb_info->iovcnt; i++) {
-					totlen += cb_info->iov[i].iov_len;
-					LogFullDebug(
-						COMPONENT_FSAL,
-						"cb_info->iov %p [%d].iov_base %p iov_len %zu for %zu of %" PRIu64,
-						cb_info->iov, i,
-						cb_info->iov[i].iov_base,
-						cb_info->iov[i].iov_len, totlen,
-						cb_info->result);
-				}
-			}
-		}
-#endif
 		LogFullDebug(COMPONENT_FSAL, "Read returned %" PRIu64,
 			     cb_info->result);
+	}
+
+	/* Record e2e FSAL READ latency once (not on CLOSEFD resume). */
+	if (cbi->stat_timing) {
+		ceph_fsal_stat_finish(CEPH_STAT_READ, &cbi->stat_start, true);
+		cbi->stat_timing = false;
 	}
 
 	if (cbi->async && cbi->my_fd->fsal_fd.close_on_complete) {
@@ -1940,6 +2162,15 @@ static void ceph_fsal_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 
 #if USE_FSAL_CEPH_FS_NONBLOCKING_IO
 	if (read_arg->fsal_resume) {
+#ifdef USE_FSAL_CEPH_FS_ZEROCOPY_IO
+		struct ceph_fsal_cb_info *resume_cbi = read_arg->cbi;
+
+		if (resume_cbi->zerocopy) {
+			ceph_zc_read_complete(resume_cbi, resume_cbi->zc_status,
+					      resume_cbi->zc_result, true);
+			return;
+		}
+#endif
 		ceph_read2_cb(read_arg->cbi);
 		return;
 	}
@@ -1989,12 +2220,62 @@ static void ceph_fsal_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 
 #if USE_FSAL_CEPH_FS_NONBLOCKING_IO
 #ifdef USE_FSAL_CEPH_FS_ZEROCOPY_IO
-	if (!CephFSM.async && !CephFSM.zerocopy)
-		goto old_style;
-#else
+	/*
+	 * Zero-copy when configured and the caller left the buffer unallocated
+	 * (allocate_own_read_buffer). Otherwise use the copy I/O path.
+	 */
+	if (CephFSM.zerocopy && read_arg->iov[0].iov_base == NULL) {
+		uint64_t len = read_arg->io_request;
+
+		if (len == 0)
+			len = read_arg->iov[0].iov_len;
+
+		cbi->arg = read_arg;
+		cbi->exp = op_ctx->ctx_export;
+		cbi->fsal_export = op_ctx->fsal_export;
+		cbi->my_fd = my_fd;
+		cbi->obj_hdl = obj_hdl;
+		cbi->done_cb = done_cb;
+		cbi->caller_arg = caller_arg;
+		cbi->async = true;
+		cbi->zerocopy = true;
+		cbi->zc_comp.cb = ceph_zc_read_cb;
+		cbi->zc_comp.priv = cbi;
+		read_arg->cbi = cbi;
+
+		LogFullDebug(COMPONENT_FSAL,
+			     "Calling ceph_ll_async_read for zero-copy read");
+
+		ceph_fsal_stat_start(&cbi->stat_start, &cbi->stat_timing);
+		result = ceph_ll_async_read(export->cmount, my_fd->fd, offset,
+					    len, &cbi->zc_comp);
+
+		if (result < 0) {
+			status = ceph2fsal_error(result);
+			ceph_fsal_stat_finish(CEPH_STAT_READ, &cbi->stat_start,
+					      cbi->stat_timing);
+			cbi->stat_timing = false;
+			goto out;
+		}
+
+		/* Completion is always asynchronous via ceph_zc_read_cb. */
+		return;
+	}
+#endif /* USE_FSAL_CEPH_FS_ZEROCOPY_IO */
+
 	if (!CephFSM.async)
 		goto old_style;
-#endif
+
+	/*
+	 * allocate_own_read_buffer may leave iov_base NULL when ZC is compiled
+	 * in but not configured; allocate a staging buffer for the copy path.
+	 */
+	if (read_arg->iov_count == 1 && read_arg->iov[0].iov_base == NULL) {
+		read_arg->iov[0].iov_base = gsh_malloc(read_arg->iov[0].iov_len,
+						       MEM_COMP_IO_BUFFER);
+		read_arg->iov_release = ceph_staging_iov_release;
+		read_arg->release_data = read_arg->iov[0].iov_base;
+	}
 
 	cbi->io_info.callback = ceph_read2_cb;
 	cbi->io_info.priv = cbi;
@@ -2011,25 +2292,8 @@ static void ceph_fsal_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	cbi->done_cb = done_cb;
 	cbi->caller_arg = caller_arg;
 	cbi->async = CephFSM.async;
-	cbi->zerocopy = false;
 	read_arg->cbi = cbi;
 
-#ifdef USE_FSAL_CEPH_FS_ZEROCOPY_IO
-	/* We are only going to do zero copy if configure AND caller didn't
-	 * supply a buffer, otherwise, we will let ceph copy into the
-	 * provided iovec.
-	 */
-	cbi->io_info.zerocopy = CephFSM.zerocopy &&
-				read_arg->iov[0].iov_base == NULL;
-
-	cbi->zerocopy = cbi->io_info.zerocopy;
-
-	if (!CephFSM.async) {
-		/* Do zerocopy non-async I/O */
-		ceph_ll_readv_writev(export->cmount, &cbi->io_info);
-		return;
-	}
-#endif
 	/* Note that while we are passing an export to the callback, the
 	 * protocol request that drove this I/O can not complete until the
 	 * callback completes, which also means that its op_context with its
@@ -2039,18 +2303,25 @@ static void ceph_fsal_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	LogFullDebug(COMPONENT_FSAL,
 		     "Calling ceph_ll_nonblocking_readv_writev for read");
 
+	ceph_fsal_stat_start(&cbi->stat_start, &cbi->stat_timing);
 	result =
 		ceph_ll_nonblocking_readv_writev(export->cmount, &cbi->io_info);
 
 	if (result < 0) {
 		/* An error occurred. */
 		status = ceph2fsal_error(result);
+		ceph_fsal_stat_finish(CEPH_STAT_READ, &cbi->stat_start,
+				      cbi->stat_timing);
+		cbi->stat_timing = false;
 	} else if (result == 0) {
-		/* I/O will complete async, return. */
+		/* I/O will complete async; callback records FSAL READ. */
 		return;
 	} else {
 		/* I/O actually completed... */
 		read_arg->io_amount = result;
+		ceph_fsal_stat_finish(CEPH_STAT_READ, &cbi->stat_start,
+				      cbi->stat_timing);
+		cbi->stat_timing = false;
 	}
 
 	GSH_UNIQUE_AUTO_TRACEPOINT(fsal_ceph, ceph_read, TRACE_DEBUG,
@@ -2062,10 +2333,22 @@ old_style:
 
 #endif
 
+	/*
+	 * Sync copy path: allocate if allocate_own_read_buffer left iov NULL.
+	 */
+	if (read_arg->iov_count == 1 && read_arg->iov[0].iov_base == NULL) {
+		read_arg->iov[0].iov_base = gsh_malloc(read_arg->iov[0].iov_len,
+						       MEM_COMP_IO_BUFFER);
+		read_arg->iov_release = ceph_staging_iov_release;
+		read_arg->release_data = read_arg->iov[0].iov_base;
+	}
+
 	for (i = 0; i < read_arg->iov_count; i++) {
-		nb_read = ceph_ll_read(export->cmount, my_fd->fd, offset,
-				       read_arg->iov[i].iov_len,
-				       read_arg->iov[i].iov_base);
+		CEPH_FSAL_TIME_CALL(
+			CEPH_STAT_READ,
+			nb_read = ceph_ll_read(export->cmount, my_fd->fd,
+					       offset, read_arg->iov[i].iov_len,
+					       read_arg->iov[i].iov_base));
 
 		if (nb_read == 0) {
 			read_arg->end_of_file = true;
@@ -2138,6 +2421,12 @@ void ceph_write2_cb(struct ceph_ll_io_info *cb_info)
 		container_of(cbi->obj_hdl, struct ceph_handle, handle);
 	struct req_op_context ctx;
 
+	LogFullDebug(COMPONENT_FSAL,
+		     "io_correl callback write caller_arg=%p cbi=%p io_info=%p "
+		     "fileid=%" PRIu64 " offset=%" PRIu64 " result=%" PRId64,
+		     cbi->caller_arg, cbi, cb_info, obj_hdl->fileid,
+		     write_arg->offset, (int64_t)cb_info->result);
+
 	/* Take a reference to the export for the callback. Note that while
 	 * this looks unsafe, we know that the caller's request can not complete
 	 * without this callback occurring, and since it can not complete, its
@@ -2172,6 +2461,12 @@ void ceph_write2_cb(struct ceph_ll_io_info *cb_info)
 			     cb_info->result);
 	}
 
+	/* Record e2e FSAL WRITE latency once (not on CLOSEFD resume). */
+	if (cbi->stat_timing) {
+		ceph_fsal_stat_finish(CEPH_STAT_WRITE, &cbi->stat_start, true);
+		cbi->stat_timing = false;
+	}
+
 	if (cbi->my_fd->fsal_fd.close_on_complete) {
 		/* We need to ask to resume so we can complete I/O not on the
 		 * call back thread since we have to call close.
@@ -2185,6 +2480,11 @@ void ceph_write2_cb(struct ceph_ll_io_info *cb_info)
 resume:
 
 	status2 = fsal_complete_io(obj_hdl, &cbi->my_fd->fsal_fd);
+
+	LogFullDebug(COMPONENT_FSAL,
+		     "io_correl callback write fsal_complete_io caller_arg=%p "
+		     "cbi=%p status=%s",
+		     cbi->caller_arg, cbi, fsal_err_txt(status2));
 
 	LogFullDebug(COMPONENT_FSAL, "fsal_complete_io returned %s",
 		     fsal_err_txt(status2));
@@ -2252,6 +2552,16 @@ static void ceph_fsal_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	int64_t result;
 
 	if (write_arg->fsal_resume) {
+#ifdef USE_FSAL_CEPH_FS_ZEROCOPY_IO
+		struct ceph_fsal_cb_info *resume_cbi = write_arg->cbi;
+
+		if (resume_cbi->zerocopy) {
+			ceph_zc_write_complete(resume_cbi,
+					       resume_cbi->zc_status,
+					       resume_cbi->zc_result, true);
+			return;
+		}
+#endif
 		ceph_write2_cb(write_arg->cbi);
 		return;
 	}
@@ -2264,7 +2574,7 @@ static void ceph_fsal_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 
 	/* Indicate a desire to start io and get a usable file descritor */
 #if USE_FSAL_CEPH_FS_NONBLOCKING_IO
-	if (CephFSM.async) {
+	if (CephFSM.async || CephFSM.zerocopy) {
 		status = fsal_start_io(&out_fd, obj_hdl, &myself->fd.fsal_fd,
 				       &cbi->temp_fd.fsal_fd, write_arg->state,
 				       FSAL_O_WRITE, false, NULL, bypass,
@@ -2288,6 +2598,57 @@ static void ceph_fsal_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	my_fd = container_of(out_fd, struct ceph_fd, fsal_fd);
 
 #if USE_FSAL_CEPH_FS_NONBLOCKING_IO
+#ifdef USE_FSAL_CEPH_FS_ZEROCOPY_IO
+	if (CephFSM.zerocopy) {
+		ceph_bufferlist *bl;
+
+		bl = ceph_bufferlist_wrap_iov(write_arg->iov,
+					      write_arg->iov_count);
+		if (bl == NULL) {
+			status = ceph2fsal_error(-ENOMEM);
+			goto out;
+		}
+
+		cbi->arg = write_arg;
+		cbi->exp = op_ctx->ctx_export;
+		cbi->fsal_export = op_ctx->fsal_export;
+		cbi->my_fd = my_fd;
+		cbi->obj_hdl = obj_hdl;
+		cbi->done_cb = done_cb;
+		cbi->caller_arg = caller_arg;
+		cbi->async = true;
+		cbi->zerocopy = true;
+		cbi->zc_comp.cb = ceph_zc_write_cb;
+		cbi->zc_comp.priv = cbi;
+		write_arg->cbi = cbi;
+
+		LogFullDebug(COMPONENT_FSAL,
+			     "Calling ceph_ll_async_write for zero-copy write "
+			     "fileid=%" PRIu64 " offset=%" PRIu64 " fsync=%d",
+			     obj_hdl->fileid, offset, write_arg->fsal_stable);
+
+		ceph_fsal_stat_start(&cbi->stat_start, &cbi->stat_timing);
+		/*
+		 * ceph_ll_async_write consumes bl on entry (even if submit
+		 * returns an error). Do not put after this call.
+		 */
+		result = ceph_ll_async_write(export->cmount, my_fd->fd, offset,
+					     bl, write_arg->fsal_stable,
+					     &cbi->zc_comp);
+
+		if (result < 0) {
+			status = ceph2fsal_error(result);
+			ceph_fsal_stat_finish(CEPH_STAT_WRITE, &cbi->stat_start,
+					      cbi->stat_timing);
+			cbi->stat_timing = false;
+			goto out;
+		}
+
+		/* Completion is always asynchronous via ceph_zc_write_cb. */
+		return;
+	}
+#endif /* USE_FSAL_CEPH_FS_ZEROCOPY_IO */
+
 	if (!CephFSM.async)
 		goto old_style;
 
@@ -2299,7 +2660,7 @@ static void ceph_fsal_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	cbi->io_info.off = offset;
 	cbi->io_info.write = true;
 	cbi->io_info.fsync = write_arg->fsal_stable;
-	cbi->io_info.syncdataonly = false;
+	cbi->io_info.syncdataonly = CephFSM.syncdataonly;
 	cbi->arg = write_arg;
 	cbi->exp = op_ctx->ctx_export;
 	cbi->fsal_export = op_ctx->fsal_export;
@@ -2316,34 +2677,49 @@ static void ceph_fsal_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	 */
 
 	LogFullDebug(COMPONENT_FSAL,
+		     "io_correl submit write caller_arg=%p cbi=%p io_info=%p "
+		     "fileid=%" PRIu64 " offset=%" PRIu64 " fsync=%d",
+		     caller_arg, cbi, &cbi->io_info, obj_hdl->fileid, offset,
+		     write_arg->fsal_stable);
+
+	LogFullDebug(COMPONENT_FSAL,
 		     "Calling ceph_ll_nonblocking_readv_writev for write");
 
+	ceph_fsal_stat_start(&cbi->stat_start, &cbi->stat_timing);
 	result =
 		ceph_ll_nonblocking_readv_writev(export->cmount, &cbi->io_info);
 
-	LogFullDebug(
-		COMPONENT_FSAL,
-		"ceph_ll_nonblocking_readv_writev for write returned %" PRIi64,
-		result);
+	LogFullDebug(COMPONENT_FSAL,
+		     "io_correl submit write returned caller_arg=%p cbi=%p "
+		     "result=%" PRIi64,
+		     caller_arg, cbi, result);
 
 	if (result < 0) {
 		/* An error occurred. */
 		status = ceph2fsal_error(result);
+		ceph_fsal_stat_finish(CEPH_STAT_WRITE, &cbi->stat_start,
+				      cbi->stat_timing);
+		cbi->stat_timing = false;
 	} else if (result == 0) {
-		/* I/O will complete async, return. */
+		/* I/O will complete async; callback records FSAL WRITE. */
 		return;
 	} else {
 		/* I/O actually completed... */
 		write_arg->io_amount = result;
+		ceph_fsal_stat_finish(CEPH_STAT_WRITE, &cbi->stat_start,
+				      cbi->stat_timing);
+		cbi->stat_timing = false;
 	}
 	goto out;
 
 old_style:
 #endif
 	for (i = 0; i < write_arg->iov_count; i++) {
-		nb_written = ceph_ll_write(export->cmount, my_fd->fd, offset,
-					   write_arg->iov[i].iov_len,
-					   write_arg->iov[i].iov_base);
+		CEPH_FSAL_TIME_CALL(CEPH_STAT_WRITE,
+				    nb_written = ceph_ll_write(
+					    export->cmount, my_fd->fd, offset,
+					    write_arg->iov[i].iov_len,
+					    write_arg->iov[i].iov_base));
 
 		if (nb_written == 0) {
 			break;
@@ -2357,7 +2733,10 @@ old_style:
 	}
 
 	if (write_arg->fsal_stable) {
-		retval = ceph_ll_fsync(export->cmount, my_fd->fd, false);
+		CEPH_FSAL_TIME_CALL(
+			CEPH_STAT_FSYNC,
+			retval = ceph_ll_fsync(export->cmount, my_fd->fd,
+					       CephFSM.syncdataonly));
 
 		if (retval < 0) {
 			status = ceph2fsal_error(retval);
@@ -2429,7 +2808,9 @@ static fsal_status_t ceph_fsal_commit2(struct fsal_obj_handle *obj_hdl,
 	 * altogether. Since we don't need to check share reservation, this
 	 * totally avoids dealing with the obj_lock or any fsal_fd.
 	 */
-	retval = ceph_ll_sync_inode(export->cmount, myself->i, 0);
+	CEPH_FSAL_TIME_CALL(CEPH_STAT_FSYNC,
+			    retval = ceph_ll_sync_inode(export->cmount,
+							myself->i, 0));
 
 	GSH_UNIQUE_AUTO_TRACEPOINT(fsal_ceph, ceph_commit, TRACE_DEBUG,
 				   "Write. fileid: {}", obj_hdl->fileid);
@@ -2473,7 +2854,9 @@ static fsal_status_t ceph_fsal_commit2(struct fsal_obj_handle *obj_hdl,
 
 	my_fd = container_of(out_fd, struct ceph_fd, fsal_fd);
 
-	retval = ceph_ll_fsync(export->cmount, my_fd->fd, false);
+	CEPH_FSAL_TIME_CALL(CEPH_STAT_FSYNC,
+			    retval = ceph_ll_fsync(export->cmount, my_fd->fd,
+						   false));
 
 	if (retval < 0)
 		status = ceph2fsal_error(retval);
@@ -2608,11 +2991,16 @@ static fsal_status_t ceph_fsal_lock_op2(struct fsal_obj_handle *obj_hdl,
 	my_fd = container_of(out_fd, struct ceph_fd, fsal_fd);
 
 	if (lock_op == FSAL_OP_LOCKT) {
-		retval = ceph_ll_getlk(export->cmount, my_fd->fd, &lock_args,
-				       (uint64_t)owner);
+		CEPH_FSAL_TIME_CALL(
+			CEPH_STAT_GETLK,
+			retval = ceph_ll_getlk(export->cmount, my_fd->fd,
+					       &lock_args, (uint64_t)owner));
 	} else {
-		retval = ceph_ll_setlk(export->cmount, my_fd->fd, &lock_args,
-				       (uint64_t)owner, false);
+		CEPH_FSAL_TIME_CALL(
+			CEPH_STAT_SETLK,
+			retval = ceph_ll_setlk(export->cmount, my_fd->fd,
+					       &lock_args, (uint64_t)owner,
+					       false));
 	}
 
 	if (retval < 0) {
@@ -2625,8 +3013,11 @@ static fsal_status_t ceph_fsal_lock_op2(struct fsal_obj_handle *obj_hdl,
 			int retval2;
 
 			/* Get the conflicting lock */
-			retval2 = ceph_ll_getlk(export->cmount, my_fd->fd,
-						&lock_args, (uint64_t)owner);
+			CEPH_FSAL_TIME_CALL(
+				CEPH_STAT_GETLK,
+				retval2 = ceph_ll_getlk(export->cmount,
+							my_fd->fd, &lock_args,
+							(uint64_t)owner));
 
 			if (retval2 < 0) {
 				LogCrit(COMPONENT_FSAL,
@@ -3276,15 +3667,19 @@ static fsal_status_t ceph_fsal_fallocate(struct fsal_obj_handle *obj_hdl,
 	my_fd = container_of(out_fd, struct ceph_fd, fsal_fd);
 
 	mode = allocate ? 0 : FALLOC_FL_KEEP_SIZE | FALLOC_FL_PUNCH_HOLE;
-	retval = ceph_ll_fallocate(export->cmount, my_fd->fd, mode, offset,
-				   length);
+	CEPH_FSAL_TIME_CALL(CEPH_STAT_FALLOCATE,
+			    retval = ceph_ll_fallocate(export->cmount,
+						       my_fd->fd, mode, offset,
+						       length));
 
 	if (retval < 0) {
 		status = ceph2fsal_error(retval);
 		goto out;
 	}
 
-	retval = ceph_ll_fsync(export->cmount, my_fd->fd, false);
+	CEPH_FSAL_TIME_CALL(CEPH_STAT_FSYNC,
+			    retval = ceph_ll_fsync(export->cmount, my_fd->fd,
+						   false));
 	if (retval < 0)
 		status = ceph2fsal_error(retval);
 
