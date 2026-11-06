@@ -86,6 +86,40 @@
       "message": "Typo error - Should this be uid_t?",
       "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "105e7bc1_ae48e0c8",
+        "filename": "src/os/freebsd/subr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1010265
+      },
+      "writtenOn": "2026-11-06T16:13:34Z",
+      "side": 1,
+      "message": "maybe just a logcrit - and no attempt to do syscall - this should be the impossible code path (GPFS FSAL in BSD)",
+      "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8db52344_aa10b21c",
+        "filename": "src/os/linux/subr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1010265
+      },
+      "writtenOn": "2026-11-06T16:13:34Z",
+      "side": 1,
+      "message": "I would suggest to leave this function name (and setgroup) as is  - \nand name the new functions setfsuser and setfsgroup",
+      "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
