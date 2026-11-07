@@ -16,6 +16,24 @@
       "message": "missing braces {}, ends up in if (item-\u003eflags \u0026 CONFIG_MARK_SET) even tough the convert_bool fails.\n@ffilzlnx@mindspring.com : I am not sure, that is the intended behavior, please confirm.",
       "revId": "0dbfcf50e66516025fb13144d143b136d0177e94",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60f899f1_6c3ab4ff",
+        "filename": "src/config_parsing/config_parsing.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1187,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-07T01:39:11Z",
+      "side": 1,
+      "message": "Yea, my bad.",
+      "parentUuid": "1be66b93_861102f6",
+      "revId": "0dbfcf50e66516025fb13144d143b136d0177e94",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
