@@ -107,6 +107,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a85ec9a2_78e09a18",
+        "filename": "src/os/freebsd/subr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-07T01:32:23Z",
+      "side": 1,
+      "message": "Or maybe just don\u0027t include it and make sure FSAL_GPFS isn\u0027t built under FreeBSD",
+      "parentUuid": "105e7bc1_ae48e0c8",
+      "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "449be27c_b8531c99",
+        "filename": "src/os/freebsd/subr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-07T01:32:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f5d9eae_dfb60625",
+      "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8db52344_aa10b21c",
         "filename": "src/os/linux/subr.c",
         "patchSetId": 2
@@ -118,6 +154,24 @@
       "writtenOn": "2026-11-06T16:13:34Z",
       "side": 1,
       "message": "I would suggest to leave this function name (and setgroup) as is  - \nand name the new functions setfsuser and setfsgroup",
+      "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb5565ce_357cb010",
+        "filename": "src/os/linux/subr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-07T01:32:23Z",
+      "side": 1,
+      "message": "This is specifically bypassing glibc to call the system call directly so it only applies to a single thread. I think that\u0027s worth calling out in the function names.",
+      "parentUuid": "8db52344_aa10b21c",
       "revId": "d227daa70ba1506e3dcca7d06be808777752665a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
