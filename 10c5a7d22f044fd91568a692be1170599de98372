@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "948b46f0_5a822dc6",
+        "filename": "src/FSAL/FSAL_CEPH/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-09T15:33:59Z",
+      "side": 1,
+      "message": "Should we actually validate this in create_export? So we report a config error?",
+      "revId": "10c5a7d22f044fd91568a692be1170599de98372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
