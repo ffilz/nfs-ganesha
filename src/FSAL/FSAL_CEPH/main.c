@@ -1162,6 +1162,26 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 		}
 	}
 
+	/* An explicitly configured cmount_path must be a path prefix of
+	 * the export path: the export is either the mount path itself or
+	 * a sub-directory of it (see the cmount key selection below).
+	 * Otherwise the path advance in lookup_path would run past the
+	 * end of the buffer, or resolve the export to the wrong subtree.
+	 */
+	if (export->cmount_path != NULL) {
+		size_t lmp = strlen(export->cmount_path);
+		const char *fp = CTX_FULLPATH(op_ctx);
+
+		if (strncmp(fp, export->cmount_path, lmp) != 0 ||
+		    (fp[lmp] != '\0' && fp[lmp] != '/')) {
+			LogWarn(COMPONENT_FSAL,
+				"Export path %s is not under cmount_path %s",
+				fp, export->cmount_path);
+			gsh_free(export, MEM_COMP_EXPORT);
+			return fsalstat(ERR_FSAL_INVAL, 0);
+		}
+	}
+
 	memset(&cm_key, 0, sizeof(cm_key));
 	user_id = key = NULL;
 
