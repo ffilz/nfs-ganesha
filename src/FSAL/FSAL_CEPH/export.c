@@ -193,13 +193,23 @@ static fsal_status_t lookup_path(struct fsal_export *export_pub,
 		lmp = 0;
 	}
 
+	/* cmount_path must be a prefix of the export path, or the
+	 * advance below would run past the end of the buffer, or
+	 * resolve to the wrong subtree.
+	 */
+	if (strncmp(realpath, export->cm->cm_mount_path, lmp) != 0) {
+		PTHREAD_RWLOCK_unlock(&cmount_lock);
+		status.major = ERR_FSAL_SERVERFAULT;
+		return status;
+	}
+
 	/* Advance past the export's fullpath */
 	realpath += lmp;
 
 	PTHREAD_RWLOCK_unlock(&cmount_lock);
 
 	/* special case the root */
-	if (realpath[1] == '\0' || realpath[0] == '\0') {
+	if (realpath[0] == '\0' || realpath[1] == '\0') {
 		assert(export->root);
 		*pub_handle = &export->root->handle;
 		return status;
