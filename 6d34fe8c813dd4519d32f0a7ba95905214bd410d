@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17ed5e3f_9c90cef4",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-10T21:51:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7a2ec6c0_96379e95",
+      "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10577644_bfa31d31",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-11-07T14:49:55Z",
       "side": 1,
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\t\"SEQUENCE returning unexpected NFS4ERR_RETRY_UNCACHED_REP with slot seqid\u003d%\"\n    - \t\t\t\t\tPRIu32 \" op seqid\u003d%\" PRIu32,\n→ to be replaced with:\n    + \t\t\t\t\t\"SEQUENCE returning unexpected NFS4ERR_RETRY_UNCACHED_REP with slot seqid\u003d%\" PRIu32\n    + \t\t\t\t\t\" op seqid\u003d%\" PRIu32,",
+      "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc190b22_5864bf2f",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-10T21:51:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "10577644_bfa31d31",
       "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
