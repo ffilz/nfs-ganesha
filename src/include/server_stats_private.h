@@ -196,8 +196,7 @@ struct auth_stats {
 
 #define PROTOCOLS_CONTAINER                                              \
 	"(" STAT_TYPE_NFSV3 STAT_TYPE_MNT STAT_TYPE_NLM STAT_TYPE_RQUOTA \
-		STAT_TYPE_NFSV40 STAT_TYPE_NFSV41 STAT_TYPE_NFSV42       \
-	")"
+		STAT_TYPE_NFSV40 STAT_TYPE_NFSV41 STAT_TYPE_NFSV42 ")"
 
 #define EXPORT_CONTAINER "(" TYPE_ID TYPE_STRING PROTOCOLS_CONTAINER "t(tt))"
 
@@ -226,15 +225,14 @@ struct auth_stats {
 	{ .name = "read", .type = "(tttttt)", .direction = "out" }, \
 		{ .name = "write", .type = "(tttttt)", .direction = "out" }
 
-#define CEIOSTATS_TYPE   "(ttt)(ttt)(tt)"   /* read, write, other */
-#define CEIOSTATS_REPLY                                                    \
+#define CEIOSTATS_TYPE "(ttt)(ttt)(tt)" /* read, write, other */
+#define CEIOSTATS_REPLY                                                   \
 	{ .name = "read", .type = "(ttt)", .direction = "out" },          \
 		{ .name = "write", .type = "(ttt)", .direction = "out" }, \
 		{ .name = "other", .type = "(tt)", .direction = "out" }
 
-#define CELOSTATS_TYPE   "(tt)"               /* layout */
-#define CELOSTATS_REPLY \
-	{ .name = "layout", .type = "(tt)", .direction = "out" }
+#define CELOSTATS_TYPE "(tt)" /* layout */
+#define CELOSTATS_REPLY { .name = "layout", .type = "(tt)", .direction = "out" }
 
 #ifdef _USE_NFS3
 #define CE_STATS_REPLY                                                   \
@@ -259,57 +257,57 @@ struct auth_stats {
 
 /* Type signature for array of client I/O stats (for GetAllClientIOops) */
 #ifdef _USE_NFS3
-#define CE_STATS_TYPE                            \
-	"b" CEIOSTATS_TYPE                       /* clnt_v3  */ \
-	"b" CEIOSTATS_TYPE                       /* clnt_v40 */ \
-	"b" CEIOSTATS_TYPE CELOSTATS_TYPE        /* clnt_v41 */ \
-	"b" CEIOSTATS_TYPE CELOSTATS_TYPE        /* clnt_v42 */
+#define CE_STATS_TYPE                                    \
+	"b" CEIOSTATS_TYPE /* clnt_v3  */                \
+	"b" CEIOSTATS_TYPE /* clnt_v40 */                \
+	"b" CEIOSTATS_TYPE CELOSTATS_TYPE /* clnt_v41 */ \
+	"b" CEIOSTATS_TYPE CELOSTATS_TYPE /* clnt_v42 */
 #else
-#define CE_STATS_TYPE                            \
-	CEIOSTATS_TYPE                           /* unconditional */ \
-	"b" CEIOSTATS_TYPE                       /* clnt_v40 */ \
-	"b" CEIOSTATS_TYPE CELOSTATS_TYPE        /* clnt_v41 */ \
-	"b" CEIOSTATS_TYPE CELOSTATS_TYPE        /* clnt_v42 */
+#define CE_STATS_TYPE                                            \
+	CEIOSTATS_TYPE /* unconditional */                       \
+		"b" CEIOSTATS_TYPE /* clnt_v40 */                \
+		"b" CEIOSTATS_TYPE CELOSTATS_TYPE /* clnt_v41 */ \
+		"b" CEIOSTATS_TYPE CELOSTATS_TYPE /* clnt_v42 */
 #endif
 
 /* Array reply macro for all clients stats - wraps CE_STATS_REPLY in
  * array format */
-#define CE_STATS_ARRAY_REPLY                          \
-	{ .name = "clients",                          \
-	  .type = "a(s(tt)" CE_STATS_TYPE ")",        \
+#define CE_STATS_ARRAY_REPLY                   \
+	{ .name = "clients",                   \
+	  .type = "a(s(tt)" CE_STATS_TYPE ")", \
 	  .direction = "out" }
 
 /* Type signature for array of client all_ops stats (for GetAllClientAllops) */
 #ifdef _USE_NFS3
 #ifdef _USE_NLM
-#define CE_ALL_OPS_TYPE                          \
-	"b" CLNT_V3NLM_OPS_TYPE                  /* clnt_v3  */ \
-	"b" CLNT_V3NLM_OPS_TYPE                  /* clnt_nlm */ \
-	"b" CLNT_V4_OPS_TYPE                     /* clnt_v4  */ \
-	"b" CLNT_CMP_OPS_TYPE                    /* clnt_cmp */
+#define CE_ALL_OPS_TYPE                        \
+	"b" CLNT_V3NLM_OPS_TYPE /* clnt_v3  */ \
+	"b" CLNT_V3NLM_OPS_TYPE /* clnt_nlm */ \
+	"b" CLNT_V4_OPS_TYPE /* clnt_v4  */    \
+	"b" CLNT_CMP_OPS_TYPE /* clnt_cmp */
 #else
-#define CE_ALL_OPS_TYPE                          \
-	"b" CLNT_V3NLM_OPS_TYPE                  /* clnt_v3  */ \
-	"b" CLNT_V4_OPS_TYPE                     /* clnt_v4  */ \
-	"b" CLNT_CMP_OPS_TYPE                    /* clnt_cmp */
+#define CE_ALL_OPS_TYPE                        \
+	"b" CLNT_V3NLM_OPS_TYPE /* clnt_v3  */ \
+	"b" CLNT_V4_OPS_TYPE /* clnt_v4  */    \
+	"b" CLNT_CMP_OPS_TYPE /* clnt_cmp */
 #endif
 #else
 #ifdef _USE_NLM
-#define CE_ALL_OPS_TYPE                          \
-	"b" CLNT_V3NLM_OPS_TYPE                  /* clnt_nlm */ \
-	"b" CLNT_V4_OPS_TYPE                     /* clnt_v4  */ \
-	"b" CLNT_CMP_OPS_TYPE                    /* clnt_cmp */
+#define CE_ALL_OPS_TYPE                        \
+	"b" CLNT_V3NLM_OPS_TYPE /* clnt_nlm */ \
+	"b" CLNT_V4_OPS_TYPE /* clnt_v4  */    \
+	"b" CLNT_CMP_OPS_TYPE /* clnt_cmp */
 #else
-#define CE_ALL_OPS_TYPE                          \
-	"b" CLNT_V4_OPS_TYPE                     /* clnt_v4  */ \
-	"b" CLNT_CMP_OPS_TYPE                    /* clnt_cmp */
+#define CE_ALL_OPS_TYPE                     \
+	"b" CLNT_V4_OPS_TYPE /* clnt_v4  */ \
+	"b" CLNT_CMP_OPS_TYPE /* clnt_cmp */
 #endif
 #endif
 
 /* Array reply macro for all clients all_ops stats */
-#define CE_ALL_OPS_ARRAY_REPLY                        \
-	{ .name = "clients",                          \
-	  .type = "a(s(tt)" CE_ALL_OPS_TYPE ")",      \
+#define CE_ALL_OPS_ARRAY_REPLY                   \
+	{ .name = "clients",                     \
+	  .type = "a(s(tt)" CE_ALL_OPS_TYPE ")", \
 	  .direction = "out" }
 
 #ifdef _USE_NFS3
@@ -321,13 +319,15 @@ struct auth_stats {
 #endif
 
 #define CLNT_V4_OPS_TYPE "a(stt)"
-#define CLNT_V4_OPS_REPLY \
-	{ .name = "clnt_v4_ops_stats", .type = CLNT_V4_OPS_TYPE, \
+#define CLNT_V4_OPS_REPLY              \
+	{ .name = "clnt_v4_ops_stats", \
+	  .type = CLNT_V4_OPS_TYPE,    \
 	  .direction = "out" }
 
 #define CLNT_CMP_OPS_TYPE "ttt"
-#define CLNT_CMP_OPS_REPLY \
-	{ .name = "clnt_cmp_ops_stats", .type = CLNT_CMP_OPS_TYPE, \
+#define CLNT_CMP_OPS_REPLY              \
+	{ .name = "clnt_cmp_ops_stats", \
+	  .type = CLNT_CMP_OPS_TYPE,    \
 	  .direction = "out" }
 
 #define TRANSPORT_REPLY                                                    \
@@ -405,6 +405,13 @@ struct auth_stats {
 /* name, count, avg_us, min_us, max_us — buckets then stage deltas */
 #define IO_STAGES_REPLY \
 	{ .name = "io_stages", .type = "a(stddd)", .direction = "out" }
+
+/*
+ * enabled, threshold, max_pending, sends, completions,
+ * copied, enobufs, fallback
+*/
+#define SOCKET_ZC_REPLY \
+	{ .name = "socket_zc", .type = "(bttttttt)", .direction = "out" }
 
 #define AUTH_REPLY \
 	{ .name = "auth", .type = "a(tdddtdddtddd)", .direction = "out" }
