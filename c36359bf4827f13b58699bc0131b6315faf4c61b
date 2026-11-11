@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b913bd6a_49825a09",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-11T18:17:29Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\"SEQUENCE in use, returning status %s with slot seqid\u003d%\"\n    - \t\t\tPRIu32 \" op seqid\u003d%\" PRIu32,\n→ to be replaced with:\n    + \t\t\t\"SEQUENCE in use, returning status %s with slot seqid\u003d%\" PRIu32\n    + \t\t\t\" op seqid\u003d%\" PRIu32,",
+      "revId": "c36359bf4827f13b58699bc0131b6315faf4c61b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6c8f6fa_ab111d65",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-11T18:17:29Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\t\"SEQUENCE returning unexpected NFS4ERR_RETRY_UNCACHED_REP with slot seqid\u003d%\"\n    - \t\t\t\t\tPRIu32 \" op seqid\u003d%\" PRIu32,\n→ to be replaced with:\n    + \t\t\t\t\t\"SEQUENCE returning unexpected NFS4ERR_RETRY_UNCACHED_REP with slot seqid\u003d%\" PRIu32\n    + \t\t\t\t\t\" op seqid\u003d%\" PRIu32,",
+      "revId": "c36359bf4827f13b58699bc0131b6315faf4c61b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
