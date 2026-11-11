@@ -70,6 +70,24 @@
       "parentUuid": "615a94ee_56d282ad",
       "revId": "10c5a7d22f044fd91568a692be1170599de98372",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c12edc4_778bf759",
+        "filename": "src/FSAL/FSAL_CEPH/export.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-11T16:28:14Z",
+      "side": 1,
+      "message": "Ok, thanks for removing the redundant check, and yes, the correction below is necessary.",
+      "parentUuid": "fb11dea3_ef0f5fac",
+      "revId": "10c5a7d22f044fd91568a692be1170599de98372",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
