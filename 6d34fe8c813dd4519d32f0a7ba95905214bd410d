@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8a7d096_e2f80345",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2026-11-11T08:31:39Z",
+      "side": 1,
+      "message": "typo - in_use",
+      "range": {
+        "startLine": 960,
+        "startChar": 56,
+        "endLine": 960,
+        "endChar": 64
+      },
+      "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a2ec6c0_96379e95",
         "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
         "patchSetId": 1
@@ -55,6 +78,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7cba4541_e189f628",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2026-11-11T08:31:39Z",
+      "side": 1,
+      "message": "I think we can still get here if a client sends sa_sequenceid \u003d\u003d 0 on a newly created slot:\n- nfs4_op_create_session() allocates fc_slots with gsh_calloc(), so a new slot starts with sequence \u003d\u003d 0 and cached_result \u003d\u003d NULL.\n- If a client sends sa_sequenceid \u003d\u003d 0 on an unused slot, sess_slot-\u003esequence \u003d\u003d arg_SEQUENCE4-\u003esa_sequenceid is true while cached_result is NULL, which will hit this branch and log a LogCrit (and return NFS4ERR_RETRY_UNCACHED_REP instead of NFS4ERR_SEQ_MISORDERED).",
+      "range": {
+        "startLine": 305,
+        "startChar": 4,
+        "endLine": 308,
+        "endChar": 7
+      },
+      "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10577644_bfa31d31",
         "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
         "patchSetId": 1
@@ -84,6 +130,46 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "10577644_bfa31d31",
+      "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7126c655_ae9e37e5",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2026-11-11T08:31:39Z",
+      "side": 1,
+      "message": "typo - response",
+      "range": {
+        "startLine": 344,
+        "startChar": 11,
+        "endLine": 344,
+        "endChar": 18
+      },
+      "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0497245e_9ee4840c",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2026-11-11T08:31:39Z",
+      "side": 1,
+      "message": "If check_resp_room() fails here, we unlock slot_lock without setting sess_slot-\u003ein_use \u003d true and drop the session ref, but data-\u003ecd_slot and data-\u003esa_cachethis are already set:\n\n- complete_nfs4_compound() will then write to data-\u003ecd_slot without a session ref (same UAF as https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1259048 if the session is destroyed concurrently) and with in_use \u003d\u003d false (so it can race with another request on the same slot).\n- Since the comment here says we do want to cache the failed response, maybe we should set sess_slot-\u003ein_use \u003d true and unlock slot_lock before check_resp_room(), and not drop the session ref in this error path so compound_data_Free() cleans up both in_use and data-\u003esession after complete_nfs4_compound()?",
       "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
