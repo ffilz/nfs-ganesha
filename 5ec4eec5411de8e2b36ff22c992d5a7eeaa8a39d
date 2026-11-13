@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c2aac6c_8c260653",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T17:30:04Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\tnow_mono(\u0026reqdata-\u003esvc.rq_reply_time);\n    - \t\t}\n→ to be replaced with:\n    + \t\tnow_mono(\u0026reqdata-\u003esvc.rq_reply_time);\n    + \t}",
+      "revId": "5ec4eec5411de8e2b36ff22c992d5a7eeaa8a39d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82b2f617_1d74a09e",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T17:30:04Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t * so latency includes SVC_RECV/decode and matches now_mono() resolution.",
+      "revId": "5ec4eec5411de8e2b36ff22c992d5a7eeaa8a39d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fac0770_a0c6776a",
+        "filename": "src/Protocols/NFS/nfs4_Compound.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T17:30:04Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tnfs_request_t *reqdata \u003d\n    - \t\tcontainer_of(data-\u003ereq, nfs_request_t, svc);\n→ to be replaced with:\n    + \tnfs_request_t *reqdata \u003d container_of(data-\u003ereq, nfs_request_t, svc);",
+      "revId": "5ec4eec5411de8e2b36ff22c992d5a7eeaa8a39d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9bf96fe_18162a99",
+        "filename": "src/gtest/fsal_api/test_close2_latency.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T17:30:04Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t    \"export\", po::value\u003cuint16_t\u003e(),\n    - \t\t\t    \"id of export on which to operate (must exist)\");\n    - \t\t\t\t\t   \"ganesha debug level\");\n→ to be replaced with:\n    + \t\t\t\"export\", po::value\u003cuint16_t\u003e(),\n    + \t\t\t\"id of export on which to operate (must exist)\");\n    + \t\t\t\t   \"ganesha debug level\");",
+      "revId": "5ec4eec5411de8e2b36ff22c992d5a7eeaa8a39d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5b2e72d_b8e8c7e8",
+        "filename": "src/support/io_stages.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T17:30:04Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/support/io_stages.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "5ec4eec5411de8e2b36ff22c992d5a7eeaa8a39d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e37d98f0_1a6f3ed5",
+        "filename": "src/support/io_stages.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T17:30:04Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "5ec4eec5411de8e2b36ff22c992d5a7eeaa8a39d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22e78696_59e13f02",
+        "filename": "src/support/io_stages.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T17:30:04Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - static bool stage_delta_get(const struct io_stage_timing *st, int cur,\n    - \t\t\t    int prev, uint64_t *out)\n→ to be replaced with:\n    + static bool stage_delta_get(const struct io_stage_timing *st, int cur, int prev,\n    + \t\t\t    uint64_t *out)",
+      "revId": "5ec4eec5411de8e2b36ff22c992d5a7eeaa8a39d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b59aefd_87d65a9f",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1320,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T17:30:04Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t/* T11: reply flush complete (survives nfs_request free via ioq cookie) */",
+      "revId": "5ec4eec5411de8e2b36ff22c992d5a7eeaa8a39d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
