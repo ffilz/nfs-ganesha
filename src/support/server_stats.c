@@ -122,7 +122,6 @@ static const struct op_name optnlm[] = {
 };
 #endif
 
-
 /* Classify protocol ops for stats purposes
  */
 
@@ -373,10 +372,16 @@ static struct global_stats global_st;
 #ifdef _USE_NFS3
 /* NFSv3 Detailed stats holder */
 struct proto_op v3_full_stats[NFS_V3_NB_COMMAND];
+/* Reply e2e (T4-T0) and send-side (T4-T3) for READ/WRITE */
+struct proto_op v3_e2e_stats[NFS_V3_NB_COMMAND];
+struct proto_op v3_send_stats[NFS_V3_NB_COMMAND];
 #endif
 
 /* NFSv4 Detailed stats holder */
 struct proto_op v4_full_stats[NFS4_OP_LAST_ONE];
+/* Reply e2e (T4-T0) and send-side (T4-T3) for terminal data ops */
+struct proto_op v4_e2e_stats[NFS4_OP_LAST_ONE];
+struct proto_op v4_send_stats[NFS4_OP_LAST_ONE];
 
 /**
  * @brief Get stats struct helpers
@@ -1262,9 +1267,7 @@ void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup)
 	if (nfs_param.core_param.enable_FASTSTATS)
 		return;
 
-	/* current_time already set above if client != NULL */
-	if (client == NULL)
-		now(&current_time);
+	now_mono(&current_time);
 	time_diff = timespec_diff(&op_ctx->start_time, &current_time);
 
 #ifdef _USE_NFS3
@@ -1285,22 +1288,95 @@ void server_stats_nfs_done(nfs_request_t *reqdata, int rc, bool dup)
 	}
 	if (!dup && op_ctx->ctx_export != NULL) {
 		struct export_stats *exp_st;
+		struct timespec wall_time;
 
 		exp_st = container_of(op_ctx->ctx_export, struct export_stats,
 				      export);
 		record_stats(&exp_st->st, &op_ctx->ctx_export->exp_lock,
 			     reqdata, time_diff, rc == NFS_REQ_OK, dup, true);
-		timespec_update(&op_ctx->ctx_export->last_update,
-				&current_time);
+		now(&wall_time);
+		timespec_update(&op_ctx->ctx_export->last_update, &wall_time);
 	}
 }
 
 /**
- * @brief record NFS V4 compound finished
+ * @brief Record reply-send completion (T4)
  *
- * Called from nfs4_compound at compound loop completion
+ * Called from ntirpc when the reply has been fully flushed (or abandoned).
+ * Gated by Enable_FULLV3_Stats / Enable_FULLV4_Stats. Only data ops with
+ * rq_stats_opcode set are recorded.
  */
+void server_stats_nfs_reply_done(const struct timespec *stime,
+				 const struct timespec *reply_time, int opcode,
+				 int status, uint64_t stage_t10_ns)
+{
+	struct timespec current_time;
+	nsecs_elapsed_t e2e_diff;
+	nsecs_elapsed_t send_diff;
+	int proc;
+	bool is_v3;
 
+	/*
+	 * T11: reply flush complete (survives nfs_request free via ioq cookie)
+	*/
+	if (status == 0)
+		server_stats_io_stages_reply_done(stage_t10_ns);
+
+	if (status != 0 || opcode < 0 || stime == NULL || reply_time == NULL)
+		return;
+	if (stime->tv_sec == 0)
+		return;
+
+	is_v3 = (opcode & RQ_STATS_OPCODE_V3_FLAG) != 0;
+	proc = opcode & 0xffff;
+
+	now_mono(&current_time);
+	e2e_diff = timespec_diff(stime, &current_time);
+	send_diff = (reply_time->tv_sec != 0)
+			    ? timespec_diff(reply_time, &current_time)
+			    : 0;
+
+#ifdef _USE_NFS3
+	if (is_v3) {
+		if (!nfs_param.core_param.enable_FULLV3STATS)
+			return;
+		if (proc != NFSPROC3_READ && proc != NFSPROC3_WRITE)
+			return;
+		if (proc >= NFS_V3_NB_COMMAND)
+			return;
+		record_op(&v3_e2e_stats[proc], e2e_diff, true, false);
+		if (reply_time->tv_sec != 0)
+			record_op(&v3_send_stats[proc], send_diff, true, false);
+		return;
+	}
+#else
+	if (is_v3)
+		return;
+#endif
+
+	if (!nfs_param.core_param.enable_FULLV4STATS)
+		return;
+	switch (proc) {
+	case NFS4_OP_READ:
+	case NFS4_OP_WRITE:
+	case NFS4_OP_READ_PLUS:
+	case NFS4_OP_WRITE_SAME:
+		break;
+	default:
+		return;
+	}
+	if (proc >= NFS4_OP_LAST_ONE)
+		return;
+	record_op(&v4_e2e_stats[proc], e2e_diff, true, false);
+	if (reply_time->tv_sec != 0)
+		record_op(&v4_send_stats[proc], send_diff, true, false);
+}
+
+/**
+ * @brief record NFS V4 op finished
+ *
+ * Called from nfs4_compound at per-op completion
+ */
 void server_stats_nfsv4_op_done(int proto_op, struct timespec *start_time,
 				int status)
 {
@@ -1324,9 +1400,7 @@ void server_stats_nfsv4_op_done(int proto_op, struct timespec *start_time,
 	if (nfs_param.core_param.enable_FASTSTATS)
 		return;
 
-	/* current_time already set above if client != NULL */
-	if (client == NULL)
-		now(&current_time);
+	now_mono(&current_time);
 	time_diff = timespec_diff(start_time, &current_time);
 
 	nfs_metrics__nfs4_op_completed(proto_op, status, time_diff);
@@ -1361,14 +1435,15 @@ void server_stats_nfsv4_op_done(int proto_op, struct timespec *start_time,
 
 	if (op_ctx->ctx_export != NULL) {
 		struct export_stats *exp_st;
+		struct timespec wall_time;
 
 		exp_st = container_of(op_ctx->ctx_export, struct export_stats,
 				      export);
 		record_nfsv4_op(&exp_st->st, &op_ctx->ctx_export->exp_lock,
 				proto_op, op_ctx->nfs_minorvers, time_diff,
 				status, true);
-		timespec_update(&op_ctx->ctx_export->last_update,
-				&current_time);
+		now(&wall_time);
+		timespec_update(&op_ctx->ctx_export->last_update, &wall_time);
 	}
 }
 
@@ -1386,30 +1461,33 @@ void server_stats_compound_done(int num_ops, int status)
 
 	if (!nfs_param.core_param.enable_NFSSTATS)
 		return;
-	now(&current_time);
+	now_mono(&current_time);
 	time_diff = timespec_diff(&op_ctx->start_time, &current_time);
 
 	nfs_metrics__nfs4_compound_completed(status, time_diff, num_ops);
 
 	if (client != NULL) {
 		struct server_stats *server_st;
+		struct timespec wall_time;
 
 		server_st = container_of(client, struct server_stats, client);
 		record_compound(&server_st->st, &client->client_lock,
 				op_ctx->nfs_minorvers, num_ops, time_diff,
 				status == NFS4_OK);
-		timespec_update(&client->last_update, &current_time);
+		now(&wall_time);
+		timespec_update(&client->last_update, &wall_time);
 	}
 	if (op_ctx->ctx_export != NULL) {
 		struct export_stats *exp_st;
+		struct timespec wall_time;
 
 		exp_st = container_of(op_ctx->ctx_export, struct export_stats,
 				      export);
 		record_compound(&exp_st->st, &op_ctx->ctx_export->exp_lock,
 				op_ctx->nfs_minorvers, num_ops, time_diff,
 				status == NFS4_OK);
-		timespec_update(&op_ctx->ctx_export->last_update,
-				&current_time);
+		now(&wall_time);
+		timespec_update(&op_ctx->ctx_export->last_update, &wall_time);
 	}
 }
 
@@ -2907,6 +2985,13 @@ void server_dbus_delegations(struct deleg_stats *ds, DBusMessageIter *iter)
 	dbus_message_iter_close_container(iter, &struct_iter);
 }
 
+static double proto_op_avg_ms(struct proto_op *op)
+{
+	if (op->total == 0)
+		return 0.0;
+	return (double)op->latency.latency * 0.000001 / op->total;
+}
+
 #ifdef _USE_NFS3
 /**
  * @brief NFSv3 Detailed stats reporting
@@ -2920,7 +3005,7 @@ void server_dbus_v3_full_stats(DBusMessageIter *iter)
 	char *message, *op_name;
 
 	gsh_dbus_append_timestamp(iter, &v3_full_stats_time);
-	dbus_message_iter_open_container(iter, DBUS_TYPE_ARRAY, "(stttddd)",
+	dbus_message_iter_open_container(iter, DBUS_TYPE_ARRAY, "(stttddddd)",
 					 &array_iter);
 	for (op = 1; op < NFS_V3_NB_COMMAND; op++) {
 		if (v3_full_stats[op].total) {
@@ -2950,6 +3035,12 @@ void server_dbus_v3_full_stats(DBusMessageIter *iter)
 			res = (double)v3_full_stats[op].latency.max * 0.000001;
 			dbus_message_iter_append_basic(&op_iter,
 						       DBUS_TYPE_DOUBLE, &res);
+			res = proto_op_avg_ms(&v3_e2e_stats[op]);
+			dbus_message_iter_append_basic(&op_iter,
+						       DBUS_TYPE_DOUBLE, &res);
+			res = proto_op_avg_ms(&v3_send_stats[op]);
+			dbus_message_iter_append_basic(&op_iter,
+						       DBUS_TYPE_DOUBLE, &res);
 			dbus_message_iter_close_container(&array_iter,
 							  &op_iter);
 			op_counter += v3_full_stats[op].total;
@@ -2968,6 +3059,10 @@ void server_dbus_v3_full_stats(DBusMessageIter *iter)
 					       &op_counter);
 		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_UINT64,
 					       &op_counter);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
+					       &res);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
+					       &res);
 		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
 					       &res);
 		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
@@ -2995,7 +3090,7 @@ void server_dbus_v4_full_stats(DBusMessageIter *iter)
 	char *message, *op_name;
 
 	gsh_dbus_append_timestamp(iter, &v4_full_stats_time);
-	dbus_message_iter_open_container(iter, DBUS_TYPE_ARRAY, "(sttddd)",
+	dbus_message_iter_open_container(iter, DBUS_TYPE_ARRAY, "(sttddddd)",
 					 &array_iter);
 	for (op = 1; op < NFS_V42_NB_OPERATION; op++) {
 		if (v4_full_stats[op].total) {
@@ -3022,6 +3117,12 @@ void server_dbus_v4_full_stats(DBusMessageIter *iter)
 			res = (double)v4_full_stats[op].latency.max * 0.000001;
 			dbus_message_iter_append_basic(&op_iter,
 						       DBUS_TYPE_DOUBLE, &res);
+			res = proto_op_avg_ms(&v4_e2e_stats[op]);
+			dbus_message_iter_append_basic(&op_iter,
+						       DBUS_TYPE_DOUBLE, &res);
+			res = proto_op_avg_ms(&v4_send_stats[op]);
+			dbus_message_iter_append_basic(&op_iter,
+						       DBUS_TYPE_DOUBLE, &res);
 			dbus_message_iter_close_container(&array_iter,
 							  &op_iter);
 			op_counter += v4_full_stats[op].total;
@@ -3038,6 +3139,10 @@ void server_dbus_v4_full_stats(DBusMessageIter *iter)
 					       &op_counter);
 		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_UINT64,
 					       &op_counter);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
+					       &res);
+		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
+					       &res);
 		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
 					       &res);
 		dbus_message_iter_append_basic(&op_iter, DBUS_TYPE_DOUBLE,
@@ -3176,6 +3281,18 @@ void reset_v3_full_stats(void)
 		v3_full_stats[op].latency.latency = 0;
 		v3_full_stats[op].latency.min = 0;
 		v3_full_stats[op].latency.max = 0;
+		v3_e2e_stats[op].total = 0;
+		v3_e2e_stats[op].errors = 0;
+		v3_e2e_stats[op].dups = 0;
+		v3_e2e_stats[op].latency.latency = 0;
+		v3_e2e_stats[op].latency.min = 0;
+		v3_e2e_stats[op].latency.max = 0;
+		v3_send_stats[op].total = 0;
+		v3_send_stats[op].errors = 0;
+		v3_send_stats[op].dups = 0;
+		v3_send_stats[op].latency.latency = 0;
+		v3_send_stats[op].latency.min = 0;
+		v3_send_stats[op].latency.max = 0;
 	}
 }
 #endif
@@ -3210,6 +3327,18 @@ void reset_v4_full_stats(void)
 		v4_full_stats[op].latency.latency = 0;
 		v4_full_stats[op].latency.min = 0;
 		v4_full_stats[op].latency.max = 0;
+		v4_e2e_stats[op].total = 0;
+		v4_e2e_stats[op].errors = 0;
+		v4_e2e_stats[op].dups = 0;
+		v4_e2e_stats[op].latency.latency = 0;
+		v4_e2e_stats[op].latency.min = 0;
+		v4_e2e_stats[op].latency.max = 0;
+		v4_send_stats[op].total = 0;
+		v4_send_stats[op].errors = 0;
+		v4_send_stats[op].dups = 0;
+		v4_send_stats[op].latency.latency = 0;
+		v4_send_stats[op].latency.min = 0;
+		v4_send_stats[op].latency.max = 0;
 	}
 }
 
@@ -3920,24 +4049,20 @@ void server_grpc_fill_stats_summary(struct gsh_stats *st,
  * @brief Fill per-export protocol-activity flags for ShowExports
  */
 bool server_grpc_fill_export_stats_summary(
-        struct gsh_export *export_obj,
-        struct grpc_protocol_activity *protos,
-        uint32_t *proto_count,
-        uint64_t *total_ops_out)
+	struct gsh_export *export_obj, struct grpc_protocol_activity *protos,
+	uint32_t *proto_count, uint64_t *total_ops_out)
 {
-        struct export_stats *exp;
+	struct export_stats *exp;
 
-        if (export_obj == NULL)
-                return false;
+	if (export_obj == NULL)
+		return false;
 
-        exp = container_of(export_obj, struct export_stats, export);
+	exp = container_of(export_obj, struct export_stats, export);
 
-        server_grpc_fill_stats_summary(&exp->st,
-                                       protos,
-                                       proto_count,
-                                       total_ops_out);
+	server_grpc_fill_stats_summary(&exp->st, protos, proto_count,
+				       total_ops_out);
 
-        return true;
+	return true;
 }
 
 /*
@@ -4234,9 +4359,8 @@ const char *gsh_mem_stats_get_mem_comp_str(mem_components_t comp)
 }
 
 const char *mem_stat_names[] = {
-	"Lifetime_Alloc_Calls", "Lifetime_Free_Calls",
-	"Lifetime_Alloc_Bytes", "Lifetime_Freed_Bytes",
-	"Current_Active_Bytes", "Peak_Active_Bytes",
+	"Lifetime_Alloc_Calls", "Lifetime_Free_Calls",	"Lifetime_Alloc_Bytes",
+	"Lifetime_Freed_Bytes", "Current_Active_Bytes", "Peak_Active_Bytes",
 };
 
 static inline bool is_mem_stats_disabled(void)
@@ -4273,22 +4397,20 @@ void gsh_mem_stats_update_alloc(void *p, mem_components_t comp,
 
 	current_bytes =
 		atomic_add_int64_t(&mc->current_active_bytes, (int64_t)size);
-	peak_bytes = atomic_max_int64_t(&mc->peak_active_bytes,
-					current_bytes);
+	peak_bytes = atomic_max_int64_t(&mc->peak_active_bytes, current_bytes);
 
 	if (isFullDebug(COMPONENT_MEM_ALLOC)) {
 		l_fc = atomic_fetch_uint64_t(&mc->lifetime_free_calls);
 		l_fb = atomic_fetch_uint64_t(&mc->lifetime_freed_bytes);
 
-		LogFullDebug(
-			COMPONENT_MEM_ALLOC,
-			"Component: %s, L_ac/L_fc/L_ab/L_fb: %" PRIu64
-			" %" PRIu64 " %" PRIu64 " %" PRIu64
-			" current: %" PRId64 " peak: %" PRId64
-			" this_alloc: %zu at %s:%d (%s)",
-			gsh_mem_stats_get_mem_comp_str(comp), l_ac, l_fc,
-			l_ab, l_fb, current_bytes, peak_bytes, size, file,
-			line, function);
+		LogFullDebug(COMPONENT_MEM_ALLOC,
+			     "Component: %s, L_ac/L_fc/L_ab/L_fb: %" PRIu64
+			     " %" PRIu64 " %" PRIu64 " %" PRIu64
+			     " current: %" PRId64 " peak: %" PRId64
+			     " this_alloc: %zu at %s:%d (%s)",
+			     gsh_mem_stats_get_mem_comp_str(comp), l_ac, l_fc,
+			     l_ab, l_fb, current_bytes, peak_bytes, size, file,
+			     line, function);
 	}
 }
 
@@ -4319,9 +4441,10 @@ void gsh_mem_stats_update_free(void *p, mem_components_t comp, const char *file,
 
 	if (current_bytes < 0) {
 		LogWarnLimited(COMPONENT_MEM_ALLOC,
-			       "mem_comp underflow on %s: freed %zu bytes, current_active_bytes is now %"
-			       PRId64
-			       " - possible alloc/free mem_comp mismatch at %s:%d(%s)",
+			       "mem_comp underflow on %s: freed %zu bytes, "
+			       "current_active_bytes is now %" PRId64
+			       " - possible alloc/free mem_comp mismatch "
+			       "at %s:%d(%s)",
 			       gsh_mem_stats_get_mem_comp_str(comp), size,
 			       current_bytes, file, line, function);
 	}
@@ -4331,15 +4454,14 @@ void gsh_mem_stats_update_free(void *p, mem_components_t comp, const char *file,
 		l_ab = atomic_fetch_uint64_t(&mc->lifetime_alloc_bytes);
 		peak_bytes = atomic_fetch_int64_t(&mc->peak_active_bytes);
 
-		LogFullDebug(
-			COMPONENT_MEM_ALLOC,
-			"Component: %s, L_ac/L_fc/L_ab/L_fb: %" PRIu64
-			" %" PRIu64 " %" PRIu64 " %" PRIu64
-			" current: %" PRId64 " peak: %" PRId64
-			" this_free: %zu at %s:%d (%s)",
-			gsh_mem_stats_get_mem_comp_str(comp), l_ac, l_fc,
-			l_ab, l_fb, current_bytes, peak_bytes, size, file,
-			line, function);
+		LogFullDebug(COMPONENT_MEM_ALLOC,
+			     "Component: %s, L_ac/L_fc/L_ab/L_fb: %" PRIu64
+			     " %" PRIu64 " %" PRIu64 " %" PRIu64
+			     " current: %" PRId64 " peak: %" PRId64
+			     " this_free: %zu at %s:%d (%s)",
+			     gsh_mem_stats_get_mem_comp_str(comp), l_ac, l_fc,
+			     l_ab, l_fb, current_bytes, peak_bytes, size, file,
+			     line, function);
 	}
 }
 
@@ -4405,17 +4527,17 @@ void gsh_log_mem_stats(void)
 			continue;
 		}
 		mc = &gshMC[comp];
-		LogEvent(
-			COMPONENT_MEM_ALLOC,
-			"Component: %s, L_Alloc/Free/Bytes/F: %" PRIu64
-			" %" PRIu64 " %" PRIu64 " %" PRIu64
-			" Cur/Peak: %" PRId64 " %" PRId64,
-			cname, atomic_fetch_uint64_t(&mc->lifetime_alloc_calls),
-			atomic_fetch_uint64_t(&mc->lifetime_free_calls),
-			atomic_fetch_uint64_t(&mc->lifetime_alloc_bytes),
-			atomic_fetch_uint64_t(&mc->lifetime_freed_bytes),
-			atomic_fetch_int64_t(&mc->current_active_bytes),
-			atomic_fetch_int64_t(&mc->peak_active_bytes));
+		LogEvent(COMPONENT_MEM_ALLOC,
+			 "Component: %s, L_Alloc/Free/Bytes/F: %" PRIu64
+			 " %" PRIu64 " %" PRIu64 " %" PRIu64
+			 " Cur/Peak: %" PRId64 " %" PRId64,
+			 cname,
+			 atomic_fetch_uint64_t(&mc->lifetime_alloc_calls),
+			 atomic_fetch_uint64_t(&mc->lifetime_free_calls),
+			 atomic_fetch_uint64_t(&mc->lifetime_alloc_bytes),
+			 atomic_fetch_uint64_t(&mc->lifetime_freed_bytes),
+			 atomic_fetch_int64_t(&mc->current_active_bytes),
+			 atomic_fetch_int64_t(&mc->peak_active_bytes));
 	}
 }
 
@@ -4538,9 +4660,9 @@ static struct gsh_dbus_method get_mem_stats_status = {
 	.args = { STATUS_REPLY, END_ARG_LIST }
 };
 
-static struct gsh_dbus_method *mem_stats_methods[] = {
-	&get_mem_statistics, &get_mem_stats_status, NULL
-};
+static struct gsh_dbus_method *mem_stats_methods[] = { &get_mem_statistics,
+						       &get_mem_stats_status,
+						       NULL };
 
 static struct gsh_dbus_interface mem_stats_table = {
 	.name = "org.ganesha.nfsd.memstats",
