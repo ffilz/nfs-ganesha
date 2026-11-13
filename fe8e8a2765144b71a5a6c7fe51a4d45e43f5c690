@@ -1,0 +1,463 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58cf72d9_0060d060",
+        "filename": "src/FSAL/FSAL_VFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tstruct vfs_fsal_module *mod \u003d container_of(\n    - \t\t\tfsal_hdl, struct vfs_fsal_module, module);\n→ to be replaced with:\n    + \t\tstruct vfs_fsal_module *mod \u003d\n    + \t\t\tcontainer_of(fsal_hdl, struct vfs_fsal_module, module);",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "563bae87_ddb80b38",
+        "filename": "src/FSAL/FSAL_VFS/export.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\tstruct vfs_fsal_module *mod \u003d container_of(\n    - \t\t\t\tfsal_hdl, struct vfs_fsal_module, module);\n→ to be replaced with:\n    + \t\t\tstruct vfs_fsal_module *mod \u003d\n    + \t\t\t\tcontainer_of(fsal_hdl, struct vfs_fsal_module,\n    + \t\t\t\t\t     module);",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6770b758_071fca79",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t   fd \u003d vfs_fsal_open(myself, posix_flags, \u0026fsal_error));\n→ to be replaced with:\n    + \t\t\t   fd \u003d vfs_fsal_open(myself, posix_flags,\n    + \t\t\t\t\t      \u0026fsal_error));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8515adea_cbd533f2",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t   fd \u003d vfs_fsal_open(myself, posix_flags, \u0026fsal_error));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd958219_847d075d",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t   fd \u003d vfs_fsal_open(myself, posix_flags, \u0026fsal_error));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be37b817_54e4d21c",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t   fd \u003d vfs_fsal_open(myself, posix_flags, \u0026fsal_error));\n→ to be replaced with:\n    + \t\t\t   fd \u003d vfs_fsal_open(myself, posix_flags,\n    + \t\t\t\t\t      \u0026fsal_error));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "219b8f34_f18516c1",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\tVFS_FSAL_TIME_CALL(\n    - \t\t\t\tVFS_STAT_GETATTR,\n    - \t\t\t\tretval \u003d vfs_stat_by_handle(my_fd, \u0026stat));\n→ to be replaced with:\n    + \t\t\tVFS_FSAL_TIME_CALL(VFS_STAT_GETATTR,\n    + \t\t\t\t\t   retval \u003d vfs_stat_by_handle(my_fd,\n    + \t\t\t\t\t\t\t\t       \u0026stat));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a98c1b3e_f844cb49",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 83 exceeds 80 columns\n+\t\tVFS_FSAL_TIME_CALL(VFS_STAT_GETATTR, retval \u003d fstat(my_fd, \u0026stat));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6263f02_09f96eb8",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tVFS_FSAL_TIME_CALL(VFS_STAT_GETATTR, retval \u003d fstat(my_fd, \u0026stat));\n→ to be replaced with:\n    + \t\tVFS_FSAL_TIME_CALL(VFS_STAT_GETATTR,\n    + \t\t\t\t   retval \u003d fstat(my_fd, \u0026stat));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a8afc31_63ce9543",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tVFS_FSAL_TIME_CALL(\n    - \t\t\tVFS_STAT_CREATE,\n    - \t\t\tfd \u003d openat(dir_fd, name, posix_flags, unix_mode));\n→ to be replaced with:\n    + \t\tVFS_FSAL_TIME_CALL(VFS_STAT_CREATE,\n    + \t\t\t\t   fd \u003d openat(dir_fd, name, posix_flags,\n    + \t\t\t\t\t       unix_mode));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c614c480_e2ede135",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tVFS_FSAL_TIME_CALL(\n    - \t\t\tVFS_STAT_CREATE,\n    - \t\t\tfd \u003d openat(dir_fd, name, posix_flags, unix_mode));\n→ to be replaced with:\n    + \t\tVFS_FSAL_TIME_CALL(VFS_STAT_CREATE,\n    + \t\t\t\t   fd \u003d openat(dir_fd, name, posix_flags,\n    + \t\t\t\t\t       unix_mode));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90efa63b_870e92d5",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tVFS_FSAL_TIME_CALL_BUSY(VFS_STAT_READ,\n    - \t\t\t\tvfs_io_busy_delay(obj_hdl-\u003efsal),\n→ to be replaced with:\n    + \tVFS_FSAL_TIME_CALL_BUSY(VFS_STAT_READ, vfs_io_busy_delay(obj_hdl-\u003efsal),",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "927f4fd4_46f7cad3",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1886,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tVFS_FSAL_TIME_CALL(\n    - \t\tlock_op \u003d\u003d FSAL_OP_LOCKT ? VFS_STAT_GETLK : VFS_STAT_SETLK,\n    - \t\tretval \u003d fcntl(my_fd-\u003efd, fcntl_comm, \u0026lock_args));\n→ to be replaced with:\n    + \tVFS_FSAL_TIME_CALL(lock_op \u003d\u003d FSAL_OP_LOCKT ? VFS_STAT_GETLK\n    + \t\t\t\t\t\t    : VFS_STAT_SETLK,\n    + \t\t\t   retval \u003d fcntl(my_fd-\u003efd, fcntl_comm, \u0026lock_args));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8acec8b_7ded3af8",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2217,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tVFS_FSAL_TIME_CALL(\n    - \t\t\tVFS_STAT_SETATTR,\n    - \t\t\tretval \u003d ftruncate(my_fd-\u003efd, attrib_set-\u003efilesize));\n→ to be replaced with:\n    + \t\tVFS_FSAL_TIME_CALL(VFS_STAT_SETATTR,\n    + \t\t\t\t   retval \u003d ftruncate(my_fd-\u003efd,\n    + \t\t\t\t\t\t      attrib_set-\u003efilesize));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d99ba52_f3202378",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2260,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t\t\t\t\t\tfsal2unix_mode(attrib_set-\u003emode),",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e8a7cd1_9875b873",
+        "filename": "src/FSAL/FSAL_VFS/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2298,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\t\tretval \u003d fchownat(\n    - \t\t\t\t\tmy_fd-\u003efd, \"\", user, group,\n    - \t\t\t\t\tAT_SYMLINK_NOFOLLOW | AT_EMPTY_PATH));\n    - \t\t\tVFS_FSAL_TIME_CALL(\n    - \t\t\t\tVFS_STAT_SETATTR,\n    - \t\t\t\tretval \u003d fchown(my_fd-\u003efd, user, group));\n→ to be replaced with:\n    + \t\t\t\tretval \u003d fchownat(my_fd-\u003efd, \"\", user, group,\n    + \t\t\t\t\t\t  AT_SYMLINK_NOFOLLOW |\n    + \t\t\t\t\t\t\t  AT_EMPTY_PATH));\n    + \t\t\tVFS_FSAL_TIME_CALL(VFS_STAT_SETATTR,\n    + \t\t\t\t\t   retval \u003d fchown(my_fd-\u003efd, user,\n    + \t\t\t\t\t\t\t   group));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af4b58e4_f6ef1865",
+        "filename": "src/FSAL/FSAL_VFS/fsal_stats_vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/FSAL/FSAL_VFS/fsal_stats_vfs.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78c9db84_021e3d50",
+        "filename": "src/FSAL/FSAL_VFS/fsal_stats_vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ffc9240_f65587e5",
+        "filename": "src/FSAL/FSAL_VFS/fsal_stats_vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\ttotal_ops \u003d\n    - \t\t\tatomic_fetch_uint64_t(\u0026stats-\u003eop_stats[i].num_ops);\n    - \t\ttotal_resp \u003d atomic_fetch_uint64_t(\n    - \t\t\t\u0026stats-\u003eop_stats[i].resp_time);\n→ to be replaced with:\n    + \t\ttotal_ops \u003d atomic_fetch_uint64_t(\u0026stats-\u003eop_stats[i].num_ops);\n    + \t\ttotal_resp \u003d\n    + \t\t\tatomic_fetch_uint64_t(\u0026stats-\u003eop_stats[i].resp_time);",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "281104a1_89c0faf2",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tVFS_FSAL_TIME_CALL(\n    - \t\tVFS_STAT_LOOKUP,\n    - \t\tstatus \u003d lookup_with_fd(parent_hdl, dirfd, path, handle,\n    - \t\t\t\t\tattrs_out));\n→ to be replaced with:\n    + \tVFS_FSAL_TIME_CALL(VFS_STAT_LOOKUP,\n    + \t\t\t   status \u003d lookup_with_fd(parent_hdl, dirfd, path,\n    + \t\t\t\t\t\t   handle, attrs_out));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1620a73_f0cef37a",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tVFS_FSAL_TIME_CALL(\n    - \t\tVFS_STAT_LINK,\n    - \t\tretval \u003d vfs_link_by_handle(myself-\u003ehandle, my_fd-\u003efd,\n    - \t\t\t\t\t    destdirfd, name));\n→ to be replaced with:\n    + \tVFS_FSAL_TIME_CALL(VFS_STAT_LINK,\n    + \t\t\t   retval \u003d vfs_link_by_handle(\n    + \t\t\t\t   myself-\u003ehandle, my_fd-\u003efd, destdirfd, name));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b44072f0_6f80f082",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1680,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tVFS_FSAL_TIME_CALL(\n    - \t\tVFS_STAT_RENAME,\n    - \t\tretval \u003d renameat(oldfd, old_name, newfd, new_name));\n→ to be replaced with:\n    + \tVFS_FSAL_TIME_CALL(VFS_STAT_RENAME,\n    + \t\t\t   retval \u003d renameat(oldfd, old_name, newfd, new_name));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa3b2d1f_a2512b66",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1895,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tVFS_FSAL_TIME_CALL(\n    - \t\tVFS_STAT_GETXATTR,\n    - \t\trc \u003d fgetxattr(fd, name, xa_value-\u003eutf8string_val,\n    - \t\t\t       xa_value-\u003eutf8string_len));\n→ to be replaced with:\n    + \tVFS_FSAL_TIME_CALL(VFS_STAT_GETXATTR,\n    + \t\t\t   rc \u003d fgetxattr(fd, name, xa_value-\u003eutf8string_val,\n    + \t\t\t\t\t  xa_value-\u003eutf8string_len));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f670f68_ebc37627",
+        "filename": "src/FSAL/FSAL_VFS/handle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2002,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tVFS_FSAL_TIME_CALL(VFS_STAT_REMOVEXATTR,\n    - \t\t\t   rc \u003d fremovexattr(fd, name));\n→ to be replaced with:\n    + \tVFS_FSAL_TIME_CALL(VFS_STAT_REMOVEXATTR, rc \u003d fremovexattr(fd, name));",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aea1b549_be28c3f5",
+        "filename": "src/FSAL/FSAL_VFS/vfs_methods.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tstruct vfs_fsal_export *exp \u003d container_of(\n    - \t\t\top_ctx-\u003efsal_export, struct vfs_fsal_export, export);\n→ to be replaced with:\n    + \t\tstruct vfs_fsal_export *exp \u003d\n    + \t\t\tcontainer_of(op_ctx-\u003efsal_export,\n    + \t\t\t\t     struct vfs_fsal_export, export);",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a56bec5_ef49b30e",
+        "filename": "src/FSAL/FSAL_VFS/vfs_stats.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\tvfs_fsal_record_stats(                                 \\\n    - \t\t\t\t(op),                                          \\\n    - \t\t\t\ttimespec_diff(\u0026_vfs_stat_start,                \\\n    - \t\t\t\t\t      \u0026_vfs_stat_stop));               \\\n→ to be replaced with:\n    + \t\t\tvfs_fsal_record_stats((op),                            \\\n    + \t\t\t\t\t      timespec_diff(\u0026_vfs_stat_start,  \\\n    + \t\t\t\t\t\t\t    \u0026_vfs_stat_stop)); \\",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "392e19be_febfacdc",
+        "filename": "src/FSAL/FSAL_VFS/vfs_stats.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T16:38:52Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\t\tvfs_fsal_record_stats(                                 \\\n    - \t\t\t\t(op),                                          \\\n    - \t\t\t\ttimespec_diff(\u0026_vfs_stat_start,                \\\n    - \t\t\t\t\t      \u0026_vfs_stat_stop));               \\\n→ to be replaced with:\n    + \t\t\tvfs_fsal_record_stats((op),                            \\\n    + \t\t\t\t\t      timespec_diff(\u0026_vfs_stat_start,  \\\n    + \t\t\t\t\t\t\t    \u0026_vfs_stat_stop)); \\",
+      "revId": "fe8e8a2765144b71a5a6c7fe51a4d45e43f5c690",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
