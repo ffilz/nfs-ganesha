@@ -42,8 +42,12 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include <assert.h>
 #include <malloc.h>
+#ifdef HAVE_TCMALLOC_RELEASE
+#include <malloc_extension_c.h>
+#endif /* HAVE_TCMALLOC_RELEASE */
 #include "abstract_atomic.h"
 #include "mem_components.h"
 #include "log.h"
@@ -51,6 +55,34 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @brief Return free memory held by the allocator to the OS
+ *
+ * This replaces direct calls to malloc_trim().  glibc implements
+ * malloc_trim(), but tcmalloc ignores it, so freed pages stay in the
+ * tcmalloc page heap and RSS never goes down; tcmalloc needs its own
+ * interface instead.
+ *
+ * @return true if memory was (possibly) released to the OS.
+ */
+static inline bool gsh_malloc_trim(void)
+{
+#ifdef HAVE_TCMALLOC_RELEASE
+	/* ReleaseFreeMemory() returns void, so there is no way to tell
+	 * whether any memory was actually released; report success.
+	 */
+	MallocExtension_ReleaseFreeMemory();
+	return true;
+#else
+	/* glibc implements malloc_trim() via <malloc.h>, which
+	 * abstract_mem.h includes unconditionally on Linux.  jemalloc does
+	 * not implement it (it needs a mallctl arena purge), so under
+	 * jemalloc this is effectively a no-op.
+	 */
+	return malloc_trim(0) != 0;
+#endif
+}
 
 /* Memory Statistics API's */
 extern void gsh_mem_stats_update_alloc(void *p, mem_components_t comp,
