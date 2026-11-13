@@ -504,6 +504,18 @@ void SetNameFunction(const char *nom)
 			"Thread name %s too long truncated to %s", nom,
 			thread_name);
 	}
+#ifdef HAVE_PTHREAD_SETNAME_NP
+	/* Keep the main thread's /proc/pid/comm as the executable name so
+	 * tools like pgrep ganesha still match the process.
+	 */
+	if (strcmp(nom, "main") != 0) {
+#if defined(LINUX)
+		pthread_setname_np(pthread_self(), thread_name);
+#elif defined(FREEBSD) || defined(DARWIN)
+		pthread_setname_np(thread_name);
+#endif
+	}
+#endif
 	clientip = NULL;
 }
 
@@ -3652,7 +3664,7 @@ static void reset_conditional_logging_state(void)
 	conditional_logging_configured = false;
 
 	LogEvent(COMPONENT_LOG,
-			"Conditional logging configuration reset to defaults");
+		 "Conditional logging configuration reset to defaults");
 
 	PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
 }
@@ -4189,9 +4201,13 @@ static bool dbus_conditional_log_match_policy_change(DBusMessageIter *args,
 			if (glist_empty(&global_client_ip_list) ||
 			    glist_empty(&global_export_id_list)) {
 				PTHREAD_RWLOCK_unlock(&cond_log_rwlock);
-				LogEvent(COMPONENT_LOG,
-					 "Conditional logging Match Policy changed: Rejected due to either client list or export list is empty");
-				errormsg = "MATCH_ALL requires both a non-empty client list and a non-empty export list";
+				LogEvent(
+					COMPONENT_LOG,
+					"Conditional logging Match Policy changed: "
+					"Rejected due to either client list or export list is empty");
+				errormsg =
+					"MATCH_ALL requires both a non-empty client list and a "
+					"non-empty export list";
 				gsh_dbus_status_reply(&iter, false, errormsg);
 				goto error;
 			}
@@ -4255,8 +4271,7 @@ arg_error:
  * @return true if reset was successful, false otherwise.
  */
 static bool dbus_conditional_log_reset(DBusMessageIter *args,
-				       DBusMessage *reply,
-				       DBusError *error)
+				       DBusMessage *reply, DBusError *error)
 {
 	char errormsg[LOG_BUFF_LEN];
 	bool success = true;
