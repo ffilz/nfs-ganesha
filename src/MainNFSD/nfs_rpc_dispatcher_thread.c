@@ -593,6 +593,13 @@ static enum xprt_stat nfs_rpc_dispatch_RDMA(SVCXPRT *xprt)
 	 */
 	nfs_rpc_alloc_user_data(xprt);
 
+	/* Add callback to un-reference xprt user data. Without it, the
+	 * xprt reference taken by nfs41_Session_Add_Connection is never
+	 * released, so the xprt (and its RDMA buffers) is never destroyed.
+	 */
+	(void)SVC_CONTROL(xprt, SVCSET_XP_UNREF_USER_DATA,
+			  nfs_rpc_unref_user_data);
+
 	xprt->xp_dispatch.process_cb = nfs_rpc_valid_NFS_RDMA;
 	return SVC_STAT(xprt->xp_parent);
 }
