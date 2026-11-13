@@ -16,6 +16,24 @@
       "message": "Can you set explain a bit more about the scope of issue this is working on?\n\nThe performance report says it greatly reduces the number of MDS readdirs in large directories, but why is that? Are the directories themselves exceeding the configured libcephfs cache size, or is there an active workload pushing inodes out of cache?\n\nAs you note, the readdir handles are holding libcephfs inode references, so bugs around this could be really unpleasant in terms of reference leaks. And the cache itself should be resolving any readdirs unless the cache exceeds its size. How does this patch change other statistics like memory use, and how does it behave if the directory is being updated by other CephFS clients? I\u0027m concerned this may just increase the coordination traffic a lot and enter a performance death spiral in that case, not to mention force Ganesha/libcephfs to exceed cache configuration and slow down other traffic or even trigger warnings in the central cluster log.",
       "revId": "0e723057f03a4568f2f085a00d544173678d16f2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "233c407e_73ea9e0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039709
+      },
+      "writtenOn": "2026-11-13T03:48:03Z",
+      "side": 1,
+      "message": "Some background first, since the problem is not simply an undersized cache. NFS READDIR resumes using a cookie and verifier; it does not expose a persistent directory-stream handle. Before the patch, FSAL_CEPH opened a new libcephfs directory stream for each READDIR, sought to the requested cookie, and closed it after producing the reply. In the tested libcephfs version, the directory readdir cache is usable only when the directory is complete and ordered and the client holds the required shared caps. For a nonempty, initially uncached directory, establishing that state requires a single stream to read from the beginning through EOF without invalidation during the scan. Opening a new stream for each READDIR prevents this when the listing spans multiple requests, even if the directory fits in client_cache_size. A sufficiently small directory that reaches EOF in one request is an exception. Seeking to the current position, including seekdir(0) on a new stream, is a no-op; forward and backward seeks invalidate different parts of the stream’s cache-building state (Ceph 6fa99c01829, Client.cc:9880, :10286, :10377).\n\nIn the tested Linux 5.10 setup, the client retains about 102 of the roughly 630 entries in a full reply and resumes from the last retained cookie, behind where the previous stream stopped. With a new stream per request, the previous stream’s buffer has already been discarded on close, so overlapping entries are fetched again. Simply retaining the stream and seeking backwards would also discard its buffer and disrupt ordered-cache construction. The patch therefore retains the stream and replays overlapping entries from a window, allowing the underlying libcephfs stream to continue forwards.\n\nFor example, in the 10k-entry test with NFSv4.1 and 32 KiB replies, the unpatched version takes 99 MDS READDIRs per listing, both cold and warm. With the patch, this falls to 7 cold and 0 warm because libcephfs can serve the completed directory from cache. Here, “warm” means remounting NFS to clear the kernel client cache while preserving the Ganesha/libcephfs caches. NFS READDIR requests remain at 99 per listing; the zero refers specifically to MDS READDIRs.",
+      "parentUuid": "775fe34c_226fa04d",
+      "revId": "0e723057f03a4568f2f085a00d544173678d16f2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
