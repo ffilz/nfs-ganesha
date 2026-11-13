@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92b99eab_68854708",
+        "filename": "src/monitoring/dynamic_metrics.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T14:00:44Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tconst double virtual_size \u003d\n    - \t\t(double)proc_info-\u003evm_size / (1024 * 1024);\n→ to be replaced with:\n    + \tconst double virtual_size \u003d (double)proc_info-\u003evm_size / (1024 * 1024);",
+      "revId": "38c4432fdbb270d61e9781660dae6e896f80b773",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bed3a51_60e7b531",
+        "filename": "src/monitoring/dynamic_metrics.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T14:00:44Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tdouble cpu_time \u003d (proc_info-\u003eutime + proc_info-\u003estime) /\n    - \t\t\t\t  (double)clk_tck;\n    - \t\tdouble process_time \u003d\n    - \t\t\tsystem_uptime - (proc_info-\u003estart_time / (double)clk_tck);\n→ to be replaced with:\n    + \t\tdouble cpu_time \u003d\n    + \t\t\t(proc_info-\u003eutime + proc_info-\u003estime) / (double)clk_tck;\n    + \t\tdouble process_time \u003d system_uptime -\n    + \t\t\t\t      (proc_info-\u003estart_time / (double)clk_tck);",
+      "revId": "38c4432fdbb270d61e9781660dae6e896f80b773",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c44b5932_015caec1",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T14:00:44Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\tPIDS_VM_RSS, PIDS_VM_SIZE, PIDS_VM_SWAP,\n→ to be replaced with:\n    + \t\tPIDS_VM_RSS,\tPIDS_VM_SIZE,\t  PIDS_VM_SWAP,",
+      "revId": "38c4432fdbb270d61e9781660dae6e896f80b773",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fd6c198_bfd77d80",
+        "filename": "src/monitoring/prometheus_exposer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T14:00:44Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \tmem_info.vm_rss \u003d\n    - \t\tPIDS_VAL(rel_vm_rss, ul_int, fetch-\u003estacks[0], info);\n→ to be replaced with:\n    + \tmem_info.vm_rss \u003d PIDS_VAL(rel_vm_rss, ul_int, fetch-\u003estacks[0], info);",
+      "revId": "38c4432fdbb270d61e9781660dae6e896f80b773",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
