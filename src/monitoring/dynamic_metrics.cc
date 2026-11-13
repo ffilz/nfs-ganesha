@@ -30,7 +30,7 @@
 #include <shared_mutex>
 
 #include "dynamic_metrics.h"
-#ifdef HAVE_PROCPS
+#if defined(HAVE_PROCPS) || defined(HAVE_LIBPROC2)
 #include <sys/sysinfo.h>
 #endif
 #ifdef USE_MONITORING
@@ -549,10 +549,9 @@ void dynamic_metrics_export_info(const char *path, const uint64_t total_size,
 	 * returns -1 for statvfs inode counts, which would produce a
 	 * meaningless -1 gauge and 100% utilization.
 	 */
-	bool inode_stats_valid =
-		total_files > 0 &&
-		total_files != (uint64_t)-1 &&
-		avail_files != (uint64_t)-1;
+	bool inode_stats_valid = total_files > 0 &&
+				 total_files != (uint64_t)-1 &&
+				 avail_files != (uint64_t)-1;
 
 	if (inode_stats_valid) {
 		uint32_t files_utilization =
@@ -567,13 +566,17 @@ void dynamic_metrics_export_info(const char *path, const uint64_t total_size,
 	}
 }
 
-#ifdef HAVE_PROCPS
-void dynamic_metrics__mem_info(proc_t proc_info)
+#if defined(HAVE_PROCPS) || defined(HAVE_LIBPROC2)
+void dynamic_metrics__mem_info(const struct ganesha_proc_mem_info *proc_info)
 {
-	const double rss = (double)proc_info.vm_rss / 1024;
-	const double virtual_size = (double)proc_info.vm_size / (1024 * 1024);
-	const double swap_size = proc_info.vm_swap;
+	const double rss = (double)proc_info->vm_rss / 1024;
+	const double virtual_size = (double)proc_info->vm_size / (1024 * 1024);
+	const double swap_size = (double)proc_info->vm_swap;
 	struct sysinfo info;
+
+	if (!dynamic_metrics)
+		return;
+
 	dynamic_metrics->memoryrss.Add({}).Set(rss);
 	dynamic_metrics->memoryvirtualsize.Add({}).Set(virtual_size);
 	dynamic_metrics->memoryswapsize.Add({}).Set(swap_size);
@@ -582,9 +585,9 @@ void dynamic_metrics__mem_info(proc_t proc_info)
 		int num_cpus = sysconf(_SC_NPROCESSORS_ONLN);
 		double system_uptime = info.uptime;
 		double cpu_time =
-			(proc_info.utime + proc_info.stime) / (double)clk_tck;
-		double process_time =
-			system_uptime - (proc_info.start_time / clk_tck);
+			(proc_info->utime + proc_info->stime) / (double)clk_tck;
+		double process_time = system_uptime -
+				      (proc_info->start_time / (double)clk_tck);
 		if (process_time > 0) {
 			double utilizaiton =
 				(cpu_time / process_time) * 100.0 / num_cpus;
