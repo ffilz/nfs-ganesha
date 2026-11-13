@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b3071fe_4bfb95dc",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T22:39:15Z",
+      "side": 1,
+      "message": "WARNING: suspect code indent for conditional statements (16, 16)\n+\t\tif (reqdata-\u003esvc.rq_msg.cb_prog \u003d\u003d NFS_program[P_NFS] \u0026\u0026\n[...]\n+\t\tnow_mono(\u0026reqdata-\u003esvc.rq_reply_time);",
+      "revId": "df64a19b76e9c1756b88806cbd719c7ed0b94c7f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee59f40f_c4e70dbc",
+        "filename": "src/MainNFSD/nfs_worker_thread.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1109,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T22:39:15Z",
+      "side": 1,
+      "message": "WARNING: line length of 81 exceeds 80 columns\n+\t * so latency includes SVC_RECV/decode and matches now_mono() resolution.",
+      "revId": "df64a19b76e9c1756b88806cbd719c7ed0b94c7f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4b085e8_0c881c5f",
+        "filename": "src/support/io_stages.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T22:39:15Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "df64a19b76e9c1756b88806cbd719c7ed0b94c7f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "598efc3e_838f99b3",
+        "filename": "src/support/io_stages.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T22:39:15Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/support/io_stages.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "df64a19b76e9c1756b88806cbd719c7ed0b94c7f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89aa6a2e_32acf3e4",
+        "filename": "src/support/server_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1320,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-13T22:39:15Z",
+      "side": 1,
+      "message": "WARNING: line length of 82 exceeds 80 columns\n+\t/* T11: reply flush complete (survives nfs_request free via ioq cookie) */",
+      "revId": "df64a19b76e9c1756b88806cbd719c7ed0b94c7f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
