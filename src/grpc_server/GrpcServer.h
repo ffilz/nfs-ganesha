@@ -28,7 +28,6 @@
 #include <string_view>
 #include <string>
 #include <memory>
-#include <thread>
 #include <mutex>
 #include "metricsService.h"
 #include "nfsService.h"
@@ -54,14 +53,7 @@ class GrpcServer {
     private:
 	std::mutex mutex_;
 	std::unique_ptr<grpc::Server> server_;
-	std::thread server_thread_;
-	std::once_flag start_once_;
 	std::string server_address_;
-
-	void gRPCServerStart(uint16_t port, grpc_credentials_type_t cred_type,
-			     std::string server_crt, std::string server_key,
-			     std::string ca_crt, std::string ip_addr,
-			     uint16_t ip_family);
 
 	/* TODO: Add a separate class for the services*/
 	GetClientIdService showClientService;

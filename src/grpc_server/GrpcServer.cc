@@ -83,134 +83,95 @@ static std::shared_ptr<grpc::ServerCredentials> make_server_credentials(
 	return grpc::SslServerCredentials(ssl_opts);
 }
 
-/* start gRPC server */
+/* Start the gRPC server. BuildAndStart() returns a running server that
+ * serves calls on gRPC's own threads, so no thread has to wait on it.
+ */
 void GrpcServer::start(uint16_t port, grpc_credentials_type_t cred_type,
 		       std::string server_crt, std::string server_key,
 		       std::string ca_crt, std::string ip_addr,
 		       uint16_t ip_family)
 {
-	std::call_once(start_once_, [this, port, cred_type,
-				     server_crt = std::move(server_crt),
-				     server_key = std::move(server_key),
-				     ca_crt = std::move(ca_crt),
-				     ip_addr = std::move(ip_addr),
-				     ip_family]() {
-		server_thread_ = std::thread(
-			[this, port, cred_type,
-			 server_crt = std::move(server_crt),
-			 server_key = std::move(server_key),
-			 ca_crt = std::move(ca_crt),
-			 ip_addr = std::move(ip_addr), ip_family]() {
-				gRPCServerStart(port, cred_type,
-						std::move(server_crt),
-						std::move(server_key),
-						std::move(ca_crt),
-						std::move(ip_addr), ip_family);
-			});
-	});
-}
+	const std::lock_guard<std::mutex> lock(mutex_);
 
-/* gRPC Server thread function */
-void GrpcServer::gRPCServerStart(uint16_t port,
-				 grpc_credentials_type_t cred_type,
-				 std::string server_crt, std::string server_key,
-				 std::string ca_crt, std::string ip_addr,
-				 uint16_t ip_family)
-{
-	{ /* Taking a lock */
-		const std::lock_guard<std::mutex> lock(mutex_);
+	/* If default address is provided and
+	** v6 ip is allowed than the sever will
+	** automatically accept IPv6 connections
+	** default port number is 50051
+	*/
 
-		/* If default address is provided and
-		** v6 ip is allowed than the sever will
-		** automatically accept IPv6 connections
-		** default port number is 50051
-		*/
-
-		if (server_) {
-			LogDebug(COMPONENT_GRPC,
-				 "gRPC server is already running");
-			return;
-		}
-
-		if (ip_family == AF_INET6) {
-			server_address_ =
-				"[" + ip_addr + "]:" + std::to_string(port);
-		} else {
-			server_address_ = ip_addr + ":" + std::to_string(port);
-		}
-
-		std::shared_ptr<grpc::ServerCredentials> server_creds =
-			make_server_credentials(cred_type, ip_addr,
-						server_address_,
-						std::move(server_crt),
-						std::move(server_key),
-						std::move(ca_crt));
-
-		grpc::ServerBuilder builder;
-		/* Adding the listening port */
-		builder.AddListeningPort(server_address_, server_creds);
-
-		/* Register the service with the builder */
-		builder.RegisterService(&showClientService);
-
-		builder.RegisterService(&nfsIngrace);
-
-		builder.RegisterService(&getClientSessionIds);
-
-		builder.RegisterService(&fakeRecallService);
-
-		builder.RegisterService(&startNfsGrace);
-
-		builder.RegisterService(&clientStatsService);
-
-		builder.RegisterService(&clientMgrService);
-
-		builder.RegisterService(&clusterMembersService);
-
-		builder.RegisterService(&nfsAdmin);
-
-		builder.RegisterService(&exportStatsService);
-
-		builder.RegisterService(&exportService);
-
-		builder.RegisterService(&cachemgr);
-
-		builder.RegisterService(&qosMgrService);
-
-		builder.RegisterService(&metricsService);
-
-		/* Reflection Service to enable grpc CLI */
-		grpc::reflection::InitProtoReflectionServerBuilderPlugin();
-
-		/* Start the server */
-		server_ = builder.BuildAndStart();
-
-		if (!server_) {
-			LogFatal(COMPONENT_GRPC,
-				 "Failed to start gRPC server on %s",
-				 server_address_.c_str());
-		}
+	if (server_) {
+		LogDebug(COMPONENT_GRPC, "gRPC server is already running");
+		return;
 	}
 
-	server_->Wait();
+	if (ip_family == AF_INET6) {
+		server_address_ = "[" + ip_addr + "]:" + std::to_string(port);
+	} else {
+		server_address_ = ip_addr + ":" + std::to_string(port);
+	}
+
+	std::shared_ptr<grpc::ServerCredentials> server_creds =
+		make_server_credentials(cred_type, ip_addr, server_address_,
+					std::move(server_crt),
+					std::move(server_key),
+					std::move(ca_crt));
+
+	grpc::ServerBuilder builder;
+	/* Adding the listening port */
+	builder.AddListeningPort(server_address_, server_creds);
+
+	/* Register the service with the builder */
+	builder.RegisterService(&showClientService);
+
+	builder.RegisterService(&nfsIngrace);
+
+	builder.RegisterService(&getClientSessionIds);
+
+	builder.RegisterService(&fakeRecallService);
+
+	builder.RegisterService(&startNfsGrace);
+
+	builder.RegisterService(&clientStatsService);
+
+	builder.RegisterService(&clientMgrService);
+
+	builder.RegisterService(&clusterMembersService);
+
+	builder.RegisterService(&nfsAdmin);
+
+	builder.RegisterService(&exportStatsService);
+
+	builder.RegisterService(&exportService);
+
+	builder.RegisterService(&cachemgr);
+
+	builder.RegisterService(&qosMgrService);
+
+	builder.RegisterService(&metricsService);
+
+	/* Reflection Service to enable grpc CLI */
+	grpc::reflection::InitProtoReflectionServerBuilderPlugin();
+
+	/* Start the server */
+	server_ = builder.BuildAndStart();
+
+	if (!server_) {
+		LogFatal(COMPONENT_GRPC, "Failed to start gRPC server on %s",
+			 server_address_.c_str());
+	}
 }
 
 /* Stop the gRPC server */
 void GrpcServer::stop()
 {
-	{
-		const std::lock_guard<std::mutex> lock(mutex_);
+	const std::lock_guard<std::mutex> lock(mutex_);
 
-		if (server_) {
-			server_->Shutdown();
-			server_->Wait();
-			server_.reset();
-		}
-	}
-
-	if (server_thread_.joinable()) {
-		/* Wait for the server thread to finish */
-		server_thread_.join();
+	/* Shutdown() returns once all calls have finished, so nothing uses
+	 * the server after it.
+	 */
+	if (server_) {
+		server_->Shutdown();
+		server_.reset();
 	}
 }
 
