@@ -678,6 +678,9 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 	struct stat stat;
 	vfs_file_handle_t *fh = NULL;
 	bool created = false;
+	bool direct_truncate = false;
+	struct vfs_fsal_module *module =
+		container_of(obj_hdl->fsal, struct vfs_fsal_module, module);
 
 	if (state != NULL)
 		my_fd = &container_of(state, struct vfs_state_fd, state)->vfs_fd;
@@ -701,6 +704,12 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 
 		*caller_perm_check = FSAL_IS_SUCCESS(status);
 		return status;
+	}
+
+	/* Defer truncation until direct I/O is enabled. */
+	if (module->odirect && (posix_flags & O_TRUNC)) {
+		posix_flags &= ~O_TRUNC;
+		direct_truncate = true;
 	}
 
 	/* In this path where we are opening by name, we can't check share
@@ -931,6 +940,23 @@ fsal_status_t vfs_open2(struct fsal_obj_handle *obj_hdl, struct state_t *state,
 		/* Trying to open2 any other non-regular file */
 		status = fsalstat(ERR_FSAL_SYMLINK, 0);
 		goto fileerr;
+	}
+
+	/* This OFD is still private. Do not retry O_CREAT after a failed
+	 * direct open: some filesystems may already have created the inode.
+	 */
+	if (module->odirect) {
+		int flags = fcntl(fd, F_GETFL);
+
+		if (flags < 0 || fcntl(fd, F_SETFL, flags | O_DIRECT) < 0) {
+			status = posix2fsal_status(errno);
+			goto fileerr;
+		}
+		if (direct_truncate &&
+		    (ftruncate(fd, 0) < 0 || fstat(fd, &stat) < 0)) {
+			status = posix2fsal_status(errno);
+			goto fileerr;
+		}
 	}
 
 	/* allocate an obj_handle and fill it up */
@@ -1243,6 +1269,105 @@ success:
 	return status;
 }
 
+struct vfs_io {
+	struct iovec *iov;
+	int count;
+	size_t length;
+	struct iovec bounce;
+};
+
+/* Copy only bytes actually transferred; leave the original iov and its
+ * transport/RDMA ownership and release callbacks untouched.
+ */
+static void vfs_copy_iov(struct fsal_io_arg *arg, void *buffer, size_t bytes,
+			 bool gather)
+{
+	char *p = buffer;
+
+	for (int i = 0; i < arg->iov_count && bytes != 0; i++) {
+		size_t n = MIN(bytes, arg->iov[i].iov_len);
+
+		if (n != 0) {
+			if (gather)
+				memcpy(p, arg->iov[i].iov_base, n);
+			else
+				memcpy(arg->iov[i].iov_base, p, n);
+		}
+		p += n;
+		bytes -= n;
+	}
+}
+
+static int vfs_prepare_io(struct fsal_obj_handle *obj_hdl, int fd,
+			  struct fsal_io_arg *arg, bool write,
+			  struct vfs_io *io)
+{
+	struct vfs_fsal_module *module =
+		container_of(obj_hdl->fsal, struct vfs_fsal_module, module);
+	int flags;
+
+	io->iov = arg->iov;
+	io->count = arg->iov_count;
+	if (!module->odirect)
+		return 0;
+	flags = fcntl(fd, F_GETFL);
+	if (flags < 0)
+		return errno;
+	if (!(flags & O_DIRECT))
+		return EOPNOTSUPP;
+
+#ifdef STATX_DIOALIGN
+	struct statx stx;
+	size_t length = 0;
+	bool aligned = true;
+
+	if (statx(fd, "", AT_EMPTY_PATH, STATX_DIOALIGN, &stx) == 0 &&
+	    (stx.stx_mask & STATX_DIOALIGN) && stx.stx_dio_mem_align &&
+	    stx.stx_dio_offset_align &&
+	    !(stx.stx_dio_mem_align & (stx.stx_dio_mem_align - 1))) {
+		size_t mem_align = stx.stx_dio_mem_align;
+		size_t offset_align = stx.stx_dio_offset_align;
+
+		for (int i = 0; i < arg->iov_count; i++) {
+			if (arg->iov[i].iov_len > SSIZE_MAX - length)
+				return EINVAL;
+			length += arg->iov[i].iov_len;
+			if ((uintptr_t)arg->iov[i].iov_base % mem_align ||
+			    arg->iov[i].iov_len % offset_align)
+				aligned = false;
+		}
+		io->length = length;
+		if (arg->offset % offset_align == 0 &&
+		    length % offset_align == 0) {
+			int rc;
+
+			if (aligned || length == 0)
+				return 0;
+			rc = posix_memalign(&io->bounce.iov_base,
+					    MAX(mem_align, sizeof(void *)),
+					    length);
+			if (rc != 0)
+				return rc;
+			io->bounce.iov_len = length;
+			if (write)
+				vfs_copy_iov(arg, io->bounce.iov_base, length,
+					     true);
+			io->iov = &io->bounce;
+			io->count = 1;
+			return 0;
+		}
+		/* No rounded read/modify/write and no buffered reopen. */
+		return EINVAL;
+	}
+#endif
+	return EOPNOTSUPP;
+}
+
+static void vfs_release_io(struct vfs_io *io)
+{
+	free(io->bounce.iov_base);
+}
+
 /**
  * @brief Read data from a file
  *
@@ -1267,6 +1392,8 @@ void vfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 	       void *caller_arg)
 {
 	ssize_t nb_read;
+	struct vfs_io io = { 0 };
+	int rc;
 	fsal_status_t status = { 0, 0 }, status2;
 	struct vfs_fd *my_fd;
 	struct vfs_fd temp_fd = { FSAL_FD_INIT, -1 };
@@ -1307,8 +1434,12 @@ void vfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 
 	my_fd = container_of(out_fd, struct vfs_fd, fsal_fd);
 
-	nb_read = preadv(my_fd->fd, read_arg->iov, read_arg->iov_count,
-			 read_arg->offset);
+	rc = vfs_prepare_io(obj_hdl, my_fd->fd, read_arg, false, &io);
+	if (rc != 0) {
+		status = posix2fsal_status(rc);
+		goto out;
+	}
+	nb_read = preadv(my_fd->fd, io.iov, io.count, read_arg->offset);
 
 	if (read_arg->offset == -1 || nb_read == -1) {
 		status = posix2fsal_status(errno);
@@ -1317,11 +1448,23 @@ void vfs_read2(struct fsal_obj_handle *obj_hdl, bool bypass,
 		goto out;
 	}
 
+	if (io.bounce.iov_base && nb_read > 0)
+		vfs_copy_iov(read_arg, io.bounce.iov_base, nb_read, false);
 	read_arg->io_amount = nb_read;
 
 	read_arg->end_of_file = (nb_read == 0);
+	if (nb_read > 0 && (size_t)nb_read < io.length) {
+		struct stat st;
+
+		if (fstat(my_fd->fd, &st) == 0)
+			read_arg->end_of_file =
+				read_arg->offset >= (uint64_t)st.st_size ||
+				(uint64_t)nb_read >=
+					(uint64_t)st.st_size - read_arg->offset;
+	}
 
 out:
+	vfs_release_io(&io);
 
 	status2 = fsal_complete_io(obj_hdl, out_fd);
 
@@ -1370,6 +1513,7 @@ void vfs_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 		void *caller_arg)
 {
 	ssize_t nb_written;
+	struct vfs_io io = { 0 };
 	fsal_status_t status, status2;
 	int retval = 0;
 	struct vfs_fd *my_fd;
@@ -1402,6 +1546,12 @@ void vfs_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 
 	my_fd = container_of(out_fd, struct vfs_fd, fsal_fd);
 
+	retval = vfs_prepare_io(obj_hdl, my_fd->fd, write_arg, true, &io);
+	if (retval != 0) {
+		status = posix2fsal_status(retval);
+		goto out2;
+	}
+
 	if (!vfs_set_credentials(&op_ctx->creds, obj_hdl->fsal)) {
 		status = posix2fsal_status(EPERM);
 		LogFullDebug(COMPONENT_FSAL,
@@ -1410,8 +1560,7 @@ void vfs_write2(struct fsal_obj_handle *obj_hdl, bool bypass,
 		goto out2;
 	}
 
-	nb_written = pwritev(my_fd->fd, write_arg->iov, write_arg->iov_count,
-			     write_arg->offset);
+	nb_written = pwritev(my_fd->fd, io.iov, io.count, write_arg->offset);
 
 	if (nb_written == -1) {
 		status = posix2fsal_status(errno);
@@ -1437,6 +1586,7 @@ out:
 	vfs_restore_ganesha_credentials(obj_hdl->fsal);
 
 out2:
+	vfs_release_io(&io);
 
 	status2 = fsal_complete_io(obj_hdl, out_fd);
 
@@ -2424,6 +2574,15 @@ fsal_status_t vfs_copy_file_range(struct fsal_obj_handle *src_hdl,
 	off_t d_off = (off_t)dst_off;
 	ssize_t rc;
 	fsal_status_t status, status2;
+
+	struct vfs_fsal_module *module =
+		container_of(src_hdl->fsal, struct vfs_fsal_module, module);
+
+	/* Kernel COPY and its userspace fallback can populate page cache. */
+	if (module->odirect) {
+		*copied = 0;
+		return fsalstat(ERR_FSAL_NOTSUPP, EOPNOTSUPP);
+	}
 
 	/* Copying into a named attribute is not supported */
 	if (vfs_is_attr_obj(dst_hdl))

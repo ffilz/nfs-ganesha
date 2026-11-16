@@ -47,6 +47,7 @@ struct vfs_fsal_module {
 	struct fsal_module module;
 	struct fsal_obj_ops handle_ops;
 	bool only_one_user;
+	bool odirect;
 };
 
 /*

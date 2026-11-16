@@ -61,6 +61,14 @@
 int vfs_fsal_open(struct vfs_fsal_obj_handle *hdl, int openflags,
 		  fsal_errors_t *fsal_error)
 {
+	struct vfs_fsal_module *module = container_of(hdl->obj_handle.fsal,
+						      struct vfs_fsal_module,
+						      module);
+
+	if (module->odirect && hdl->obj_handle.type == REGULAR_FILE &&
+	    !(openflags & O_PATH))
+		openflags |= O_DIRECT;
+
 	return vfs_open_by_handle(hdl->obj_handle.fs, hdl->handle, openflags,
 				  fsal_error);
 }

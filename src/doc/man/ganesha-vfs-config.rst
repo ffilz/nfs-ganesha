@@ -36,6 +36,24 @@ fsid_type(enum)
 VFS {}
 --------------------------------------------------------------------------------
 
+**ODirect(bool, default false)**
+    Linux only. Require O_DIRECT for regular-file reads and writes in all VFS
+    exports. Intended for controlled workloads using aligned file ranges.
+    Misaligned transport buffers use a temporary aligned buffer in RAM;
+    the file descriptor remains direct. Linux STATX_DIOALIGN must report the
+    filesystem's alignment requirements (available since Linux 6.1).
+    Misaligned offsets or lengths return EINVAL; unknown alignment or a
+    non-direct data descriptor returns EOPNOTSUPP. Direct-open errors propagate
+    without a buffered retry. General byte-granular NFS applications may fail
+    with this option enabled. Native VFS COPY is disabled in this mode.
+    Generic COPY paths (including cross-export copies) use the FSAL READ/WRITE
+    operations and remain subject to these alignment restrictions.
+    Ganesha does not fall back to buffered data I/O; filesystem-internal
+    direct-I/O behavior remains subject to the kernel and filesystem.
+    It does not bypass metadata caches or a storage backend's cache (for example
+    ZFS ARC), evict existing cached pages, or imply synchronous writes.
+    It is read at module initialization; reload leaves it unchanged until restart.
+
 **link_support(bool, default true)**
 
 **symlink_support(bool, default true)**
