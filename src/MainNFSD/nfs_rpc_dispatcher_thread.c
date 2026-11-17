@@ -31,6 +31,10 @@
  * @brief Contains the @c rpc_dispatcher_thread routine and support code
  */
 #include "config.h"
+
+#include <rpc/rpc.h> /* type foundation for rpc_com.h */
+#include <rpc/rpc_com.h> /* rpc_control */
+#include <rpc/svc.h> /* RPC_SVC_CONNMAXREC_SET, explicitly listed for clarity */
 #include <stdio.h>
 #include <string.h>
 #include <pthread.h>
@@ -771,6 +775,26 @@ void Create_RDMA(protos prot)
 void Create_SVCXPRTs(void)
 {
 	protos p;
+	int maxrec;
+
+	/*
+	 * Raise the RPC record (fragment) limit above the ntirpc default of
+	 * RPC_MAXDATA_LEGACY (256 KiB); otherwise a MaxWrite-sized WRITE is
+	 * rejected by svc_vc_recv as "fragment size exceeds maxrec".  Each
+	 * xprt snapshots the global limit (__svc_maxrec) when it is created,
+	 * so this must be set before any xprt exists.
+	 */
+	maxrec = nfs_param.core_param.rpc.max_recv_buffer_size +
+		 NFS_RPC_MAXREC_HEADROOM;
+	if (maxrec > NFS_RPC_MAXREC_MAX_CAP) {
+		LogWarn(COMPONENT_DISPATCH,
+			"MaxRPCRecvBufferSize + headroom (%d) exceeds hard cap (%d), clamping",
+			maxrec, NFS_RPC_MAXREC_MAX_CAP);
+		maxrec = NFS_RPC_MAXREC_MAX_CAP;
+	}
+	if (!rpc_control(RPC_SVC_CONNMAXREC_SET, &maxrec))
+		LogFatal(COMPONENT_DISPATCH,
+			 "Cannot set nTI-RPC max record size");
 
 	LogFullDebug(COMPONENT_DISPATCH, "Allocation of the SVCXPRT");
 	for (p = P_NFS; p < P_COUNT; p++)
