@@ -185,6 +185,31 @@ typedef enum protos {
 #define NFS_DEFAULT_RECV_BUFFER_SIZE 1048576
 
 /**
+ * @brief Headroom added to MaxRPCRecvBufferSize to obtain the RPC record
+ * (fragment) limit for connection-oriented transports.
+ *
+ * The largest legitimate request is a MaxRPCRecvBufferSize-sized NFS
+ * payload (a WRITE) wrapped in an RPC record.  The wrapper contributes
+ * the RPC message header and verifier, the maximum AUTH_SYS credentials,
+ * and the NFSv4 COMPOUND operation headers preceding the payload.  64 KiB
+ * covers all of those for any supported auth flavor while still limiting
+ * how much a single peer can make the server queue.
+ */
+#define NFS_RPC_MAXREC_HEADROOM (64 * 1024)
+
+/**
+ * @brief Hard upper bound on the RPC record (fragment) limit.
+ *
+ * The record limit is computed as MaxRPCRecvBufferSize plus
+ * NFS_RPC_MAXREC_HEADROOM.  This cap bounds the amount of memory a
+ * single peer can make ganesha queue per fragment even if
+ * MaxRPCRecvBufferSize is raised near its own upper limit.  8 MiB
+ * comfortably exceeds the largest legitimate WRITE (MaxWrite up to
+ * 9 MiB per the conf item) plus the RPC and NFSv4 COMPOUND headers.
+ */
+#define NFS_RPC_MAXREC_MAX_CAP (8 * 1024 * 1024)
+
+/**
  * @brief Default Monitoring Port.
  */
 #define MONITORING_PORT 9587
