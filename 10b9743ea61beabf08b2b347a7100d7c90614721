@@ -16,6 +16,74 @@
       "message": "Recheck gatecheck",
       "revId": "10b9743ea61beabf08b2b347a7100d7c90614721",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3607378_cb8f5eab",
+        "filename": "src/FSAL/FSAL_CEPH/ceph_stats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-17T04:11:11Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - #define CEPH_FSAL_TIME_CALL(op, call)                                          \\\n    - \tdo {                                                                   \\\n    - \t\tif (nfs_param.core_param.enable_FSALSTATS) {                   \\\n    - \t\t\tstruct timespec _ceph_stat_start, _ceph_stat_stop;     \\\n    - \t\t\tnow(\u0026_ceph_stat_start);                                \\\n    - \t\t\tcall;                                                  \\\n    - \t\t\tnow(\u0026_ceph_stat_stop);                                 \\\n    - \t\t\tceph_fsal_record_stats(                                \\\n    - \t\t\t\t(op),                                          \\\n    - \t\t\t\ttimespec_diff(\u0026_ceph_stat_start,               \\\n    - \t\t\t\t\t      \u0026_ceph_stat_stop));              \\\n    - \t\t} else {                                                       \\\n    - \t\t\tcall;                                                  \\\n    - \t\t}                                                              \\\n→ to be replaced with:\n    + #define CEPH_FSAL_TIME_CALL(op, call)                                      \\\n    + \tdo {                                                               \\\n    + \t\tif (nfs_param.core_param.enable_FSALSTATS) {               \\\n    + \t\t\tstruct timespec _ceph_stat_start, _ceph_stat_stop; \\\n    + \t\t\tnow(\u0026_ceph_stat_start);                            \\\n    + \t\t\tcall;                                              \\\n    + \t\t\tnow(\u0026_ceph_stat_stop);                             \\\n    + \t\t\tceph_fsal_record_stats(                            \\\n    + \t\t\t\t(op), timespec_diff(\u0026_ceph_stat_start,     \\\n    + \t\t\t\t\t\t    \u0026_ceph_stat_stop));    \\\n    + \t\t} else {                                                   \\\n    + \t\t\tcall;                                              \\\n    + \t\t}                                                          \\",
+      "revId": "10b9743ea61beabf08b2b347a7100d7c90614721",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daa20b10_bdf9e3ff",
+        "filename": "src/FSAL/FSAL_CEPH/fsal_stats_ceph.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-17T04:11:11Z",
+      "side": 1,
+      "message": "WARNING: Missing or malformed SPDX-License-Identifier tag in line 1\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "10b9743ea61beabf08b2b347a7100d7c90614721",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f07d5f6_39ce3723",
+        "filename": "src/FSAL/FSAL_CEPH/fsal_stats_ceph.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-17T04:11:11Z",
+      "side": 1,
+      "message": "WARNING: Improper SPDX comment style for \u0027src/FSAL/FSAL_CEPH/fsal_stats_ceph.c\u0027, please use \u0027//\u0027 instead\n+/* SPDX-License-Identifier: LGPL-3.0-or-later */",
+      "revId": "10b9743ea61beabf08b2b347a7100d7c90614721",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "760ed6a3_a7f57740",
+        "filename": "src/FSAL/FSAL_CEPH/fsal_stats_ceph.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1005370
+      },
+      "writtenOn": "2026-11-17T04:11:11Z",
+      "side": 1,
+      "message": "clang-format expects formatting for these lines:\n    - \t\ttotal_ops \u003d\n    - \t\t\tatomic_fetch_uint64_t(\u0026stats-\u003eop_stats[i].num_ops);\n    - \t\ttotal_resp \u003d atomic_fetch_uint64_t(\n    - \t\t\t\u0026stats-\u003eop_stats[i].resp_time);\n→ to be replaced with:\n    + \t\ttotal_ops \u003d atomic_fetch_uint64_t(\u0026stats-\u003eop_stats[i].num_ops);\n    + \t\ttotal_resp \u003d\n    + \t\t\tatomic_fetch_uint64_t(\u0026stats-\u003eop_stats[i].resp_time);",
+      "revId": "10b9743ea61beabf08b2b347a7100d7c90614721",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
