@@ -99,6 +99,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87f9d01a_410f2d57",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2026-11-18T20:40:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cba4541_e189f628",
+      "range": {
+        "startLine": 305,
+        "startChar": 4,
+        "endLine": 308,
+        "endChar": 7
+      },
+      "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10577644_bfa31d31",
@@ -157,6 +181,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eedca2cb_e0fc9bad",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2026-11-18T20:40:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7126c655_ae9e37e5",
+      "range": {
+        "startLine": 344,
+        "startChar": 11,
+        "endLine": 344,
+        "endChar": 18
+      },
+      "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0497245e_9ee4840c",
@@ -170,6 +218,24 @@
       "writtenOn": "2026-11-11T08:31:39Z",
       "side": 1,
       "message": "If check_resp_room() fails here, we unlock slot_lock without setting sess_slot-\u003ein_use \u003d true and drop the session ref, but data-\u003ecd_slot and data-\u003esa_cachethis are already set:\n\n- complete_nfs4_compound() will then write to data-\u003ecd_slot without a session ref (same UAF as https://review.gerrithub.io/c/ffilz/nfs-ganesha/+/1259048 if the session is destroyed concurrently) and with in_use \u003d\u003d false (so it can race with another request on the same slot).\n- Since the comment here says we do want to cache the failed response, maybe we should set sess_slot-\u003ein_use \u003d true and unlock slot_lock before check_resp_room(), and not drop the session ref in this error path so compound_data_Free() cleans up both in_use and data-\u003esession after complete_nfs4_compound()?",
+      "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5289d3e7_76274eaf",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1038575
+      },
+      "writtenOn": "2026-11-18T20:40:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0497245e_9ee4840c",
       "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
