@@ -25,6 +25,7 @@ Requires: openSUSE-release
 # % bcond_without adds a"--without" so the feature is enabled by default
 
 %{!?name: %global name nfs-ganesha}
+%bcond_without selinux
 @BCOND_NULLFS@ nullfs
 %global use_fsal_null %{on_off_switch nullfs}
 
@@ -245,7 +246,7 @@ Requires(post): psmisc
 Requires(pre): /usr/sbin/useradd
 Requires(pre): /usr/sbin/groupadd
 
-%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 )
+%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 ) && %{with selinux}
 Requires: %{name}-selinux = %{version}-%{release}
 %endif
 
@@ -522,7 +523,7 @@ be used with NFS-Ganesha to support SAUNAFS
 %endif
 
 # SELINUX
-%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 )
+%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 ) && %{with selinux}
 %package selinux
 Summary: The NFS-GANESHA SELINUX targeted policy
 Group: Applications/System
@@ -647,7 +648,7 @@ Development headers and auxiliary files for developing with %{name}.
 
 make %{?_smp_mflags} || make %{?_smp_mflags} || make
 
-%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 )
+%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 ) && %{with selinux}
 make -C selinux -f /usr/share/selinux/devel/Makefile ganesha.pp
 pushd selinux && bzip2 -9 ganesha.pp && popd
 %endif
@@ -720,7 +721,7 @@ install -m 644 config_samples/gpfs_logrotate_ganesha %{buildroot}%{_sysconfdir}/
 
 make DESTDIR=%{buildroot} install
 
-%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 )
+%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 ) && %{with selinux}
 install -d %{buildroot}%{_selinux_store_path}/packages
 install -d -p %{buildroot}%{_selinux_store_path}/devel/include/contrib
 install -p -m 644 selinux/ganesha.if %{buildroot}%{_selinux_store_path}/devel/include/contrib
@@ -934,7 +935,7 @@ exit 0
 %endif
 %endif
 
-%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 )
+%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 ) && %{with selinux}
 %files selinux
 %attr(0644,root,root) %{_selinux_store_path}/packages/ganesha.pp.bz2
 %attr(0644,root,root) %{_selinux_store_path}/devel/include/contrib/ganesha.if
