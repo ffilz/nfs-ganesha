@@ -472,6 +472,9 @@ goption(CEPHFS_POSIX_ACL "Enable CephFS POSIX ACL" ON)
 # Enable NFSv4 and POSIX acls mapping
 option(USE_ACL_MAPPING "Build NFSv4 to POSIX ACL mapping" OFF)
 
+# Build and package SELinux policy
+option(USE_SELINUX "Build and package SELinux policy" ON)
+
 #
 # End build options
 #
@@ -1653,6 +1656,7 @@ message(STATUS "USE_TLS = ${USE_TLS}")
 message(STATUS "USE_OPENSSL = ${USE_OPENSSL}")
 message(STATUS "USE_GNUTLS = ${USE_GNUTLS}")
 message(STATUS "TLS_BACKEND = ${TLS_BACKEND}")
+message(STATUS "USE_SELINUX = ${USE_SELINUX}")
 
 set(USE_CB_SIMULATOR ${USE_CB_SIMULATOR}
   CACHE BOOL
@@ -1967,6 +1971,12 @@ if(USE_FSAL_CEPH_FSCRYPT)
 else(USE_FSAL_CEPH_FSCRYPT)
   set(BCOND_CEPH_FSCRYPT "%bcond_with")
 endif(USE_FSAL_CEPH_FSCRYPT)
+
+if(USE_SELINUX)
+  set(BCOND_SELINUX "%bcond_without")
+else(USE_SELINUX)
+  set(BCOND_SELINUX "%bcond_with")
+endif(USE_SELINUX)
 
 # deal with legacy python for el9
 # ... and deal with legacy rpmbuild for legacy python for fc34.

@@ -25,6 +25,11 @@ Requires: openSUSE-release
 # % bcond_without adds a"--without" so the feature is enabled by default
 
 %{!?name: %global name nfs-ganesha}
+
+@BCOND_SELINUX@ selinux
+%bcond_without selinux
+%global use_selinux %{on_off_switch selinux}
+
 @BCOND_NULLFS@ nullfs
 %global use_fsal_null %{on_off_switch nullfs}
 
@@ -245,7 +250,7 @@ Requires(post): psmisc
 Requires(pre): /usr/sbin/useradd
 Requires(pre): /usr/sbin/groupadd
 
-%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 )
+%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 ) && %{with selinux}
 Requires: %{name}-selinux = %{version}-%{release}
 %endif
 
@@ -522,7 +527,7 @@ be used with NFS-Ganesha to support SAUNAFS
 %endif
 
 # SELINUX
-%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 )
+%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 ) && %{with selinux}
 %package selinux
 Summary: The NFS-GANESHA SELINUX targeted policy
 Group: Applications/System
@@ -606,6 +611,7 @@ Development headers and auxiliary files for developing with %{name}.
 	-DUSE_FSAL_GLUSTER=%{use_fsal_gluster}		\
 	-DUSE_FSAL_SAUNAFS=%{use_fsal_saunafs}		\
 	-DUSE_SYSTEM_NTIRPC=%{use_system_ntirpc}	\
+	-DUSE_SELINUX=%{use_selinux}			\
 	-DENABLE_QOS=%{use_qos}				\
 	-DUSE_NFSIDMAP=%{use_nfsidmap}			\
 	-DUSE_MONITORING=%{use_monitoring}		\
@@ -647,7 +653,7 @@ Development headers and auxiliary files for developing with %{name}.
 
 make %{?_smp_mflags} || make %{?_smp_mflags} || make
 
-%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 )
+%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 ) && %{with selinux}
 make -C selinux -f /usr/share/selinux/devel/Makefile ganesha.pp
 pushd selinux && bzip2 -9 ganesha.pp && popd
 %endif
@@ -720,7 +726,7 @@ install -m 644 config_samples/gpfs_logrotate_ganesha %{buildroot}%{_sysconfdir}/
 
 make DESTDIR=%{buildroot} install
 
-%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 )
+%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 ) && %{with selinux}
 install -d %{buildroot}%{_selinux_store_path}/packages
 install -d -p %{buildroot}%{_selinux_store_path}/devel/include/contrib
 install -p -m 644 selinux/ganesha.if %{buildroot}%{_selinux_store_path}/devel/include/contrib
@@ -743,7 +749,7 @@ rm -f %{buildroot}/%{python3_sitelib}/Ganesha/QtUI/__init__.*
 %if ( 0%{?suse_version} )
 %service_add_post nfs-ganesha.service nfs-ganesha-lock.service nfs-ganesha-config.service
 %else
-%if ( 0%{?fedora} || ( 0%{?rhel} && 0%{?rhel} > 6 ) )
+%if ( 0%{?fedora} || ( 0%{?rhel} && 0%{?rhel} > 6 ) ) && %{with selinux}
 semanage fcontext -a -t ganesha_var_log_t %{_localstatedir}/log/ganesha > /dev/null 2>&1 || :
 semanage fcontext -a -t ganesha_var_log_t %{_localstatedir}/log/ganesha/ganesha.log > /dev/null 2>&1 || :
 %if %{with gluster}
@@ -934,7 +940,7 @@ exit 0
 %endif
 %endif
 
-%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 )
+%if ( 0%{?fedora} >= 30 || 0%{?rhel} >= 8 ) && %{with selinux}
 %files selinux
 %attr(0644,root,root) %{_selinux_store_path}/packages/ganesha.pp.bz2
 %attr(0644,root,root) %{_selinux_store_path}/devel/include/contrib/ganesha.if
