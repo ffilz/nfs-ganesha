@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "723e285d_abe0346a",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-11-18T08:03:48Z",
+      "side": 1,
+      "message": "Prefer is_loopback(..., true) on the sockaddr instead of comparing display_sockip strings. Config commit already enforces this; a stringly check is fragile if formatting differs.",
+      "revId": "9ece5cc53dfb24b69090b2303f0659fe5a1ce345",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04775eb8_7edbfcba",
+        "filename": "src/grpc_server/metricsService.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-11-18T08:03:48Z",
+      "side": 1,
+      "message": "registry is used without a null check. If monitoring__get_registry_handle().registry is NULL, registry-\u003eCollect() might crash the gRPC thread. We can guard it and return a gRPC error.",
+      "revId": "9ece5cc53dfb24b69090b2303f0659fe5a1ce345",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "017189d6_43f8062f",
+        "filename": "src/grpc_server/nfsServiceClient.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1038782
+      },
+      "writtenOn": "2026-11-18T08:03:48Z",
+      "side": 1,
+      "message": "Comment says local credentials are only allowed with a localhost address, but server_address is not validated before CreateChannel(... LocalCredentials ...).\n\nIf a caller passes a non-loopback host while Grpc_Credentials\u003dlocal, this fails late or behaves unexpectedly. It would be better to validate the address (or assert loopback) before creating the channel.",
+      "revId": "9ece5cc53dfb24b69090b2303f0659fe5a1ce345",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
