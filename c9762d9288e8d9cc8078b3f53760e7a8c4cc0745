@@ -16,6 +16,24 @@
       "message": "Does this depend on an ntirpc patch?",
       "revId": "c9762d9288e8d9cc8078b3f53760e7a8c4cc0745",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da808c1e_991956a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019837
+      },
+      "writtenOn": "2026-11-18T13:56:56Z",
+      "side": 1,
+      "message": "This change depends on an ntirpc patch, see [https://github.com/nfs-ganesha/ntirpc/pull/431](https://github.com/nfs-ganesha/ntirpc/pull/431); they should be reviewed together.",
+      "parentUuid": "77cf8279_7b14e9c1",
+      "revId": "c9762d9288e8d9cc8078b3f53760e7a8c4cc0745",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
