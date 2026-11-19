@@ -42,8 +42,7 @@ pthread_cond_t nlm_async_resp_cond;
 int nlm_send_async_res_nlm4(state_nlm_client_t *host, state_async_func_t func,
 			    nfs_res_t *pres)
 {
-	state_async_queue_t *arg =
-		gsh_malloc(sizeof(*arg), MEM_COMP_STATE);
+	state_async_queue_t *arg = gsh_malloc(sizeof(*arg), MEM_COMP_STATE);
 	state_nlm_async_data_t *nlm_arg;
 	state_status_t status;
 
@@ -69,8 +68,7 @@ int nlm_send_async_res_nlm4(state_nlm_client_t *host, state_async_func_t func,
 int nlm_send_async_res_nlm4test(state_nlm_client_t *host,
 				state_async_func_t func, nfs_res_t *pres)
 {
-	state_async_queue_t *arg =
-		gsh_malloc(sizeof(*arg), MEM_COMP_STATE);
+	state_async_queue_t *arg = gsh_malloc(sizeof(*arg), MEM_COMP_STATE);
 	state_nlm_async_data_t *nlm_arg;
 	state_status_t status;
 	nfs_res_t *res;
@@ -115,7 +113,7 @@ static const int MAX_ASYNC_RETRY = 2;
 static const struct timespec tout = { 0, 0 }; /* one-shot */
 
 static void nlm_async_cc_free(struct clnt_req *cc, size_t size,
-			const char *file, int line, const char *function)
+			      const char *file, int line, const char *function)
 {
 	gsh_free(cc, MEM_COMP_PROTOCOL);
 }

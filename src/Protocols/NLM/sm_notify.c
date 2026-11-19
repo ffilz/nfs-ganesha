@@ -42,8 +42,8 @@
 
 char *argv0;
 
-#define USAGE                                       \
-	"usage: %s [-p <port>] -l <local address> " \
+#define USAGE                                                  \
+	"usage: %s [-p <port>] -l <local address> "            \
 	"-m <monitor host> -r <remote address> -s <state>\n\n" \
 	"Only IPv4 and IPv6 addresses are supported\n"
 
@@ -157,7 +157,7 @@ CLIENT *client_create(sockaddr_t *caddr, sockaddr_t *saddr, uint32_t port,
 }
 
 static void sm_notify_cc_free(struct clnt_req *cc, size_t size,
-			const char *file, int line, const char *function)
+			      const char *file, int line, const char *function)
 {
 	gsh_free(cc, MEM_COMP_PROTOCOL);
 }
