@@ -16,6 +16,24 @@
       "message": "clang-format expects formatting for these lines:\n    - #define CLUSTER_MEMBERS_ARG                                        \\\n    - \t{                                                          \\\n    - \t\t.name \u003d \"ipaddrs\", .type \u003d \"as\", .direction \u003d \"in\" \\\n    - \t}\n    - #define CLUSTER_MEMBERS_REPLY                                       \\\n    - \t{                                                           \\\n    - \t\t.name \u003d \"ipaddrs\", .type \u003d \"as\", .direction \u003d \"out\" \\\n    - \t}\n→ to be replaced with:\n    + #define CLUSTER_MEMBERS_ARG \\\n    + \t{ .name \u003d \"ipaddrs\", .type \u003d \"as\", .direction \u003d \"in\" }\n    + #define CLUSTER_MEMBERS_REPLY \\\n    + \t{ .name \u003d \"ipaddrs\", .type \u003d \"as\", .direction \u003d \"out\" }",
       "revId": "4786aee3691919fb4666e78fd73950245f4a4036",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3367e4c3_3a08c4c5",
+        "filename": "src/MainNFSD/nfs_admin_thread.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-19T21:40:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "22f49d14_0e4d469c",
+      "revId": "4786aee3691919fb4666e78fd73950245f4a4036",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
