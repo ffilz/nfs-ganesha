@@ -612,28 +612,27 @@ done:
 }
 
 /**
- * This function creates rpc client handle for given fd.
+ * This function creates rpc client handle for given node.
  *
- * @param [in]  fd which is already connected to remote node.
+ * @param [in]  cqos_ceph_nodes_t to create client for
  * @return      rpc client handle.
  *              NULL if rpc client handle can't be created.
  */
-static CLIENT *cqos_create_rpc_client(int fd)
+static CLIENT *cqos_create_rpc_client(cqos_ceph_nodes_t *node)
 {
 	char *err;
 	CLIENT *clnt = NULL;
 
-	if (fd < 0) {
+	if (node->cqos_fd < 0) {
 		LogCrit(COMPONENT_QOS, "CQOS: Invalid Fd to create client");
 		return NULL;
 	}
 
-	struct sockaddr_storage ss;
+	struct netbuf raddr = { .buf = &node->cqos_node_addr,
+				.len = sizeof(node->cqos_node_addr) };
 
-	struct netbuf raddr = { .buf = &ss, .len = sizeof(ss) };
-
-	clnt = clnt_vc_ncreatef(fd, &raddr, CQOSPROG, CQOS_VERS, 0, 0,
-				CLNT_CREATE_FLAG_CLOSE);
+	clnt = clnt_vc_ncreatef(node->cqos_fd, &raddr, CQOSPROG, CQOS_VERS, 0,
+				0, CLNT_CREATE_FLAG_CLOSE);
 	if (CLNT_FAILURE(clnt)) {
 		err = rpc_sperror(&clnt->cl_error, "failed");
 		LogCrit(COMPONENT_QOS, "%s", err);
@@ -688,8 +687,7 @@ static void cqos_rpc_call_process(struct clnt_req *cc)
 			node->cqos_fd =
 				cqos_create_socket(&node->cqos_node_addr);
 			if (node->cqos_fd >= 0)
-				node->cqos_clnt =
-					cqos_create_rpc_client(node->cqos_fd);
+				node->cqos_clnt = cqos_create_rpc_client(node);
 			if (node->cqos_clnt != NULL)
 				cc->cc_clnt = node->cqos_clnt;
 		}
@@ -785,65 +783,45 @@ static bool cqos_send_rpc_msg(CLIENT *clnt, cluster_qos_msg msg)
  * It is a persistent TCP connection, so we need not create fd, handle
  * everytime.
  *
- * @param [in] Address of file descriptor
- * @param [in] Address of rpc client handle pointer
- * @param [in] address of the node to which msg needs to be sent
+ * @param [in] cqos_ceph_nodes_t to which msg needs to be sent
  * @param [in] cqos message that needs to be sent
  */
-static void cqos_process_send_msg(int *fd, CLIENT **clnt, sockaddr_t sockaddr,
+static void cqos_process_send_msg(cqos_ceph_nodes_t *node,
 				  cluster_qos_msg pubsub_msg)
 {
 	int retries = 0;
 
 retry:
-	if ((*fd >= 0) && (*clnt != NULL)) {
-		if (!cqos_send_rpc_msg(*clnt, pubsub_msg)) {
-			if (*clnt != NULL)
-				CLNT_DESTROY(*clnt);
-			close(*fd);
-			*fd = -1;
-			*clnt = NULL;
-			retries++;
-			if (retries > CQOS_MAX_RETRIES)
-				return;
-			goto retry;
+
+	if (node->cqos_fd < 0) {
+		node->cqos_fd = cqos_create_socket(&node->cqos_node_addr);
+		if (node->cqos_fd < 0) {
+			/* Handle error? */
+			return;
 		}
-	} else if (*fd >= 0) {
-		*clnt = cqos_create_rpc_client(*fd);
-		if (*clnt != NULL) {
-			if (!cqos_send_rpc_msg(*clnt, pubsub_msg)) {
-				if (*clnt != NULL)
-					CLNT_DESTROY(*clnt);
-				close(*fd);
-				*fd = -1;
-				*clnt = NULL;
-				retries++;
-				if (retries > CQOS_MAX_RETRIES)
-					return;
-				goto retry;
-			}
+	}
+
+	if (node->cqos_clnt == NULL) {
+		node->cqos_clnt = cqos_create_rpc_client(node);
+		if (node->cqos_clnt == NULL) {
+			/* Handle error? */
+			close(node->cqos_fd);
+			node->cqos_fd = -1;
+			return;
 		}
-	} else if (*fd < 0) {
-		*fd = cqos_create_socket(&sockaddr);
-		if (*fd >= 0) {
-			*clnt = cqos_create_rpc_client(*fd);
-			if (*clnt != NULL) {
-				if (!cqos_send_rpc_msg(*clnt, pubsub_msg)) {
-					if (*clnt != NULL)
-						CLNT_DESTROY(*clnt);
-					close(*fd);
-					*fd = -1;
-					*clnt = NULL;
-					retries++;
-					if (retries > CQOS_MAX_RETRIES)
-						return;
-					goto retry;
-				}
-			} else {
-				close(*fd);
-				*fd = -1;
-			}
+	}
+
+	if (!cqos_send_rpc_msg(node->cqos_clnt, pubsub_msg)) {
+		CLNT_DESTROY(node->cqos_clnt);
+		close(node->cqos_fd);
+		node->cqos_fd = -1;
+		node->cqos_clnt = NULL;
+		retries++;
+		if (retries > CQOS_MAX_RETRIES) {
+			/* Handle error? */
+			return;
 		}
+		goto retry;
 	}
 }
 
@@ -876,8 +854,7 @@ static void send_sub_unsub_msg_to_nodes(qos_class_t *class_ptr,
 
 	glist_for_each(glist, &local_cqos_hosts->grl_list) {
 		node = glist_entry(glist, cqos_ceph_nodes_t, cqos_node_list);
-		cqos_process_send_msg(&node->cqos_fd, &node->cqos_clnt,
-				      node->cqos_node_addr, sub_unsub_qos_msg);
+		cqos_process_send_msg(node, sub_unsub_qos_msg);
 	}
 
 	gsh_reflist_put(local_cqos_hosts);
@@ -1019,8 +996,7 @@ static void send_publish_message(sockaddr_t sockaddr, cluster_qos_msg cqos_msg)
 		node = glist_entry(glist, cqos_ceph_nodes_t, cqos_node_list);
 		if (!sockaddr_cmp(COMPONENT_QOS, &node->cqos_node_addr,
 				  &sockaddr, true)) {
-			cqos_process_send_msg(&node->cqos_fd, &node->cqos_clnt,
-					      node->cqos_node_addr, cqos_msg);
+			cqos_process_send_msg(node, cqos_msg);
 			break;
 		}
 	}
