@@ -33,6 +33,29 @@
       "message": "clang-format expects formatting for these lines:\n    - \t\t\t\t\t\"SEQUENCE returning unexpected NFS4ERR_RETRY_UNCACHED_REP with slot seqid\u003d%\"\n    - \t\t\t\t\tPRIu32 \" op seqid\u003d%\" PRIu32,\n→ to be replaced with:\n    + \t\t\t\t\t\"SEQUENCE returning unexpected NFS4ERR_RETRY_UNCACHED_REP with slot seqid\u003d%\" PRIu32\n    + \t\t\t\t\t\" op seqid\u003d%\" PRIu32,",
       "revId": "c36359bf4827f13b58699bc0131b6315faf4c61b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb426dcc_d310afc4",
+        "filename": "src/libntirpc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1020068
+      },
+      "writtenOn": "2026-11-19T12:06:05Z",
+      "side": 1,
+      "message": "You would drop this part of the change?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 58
+      },
+      "revId": "c36359bf4827f13b58699bc0131b6315faf4c61b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
