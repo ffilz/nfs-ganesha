@@ -80,6 +80,11 @@ Requires: openSUSE-release
 
 @BCOND_NTIRPC@ system_ntirpc
 %global use_system_ntirpc %{on_off_switch system_ntirpc}
+@BCOND_EMBEDDED_NTIRPC@ embedded_ntirpc
+
+%if %{with system_ntirpc} && %{with embedded_ntirpc}
+%{error:Cannot specify both --with system_ntirpc and --with embedded_ntirpc}
+%endif
 
 @BCOND_QOS@ qos
 %global use_qos %{on_off_switch qos}
@@ -194,7 +199,11 @@ BuildRequires:	gcc-c++
 %if %{with system_ntirpc}
 BuildRequires: libntirpc-devel >= @NTIRPC_MIN_VERSION@
 %else
+%if %{with embedded_ntirpc}
+Requires: libtirpc
+%else
 Requires: libntirpc = @NTIRPC_VERSION_EMBED@
+%endif
 %endif
 %if %{with sanitize_address}
 BuildRequires:	libasan
@@ -550,7 +559,7 @@ fi
 %endif
 
 # NTIRPC (if built-in)
-%if ! %{with system_ntirpc}
+%if ! %{with system_ntirpc} && ! %{with embedded_ntirpc}
 %package -n libntirpc
 Summary:	New Transport Independent RPC Library
 Group:		System Environment/Libraries
@@ -780,6 +789,17 @@ exit 0
 %files
 %{_bindir}/ganesha.nfsd
 %{_libdir}/libganesha_nfsd.so*
+%if ! %{with system_ntirpc} && %{with embedded_ntirpc}
+%{_libdir}/libntirpc.so.@NTIRPC_VERSION_EMBED@
+@NTIRPC_COMMENT_IF_EQUAL_ELSE_PERCENT@{_libdir}/libntirpc.so.@NTIRPC_ABI_EMBED@
+%{_libdir}/libntirpc.so
+%{!?_licensedir:%global license %%doc}
+%license libntirpc/COPYING
+%doc libntirpc/NEWS libntirpc/README
+%{_libdir}/pkgconfig/libntirpc.pc
+%dir %{_includedir}/ntirpc
+%{_includedir}/ntirpc/*
+%endif
 %if %{with ceph_fscrypt}
 %{lib64dir}/ganesha/libkmip_fscrypt*
 %endif
@@ -940,7 +960,7 @@ exit 0
 %attr(0644,root,root) %{_selinux_store_path}/devel/include/contrib/ganesha.if
 %endif
 
-%if ! %{with system_ntirpc}
+%if ! %{with system_ntirpc} && ! %{with embedded_ntirpc}
 %files -n libntirpc
 %{_libdir}/libntirpc.so.@NTIRPC_VERSION_EMBED@
 @NTIRPC_COMMENT_IF_EQUAL_ELSE_PERCENT@{_libdir}/libntirpc.so.@NTIRPC_ABI_EMBED@
