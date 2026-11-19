@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19af669f_0d217143",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-11-19T14:54:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "723e285d_abe0346a",
+      "revId": "9ece5cc53dfb24b69090b2303f0659fe5a1ce345",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04775eb8_7edbfcba",
         "filename": "src/grpc_server/metricsService.cc",
         "patchSetId": 9
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1cd44d95_341ca2d3",
+        "filename": "src/grpc_server/metricsService.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-11-19T14:54:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04775eb8_7edbfcba",
+      "revId": "9ece5cc53dfb24b69090b2303f0659fe5a1ce345",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "017189d6_43f8062f",
         "filename": "src/grpc_server/nfsServiceClient.cc",
         "patchSetId": 9
@@ -48,6 +84,24 @@
       "writtenOn": "2026-11-18T08:03:48Z",
       "side": 1,
       "message": "Comment says local credentials are only allowed with a localhost address, but server_address is not validated before CreateChannel(... LocalCredentials ...).\n\nIf a caller passes a non-loopback host while Grpc_Credentials\u003dlocal, this fails late or behaves unexpectedly. It would be better to validate the address (or assert loopback) before creating the channel.",
+      "revId": "9ece5cc53dfb24b69090b2303f0659fe5a1ce345",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0683cd03_09b15341",
+        "filename": "src/grpc_server/nfsServiceClient.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1039498
+      },
+      "writtenOn": "2026-11-19T14:54:47Z",
+      "side": 1,
+      "message": "With local credentials, gRPC already rejects non-loopback connections during the handshake, so the first RPC fails right away. The address string can also use a hostname like localhost:50051 that gRPC resolves first, so I updated the comment instead.",
+      "parentUuid": "017189d6_43f8062f",
       "revId": "9ece5cc53dfb24b69090b2303f0659fe5a1ce345",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
