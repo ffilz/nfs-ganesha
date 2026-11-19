@@ -1148,6 +1148,21 @@ bool nlm_add_entry(struct local_nlm_info *info)
  */
 void nfs4_rm_clid(nfs_client_id_t *clientid)
 {
+	/* Checked before taking our cid_mutex: the scan takes partition
+	 * locks and then the other clients' cid_mutex, like the reaper.
+	 */
+	if (nfs_client_id_recov_tag_shared(clientid)) {
+		LogDebug(
+			COMPONENT_CLIENTID,
+			"Keeping recovery record %s, another confirmed client still uses it",
+			clientid->cid_recov_tag);
+		PTHREAD_MUTEX_lock(&clientid->cid_mutex);
+		gsh_free(clientid->cid_recov_tag, MEM_COMP_RECOVERY);
+		clientid->cid_recov_tag = NULL;
+		PTHREAD_MUTEX_unlock(&clientid->cid_mutex);
+		return;
+	}
+
 	PTHREAD_MUTEX_lock(&clientid->cid_mutex);
 	recovery_backend->rm_clid(clientid);
 	PTHREAD_MUTEX_unlock(&clientid->cid_mutex);

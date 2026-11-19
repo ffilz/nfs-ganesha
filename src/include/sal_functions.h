@@ -327,6 +327,7 @@ int display_clientid_name(struct display_buffer *dspbuf,
 
 void free_client_id(nfs_client_id_t *clientid);
 
+bool nfs_client_id_recov_tag_shared(nfs_client_id_t *clientid);
 void nfs41_foreach_client_callback(bool (*cb)(nfs_client_id_t *cl, void *state),
 				   void *state);
 
