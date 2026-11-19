@@ -218,13 +218,10 @@ void copy_xprt_addr(sockaddr_t *, SVCXPRT *);
 static inline int display_xprt_sockaddr(struct display_buffer *db,
 					const SVCXPRT *xprt)
 {
-	const sockaddr_t *addr;
-	const struct netbuf *hostaddr = svc_getcaller_netbuf(xprt);
+	const sockaddr_t *addr = svc_getrpccaller(xprt);
 
-	if (hostaddr->len == 0)
-		hostaddr = svc_getlocal_netbuf(xprt);
-	assert(hostaddr->len <= sizeof(sockaddr_t) && hostaddr->buf != NULL);
-	addr = (const sockaddr_t *)hostaddr->buf;
+	if (addr->ss_family == AF_UNSPEC)
+		addr = svc_getrpclocal(xprt);
 
 	return display_sockaddr(db, addr);
 }

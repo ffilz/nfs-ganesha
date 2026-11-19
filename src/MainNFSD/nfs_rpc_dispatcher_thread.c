@@ -152,10 +152,6 @@ typedef struct proto_data {
 	struct sockaddr_in sinaddr_tcp;
 	struct sockaddr_in6 sinaddr_udp6;
 	struct sockaddr_in6 sinaddr_tcp6;
-	struct netbuf netbuf_udp6;
-	struct netbuf netbuf_tcp6;
-	struct t_bind bindaddr_udp6;
-	struct t_bind bindaddr_tcp6;
 	struct __rpc_sockinfo si_udp6;
 	struct __rpc_sockinfo si_tcp6;
 } proto_data;
@@ -827,16 +823,6 @@ static int Bind_sockets_V6(void)
 				pdatap->sinaddr_udp6.sin6_port =
 					htons(nfs_param.core_param.port[p]);
 
-				pdatap->netbuf_udp6.maxlen =
-					sizeof(pdatap->sinaddr_udp6);
-				pdatap->netbuf_udp6.len =
-					sizeof(pdatap->sinaddr_udp6);
-				pdatap->netbuf_udp6.buf = &pdatap->sinaddr_udp6;
-
-				pdatap->bindaddr_udp6.qlen = SOMAXCONN;
-				pdatap->bindaddr_udp6.addr =
-					pdatap->netbuf_udp6;
-
 				if (!__rpc_fd2sockinfo(udp_socket[p],
 						       &pdatap->si_udp6)) {
 					LogWarn(COMPONENT_DISPATCH,
@@ -852,20 +838,19 @@ static int Bind_sockets_V6(void)
 						sizeof(str), str, str
 					};
 
-					display_sockaddr(&dbuf,
-							 (sockaddr_t *)pdatap
-								 ->bindaddr_udp6
-								 .addr.buf);
+					display_sockaddr(
+						&dbuf, (sockaddr_t *)&pdatap
+							       ->sinaddr_udp6);
 
 					LogInfo(COMPONENT_DISPATCH,
 						"Binding UDP socket to address %s for %s",
 						str, tags[p]);
 				}
 
-				rc = bind(udp_socket[p],
-					  (struct sockaddr *)pdatap
-						  ->bindaddr_udp6.addr.buf,
-					  (socklen_t)pdatap->si_udp6.si_alen);
+				rc = bind(
+					udp_socket[p],
+					(struct sockaddr *)&pdatap->sinaddr_udp6,
+					(socklen_t)pdatap->si_udp6.si_alen);
 				if (rc == -1) {
 					LogWarn(COMPONENT_DISPATCH,
 						"Cannot bind %s udp6 socket, error %d (%s)",
@@ -886,14 +871,6 @@ static int Bind_sockets_V6(void)
 			pdatap->sinaddr_tcp6.sin6_port =
 				htons(nfs_param.core_param.port[p]);
 
-			pdatap->netbuf_tcp6.maxlen =
-				sizeof(pdatap->sinaddr_tcp6);
-			pdatap->netbuf_tcp6.len = sizeof(pdatap->sinaddr_tcp6);
-			pdatap->netbuf_tcp6.buf = &pdatap->sinaddr_tcp6;
-
-			pdatap->bindaddr_tcp6.qlen = SOMAXCONN;
-			pdatap->bindaddr_tcp6.addr = pdatap->netbuf_tcp6;
-
 			if (!__rpc_fd2sockinfo(tcp_socket[p],
 					       &pdatap->si_tcp6)) {
 				LogWarn(COMPONENT_DISPATCH,
@@ -909,8 +886,7 @@ static int Bind_sockets_V6(void)
 
 				display_sockaddr(
 					&dbuf,
-					(sockaddr_t *)
-						pdatap->bindaddr_tcp6.addr.buf);
+					(sockaddr_t *)&pdatap->sinaddr_tcp6);
 
 				LogInfo(COMPONENT_DISPATCH,
 					"Binding TCP socket to address %s for %s",
@@ -918,8 +894,7 @@ static int Bind_sockets_V6(void)
 			}
 
 			rc = bind(tcp_socket[p],
-				  (struct sockaddr *)
-					  pdatap->bindaddr_tcp6.addr.buf,
+				  (struct sockaddr *)&pdatap->sinaddr_tcp6,
 				  (socklen_t)pdatap->si_tcp6.si_alen);
 			if (rc == -1) {
 				LogWarn(COMPONENT_DISPATCH,
@@ -966,16 +941,6 @@ static int Bind_sockets_V4(void)
 				pdatap->sinaddr_udp.sin_port =
 					htons(nfs_param.core_param.port[p]);
 
-				pdatap->netbuf_udp6.maxlen =
-					sizeof(pdatap->sinaddr_udp);
-				pdatap->netbuf_udp6.len =
-					sizeof(pdatap->sinaddr_udp);
-				pdatap->netbuf_udp6.buf = &pdatap->sinaddr_udp;
-
-				pdatap->bindaddr_udp6.qlen = SOMAXCONN;
-				pdatap->bindaddr_udp6.addr =
-					pdatap->netbuf_udp6;
-
 				if (!__rpc_fd2sockinfo(udp_socket[p],
 						       &pdatap->si_udp6)) {
 					LogWarn(COMPONENT_DISPATCH,
@@ -992,19 +957,18 @@ static int Bind_sockets_V4(void)
 					};
 
 					display_sockaddr(&dbuf,
-							 (sockaddr_t *)pdatap
-								 ->bindaddr_udp6
-								 .addr.buf);
+							 (sockaddr_t *)&pdatap
+								 ->sinaddr_udp);
 
 					LogInfo(COMPONENT_DISPATCH,
 						"Binding UDP socket to address %s for %s",
 						str, tags[p]);
 				}
 
-				rc = bind(udp_socket[p],
-					  (struct sockaddr *)pdatap
-						  ->bindaddr_udp6.addr.buf,
-					  (socklen_t)pdatap->si_udp6.si_alen);
+				rc = bind(
+					udp_socket[p],
+					(struct sockaddr *)&pdatap->sinaddr_udp,
+					(socklen_t)pdatap->si_udp6.si_alen);
 				if (rc == -1) {
 					LogWarn(COMPONENT_DISPATCH,
 						"Cannot bind %s udp6 socket, error %d (%s)",
@@ -1025,14 +989,6 @@ static int Bind_sockets_V4(void)
 			pdatap->sinaddr_tcp.sin_port =
 				htons(nfs_param.core_param.port[p]);
 
-			pdatap->netbuf_tcp6.maxlen =
-				sizeof(pdatap->sinaddr_tcp);
-			pdatap->netbuf_tcp6.len = sizeof(pdatap->sinaddr_tcp);
-			pdatap->netbuf_tcp6.buf = &pdatap->sinaddr_tcp;
-
-			pdatap->bindaddr_tcp6.qlen = SOMAXCONN;
-			pdatap->bindaddr_tcp6.addr = pdatap->netbuf_tcp6;
-
 			if (!__rpc_fd2sockinfo(tcp_socket[p],
 					       &pdatap->si_tcp6)) {
 				LogWarn(COMPONENT_DISPATCH,
@@ -1048,8 +1004,7 @@ static int Bind_sockets_V4(void)
 
 				display_sockaddr(
 					&dbuf,
-					(sockaddr_t *)
-						pdatap->bindaddr_tcp6.addr.buf);
+					(sockaddr_t *)&pdatap->sinaddr_tcp);
 
 				LogInfo(COMPONENT_DISPATCH,
 					"Binding TCP socket to address %s for %s",
@@ -1057,8 +1012,7 @@ static int Bind_sockets_V4(void)
 			}
 
 			rc = bind(tcp_socket[p],
-				  (struct sockaddr *)
-					  pdatap->bindaddr_tcp6.addr.buf,
+				  (struct sockaddr *)&pdatap->sinaddr_tcp,
 				  (socklen_t)pdatap->si_tcp6.si_alen);
 			if (rc == -1) {
 				LogWarn(COMPONENT_DISPATCH,
@@ -1589,10 +1543,11 @@ rdma_reg:
 		/* Check if IPv6 RDMA registration is possible
 		 * Currently skipped for IPv4-only transport */
 		if (!v6disabled && netconfig_rdma6 && tcp_xprt[prot]) {
-			struct sockaddr *sa = (struct sockaddr *)tcp_xprt[prot]
-						      ->xp_local.nb.buf;
+			struct sockaddr *sa;
 
-			if (sa && tcp_xprt[prot]->xp_local.nb.len > 0 &&
+			sa = (struct sockaddr *)&tcp_xprt[prot]->xp_local.ss;
+
+			if (sa && tcp_xprt[prot]->xp_local.len > 0 &&
 			    sa->sa_family == AF_INET6) {
 				LogInfo(COMPONENT_RDMA,
 					"Registering %s V%d/RDMAv6", tags[prot],

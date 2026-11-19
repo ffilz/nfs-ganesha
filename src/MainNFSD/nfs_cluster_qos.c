@@ -628,11 +628,8 @@ static CLIENT *cqos_create_rpc_client(cqos_ceph_nodes_t *node)
 		return NULL;
 	}
 
-	struct netbuf raddr = { .buf = &node->cqos_node_addr,
-				.len = sizeof(node->cqos_node_addr) };
-
-	clnt = clnt_vc_ncreatef(node->cqos_fd, &raddr, CQOSPROG, CQOS_VERS, 0,
-				0, CLNT_CREATE_FLAG_CLOSE);
+	clnt = clnt_vc_ncreatef(node->cqos_fd, &node->cqos_node_addr, CQOSPROG,
+				CQOS_VERS, 0, 0, CLNT_CREATE_FLAG_CLOSE);
 	if (CLNT_FAILURE(clnt)) {
 		err = rpc_sperror(&clnt->cl_error, "failed");
 		LogCrit(COMPONENT_QOS, "%s", err);

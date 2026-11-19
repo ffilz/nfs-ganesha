@@ -585,7 +585,6 @@ int nfs_rpc_create_chan_v40(nfs_client_id_t *clientid, uint32_t flags)
 {
 	rpc_call_channel_t *chan = &clientid->cid_cb.v40.cb_chan;
 	char *err;
-	struct netbuf raddr;
 	int fd;
 	int proto;
 	int code;
@@ -606,26 +605,26 @@ int nfs_rpc_create_chan_v40(nfs_client_id_t *clientid, uint32_t flags)
 		return code;
 	}
 
-	raddr.buf = &clientid->cid_cb.v40.cb_addr.ss;
-
+	/* clang-format off */
 	switch (proto) {
 	case IPPROTO_TCP:
-		raddr.maxlen = raddr.len = sizeof(struct sockaddr_in);
 		chan->clnt = clnt_vc_ncreatef(
-			fd, &raddr, clientid->cid_cb.v40.cb_program,
+			fd, &clientid->cid_cb.v40.cb_addr.ss,
+			clientid->cid_cb.v40.cb_program,
 			NFS_CB /* Errata ID: 2291 */, 0, 0,
 			CLNT_CREATE_FLAG_CLOSE | CLNT_CREATE_FLAG_CONNECT);
 		break;
 	case IPPROTO_UDP:
-		raddr.maxlen = raddr.len = sizeof(struct sockaddr_in6);
-		chan->clnt = clnt_dg_ncreatef(fd, &raddr,
-					      clientid->cid_cb.v40.cb_program,
-					      NFS_CB /* Errata ID: 2291 */, 0,
-					      0, CLNT_CREATE_FLAG_CLOSE);
+		chan->clnt = clnt_dg_ncreatef(
+			fd, &clientid->cid_cb.v40.cb_addr.ss,
+			clientid->cid_cb.v40.cb_program,
+			NFS_CB /* Errata ID: 2291 */, 0, 0,
+			CLNT_CREATE_FLAG_CLOSE);
 		break;
 	default:
 		break;
 	}
+	/* clang-format on */
 
 	if (CLNT_FAILURE(chan->clnt)) {
 		err = rpc_sperror(&chan->clnt->cl_error, "failed");

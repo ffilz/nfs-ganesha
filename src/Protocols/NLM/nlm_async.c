@@ -217,7 +217,7 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 				int fd;
 				struct sockaddr_in6 server_addr;
 				sockaddr_t client_addr;
-				struct netbuf *buf, local_buf;
+				struct sockaddr_storage *buf;
 
 				fd = socket(PF_INET6, SOCK_STREAM, IPPROTO_TCP);
 				if (fd < 0)
@@ -267,12 +267,10 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 
 				retval = find_peer_addr(
 					caller_name,
-					((struct sockaddr_in *)buf->buf)
-						->sin_port,
+					((struct sockaddr_in *)buf)->sin_port,
 					&client_addr);
 
 				/* buf with inet is only needed for the port */
-				gsh_free(buf->buf, MEM_COMP_LIBNTIRPC);
 				gsh_free(buf, MEM_COMP_LIBNTIRPC);
 
 				/* retry for spurious EAI_NONAME errors */
@@ -298,13 +296,10 @@ int nlm_send_async(int proc, state_nlm_client_t *host, void *inarg, void *key)
 					return -1;
 				}
 
-				/* setup the netbuf with in6 address */
-				local_buf.buf = &client_addr;
-				local_buf.len = sizeof(struct sockaddr_in6);
-
 				host->slc_callback_clnt =
-					clnt_vc_ncreate(fd, &local_buf, NLMPROG,
-							NLM4_VERS, 0, 0);
+					clnt_vc_ncreate(fd, &client_addr,
+							NLMPROG, NLM4_VERS, 0,
+							0);
 			} else {
 				host->slc_callback_clnt =
 					clnt_ncreate(caller_name, NLMPROG,

@@ -100,10 +100,6 @@ CLIENT *client_create(sockaddr_t *caddr, sockaddr_t *saddr, uint32_t port,
 		      int prog, int vers)
 {
 	CLIENT *clnt;
-	struct netbuf cli_netbuf = { sizeof(sockaddr_t), sizeof(sockaddr_t),
-				     caddr };
-	struct netbuf srv_netbuf = { sizeof(sockaddr_t), sizeof(sockaddr_t),
-				     saddr };
 	int net_port = htons(port);
 	struct netconfig *nconf;
 	char client[256];
@@ -138,8 +134,8 @@ CLIENT *client_create(sockaddr_t *caddr, sockaddr_t *saddr, uint32_t port,
 		"Creating client for %s family %d server %s family %d nconf=%p\n",
 		client, caddr->ss_family, server, saddr->ss_family, nconf);
 
-	clnt = clnt_tli_ncreate_opt(RPC_ANYFD, nconf, &cli_netbuf, &srv_netbuf,
-				    prog, vers, 0, 0, !IPV6_V6ONLY);
+	clnt = clnt_tli_ncreate_opt(RPC_ANYFD, nconf, caddr, saddr, prog, vers,
+				    0, 0, !IPV6_V6ONLY);
 
 	if (CLNT_FAILURE(clnt)) {
 		char *err = rpc_sperror(&clnt->cl_error, "failed");

@@ -678,10 +678,6 @@ int smmon_proc_notify(nfs_arg_t *arg, struct svc_req *req, nfs_res_t *res)
 bool local_nlm_info_client_create(struct local_nlm_info *info)
 {
 	struct my_id *my_id = &info->mon.mon_id.my_id;
-	struct netbuf cli_netbuf = { sizeof(sockaddr_t), sizeof(sockaddr_t),
-				     &info->client_address };
-	struct netbuf srv_netbuf = { sizeof(sockaddr_t), sizeof(sockaddr_t),
-				     &info->server_address };
 	/* For NLM notify callback, which might be TCP, the RPCBIND/PORTMAP
 	 * call has filled in info_port.
 	 */
@@ -712,7 +708,8 @@ bool local_nlm_info_client_create(struct local_nlm_info *info)
 		info->info_port, info->server_address_str, info);
 
 	info->rpc_client = clnt_tli_ncreate_opt(RPC_ANYFD, info->nconf,
-						&srv_netbuf, &cli_netbuf,
+						&info->server_address,
+						&info->client_address,
 						my_id->my_prog, my_id->my_vers,
 						0, 0, !IPV6_V6ONLY);
 
