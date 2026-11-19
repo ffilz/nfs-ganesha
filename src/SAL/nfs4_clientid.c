@@ -2273,6 +2273,74 @@ void nfs41_foreach_client_callback(bool (*cb)(nfs_client_id_t *cl, void *state),
 }
 
 /**
+ * @brief Check whether another confirmed client shares a recovery record
+ *
+ * The fs recovery backend names a record after the client address and the
+ * client owner, not after the server address the client used.  A client that
+ * mounts several addresses served by the same node (floating IPs moved here
+ * by a takeover, for example) gets one clientid per address, and all of them
+ * map to the same record.  When one of those clientids expires, removing the
+ * record would leave the others without one, and a later takeover of this
+ * node would load no records and end grace before they can reclaim.
+ *
+ * @param[in] clientid  The clientid whose record is about to be removed
+ *
+ * @return true if another confirmed clientid uses the same record.
+ */
+
+bool nfs_client_id_recov_tag_shared(nfs_client_id_t *clientid)
+{
+	uint32_t i;
+	hash_table_t *ht = ht_confirmed_client_id;
+	struct rbt_head *head_rbt;
+	struct hash_data *pdata;
+	struct rbt_node *pn;
+	nfs_client_id_t *other;
+	const char *tag = clientid->cid_recov_tag;
+	bool ipbased = nfs_param.nfsv4_param.recovery_backend_ipbased;
+	bool shared = false;
+
+	if (tag == NULL)
+		return false;
+
+	for (i = 0; i < ht->parameter.index_size && !shared; i++) {
+		head_rbt = &(ht->partitions[i].rbt);
+
+		PTHREAD_RWLOCK_rdlock(&(ht->partitions[i].ht_lock));
+
+		RBT_LOOP(head_rbt, pn)
+		{
+			pdata = RBT_OPAQ(pn);
+			other = pdata->val.addr;
+			RBT_INCREMENT(pn);
+
+			if (other == clientid)
+				continue;
+
+			PTHREAD_MUTEX_lock(&other->cid_mutex);
+			shared = other->cid_confirmed == CONFIRMED_CLIENT_ID &&
+				 other->cid_recov_tag != NULL &&
+				 strcmp(other->cid_recov_tag, tag) == 0 &&
+				 (!ipbased ||
+				  sockaddr_cmp(COMPONENT_CLIENTID,
+					       &other->cid_client_record
+							->cr_server_addr,
+					       &clientid->cid_client_record
+							->cr_server_addr,
+					       true) == 0);
+			PTHREAD_MUTEX_unlock(&other->cid_mutex);
+
+			if (shared)
+				break;
+		}
+
+		PTHREAD_RWLOCK_unlock(&(ht->partitions[i].ht_lock));
+	}
+
+	return shared;
+}
+
+/**
  * @brief For the given gsh_client, get the nfsv41-client and destroy all
  * its connections
  *
