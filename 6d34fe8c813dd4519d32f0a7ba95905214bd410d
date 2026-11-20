@@ -195,6 +195,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40e1207b_5c9d5ea3",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-20T16:59:52Z",
+      "side": 1,
+      "message": "OK, I\u0027m going to leave this for now. This patch isn\u0027t changing the response for the illegal case (client starting slot with seqid 0) but we do now LogCrit. We can come back to this case later if we really want a different response.",
+      "parentUuid": "5f358854_5cc918b9",
+      "range": {
+        "startLine": 305,
+        "startChar": 4,
+        "endLine": 308,
+        "endChar": 7
+      },
+      "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10577644_bfa31d31",
@@ -344,6 +368,24 @@
       "side": 1,
       "message": "Fixed",
       "parentUuid": "ba09704c_71e9ecae",
+      "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16c35f37_4ba89cdd",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-20T16:59:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e11f3829_629e4100",
       "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
