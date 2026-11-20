@@ -173,6 +173,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f358854_5cc918b9",
+        "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1038686
+      },
+      "writtenOn": "2026-11-20T08:40:30Z",
+      "side": 1,
+      "message": "@ffilzlnx@mindspring.com \nLooking at RFC 881 in section 2.10.6.1 It says \"The ﬁrst time a slot is used, the requester MUST specify a sequence ID of one (Section 18.36). Each time a slot is reused, the request MUST specify a sequence ID that is one\ngreater than that of the previous request on the slot. If the previous sequence ID was\n0xFFFFFFFF, then the next request for the slot MUST have the sequence ID set to zero (i.e., (232 -\n1) + 1 mod 232).\"  So only 0 on the wrap around.  So you are correct in saying that it is not some sort of weird uncached error.\n\nYes, because we choose not to cache if sa_cachethis is False we have an oddity here.    I think that this should stay as NFS4ERR_RETRY_UNCACHED_REP. We have determined it is a sequence id that has been used previously and therefore is not a bad seqid.  But the contents in the cache must have been discarded somehow or never got there.  Since it is an oddity I would keep the error level up high probably at WARN.  We would probably want to work out why if it starts happening.",
+      "parentUuid": "6f53ce3e_434170ea",
+      "range": {
+        "startLine": 305,
+        "startChar": 4,
+        "endLine": 308,
+        "endChar": 7
+      },
+      "revId": "6d34fe8c813dd4519d32f0a7ba95905214bd410d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10577644_bfa31d31",
         "filename": "src/Protocols/NFS/nfs4_op_sequence.c",
         "patchSetId": 1
