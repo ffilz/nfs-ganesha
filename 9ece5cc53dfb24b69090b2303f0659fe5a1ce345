@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c36540e5_ac2404f0",
+        "filename": "src/grpc_server/GrpcServer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-20T22:08:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19af669f_0d217143",
+      "revId": "9ece5cc53dfb24b69090b2303f0659fe5a1ce345",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04775eb8_7edbfcba",
@@ -71,6 +89,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2e0dbf9_67a6c81d",
+        "filename": "src/grpc_server/metricsService.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-20T22:08:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cd44d95_341ca2d3",
+      "revId": "9ece5cc53dfb24b69090b2303f0659fe5a1ce345",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "017189d6_43f8062f",
@@ -102,6 +138,24 @@
       "side": 1,
       "message": "With local credentials, gRPC already rejects non-loopback connections during the handshake, so the first RPC fails right away. The address string can also use a hostname like localhost:50051 that gRPC resolves first, so I updated the comment instead.",
       "parentUuid": "017189d6_43f8062f",
+      "revId": "9ece5cc53dfb24b69090b2303f0659fe5a1ce345",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74706004_ae7c5047",
+        "filename": "src/grpc_server/nfsServiceClient.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003571
+      },
+      "writtenOn": "2026-11-20T22:08:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0683cd03_09b15341",
       "revId": "9ece5cc53dfb24b69090b2303f0659fe5a1ce345",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
