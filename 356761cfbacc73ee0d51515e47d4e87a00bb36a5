@@ -16,6 +16,24 @@
       "message": "Please add build flag in src/CMakeLists.txt and make it off by default. Also, set build variable based on input flag.",
       "revId": "356761cfbacc73ee0d51515e47d4e87a00bb36a5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a817345b_1a991d64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039507
+      },
+      "writtenOn": "2026-11-23T18:51:48Z",
+      "side": 1,
+      "message": "Done in Patch Set 2:\n\n- Added `BUNDLE_MONITORING` option (`OFF` by default) in `src/CMakeLists.txt`\n  with a check requiring `USE_MONITORING`.\n- Set `BCOND_BUNDLE_MONITORING` based on `BUNDLE_MONITORING` (`%bcond_without`\n  when `ON`, `%bcond_with` when `OFF`).\n- Updated `src/nfs-ganesha.spec-in.cmake` to use `@BCOND_BUNDLE_MONITORING@`\n  and pass `-DBUNDLE_MONITORING` to CMake.",
+      "parentUuid": "3ddddfe5_7f1144f5",
+      "revId": "356761cfbacc73ee0d51515e47d4e87a00bb36a5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
