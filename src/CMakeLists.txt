@@ -1737,6 +1737,24 @@ configure_file(
 # %bcond_without adds a"--without" so the feature is enabled by default
 # This has to be coherent with chosen FSALs
 
+if(USE_FSAL_VFS)
+    set(BCOND_VFS "%bcond_without")
+else(USE_FSAL_VFS)
+    set(BCOND_VFS "%bcond_with")
+endif(USE_FSAL_VFS)
+
+if(USE_FSAL_PROXY_V4)
+    set(BCOND_PROXY_V4 "%bcond_without")
+else(USE_FSAL_PROXY_V4)
+    set(BCOND_PROXY_V4 "%bcond_with")
+endif(USE_FSAL_PROXY_V4)
+
+if(USE_FSAL_PROXY_V3)
+    set(BCOND_PROXY_V3 "%bcond_without")
+else(USE_FSAL_PROXY_V3)
+    set(BCOND_PROXY_V3 "%bcond_with")
+endif(USE_FSAL_PROXY_V3)
+
 if(USE_FSAL_XFS)
     set(BCOND_XFS "%bcond_without")
 else(USE_FSAL_XFS)
