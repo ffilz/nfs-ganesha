@@ -16,6 +16,24 @@
       "message": "Please add build flag in src/CMakeLists.txt and make it on by default. Also, set build variable based on input flag.",
       "revId": "df804682bbb2b451e9926752d7cb6b9dad0f2a99",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e33fdfd_d962b40b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039507
+      },
+      "writtenOn": "2026-11-23T17:39:04Z",
+      "side": 1,
+      "message": "Done in Patch Set 2:\n\n- Added `USE_SELINUX` option (`ON` by default) in `src/CMakeLists.txt`.\n- Set `BCOND_SELINUX` based on `USE_SELINUX` (`%bcond_without` when `ON`,\n  `%bcond_with` when `OFF`).\n- Updated `src/nfs-ganesha.spec-in.cmake` to use `@BCOND_SELINUX@` and\n  pass `-DUSE_SELINUX` to CMake.\n- Skipped `%post` SELinux labeling when `--without selinux` is passed.",
+      "parentUuid": "d22c68d3_568ef92e",
+      "revId": "df804682bbb2b451e9926752d7cb6b9dad0f2a99",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
