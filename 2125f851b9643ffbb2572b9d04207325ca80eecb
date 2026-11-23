@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0667f21_6fa974e5",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1039507
+      },
+      "writtenOn": "2026-11-23T18:33:45Z",
+      "side": 1,
+      "message": "No—we cannot use %if %{with use_fsal_vfs} or %if %{use_fsal_vfs} directly in RPM spec conditionals, because use_fsal_vfs is a string (ON/OFF) meant only for CMake, whereas %{with vfs} is the RPM %bcond boolean (1/0) that corresponds to --with vfs / --without vfs.",
+      "parentUuid": "26d99b7f_f5f7a3ad",
+      "revId": "2125f851b9643ffbb2572b9d04207325ca80eecb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e52fa84_111bcf7f",
