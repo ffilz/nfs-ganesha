@@ -1216,6 +1216,20 @@ nfsstat4 nfs4_check_stateid_acquire_state_lock(
 	    (stateid->seqid != 0)) {
 		/* Check seqid in stateid */
 
+		/*
+		 * A layout stateid never carries seqid zero (RFC 5661 12.5.3).
+		 */
+		if (state2->state_type == STATE_TYPE_LAYOUT &&
+		    stateid->seqid == 0) {
+			if (str_valid)
+				LogDebug(
+					COMPONENT_STATE,
+					"Check %s stateid found layout stateid %s with seqid zero",
+					tag, str);
+			status = NFS4ERR_BAD_STATEID;
+			goto failure;
+		}
+
 		/**
 		 * @todo Eventually all checks of the seqid should be migrated
 		 *       to be done under the seqid_mutex.
