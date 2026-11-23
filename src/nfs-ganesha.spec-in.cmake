@@ -25,6 +25,14 @@ Requires: openSUSE-release
 # % bcond_without adds a"--without" so the feature is enabled by default
 
 %{!?name: %global name nfs-ganesha}
+
+%bcond_without vfs
+%global use_fsal_vfs %{on_off_switch vfs}
+%bcond_without proxy_v4
+%global use_fsal_proxy_v4 %{on_off_switch proxy_v4}
+%bcond_without proxy_v3
+%global use_fsal_proxy_v3 %{on_off_switch proxy_v3}
+
 @BCOND_NULLFS@ nullfs
 %global use_fsal_null %{on_off_switch nullfs}
 
@@ -157,10 +165,10 @@ Source:		%{sourcename}.tar.gz
 
 %if 0%{?rhel} && 0%{?rhel} <= 7
 BuildRequires:	cmake3
-%global cmake_cmd cmake3
+%{!?cmake_cmd: %global cmake_cmd cmake3}
 %else
 BuildRequires:	cmake >= 3.0
-%global cmake_cmd cmake
+%{!?cmake_cmd: %global cmake_cmd cmake}
 %endif
 BuildRequires:	bison
 BuildRequires:	flex
@@ -271,6 +279,7 @@ The monitoring module contains metrics collectors and HTTP exposer
 in Prometheus format.
 %endif
 
+%if %{with vfs}
 %package vfs
 Summary: The NFS-GANESHA VFS FSAL
 Group: Applications/System
@@ -280,7 +289,9 @@ Requires: %{name} = %{version}-%{release}
 %description vfs
 This package contains a FSAL shared object to
 be used with NFS-Ganesha to support VFS based filesystems
+%endif
 
+%if %{with proxy_v4}
 %package proxy-v4
 Summary: The NFS-GANESHA PROXY_V4 FSAL
 Group: Applications/System
@@ -290,7 +301,9 @@ Requires: %{name} = %{version}-%{release}
 %description proxy-v4
 This package contains a FSAL shared object to
 be used with NFS-Ganesha to support PROXY_V4 based filesystems
+%endif
 
+%if %{with proxy_v3}
 %package proxy-v3
 Summary: The NFS-GANESHA PROXY_V3 FSAL
 Group: Applications/System
@@ -300,6 +313,7 @@ Requires: %{name} = %{version}-%{release}
 %description proxy-v3
 This package contains a FSAL shared object to
 be used with NFS-Ganesha to support PROXY_V3 based filesystems
+%endif
 
 
 %if %{with utils}
@@ -622,8 +636,8 @@ Development headers and auxiliary files for developing with %{name}.
 	-DUSE_GUI_ADMIN_TOOLS=%{use_gui_utils}		\
 	-DUSE_RADOS_RECOV=%{use_rados_recov}		\
 	-DRADOS_URLS=%{use_rados_urls}			\
-	-DUSE_FSAL_VFS=ON				\
-	-DUSE_FSAL_PROXY_V4=ON				\
+	-DUSE_FSAL_VFS=%{use_fsal_vfs}			\
+	-DUSE_FSAL_PROXY_V4=%{use_fsal_proxy_v4}	\
 	-DUSE_DBUS=ON					\
 	-DINTERNAL_STATD=%{internal_statd} 		\
 	-DDISTNAME_HAS_GIT_DATA=OFF			\
@@ -667,7 +681,9 @@ install -m 644 scripts/ganeshactl/org.ganesha.nfsd.conf	%{buildroot}%{_sysconfdi
 install -m 755 scripts/nfs-ganesha-config.sh %{buildroot}%{_libexecdir}/ganesha
 install -m 755 scripts/gen_ctdb_epoch.py %{buildroot}%{_libexecdir}/ganesha/
 
+%if %{with vfs}
 install -m 644 config_samples/vfs.conf %{buildroot}%{_sysconfdir}/ganesha
+%endif
 
 mkdir -p %{buildroot}%{_unitdir}
 %if ( 0%{?fedora} ) || ( 0%{?rhel} && 0%{?rhel} >= 8 )
@@ -844,23 +860,29 @@ exit 0
 %endif
 %endif
 
+%if %{with vfs}
 %files vfs
 %{_libdir}/ganesha/libfsalvfs*
 %config(noreplace) %{_sysconfdir}/ganesha/vfs.conf
 %if %{with man_page}
 %{_mandir}/*/ganesha-vfs-config.8.gz
 %endif
+%endif
 
+%if %{with proxy_v4}
 %files proxy-v4
 %{_libdir}/ganesha/libfsalproxy_v4*
 %if %{with man_page}
 %{_mandir}/*/ganesha-proxy-v4-config.8.gz
 %endif
+%endif
 
+%if %{with proxy_v3}
 %files proxy-v3
 %{_libdir}/ganesha/libfsalproxy_v3*
 %if %{with man_page}
 %{_mandir}/*/ganesha-proxy-v3-config.8.gz
+%endif
 %endif
 
 
