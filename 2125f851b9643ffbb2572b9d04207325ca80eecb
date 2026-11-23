@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "297cfd0f_a6e5578d",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1039507
+      },
+      "writtenOn": "2026-11-23T18:50:16Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "e6b14823_177cbf54",
+      "revId": "2125f851b9643ffbb2572b9d04207325ca80eecb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26d99b7f_f5f7a3ad",
@@ -66,6 +84,24 @@
       "writtenOn": "2026-11-23T08:53:44Z",
       "side": 1,
       "message": "what about Proxy_V3?",
+      "revId": "2125f851b9643ffbb2572b9d04207325ca80eecb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec08dfbf_e9a16749",
+        "filename": "src/nfs-ganesha.spec-in.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1039507
+      },
+      "writtenOn": "2026-11-23T18:50:16Z",
+      "side": 1,
+      "message": "Fixed\nadded -DUSE_FSAL_PROXY_V3\u003d%{use_fsal_proxy_v3}",
+      "parentUuid": "6e52fa84_111bcf7f",
       "revId": "2125f851b9643ffbb2572b9d04207325ca80eecb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
