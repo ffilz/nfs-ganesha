@@ -34,6 +34,24 @@
       "parentUuid": "c9be34b2_b8abe45a",
       "revId": "f2143da671fe4f11d50a50861679ff053e5e80ab",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2c1b007_aa4004bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039507
+      },
+      "writtenOn": "2026-11-23T17:00:34Z",
+      "side": 1,
+      "message": "Done in Patch Set 2/3:\n\n- Added `EMBEDDED_NTIRPC` build option (`OFF` by default) in\n  `src/CMakeLists.txt` and logged it in the configuration summary.\n- Mapped `EMBEDDED_NTIRPC` to `BCOND_EMBEDDED_NTIRPC` (`%bcond_without` when\n  `ON`, `%bcond_with` when `OFF`).\n- Updated `src/nfs-ganesha.spec-in.cmake` to use `@BCOND_EMBEDDED_NTIRPC@`,\n  defined `use_embedded_ntirpc`, and passed `-DEMBEDDED_NTIRPC` to CMake in\n  `%build`.",
+      "parentUuid": "b9565111_14e4e6cc",
+      "revId": "f2143da671fe4f11d50a50861679ff053e5e80ab",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
