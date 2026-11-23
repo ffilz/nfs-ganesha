@@ -137,6 +137,12 @@ Requires: openSUSE-release
 
 %global dev_version %{lua: s = string.gsub('@GANESHA_EXTRA_VERSION@', '^%-', ''); s2 = string.gsub(s, '%-', '.'); print((s2 ~= nil and s2 ~= '') and s2 or "0.1") }
 
+%bcond_with bundle_monitoring
+
+%if ! %{with monitoring} && %{with bundle_monitoring}
+%{error:Cannot specify both --without monitoring and --with bundle_monitoring}
+%endif
+
 @BCOND_NFS_RDMA@ nfs_rdma
 
 @BCOND_RPC_RDMA@ rpc_rdma
@@ -250,7 +256,11 @@ Requires: %{name}-selinux = %{version}-%{release}
 %endif
 
 %if %{with monitoring}
+%if %{with bundle_monitoring}
+Provides:	libganesha_monitoring.so
+%else
 Requires:	%{name}-monitoring
+%endif
 %endif
 
 # Use CMake variables
@@ -260,7 +270,7 @@ Requires:	%{name}-monitoring
 It comes with various back-end modules (called FSALs) provided as
  shared objects to support different file systems and name-spaces.
 
-%if %{with monitoring}
+%if %{with monitoring} && ! %{with bundle_monitoring}
 %package monitoring
 Summary: The NFS-GANESHA Monitoring module
 Group: Applications/System
@@ -780,6 +790,12 @@ exit 0
 %files
 %{_bindir}/ganesha.nfsd
 %{_libdir}/libganesha_nfsd.so*
+%if %{with monitoring} && %{with bundle_monitoring}
+%{_libdir}/libganesha_monitoring*
+%if ! %{with system_ntirpc}
+%{_libdir}/libntirpcmonitoring*
+%endif
+%endif
 %if %{with ceph_fscrypt}
 %{lib64dir}/ganesha/libkmip_fscrypt*
 %endif
@@ -836,7 +852,7 @@ exit 0
 %{_libdir}/libganesha_rados_urls.so*
 %endif
 
-%if %{with monitoring}
+%if %{with monitoring} && ! %{with bundle_monitoring}
 %files monitoring
 %{_libdir}/libganesha_monitoring*
 %if ! %{with system_ntirpc}
