@@ -316,9 +316,14 @@ option(GSH_CAN_HOST_LOCAL_FS "Ganesha supports hosting local filesystems" ON)
 
 # Monitoring stack.
 goption(USE_MONITORING "Enable monitoring stack" ON)
+option(BUNDLE_MONITORING "Bundle monitoring libraries into main RPM package" OFF)
 goption(LEGACY_METRICS "Enable legacy metrics" ON)
 gopt_test(USE_MONITORING)
 gopt_test(LEGACY_METRICS)
+
+if(NOT USE_MONITORING AND BUNDLE_MONITORING)
+  message(FATAL_ERROR "Cannot set BUNDLE_MONITORING without USE_MONITORING")
+endif()
 
 # nTIRPC
 option(USE_SYSTEM_NTIRPC "Use the system nTIRPC, rather than the submodule" OFF)
@@ -1596,6 +1601,7 @@ message(STATUS "ENABLE_VFS_DEBUG_ACL = ${ENABLE_VFS_DEBUG_ACL}")
 message(STATUS "ENABLE_RFC_ACL = ${ENABLE_RFC_ACL}")
 message(STATUS "CEPHFS_POSIX_ACL = ${CEPHFS_POSIX_ACL}")
 message(STATUS "USE_MONITORING = ${USE_MONITORING}")
+message(STATUS "BUNDLE_MONITORING = ${BUNDLE_MONITORING}")
 message(STATUS "LEGACY_METRICS = ${LEGACY_METRICS}")
 message(STATUS "USE_CAPS = ${USE_CAPS}")
 message(STATUS "USE_BLKID = ${USE_BLKID}")
@@ -1955,6 +1961,12 @@ if(USE_MONITORING)
 else(USE_MONITORING)
   set(BCOND_MONITORING "%bcond_with")
 endif(USE_MONITORING)
+
+if(BUNDLE_MONITORING)
+  set(BCOND_BUNDLE_MONITORING "%bcond_without")
+else(BUNDLE_MONITORING)
+  set(BCOND_BUNDLE_MONITORING "%bcond_with")
+endif(BUNDLE_MONITORING)
 
 if(INTERNAL_STATD)
   set(BCOND_STATD "%bcond_without")
