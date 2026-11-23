@@ -417,6 +417,7 @@ void nfs4_BuildStateId_Other(nfs_client_id_t *clientid, char *other);
  */
 #define STATEID_SPECIAL_CLOSE_40 0x40
 #define STATEID_SPECIAL_CLOSE_41 0x80
+#define STATEID_SPECIAL_OLD_LAYOUT 0x100 /*< Allow old layout seqid */
 #define STATEID_SPECIAL_ANY 0x3F
 #define STATEID_SPECIAL_FOR_LOCK (STATEID_SPECIAL_CURRENT)
 #define STATEID_SPECIAL_FOR_CLOSE_40 (STATEID_SPECIAL_CLOSE_40)

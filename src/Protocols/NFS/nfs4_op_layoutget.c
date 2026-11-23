@@ -108,9 +108,9 @@ static nfsstat4 acquire_layout_state(compound_data_t *data,
 	 */
 	nfs_status = nfs4_check_stateid_acquire_state_lock(
 		supplied_stateid, data->current_obj, data,
-		STATEID_SPECIAL_CURRENT, 0, false, /*should_lock=*/true, tag,
-		&supplied_state, &layout_obj, &layout_owner,
-		out_state_handle_lock_held);
+		STATEID_SPECIAL_CURRENT | STATEID_SPECIAL_OLD_LAYOUT, 0, false,
+		/*should_lock=*/true, tag, &supplied_state, &layout_obj,
+		&layout_owner, out_state_handle_lock_held);
 
 	if (layout_owner != NULL) {
 		dec_state_owner_ref(layout_owner);

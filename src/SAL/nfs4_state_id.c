@@ -973,12 +973,13 @@ nfsstat4 nfs4_check_stateid_acquire_state_lock(
 		str_valid = true;
 	}
 
-	LogFullDebug(COMPONENT_STATE, "Check %s stateid flags%s%s%s%s%s%s", tag,
-		     flags & STATEID_SPECIAL_ALL_0 ? " ALL_0" : "",
+	LogFullDebug(COMPONENT_STATE, "Check %s stateid flags%s%s%s%s%s%s%s",
+		     tag, flags & STATEID_SPECIAL_ALL_0 ? " ALL_0" : "",
 		     flags & STATEID_SPECIAL_ALL_1 ? " ALL_1" : "",
 		     flags & STATEID_SPECIAL_CURRENT ? " CURRENT" : "",
 		     flags & STATEID_SPECIAL_CLOSE_40 ? " CLOSE_40" : "",
 		     flags & STATEID_SPECIAL_CLOSE_41 ? " CLOSE_41" : "",
+		     flags & STATEID_SPECIAL_OLD_LAYOUT ? " OLD_LAYOUT" : "",
 		     flags == 0 ? " NONE" : "");
 
 	status = check_special_stateid(stateid, data, flags, tag,
@@ -1241,7 +1242,15 @@ nfsstat4 nfs4_check_stateid_acquire_state_lock(
 		 *            as good enough and maybe makes pynfs happy.
 		 */
 		diff = stateid->seqid - state2->state_seqid;
-		if (diff < 0) {
+		if (diff < 0 && (flags & STATEID_SPECIAL_OLD_LAYOUT) != 0 &&
+		    state2->state_type == STATE_TYPE_LAYOUT) {
+			/* Parallel layout ops (RFC 5661 12.5.5.2.1.4) */
+			if (str_valid)
+				LogDebug(
+					COMPONENT_STATE,
+					"Check %s stateid accepted old layout stateid %s",
+					tag, str);
+		} else if (diff < 0) {
 			/* if this is NFSv4.0 and stateid's seqid is one less
 			 * than current AND if owner_seqid is current
 			 * pass state back to allow replay check
