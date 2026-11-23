@@ -1954,7 +1954,10 @@ fsal_status_t vfs_getattr2(struct fsal_obj_handle *obj_hdl,
 			obj_hdl->fsal->name,
 			obj_hdl->fs->fsal != NULL ? obj_hdl->fs->fsal->name
 						  : "(none)");
-		goto out;
+		/* No fd was acquired yet; fsal_complete_io() must not be
+		 * called with the still NULL out_fd.
+		 */
+		goto exit;
 	}
 
 	if (vfs_unopenable_type(obj_hdl->type) &&
