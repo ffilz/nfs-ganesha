@@ -186,8 +186,9 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	int rc = 0;
 	/* Return code from RGW calls */
 	int rgw_status;
-	/* True if we have called fsal_export_init */
-	bool initialized = false;
+	/* Track resources acquired so the error path can unwind them */
+	bool mounted = false;
+	bool attached = false;
 
 	/* once */
 	if (!RGWFSM.rgw) {
@@ -228,8 +229,8 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 
 			if (RGWFSM.cluster) {
 				clen = strlen(RGWFSM.cluster) + 11;
-				cluster = (char *)gsh_malloc(clen,
-							     MEM_COMP_FSAL);
+				cluster =
+					(char *)gsh_malloc(clen, MEM_COMP_FSAL);
 				(void)sprintf(cluster, "--cluster=%s",
 					      RGWFSM.cluster);
 				argv[argc] = cluster;
@@ -270,12 +271,10 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 					   export, true, err_type);
 
 		if (rc != 0) {
-			gsh_free(export, MEM_COMP_EXPORT);
-			return fsalstat(ERR_FSAL_INVAL, 0);
+			status = fsalstat(ERR_FSAL_INVAL, 0);
+			goto error;
 		}
 	}
-
-	initialized = true;
 
 #ifndef USE_FSAL_RGW_MOUNT2
 	rgw_status = rgw_mount(RGWFSM.rgw, export->rgw_user_id,
@@ -317,12 +316,15 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 		goto error;
 	}
 
+	mounted = true;
+
 	if (fsal_attach_export(module_in, &export->export.exports) != 0) {
 		status.major = ERR_FSAL_SERVERFAULT;
 		LogCrit(COMPONENT_FSAL, "Unable to attach export for %s.",
 			CTX_FULLPATH(op_ctx));
 		goto error;
 	}
+	attached = true;
 
 	if (rgw_register_invalidate(export->rgw_fs, rgw_fs_invalidate,
 				    up_ops->up_fsal_export,
@@ -339,8 +341,10 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 
 	rc = rgw_getattr(export->rgw_fs, export->rgw_fs->root_fh, &st,
 			 RGW_GETATTR_FLAG_NONE);
-	if (rc < 0)
-		return rgw2fsal_error(rc);
+	if (rc < 0) {
+		status = rgw2fsal_error(rc);
+		goto error;
+	}
 
 	rc = construct_handle(export, export->rgw_fs->root_fh, &st, &handle);
 	if (rc < 0) {
@@ -356,10 +360,25 @@ static fsal_status_t create_export(struct fsal_module *module_in,
 	return status;
 
 error:
-	gsh_free(export, MEM_COMP_EXPORT);
-
-	if (initialized)
-		initialized = false;
+	/* Unwind whatever this export managed to acquire, in reverse order. */
+	if (export != NULL) {
+		if (export->root != NULL) {
+			deconstruct_handle(export->root);
+			export->root = NULL;
+		}
+		if (mounted) {
+			(void)rgw_umount(export->rgw_fs, RGW_UMOUNT_FLAG_NONE);
+			export->rgw_fs = NULL;
+			mounted = false;
+		}
+		if (attached) {
+			fsal_detach_export(module_in, &export->export.exports);
+			attached = false;
+		}
+		free_export_ops(&export->export);
+		gsh_free(export, MEM_COMP_EXPORT);
+		export = NULL;
+	}
 
 	return status;
 }
