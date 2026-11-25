@@ -113,6 +113,9 @@ FD_HWMark_Percent(uint32, range 0 to 100, default 90)
 FD_LWMark_Percent(uint32, range 0 to 100, default 50)
     The percentage of the system-imposed maximum of file descriptors below which
     Ganesha will not reap file descriptors.
+    Note:
+    - For GPFS SCALE, the default value is set to 0 so file descriptor reaping
+      is not restricted by a lower watermark threshold.
 
 Reaper_Work(uint32, range 1 to 2000, default 0)
     Roughly, the amount of work to do on each pass through the thread under

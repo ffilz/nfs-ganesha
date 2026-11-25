@@ -410,6 +410,9 @@ MaxRPCRdmaCredits(uint32, range 1 to 4096, default 64)
 RPC_Ioq_ThrdMax(uint32, range 1 to 1024*128 default 200)
     TIRPC ioq maximum simultaneous io threads
     This parameter may be updated dynamically with a SIGHUP.
+    Note:
+    - For GPFS SCALE, the default value is set to 512 to allow higher
+      simultaneous I/O thread concurrency.
 
 RPC_Ioq_ThrdMin(uint32, range 2 to 1024*128 default 2)
     TIRPC ioq minimum simultaneous io threads
