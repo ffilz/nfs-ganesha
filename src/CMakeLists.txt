@@ -311,6 +311,9 @@ goption(USE_FSAL_RGW "build RGW FSAL shared library" ON)
 goption(USE_FSAL_MEM "build Memory FSAL shared library" ON)
 goption(USE_FSAL_SAUNAFS "build SAUNAFS FSAL shared library" ON)
 
+# Generic build switch for Scale (GPFS) packaging and behavior
+option(USE_GPFS_SCALE "Enable IBM Storage Scale (GPFS) specific build and packaging" OFF)
+
 # Internal capability required by some FSALs
 option(GSH_CAN_HOST_LOCAL_FS "Ganesha supports hosting local filesystems" ON)
 
@@ -1578,6 +1581,7 @@ message(STATUS "USE_FSAL_RGW = ${USE_FSAL_RGW}")
 message(STATUS "USE_FSAL_SAUNAFS = ${USE_FSAL_SAUNAFS}")
 message(STATUS "USE_FSAL_XFS = ${USE_FSAL_XFS}")
 message(STATUS "USE_FSAL_GPFS = ${USE_FSAL_GPFS}")
+message(STATUS "USE_GPFS_SCALE = ${USE_GPFS_SCALE}")
 message(STATUS "USE_FSAL_GLUSTER = ${USE_FSAL_GLUSTER}")
 message(STATUS "USE_FSAL_NULL = ${USE_FSAL_NULL}")
 message(STATUS "USE_FSAL_MEM = ${USE_FSAL_MEM}")
@@ -1754,6 +1758,13 @@ if(USE_FSAL_GPFS)
 else(USE_FSAL_GPFS)
     set(BCOND_GPFS "%bcond_with")
 endif(USE_FSAL_GPFS)
+
+# Enable gpfs_scale spec conditional only when both GPFS and GPFS_SCALE are ON
+if(USE_FSAL_GPFS AND USE_GPFS_SCALE)
+    set(BCOND_GPFS_SCALE "%bcond_without")
+else()
+    set(BCOND_GPFS_SCALE "%bcond_with")
+endif()
 
 if(USE_FSAL_LIZARDFS)
     set(BCOND_LIZARDFS "%bcond_without")
@@ -2013,6 +2024,13 @@ configure_file(
 configure_file(
   "${PROJECT_SOURCE_DIR}/scripts/systemd/nfs-ganesha-config.service-in.cmake"
   "${PROJECT_SOURCE_DIR}/scripts/systemd/nfs-ganesha-config.service"
+)
+
+# Generate the Scale sysconfig file from gpfs.nfs-ganesha-in.cmake
+configure_file(
+  "${PROJECT_SOURCE_DIR}/scripts/systemd/sysconfig/gpfs.nfs-ganesha-in.cmake"
+  "${PROJECT_BINARY_DIR}/scripts/systemd/sysconfig/gpfs.nfs-ganesha"
+  @ONLY
 )
 
 # Make a docker image
