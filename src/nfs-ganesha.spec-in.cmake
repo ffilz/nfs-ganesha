@@ -34,6 +34,9 @@ Requires: openSUSE-release
 @BCOND_GPFS@ gpfs
 %global use_fsal_gpfs %{on_off_switch gpfs}
 
+@BCOND_GPFS_SCALE@ gpfs_scale
+%global use_gpfs_scale %{on_off_switch gpfs_scale}
+
 @BCOND_XFS@ xfs
 %global use_fsal_xfs %{on_off_switch xfs}
 
@@ -601,6 +604,7 @@ Development headers and auxiliary files for developing with %{name}.
 	-DUSE_FSAL_CEPH=%{use_fsal_ceph}		\
 	-DUSE_FSAL_RGW=%{use_fsal_rgw}			\
 	-DUSE_FSAL_GPFS=%{use_fsal_gpfs}		\
+	-DUSE_GPFS_SCALE=%{use_gpfs_scale}		\
 	-DUSE_FSAL_KVSFS=%{use_fsal_kvsfs}		\
 	-DUSE_FSAL_LIZARDFS=%{use_fsal_lizardfs}	\
 	-DUSE_FSAL_GLUSTER=%{use_fsal_gluster}		\
@@ -664,6 +668,7 @@ mkdir -p %{buildroot}%{_localstatedir}/log/ganesha
 mkdir -p %{buildroot}%{_libexecdir}/ganesha
 install -m 644 config_samples/logrotate_ganesha	%{buildroot}%{_sysconfdir}/logrotate.d/ganesha
 install -m 644 scripts/ganeshactl/org.ganesha.nfsd.conf	%{buildroot}%{_sysconfdir}/dbus-1/system.d
+
 install -m 755 scripts/nfs-ganesha-config.sh %{buildroot}%{_libexecdir}/ganesha
 install -m 755 scripts/gen_ctdb_epoch.py %{buildroot}%{_libexecdir}/ganesha/
 
@@ -674,7 +679,13 @@ mkdir -p %{buildroot}%{_unitdir}
 mkdir -p %{buildroot}%{_sysconfdir}/systemd/system/nfs-ganesha-lock.service.d
 %endif
 
+# Use Scale systemd unit file only when both gpfs and gpfs_scale are enabled
+%if %{with gpfs} && %{with gpfs_scale}
+install -m 644 scripts/systemd/gpfs.nfs-ganesha.service.el7	%{buildroot}%{_unitdir}/nfs-ganesha.service
+%else
 install -m 644 scripts/systemd/nfs-ganesha.service.el7	%{buildroot}%{_unitdir}/nfs-ganesha.service
+%endif
+
 %if ( 0%{?fedora} ) || ( 0%{?rhel} && 0%{?rhel} >= 8 )
 install -m 644 scripts/systemd/nfs-ganesha-lock.service.el8	%{buildroot}%{_unitdir}/nfs-ganesha-lock.service
 install -m 644 scripts/systemd/rpc-statd.conf.el8	%{buildroot}%{_sysconfdir}/systemd/system/nfs-ganesha-lock.service.d/rpc-statd.conf
@@ -682,7 +693,13 @@ install -m 644 scripts/systemd/rpc-statd.conf.el8	%{buildroot}%{_sysconfdir}/sys
 install -m 644 scripts/systemd/nfs-ganesha-lock.service.el7	%{buildroot}%{_unitdir}/nfs-ganesha-lock.service
 %endif
 install -m 644 scripts/systemd/nfs-ganesha-config.service %{buildroot}%{_unitdir}/nfs-ganesha-config.service
+
+# Use Scale sysconfig file only when both gpfs and gpfs_scale are enabled
+%if %{with gpfs} && %{with gpfs_scale}
+install -m 644 scripts/systemd/sysconfig/gpfs.nfs-ganesha	%{buildroot}%{_sysconfdir}/sysconfig/ganesha
+%else
 install -m 644 scripts/systemd/sysconfig/nfs-ganesha	%{buildroot}%{_sysconfdir}/sysconfig/ganesha
+%endif
 
 %if %{with pt}
 install -m 644 config_samples/pt.conf %{buildroot}%{_sysconfdir}/ganesha
