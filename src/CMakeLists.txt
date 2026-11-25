@@ -42,6 +42,11 @@ set(GANESHA_TOP_CMAKE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${GANESHA_TOP_CMAKE_DIR}/cmake/modules/")
 
 project(nfs-ganesha C CXX)
+
+# Default to upstream daemon binary name ("ganesha.nfsd") unless overridden
+# via -DGANESHA_DAEMON_NAME=<name>
+set(GANESHA_DAEMON_NAME "ganesha.nfsd" CACHE STRING "NFS-Ganesha daemon binary name")
+
 # Project versioning
 set(GANESHA_MAJOR_VERSION 15)
 # Minor version is blank for development.  On release, it becomes ".0".  On a
@@ -1653,6 +1658,7 @@ message(STATUS "USE_TLS = ${USE_TLS}")
 message(STATUS "USE_OPENSSL = ${USE_OPENSSL}")
 message(STATUS "USE_GNUTLS = ${USE_GNUTLS}")
 message(STATUS "TLS_BACKEND = ${TLS_BACKEND}")
+message(STATUS "GANESHA_DAEMON_NAME = ${GANESHA_DAEMON_NAME}")
 
 set(USE_CB_SIMULATOR ${USE_CB_SIMULATOR}
   CACHE BOOL
@@ -2036,7 +2042,7 @@ if(LSB_RELEASE_EXECUTABLE)
     COMMAND sh -c "make DESTDIR=${PROJECT_BINARY_DIR}/docker/root install"
     COMMAND sh -c "docker build -t ganesha/dev ${PROJECT_BINARY_DIR}/docker"
     VERBATIM )
-  add_dependencies(docker ganesha.nfsd )
+  add_dependencies(docker ${GANESHA_DAEMON_NAME} )
 endif(LSB_RELEASE_EXECUTABLE)
 
 
@@ -2058,10 +2064,10 @@ endif(COVERAGE)
 
 ########### next target ###############
 
-add_executable(ganesha.nfsd ./MainNFSD/nfs_main.c)
-add_sanitizers(ganesha.nfsd)
+add_executable(${GANESHA_DAEMON_NAME} ./MainNFSD/nfs_main.c)
+add_sanitizers(${GANESHA_DAEMON_NAME})
 
-target_link_libraries(ganesha.nfsd
+target_link_libraries(${GANESHA_DAEMON_NAME}
   ganesha_nfsd
   ${LIBTIRPC_LIBRARIES}
   ${SYSTEM_LIBRARIES}
@@ -2069,10 +2075,10 @@ target_link_libraries(ganesha.nfsd
   ${LDFLAG_DISALLOW_UNDEF}
 )
 if (USE_MONITORING)
-  target_link_libraries(ganesha.nfsd ganesha_monitoring)
+  target_link_libraries(${GANESHA_DAEMON_NAME} ganesha_monitoring)
 endif (USE_MONITORING)
-set_target_properties(ganesha.nfsd PROPERTIES COMPILE_FLAGS "-fPIC")
-install(TARGETS ganesha.nfsd COMPONENT daemon DESTINATION bin)
+set_target_properties(${GANESHA_DAEMON_NAME} PROPERTIES COMPILE_FLAGS "-fPIC")
+install(TARGETS ${GANESHA_DAEMON_NAME} COMPONENT daemon DESTINATION bin)
 
 ########### next target ###############
 

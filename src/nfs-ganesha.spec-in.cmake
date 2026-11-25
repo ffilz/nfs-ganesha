@@ -25,6 +25,11 @@ Requires: openSUSE-release
 # % bcond_without adds a"--without" so the feature is enabled by default
 
 %{!?name: %global name nfs-ganesha}
+
+# Default to upstream daemon binary name ("ganesha.nfsd"); overridden if and
+# only if --define "ganesha_daemon_name <name>" is passed to rpmbuild
+%{!?ganesha_daemon_name: %global ganesha_daemon_name ganesha.nfsd}
+
 @BCOND_NULLFS@ nullfs
 %global use_fsal_null %{on_off_switch nullfs}
 
@@ -593,6 +598,7 @@ Development headers and auxiliary files for developing with %{name}.
 %build
 %{cmake_cmd} .	-DCMAKE_BUILD_TYPE=Debug			\
 	-DBUILD_CONFIG=rpmbuild				\
+	-DGANESHA_DAEMON_NAME=%{ganesha_daemon_name}			\
 	-DWITH_PYTHON3=%{python3_version}		\
 	-DUSE_FSAL_NULL=%{use_fsal_null}		\
 	-DUSE_FSAL_MEM=%{use_fsal_mem}			\
@@ -778,7 +784,7 @@ exit 0
 %endif
 
 %files
-%{_bindir}/ganesha.nfsd
+%{_bindir}/%{ganesha_daemon_name}
 %{_libdir}/libganesha_nfsd.so*
 %if %{with ceph_fscrypt}
 %{lib64dir}/ganesha/libkmip_fscrypt*
