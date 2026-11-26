@@ -135,7 +135,7 @@ Requires: openSUSE-release
 @BCOND_MONITORING@ legacy_metrics
 %global legacy_metrics %{on_off_switch legacy_metrics}
 
-%global dev_version %{lua: s = string.gsub('@GANESHA_EXTRA_VERSION@', '^%-', ''); s2 = string.gsub(s, '%-', '.'); print((s2 ~= nil and s2 ~= '') and s2 or "0.1") }
+%global dev_version %{lua: s = string.gsub('@GANESHA_EXTRA_VERSION@', '^[%+%-]', ''); s2 = string.gsub(s, '%-', '.'); print((s2 ~= nil and s2 ~= '') and s2 or "0.1") }
 
 @BCOND_NFS_RDMA@ nfs_rdma
 
@@ -984,7 +984,7 @@ exit 0
 %{python_sitelib}/Ganesha/*
 %{python_sitelib}/ganeshactl-*-info
 %endif
-%if ( 0%{?rhel} > 8 ||  0%{?fedora} >= 34 )
+%if ( 0%{?rhel} >= 8 ||  0%{?fedora} >= 34 )
 %{python3_sitelib}/Ganesha/*
 %exclude %{python3_sitelib}/ganesha*-*-info
 %endif

@@ -64,6 +64,13 @@ if(USE_FSAL_GPFS)
         COMMAND ${CMAKE_COMMAND} -E touch ${OUTPUT}
         DEPENDS ${GPFS_EPOCH_SRCS} ${SCRIPTS}
         )
+    elseif(USE_GPFS_SCALE)
+      add_custom_command(
+        OUTPUT ${OUTPUT}
+        COMMAND ${Python3_EXECUTABLE} -m build --wheel --no-isolation
+        COMMAND ${CMAKE_COMMAND} -E touch ${OUTPUT}
+        DEPENDS ${GPFS_EPOCH_SRCS} ${SCRIPTS}
+        )
     else()
       add_custom_command(
         OUTPUT ${OUTPUT}
@@ -79,6 +86,12 @@ if(USE_FSAL_GPFS)
         CODE
         "execute_process(WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMAND ${Python3_EXECUTABLE} ${SETUP_PY} install --skip-build --no-compile --prefix=\$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX} --install-scripts=\$ENV{DESTDIR}${LIBEXECDIR}/ganesha)"
+        )
+    elseif(USE_GPFS_SCALE)
+      install(
+        CODE
+        "execute_process(WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMAND ${Python3_EXECUTABLE} -m installer --destdir \$ENV{DESTDIR} dist/gpfs-${GANESHA_MAJOR_VERSION}${GANESHA_MINOR_VERSION}+${GANESHA_TAG}-py3-none-any.whl)"
         )
     else()
       foreach(script_py ${GPFS_EPOCH_SRCS})
