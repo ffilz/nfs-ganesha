@@ -16,6 +16,24 @@
       "message": "I dont think you need src/scripts/gpfs.nfs-ganesha-config.sh if the changes is related [ \"$(basename \"${EPOCH_EXEC%% *}\")\" \u003d \"gpfs-epoch\" ];\n\nPls check https://github.com/nfs-ganesha/nfs-ganesha/commit/c27ef5be8db5cdce2f91cc0452c4453505198f06",
       "revId": "66f5c649ea0cc156b40638465cd20d2b34526101",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff5af119_50b8eada",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039507
+      },
+      "writtenOn": "2026-11-26T09:04:46Z",
+      "side": 1,
+      "message": "yes its not required. removing the gpfs.nfs-ganesha-config.sh\n\nOn Ubuntu/Debian, removing gpfs.nfs-ganesha-config.sh causes upstream nfs-ganesha-config.sh to use /etc/default/nfs-ganesha instead of /etc/sysconfig/ganesha and /run/sysconfig/ganesha, which can be fixed later by adding EnvironmentFile\u003d-/etc/default/nfs-ganesha to the Debian service file and linking /etc/sysconfig/ganesha in Debian packaging.",
+      "parentUuid": "f2d33d1a_d862a5da",
+      "revId": "66f5c649ea0cc156b40638465cd20d2b34526101",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
