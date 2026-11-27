@@ -2261,8 +2261,12 @@ int add_client(enum log_components component, struct glist_head *client_list,
 					  client_tok, gai_strerror(rc));
 			err_type->bogus = true;
 			errcnt++;
+			/* Do not fall through to add the unresolved, empty
+			 * entry (type PROTO_CLIENT, no str, no cidr) to the
+			 * client list.
+			 */
+			goto out;
 		}
-		break;
 	default:
 		config_proc_error(cnode, err_type,
 				  "Expected a client, got a %s for (%s)",
